@@ -4,10 +4,10 @@
     {
         public int GameId { get; }
 
-        public GameAccountStatusComposer(int GameID)
+        public GameAccountStatusComposer(int gameId)
             : base(ServerPacketHeader.GameAccountStatusMessageComposer)
         {
-            this.GameId = GameID;
+            GameId = gameId;
         }
 
         public override void Compose(ServerPacket packet)

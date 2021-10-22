@@ -18,7 +18,7 @@ namespace Plus.HabboHotel.Users.Clothing
         /// <summary>
         /// Effects stored by ID > Effect.
         /// </summary>
-        private readonly ConcurrentDictionary<int, ClothingParts> _allClothing = new ConcurrentDictionary<int, ClothingParts>();
+        private readonly ConcurrentDictionary<int, ClothingParts> _allClothing = new();
 
         public ClothingComponent()
         {

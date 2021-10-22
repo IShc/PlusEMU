@@ -8,7 +8,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Styles
 {
     public sealed class ChatStyleManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(ChatStyleManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ChatStyleManager));
 
         private readonly Dictionary<int, ChatStyle> _styles;
 
@@ -22,35 +22,35 @@ namespace Plus.HabboHotel.Rooms.Chat.Styles
             if (_styles.Count > 0)
                 _styles.Clear();
 
-            DataTable Table = null;
+            DataTable table = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `room_chat_styles`;");
-                Table = dbClient.GetTable();
+                table = dbClient.GetTable();
 
-                if (Table != null)
+                if (table != null)
                 {
-                    foreach (DataRow Row in Table.Rows)
+                    foreach (DataRow row in table.Rows)
                     {
                         try
                         {
-                            if (!_styles.ContainsKey(Convert.ToInt32(Row["id"])))
-                                _styles.Add(Convert.ToInt32(Row["id"]), new ChatStyle(Convert.ToInt32(Row["id"]), Convert.ToString(Row["name"]), Convert.ToString(Row["required_right"])));
+                            if (!_styles.ContainsKey(Convert.ToInt32(row["id"])))
+                                _styles.Add(Convert.ToInt32(row["id"]), new ChatStyle(Convert.ToInt32(row["id"]), Convert.ToString(row["name"]), Convert.ToString(row["required_right"])));
                         }
                         catch (Exception ex)
                         {
-                            log.Error("Unable to load ChatBubble for ID [" + Convert.ToInt32(Row["id"]) + "]", ex);
+                            Log.Error("Unable to load ChatBubble for ID [" + Convert.ToInt32(row["id"]) + "]", ex);
                         }
                     }
                 }
             }
 
-            log.Info("Loaded " + _styles.Count + " chat styles.");
+            Log.Info("Loaded " + _styles.Count + " chat styles.");
         }
 
-        public bool TryGetStyle(int Id, out ChatStyle Style)
+        public bool TryGetStyle(int id, out ChatStyle style)
         {
-            return _styles.TryGetValue(Id, out Style);
+            return _styles.TryGetValue(id, out style);
         }
     }
 }

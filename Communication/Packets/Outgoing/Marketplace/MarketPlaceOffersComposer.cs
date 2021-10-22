@@ -12,8 +12,8 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
         public MarketPlaceOffersComposer(Dictionary<int, MarketOffer> dictionary, Dictionary<int, int> dictionary2)
             : base(ServerPacketHeader.MarketPlaceOffersMessageComposer)
         {
-            this.Offers = dictionary;
-            this.Dictionary2 = dictionary2;
+            Offers = dictionary;
+            Dictionary2 = dictionary2;
         }
 
         public override void Compose(ServerPacket packet)

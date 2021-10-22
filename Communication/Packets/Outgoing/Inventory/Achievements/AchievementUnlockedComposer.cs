@@ -9,13 +9,13 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
         public int PointReward { get; }
         public int PixelReward { get; }
 
-        public AchievementUnlockedComposer(Achievement Achievement, int Level, int PointReward, int PixelReward)
+        public AchievementUnlockedComposer(Achievement achievement, int level, int pointReward, int pixelReward)
             : base(ServerPacketHeader.AchievementUnlockedMessageComposer)
         {
-            this.Achievement = Achievement;
-            this.Level = Level;
-            this.PointReward = PointReward;
-            this.PixelReward = PixelReward;
+            Achievement = achievement;
+            Level = level;
+            PointReward = pointReward;
+            PixelReward = pixelReward;
         }
 
         public override void Compose(ServerPacket packet)

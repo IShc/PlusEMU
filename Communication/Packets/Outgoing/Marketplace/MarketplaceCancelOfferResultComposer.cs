@@ -5,11 +5,11 @@
         public int OfferId { get; }
         public bool Success { get; }
 
-        public MarketplaceCancelOfferResultComposer(int OfferId, bool Success)
+        public MarketplaceCancelOfferResultComposer(int offerId, bool success)
             : base(ServerPacketHeader.MarketplaceCancelOfferResultMessageComposer)
         {
-            this.OfferId = OfferId;
-            this.Success = Success;
+            OfferId = offerId;
+            Success = success;
         }
 
         public override void Compose(ServerPacket packet)

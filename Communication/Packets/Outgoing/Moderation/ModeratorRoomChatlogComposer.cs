@@ -14,8 +14,8 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public ModeratorRoomChatlogComposer(Room room, ICollection<ChatlogEntry> chats)
             : base(ServerPacketHeader.ModeratorRoomChatlogMessageComposer)
         {
-            this.Room = room;
-            this.Chats = chats;
+            Room = room;
+            Chats = chats;
         }
 
         public override void Compose(ServerPacket packet)
@@ -30,18 +30,18 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteInteger(Room.Id);
 
             packet.WriteShort(Chats.Count);
-            foreach (ChatlogEntry Entry in Chats)
+            foreach (ChatlogEntry entry in Chats)
             {
-                string Username = "Unknown";
-                if (Entry.PlayerNullable() != null)
+                string username = "Unknown";
+                if (entry.PlayerNullable() != null)
                 {
-                    Username = Entry.PlayerNullable().Username;
+                    username = entry.PlayerNullable().Username;
                 }
 
-                packet.WriteString(UnixTimestamp.FromUnixTimestamp(Entry.Timestamp).ToShortTimeString()); // time?
-                packet.WriteInteger(Entry.PlayerId); // User Id
-                packet.WriteString(Username); // Username
-                packet.WriteString(!string.IsNullOrEmpty(Entry.Message) ? Entry.Message : "** user sent a blank message **"); // Message        
+                packet.WriteString(UnixTimestamp.FromUnixTimestamp(entry.Timestamp).ToShortTimeString()); // time?
+                packet.WriteInteger(entry.PlayerId); // User Id
+                packet.WriteString(username); // Username
+                packet.WriteString(!string.IsNullOrEmpty(entry.Message) ? entry.Message : "** user sent a blank message **"); // Message        
                 packet.WriteBoolean(false); //TODO, AI's?
             }
         }

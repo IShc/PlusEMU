@@ -5,11 +5,11 @@
         public bool CreditError { get; }
         public bool DucketError { get; }
 
-        public PresentDeliverErrorMessageComposer(bool CreditError, bool DucketError)
+        public PresentDeliverErrorMessageComposer(bool creditError, bool ducketError)
             : base(ServerPacketHeader.PresentDeliverErrorMessageComposer)
         {
-            this.CreditError = CreditError;
-            this.DucketError = DucketError;
+            CreditError = creditError;
+            DucketError = ducketError;
         }
 
         public override void Compose(ServerPacket packet)

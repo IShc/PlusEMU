@@ -4,10 +4,10 @@
     {
         public int ErrorCode { get; }
 
-        public PurchaseErrorComposer(int ErrorCode)
+        public PurchaseErrorComposer(int errorCode)
             : base(ServerPacketHeader.PurchaseErrorMessageComposer)
         {
-            this.ErrorCode = ErrorCode;
+            ErrorCode = errorCode;
         }
 
         public override void Compose(ServerPacket packet)

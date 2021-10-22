@@ -10,17 +10,17 @@ namespace Plus.Communication.Packets.Outgoing.Users
         public NameChangeUpdateComposer(string name, int error, ICollection<string> tags)
             : base(ServerPacketHeader.NameChangeUpdateMessageComposer)
         {
-            this.Error = error;
-            this.Name = name;
-            this.Tags = tags;
+            Error = error;
+            Name = name;
+            Tags = tags;
         }
 
         public NameChangeUpdateComposer(string name, int error)
             : base(ServerPacketHeader.NameChangeUpdateMessageComposer)
         {
-            this.Error = error;
-            this.Name = name;
-            this.Tags = new List<string>();
+            Error = error;
+            Name = name;
+            Tags = new List<string>();
         }
 
         public override void Compose(ServerPacket packet)

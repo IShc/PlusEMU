@@ -4,10 +4,10 @@
     {
         public int Result { get; }
 
-        public SubmitBullyReportComposer(int Result)
+        public SubmitBullyReportComposer(int result)
             : base(ServerPacketHeader.SubmitBullyReportMessageComposer)
         {
-            this.Result = Result;
+            Result = result;
         }
 
         public override void Compose(ServerPacket packet)

@@ -6,11 +6,11 @@ namespace Plus.Core
 {
     public class ConfigurationData
     {
-        public Dictionary<string, string> data;
+        public Dictionary<string, string> Data;
 
         public ConfigurationData(string filePath, bool maynotexist = false)
         {
-            data = new Dictionary<string, string>();
+            Data = new Dictionary<string, string>();
 
             if (!File.Exists(filePath))
             {
@@ -39,7 +39,7 @@ namespace Plus.Core
                             string key = line.Substring(0, delimiterIndex);
                             string val = line.Substring(delimiterIndex + 1);
 
-                            data.Add(key, val);
+                            Data.Add(key, val);
                         }
                     }
                 }

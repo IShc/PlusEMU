@@ -10,7 +10,7 @@ namespace Plus.HabboHotel.Subscriptions
     {
         private static ILog log = LogManager.GetLogger(typeof(SubscriptionManager));
 
-        private readonly Dictionary<int, SubscriptionData> _subscriptions = new Dictionary<int, SubscriptionData>();
+        private readonly Dictionary<int, SubscriptionData> _subscriptions = new();
 
         public SubscriptionManager()
         {

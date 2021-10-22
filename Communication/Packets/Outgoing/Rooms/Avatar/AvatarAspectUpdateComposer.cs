@@ -5,11 +5,11 @@
         public string Figure { get; }
         public string Gender { get; }
 
-        public AvatarAspectUpdateComposer(string Figure, string Gender)
+        public AvatarAspectUpdateComposer(string figure, string gender)
             : base(ServerPacketHeader.AvatarAspectUpdateMessageComposer)
         {
-            this.Figure = Figure;
-            this.Gender = Gender;
+            Figure = figure;
+            Gender = gender;
         }
 
         public override void Compose(ServerPacket packet)

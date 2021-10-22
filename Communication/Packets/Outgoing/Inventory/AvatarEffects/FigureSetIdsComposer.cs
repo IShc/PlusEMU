@@ -8,24 +8,24 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects
     {
         public ICollection<ClothingParts> ClothingParts { get; }
 
-        public FigureSetIdsComposer(ICollection<ClothingParts> ClothingParts)
+        public FigureSetIdsComposer(ICollection<ClothingParts> clothingParts)
             : base(ServerPacketHeader.FigureSetIdsMessageComposer)
         {
-            this.ClothingParts = ClothingParts;
+            ClothingParts = clothingParts;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(ClothingParts.Count);
-            foreach (ClothingParts Part in ClothingParts.ToList())
+            foreach (ClothingParts part in ClothingParts.ToList())
             {
-                packet.WriteInteger(Part.PartId);
+                packet.WriteInteger(part.PartId);
             }
 
             packet.WriteInteger(ClothingParts.Count);
-            foreach (ClothingParts Part in ClothingParts.ToList())
+            foreach (ClothingParts part in ClothingParts.ToList())
             {
-                packet.WriteString(Part.Part);
+                packet.WriteString(part.Part);
             }
         }
     }

@@ -8,8 +8,8 @@
         public RoomPropertyComposer(string name, string val)
             : base(ServerPacketHeader.RoomPropertyMessageComposer)
         {
-            this.Name = name;
-            this.Val = val;
+            Name = name;
+            Val = val;
         }
 
         public override void Compose(ServerPacket packet)

@@ -2,28 +2,19 @@
 {
     class CoordsCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_coords"; }
-        }
+        public string PermissionRequired => "command_coords";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Used to get your current position within the room."; }
-        }
+        public string Description => "Used to get your current position within the room.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            RoomUser ThisUser = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (ThisUser == null)
+            RoomUser thisUser = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (thisUser == null)
                 return;
 
-            Session.SendNotification("X: " + ThisUser.X + "\n - Y: " + ThisUser.Y + "\n - Z: " + ThisUser.Z + "\n - Rot: " + ThisUser.RotBody + ", sqState: " + Room.GetGameMap().GameMap[ThisUser.X, ThisUser.Y].ToString() + "\n\n - RoomID: " + Session.GetHabbo().CurrentRoomId);                           
+            session.SendNotification("X: " + thisUser.X + "\n - Y: " + thisUser.Y + "\n - Z: " + thisUser.Z + "\n - Rot: " + thisUser.RotBody + ", sqState: " + room.GetGameMap().GameMap[thisUser.X, thisUser.Y].ToString() + "\n\n - RoomID: " + session.GetHabbo().CurrentRoomId);                           
         }
     }
 }

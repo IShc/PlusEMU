@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using log4net.Core;
-using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Navigator;
 using Plus.HabboHotel.Users;
 
@@ -20,12 +18,12 @@ namespace Plus.Communication.Packets.Outgoing.Navigator.New
             ICollection<SearchResultList> searchResultLists, Habbo habbo, int goBack = 1, int fetchLimit = 12)
             : base(ServerPacketHeader.NavigatorSearchResultSetMessageComposer)
         {
-            this.Category = category;
-            this.Data = data;
-            this.SearchResultLists = searchResultLists;
-            this.Habbo = habbo;
-            this.GoBack = goBack;
-            this.FetchLimit = fetchLimit;
+            Category = category;
+            Data = data;
+            SearchResultLists = searchResultLists;
+            Habbo = habbo;
+            GoBack = goBack;
+            FetchLimit = fetchLimit;
         }
 
         public override void Compose(ServerPacket packet)

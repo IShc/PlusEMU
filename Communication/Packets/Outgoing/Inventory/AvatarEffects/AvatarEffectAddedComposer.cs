@@ -5,11 +5,11 @@
         public int SpriteId { get; }
         public int Duration { get; }
 
-        public AvatarEffectAddedComposer(int SpriteId, int Duration)
+        public AvatarEffectAddedComposer(int spriteId, int duration)
             : base(ServerPacketHeader.AvatarEffectAddedMessageComposer)
         {
-            this.SpriteId = SpriteId;
-            this.Duration = Duration;
+            SpriteId = spriteId;
+            Duration = duration;
         }
 
         public override void Compose(ServerPacket packet)

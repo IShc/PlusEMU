@@ -3,10 +3,10 @@
     class CantConnectComposer : MessageComposer
     {
         public int Error { get; }
-        public CantConnectComposer(int Error)
+        public CantConnectComposer(int error)
             : base(ServerPacketHeader.CantConnectMessageComposer)
         {
-            this.Error = Error;
+            Error = error;
         }
 
         public override void Compose(ServerPacket packet)

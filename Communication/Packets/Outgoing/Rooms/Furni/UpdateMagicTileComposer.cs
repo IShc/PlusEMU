@@ -1,17 +1,15 @@
-﻿using System;
-
-namespace Plus.Communication.Packets.Outgoing.Rooms.Furni
+﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Furni
 {
     class UpdateMagicTileComposer : MessageComposer
     {
         public int ItemId { get; }
         public int Decimal { get; }
 
-        public UpdateMagicTileComposer(int ItemId, int Decimal)
+        public UpdateMagicTileComposer(int itemId, int @decimal)
             : base(ServerPacketHeader.UpdateMagicTileMessageComposer)
         {
-            this.ItemId = ItemId;
-            this.Decimal = Decimal;
+            ItemId = itemId;
+            Decimal = @decimal;
         }
 
         public override void Compose(ServerPacket packet)

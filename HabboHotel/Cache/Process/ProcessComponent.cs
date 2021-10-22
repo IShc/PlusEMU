@@ -37,7 +37,7 @@ namespace Plus.HabboHotel.Cache.Process
         /// <summary>
         /// Used for disposing the ProcessComponent safely.
         /// </summary>
-        private readonly AutoResetEvent _resetEvent = new AutoResetEvent(true);
+        private readonly AutoResetEvent _resetEvent = new(true);
 
         /// <summary>
         /// How often the timer should execute.

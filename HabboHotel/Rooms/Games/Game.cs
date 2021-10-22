@@ -247,7 +247,7 @@ namespace Plus.HabboHotel.Rooms.Games
 
         public void StopGame()
         {
-            _room.lastTimerReset = DateTime.Now;
+            _room.LastTimerReset = DateTime.Now;
         }
 
         public void Dispose()

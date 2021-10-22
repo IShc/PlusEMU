@@ -21,7 +21,7 @@ namespace Plus.Network
         private IEventExecutorGroup ChannelGroup { get; set; }
         private ServerBootstrap ServerBootstrap { get; set; }
         private IChannel ServerChannel { get; set; }
-        private static readonly ILog log = LogManager.GetLogger(typeof(NetworkBootstrap));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(NetworkBootstrap));
 
         public NetworkBootstrap(string host, int port)
         {
@@ -31,9 +31,9 @@ namespace Plus.Network
 
         public async Task InitAsync()
         {
-            BossGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().data["game.tcp.acceptGroupThreads"]));
-            WorkerGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().data["game.tcp.ioGroupThreads"]));
-            ChannelGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().data["game.tcp.channelGroupThreads"]));
+            BossGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().Data["game.tcp.acceptGroupThreads"]));
+            WorkerGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().Data["game.tcp.ioGroupThreads"]));
+            ChannelGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().Data["game.tcp.channelGroupThreads"]));
             
             ServerBootstrap = new ServerBootstrap()
                 .Group(BossGroup, WorkerGroup)
@@ -53,7 +53,7 @@ namespace Plus.Network
                 .ChildOption(ChannelOption.RcvbufAllocator, new FixedRecvByteBufAllocator(1024))
                 .ChildOption(ChannelOption.Allocator, UnpooledByteBufferAllocator.Default);
             ServerChannel = await ServerBootstrap.BindAsync(IPAddress.Parse(Host), Port);
-            log.Info($"Game Server listening on {((IPEndPoint)ServerChannel.LocalAddress).Address.MapToIPv4()}:{Port}");
+            Log.Info($"Game Server listening on {((IPEndPoint)ServerChannel.LocalAddress).Address.MapToIPv4()}:{Port}");
         }
 
         /// <summary>

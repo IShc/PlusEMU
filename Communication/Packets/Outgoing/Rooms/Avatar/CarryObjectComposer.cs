@@ -5,11 +5,11 @@
         public int VirtualId { get; }
         public int ItemId { get; }
 
-        public CarryObjectComposer(int virtualID, int itemID)
+        public CarryObjectComposer(int virtualId, int itemId)
             : base(ServerPacketHeader.CarryObjectMessageComposer)
         {
-            this.VirtualId = virtualID;
-            this.ItemId = itemID;
+            VirtualId = virtualId;
+            ItemId = itemId;
         }
 
         public override void Compose(ServerPacket packet)

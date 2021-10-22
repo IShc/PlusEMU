@@ -5,10 +5,10 @@
         public int Id;
         public string Input;
 
-        public PetCommand(int CommandId, string CommandInput)
+        public PetCommand(int commandId, string commandInput)
         {
-            Id = CommandId;
-            Input = CommandInput;
+            Id = commandId;
+            Input = commandInput;
         }
     }
 }

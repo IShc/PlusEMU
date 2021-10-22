@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-
-using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Achievements;
 using Plus.HabboHotel.Users;
 
@@ -11,40 +9,40 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
         public List<Achievement> Achievements { get; }
         public Habbo Habbo { get; }
 
-        public AchievementsComposer(Habbo habbo, List<Achievement> Achievements)
+        public AchievementsComposer(Habbo habbo, List<Achievement> achievements)
             : base(ServerPacketHeader.AchievementsMessageComposer)
         {
-            this.Achievements = Achievements;
-            this.Habbo = habbo;
+            Achievements = achievements;
+            Habbo = habbo;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(Achievements.Count);
-            foreach (Achievement Achievement in Achievements)
+            foreach (Achievement achievement in Achievements)
             {
-                UserAchievement UserData = Habbo.GetAchievementData(Achievement.GroupName);
-                int TargetLevel = (UserData != null ? UserData.Level + 1 : 1);
-                int TotalLevels = Achievement.Levels.Count;
+                UserAchievement userData = Habbo.GetAchievementData(achievement.GroupName);
+                int targetLevel = (userData != null ? userData.Level + 1 : 1);
+                int totalLevels = achievement.Levels.Count;
 
-                TargetLevel = (TargetLevel > TotalLevels ? TotalLevels : TargetLevel);
+                targetLevel = (targetLevel > totalLevels ? totalLevels : targetLevel);
 
-                AchievementLevel TargetLevelData = Achievement.Levels[TargetLevel];
-                packet.WriteInteger(Achievement.Id); // Unknown (ID?)
-                packet.WriteInteger(TargetLevel); // Target level
-                packet.WriteString(Achievement.GroupName + TargetLevel); // Target name/desc/badge
+                AchievementLevel targetLevelData = achievement.Levels[targetLevel];
+                packet.WriteInteger(achievement.Id); // Unknown (ID?)
+                packet.WriteInteger(targetLevel); // Target level
+                packet.WriteString(achievement.GroupName + targetLevel); // Target name/desc/badge
 
                 packet.WriteInteger(1);
-                packet.WriteInteger(TargetLevelData.Requirement); // Progress req/target          
-                packet.WriteInteger(TargetLevelData.RewardPixels);
+                packet.WriteInteger(targetLevelData.Requirement); // Progress req/target          
+                packet.WriteInteger(targetLevelData.RewardPixels);
 
                 packet.WriteInteger(0); // Type of reward
-                packet.WriteInteger(UserData != null ? UserData.Progress : 0); // Current progress
+                packet.WriteInteger(userData != null ? userData.Progress : 0); // Current progress
 
-                packet.WriteBoolean(UserData != null ? (UserData.Level >= TotalLevels) : false);// Set 100% completed(??)
-                packet.WriteString(Achievement.Category); // Category
+                packet.WriteBoolean(userData != null ? (userData.Level >= totalLevels) : false);// Set 100% completed(??)
+                packet.WriteString(achievement.Category); // Category
                 packet.WriteString(string.Empty);
-                packet.WriteInteger(TotalLevels); // Total amount of levels 
+                packet.WriteInteger(totalLevels); // Total amount of levels 
                 packet.WriteInteger(0);
             }
             packet.WriteString("");

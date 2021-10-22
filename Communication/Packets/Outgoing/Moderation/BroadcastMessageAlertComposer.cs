@@ -4,11 +4,11 @@
     {
         public string Message { get; }
         public string Url { get; }
-        public BroadcastMessageAlertComposer(string Message, string URL = "")
+        public BroadcastMessageAlertComposer(string message, string url = "")
             : base(ServerPacketHeader.BroadcastMessageAlertMessageComposer)
         {
-            this.Message = Message;
-            this.Url = URL;
+            Message = message;
+            Url = url;
         }
 
         public override void Compose(ServerPacket packet)

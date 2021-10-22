@@ -4,10 +4,10 @@
     {
         public int GameId { get; }
 
-        public PlayableGamesComposer(int GameID)
+        public PlayableGamesComposer(int gameId)
             : base(ServerPacketHeader.PlayableGamesMessageComposer)
         {
-            this.GameId = GameID;
+            GameId = gameId;
         }
 
         public override void Compose(ServerPacket packet)

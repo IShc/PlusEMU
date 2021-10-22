@@ -4,10 +4,10 @@
     {
         public int ItemId { get; }
 
-        public LoveLockDialogueMessageComposer(int ItemId)
+        public LoveLockDialogueMessageComposer(int itemId)
             : base(ServerPacketHeader.LoveLockDialogueMessageComposer)
         {
-            this.ItemId = ItemId;
+            ItemId = itemId;
         }
 
         public override void Compose(ServerPacket packet)

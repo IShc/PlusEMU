@@ -8,8 +8,8 @@
         public CanCreateRoomComposer(bool error, int maxRoomsPerUser)
             : base(ServerPacketHeader.CanCreateRoomMessageComposer)
         {
-            this.Error = error;
-            this.MaxRoomsPerUser = maxRoomsPerUser;
+            Error = error;
+            MaxRoomsPerUser = maxRoomsPerUser;
         }
 
         public override void Compose(ServerPacket packet)

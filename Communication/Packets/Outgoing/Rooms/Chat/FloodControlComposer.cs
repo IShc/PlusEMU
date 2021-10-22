@@ -7,7 +7,7 @@
         public FloodControlComposer(int floodTime)
             : base(ServerPacketHeader.FloodControlMessageComposer)
         {
-            this.FloodTime = floodTime;
+            FloodTime = floodTime;
         }
 
         public override void Compose(ServerPacket packet)

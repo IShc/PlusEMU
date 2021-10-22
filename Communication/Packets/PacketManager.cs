@@ -62,18 +62,18 @@ namespace Plus.Communication.Packets
         /// <summary>
         ///     Testing the Task code
         /// </summary>
-        private readonly bool _ignoreTasks = true;
+        private const bool IgnoreTasks = true;
 
         /// <summary>
         ///     The maximum time a task can run for before it is considered dead
         ///     (can be used for debugging any locking issues with certain areas of code)
         /// </summary>
-        private readonly int _maximumRunTimeInSec = 300; // 5 minutes
+        private const int MaximumRunTimeInSec = 300; // 5 minutes
 
         /// <summary>
         ///     Should the handler throw errors or log and continue.
         /// </summary>
-        private readonly bool _throwUserErrors = false;
+        private const bool ThrowUserErrors = false;
 
         /// <summary>
         ///     The task factory which is used for running Asynchronous tasks, in this case we use it to execute packets.
@@ -149,7 +149,7 @@ namespace Plus.Communication.Packets
                     Log.Debug("Handled Packet: [" + packet.Id + "] UnnamedPacketEvent");
 //            }
 
-            if (!_ignoreTasks)
+            if (!IgnoreTasks)
                 ExecutePacketAsync(session, packet, pak);
             else
                 pak.Parse(session, packet);
@@ -170,7 +170,7 @@ namespace Plus.Communication.Packets
 
             try
             {
-                if (!t.Wait(_maximumRunTimeInSec * 1000, token))
+                if (!t.Wait(MaximumRunTimeInSec * 1000, token))
                 {
                     cancelSource.Cancel();
                 }
@@ -179,11 +179,6 @@ namespace Plus.Communication.Packets
             {
                 foreach (Exception e in ex.Flatten().InnerExceptions)
                 {
-                    if (_throwUserErrors)
-                    {
-                        throw e;
-                    }
-                    else
                     {
                         //log.Fatal("Unhandled Error: " + e.Message + " - " + e.StackTrace);
                         session.Disconnect();
@@ -222,8 +217,8 @@ namespace Plus.Communication.Packets
             _incomingPackets.Add(ClientPacketHeader.GetClientVersionMessageEvent, new GetClientVersionEvent());
             _incomingPackets.Add(ClientPacketHeader.InitCryptoMessageEvent, new InitCryptoEvent());
             _incomingPackets.Add(ClientPacketHeader.GenerateSecretKeyMessageEvent, new GenerateSecretKeyEvent());
-            _incomingPackets.Add(ClientPacketHeader.UniqueIDMessageEvent, new UniqueIdEvent());
-            _incomingPackets.Add(ClientPacketHeader.SSOTicketMessageEvent, new SsoTicketEvent());
+            _incomingPackets.Add(ClientPacketHeader.UniqueIDMessageEvent, new UniqueIDEvent());
+            _incomingPackets.Add(ClientPacketHeader.SSOTicketMessageEvent, new SSOTicketEvent());
             _incomingPackets.Add(ClientPacketHeader.InfoRetrieveMessageEvent, new InfoRetrieveEvent());
             _incomingPackets.Add(ClientPacketHeader.PingMessageEvent, new PingEvent());
         }

@@ -42,7 +42,7 @@ namespace Plus.HabboHotel.Rooms
                     _cycleLastExecution = DateTime.Now;
                     foreach (Room room in _rooms.Values.ToList())
                     {
-                        if (room.isCrashed)
+                        if (room.IsCrashed)
                             continue;
 
                         if (room.ProcessTask == null || room.ProcessTask.IsCompleted)
@@ -56,7 +56,7 @@ namespace Plus.HabboHotel.Rooms
                             room.IsLagging++;
                             if (room.IsLagging >= 30)
                             {
-                                room.isCrashed = true;
+                                room.IsCrashed = true;
                                 UnloadRoom(room.Id);
                             }
                         }

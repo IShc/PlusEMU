@@ -4,46 +4,37 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
     class DanceCommand :IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_dance"; }
-        }
+        public string PermissionRequired => "command_dance";
 
-        public string Parameters
-        {
-            get { return "%DanceId%"; }
-        }
+        public string Parameters => "%DanceId%";
 
-        public string Description
-        {
-            get { return "Too lazy to dance the proper way? Do it like this!"; }
-        }
+        public string Description => "Too lazy to dance the proper way? Do it like this!";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            RoomUser ThisUser = Session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (ThisUser == null)
+            RoomUser thisUser = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (thisUser == null)
                 return;
 
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Please enter an ID of a dance.");
+                session.SendWhisper("Please enter an ID of a dance.");
                 return;
             }
 
-            int DanceId;
-            if (int.TryParse(Params[1], out DanceId))
+            int danceId;
+            if (int.TryParse(@params[1], out danceId))
             {
-                if (DanceId > 4 || DanceId < 0)
+                if (danceId > 4 || danceId < 0)
                 {
-                    Session.SendWhisper("The dance ID must be between 0 and 4!");
+                    session.SendWhisper("The dance ID must be between 0 and 4!");
                     return;
                 }
 
-                Session.GetHabbo().CurrentRoom.SendPacket(new DanceComposer(ThisUser.VirtualId, DanceId));
+                session.GetHabbo().CurrentRoom.SendPacket(new DanceComposer(thisUser.VirtualId, danceId));
             }
             else
-                Session.SendWhisper("Please enter a valid dance ID.");
+                session.SendWhisper("Please enter a valid dance ID.");
         }
     }
 }

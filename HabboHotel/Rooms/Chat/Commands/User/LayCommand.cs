@@ -2,72 +2,63 @@
 {
     class LayCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_lay"; }
-        }
+        public string PermissionRequired => "command_lay";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Allows you to lay down in the room, without needing a bed."; }
-        }
+        public string Description => "Allows you to lay down in the room, without needing a bed.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (User == null)
+            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (user == null)
                 return;
 
-            if (!Room.GetGameMap().ValidTile(User.X + 2, User.Y + 2) && !Room.GetGameMap().ValidTile(User.X + 1, User.Y + 1))
+            if (!room.GetGameMap().ValidTile(user.X + 2, user.Y + 2) && !room.GetGameMap().ValidTile(user.X + 1, user.Y + 1))
             {
-                Session.SendWhisper("Oops, cannot lay down here - try elsewhere!");
+                session.SendWhisper("Oops, cannot lay down here - try elsewhere!");
                 return;
             }
 
-            if (User.Statusses.ContainsKey("sit") || User.isSitting || User.RidingHorse || User.IsWalking)
+            if (user.Statusses.ContainsKey("sit") || user.isSitting || user.RidingHorse || user.IsWalking)
                 return;
 
-            if (Session.GetHabbo().Effects().CurrentEffect > 0)
-                Session.GetHabbo().Effects().ApplyEffect(0);
+            if (session.GetHabbo().Effects().CurrentEffect > 0)
+                session.GetHabbo().Effects().ApplyEffect(0);
 
-            if (!User.Statusses.ContainsKey("lay"))
+            if (!user.Statusses.ContainsKey("lay"))
             {
-                if ((User.RotBody % 2) == 0)
+                if ((user.RotBody % 2) == 0)
                 {
-                    if (User == null)
+                    if (user == null)
                         return;
 
                     try
                     {
-                        User.Statusses.Add("lay", "1.0 null");
-                        User.Z -= 0.35;
-                        User.isLying = true;
-                        User.UpdateNeeded = true;
+                        user.Statusses.Add("lay", "1.0 null");
+                        user.Z -= 0.35;
+                        user.isLying = true;
+                        user.UpdateNeeded = true;
                     }
                     catch { }
                 }
                 else
                 {
-                    User.RotBody--;//
-                    User.Statusses.Add("lay", "1.0 null");
-                    User.Z -= 0.35;
-                    User.isLying = true;
-                    User.UpdateNeeded = true;
+                    user.RotBody--;//
+                    user.Statusses.Add("lay", "1.0 null");
+                    user.Z -= 0.35;
+                    user.isLying = true;
+                    user.UpdateNeeded = true;
                 }
 
             }
             else
             {
-                User.Z += 0.35;
-                User.Statusses.Remove("lay");
-                User.Statusses.Remove("1.0");
-                User.isLying = false;
-                User.UpdateNeeded = true;
+                user.Z += 0.35;
+                user.Statusses.Remove("lay");
+                user.Statusses.Remove("1.0");
+                user.isLying = false;
+                user.UpdateNeeded = true;
             }
         }
     }

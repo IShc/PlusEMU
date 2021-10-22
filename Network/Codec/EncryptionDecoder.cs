@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Transport.Channels;
-using HabboEncryption;
 using Plus.Communication.Encryption.Crypto.Prng;
 
 namespace Plus.Network.Codec

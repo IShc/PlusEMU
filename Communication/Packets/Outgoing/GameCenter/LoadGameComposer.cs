@@ -5,13 +5,13 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
     class LoadGameComposer : MessageComposer
     {
         public GameData GameData { get; }
-        public string SSOTicket { get; }
+        public string SsoTicket { get; }
 
-        public LoadGameComposer(GameData GameData, string SSOTicket)
+        public LoadGameComposer(GameData gameData, string ssoTicket)
             : base(ServerPacketHeader.LoadGameMessageComposer)
         {
-            this.GameData = GameData;
-            this.SSOTicket = SSOTicket;
+            GameData = gameData;
+            SsoTicket = ssoTicket;
         }
 
         public override void Compose(ServerPacket packet)
@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
             packet.WriteString("habboHost");
             packet.WriteString("http://fuseus-private-httpd-fe-1");
             packet.WriteString("accessToken");
-            packet.WriteString(SSOTicket);
+            packet.WriteString(SsoTicket);
             packet.WriteString("gameServerHost");
             packet.WriteString(GameData.ServerHost);
             packet.WriteString("gameServerPort");

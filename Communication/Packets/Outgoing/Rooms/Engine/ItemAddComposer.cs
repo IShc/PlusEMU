@@ -6,10 +6,10 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
     {
         public Item Item { get; }
 
-        public ItemAddComposer(Item Item)
+        public ItemAddComposer(Item item)
             : base(ServerPacketHeader.ItemAddMessageComposer)
         {
-            this.Item = Item;
+            Item = item;
         }
 
         public override void Compose(ServerPacket packet)

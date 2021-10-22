@@ -14,8 +14,8 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
         public WiredTriggerConfigComposer(IWiredItem box, List<int> blockedItems)
             : base(ServerPacketHeader.WiredTriggerConfigMessageComposer)
         {
-            this.WiredItem = box;
-            this.BlockedItems = blockedItems;
+            WiredItem = box;
+            BlockedItems = blockedItems;
         }
 
         public override void Compose(ServerPacket packet)
@@ -34,9 +34,9 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             packet.WriteString(WiredItem.StringData);
 
             packet.WriteInteger(WiredItem is IWiredCycle ? 1 : 0);
-            if (WiredItem is IWiredCycle Cycle)
+            if (WiredItem is IWiredCycle cycle)
             {
-                packet.WriteInteger(Cycle.Delay);
+                packet.WriteInteger(cycle.Delay);
             }
             packet.WriteInteger(0);
             packet.WriteInteger(WiredBoxTypeUtility.GetWiredId(WiredItem.Type));

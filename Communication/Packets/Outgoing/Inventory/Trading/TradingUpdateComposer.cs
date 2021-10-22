@@ -11,7 +11,7 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
         public TradingUpdateComposer(Trade trade)
             : base(ServerPacketHeader.TradingUpdateMessageComposer)
         {
-            this.Trade = trade;
+            Trade = trade;
         }
 
         public override void Compose(ServerPacket packet)

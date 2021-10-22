@@ -7,11 +7,11 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public Group Group { get; }
         public string[] BadgeParts { get; }
 
-        public ManageGroupComposer(Group Group, string[] BadgeParts)
+        public ManageGroupComposer(Group @group, string[] badgeParts)
             : base(ServerPacketHeader.ManageGroupMessageComposer)
         {
-            this.Group = Group;
-            this.BadgeParts = BadgeParts;
+            Group = @group;
+            BadgeParts = badgeParts;
         }
 
         public override void Compose(ServerPacket packet)

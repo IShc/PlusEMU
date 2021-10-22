@@ -22,13 +22,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Pets.Locale
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `bots_pet_responses`");
-                DataTable Pets = dbClient.GetTable();
+                DataTable pets = dbClient.GetTable();
 
-                if (Pets != null)
+                if (pets != null)
                 {
-                    foreach (DataRow Row in Pets.Rows)
+                    foreach (DataRow row in pets.Rows)
                     {
-                        _values.Add(Row[0].ToString(), Row[1].ToString().Split(';'));
+                        _values.Add(row[0].ToString(), row[1].ToString().Split(';'));
                     }
                 }
             }

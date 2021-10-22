@@ -7,10 +7,10 @@ namespace Plus.HabboHotel.Catalog.Marketplace
 {
     public class MarketplaceManager
     {
-        public List<int> MarketItemKeys = new List<int>();
-        public List<MarketOffer> MarketItems = new List<MarketOffer>();
-        public Dictionary<int, int> MarketCounts = new Dictionary<int, int>();
-        public Dictionary<int, int> MarketAverages = new Dictionary<int, int>();
+        public List<int> MarketItemKeys = new();
+        public List<MarketOffer> MarketItems = new();
+        public Dictionary<int, int> MarketCounts = new();
+        public Dictionary<int, int> MarketAverages = new();
 
         public MarketplaceManager()
         {

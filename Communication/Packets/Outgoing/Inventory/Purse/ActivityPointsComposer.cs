@@ -4,14 +4,14 @@
     {
         public int PixelsBalance { get; }
         public int SeasonalCurrency { get; }
-        public int GOTWPoints { get; }
+        public int GotwPoints { get; }
 
-        public ActivityPointsComposer(int PixelsBalance, int SeasonalCurrency, int GOTWPoints)
+        public ActivityPointsComposer(int pixelsBalance, int seasonalCurrency, int gotwPoints)
             : base(ServerPacketHeader.ActivityPointsMessageComposer)
         {
-            this.PixelsBalance = PixelsBalance;
-            this.SeasonalCurrency = SeasonalCurrency;
-            this.GOTWPoints = GOTWPoints;
+            PixelsBalance = pixelsBalance;
+            SeasonalCurrency = seasonalCurrency;
+            GotwPoints = gotwPoints;
         }
 
         public override void Compose(ServerPacket packet)
@@ -35,7 +35,7 @@
                 packet.WriteInteger(102);
                 packet.WriteInteger(0);
                 packet.WriteInteger(103);//Stars
-                packet.WriteInteger(GOTWPoints);
+                packet.WriteInteger(GotwPoints);
                 packet.WriteInteger(104);//Clouds
                 packet.WriteInteger(0);
                 packet.WriteInteger(105);//Diamonds

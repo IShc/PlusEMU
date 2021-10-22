@@ -9,22 +9,22 @@ namespace Plus.Communication.Packets.Outgoing.Quests
         public Habbo Habbo { get; }
         public Quest Quest { get; }
 
-        public QuestCompletedComposer(GameClient Session, Quest Quest)
+        public QuestCompletedComposer(GameClient session, Quest quest)
             : base(ServerPacketHeader.QuestCompletedMessageComposer)
         {
-            this.Habbo = Session.GetHabbo();
-            this.Quest = Quest;
+            Habbo = session.GetHabbo();
+            Quest = quest;
         }
 
         public override void Compose(ServerPacket packet)
         {
-            int AmountInCat = PlusEnvironment.GetGame().GetQuestManager().GetAmountOfQuestsInCategory(Quest.Category);
-            int Number = Quest == null ? AmountInCat : Quest.Number;
-            int UserProgress = Quest == null ? 0 : Habbo.GetQuestProgress(Quest.Id);
+            int amountInCat = PlusEnvironment.GetGame().GetQuestManager().GetAmountOfQuestsInCategory(Quest.Category);
+            int number = Quest == null ? amountInCat : Quest.Number;
+            int userProgress = Quest == null ? 0 : Habbo.GetQuestProgress(Quest.Id);
 
             packet.WriteString(Quest.Category);
-            packet.WriteInteger(Number); // Quest progress in this cat
-            packet.WriteInteger((Quest.Name.Contains("xmas2012")) ? 1 : AmountInCat); // Total quests in this cat
+            packet.WriteInteger(number); // Quest progress in this cat
+            packet.WriteInteger((Quest.Name.Contains("xmas2012")) ? 1 : amountInCat); // Total quests in this cat
             packet.WriteInteger(Quest == null ? 3 : Quest.RewardType); // Reward type (1 = Snowflakes, 2 = Love hearts, 3 = Pixels, 4 = Seashells, everything else is pixels
             packet.WriteInteger(Quest == null ? 0 : Quest.Id); // Quest id
             packet.WriteBoolean(Quest == null ? false : Habbo.GetStats().QuestId == Quest.Id); // Quest started
@@ -32,7 +32,7 @@ namespace Plus.Communication.Packets.Outgoing.Quests
             packet.WriteString(Quest == null ? string.Empty : Quest.DataBit);
             packet.WriteInteger(Quest == null ? 0 : Quest.Reward);
             packet.WriteString(Quest == null ? string.Empty : Quest.Name);
-            packet.WriteInteger(UserProgress); // Current progress
+            packet.WriteInteger(userProgress); // Current progress
             packet.WriteInteger(Quest == null ? 0 : Quest.GoalData); // Target progress
             packet.WriteInteger(Quest == null ? 0 : Quest.TimeUnlock); // "Next quest available countdown" in seconds
             packet.WriteString("");

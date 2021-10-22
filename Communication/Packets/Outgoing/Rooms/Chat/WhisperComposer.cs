@@ -7,13 +7,13 @@
         public int Emotion { get; }
         public int Colour { get; }
 
-        public WhisperComposer(int VirtualId, string Text, int Emotion, int Colour)
+        public WhisperComposer(int virtualId, string text, int emotion, int colour)
             : base(ServerPacketHeader.WhisperMessageComposer)
         {
-            this.VirtualId = VirtualId;
-            this.Text = Text;
-            this.Emotion = Emotion;
-            this.Colour = Colour;
+            VirtualId = virtualId;
+            Text = text;
+            Emotion = emotion;
+            Colour = colour;
         }
 
         public override void Compose(ServerPacket packet)

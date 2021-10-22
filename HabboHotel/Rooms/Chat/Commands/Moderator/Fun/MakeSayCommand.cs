@@ -4,43 +4,34 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
     class MakeSayCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_makesay"; }
-        }
+        public string PermissionRequired => "command_makesay";
 
-        public string Parameters
-        {
-            get { return "%username% %message%"; }
-        }
+        public string Parameters => "%username% %message%";
 
-        public string Description
-        {
-            get { return "Forces the specified user to say the specified message."; }
-        }
+        public string Description => "Forces the specified user to say the specified message.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            RoomUser ThisUser = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (ThisUser == null)
+            RoomUser thisUser = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (thisUser == null)
                 return;
 
-            if (Params.Length == 1)
-                Session.SendWhisper("You must enter a username and the message you wish to force them to say.");
+            if (@params.Length == 1)
+                session.SendWhisper("You must enter a username and the message you wish to force them to say.");
             else
             {
-                string Message = CommandManager.MergeParams(Params, 2);
-                RoomUser TargetUser = Session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(Params[1]);
-                if (TargetUser != null)
+                string message = CommandManager.MergeParams(@params, 2);
+                RoomUser targetUser = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(@params[1]);
+                if (targetUser != null)
                 {
-                    if (TargetUser.GetClient() != null && TargetUser.GetClient().GetHabbo() != null)
-                        if (!TargetUser.GetClient().GetHabbo().GetPermissions().HasRight("mod_make_say_any"))
-                            Room.SendPacket(new ChatComposer(TargetUser.VirtualId, Message, 0, TargetUser.LastBubble));
+                    if (targetUser.GetClient() != null && targetUser.GetClient().GetHabbo() != null)
+                        if (!targetUser.GetClient().GetHabbo().GetPermissions().HasRight("mod_make_say_any"))
+                            room.SendPacket(new ChatComposer(targetUser.VirtualId, message, 0, targetUser.LastBubble));
                         else
-                            Session.SendWhisper("You cannot use makesay on this user.");
+                            session.SendWhisper("You cannot use makesay on this user.");
                 }
                 else
-                    Session.SendWhisper("This user could not be found in the room");
+                    session.SendWhisper("This user could not be found in the room");
             }
         }
     }

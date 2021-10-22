@@ -7,7 +7,7 @@
         public NavigatorSettingsComposer(int homeroom)
             : base(ServerPacketHeader.NavigatorSettingsMessageComposer)
         {
-            this.HomeRoomId = homeroom;
+            HomeRoomId = homeroom;
         }
 
         public override void Compose(ServerPacket packet)

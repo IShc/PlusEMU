@@ -9,12 +9,12 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         public int OwnerId { get; }
         public string OwnerName { get; }
 
-        public ItemsComposer(Item[] Objects, Room Room)
+        public ItemsComposer(Item[] objects, Room room)
             : base(ServerPacketHeader.ItemsMessageComposer)
         {
-            this.Objects = Objects;
-            this.OwnerId = Room.OwnerId;
-            this.OwnerName = Room.OwnerName;
+            Objects = objects;
+            OwnerId = room.OwnerId;
+            OwnerName = room.OwnerName;
         }
 
         public override void Compose(ServerPacket packet)
@@ -25,31 +25,31 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 
             packet.WriteInteger(Objects.Length);
 
-            foreach (Item Item in Objects)
+            foreach (Item item in Objects)
             {
-                WriteWallItem(Item, OwnerId, packet);
+                WriteWallItem(item, OwnerId, packet);
             }
         }
 
-        private void WriteWallItem(Item Item, int UserId, ServerPacket packet)
+        private void WriteWallItem(Item item, int userId, ServerPacket packet)
         {
-            packet.WriteString(Item.Id.ToString());
-            packet.WriteInteger(Item.Data.SpriteId);
+            packet.WriteString(item.Id.ToString());
+            packet.WriteInteger(item.Data.SpriteId);
 
             try
             {
-                packet.WriteString(Item.wallCoord);
+                packet.WriteString(item.wallCoord);
             }
             catch
             {
                 packet.WriteString("");
             }
 
-            ItemBehaviourUtility.GenerateWallExtradata(Item, packet);
+            ItemBehaviourUtility.GenerateWallExtradata(item, packet);
 
             packet.WriteInteger(-1);
-            packet.WriteInteger((Item.Data.Modes > 1) ? 1 : 0);
-            packet.WriteInteger(UserId);
+            packet.WriteInteger((item.Data.Modes > 1) ? 1 : 0);
+            packet.WriteInteger(userId);
         }
     }
 }

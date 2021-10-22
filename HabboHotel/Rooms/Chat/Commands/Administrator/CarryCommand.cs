@@ -4,35 +4,26 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
     class CarryCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_carry"; }
-        }
+        public string PermissionRequired => "command_carry";
 
-        public string Parameters
-        {
-            get { return "%ItemId%"; }
-        }
+        public string Parameters => "%ItemId%";
 
-        public string Description
-        {
-            get { return "Allows you to carry a hand item"; }
-        }
+        public string Description => "Allows you to carry a hand item";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            int ItemId = 0;
-            if (!int.TryParse(Convert.ToString(Params[1]), out ItemId))
+            int itemId = 0;
+            if (!int.TryParse(Convert.ToString(@params[1]), out itemId))
             {
-                Session.SendWhisper("Please enter a valid integer.");
+                session.SendWhisper("Please enter a valid integer.");
                 return;
             }
 
-            RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (User == null)
+            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (user == null)
                 return;
 
-            User.CarryItem(ItemId);
+            user.CarryItem(itemId);
         }
     }
 }

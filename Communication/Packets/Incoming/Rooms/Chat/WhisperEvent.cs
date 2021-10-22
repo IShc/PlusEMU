@@ -31,9 +31,9 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
             if (PlusEnvironment.GetUnixTimestamp() < session.GetHabbo().FloodTime && session.GetHabbo().FloodTime != 0)
                 return;
 
-            string Params = packet.PopString();
-            string toUser = Params.Split(' ')[0];
-            string message = Params.Substring(toUser.Length + 1);
+            string @params = packet.PopString();
+            string toUser = @params.Split(' ')[0];
+            string message = @params.Substring(toUser.Length + 1);
             int colour = packet.PopInt();
 
             RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);

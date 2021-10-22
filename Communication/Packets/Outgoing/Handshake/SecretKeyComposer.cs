@@ -7,7 +7,7 @@
         public SecretKeyComposer(string publicKey)
             : base(ServerPacketHeader.SecretKeyMessageComposer)
         {
-            this.PublicKey = publicKey;
+            PublicKey = publicKey;
         }
 
         public override void Compose(ServerPacket packet)

@@ -5,7 +5,7 @@ namespace Plus.Utilities.Enclosure
 {
     public class PointField
     {
-        private static readonly Point BadPoint = new Point(-1, -1);
+        private static readonly Point BadPoint = new(-1, -1);
         private readonly List<Point> _pointList;
         private Point _mostDown = BadPoint;
         private Point _mostLeft = BadPoint;

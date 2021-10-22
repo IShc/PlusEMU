@@ -9,7 +9,7 @@ namespace Plus.Communication.Packets.Outgoing.Navigator
         public PopularRoomTagsResultComposer(ICollection<KeyValuePair<string, int>> tags)
             : base(ServerPacketHeader.PopularRoomTagsResultMessageComposer)
         {
-            this.Tags = tags;
+            Tags = tags;
         }
 
         public override void Compose(ServerPacket packet)

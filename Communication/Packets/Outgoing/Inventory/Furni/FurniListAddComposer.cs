@@ -7,10 +7,10 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
     {
         public Item Item { get; }
 
-        public FurniListAddComposer(Item Item)
+        public FurniListAddComposer(Item item)
             : base(ServerPacketHeader.FurniListAddMessageComposer)
         {
-            this.Item = Item;
+            Item = item;
         }
 
         public override void Compose(ServerPacket packet)

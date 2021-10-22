@@ -9,24 +9,24 @@ namespace Plus.Communication.Packets.Outgoing.LandingView
     {
         public ICollection<Promotion> LandingPromotions { get; }
 
-        public PromoArticlesComposer(ICollection<Promotion> LandingPromotions)
+        public PromoArticlesComposer(ICollection<Promotion> landingPromotions)
             : base(ServerPacketHeader.PromoArticlesMessageComposer)
         {
-            this.LandingPromotions = LandingPromotions;
+            LandingPromotions = landingPromotions;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(LandingPromotions.Count);//Count
-            foreach (Promotion Promotion in LandingPromotions.ToList())
+            foreach (Promotion promotion in LandingPromotions.ToList())
             {
-                packet.WriteInteger(Promotion.Id); //ID
-                packet.WriteString(Promotion.Title); //Title
-                packet.WriteString(Promotion.Text); //Text
-                packet.WriteString(Promotion.ButtonText); //Button text
-                packet.WriteInteger(Promotion.ButtonType); //Link type 0 and 3
-                packet.WriteString(Promotion.ButtonLink); //Link to article
-                packet.WriteString(Promotion.ImageLink); //Image link
+                packet.WriteInteger(promotion.Id); //ID
+                packet.WriteString(promotion.Title); //Title
+                packet.WriteString(promotion.Text); //Text
+                packet.WriteString(promotion.ButtonText); //Button text
+                packet.WriteInteger(promotion.ButtonType); //Link type 0 and 3
+                packet.WriteString(promotion.ButtonLink); //Link to article
+                packet.WriteString(promotion.ImageLink); //Image link
             }
         }
     }

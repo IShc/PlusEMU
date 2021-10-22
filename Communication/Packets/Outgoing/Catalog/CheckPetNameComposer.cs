@@ -5,11 +5,11 @@
         public int Error { get; }
         public string ExtraData { get; }
 
-        public CheckPetNameComposer(int Error, string ExtraData)
+        public CheckPetNameComposer(int error, string extraData)
             : base(ServerPacketHeader.CheckPetNameMessageComposer)
         {
-            this.Error = Error;
-            this.ExtraData = ExtraData;
+            Error = error;
+            ExtraData = extraData;
         }
 
         public override void Compose(ServerPacket packet)

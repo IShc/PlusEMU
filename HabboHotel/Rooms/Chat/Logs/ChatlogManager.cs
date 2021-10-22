@@ -6,7 +6,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
 {
     public sealed class ChatlogManager
     {
-        private const int FLUSH_ON_COUNT = 10;
+        private const int FlushOnCount = 10;
 
         private readonly List<ChatlogEntry> _chatlogs;
         private readonly ReaderWriterLockSlim _lock;
@@ -17,11 +17,11 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
             _lock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
         }
 
-        public void StoreChatlog(ChatlogEntry Entry)
+        public void StoreChatlog(ChatlogEntry entry)
         {
             _lock.EnterUpgradeableReadLock();
 
-            _chatlogs.Add(Entry);
+            _chatlogs.Add(entry);
 
             OnChatlogStore();
 
@@ -30,7 +30,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
 
         private void OnChatlogStore()
         {
-            if (_chatlogs.Count >= FLUSH_ON_COUNT)
+            if (_chatlogs.Count >= FlushOnCount)
                 FlushAndSave();
         }
 
@@ -42,13 +42,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
             {
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    foreach (ChatlogEntry Entry in _chatlogs)
+                    foreach (ChatlogEntry entry in _chatlogs)
                     {
                         dbClient.SetQuery("INSERT INTO chatlogs (`user_id`, `room_id`, `timestamp`, `message`) VALUES " + "(@uid, @rid, @time, @msg)");
-                        dbClient.AddParameter("uid", Entry.PlayerId);
-                        dbClient.AddParameter("rid", Entry.RoomId);
-                        dbClient.AddParameter("time", Entry.Timestamp);
-                        dbClient.AddParameter("msg", Entry.Message);
+                        dbClient.AddParameter("uid", entry.PlayerId);
+                        dbClient.AddParameter("rid", entry.RoomId);
+                        dbClient.AddParameter("time", entry.Timestamp);
+                        dbClient.AddParameter("msg", entry.Message);
                         dbClient.RunQuery();
                     }
                 }

@@ -39,12 +39,12 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (Instance == null)
                 return false;
 
-            TimeSpan TimeSinceRegen = DateTime.Now - Instance.lastRegeneration;
+            TimeSpan TimeSinceRegen = DateTime.Now - Instance.LastRegeneration;
 
             if (TimeSinceRegen.TotalMinutes > 1)
             {
                 Instance.GetGameMap().GenerateMaps();
-                Instance.lastRegeneration = DateTime.Now;
+                Instance.LastRegeneration = DateTime.Now;
                 return true;
             }
             

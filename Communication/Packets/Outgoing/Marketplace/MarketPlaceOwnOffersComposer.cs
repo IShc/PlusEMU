@@ -9,10 +9,10 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
     {
         public int UserId { get; }
 
-        public MarketPlaceOwnOffersComposer(int UserId)
+        public MarketPlaceOwnOffersComposer(int userId)
             : base(ServerPacketHeader.MarketPlaceOwnOffersMessageComposer)
         {
-            this.UserId = UserId;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)

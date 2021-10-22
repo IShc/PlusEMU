@@ -5,11 +5,11 @@
         public string Prime { get; }
         public string Generator { get; }
 
-        public InitCryptoComposer(string Prime, string Generator)
+        public InitCryptoComposer(string prime, string generator)
             : base(ServerPacketHeader.InitCryptoMessageComposer)
         {
-            this.Prime = Prime;
-            this.Generator = Generator;
+            Prime = prime;
+            Generator = generator;
         }
 
         public override void Compose(ServerPacket packet)

@@ -9,13 +9,13 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Bots
         public int ActionId { get; }
         public string BotSpeech { get; }
 
-        public OpenBotActionComposer(RoomUser BotUser, int ActionId, string BotSpeech)
+        public OpenBotActionComposer(RoomUser botUser, int actionId, string botSpeech)
             : base(ServerPacketHeader.OpenBotActionMessageComposer)
         {
-            this.BotId = BotUser.BotData.Id;
-            this.BotName = BotUser.BotData.Name;
-            this.ActionId = ActionId;
-            this.BotSpeech = BotSpeech;
+            BotId = botUser.BotData.Id;
+            BotName = botUser.BotData.Name;
+            ActionId = actionId;
+            BotSpeech = botSpeech;
         }
 
         public override void Compose(ServerPacket packet)

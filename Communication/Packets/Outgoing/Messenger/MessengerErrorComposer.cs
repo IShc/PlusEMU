@@ -5,11 +5,11 @@
         public int ErrorCode1 { get; }
         public int ErrorCode2 { get; }
 
-        public MessengerErrorComposer(int ErrorCode1, int ErrorCode2)
+        public MessengerErrorComposer(int errorCode1, int errorCode2)
             : base(ServerPacketHeader.MessengerErrorMessageComposer)
         {
-            this.ErrorCode1 = ErrorCode1;
-            this.ErrorCode2 = ErrorCode2;
+            ErrorCode1 = errorCode1;
+            ErrorCode2 = errorCode2;
         }
 
         public override void Compose(ServerPacket packet)

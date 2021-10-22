@@ -5,11 +5,11 @@
         public int VirtualId { get; }
         public bool Typing { get; }
 
-        public UserTypingComposer(int VirtualId, bool Typing)
+        public UserTypingComposer(int virtualId, bool typing)
             : base(ServerPacketHeader.UserTypingMessageComposer)
         {
-            this.VirtualId = VirtualId;
-            this.Typing = Typing;
+            VirtualId = virtualId;
+            Typing = typing;
         }
 
         public override void Compose(ServerPacket packet)

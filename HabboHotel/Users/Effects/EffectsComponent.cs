@@ -17,7 +17,7 @@ namespace Plus.HabboHotel.Users.Effects
         /// <summary>
         /// Effects stored by ID > Effect.
         /// </summary>
-        private readonly ConcurrentDictionary<int, AvatarEffect> _effects = new ConcurrentDictionary<int, AvatarEffect>();
+        private readonly ConcurrentDictionary<int, AvatarEffect> _effects = new();
 
         public EffectsComponent()
         {

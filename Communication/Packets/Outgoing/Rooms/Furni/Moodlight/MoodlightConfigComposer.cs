@@ -6,10 +6,10 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Moodlight
     {
         public MoodlightData Data { get; }
 
-        public MoodlightConfigComposer(MoodlightData MoodlightData)
+        public MoodlightConfigComposer(MoodlightData moodlightData)
             : base(ServerPacketHeader.MoodlightConfigMessageComposer)
         {
-            this.Data = MoodlightData;
+            Data = moodlightData;
         }
 
         public override void Compose(ServerPacket packet)
@@ -18,12 +18,12 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Moodlight
             packet.WriteInteger(Data.CurrentPreset);
 
             int i = 1;
-            foreach (MoodlightPreset Preset in Data.Presets)
+            foreach (MoodlightPreset preset in Data.Presets)
             {
                 packet.WriteInteger(i);
-                packet.WriteInteger(Preset.BackgroundOnly ? 2 : 1);
-                packet.WriteString(Preset.ColorCode);
-                packet.WriteInteger(Preset.ColorIntensity);
+                packet.WriteInteger(preset.BackgroundOnly ? 2 : 1);
+                packet.WriteString(preset.ColorCode);
+                packet.WriteInteger(preset.ColorIntensity);
                 i++;
             }
         }

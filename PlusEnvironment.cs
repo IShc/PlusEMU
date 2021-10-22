@@ -31,7 +31,7 @@ namespace Plus
 {
     public static class PlusEnvironment
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(PlusEnvironment));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(PlusEnvironment));
 
         public const string PrettyVersion = "Plus Emulator";
         public const string PrettyBuild = "3.4.3.0";
@@ -44,25 +44,25 @@ namespace Plus
         private static LanguageManager _languageManager;
         private static SettingsManager _settingsManager;
         private static DatabaseManager _manager;
-        private static RconSocket _Rcon;
+        private static RconSocket _rcon;
         private static FigureDataManager _figureManager;
         private static NetworkBootstrap _bootstrap;
 
         // TODO: Get rid?
         public static bool Event = false;
-        public static DateTime lastEvent;
+        public static DateTime LastEvent;
         public static DateTime ServerStarted;
 
-        private static readonly List<char> Allowedchars = new List<char>(new[]
+        private static readonly List<char> Allowedchars = new(new[]
             {
                 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
                 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
                 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '.'
             });
 
-        private static ConcurrentDictionary<int, Habbo> _usersCached = new ConcurrentDictionary<int, Habbo>();
+        private static ConcurrentDictionary<int, Habbo> _usersCached = new();
 
-        public static string SWFRevision = "";
+        public static string SwfRevision = "";
 
         public static void Initialize()
         {
@@ -96,16 +96,16 @@ namespace Plus
                 var connectionString = new MySqlConnectionStringBuilder
                 {
                     ConnectionTimeout = 10,
-                    Database = GetConfig().data["db.name"],
+                    Database = GetConfig().Data["db.name"],
                     DefaultCommandTimeout = 30,
                     Logging = false,
-                    MaximumPoolSize = uint.Parse(GetConfig().data["db.pool.maxsize"]),
-                    MinimumPoolSize = uint.Parse(GetConfig().data["db.pool.minsize"]),
-                    Password = GetConfig().data["db.password"],
+                    MaximumPoolSize = uint.Parse(GetConfig().Data["db.pool.maxsize"]),
+                    MinimumPoolSize = uint.Parse(GetConfig().Data["db.pool.minsize"]),
+                    Password = GetConfig().Data["db.password"],
                     Pooling = true,
-                    Port = uint.Parse(GetConfig().data["db.port"]),
-                    Server = GetConfig().data["db.hostname"],
-                    UserID = GetConfig().data["db.username"],
+                    Port = uint.Parse(GetConfig().Data["db.port"]),
+                    Server = GetConfig().Data["db.hostname"],
+                    UserID = GetConfig().Data["db.username"],
                     AllowZeroDateTime = true,
                     ConvertZeroDateTime = true,
                     SslMode = MySqlSslMode.None
@@ -115,13 +115,13 @@ namespace Plus
 
                 if (!_manager.IsConnected())
                 {
-                    log.Error("Failed to Connect to the specified MySQL server.");
+                    Log.Error("Failed to Connect to the specified MySQL server.");
                     Console.ReadKey(true);
                     Environment.Exit(1);
                     return;
                 }
 
-                log.Info("Connected to Database!");
+                Log.Info("Connected to Database!");
 
                 //Reset our statistics first.
                 using (IQueryAdapter dbClient = GetDatabaseManager().GetQueryReactor())
@@ -146,63 +146,59 @@ namespace Plus
                 HabboEncryptionV2.Initialize(new RSAKeys());
 
                 //Make sure Rcon is connected before we allow clients to Connect.
-                _Rcon = new RconSocket(GetConfig().data["rcon.tcp.bindip"], int.Parse(GetConfig().data["rcon.tcp.port"]), GetConfig().data["rcon.tcp.allowedaddr"].Split(Convert.ToChar(";")));
+                _rcon = new RconSocket(GetConfig().Data["rcon.tcp.bindip"], int.Parse(GetConfig().Data["rcon.tcp.port"]), GetConfig().Data["rcon.tcp.allowedaddr"].Split(Convert.ToChar(";")));
 
                 _game = new Game();
                 _game.StartGameLoop();
 
                 //Accept connections.
-                _bootstrap = new NetworkBootstrap(GetConfig().data["game.tcp.bindip"], int.Parse(GetConfig().data["game.tcp.port"]));
+                _bootstrap = new NetworkBootstrap(GetConfig().Data["game.tcp.bindip"], int.Parse(GetConfig().Data["game.tcp.port"]));
                 _bootstrap.InitAsync().Wait();
 
-                TimeSpan TimeUsed = DateTime.Now - ServerStarted;
+                TimeSpan timeUsed = DateTime.Now - ServerStarted;
 
                 Console.WriteLine();
 
-                log.Info("EMULATOR -> READY! (" + TimeUsed.Seconds + " s, " + TimeUsed.Milliseconds + " ms)");
+                Log.Info("EMULATOR -> READY! (" + timeUsed.Seconds + " s, " + timeUsed.Milliseconds + " ms)");
             }
-#pragma warning disable CS0168 // The variable 'e' is declared but never used
-            catch (KeyNotFoundException e)
-#pragma warning restore CS0168 // The variable 'e' is declared but never used
+            catch (KeyNotFoundException)
             { 
-                log.Error("Please check your configuration file - some values appear to be missing.");
-                log.Error("Press any key to shut down ...");
+                Log.Error("Please check your configuration file - some values appear to be missing.");
+                Log.Error("Press any key to shut down ...");
          
                 Console.ReadKey(true);
                 Environment.Exit(1);
-                return;
             }
             catch (InvalidOperationException e)
             {
-                log.Error("Failed to initialize PlusEmulator: " + e.Message);
-                log.Error("Press any key to shut down ...");
+                Log.Error("Failed to initialize PlusEmulator: " + e.Message);
+                Log.Error("Press any key to shut down ...");
                 Console.ReadKey(true);
                 Environment.Exit(1);
-                return;
             }
             catch (Exception e)
             {
-                log.Error("Fatal error during startup: " + e);
-                log.Error("Press a key to exit");
+                Log.Error("Fatal error during startup: " + e);
+                Log.Error("Press a key to exit");
 
                 Console.ReadKey();
                 Environment.Exit(1);
             }
         }
 
-        public static bool EnumToBool(string Enum)
+        public static bool EnumToBool(string @enum)
         {
-            return (Enum == "1");
+            return (@enum == "1");
         }
 
-        public static string BoolToEnum(bool Bool)
+        public static string BoolToEnum(bool @bool)
         {
-            return (Bool == true ? "1" : "0");
+            return (@bool == true ? "1" : "0");
         }
 
-        public static int GetRandomNumber(int Min, int Max)
+        public static int GetRandomNumber(int min, int max)
         {
-            return RandomNumber.GenerateNewRandom(Min, Max);
+            return RandomNumber.GenerateNewRandom(min, max);
         }
 
         public static double GetUnixTimestamp()
@@ -253,63 +249,63 @@ namespace Plus
             return true;
         }
 
-        public static string GetUsernameById(int UserId)
+        public static string GetUsernameById(int userId)
         {
-            string Name = "Unknown User";
+            string name = "Unknown User";
 
-            GameClient Client = GetGame().GetClientManager().GetClientByUserId(UserId);
-            if (Client != null && Client.GetHabbo() != null)
-                return Client.GetHabbo().Username;
+            GameClient client = GetGame().GetClientManager().GetClientByUserId(userId);
+            if (client != null && client.GetHabbo() != null)
+                return client.GetHabbo().Username;
 
-            UserCache User = GetGame().GetCacheManager().GenerateUser(UserId);
-            if (User != null)
-                return User.Username;
+            UserCache user = GetGame().GetCacheManager().GenerateUser(userId);
+            if (user != null)
+                return user.Username;
 
             using (IQueryAdapter dbClient = GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `username` FROM `users` WHERE `id` = @id LIMIT 1");
-                dbClient.AddParameter("id", UserId);
-                Name = dbClient.GetString();
+                dbClient.AddParameter("id", userId);
+                name = dbClient.GetString();
             }
 
-            if (string.IsNullOrEmpty(Name))
-                Name = "Unknown User";
+            if (string.IsNullOrEmpty(name))
+                name = "Unknown User";
 
-            return Name;
+            return name;
         }
 
-        public static Habbo GetHabboById(int UserId)
+        public static Habbo GetHabboById(int userId)
         {
             try
             {
-                GameClient Client = GetGame().GetClientManager().GetClientByUserId(UserId);
-                if (Client != null)
+                GameClient client = GetGame().GetClientManager().GetClientByUserId(userId);
+                if (client != null)
                 {
-                    Habbo User = Client.GetHabbo();
-                    if (User != null && User.Id > 0)
+                    Habbo user = client.GetHabbo();
+                    if (user != null && user.Id > 0)
                     {
-                        if (_usersCached.ContainsKey(UserId))
-                            _usersCached.TryRemove(UserId, out User);
-                        return User;
+                        if (_usersCached.ContainsKey(userId))
+                            _usersCached.TryRemove(userId, out user);
+                        return user;
                     }
                 }
                 else
                 {
                     try
                     {
-                        if (_usersCached.ContainsKey(UserId))
-                            return _usersCached[UserId];
+                        if (_usersCached.ContainsKey(userId))
+                            return _usersCached[userId];
                         else
                         {
-                            UserData data = UserDataFactory.GetUserData(UserId);
+                            UserData data = UserDataFactory.GetUserData(userId);
                             if (data != null)
                             {
-                                Habbo Generated = data.user;
-                                if (Generated != null)
+                                Habbo generated = data.user;
+                                if (generated != null)
                                 {
-                                    Generated.InitInformation(data);
-                                    _usersCached.TryAdd(UserId, Generated);
-                                    return Generated;
+                                    generated.InitInformation(data);
+                                    _usersCached.TryAdd(userId, generated);
+                                    return generated;
                                 }
                             }
                         }
@@ -324,14 +320,14 @@ namespace Plus
             }
         }
 
-        public static Habbo GetHabboByUsername(String UserName)
+        public static Habbo GetHabboByUsername(String userName)
         {
             try
             {
                 using (IQueryAdapter dbClient = GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.SetQuery("SELECT `id` FROM `users` WHERE `username` = @user LIMIT 1");
-                    dbClient.AddParameter("user", UserName);
+                    dbClient.AddParameter("user", userName);
                     int id = dbClient.GetInteger();
                     if (id > 0)
                         return GetHabboById(Convert.ToInt32(id));
@@ -346,7 +342,7 @@ namespace Plus
         public static void PerformShutDown()
         {
             Console.Clear();
-            log.Info("Server shutting down...");
+            Log.Info("Server shutting down...");
             Console.Title = "PLUS EMULATOR: SHUTTING DOWN!";
 
             GetGame().GetClientManager().SendPacket(new BroadcastMessageAlertComposer(GetLanguageManager().TryGetValue("server.shutdown.message")));
@@ -367,7 +363,7 @@ namespace Plus
                 dbClient.RunQuery("UPDATE `server_status` SET `users_online` = '0', `loaded_rooms` = '0'");
             }
 
-            log.Info("Plus Emulator has successfully shutdown.");
+            Log.Info("Plus Emulator has successfully shutdown.");
 
             Thread.Sleep(1000);
             Environment.Exit(0);
@@ -390,7 +386,7 @@ namespace Plus
 
         public static RconSocket GetRconSocket()
         {
-            return _Rcon;
+            return _rcon;
         }
 
         public static FigureDataManager GetFigureManager()
@@ -418,9 +414,9 @@ namespace Plus
             return _usersCached.Values;
         }
 
-        public static bool RemoveFromCache(int Id, out Habbo Data)
+        public static bool RemoveFromCache(int id, out Habbo data)
         {
-            return _usersCached.TryRemove(Id, out Data);
+            return _usersCached.TryRemove(id, out data);
         }
     }
 }

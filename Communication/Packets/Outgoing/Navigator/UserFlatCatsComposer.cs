@@ -12,8 +12,8 @@ namespace Plus.Communication.Packets.Outgoing.Navigator
         public UserFlatCatsComposer(ICollection<SearchResultList> categories, int rank)
             : base(ServerPacketHeader.UserFlatCatsMessageComposer)
         {
-            this.Categories = categories;
-            this.Rank = rank;
+            Categories = categories;
+            Rank = rank;
         }
 
         public override void Compose(ServerPacket packet)

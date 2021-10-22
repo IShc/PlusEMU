@@ -4,10 +4,10 @@
     {
         public int Rank { get; }
 
-        public UserRightsComposer(int Rank)
+        public UserRightsComposer(int rank)
             : base(ServerPacketHeader.UserRightsMessageComposer)
         {
-            this.Rank = Rank;
+            Rank = rank;
         }
 
         public override void Compose(ServerPacket packet)

@@ -11,7 +11,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
         public HabboUserBadgesComposer(Habbo habbo)
             : base(ServerPacketHeader.HabboUserBadgesMessageComposer)
         {
-            this.Habbo = habbo;
+            Habbo = habbo;
         }
 
         public override void Compose(ServerPacket packet)

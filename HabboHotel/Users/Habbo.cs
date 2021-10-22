@@ -1167,7 +1167,7 @@ namespace Plus.HabboHotel.Users
                 return;
             }
 
-            if (Room.isCrashed)
+            if (Room.IsCrashed)
             {
                 GetClient().SendNotification("This room has crashed! :(");
                 GetClient().SendPacket(new CloseConnectionComposer());

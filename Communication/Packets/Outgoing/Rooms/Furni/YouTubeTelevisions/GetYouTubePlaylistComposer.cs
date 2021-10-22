@@ -10,22 +10,22 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.YouTubeTelevisions
         public int ItemId { get; }
         public ICollection<TelevisionItem> Videos { get; }
 
-        public GetYouTubePlaylistComposer(int ItemId, ICollection<TelevisionItem> Videos)
+        public GetYouTubePlaylistComposer(int itemId, ICollection<TelevisionItem> videos)
             : base(ServerPacketHeader.GetYouTubePlaylistMessageComposer)
         {
-            this.ItemId = ItemId;
-            this.Videos = Videos;
+            ItemId = itemId;
+            Videos = videos;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(ItemId);
             packet.WriteInteger(Videos.Count);
-            foreach (TelevisionItem Video in Videos.ToList())
+            foreach (TelevisionItem video in Videos.ToList())
             {
-                packet.WriteString(Video.YouTubeId);
-                packet.WriteString(Video.Title);//Title
-                packet.WriteString(Video.Description);//Description
+                packet.WriteString(video.YouTubeId);
+                packet.WriteString(video.Title);//Title
+                packet.WriteString(video.Description);//Description
             }
             packet.WriteString("");
         }

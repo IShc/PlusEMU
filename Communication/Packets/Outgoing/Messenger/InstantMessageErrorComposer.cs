@@ -7,11 +7,11 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
         public MessengerMessageErrors Error { get; }
         public int Target { get; }
 
-        public InstantMessageErrorComposer(MessengerMessageErrors Error, int Target)
+        public InstantMessageErrorComposer(MessengerMessageErrors error, int target)
             : base(ServerPacketHeader.InstantMessageErrorMessageComposer)
         {
-            this.Error = Error;
-            this.Target = Target;
+            Error = error;
+            Target = target;
         }
 
         public override void Compose(ServerPacket packet)

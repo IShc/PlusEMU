@@ -1,35 +1,33 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using DotNetty.Buffers;
-using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming
 {
     public class ClientPacket
     {
-        private readonly IByteBuffer buffer;
+        private readonly IByteBuffer _buffer;
         public short Id { get; }
 
         public ClientPacket(short id, IByteBuffer buf)
         {
             Id = id;
-            buffer = buf;
+            _buffer = buf;
         }
 
         public string PopString()
         {
-            int length = buffer.ReadShort();
-            IByteBuffer data = buffer.ReadBytes(length);
+            int length = _buffer.ReadShort();
+            IByteBuffer data = _buffer.ReadBytes(length);
             return Encoding.UTF8.GetString(data.Array);
         }
 
         public int PopInt() =>
-            buffer.ReadInt();
+            _buffer.ReadInt();
 
         public bool PopBoolean() =>
-            buffer.ReadByte() == 1;
+            _buffer.ReadByte() == 1;
 
         public int RemainingLength() =>
-            buffer.ReadableBytes;
+            _buffer.ReadableBytes;
     }
 }

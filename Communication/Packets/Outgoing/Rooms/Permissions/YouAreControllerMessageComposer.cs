@@ -3,10 +3,10 @@
     class YouAreControllerComposer : MessageComposer
     {
         public int Setting { get; }
-        public YouAreControllerComposer(int Setting)
+        public YouAreControllerComposer(int setting)
             : base(ServerPacketHeader.YouAreControllerMessageComposer)
         {
-            this.Setting = Setting;
+            Setting = setting;
         }
 
         public override void Compose(ServerPacket packet)

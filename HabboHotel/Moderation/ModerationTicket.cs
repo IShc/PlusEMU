@@ -37,11 +37,11 @@ namespace Plus.HabboHotel.Moderation
             ReportedChats = reportedChats;
         }
 
-        public int GetStatus(int Id)
+        public int GetStatus(int id)
         {
             if (Moderator == null)
                 return 1;         
-            else if (Moderator.Id == Id && !Answered)
+            else if (Moderator.Id == id && !Answered)
                 return 2;
             else if (Answered)
                 return 3;

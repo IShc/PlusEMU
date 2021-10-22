@@ -5,46 +5,37 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class SellRoomCommand : IChatCommand
     {
-        public string Description
-        {
-            get { return "Allows the user to sell their own room."; }
-        }
+        public string Description => "Allows the user to sell their own room.";
 
-        public string Parameters
-        {
-            get { return "%price%"; }
-        }
+        public string Parameters => "%price%";
 
-        public string PermissionRequired
-        {
-            get { return "command_sell_room"; }
-        }
+        public string PermissionRequired => "command_sell_room";
 
-        public void Execute(GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (!Room.CheckRights(Session, true))
+            if (!room.CheckRights(session, true))
                 return;
 
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Oops, you forgot to choose a price to sell the room for.");
+                session.SendWhisper("Oops, you forgot to choose a price to sell the room for.");
                 return;
             }
-            else if (Room.Group != null)
+            else if (room.Group != null)
             {
-                Session.SendWhisper("Oops, this room has a group. You must delete the group before you can sell the room.");
+                session.SendWhisper("Oops, this room has a group. You must delete the group before you can sell the room.");
                 return;
             }
             
-            if (!int.TryParse(Params[1], out int price))
+            if (!int.TryParse(@params[1], out int price))
             {
-                Session.SendWhisper("Oops, you've entered an invalid integer.");
+                session.SendWhisper("Oops, you've entered an invalid integer.");
                 return;
             }
 
             if (price == 0)
             {
-                Session.SendWhisper("Oops, you cannot sell a room for 0 credits.");
+                session.SendWhisper("Oops, you cannot sell a room for 0 credits.");
                 return;
             }
 
@@ -52,13 +43,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
             {
                 dbClient.SetQuery("UPDATE `rooms` SET `sale_price` = @SalePrice WHERE `id` = @Id LIMIT 1");
                 dbClient.AddParameter("SalePrice", price);
-                dbClient.AddParameter("Id", Room.Id);
+                dbClient.AddParameter("Id", room.Id);
                 dbClient.RunQuery();
             }
 
-            Session.SendNotification("Your room is now up for sale. The the current room visitors have been alerted, any item that belongs to you in this room will be transferred to the new owner once purchased. Other items shall be ejected.");
+            session.SendNotification("Your room is now up for sale. The the current room visitors have been alerted, any item that belongs to you in this room will be transferred to the new owner once purchased. Other items shall be ejected.");
 
-            foreach (RoomUser user in Room.GetRoomUserManager().GetRoomUsers())
+            foreach (RoomUser user in room.GetRoomUserManager().GetRoomUsers())
             {
                 if (user == null || user.GetClient() == null)
                     continue;

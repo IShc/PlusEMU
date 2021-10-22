@@ -7,67 +7,58 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
     class MimicCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_mimic"; }
-        }
+        public string PermissionRequired => "command_mimic";
 
-        public string Parameters
-        {
-            get { return "%username%"; }
-        }
+        public string Parameters => "%username%";
 
-        public string Description
-        {
-            get { return "Liking someone elses swag? Copy it!"; }
-        }
+        public string Description => "Liking someone elses swag? Copy it!";
 
-        public void Execute(GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Please enter the username of the user you wish to mimic.");
+                session.SendWhisper("Please enter the username of the user you wish to mimic.");
                 return;
             }
 
-            GameClient TargetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(Params[1]);
-            if (TargetClient == null)
+            GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(@params[1]);
+            if (targetClient == null)
             {
-                Session.SendWhisper("An error occoured whilst finding that user, maybe they're not online.");
+                session.SendWhisper("An error occoured whilst finding that user, maybe they're not online.");
                 return;
             }
 
-            if (!TargetClient.GetHabbo().AllowMimic)
+            if (!targetClient.GetHabbo().AllowMimic)
             {
-                Session.SendWhisper("Oops, you cannot mimic this user - sorry!");
+                session.SendWhisper("Oops, you cannot mimic this user - sorry!");
                 return;
             }
 
-            RoomUser TargetUser = Session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(TargetClient.GetHabbo().Id);
-            if (TargetUser == null)
+            RoomUser targetUser = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(targetClient.GetHabbo().Id);
+            if (targetUser == null)
             {
-                Session.SendWhisper("An error occoured whilst finding that user, maybe they're not online or in this room.");
+                session.SendWhisper("An error occoured whilst finding that user, maybe they're not online or in this room.");
                 return;
             }
 
-            Session.GetHabbo().Gender = TargetUser.GetClient().GetHabbo().Gender;
-            Session.GetHabbo().Look = TargetUser.GetClient().GetHabbo().Look;
+            session.GetHabbo().Gender = targetUser.GetClient().GetHabbo().Gender;
+            session.GetHabbo().Look = targetUser.GetClient().GetHabbo().Look;
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("UPDATE `users` SET `gender` = @gender, `look` = @look WHERE `id` = @id LIMIT 1");
-                dbClient.AddParameter("gender", Session.GetHabbo().Gender);
-                dbClient.AddParameter("look", Session.GetHabbo().Look);
-                dbClient.AddParameter("id", Session.GetHabbo().Id);
+                dbClient.AddParameter("gender", session.GetHabbo().Gender);
+                dbClient.AddParameter("look", session.GetHabbo().Look);
+                dbClient.AddParameter("id", session.GetHabbo().Id);
                 dbClient.RunQuery();
             }
 
-            RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (User != null)
+            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (user != null)
             {
-                Session.SendPacket(new AvatarAspectUpdateComposer(Session.GetHabbo().Look, Session.GetHabbo().Gender));
-                Session.SendPacket(new UserChangeComposer(User, true));
-                Room.SendPacket(new UserChangeComposer(User, false));
+                session.SendPacket(new AvatarAspectUpdateComposer(session.GetHabbo().Look, session.GetHabbo().Gender));
+                session.SendPacket(new UserChangeComposer(user, true));
+                room.SendPacket(new UserChangeComposer(user, false));
             }
         }
     }

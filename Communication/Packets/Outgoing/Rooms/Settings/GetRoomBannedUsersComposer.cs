@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Cache.Type;
+﻿using Plus.HabboHotel.Cache.Type;
 using System.Collections.Generic;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
@@ -9,11 +7,11 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
     {
         public int RoomId { get; }
         public List<int> BannedUsers { get; }
-        public GetRoomBannedUsersComposer(int RoomId, List<int> BannedUsers)
+        public GetRoomBannedUsersComposer(int roomId, List<int> bannedUsers)
             : base(ServerPacketHeader.GetRoomBannedUsersMessageComposer)
         {
-            this.RoomId = RoomId;
-            this.BannedUsers = BannedUsers;
+            RoomId = roomId;
+            BannedUsers = bannedUsers;
         }
 
         public override void Compose(ServerPacket packet)
@@ -21,19 +19,19 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
             packet.WriteInteger(RoomId);
 
             packet.WriteInteger(BannedUsers.Count);//Count
-            foreach (int Id in BannedUsers)
+            foreach (int id in BannedUsers)
             {
-                UserCache Data = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(Id);
+                UserCache data = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(id);
 
-                if (Data == null)
+                if (data == null)
                 {
                     packet.WriteInteger(0);
                     packet.WriteString("Unknown Error");
                 }
                 else
                 {
-                    packet.WriteInteger(Data.Id);
-                    packet.WriteString(Data.Username);
+                    packet.WriteInteger(data.Id);
+                    packet.WriteString(data.Username);
                 }
             }
         }

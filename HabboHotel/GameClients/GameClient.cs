@@ -3,7 +3,6 @@ using DotNetty.Transport.Channels;
 using Plus.Core;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
-using Plus.Communication.Interfaces;
 using Plus.Communication.Packets.Outgoing.Sound;
 using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.Communication.Packets.Outgoing.Handshake;
@@ -11,8 +10,6 @@ using Plus.Communication.Packets.Outgoing.Navigator;
 using Plus.Communication.Packets.Outgoing.Moderation;
 using Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects;
 using Plus.Communication.Packets.Outgoing.Inventory.Achievements;
-
-using Plus.Communication.Encryption.Crypto.Prng;
 using Plus.Communication.Packets.Outgoing;
 using Plus.HabboHotel.Users.Messenger.FriendBar;
 using Plus.Communication.Packets.Outgoing.BuildersClub;
@@ -89,7 +86,7 @@ namespace Plus.HabboHotel.GameClients
                 {
                     userData.user.Init(this, userData);
 
-                    SendPacket(new AuthenticationOKComposer());
+                    SendPacket(new AuthenticationOkComposer());
                     SendPacket(new AvatarEffectsComposer(_habbo.Effects().GetAllEffects));
                     SendPacket(new NavigatorSettingsComposer(_habbo.HomeRoom));
                     SendPacket(new FavouritesComposer(userData.user.FavoriteRooms));

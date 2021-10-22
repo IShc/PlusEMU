@@ -4,10 +4,10 @@
     {
         public int Type { get; }
 
-        public VoucherRedeemErrorComposer(int Type)
+        public VoucherRedeemErrorComposer(int type)
             : base(ServerPacketHeader.VoucherRedeemErrorMessageComposer)
         {
-            this.Type = Type;
+            Type = type;
         }
 
         public override void Compose(ServerPacket packet)

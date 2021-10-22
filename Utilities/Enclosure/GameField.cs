@@ -110,7 +110,7 @@ namespace Plus.Utilities.Enclosure
             //Console.WriteLine("Middle: x:[{0}]  y:[{1}]", middleX, middleY);
 
             var toFill = new List<Point>();
-            var checkedItems = new List<Point> {new Point(_currentlyChecking.X, _currentlyChecking.Y)};
+            var checkedItems = new List<Point> {new(_currentlyChecking.X, _currentlyChecking.Y)};
             toFill.Add(new Point(middleX, middleY));
             while (toFill.Count > 0)
             {

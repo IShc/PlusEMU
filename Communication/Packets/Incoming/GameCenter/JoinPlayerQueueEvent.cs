@@ -7,24 +7,24 @@ namespace Plus.Communication.Packets.Incoming.GameCenter
 {
     class JoinPlayerQueueEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient Session, ClientPacket Packet)
+        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
         {
-            if (Session == null || Session.GetHabbo() == null)
+            if (session == null || session.GetHabbo() == null)
                 return;
 
-            int GameId = Packet.PopInt();
+            int gameId = packet.PopInt();
 
-            GameData GameData = null;
-            if (PlusEnvironment.GetGame().GetGameDataManager().TryGetGame(GameId, out GameData))
+            GameData gameData = null;
+            if (PlusEnvironment.GetGame().GetGameDataManager().TryGetGame(gameId, out gameData))
             {
-                string SSOTicket = "HABBOON-Fastfood-" + GenerateSSO(32) + "-" + Session.GetHabbo().Id;
+                string ssoTicket = "HABBOON-Fastfood-" + GenerateSso(32) + "-" + session.GetHabbo().Id;
 
-                Session.SendPacket(new JoinQueueComposer(GameData.Id));
-                Session.SendPacket(new LoadGameComposer(GameData, SSOTicket));
+                session.SendPacket(new JoinQueueComposer(gameData.Id));
+                session.SendPacket(new LoadGameComposer(gameData, ssoTicket));
             }
         }
 
-        private string GenerateSSO(int length)
+        private string GenerateSso(int length)
         {
             Random random = new Random();
             string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";

@@ -4,7 +4,7 @@ namespace Plus.Utilities
 {
     public static class Randomizer
     {
-        public static Random GetRandom { get; } = new Random();
+        public static Random GetRandom { get; } = new();
 
         public static int Next()
         {

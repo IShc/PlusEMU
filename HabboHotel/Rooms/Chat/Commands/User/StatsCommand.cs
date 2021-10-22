@@ -5,41 +5,32 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class StatsCommand : IChatCommand
     {
-        public string PermissionRequired
+        public string PermissionRequired => "command_stats";
+
+        public string Parameters => "";
+
+        public string Description => "View your current statistics.";
+
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            get { return "command_stats"; }
-        }
+            double minutes = session.GetHabbo().GetStats().OnlineTime / 60;
+            double hours = minutes / 60;
+            int onlineTime = Convert.ToInt32(hours);
+            string s = onlineTime == 1 ? "" : "s";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+            StringBuilder habboInfo = new StringBuilder();
+            habboInfo.Append("Your account stats:\r\r");
 
-        public string Description
-        {
-            get { return "View your current statistics."; }
-        }
-
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
-        {
-            double Minutes = Session.GetHabbo().GetStats().OnlineTime / 60;
-            double Hours = Minutes / 60;
-            int OnlineTime = Convert.ToInt32(Hours);
-            string s = OnlineTime == 1 ? "" : "s";
-
-            StringBuilder HabboInfo = new StringBuilder();
-            HabboInfo.Append("Your account stats:\r\r");
-
-            HabboInfo.Append("Currency Info:\r");
-            HabboInfo.Append("Credits: " + Session.GetHabbo().Credits + "\r");
-            HabboInfo.Append("Duckets: " + Session.GetHabbo().Duckets + "\r");
-            HabboInfo.Append("Diamonds: " + Session.GetHabbo().Diamonds + "\r");
-            HabboInfo.Append("Online Time: " + OnlineTime + " Hour" + s + "\r");
-            HabboInfo.Append("Respects: " + Session.GetHabbo().GetStats().Respect + "\r");
-            HabboInfo.Append("GOTW Points: " + Session.GetHabbo().GOTWPoints + "\r\r");
+            habboInfo.Append("Currency Info:\r");
+            habboInfo.Append("Credits: " + session.GetHabbo().Credits + "\r");
+            habboInfo.Append("Duckets: " + session.GetHabbo().Duckets + "\r");
+            habboInfo.Append("Diamonds: " + session.GetHabbo().Diamonds + "\r");
+            habboInfo.Append("Online Time: " + onlineTime + " Hour" + s + "\r");
+            habboInfo.Append("Respects: " + session.GetHabbo().GetStats().Respect + "\r");
+            habboInfo.Append("GOTW Points: " + session.GetHabbo().GOTWPoints + "\r\r");
 
 
-            Session.SendNotification(HabboInfo.ToString());
+            session.SendNotification(habboInfo.ToString());
         }
     }
 }

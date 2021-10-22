@@ -7,7 +7,7 @@
         public DoorbellComposer(string username)
             : base(ServerPacketHeader.DoorbellMessageComposer)
         {
-            this.Username = username;
+            Username = username;
         }
 
         public override void Compose(ServerPacket packet)

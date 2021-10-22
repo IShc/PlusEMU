@@ -27,15 +27,15 @@ namespace Plus.HabboHotel.Rooms.Chat.Pets.Commands
             _commandRegister.Clear();
             _commandDatabase.Clear();
 
-            DataTable Table = null;
+            DataTable table = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `bots_pet_commands`");
-                Table = dbClient.GetTable();
+                table = dbClient.GetTable();
 
-                if (Table != null)
+                if (table != null)
                 {
-                    foreach (DataRow row in Table.Rows)
+                    foreach (DataRow row in table.Rows)
                     {
                         _commandRegister.Add(Convert.ToInt32(row[0]), row[1].ToString());
                         _commandDatabase.Add(row[1] + ".input", row[2].ToString());
@@ -45,22 +45,22 @@ namespace Plus.HabboHotel.Rooms.Chat.Pets.Commands
 
             foreach (var pair in _commandRegister)
             {
-                int commandID = pair.Key;
-                string commandStringedID = pair.Value;
-                string[] commandInput = _commandDatabase[commandStringedID + ".input"].Split(',');
+                int commandId = pair.Key;
+                string commandStringedId = pair.Value;
+                string[] commandInput = _commandDatabase[commandStringedId + ".input"].Split(',');
 
                 foreach (string command in commandInput)
                 {
-                    _petCommands.Add(command, new PetCommand(commandID, command));
+                    _petCommands.Add(command, new PetCommand(commandId, command));
                 }
             }
         }
 
-        public int TryInvoke(string Input)
+        public int TryInvoke(string input)
         {
-            PetCommand Command = null;
-            if (_petCommands.TryGetValue(Input.ToLower(), out Command))
-                return Command.Id;
+            PetCommand command = null;
+            if (_petCommands.TryGetValue(input.ToLower(), out command))
+                return command.Id;
             return 0;
         }
     }

@@ -9,10 +9,10 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Pets
     {
         public ICollection<Pet> Pets { get; }
 
-        public PetInventoryComposer(ICollection<Pet> Pets)
+        public PetInventoryComposer(ICollection<Pet> pets)
             : base(ServerPacketHeader.PetInventoryMessageComposer)
         {
-            this.Pets = Pets;
+            Pets = pets;
         }
 
         public override void Compose(ServerPacket packet)
@@ -20,13 +20,13 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Pets
             packet.WriteInteger(1);
             packet.WriteInteger(1);
             packet.WriteInteger(Pets.Count);
-            foreach (Pet Pet in Pets.ToList())
+            foreach (Pet pet in Pets.ToList())
             {
-                packet.WriteInteger(Pet.PetId);
-                packet.WriteString(Pet.Name);
-                packet.WriteInteger(Pet.Type);
-                packet.WriteInteger(int.Parse(Pet.Race));
-                packet.WriteString(Pet.Color);
+                packet.WriteInteger(pet.PetId);
+                packet.WriteString(pet.Name);
+                packet.WriteInteger(pet.Type);
+                packet.WriteInteger(int.Parse(pet.Race));
+                packet.WriteString(pet.Color);
                 packet.WriteInteger(0);
                 packet.WriteInteger(0);
                 packet.WriteInteger(0);

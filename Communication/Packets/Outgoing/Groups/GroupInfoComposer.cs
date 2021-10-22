@@ -2,7 +2,6 @@
 using Plus.HabboHotel.Groups;
 using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Users;
-using Google.Protobuf.Reflection;
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
@@ -13,13 +12,13 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public Habbo Habbo { get; }
         public DateTime Origin { get; }
 
-        public GroupInfoComposer(Group Group, GameClient Session, bool NewWindow = false)
+        public GroupInfoComposer(Group @group, GameClient session, bool newWindow = false)
             : base(ServerPacketHeader.GroupInfoMessageComposer)
         {
-            DateTime Origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Group.CreateTime);
-            this.Group = Group;
-            this.NewWindow = NewWindow;
-            this.Habbo = Session.GetHabbo();
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(@group.CreateTime);
+            Group = @group;
+            NewWindow = newWindow;
+            Habbo = session.GetHabbo();
         }
 
         public override void Compose(ServerPacket packet)

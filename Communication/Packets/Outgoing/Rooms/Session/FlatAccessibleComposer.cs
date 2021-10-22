@@ -3,10 +3,10 @@
     class FlatAccessibleComposer : MessageComposer
     {
         public string Username { get; }
-        public FlatAccessibleComposer(string Username)
+        public FlatAccessibleComposer(string username)
             : base(ServerPacketHeader.FlatAccessibleMessageComposer)
         {
-            this.Username = Username;
+            Username = username;
         }
 
         public override void Compose(ServerPacket packet)

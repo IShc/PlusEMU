@@ -6,7 +6,7 @@
         public UpdateUsernameComposer(string username)
             : base(ServerPacketHeader.UpdateUsernameMessageComposer)
         {
-            this.Username = username;
+            Username = username;
         }
 
         public override void Compose(ServerPacket packet)

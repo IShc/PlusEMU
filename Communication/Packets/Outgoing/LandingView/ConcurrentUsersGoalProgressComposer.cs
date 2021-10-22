@@ -4,10 +4,10 @@
     {
         public int UsersNow { get; }
 
-        public ConcurrentUsersGoalProgressComposer(int UsersNow) 
+        public ConcurrentUsersGoalProgressComposer(int usersNow) 
             : base(ServerPacketHeader.ConcurrentUsersGoalProgressMessageComposer)
         {
-            this.UsersNow = UsersNow;
+            UsersNow = usersNow;
         }
 
         public override void Compose(ServerPacket packet)

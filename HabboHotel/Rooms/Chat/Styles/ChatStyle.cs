@@ -6,11 +6,11 @@
         private string _name;
         private string _requiredRight;
 
-        public ChatStyle(int Id, string Name, string RequiredRight)
+        public ChatStyle(int id, string name, string requiredRight)
         {
-            _id = Id;
-            _name = Name;
-            _requiredRight = RequiredRight;
+            _id = id;
+            _name = name;
+            _requiredRight = requiredRight;
         }
 
         public int Id

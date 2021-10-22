@@ -5,11 +5,11 @@
         public int Error { get; }
         public string Username { get; }
 
-        public TradingErrorComposer(int Error, string Username)
+        public TradingErrorComposer(int error, string username)
             : base(ServerPacketHeader.TradingErrorMessageComposer)
         {
-            this.Error = Error;
-            this.Username = Username;
+            Error = error;
+            Username = username;
         }
 
         public override void Compose(ServerPacket packet)

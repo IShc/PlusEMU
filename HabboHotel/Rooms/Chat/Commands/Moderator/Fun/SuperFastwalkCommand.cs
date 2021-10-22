@@ -2,33 +2,24 @@
 {
     class SuperFastwalkCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_super_fastwalk"; }
-        }
+        public string PermissionRequired => "command_super_fastwalk";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Gives you the ability to walk very very fast."; }
-        }
+        public string Description => "Gives you the ability to walk very very fast.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (User == null)
+            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (user == null)
                 return;
 
-            User.SuperFastWalking = !User.SuperFastWalking;
+            user.SuperFastWalking = !user.SuperFastWalking;
 
-            if (User.FastWalking)
-                User.FastWalking = false;
+            if (user.FastWalking)
+                user.FastWalking = false;
 
-            Session.SendWhisper("Walking mode updated.");
+            session.SendWhisper("Walking mode updated.");
         }
     }
 }

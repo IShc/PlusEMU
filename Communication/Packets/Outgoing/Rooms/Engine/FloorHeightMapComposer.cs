@@ -5,11 +5,11 @@
         public string Map { get; }
         public int WallHeight { get; }
 
-        public FloorHeightMapComposer(string Map, int WallHeight)
+        public FloorHeightMapComposer(string map, int wallHeight)
             : base(ServerPacketHeader.FloorHeightMapMessageComposer)
         {
-            this.Map = Map;
-            this.WallHeight = WallHeight;
+            Map = map;
+            WallHeight = wallHeight;
         }
 
         public override void Compose(ServerPacket packet)

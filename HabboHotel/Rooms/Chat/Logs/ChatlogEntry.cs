@@ -14,18 +14,18 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
         private WeakReference _playerReference;
         private WeakReference _roomReference;
 
-        public ChatlogEntry(int PlayerId, int RoomId, string Message, double Timestamp, Habbo Player = null, RoomData Instance = null)
+        public ChatlogEntry(int playerId, int roomId, string message, double timestamp, Habbo player = null, RoomData instance = null)
         {
-            _playerId = PlayerId;
-            _roomId = RoomId;
-            _message = Message;
-            _timestamp = Timestamp;
+            _playerId = playerId;
+            _roomId = roomId;
+            _message = message;
+            _timestamp = timestamp;
 
-            if (Player != null)
-                _playerReference = new WeakReference(Player);
+            if (player != null)
+                _playerReference = new WeakReference(player);
 
-            if (Instance != null)
-                _roomReference = new WeakReference(Instance);
+            if (instance != null)
+                _roomReference = new WeakReference(instance);
         }
 
         public int PlayerId
@@ -52,9 +52,9 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
         {
             if (_playerReference.IsAlive)
             {
-                Habbo PlayerObj = (Habbo)_playerReference.Target;
+                Habbo playerObj = (Habbo)_playerReference.Target;
 
-                return PlayerObj;
+                return playerObj;
             }
 
             return null;
@@ -64,10 +64,10 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
         {
             if (_roomReference.IsAlive)
             {
-                Room RoomObj = (Room)_roomReference.Target;
-                if (RoomObj.mDisposed)
+                Room roomObj = (Room)_roomReference.Target;
+                if (roomObj.mDisposed)
                     return null;
-                return RoomObj;
+                return roomObj;
             }
             return null;
         }

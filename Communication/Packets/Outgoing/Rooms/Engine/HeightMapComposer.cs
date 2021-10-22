@@ -6,28 +6,28 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
     {
         public string Map { get; }
 
-        public HeightMapComposer(string Map)
+        public HeightMapComposer(string map)
             : base(ServerPacketHeader.HeightMapMessageComposer)
         {
-            this.Map = Map.Replace("\n", "");
+            Map = map.Replace("\n", "");
         }
 
         public override void Compose(ServerPacket packet)
         {
-            string[] Split = Map.Split('\r');
-            packet.WriteInteger(Split[0].Length);
-            packet.WriteInteger((Split.Length - 1) * Split[0].Length);
+            string[] split = Map.Split('\r');
+            packet.WriteInteger(split[0].Length);
+            packet.WriteInteger((split.Length - 1) * split[0].Length);
             int x = 0;
             int y = 0;
-            for (y = 0; y < Split.Length - 1; y++)
+            for (y = 0; y < split.Length - 1; y++)
             {
-                for (x = 0; x < Split[0].Length; x++)
+                for (x = 0; x < split[0].Length; x++)
                 {
                     char pos;
 
                     try
                     {
-                        pos = Split[y][x];
+                        pos = split[y][x];
                     }
                     catch { pos = 'x'; }
 
@@ -35,16 +35,16 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                         packet.WriteShort(-1);
                     else
                     {
-                        int Height = 0;
-                        if (int.TryParse(pos.ToString(), out Height))
+                        int height = 0;
+                        if (int.TryParse(pos.ToString(), out height))
                         {
-                            Height = Height * 256;
+                            height = height * 256;
                         }
                         else
                         {
-                            Height = ((Convert.ToInt32(pos) - 87) * 256);
+                            height = ((Convert.ToInt32(pos) - 87) * 256);
                         }
-                        packet.WriteShort(Height);
+                        packet.WriteShort(height);
                     }
                 }
             }

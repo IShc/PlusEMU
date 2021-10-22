@@ -8,23 +8,23 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
     {
         public ICollection<GameData> Games { get; }
 
-        public GameListComposer(ICollection<GameData> Games)
+        public GameListComposer(ICollection<GameData> games)
             : base(ServerPacketHeader.GameListMessageComposer)
         {
-            this.Games = Games;
+            Games = games;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(PlusEnvironment.GetGame().GetGameDataManager().GetCount());//Game count
-            foreach (GameData Game in Games)
+            foreach (GameData game in Games)
             {
-                packet.WriteInteger(Game.Id);
-                packet.WriteString(Game.Name);
-                packet.WriteString(Game.ColourOne);
-                packet.WriteString(Game.ColourTwo);
-                packet.WriteString(Game.ResourcePath);
-                packet.WriteString(Game.StringThree);
+                packet.WriteInteger(game.Id);
+                packet.WriteString(game.Name);
+                packet.WriteString(game.ColourOne);
+                packet.WriteString(game.ColourTwo);
+                packet.WriteString(game.ResourcePath);
+                packet.WriteString(game.StringThree);
             }
         }
     }

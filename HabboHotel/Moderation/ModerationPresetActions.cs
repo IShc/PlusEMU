@@ -9,7 +9,7 @@
         public string MessageText { get; set; }
         public int MuteTime { get; set; }
         public int BanTime { get; set; }
-        public int IPBanTime { get; set; }
+        public int IpBanTime { get; set; }
         public int TradeLockTime { get; set; }
         public string DefaultSanction { get; set; }
 
@@ -22,7 +22,7 @@
             MessageText = messageText;
             MuteTime = muteText;
             BanTime = banTime;
-            IPBanTime = ipBanTime;
+            IpBanTime = ipBanTime;
             TradeLockTime = tradeLockTime;
             DefaultSanction = defaultSanction;
         }

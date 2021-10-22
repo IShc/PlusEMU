@@ -4,10 +4,10 @@
     {
         public int GroupId { get; }
 
-        public RefreshFavouriteGroupComposer(int Id)
+        public RefreshFavouriteGroupComposer(int id)
             : base(ServerPacketHeader.RefreshFavouriteGroupMessageComposer)
         {
-            this.GroupId = Id;
+            GroupId = id;
         }
 
         public override void Compose(ServerPacket packet)

@@ -6,12 +6,12 @@
         public int VirtualId { get; }
         public int Amount { get; }
 
-        public AddExperiencePointsComposer(int PetId, int VirtualId, int Amount)
+        public AddExperiencePointsComposer(int petId, int virtualId, int amount)
             : base(ServerPacketHeader.AddExperiencePointsMessageComposer)
         {
-            this.PetId = PetId;
-            this.VirtualId = VirtualId;
-            this.Amount = Amount;
+            PetId = petId;
+            VirtualId = virtualId;
+            Amount = amount;
         }
 
         public override void Compose(ServerPacket packet)

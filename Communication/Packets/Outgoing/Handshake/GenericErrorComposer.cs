@@ -7,7 +7,7 @@
         public GenericErrorComposer(int errorId)
             : base(ServerPacketHeader.GenericErrorMessageComposer)
         {
-            this.ErrorId = errorId;
+            ErrorId = errorId;
         }
 
         public override void Compose(ServerPacket packet)

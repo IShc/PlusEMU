@@ -12,7 +12,7 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
         public BuddyRequestsComposer(ICollection<MessengerRequest> requests)
             : base(ServerPacketHeader.BuddyRequestsMessageComposer)
         {
-            this.Requests = requests;
+            Requests = requests;
         }
 
         public override void Compose(ServerPacket packet)
@@ -20,13 +20,13 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
             packet.WriteInteger(Requests.Count);
             packet.WriteInteger(Requests.Count);
 
-            foreach (MessengerRequest Request in Requests)
+            foreach (MessengerRequest request in Requests)
             {
-                packet.WriteInteger(Request.From);
-                packet.WriteString(Request.Username);
+                packet.WriteInteger(request.From);
+                packet.WriteString(request.Username);
 
-                UserCache User = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(Request.From);
-                packet.WriteString(User != null ? User.Look : "");
+                UserCache user = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(request.From);
+                packet.WriteString(user != null ? user.Look : "");
             }
         }
     }

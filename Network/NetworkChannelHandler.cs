@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using DotNetty.Handlers.Timeout;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
 using log4net;
@@ -10,7 +9,7 @@ namespace Plus.Network
 {
     public class NetworkChannelHandler : SimpleChannelInboundHandler<ClientPacket>
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(NetworkChannelHandler));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(NetworkChannelHandler));
 
         public override void ChannelActive(IChannelHandlerContext context)
         {
@@ -25,7 +24,7 @@ namespace Plus.Network
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
             if (exception is IOException) return;
-            log.Debug(exception.Message);
+            Log.Debug(exception.Message);
         }
 
         protected override void ChannelRead0(IChannelHandlerContext ctx, ClientPacket msg)

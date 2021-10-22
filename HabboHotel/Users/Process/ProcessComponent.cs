@@ -40,7 +40,7 @@ namespace Plus.HabboHotel.Users.Process
         /// <summary>
         /// Used for disposing the ProcessComponent safely.
         /// </summary>
-        private AutoResetEvent _resetEvent = new AutoResetEvent(true);
+        private AutoResetEvent _resetEvent = new(true);
 
         /// <summary>
         /// How often the timer should execute.

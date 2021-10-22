@@ -48,7 +48,7 @@ namespace Plus.HabboHotel.Rooms
         public Item LastItem = null;
         public int LockedTilesCount;
 
-        public List<Vector2D> Path = new List<Vector2D>();
+        public List<Vector2D> Path = new();
         public bool PathRecalcNeeded = false;
         public int PathStep = 1;
         public Pet PetData;

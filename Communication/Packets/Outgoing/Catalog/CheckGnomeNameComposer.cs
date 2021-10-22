@@ -1,17 +1,15 @@
-﻿using System.Diagnostics.Contracts;
-
-namespace Plus.Communication.Packets.Outgoing.Catalog
+﻿namespace Plus.Communication.Packets.Outgoing.Catalog
 {
     class CheckGnomeNameComposer : MessageComposer
     {
         public string PetName { get; }
         public int ErrorId { get; }
 
-        public CheckGnomeNameComposer(string PetName, int ErrorId)
+        public CheckGnomeNameComposer(string petName, int errorId)
             : base(ServerPacketHeader.CheckGnomeNameMessageComposer)
         {
-            this.PetName = PetName;
-            this.ErrorId = ErrorId;
+            PetName = petName;
+            ErrorId = errorId;
         }
 
         public override void Compose(ServerPacket packet)

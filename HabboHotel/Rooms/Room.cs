@@ -10,7 +10,6 @@ using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Rooms.AI;
 using Plus.HabboHotel.Rooms.Games;
-using Plus.Communication.Interfaces;
 using Plus.Communication.Packets.Outgoing;
 
 
@@ -35,11 +34,11 @@ namespace Plus.HabboHotel.Rooms
 {
     public class Room : RoomData
     {
-        public bool isCrashed;
+        public bool IsCrashed;
         public bool mDisposed;
         public bool RoomMuted;
-        public DateTime lastTimerReset;
-        public DateTime lastRegeneration;
+        public DateTime LastTimerReset;
+        public DateTime LastRegeneration;
 
         public Task ProcessTask;
         public ArrayList ActiveTrades;
@@ -60,8 +59,8 @@ namespace Plus.HabboHotel.Rooms
         private Gamemap _gamemap;
         private GameItemHandler _gameItemHandler;
         
-        public TeamManager teambanzai;
-        public TeamManager teamfreeze;
+        public TeamManager TeamBanzai;
+        public TeamManager TeamFreeze;
 
         private RoomUserManager _roomUserManager;
         private RoomItemHandling _roomItemHandling;
@@ -108,7 +107,7 @@ namespace Plus.HabboHotel.Rooms
             InitBots();
             InitPets();
 
-            lastRegeneration = DateTime.Now;
+            LastRegeneration = DateTime.Now;
         }
 
         public List<string> WordFilterList
@@ -161,16 +160,16 @@ namespace Plus.HabboHotel.Rooms
 
         public TeamManager GetTeamManagerForBanzai()
         {
-            if (teambanzai == null)
-                teambanzai = TeamManager.CreateTeam("banzai");
-            return teambanzai;
+            if (TeamBanzai == null)
+                TeamBanzai = TeamManager.CreateTeam("banzai");
+            return TeamBanzai;
         }
 
         public TeamManager GetTeamManagerForFreeze()
         {
-            if (teamfreeze == null)
-                teamfreeze = TeamManager.CreateTeam("freeze");
-            return teamfreeze;
+            if (TeamFreeze == null)
+                TeamFreeze = TeamManager.CreateTeam("freeze");
+            return TeamFreeze;
         }
 
         public BattleBanzai GetBanzai()
@@ -433,7 +432,7 @@ namespace Plus.HabboHotel.Rooms
 
         public void ProcessRoom()
         {
-            if (isCrashed || mDisposed)
+            if (IsCrashed || mDisposed)
                 return;
 
             try
@@ -528,7 +527,7 @@ namespace Plus.HabboHotel.Rooms
                 ExceptionLogger.LogException(e3);
             }
 
-            isCrashed = true;
+            IsCrashed = true;
             PlusEnvironment.GetGame().GetRoomManager().UnloadRoom(Id);
         }
 
@@ -717,7 +716,7 @@ namespace Plus.HabboHotel.Rooms
 
             if (!mDisposed)
             {
-                isCrashed = false;
+                IsCrashed = false;
                 mDisposed = true;
 
                 /* TODO: Needs reviewing */
@@ -781,16 +780,16 @@ namespace Plus.HabboHotel.Rooms
 
                 // Room Data?
 
-                if (teambanzai != null)
+                if (TeamBanzai != null)
                 {
-                    teambanzai.Dispose();
-                    teambanzai = null;
+                    TeamBanzai.Dispose();
+                    TeamBanzai = null;
                 }
 
-                if (teamfreeze != null)
+                if (TeamFreeze != null)
                 {
-                    teamfreeze.Dispose();
-                    teamfreeze = null;
+                    TeamFreeze.Dispose();
+                    TeamFreeze = null;
                 }
 
                 if (_roomUserManager != null)

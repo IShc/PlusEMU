@@ -2,68 +2,59 @@
 {
     class ForceSitCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_forcesit"; }
-        }
+        public string PermissionRequired => "command_forcesit";
 
-        public string Parameters
-        {
-            get { return "%username%"; }
-        }
+        public string Parameters => "%username%";
 
-        public string Description
-        {
-            get { return "Force another to user sit."; }
-        }
+        public string Description => "Force another to user sit.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Oops, you forgot to choose a target user!");
+                session.SendWhisper("Oops, you forgot to choose a target user!");
                 return;
             }
 
-            RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(Params[1]);
-            if (User == null)
+            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(@params[1]);
+            if (user == null)
                 return;
 
-            if (User.Statusses.ContainsKey("lie") || User.isLying || User.RidingHorse || User.IsWalking)
+            if (user.Statusses.ContainsKey("lie") || user.isLying || user.RidingHorse || user.IsWalking)
                 return;
 
-            if (!User.Statusses.ContainsKey("sit"))
+            if (!user.Statusses.ContainsKey("sit"))
             {
-                if ((User.RotBody % 2) == 0)
+                if ((user.RotBody % 2) == 0)
                 {
-                    if (User == null)
+                    if (user == null)
                         return;
 
                     try
                     {
-                        User.Statusses.Add("sit", "1.0");
-                        User.Z -= 0.35;
-                        User.isSitting = true;
-                        User.UpdateNeeded = true;
+                        user.Statusses.Add("sit", "1.0");
+                        user.Z -= 0.35;
+                        user.isSitting = true;
+                        user.UpdateNeeded = true;
                     }
                     catch { }
                 }
                 else
                 {
-                    User.RotBody--;
-                    User.Statusses.Add("sit", "1.0");
-                    User.Z -= 0.35;
-                    User.isSitting = true;
-                    User.UpdateNeeded = true;
+                    user.RotBody--;
+                    user.Statusses.Add("sit", "1.0");
+                    user.Z -= 0.35;
+                    user.isSitting = true;
+                    user.UpdateNeeded = true;
                 }
             }
-            else if (User.isSitting == true)
+            else if (user.isSitting == true)
             {
-                User.Z += 0.35;
-                User.Statusses.Remove("sit");
-                User.Statusses.Remove("1.0");
-                User.isSitting = false;
-                User.UpdateNeeded = true;
+                user.Z += 0.35;
+                user.Statusses.Remove("sit");
+                user.Statusses.Remove("1.0");
+                user.isSitting = false;
+                user.UpdateNeeded = true;
             }
         }
     }

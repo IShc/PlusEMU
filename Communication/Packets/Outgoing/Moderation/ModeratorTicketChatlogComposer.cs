@@ -13,9 +13,9 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public ModeratorTicketChatlogComposer(ModerationTicket ticket, RoomData roomData, double timestamp)
               : base(ServerPacketHeader.ModeratorTicketChatlogMessageComposer)
         {
-            this.ModerationTicket = ticket;
-            this.RoomData = roomData;
-            this.Timestamp = timestamp;
+            ModerationTicket = ticket;
+            RoomData = roomData;
+            Timestamp = timestamp;
         }
 
         public override void Compose(ServerPacket packet)
@@ -35,12 +35,12 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteInteger(RoomData.Id);
 
             packet.WriteShort(ModerationTicket.ReportedChats.Count);
-            foreach (string Chat in ModerationTicket.ReportedChats)
+            foreach (string chat in ModerationTicket.ReportedChats)
             {
                 packet.WriteString(UnixTimestamp.FromUnixTimestamp(Timestamp).ToShortTimeString());
                 packet.WriteInteger(ModerationTicket.Id);
                 packet.WriteString(ModerationTicket.Reported != null ? ModerationTicket.Reported.Username : "No username");
-                packet.WriteString(Chat);
+                packet.WriteString(chat);
                 packet.WriteBoolean(false);
             }
         }

@@ -5,63 +5,54 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
     class GiveCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_give"; }
-        }
+        public string PermissionRequired => "command_give";
 
-        public string Parameters
-        {
-            get { return "%username% %type% %amount%"; }
-        }
+        public string Parameters => "%username% %type% %amount%";
 
-        public string Description
-        {
-            get { return ""; }
-        }
+        public string Description => "";
 
-        public void Execute(GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Please enter a currency type! (coins, duckets, diamonds, gotw)");
+                session.SendWhisper("Please enter a currency type! (coins, duckets, diamonds, gotw)");
                 return;
             }
 
-            GameClient Target = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(Params[1]);
-            if (Target == null)
+            GameClient target = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(@params[1]);
+            if (target == null)
             {
-                Session.SendWhisper("Oops, couldn't find that user!");
+                session.SendWhisper("Oops, couldn't find that user!");
                 return;
             }
 
-            string UpdateVal = Params[2];
-            switch (UpdateVal.ToLower())
+            string updateVal = @params[2];
+            switch (updateVal.ToLower())
             {
                 case "coins":
                 case "credits":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_give_coins"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_give_coins"))
                         {
-                            Session.SendWhisper("Oops, it appears that you do not have the permissions to use this command!");
+                            session.SendWhisper("Oops, it appears that you do not have the permissions to use this command!");
                             break;
                         }
                         else
                         {
-                            int Amount;
-                            if (int.TryParse(Params[3], out Amount))
+                            int amount;
+                            if (int.TryParse(@params[3], out amount))
                             {
-                                Target.GetHabbo().Credits = Target.GetHabbo().Credits += Amount;
-                                Target.SendPacket(new CreditBalanceComposer(Target.GetHabbo().Credits));
+                                target.GetHabbo().Credits = target.GetHabbo().Credits += amount;
+                                target.SendPacket(new CreditBalanceComposer(target.GetHabbo().Credits));
 
-                                if (Target.GetHabbo().Id != Session.GetHabbo().Id)
-                                    Target.SendNotification(Session.GetHabbo().Username + " has given you " + Amount.ToString() + " Credit(s)!");
-                                Session.SendWhisper("Successfully given " + Amount + " Credit(s) to " + Target.GetHabbo().Username + "!");
+                                if (target.GetHabbo().Id != session.GetHabbo().Id)
+                                    target.SendNotification(session.GetHabbo().Username + " has given you " + amount.ToString() + " Credit(s)!");
+                                session.SendWhisper("Successfully given " + amount + " Credit(s) to " + target.GetHabbo().Username + "!");
                                 break;
                             }
                             else
                             {
-                                Session.SendWhisper("Oops, that appears to be an invalid amount!");
+                                session.SendWhisper("Oops, that appears to be an invalid amount!");
                                 break;
                             }
                         }
@@ -70,27 +61,27 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 case "pixels":
                 case "duckets":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_give_pixels"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_give_pixels"))
                         {
-                            Session.SendWhisper("Oops, it appears that you do not have the permissions to use this command!");
+                            session.SendWhisper("Oops, it appears that you do not have the permissions to use this command!");
                             break;
                         }
                         else
                         {
-                            int Amount;
-                            if (int.TryParse(Params[3], out Amount))
+                            int amount;
+                            if (int.TryParse(@params[3], out amount))
                             {
-                                Target.GetHabbo().Duckets += Amount;
-                                Target.SendPacket(new HabboActivityPointNotificationComposer(Target.GetHabbo().Duckets, Amount));
+                                target.GetHabbo().Duckets += amount;
+                                target.SendPacket(new HabboActivityPointNotificationComposer(target.GetHabbo().Duckets, amount));
 
-                                if (Target.GetHabbo().Id != Session.GetHabbo().Id)
-                                    Target.SendNotification(Session.GetHabbo().Username + " has given you " + Amount.ToString() + " Ducket(s)!");
-                                Session.SendWhisper("Successfully given " + Amount + " Ducket(s) to " + Target.GetHabbo().Username + "!");
+                                if (target.GetHabbo().Id != session.GetHabbo().Id)
+                                    target.SendNotification(session.GetHabbo().Username + " has given you " + amount.ToString() + " Ducket(s)!");
+                                session.SendWhisper("Successfully given " + amount + " Ducket(s) to " + target.GetHabbo().Username + "!");
                                 break;
                             }
                             else
                             {
-                                Session.SendWhisper("Oops, that appears to be an invalid amount!");
+                                session.SendWhisper("Oops, that appears to be an invalid amount!");
                                 break;
                             }
                         }
@@ -98,27 +89,27 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
                 case "diamonds":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_give_diamonds"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_give_diamonds"))
                         {
-                            Session.SendWhisper("Oops, it appears that you do not have the permissions to use this command!");
+                            session.SendWhisper("Oops, it appears that you do not have the permissions to use this command!");
                             break;
                         }
                         else
                         {
-                            int Amount;
-                            if (int.TryParse(Params[3], out Amount))
+                            int amount;
+                            if (int.TryParse(@params[3], out amount))
                             {
-                                Target.GetHabbo().Diamonds += Amount;
-                                Target.SendPacket(new HabboActivityPointNotificationComposer(Target.GetHabbo().Diamonds, Amount, 5));
+                                target.GetHabbo().Diamonds += amount;
+                                target.SendPacket(new HabboActivityPointNotificationComposer(target.GetHabbo().Diamonds, amount, 5));
 
-                                if (Target.GetHabbo().Id != Session.GetHabbo().Id)
-                                    Target.SendNotification(Session.GetHabbo().Username + " has given you " + Amount.ToString() + " Diamond(s)!");
-                                Session.SendWhisper("Successfully given " + Amount + " Diamond(s) to " + Target.GetHabbo().Username + "!");
+                                if (target.GetHabbo().Id != session.GetHabbo().Id)
+                                    target.SendNotification(session.GetHabbo().Username + " has given you " + amount.ToString() + " Diamond(s)!");
+                                session.SendWhisper("Successfully given " + amount + " Diamond(s) to " + target.GetHabbo().Username + "!");
                                 break;
                             }
                             else
                             {
-                                Session.SendWhisper("Oops, that appears to be an invalid amount!");
+                                session.SendWhisper("Oops, that appears to be an invalid amount!");
                                 break;
                             }
                         }
@@ -127,33 +118,33 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 case "gotw":
                 case "gotwpoints":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_give_gotw"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_give_gotw"))
                         {
-                            Session.SendWhisper("Oops, it appears that you do not have the permissions to use this command!");
+                            session.SendWhisper("Oops, it appears that you do not have the permissions to use this command!");
                             break;
                         }
                         else
                         {
-                            int Amount;
-                            if (int.TryParse(Params[3], out Amount))
+                            int amount;
+                            if (int.TryParse(@params[3], out amount))
                             {
-                                Target.GetHabbo().GOTWPoints = Target.GetHabbo().GOTWPoints + Amount;
-                                Target.SendPacket(new HabboActivityPointNotificationComposer(Target.GetHabbo().GOTWPoints, Amount, 103));
+                                target.GetHabbo().GOTWPoints = target.GetHabbo().GOTWPoints + amount;
+                                target.SendPacket(new HabboActivityPointNotificationComposer(target.GetHabbo().GOTWPoints, amount, 103));
 
-                                if (Target.GetHabbo().Id != Session.GetHabbo().Id)
-                                    Target.SendNotification(Session.GetHabbo().Username + " has given you " + Amount.ToString() + " GOTW Point(s)!");
-                                Session.SendWhisper("Successfully given " + Amount + " GOTW point(s) to " + Target.GetHabbo().Username + "!");
+                                if (target.GetHabbo().Id != session.GetHabbo().Id)
+                                    target.SendNotification(session.GetHabbo().Username + " has given you " + amount.ToString() + " GOTW Point(s)!");
+                                session.SendWhisper("Successfully given " + amount + " GOTW point(s) to " + target.GetHabbo().Username + "!");
                                 break;
                             }
                             else
                             {
-                                Session.SendWhisper("Oops, that appears to be an invalid amount!");
+                                session.SendWhisper("Oops, that appears to be an invalid amount!");
                                 break;
                             }
                         }
                     }
                 default:
-                    Session.SendWhisper("'" + UpdateVal + "' is not a valid currency!");
+                    session.SendWhisper("'" + updateVal + "' is not a valid currency!");
                     break;
             }
         }

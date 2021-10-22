@@ -9,9 +9,9 @@
         public HabboActivityPointNotificationComposer(int balance, int notify, int type = 0)
             : base(ServerPacketHeader.HabboActivityPointNotificationMessageComposer)
         {
-            this.Balance = balance;
-            this.Notify = notify;
-            this.Type = type;
+            Balance = balance;
+            Notify = notify;
+            Type = type;
         }
 
         public override void Compose(ServerPacket packet)

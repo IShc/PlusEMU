@@ -1,16 +1,14 @@
-﻿using Plus.HabboHotel.Rooms;
-
-namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
+﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
     class FlatControllerRemovedComposer : MessageComposer
     {
         public int RoomId { get; }
         public int UserId { get; }
-        public FlatControllerRemovedComposer(int RoomId, int UserId)
+        public FlatControllerRemovedComposer(int roomId, int userId)
             : base(ServerPacketHeader.FlatControllerRemovedMessageComposer)
         {
-            this.RoomId = RoomId;
-            this.UserId = UserId;
+            RoomId = roomId;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)

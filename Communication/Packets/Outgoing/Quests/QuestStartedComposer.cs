@@ -9,11 +9,11 @@ namespace Plus.Communication.Packets.Outgoing.Quests
         public Habbo Habbo { get; }
         public Quest Quest { get; }
 
-        public QuestStartedComposer(GameClient Session, Quest Quest)
+        public QuestStartedComposer(GameClient session, Quest quest)
             : base(ServerPacketHeader.QuestStartedMessageComposer)
         {
-            this.Habbo = Session.GetHabbo();
-            this.Quest = Quest;
+            Habbo = session.GetHabbo();
+            Quest = quest;
         }
 
         public override void Compose(ServerPacket packet)

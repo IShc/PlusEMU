@@ -4,13 +4,13 @@ namespace Plus.Communication.Packets.Incoming.GameCenter
 {
     class GetPlayableGamesEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient Session, ClientPacket Packet)
+        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
         {
-            int GameId = Packet.PopInt();
+            int gameId = packet.PopInt();
 
-            Session.SendPacket(new GameAccountStatusComposer(GameId));
-            Session.SendPacket(new PlayableGamesComposer(GameId));
-            Session.SendPacket(new GameAchievementListComposer(Session, PlusEnvironment.GetGame().GetAchievementManager().GetGameAchievements(GameId), GameId));
+            session.SendPacket(new GameAccountStatusComposer(gameId));
+            session.SendPacket(new PlayableGamesComposer(gameId));
+            session.SendPacket(new GameAchievementListComposer(session, PlusEnvironment.GetGame().GetAchievementManager().GetGameAchievements(gameId), gameId));
         }
     }
 }

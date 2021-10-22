@@ -4,11 +4,11 @@
     {
         public int RoomId { get; }
         public int UserId { get; }
-        public UnbanUserFromRoomComposer(int RoomId, int UserId)
+        public UnbanUserFromRoomComposer(int roomId, int userId)
             : base(ServerPacketHeader.UnbanUserFromRoomMessageComposer)
         {
-            this.RoomId = RoomId;
-            this.UserId = UserId;
+            RoomId = roomId;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)

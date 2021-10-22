@@ -6,10 +6,10 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects
     {
         public AvatarEffect Effect { get; }
 
-        public AvatarEffectActivatedComposer(AvatarEffect Effect)
+        public AvatarEffectActivatedComposer(AvatarEffect effect)
             : base(ServerPacketHeader.AvatarEffectActivatedMessageComposer)
         {
-            this.Effect = Effect;
+            Effect = effect;
         }
 
         public override void Compose(ServerPacket packet)

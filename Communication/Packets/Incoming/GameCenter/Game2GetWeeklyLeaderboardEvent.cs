@@ -4,12 +4,12 @@ namespace Plus.Communication.Packets.Incoming.GameCenter
 {
     class Game2GetWeeklyLeaderboardEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient Session, ClientPacket Packet)
+        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
         {
-            int GameId = Packet.PopInt();
+            int gameId = packet.PopInt();
 
-            GameData GameData = null;
-            if (PlusEnvironment.GetGame().GetGameDataManager().TryGetGame(GameId, out GameData))
+            GameData gameData = null;
+            if (PlusEnvironment.GetGame().GetGameDataManager().TryGetGame(gameId, out gameData))
             {
                 //Code
             }

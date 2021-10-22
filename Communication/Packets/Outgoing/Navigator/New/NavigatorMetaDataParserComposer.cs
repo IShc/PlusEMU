@@ -11,7 +11,7 @@ namespace Plus.Communication.Packets.Outgoing.Navigator.New
         public NavigatorMetaDataParserComposer(ICollection<TopLevelItem> topLevelItems)
             : base(ServerPacketHeader.NavigatorMetaDataParserMessageComposer)
         {
-            this.TopLevelItems = topLevelItems;
+            TopLevelItems = topLevelItems;
         }
 
         public override void Compose(ServerPacket packet)

@@ -1,5 +1,4 @@
-﻿using Plus.HabboHotel.Users;
-using Plus.HabboHotel.Rooms;
+﻿using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Rooms.AI;
 
 namespace Plus.Communication.Packets.Outgoing.Pets
@@ -9,16 +8,16 @@ namespace Plus.Communication.Packets.Outgoing.Pets
         public Pet Pet { get; }
         public RoomUser RoomUser { get; }
 
-        public RespectPetNotificationMessageComposer(Pet Pet)
+        public RespectPetNotificationMessageComposer(Pet pet)
             : base(ServerPacketHeader.RespectPetNotificationMessageComposer)
         {
-            this.Pet = Pet;
+            Pet = pet;
         }
 
-        public RespectPetNotificationMessageComposer(RoomUser User)
+        public RespectPetNotificationMessageComposer(RoomUser user)
             : base(ServerPacketHeader.RespectPetNotificationMessageComposer)
         {
-            this.RoomUser = User;
+            RoomUser = user;
         }
 
         public override void Compose(ServerPacket packet)

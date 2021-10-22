@@ -5,11 +5,11 @@
         public int SenderId { get; }
         public string Text { get; }
 
-        public RoomInviteComposer(int SenderId, string Text)
+        public RoomInviteComposer(int senderId, string text)
             : base(ServerPacketHeader.RoomInviteMessageComposer)
         {
-            this.SenderId = SenderId;
-            this.Text = Text;
+            SenderId = senderId;
+            Text = text;
         }
 
         public override void Compose(ServerPacket packet)

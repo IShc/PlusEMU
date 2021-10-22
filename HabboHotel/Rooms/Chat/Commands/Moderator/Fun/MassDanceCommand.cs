@@ -7,49 +7,40 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
     class MassDanceCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_massdance"; }
-        }
+        public string PermissionRequired => "command_massdance";
 
-        public string Parameters
-        {
-            get { return "%DanceId%"; }
-        }
+        public string Parameters => "%DanceId%";
 
-        public string Description
-        {
-            get { return "Force everyone in the room to dance to a dance of your choice."; }
-        }
+        public string Description => "Force everyone in the room to dance to a dance of your choice.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Please enter a dance ID. (1-4)");
+                session.SendWhisper("Please enter a dance ID. (1-4)");
                 return;
             }
 
-            int DanceId = Convert.ToInt32(Params[1]);
-            if (DanceId < 0 || DanceId > 4)
+            int danceId = Convert.ToInt32(@params[1]);
+            if (danceId < 0 || danceId > 4)
             {
-                Session.SendWhisper("Please enter a dance ID. (1-4)");
+                session.SendWhisper("Please enter a dance ID. (1-4)");
                 return;
             }
 
-            List<RoomUser> Users = Room.GetRoomUserManager().GetRoomUsers();
-            if (Users.Count > 0)
+            List<RoomUser> users = room.GetRoomUserManager().GetRoomUsers();
+            if (users.Count > 0)
             {
-                foreach (RoomUser U in Users.ToList())
+                foreach (RoomUser u in users.ToList())
                 {
-                    if (U == null)
+                    if (u == null)
                         continue;
 
-                    if (U.CarryItemId > 0)
-                        U.CarryItemId = 0;
+                    if (u.CarryItemId > 0)
+                        u.CarryItemId = 0;
 
-                    U.DanceId = DanceId;
-                    Room.SendPacket(new DanceComposer(U.VirtualId, DanceId));
+                    u.DanceId = danceId;
+                    room.SendPacket(new DanceComposer(u.VirtualId, danceId));
                 }
             }
         }

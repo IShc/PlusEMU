@@ -56,7 +56,7 @@ namespace Plus.HabboHotel.Items
         private bool updateNeeded;
 
         private Room _room;
-        private static Random _random = new Random();
+        private static Random _random = new();
         private Dictionary<int, ThreeDCoord> _affectedPoints;
 
         private readonly bool mIsRoller;

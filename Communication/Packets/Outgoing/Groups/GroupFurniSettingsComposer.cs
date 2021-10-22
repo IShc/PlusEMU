@@ -8,12 +8,12 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public int ItemId { get; }
         public int UserId { get; }
 
-        public GroupFurniSettingsComposer(Group Group, int ItemId, int UserId)
+        public GroupFurniSettingsComposer(Group @group, int itemId, int userId)
             : base(ServerPacketHeader.GroupFurniSettingsMessageComposer)
         {
-            this.Group = Group;
-            this.ItemId = ItemId;
-            this.UserId = UserId;
+            Group = @group;
+            ItemId = itemId;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)

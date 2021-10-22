@@ -6,12 +6,12 @@
         public int DoorY { get; }
         public int DoorDirection { get; }
 
-        public FloorPlanSendDoorComposer(int DoorX, int DoorY, int DoorDirection)
+        public FloorPlanSendDoorComposer(int doorX, int doorY, int doorDirection)
             : base(ServerPacketHeader.FloorPlanSendDoorMessageComposer)
         {
-            this.DoorX = DoorX;
-            this.DoorY = DoorY;
-            this.DoorDirection = DoorDirection;
+            DoorX = doorX;
+            DoorY = doorY;
+            DoorDirection = doorDirection;
         }
 
         public override void Compose(ServerPacket packet)

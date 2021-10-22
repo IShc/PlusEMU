@@ -6,12 +6,12 @@
         public int Floor { get; }
         public bool HideWalls { get; }
 
-        public RoomVisualizationSettingsComposer(int Walls, int Floor, bool HideWalls)
+        public RoomVisualizationSettingsComposer(int walls, int floor, bool hideWalls)
             : base(ServerPacketHeader.RoomVisualizationSettingsMessageComposer)
         {
-            this.Walls = Walls;
-            this.Floor = Floor;
-            this.HideWalls = HideWalls;
+            Walls = walls;
+            Floor = floor;
+            HideWalls = hideWalls;
         }
 
         public override void Compose(ServerPacket packet)

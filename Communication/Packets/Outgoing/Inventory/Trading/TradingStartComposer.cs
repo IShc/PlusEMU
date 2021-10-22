@@ -5,11 +5,11 @@
         public int User1Id { get; }
         public int User2Id { get; }
 
-        public TradingStartComposer(int User1Id, int User2Id)
+        public TradingStartComposer(int user1Id, int user2Id)
             : base(ServerPacketHeader.TradingStartMessageComposer)
         {
-            this.User1Id = User1Id;
-            this.User2Id = User2Id;
+            User1Id = user1Id;
+            User2Id = user2Id;
         }
 
         public override void Compose(ServerPacket packet)

@@ -6,12 +6,12 @@
         public string Type { get; }
         public string Message { get; }
 
-        public VideoOffersRewardsComposer(int Id, string Type, string Message)
+        public VideoOffersRewardsComposer(int id, string type, string message)
             : base(ServerPacketHeader.VideoOffersRewardsMessageComposer)
         {
-            this.OfferId = Id;
-            this.Type = Type;
-            this.Message = Message;
+            OfferId = id;
+            Type = type;
+            Message = message;
         }
 
         public override void Compose(ServerPacket packet)

@@ -6,12 +6,12 @@
         public UserTagsComposer(int userId)
             : base(ServerPacketHeader.UserTagsMessageComposer)
         {
-            this.UserId = userId;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(this.UserId);
+            packet.WriteInteger(UserId);
             packet.WriteInteger(0); // tag count
             {
                 // append each tag as a string

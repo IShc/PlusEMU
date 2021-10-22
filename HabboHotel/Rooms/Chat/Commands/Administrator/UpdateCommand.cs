@@ -6,45 +6,36 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
     class UpdateCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_update"; }
-        }
+        public string PermissionRequired => "command_update";
 
-        public string Parameters
-        {
-            get { return "%variable%"; }
-        }
+        public string Parameters => "%variable%";
 
-        public string Description
-        {
-            get { return "Reload a specific part of the hotel."; }
-        }
+        public string Description => "Reload a specific part of the hotel.";
 
-        public void Execute(GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("You must inculde a thing to update, e.g. :update catalog");
+                session.SendWhisper("You must inculde a thing to update, e.g. :update catalog");
                 return;
             }
 
-            string UpdateVariable = Params[1];
-            switch (UpdateVariable.ToLower())
+            string updateVariable = @params[1];
+            switch (updateVariable.ToLower())
             {
                 case "cata":
                 case "catalog":
                 case "catalogue":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_catalog"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_catalog"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_catalog' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_catalog' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetCatalog().Init(PlusEnvironment.GetGame().GetItemManager());
                         PlusEnvironment.GetGame().GetClientManager().SendPacket(new CatalogUpdatedComposer());
-                        Session.SendWhisper("Catalogue successfully updated.");
+                        session.SendWhisper("Catalogue successfully updated.");
                         break;
                     }
 
@@ -52,79 +43,79 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
                 case "furni":
                 case "furniture":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_furni"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_furni"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_furni' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_furni' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetItemManager().Init();
-                        Session.SendWhisper("Items successfully updated.");
+                        session.SendWhisper("Items successfully updated.");
                         break;
                     }
 
                 case "models":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_models"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_models"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_models' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_models' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetRoomManager().LoadModels();
-                        Session.SendWhisper("Room models successfully updated.");
+                        session.SendWhisper("Room models successfully updated.");
                         break;
                     }
 
                 case "promotions":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_promotions"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_promotions"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_promotions' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_promotions' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetLandingManager().Init();
-                        Session.SendWhisper("Landing view promotions successfully updated.");
+                        session.SendWhisper("Landing view promotions successfully updated.");
                         break;
                     }
 
                 case "youtube":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_youtube"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_youtube"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_youtube' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_youtube' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetTelevisionManager().Init();
-                        Session.SendWhisper("Youtube televisions playlist successfully updated.");
+                        session.SendWhisper("Youtube televisions playlist successfully updated.");
                         break;
                     }
 
                 case "filter":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_filter"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_filter"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_filter' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_filter' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetChatManager().GetFilter().Init();
-                        Session.SendWhisper("Filter definitions successfully updated.");
+                        session.SendWhisper("Filter definitions successfully updated.");
                         break;
                     }
 
                 case "navigator":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_navigator"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_navigator"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_navigator' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_navigator' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetNavigator().Init();
-                        Session.SendWhisper("Navigator items successfully updated.");
+                        session.SendWhisper("Navigator items successfully updated.");
                         break;
                     }
 
@@ -132,104 +123,104 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
                 case "rights":
                 case "permissions":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_rights"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_rights"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_rights' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_rights' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetPermissionManager().Init();
 
-                        foreach (GameClient Client in PlusEnvironment.GetGame().GetClientManager().GetClients.ToList())
+                        foreach (GameClient client in PlusEnvironment.GetGame().GetClientManager().GetClients.ToList())
                         {
-                            if (Client == null || Client.GetHabbo() == null || Client.GetHabbo().GetPermissions() == null)
+                            if (client == null || client.GetHabbo() == null || client.GetHabbo().GetPermissions() == null)
                                 continue;
 
-                            Client.GetHabbo().GetPermissions().Init(Client.GetHabbo());
+                            client.GetHabbo().GetPermissions().Init(client.GetHabbo());
                         }
 
-                        Session.SendWhisper("Rank definitions successfully updated.");
+                        session.SendWhisper("Rank definitions successfully updated.");
                         break;
                     }
 
                 case "config":
                 case "settings":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_configuration"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_configuration"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_configuration' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_configuration' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetSettingsManager().Init();
-                        Session.SendWhisper("Server configuration successfully updated.");
+                        session.SendWhisper("Server configuration successfully updated.");
                         break;
                     }
 
                 case "bans":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_bans"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_bans"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_bans' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_bans' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetModerationManager().ReCacheBans();
-                        Session.SendWhisper("Ban cache re-loaded.");
+                        session.SendWhisper("Ban cache re-loaded.");
                         break;
                     }
 
                 case "quests":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_quests"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_quests"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_quests' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_quests' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetQuestManager().Init();
-                        Session.SendWhisper("Quest definitions successfully updated.");
+                        session.SendWhisper("Quest definitions successfully updated.");
                         break;
                     }
 
                 case "achievements":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_achievements"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_achievements"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_achievements' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_achievements' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetAchievementManager().Init();
-                        Session.SendWhisper("Achievement definitions bans successfully updated.");
+                        session.SendWhisper("Achievement definitions bans successfully updated.");
                         break;
                     }
 
                 case "moderation":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_moderation"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_moderation"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_moderation' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_moderation' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetModerationManager().Init();
                         PlusEnvironment.GetGame().GetClientManager().ModAlert("Moderation presets have been updated. Please reload the client to view the new presets.");
 
-                        Session.SendWhisper("Moderation configuration successfully updated.");
+                        session.SendWhisper("Moderation configuration successfully updated.");
                         break;
                     }
 
                 case "vouchers":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_vouchers"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_vouchers"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_vouchers' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_vouchers' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetCatalog().GetVoucherManager().Init();
-                        Session.SendWhisper("Catalogue vouche cache successfully updated.");
+                        session.SendWhisper("Catalogue vouche cache successfully updated.");
                         break;
                     }
 
@@ -237,110 +228,110 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
                 case "games":
                 case "gamecenter":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_game_center"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_game_center"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_game_center' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_game_center' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetGameDataManager().Init();
-                        Session.SendWhisper("Game Center cache successfully updated.");
+                        session.SendWhisper("Game Center cache successfully updated.");
                         break;
                     }
 
                 case "pet_locale":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_pet_locale"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_pet_locale"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_pet_locale' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_pet_locale' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetChatManager().GetPetLocale().Init();
-                        Session.SendWhisper("Pet locale cache successfully updated.");
+                        session.SendWhisper("Pet locale cache successfully updated.");
                         break;
                     }
 
                 case "locale":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_locale"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_locale"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_locale' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_locale' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetLanguageManager().Init();
-                        Session.SendWhisper("Locale cache successfully updated.");
+                        session.SendWhisper("Locale cache successfully updated.");
                         break;
                     }
 
                 case "mutant":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_anti_mutant"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_anti_mutant"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_anti_mutant' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_anti_mutant' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetFigureManager().Init();
-                        Session.SendWhisper("FigureData manager successfully reloaded.");
+                        session.SendWhisper("FigureData manager successfully reloaded.");
                         break;
                     }
 
                 case "bots":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_bots"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_bots"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_bots' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_bots' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetBotManager().Init();
-                        Session.SendWhisper("Bot managaer successfully reloaded.");
+                        session.SendWhisper("Bot managaer successfully reloaded.");
                         break;
                     }
 
                 case "rewards":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_rewards"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_rewards"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_rewards' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_rewards' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetRewardManager().Init();
-                        Session.SendWhisper("Rewards managaer successfully reloaded.");
+                        session.SendWhisper("Rewards managaer successfully reloaded.");
                         break;
                     }
 
                 case "chat_styles":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_chat_styles"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_chat_styles"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_chat_styles' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_chat_styles' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetChatManager().GetChatStyles().Init();
-                        Session.SendWhisper("Chat Styles successfully reloaded.");
+                        session.SendWhisper("Chat Styles successfully reloaded.");
                         break;
                     }
 
                 case "badge_definitions":
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand("command_update_badge_definitions"))
+                        if (!session.GetHabbo().GetPermissions().HasCommand("command_update_badge_definitions"))
                         {
-                            Session.SendWhisper("Oops, you do not have the 'command_update_badge_definitions' permission.");
+                            session.SendWhisper("Oops, you do not have the 'command_update_badge_definitions' permission.");
                             break;
                         }
 
                         PlusEnvironment.GetGame().GetBadgeManager().Init();
-                        Session.SendWhisper("Badge definitions successfully reloaded.");
+                        session.SendWhisper("Badge definitions successfully reloaded.");
                         break;
                     }
 
                 default:
-                    Session.SendWhisper("'" + UpdateVariable + "' is not a valid thing to reload.");
+                    session.SendWhisper("'" + updateVariable + "' is not a valid thing to reload.");
                     break;
             }
         }

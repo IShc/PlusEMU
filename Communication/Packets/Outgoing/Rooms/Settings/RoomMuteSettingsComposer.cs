@@ -3,10 +3,10 @@
     class RoomMuteSettingsComposer : MessageComposer
     {
         public bool Status { get; }
-        public RoomMuteSettingsComposer(bool Status)
+        public RoomMuteSettingsComposer(bool status)
             : base(ServerPacketHeader.RoomMuteSettingsMessageComposer)
         {
-            this.Status = Status;
+            Status = status;
         }
 
         public override void Compose(ServerPacket packet)

@@ -11,12 +11,12 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
         public int Pages { get; }
         public int Page { get; }
 
-        public FurniListComposer(ICollection<Item> Items, int pages, int page)
+        public FurniListComposer(ICollection<Item> items, int pages, int page)
             : base(ServerPacketHeader.FurniListMessageComposer)
         {
-            this.Items = Items;
-            this.Pages = pages;
-            this.Page = page;
+            Items = items;
+            Pages = pages;
+            Page = page;
         }
 
         public override void Compose(ServerPacket packet)
@@ -25,39 +25,39 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
             packet.WriteInteger(Page);//Page?
 
             packet.WriteInteger(Items.Count);
-            foreach (Item Item in Items)
+            foreach (Item item in Items)
             {
-                WriteItem(Item, packet);
+                WriteItem(item, packet);
             }
         }
 
-        private void WriteItem(Item Item, ServerPacket packet)
+        private void WriteItem(Item item, ServerPacket packet)
         {
-            packet.WriteInteger(Item.Id);
-            packet.WriteString(Item.GetBaseItem().Type.ToString().ToUpper());
-            packet.WriteInteger(Item.Id);
-            packet.WriteInteger(Item.GetBaseItem().SpriteId);
+            packet.WriteInteger(item.Id);
+            packet.WriteString(item.GetBaseItem().Type.ToString().ToUpper());
+            packet.WriteInteger(item.Id);
+            packet.WriteInteger(item.GetBaseItem().SpriteId);
 
-            if (Item.LimitedNo > 0)
+            if (item.LimitedNo > 0)
             {
                 packet.WriteInteger(1);
                 packet.WriteInteger(256);
-                packet.WriteString(Item.ExtraData);
-                packet.WriteInteger(Item.LimitedNo);
-                packet.WriteInteger(Item.LimitedTot);
+                packet.WriteString(item.ExtraData);
+                packet.WriteInteger(item.LimitedNo);
+                packet.WriteInteger(item.LimitedTot);
             }
             else
-                ItemBehaviourUtility.GenerateExtradata(Item, packet);
+                ItemBehaviourUtility.GenerateExtradata(item, packet);
 
-            packet.WriteBoolean(Item.GetBaseItem().AllowEcotronRecycle);
-            packet.WriteBoolean(Item.GetBaseItem().AllowTrade);
-            packet.WriteBoolean(Item.LimitedNo == 0 ? Item.GetBaseItem().AllowInventoryStack : false);
-            packet.WriteBoolean(ItemUtility.IsRare(Item));
+            packet.WriteBoolean(item.GetBaseItem().AllowEcotronRecycle);
+            packet.WriteBoolean(item.GetBaseItem().AllowTrade);
+            packet.WriteBoolean(item.LimitedNo == 0 ? item.GetBaseItem().AllowInventoryStack : false);
+            packet.WriteBoolean(ItemUtility.IsRare(item));
             packet.WriteInteger(-1);//Seconds to expiration.
             packet.WriteBoolean(true);
             packet.WriteInteger(-1);//Item RoomId
 
-            if (!Item.IsWallItem)
+            if (!item.IsWallItem)
             {
                 packet.WriteString(string.Empty);
                 packet.WriteInteger(0);

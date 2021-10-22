@@ -7,7 +7,7 @@
         public LatencyTestComposer(int testResponce)
             : base(ServerPacketHeader.LatencyResponseMessageComposer)
         {
-            this.TestResponse = testResponce;
+            TestResponse = testResponce;
         }
 
         public override void Compose(ServerPacket packet)

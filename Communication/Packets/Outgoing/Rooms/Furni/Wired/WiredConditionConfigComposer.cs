@@ -9,10 +9,10 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
     {
         public IWiredItem Box { get; }
 
-        public WiredConditionConfigComposer(IWiredItem Box)
+        public WiredConditionConfigComposer(IWiredItem box)
             : base(ServerPacketHeader.WiredConditionConfigMessageComposer)
         {
-            this.Box = Box;
+            Box = box;
         }
 
         public override void Compose(ServerPacket packet)
@@ -21,9 +21,9 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             packet.WriteInteger(5);
 
             packet.WriteInteger(Box.SetItems.Count);
-            foreach (Item Item in Box.SetItems.Values.ToList())
+            foreach (Item item in Box.SetItems.Values.ToList())
             {
-                packet.WriteInteger(Item.Id);
+                packet.WriteInteger(item.Id);
             }
 
             packet.WriteInteger(Box.Item.GetBaseItem().SpriteId);

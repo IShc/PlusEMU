@@ -4,47 +4,38 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
     class GiveBadgeCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_give_badge"; }
-        }
+        public string PermissionRequired => "command_give_badge";
 
-        public string Parameters
-        {
-            get { return "%username% %badge%"; }
-        }
+        public string Parameters => "%username% %badge%";
 
-        public string Description
-        {
-            get { return "Give a badge to another user."; }
-        }
+        public string Description => "Give a badge to another user.";
 
-        public void Execute(GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Params.Length != 3)
+            if (@params.Length != 3)
             {
-                Session.SendWhisper("Please enter a username and the code of the badge you'd like to give!");
+                session.SendWhisper("Please enter a username and the code of the badge you'd like to give!");
                 return;
             }
 
-            GameClient TargetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(Params[1]);
-            if (TargetClient != null)
+            GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(@params[1]);
+            if (targetClient != null)
             {
-                if (!TargetClient.GetHabbo().GetBadgeComponent().HasBadge(Params[2]))
+                if (!targetClient.GetHabbo().GetBadgeComponent().HasBadge(@params[2]))
                 {
-                    TargetClient.GetHabbo().GetBadgeComponent().GiveBadge(Params[2], true, TargetClient);
-                    if (TargetClient.GetHabbo().Id != Session.GetHabbo().Id)
-                        TargetClient.SendNotification("You have just been given a badge!");
+                    targetClient.GetHabbo().GetBadgeComponent().GiveBadge(@params[2], true, targetClient);
+                    if (targetClient.GetHabbo().Id != session.GetHabbo().Id)
+                        targetClient.SendNotification("You have just been given a badge!");
                     else
-                        Session.SendWhisper("You have successfully given yourself the badge " + Params[2] + "!");
+                        session.SendWhisper("You have successfully given yourself the badge " + @params[2] + "!");
                 }
                 else
-                    Session.SendWhisper("Oops, that user already has this badge (" + Params[2] + ") !");
+                    session.SendWhisper("Oops, that user already has this badge (" + @params[2] + ") !");
                 return;
             }
             else
             {
-                Session.SendWhisper("Oops, we couldn't find that target user!");
+                session.SendWhisper("Oops, we couldn't find that target user!");
                 return;
             }
         }

@@ -5,11 +5,11 @@
         public int RoomId { get; }
         public int GroupId { get; }
 
-        public NewGroupInfoComposer(int RoomId, int GroupId)
+        public NewGroupInfoComposer(int roomId, int groupId)
             : base(ServerPacketHeader.NewGroupInfoMessageComposer)
         {
-            this.RoomId = RoomId;
-            this.GroupId = GroupId;
+            RoomId = roomId;
+            GroupId = groupId;
         }
 
         public override void Compose(ServerPacket packet)

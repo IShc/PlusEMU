@@ -11,42 +11,42 @@ namespace Plus.HabboHotel.Rooms.Chat
 {
     public sealed class ChatManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(ChatManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ChatManager));
 
         /// <summary>
         /// Chat Emoticons.
         /// </summary>
-        private ChatEmotionsManager _emotions;
+        private readonly ChatEmotionsManager _emotions;
 
         /// <summary>
         /// Chatlog Manager
         /// </summary>
-        private ChatlogManager _logs;
+        private readonly ChatlogManager _logs;
 
         /// <summary>
         /// Filter Manager.
         /// </summary>
-        private WordFilterManager _filter;
+        private readonly WordFilterManager _filter;
 
         /// <summary>
         /// Commands.
         /// </summary>
-        private CommandManager _commands;
+        private readonly CommandManager _commands;
 
         /// <summary>
         /// Pet Commands.
         /// </summary>
-        private PetCommandManager _petCommands;
+        private readonly PetCommandManager _petCommands;
 
         /// <summary>
         /// Pet Locale.
         /// </summary>
-        private PetLocale _petLocale;
+        private readonly PetLocale _petLocale;
 
         /// <summary>
         /// Chat styles.
         /// </summary>
-        private ChatStyleManager _chatStyles;
+        private readonly ChatStyleManager _chatStyles;
 
         /// <summary>
         /// Initializes a new instance of the ChatManager class.
@@ -66,7 +66,7 @@ namespace Plus.HabboHotel.Rooms.Chat
             _chatStyles = new ChatStyleManager();
             _chatStyles.Init();
 
-            log.Info("Chat Manager -> LOADED");
+            Log.Info("Chat Manager -> LOADED");
         }
 
         public ChatEmotionsManager GetEmotions()

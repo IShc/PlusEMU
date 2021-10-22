@@ -3,7 +3,7 @@ using Plus.Communication.Packets.Outgoing.Handshake;
 
 namespace Plus.Communication.Packets.Incoming.Handshake
 {
-    public class UniqueIdEvent : IPacketEvent
+    public class UniqueIDEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

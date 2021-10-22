@@ -7,7 +7,7 @@
         public ModeratorSupportTicketResponseComposer(int result)
             : base(ServerPacketHeader.ModeratorSupportTicketResponseMessageComposer)
         {
-            this.Result = result;
+            Result = result;
         }
 
         public override void Compose(ServerPacket packet)

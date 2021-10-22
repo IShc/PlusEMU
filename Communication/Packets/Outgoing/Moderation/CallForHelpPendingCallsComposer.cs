@@ -10,7 +10,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public CallForHelpPendingCallsComposer(ModerationTicket ticket)
             : base(ServerPacketHeader.CallForHelpPendingCallsMessageComposer)
         {
-            this.Ticket = ticket;
+            Ticket = ticket;
         }
 
         public override void Compose(ServerPacket packet)

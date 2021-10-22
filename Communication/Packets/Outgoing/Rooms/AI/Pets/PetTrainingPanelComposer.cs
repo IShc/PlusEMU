@@ -5,11 +5,11 @@
         public int PetId { get; }
         public int Level { get; }
 
-        public PetTrainingPanelComposer(int PetId, int Level)
+        public PetTrainingPanelComposer(int petId, int level)
             : base(ServerPacketHeader.PetTrainingPanelMessageComposer)
         {
-            this.PetId = PetId;
-            this.Level = Level;
+            PetId = petId;
+            Level = level;
         }
 
         public override void Compose(ServerPacket packet)
@@ -43,9 +43,9 @@
             }
         }
 
-        public int GetCount(int Level)
+        public int GetCount(int level)
         {
-            switch(Level)
+            switch(level)
             {
                 case 1:
                 case 2:

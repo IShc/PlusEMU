@@ -3,9 +3,9 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Handshake
 {
-    public class SsoTicketEvent : IPacketEvent
+    public class SSOTicketEvent : IPacketEvent
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(SsoTicketEvent));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(SSOTicketEvent));
 
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -16,7 +16,7 @@ namespace Plus.Communication.Packets.Incoming.Handshake
 
             if (string.IsNullOrEmpty(sso) || sso.Length < 15)
             {
-                log.Debug("Invalid SSO Ticket, disconnecting client");
+                Log.Debug("Invalid SSO Ticket, disconnecting client");
                 session.Disconnect();
                 return;
             }

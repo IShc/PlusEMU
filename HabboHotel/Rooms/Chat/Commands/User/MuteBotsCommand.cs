@@ -5,33 +5,24 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class MuteBotsCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_mute_bots"; }
-        }
+        public string PermissionRequired => "command_mute_bots";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Ignore bot chat or enable it again."; }
-        }
+        public string Description => "Ignore bot chat or enable it again.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClients.GameClient session, Room room, string[] @params)
         {
-            Session.GetHabbo().AllowBotSpeech = !Session.GetHabbo().AllowBotSpeech;
+            session.GetHabbo().AllowBotSpeech = !session.GetHabbo().AllowBotSpeech;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("UPDATE `users` SET `bots_muted` = '" + ((Session.GetHabbo().AllowBotSpeech) ? 1 : 0) + "' WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
+                dbClient.RunQuery("UPDATE `users` SET `bots_muted` = '" + ((session.GetHabbo().AllowBotSpeech) ? 1 : 0) + "' WHERE `id` = '" + session.GetHabbo().Id + "' LIMIT 1");
             }
 
-            if (Session.GetHabbo().AllowBotSpeech)
-                Session.SendWhisper("Change successful, you can no longer see speech from bots.");
+            if (session.GetHabbo().AllowBotSpeech)
+                session.SendWhisper("Change successful, you can no longer see speech from bots.");
             else
-                Session.SendWhisper("Change successful, you can now see speech from bots.");                       
+                session.SendWhisper("Change successful, you can now see speech from bots.");                       
         }
     }
 }

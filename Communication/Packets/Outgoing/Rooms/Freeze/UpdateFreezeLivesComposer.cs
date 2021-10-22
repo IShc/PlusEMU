@@ -5,11 +5,11 @@
         public int UserId { get; }
         public int FreezeLives { get; }
 
-        public UpdateFreezeLivesComposer(int UserId, int FreezeLives)
+        public UpdateFreezeLivesComposer(int userId, int freezeLives)
             : base(ServerPacketHeader.UpdateFreezeLivesMessageComposer)
         {
-            this.UserId = UserId;
-            this.FreezeLives = FreezeLives;
+            UserId = userId;
+            FreezeLives = freezeLives;
         }
 
         public override void Compose(ServerPacket packet)

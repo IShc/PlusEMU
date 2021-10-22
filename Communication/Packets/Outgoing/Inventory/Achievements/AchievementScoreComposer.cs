@@ -7,7 +7,7 @@
         public AchievementScoreComposer(int achScore)
             : base(ServerPacketHeader.AchievementScoreMessageComposer)
         {
-            this.AchievementScore = achScore;
+            AchievementScore = achScore;
         }
 
         public override void Compose(ServerPacket packet)
