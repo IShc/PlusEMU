@@ -1,4 +1,6 @@
-﻿namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
     class GotoCommand : IChatCommand
     {
@@ -8,7 +10,7 @@
 
         public string Description => "";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (@params.Length == 1)
             {

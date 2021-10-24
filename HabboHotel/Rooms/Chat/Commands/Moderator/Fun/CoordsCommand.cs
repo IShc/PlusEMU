@@ -1,4 +1,6 @@
-﻿namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
     class CoordsCommand : IChatCommand
     {
@@ -8,7 +10,7 @@
 
         public string Description => "Used to get your current position within the room.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             RoomUser thisUser = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (thisUser == null)

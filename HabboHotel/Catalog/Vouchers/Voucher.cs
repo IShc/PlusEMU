@@ -4,19 +4,13 @@ namespace Plus.HabboHotel.Catalog.Vouchers
 {
     public class Voucher
     {
-        private string _code;
-        private VoucherType _type;
-        private int _value;
-        private int _currentUses;
-        private int _maxUses;
-
         public Voucher(string code, string type, int value, int currentUses, int maxUses)
         {
-            _code = code;
-            _type = VoucherUtility.GetType(type);
-            _value = value;
-            _currentUses = currentUses;
-            _maxUses = maxUses;
+            Code = code;
+            Type = VoucherUtility.GetType(type);
+            Value = value;
+            CurrentUses = currentUses;
+            MaxUses = maxUses;
         }
 
         public void UpdateUses()
@@ -24,38 +18,18 @@ namespace Plus.HabboHotel.Catalog.Vouchers
             CurrentUses += 1;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("UPDATE `catalog_vouchers` SET `current_uses` = `current_uses` + '1' WHERE `voucher` = '" + _code + "' LIMIT 1");
+                dbClient.RunQuery("UPDATE `catalog_vouchers` SET `current_uses` = `current_uses` + '1' WHERE `voucher` = '" + Code + "' LIMIT 1");
             }
         }
 
-        public string Code
-        {
-            get { return _code; }
-            set { _code = value; }
-        }
+        public string Code { get; set; }
 
-        public VoucherType Type
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
+        public VoucherType Type { get; set; }
 
-        public int Value
-        {
-            get { return _value; }
-            set { _value = value; }
-        }
+        public int Value { get; set; }
 
-        public int CurrentUses
-        {
-            get { return _currentUses; }
-            set { _currentUses = value; }
-        }
+        public int CurrentUses { get; set; }
 
-        public int MaxUses
-        {
-            get { return _maxUses; }
-            set { _maxUses = value; }
-        }
+        public int MaxUses { get; set; }
     }
 }

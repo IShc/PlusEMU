@@ -4,15 +4,9 @@ namespace Plus.Communication.Rcon.Commands.Hotel
 {
     class ReloadCatalogCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to reload the catalog."; }
-        }
+        public string Description => "This command is used to reload the catalog.";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
         public bool TryExecute(string[] parameters)
         {

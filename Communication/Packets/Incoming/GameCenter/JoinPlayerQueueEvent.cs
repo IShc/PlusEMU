@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Text;
-using Plus.HabboHotel.Games;
 using Plus.Communication.Packets.Outgoing.GameCenter;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Games;
 
 namespace Plus.Communication.Packets.Incoming.GameCenter
 {
     class JoinPlayerQueueEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             if (session == null || session.GetHabbo() == null)
                 return;

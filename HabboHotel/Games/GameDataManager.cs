@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Data;
 using System.Collections.Generic;
-
-using Plus.Database.Interfaces;
+using System.Data;
+using System.Linq;
 using log4net;
+using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Games
 {
@@ -52,12 +51,6 @@ namespace Plus.HabboHotel.Games
             return _games.Values.Count(x => x.Enabled);
         }
     
-        public ICollection<GameData> GameData
-        {
-            get
-            {
-                return _games.Values;
-            }
-        }
+        public ICollection<GameData> GameData => _games.Values;
     }
 }

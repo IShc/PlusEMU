@@ -1,4 +1,6 @@
-﻿namespace Plus.HabboHotel.Rooms.Chat.Commands.User
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class LayCommand : IChatCommand
     {
@@ -8,7 +10,7 @@
 
         public string Description => "Allows you to lay down in the room, without needing a bed.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (user == null)

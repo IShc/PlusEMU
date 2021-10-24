@@ -1,6 +1,6 @@
 ﻿using System;
-using Plus.HabboHotel.GameClients;
 using Plus.Communication.Packets.Outgoing.Help;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Help
 {

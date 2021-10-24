@@ -3,7 +3,7 @@
     public enum MessengerMessageErrors
     {
         FriendMuted,
-        yourMuted,
+        YourMuted,
         FriendOffline,
         NotFriends,
         FriendBusy,

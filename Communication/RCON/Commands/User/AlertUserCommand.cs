@@ -1,20 +1,14 @@
 ﻿using System;
-using Plus.HabboHotel.GameClients;
 using Plus.Communication.Packets.Outgoing.Moderation;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
     class AlertUserCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to alert a user."; }
-        }
+        public string Description => "This command is used to alert a user.";
 
-        public string Parameters
-        {
-            get { return "%userId% %message%"; }
-        }
+        public string Parameters => "%userId% %message%";
 
         public bool TryExecute(string[] parameters)
         {

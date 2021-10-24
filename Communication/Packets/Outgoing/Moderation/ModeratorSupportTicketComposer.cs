@@ -1,7 +1,6 @@
 ﻿using System;
-
-using Plus.Utilities;
 using Plus.HabboHotel.Moderation;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {

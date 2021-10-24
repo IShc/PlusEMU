@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-
+using Plus.HabboHotel.Cache.Type;
 using Plus.HabboHotel.Users;
 using Plus.HabboHotel.Users.Relationships;
-using Plus.HabboHotel.Cache.Type;
 
 namespace Plus.Communication.Packets.Outgoing.Users
 {

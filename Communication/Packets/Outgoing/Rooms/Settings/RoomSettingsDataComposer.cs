@@ -31,7 +31,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
             packet.WriteInteger(Room.AllowPets); // allows pets in room - pet system lacking, so always off
             packet.WriteInteger(Room.AllowPetsEating);// allows pets to eat your food - pet system lacking, so always off
             packet.WriteInteger(Room.RoomBlockingEnabled);
-            packet.WriteInteger(Room.Hidewall);
+            packet.WriteInteger(Room.HideWall);
             packet.WriteInteger(Room.WallThickness);
             packet.WriteInteger(Room.FloorThickness);
 

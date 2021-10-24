@@ -1,6 +1,5 @@
-﻿using System.Data;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Data;
 using log4net;
 using Plus.Database.Interfaces;
 

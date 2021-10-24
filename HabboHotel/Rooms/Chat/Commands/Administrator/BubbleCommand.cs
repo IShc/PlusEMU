@@ -1,4 +1,5 @@
-﻿using Plus.HabboHotel.Rooms.Chat.Styles;
+﻿using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms.Chat.Styles;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
@@ -10,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description => "Use a custom bubble to chat with.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (user == null)

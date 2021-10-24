@@ -1,5 +1,4 @@
 ﻿using Plus.Communication.Packets.Outgoing.Navigator;
-
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
 

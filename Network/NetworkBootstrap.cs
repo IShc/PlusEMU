@@ -1,3 +1,5 @@
+using System.Net;
+using System.Threading.Tasks;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
 using DotNetty.Common.Concurrency;
@@ -7,8 +9,6 @@ using DotNetty.Transport.Channels.Sockets;
 using log4net;
 using Plus.Network.Codec;
 using Plus.Network.Handler;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace Plus.Network
 {

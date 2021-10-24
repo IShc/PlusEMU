@@ -1,14 +1,12 @@
-﻿using Plus.HabboHotel.Rooms;
-
-using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-using Plus.Communication.Packets.Outgoing.Rooms.AI.Pets;
-
-using Plus.HabboHotel.Catalog.Utilities;
-using Plus.HabboHotel.Items;
+﻿using Plus.Communication.Packets.Outgoing.Catalog;
 using Plus.Communication.Packets.Outgoing.Inventory.Furni;
-using Plus.Communication.Packets.Outgoing.Catalog;
+using Plus.Communication.Packets.Outgoing.Rooms.AI.Pets;
+using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.Catalog.Utilities;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
 {

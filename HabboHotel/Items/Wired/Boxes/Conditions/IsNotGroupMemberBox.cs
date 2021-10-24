@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-
 using Plus.Communication.Packets.Incoming;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
@@ -10,38 +9,38 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.ConditionIsNotGroupMember; } }
+        public WiredBoxType Type => WiredBoxType.ConditionIsNotGroupMember;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public IsNotGroupMemberBox(Room Instance, Item Item)
+        public IsNotGroupMemberBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            string Unknown2 = Packet.PopString();
+            int unknown = packet.PopInt();
+            string unknown2 = packet.PopString();
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params.Length == 0)
+            if (@params.Length == 0)
                 return false;
 
-            Habbo Player = (Habbo)Params[0];
-            if (Player == null)
+            Habbo player = (Habbo)@params[0];
+            if (player == null)
                 return false;
 
             if (Instance.Group == null)
                 return false;
 
-            if (Instance.Group.IsMember(Player.Id))
+            if (Instance.Group.IsMember(player.Id))
                 return false;
             return true;
         }

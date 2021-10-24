@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using Plus.HabboHotel.Rooms.AI.Speech;
-using Plus.HabboHotel.Rooms.AI.Types;
 using System.Drawing;
 using Plus.HabboHotel.Catalog.Utilities;
+using Plus.HabboHotel.Rooms.AI.Speech;
+using Plus.HabboHotel.Rooms.AI.Types;
 
 namespace Plus.HabboHotel.Rooms.AI
 {
@@ -45,7 +44,6 @@ namespace Plus.HabboHotel.Rooms.AI
         public RoomUser RoomUser;
         public List<RandomSpeech> RandomSpeech;
 
-        private int _chatBubble;
         public bool ForcedMovement { get; set; }
         public int ForcedUserTargetMovement { get; set; }
         public Point TargetCoordinate { get; set; }
@@ -89,16 +87,13 @@ namespace Plus.HabboHotel.Rooms.AI
             SpeakingInterval = speakingInterval;
             MixSentences = mixSentences;
 
-            _chatBubble = chatBubble;
+            ChatBubble = chatBubble;
             ForcedMovement = false;
             TargetCoordinate = new Point();
             TargetUser = 0;
         }
 
-        public bool IsPet
-        {
-            get { return (AiType == BotAIType.Pet); }
-        }
+        public bool IsPet => (AiType == BotAIType.Pet);
 
         #region Speech Related
         public void LoadRandomSpeech(List<RandomSpeech> Speeches)
@@ -106,7 +101,7 @@ namespace Plus.HabboHotel.Rooms.AI
             RandomSpeech = new List<RandomSpeech>();
             foreach (RandomSpeech Speech in Speeches)
             {
-                if (Speech.BotID == BotId)
+                if (Speech.BotId == BotId)
                     RandomSpeech.Add(Speech);
             }
         }
@@ -139,10 +134,6 @@ namespace Plus.HabboHotel.Rooms.AI
         }
         #endregion
 
-        public int ChatBubble
-        {
-            get { return _chatBubble; }
-            set { _chatBubble = value; }
-        }
+        public int ChatBubble { get; set; }
     }
 }

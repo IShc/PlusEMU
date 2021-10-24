@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Plus.HabboHotel.Games;
 
 namespace Plus.Communication.Packets.Outgoing.GameCenter

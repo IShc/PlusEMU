@@ -1,17 +1,16 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Rooms.Avatar;
+using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items;
-
-using Plus.Utilities.Enclosure;
-using System.Linq;
-using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-using System.Collections.Concurrent;
 using Plus.HabboHotel.Items.Wired;
 using Plus.HabboHotel.Rooms.Games.Teams;
 using Plus.HabboHotel.Rooms.PathFinding;
+using Plus.Utilities.Enclosure;
 
 namespace Plus.HabboHotel.Rooms.Games.Banzai
 {
@@ -20,7 +19,6 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
         private Room _room;
         private byte[,] floorMap;
         private double timestarted;
-        private bool banzaiStarted;
         private GameField field;
         private ConcurrentDictionary<int, Item> _pucks;
         private ConcurrentDictionary<int, Item> _banzaiTiles;
@@ -28,16 +26,13 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
         public BattleBanzai(Room room)
         {
             _room = room;
-            banzaiStarted = false;
+            IsBanzaiActive = false;
             timestarted = 0;
             _pucks = new ConcurrentDictionary<int, Item>();
             _banzaiTiles = new ConcurrentDictionary<int, Item>();
         }
 
-        public bool IsBanzaiActive
-        {
-            get { return banzaiStarted; }
-        }
+        public bool IsBanzaiActive { get; private set; }
 
         public void AddTile(Item item, int itemId)
         {
@@ -182,7 +177,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 }
             }
 
-            if (banzaiStarted)
+            if (IsBanzaiActive)
             {
                 HandleBanzaiTiles(user.Coordinate, user.Team, user);
             }
@@ -195,7 +190,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
         public void BanzaiStart()
         {
-            if (banzaiStarted)
+            if (IsBanzaiActive)
                 return;
 
             floorMap = new byte[_room.GetGameMap().Model.MapSizeY, _room.GetGameMap().Model.MapSizeX];
@@ -210,13 +205,13 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             foreach (Item tile in _banzaiTiles.Values)
             {
                 tile.ExtraData = "1";
-                tile.value = 0;
-                tile.team = Team.None;
+                tile.Value = 0;
+                tile.Team = Team.None;
                 tile.UpdateState();
             }
 
             ResetTiles();
-            banzaiStarted = true;
+            IsBanzaiActive = true;
 
             _room.GetWired().TriggerEvent(WiredBoxType.TriggerGameStarts, null);
 
@@ -249,7 +244,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
         public void BanzaiEnd(bool triggeredByUser = false)
         {
-            banzaiStarted = false;
+            IsBanzaiActive = false;
             _room.GetGameManager().StopGame();
             floorMap = null;
 
@@ -260,13 +255,13 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             _room.GetGameManager().UnlockGates();
             foreach (Item tile in _banzaiTiles.Values)
             {
-                if (tile.team == winners)
+                if (tile.Team == winners)
                 {
-                    tile.interactionCount = 0;
-                    tile.interactionCountHelper = 0;
+                    tile.InteractionCount = 0;
+                    tile.InteractionCountHelper = 0;
                     tile.UpdateNeeded = true;
                 }
-                else if (tile.team == Team.None)
+                else if (tile.Team == Team.None)
                 {
                     tile.ExtraData = "0";
                     tile.UpdateState();
@@ -354,7 +349,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 return;
 
             RoomUser user = mover.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(mover.GetHabbo().Id);
-            if (banzaiStarted)
+            if (IsBanzaiActive)
             {
                 HandleBanzaiTiles(new Point(newX, newY), team, user);
             }
@@ -363,15 +358,15 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
         private void SetTile(Item item, Team team, RoomUser user)
         {
-            if (item.team == team)
+            if (item.Team == team)
             {
-                if (item.value < 3)
+                if (item.Value < 3)
                 {
-                    item.value++;
-                    if (item.value == 3)
+                    item.Value++;
+                    if (item.Value == 3)
                     {
                         user.LockedTilesCount++;
-                        _room.GetGameManager().AddPointToTeam(item.team, 1);
+                        _room.GetGameManager().AddPointToTeam(item.Team, 1);
                         field.UpdateLocation(item.GetX, item.GetY, (byte)team);
                         List<PointField> gfield = field.DoUpdate();
                         Team t;
@@ -389,15 +384,15 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             }
             else
             {
-                if (item.value < 3)
+                if (item.Value < 3)
                 {
-                    item.team = team;
-                    item.value = 1;
+                    item.Team = team;
+                    item.Value = 1;
                 }
             }
 
 
-            int newColor = item.value + (Convert.ToInt32(item.team) * 3) - 1;
+            int newColor = item.Value + (Convert.ToInt32(item.Team) * 3) - 1;
             item.ExtraData = newColor.ToString();
         }
 
@@ -466,13 +461,13 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
         private static void SetMaxForTile(Item item, Team team)
         {
-            if (item.value < 3)
+            if (item.Value < 3)
             {
-                item.value = 3;
-                item.team = team;
+                item.Value = 3;
+                item.Team = team;
             }
 
-            int newColor = item.value + (Convert.ToInt32(item.team) * 3) - 1;
+            int newColor = item.Value + (Convert.ToInt32(item.Team) * 3) - 1;
             item.ExtraData = newColor.ToString();
         }
 

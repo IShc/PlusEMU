@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-
-using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Catalog.Utilities;
+using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
 {

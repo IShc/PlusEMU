@@ -6,69 +6,69 @@ namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorVendor : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
-            Item.ExtraData = "0";
-            Item.UpdateNeeded = true;
+            item.ExtraData = "0";
+            item.UpdateNeeded = true;
 
-            if (Item.InteractingUser > 0)
+            if (item.InteractingUser > 0)
             {
-                RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Item.InteractingUser);
+                RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser);
 
-                if (User != null)
+                if (user != null)
                 {
-                    User.CanWalk = true;
+                    user.CanWalk = true;
                 }
             }
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
-            Item.ExtraData = "0";
+            item.ExtraData = "0";
 
-            if (Item.InteractingUser > 0)
+            if (item.InteractingUser > 0)
             {
-                RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Item.InteractingUser);
+                RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser);
 
-                if (User != null)
+                if (user != null)
                 {
-                    User.CanWalk = true;
+                    user.CanWalk = true;
                 }
             }
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            if (Item.ExtraData != "1" && Item.GetBaseItem().VendingIds.Count >= 1 && Item.InteractingUser == 0 &&
-                Session != null)
+            if (item.ExtraData != "1" && item.GetBaseItem().VendingIds.Count >= 1 && item.InteractingUser == 0 &&
+                session != null)
             {
-                RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
+                RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
 
-                if (User == null)
+                if (user == null)
                 {
                     return;
                 }
 
-                if (!Gamemap.TilesTouching(User.X, User.Y, Item.GetX, Item.GetY))
+                if (!Gamemap.TilesTouching(user.X, user.Y, item.GetX, item.GetY))
                 {
-                    User.MoveTo(Item.SquareInFront);
+                    user.MoveTo(item.SquareInFront);
                     return;
                 }
 
-                Item.InteractingUser = Session.GetHabbo().Id;
+                item.InteractingUser = session.GetHabbo().Id;
 
-                User.CanWalk = false;
-                User.ClearMovement(true);
-                User.SetRot(Rotation.Calculate(User.X, User.Y, Item.GetX, Item.GetY), false);
+                user.CanWalk = false;
+                user.ClearMovement(true);
+                user.SetRot(Rotation.Calculate(user.X, user.Y, item.GetX, item.GetY), false);
 
-                Item.RequestUpdate(2, true);
+                item.RequestUpdate(2, true);
 
-                Item.ExtraData = "1";
-                Item.UpdateState(false, true);
+                item.ExtraData = "1";
+                item.UpdateState(false, true);
             }
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
         }
     }

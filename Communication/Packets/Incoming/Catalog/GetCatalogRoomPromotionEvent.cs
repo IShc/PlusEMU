@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Plus.Communication.Packets.Outgoing.Catalog;
 using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Rooms;

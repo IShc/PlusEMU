@@ -1,18 +1,16 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using Plus.HabboHotel.GameClients;
-
-using Plus.HabboHotel.Rooms.Chat.Commands.User;
-using Plus.HabboHotel.Rooms.Chat.Commands.User.Fun;
-using Plus.HabboHotel.Rooms.Chat.Commands.Moderator;
-using Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun;
-using Plus.HabboHotel.Rooms.Chat.Commands.Administrator;
 using Plus.Communication.Packets.Outgoing.Notifications;
 using Plus.Database.Interfaces;
-using Plus.HabboHotel.Rooms.Chat.Commands.Events;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items.Wired;
-
+using Plus.HabboHotel.Rooms.Chat.Commands.Administrator;
+using Plus.HabboHotel.Rooms.Chat.Commands.Events;
+using Plus.HabboHotel.Rooms.Chat.Commands.Moderator;
+using Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun;
+using Plus.HabboHotel.Rooms.Chat.Commands.User;
+using Plus.HabboHotel.Rooms.Chat.Commands.User.Fun;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands
 {
@@ -94,7 +92,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
                 }
 
 
-                session.GetHabbo().IChatCommand = cmd;
+                session.GetHabbo().ChatCommand = cmd;
                 session.GetHabbo().CurrentRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSaysCommand, session.GetHabbo(), this);
 
                 cmd.Execute(session, session.GetHabbo().CurrentRoom, split);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Plus.HabboHotel.Rooms;
+
 namespace Plus.Communication.Packets.Outgoing.Catalog
 {
     class PromotableRoomsComposer : MessageComposer

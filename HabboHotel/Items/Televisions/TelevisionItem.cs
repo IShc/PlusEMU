@@ -2,60 +2,24 @@
 {
     public class TelevisionItem
     {
-        private int _id;
-        private string _youtubeId;
-        private string _title;
-        private string _description;
-        private bool _enabled;
-
-        public TelevisionItem(int Id, string YouTubeId, string Title, string Description, bool Enabled)
+        public TelevisionItem(int id, string youTubeId, string title, string description, bool enabled)
         {
-            _id = Id;
-            _youtubeId = YouTubeId;
-            _title = Title;
-            _description = Description;
-            _enabled = Enabled;
+            Id = id;
+            YouTubeId = youTubeId;
+            Title = title;
+            Description = description;
+            Enabled = enabled;
         }
 
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-        }
+        public int Id { get; }
 
-        public string YouTubeId
-        {
-            get
-            {
-                return _youtubeId;
-            }
-        }
+        public string YouTubeId { get; }
 
 
-        public string Title
-        {
-            get
-            {
-                return _title;
-            }
-        }
+        public string Title { get; }
 
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-        }
+        public string Description { get; }
 
-        public bool Enabled
-        {
-            get
-            {
-                return _enabled;
-            }
-        }
+        public bool Enabled { get; }
     }
 }

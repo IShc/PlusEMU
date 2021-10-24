@@ -1,6 +1,6 @@
-﻿using Plus.HabboHotel.GameClients;
+﻿using Plus.Communication.Packets.Outgoing.Catalog;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items;
-using Plus.Communication.Packets.Outgoing.Catalog;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {

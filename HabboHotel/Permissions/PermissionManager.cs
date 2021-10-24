@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using log4net;
 using Plus.Database.Interfaces;
-using System.Data;
 using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Permissions
@@ -173,7 +173,7 @@ namespace Plus.HabboHotel.Permissions
             }
 
             List<string> subscriptionRights = null;
-            if (_permissionSubscriptionRights.TryGetValue(player.VIPRank, out subscriptionRights))
+            if (_permissionSubscriptionRights.TryGetValue(player.VipRank, out subscriptionRights))
             {
                 permissionSet.AddRange(subscriptionRights);
             }
@@ -183,7 +183,7 @@ namespace Plus.HabboHotel.Permissions
 
         public List<string> GetCommandsForPlayer(Habbo player)
         {
-            return _commands.Where(x => player.Rank >= x.Value.GroupId && player.VIPRank >= x.Value.SubscriptionId).Select(x => x.Key).ToList();
+            return _commands.Where(x => player.Rank >= x.Value.GroupId && player.VipRank >= x.Value.SubscriptionId).Select(x => x.Key).ToList();
         }
     }
 }

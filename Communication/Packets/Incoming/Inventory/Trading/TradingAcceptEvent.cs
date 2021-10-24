@@ -1,7 +1,7 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Rooms.Trading;
-using Plus.Communication.Packets.Outgoing.Inventory.Trading;
+﻿using Plus.Communication.Packets.Outgoing.Inventory.Trading;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Rooms.Trading;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Trading
 {

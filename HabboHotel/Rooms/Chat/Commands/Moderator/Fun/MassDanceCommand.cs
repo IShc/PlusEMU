@@ -1,7 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Rooms.Avatar;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
@@ -13,7 +14,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 
         public string Description => "Force everyone in the room to dance to a dance of your choice.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (@params.Length == 1)
             {

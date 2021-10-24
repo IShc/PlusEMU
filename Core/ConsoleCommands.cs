@@ -1,6 +1,5 @@
 ﻿using System;
 using log4net;
-
 using Plus.Communication.Packets.Outgoing.Moderation;
 
 namespace Plus.Core

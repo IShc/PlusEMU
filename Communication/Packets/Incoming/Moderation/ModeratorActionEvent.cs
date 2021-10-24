@@ -1,11 +1,12 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.Communication.Packets.Outgoing.Moderation;
+﻿using Plus.Communication.Packets.Outgoing.Moderation;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
     class ModeratorActionEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             if (!session.GetHabbo().GetPermissions().HasRight("mod_caution"))
                 return;

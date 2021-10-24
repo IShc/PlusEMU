@@ -1,5 +1,5 @@
-﻿using Plus.HabboHotel.GameClients;
-using Plus.Communication.Packets.Outgoing.Inventory.Purse;
+﻿using Plus.Communication.Packets.Outgoing.Inventory.Purse;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
@@ -128,8 +128,8 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                             int amount;
                             if (int.TryParse(@params[3], out amount))
                             {
-                                target.GetHabbo().GOTWPoints = target.GetHabbo().GOTWPoints + amount;
-                                target.SendPacket(new HabboActivityPointNotificationComposer(target.GetHabbo().GOTWPoints, amount, 103));
+                                target.GetHabbo().GotwPoints = target.GetHabbo().GotwPoints + amount;
+                                target.SendPacket(new HabboActivityPointNotificationComposer(target.GetHabbo().GotwPoints, amount, 103));
 
                                 if (target.GetHabbo().Id != session.GetHabbo().Id)
                                     target.SendNotification(session.GetHabbo().Username + " has given you " + amount.ToString() + " GOTW Point(s)!");

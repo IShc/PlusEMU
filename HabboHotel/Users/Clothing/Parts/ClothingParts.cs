@@ -2,33 +2,17 @@
 {
     public sealed class ClothingParts
     {
-        private int _id;
-        private int _partId;
-        private string _part;
-
-        public ClothingParts(int Id, int PartId, string Part)
+        public ClothingParts(int id, int partId, string part)
         {
-            _id = Id;
-            _partId = PartId;
-            _part = Part;
+            Id = id;
+            PartId = partId;
+            Part = part;
         }
 
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public int Id { get; set; }
 
-        public int PartId
-        {
-            get { return _partId; }
-            set { _partId = value; }
-        }
+        public int PartId { get; set; }
 
-        public string Part
-        {
-            get { return _part; }
-            set { _part = value; }
-        }
+        public string Part { get; set; }
     }
 }

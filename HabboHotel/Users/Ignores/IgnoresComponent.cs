@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-
+using System.Data;
 using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Users.Ignores
@@ -24,13 +23,13 @@ namespace Plus.HabboHotel.Users.Ignores
             {
                 dbClient.SetQuery("SELECT * FROM `user_ignores` WHERE `user_id` = @uid;");
                 dbClient.AddParameter("uid", player.Id);
-                DataTable GetIgnores = dbClient.GetTable();
+                DataTable getIgnores = dbClient.GetTable();
 
-                if (GetIgnores != null)
+                if (getIgnores != null)
                 {
-                    foreach (DataRow Row in GetIgnores.Rows)
+                    foreach (DataRow row in getIgnores.Rows)
                     {
-                        _ignoredUsers.Add(Convert.ToInt32(Row["ignore_id"]));
+                        _ignoredUsers.Add(Convert.ToInt32(row["ignore_id"]));
                     }
                 }
             }

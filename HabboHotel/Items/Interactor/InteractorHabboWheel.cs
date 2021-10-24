@@ -4,39 +4,39 @@ namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorHabboWheel : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
-            Item.ExtraData = "-1";
-            Item.RequestUpdate(10, true);
+            item.ExtraData = "-1";
+            item.RequestUpdate(10, true);
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
-            Item.ExtraData = "-1";
+            item.ExtraData = "-1";
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            if (!HasRights)
+            if (!hasRights)
             {
                 return;
             }
 
-            if (Item.ExtraData != "-1")
+            if (item.ExtraData != "-1")
             {
-                Item.ExtraData = "-1";
-                Item.UpdateState();
-                Item.RequestUpdate(10, true);
+                item.ExtraData = "-1";
+                item.UpdateState();
+                item.RequestUpdate(10, true);
             }
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
-            if (Item.ExtraData != "-1")
+            if (item.ExtraData != "-1")
             {
-                Item.ExtraData = "-1";
-                Item.UpdateState();
-                Item.RequestUpdate(10, true);
+                item.ExtraData = "-1";
+                item.UpdateState();
+                item.RequestUpdate(10, true);
             }
         }
     }

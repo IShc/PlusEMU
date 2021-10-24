@@ -61,7 +61,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
             int i = 0;
             foreach (CatalogPage page in pages)
             {
-                if (page.MinimumRank > habbo.Rank || (page.MinimumVIP > habbo.VIPRank && habbo.Rank == 1) || page.ParentId != parentId)
+                if (page.MinimumRank > habbo.Rank || (page.MinimumVip > habbo.VipRank && habbo.Rank == 1) || page.ParentId != parentId)
                     continue;
 
                 if (page.ParentId == parentId)
@@ -77,14 +77,14 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
 
             foreach (CatalogPage parent in Pages)
             {
-                if (parent.ParentId != -1 || parent.MinimumRank > Habbo.Rank || (parent.MinimumVIP > Habbo.VIPRank && Habbo.Rank == 1))
+                if (parent.ParentId != -1 || parent.MinimumRank > Habbo.Rank || (parent.MinimumVip > Habbo.VipRank && Habbo.Rank == 1))
                     continue;
 
                 WritePage(parent, CalcTreeSize(Habbo, Pages, parent.Id), packet);
 
                 foreach (CatalogPage child in Pages)
                 {
-                    if (child.ParentId != parent.Id || child.MinimumRank > Habbo.Rank || (child.MinimumVIP > Habbo.VIPRank && Habbo.Rank == 1))
+                    if (child.ParentId != parent.Id || child.MinimumRank > Habbo.Rank || (child.MinimumVip > Habbo.VipRank && Habbo.Rank == 1))
                         continue;
 
                     if (child.Enabled)

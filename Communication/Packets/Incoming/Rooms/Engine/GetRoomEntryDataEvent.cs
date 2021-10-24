@@ -1,9 +1,8 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items.Wired;
-
+﻿using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items.Wired;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 {
@@ -42,7 +41,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 PlusEnvironment.GetGame().GetQuestManager().QuestReminder(session, session.GetHabbo().GetStats().QuestId);
 
             session.SendPacket(new RoomEntryInfoComposer(room.RoomId, room.CheckRights(session, true)));
-            session.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.Hidewall.ToString())));
+            session.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.HideWall.ToString())));
 
             RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Username);
             if (user != null && session.GetHabbo().PetId == 0)

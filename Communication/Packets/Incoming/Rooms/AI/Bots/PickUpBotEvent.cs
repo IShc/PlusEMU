@@ -1,10 +1,10 @@
 ﻿using System;
-using Plus.HabboHotel.Rooms;
-
-using Plus.HabboHotel.Users.Inventory.Bots;
+using System.Drawing;
 using Plus.Communication.Packets.Outgoing.Inventory.Bots;
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
 {
@@ -40,7 +40,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
             }
 
 
-            room.GetGameMap().RemoveUserFromMap(botUser, new System.Drawing.Point(botUser.X, botUser.Y));
+            room.GetGameMap().RemoveUserFromMap(botUser, new Point(botUser.X, botUser.Y));
 
             session.GetHabbo().GetInventoryComponent().TryAddBot(new Bot(Convert.ToInt32(botUser.BotData.Id), Convert.ToInt32(botUser.BotData.OwnerId), botUser.BotData.Name, botUser.BotData.Motto, botUser.BotData.Look, botUser.BotData.Gender));
             session.SendPacket(new BotInventoryComposer(session.GetHabbo().GetInventoryComponent().GetBots()));

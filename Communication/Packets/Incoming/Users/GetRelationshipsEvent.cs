@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Linq;
-
-using Plus.HabboHotel.Users;
 using Plus.Communication.Packets.Outgoing.Users;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {

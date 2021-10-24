@@ -23,7 +23,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         {
             packet.WriteString(item.Id.ToString());
             packet.WriteInteger(item.GetBaseItem().SpriteId);
-            packet.WriteString(item.wallCoord);
+            packet.WriteString(item.WallCoord);
             switch (item.GetBaseItem().InteractionType)
             {
                 case InteractionType.POSTIT:

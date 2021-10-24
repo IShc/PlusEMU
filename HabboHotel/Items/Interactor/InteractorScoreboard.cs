@@ -4,17 +4,17 @@ namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorScoreboard : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            if (!HasRights)
+            if (!hasRights)
             {
                 return;
             }
@@ -24,45 +24,45 @@ namespace Plus.HabboHotel.Items.Interactor
             // Request 3 - Reset with UI/Wired/Double click
 
             // Find out what number we are on right now
-            if (!int.TryParse(Item.ExtraData, out int OldValue))
+            if (!int.TryParse(item.ExtraData, out int oldValue))
             {
-                OldValue = 0;
+                oldValue = 0;
             }
 
             // Decrease value with red button
-            if (OldValue >= 0 && OldValue <= 99 && Request == 1)
+            if (oldValue >= 0 && oldValue <= 99 && request == 1)
             {
-                if (OldValue > 0)
-                    OldValue--;
-                else if (OldValue == 0)
-                    OldValue = 99;
+                if (oldValue > 0)
+                    oldValue--;
+                else if (oldValue == 0)
+                    oldValue = 99;
             }
 
             // Increase value with green button
-            if (OldValue >= 0 && OldValue <= 99 && Request == 2)
+            if (oldValue >= 0 && oldValue <= 99 && request == 2)
             {
-                if (OldValue < 99)
-                    OldValue++;
-                else if (OldValue == 99)
-                    OldValue = 0;
+                if (oldValue < 99)
+                    oldValue++;
+                else if (oldValue == 99)
+                    oldValue = 0;
             }
 
             // Reset with UI/Wired/Double click
-            if (Request == 3)
+            if (request == 3)
             {
-                OldValue = 0;
-                Item.pendingReset = true;
+                oldValue = 0;
+                item.PendingReset = true;
             }
 
-            Item.ExtraData = OldValue.ToString();
-            Item.UpdateState();
+            item.ExtraData = oldValue.ToString();
+            item.UpdateState();
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
             // Always reset scoreboard on Wired trigger
-            Item.ExtraData = "0";
-            Item.UpdateState();
+            item.ExtraData = "0";
+            item.UpdateState();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Text;
-
-using Plus.Database.Interfaces;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -13,7 +13,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description => "Gives you the ability to enable or disable basic room commands.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (@params.Length == 1)
             {

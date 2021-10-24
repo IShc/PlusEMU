@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.HabboHotel.Talents;
 
 namespace Plus.Communication.Packets.Outgoing.Talents

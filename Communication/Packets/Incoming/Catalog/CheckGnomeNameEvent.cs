@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items;
-using Plus.HabboHotel.Rooms.AI;
-using Plus.HabboHotel.Rooms.AI.Speech;
 using Plus.Communication.Packets.Outgoing.Catalog;
 using Plus.Communication.Packets.Outgoing.Inventory.Furni;
-
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.Catalog.Utilities;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Rooms.AI;
+using Plus.HabboHotel.Rooms.AI.Speech;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {
@@ -28,7 +26,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             int itemId = packet.PopInt();
             Item item = room.GetRoomItemHandler().GetItem(itemId);
 
-            if (item == null || item.Data == null || item.UserID != session.GetHabbo().Id || item.Data.InteractionType != InteractionType.GNOME_BOX)
+            if (item == null || item.Data == null || item.UserId != session.GetHabbo().Id || item.Data.InteractionType != InteractionType.GNOME_BOX)
                 return;
 
             string petName = packet.PopString();

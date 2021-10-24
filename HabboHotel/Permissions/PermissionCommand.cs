@@ -2,9 +2,9 @@
 {
     class PermissionCommand
     {
-        public string Command { get; private set; }
-        public int GroupId { get; private set; }
-        public int SubscriptionId { get; private set; }
+        public string Command { get; }
+        public int GroupId { get; }
+        public int SubscriptionId { get; }
 
         public PermissionCommand(string command, int groupId, int subscriptionId)
         {

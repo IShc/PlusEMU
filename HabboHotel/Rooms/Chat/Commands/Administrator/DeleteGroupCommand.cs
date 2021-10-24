@@ -1,5 +1,5 @@
 ﻿using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
@@ -11,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description => "Delete a group from the database and cache.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             room = session.GetHabbo().CurrentRoom;
             if (room == null)

@@ -1,5 +1,5 @@
 ﻿using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
@@ -11,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Description => "Gives you the ability to ignore or allow forced effects.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             session.GetHabbo().DisableForcedEffects = !session.GetHabbo().DisableForcedEffects;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())

@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Globalization;
-using Plus.Utilities;
-using Plus.HabboHotel.Users;
-using Plus.HabboHotel.Items;
-using Plus.HabboHotel.Catalog;
-using Plus.HabboHotel.GameClients;
 using Plus.Communication.Packets.Outgoing.Catalog;
-using Plus.Communication.Packets.Outgoing.Inventory.Purse;
 using Plus.Communication.Packets.Outgoing.Inventory.Furni;
-using Plus.Database.Interfaces;
-using Plus.HabboHotel.Quests;
-using Plus.HabboHotel.Catalog.Utilities;
+using Plus.Communication.Packets.Outgoing.Inventory.Purse;
 using Plus.Communication.Packets.Outgoing.Moderation;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.Catalog;
+using Plus.HabboHotel.Catalog.Utilities;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Quests;
+using Plus.HabboHotel.Users;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {
@@ -38,7 +38,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             if (!PlusEnvironment.GetGame().GetCatalog().TryGetPage(pageId, out CatalogPage page))
                 return;
 
-            if ( !page.Enabled || !page.Visible || page.MinimumRank > session.GetHabbo().Rank || page.MinimumVIP > session.GetHabbo().VIPRank && session.GetHabbo().Rank == 1)
+            if ( !page.Enabled || !page.Visible || page.MinimumRank > session.GetHabbo().Rank || page.MinimumVip > session.GetHabbo().VipRank && session.GetHabbo().Rank == 1)
                 return;
 
             if (!page.Items.TryGetValue(itemId, out CatalogItem item))

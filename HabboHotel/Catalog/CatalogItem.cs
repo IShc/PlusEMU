@@ -13,7 +13,7 @@ namespace Plus.HabboHotel.Catalog
         public bool HaveOffer { get; private set; }
         public bool IsLimited { get; private set; }
         public string Name { get; private set; }
-        public int PageID { get; private set; }
+        public int PageId { get; private set; }
         public int CostPixels { get; private set; }
         public int LimitedEditionStack { get; private set; }
         public int LimitedEditionSells { get; set; }
@@ -28,7 +28,7 @@ namespace Plus.HabboHotel.Catalog
             Name = catalogName;
             ItemId = itemId;
             Data = data;
-            PageID = pageId;
+            PageId = pageId;
             CostCredits = costCredits;
             CostPixels = costPixels;
             CostDiamonds = costDiamonds;

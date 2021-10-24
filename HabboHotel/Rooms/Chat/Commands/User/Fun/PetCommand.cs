@@ -1,4 +1,5 @@
 ﻿using Plus.Communication.Packets.Outgoing.Rooms.Engine;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun 
 {
@@ -10,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 
         public string Description => "Allows you to transform into a pet..";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             RoomUser roomUser = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (roomUser == null)

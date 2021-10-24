@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Rooms.PathFinding;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
@@ -12,7 +13,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 
         public string Description => "Want some attention? Make everyone face you!";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             RoomUser thisUser = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (thisUser == null)

@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Data;
 using System.Collections.Generic;
-
+using System.Data;
+using System.Linq;
 using System.Text.RegularExpressions;
-
 using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Rooms.Chat.Filter

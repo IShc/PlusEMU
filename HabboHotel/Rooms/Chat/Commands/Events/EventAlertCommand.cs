@@ -1,6 +1,7 @@
-﻿using Plus.Communication.Packets.Outgoing.Moderation;
+﻿using System;
+using Plus.Communication.Packets.Outgoing.Moderation;
 using Plus.HabboHotel.GameClients;
-using System;
+
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Events
 {
     internal class EventAlertCommand : IChatCommand

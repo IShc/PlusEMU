@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using MoreLinq;
-using Plus.HabboHotel.Items;
 using Plus.Communication.Packets.Outgoing.Inventory.Furni;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Furni
 {

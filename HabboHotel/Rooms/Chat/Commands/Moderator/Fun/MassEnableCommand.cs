@@ -1,5 +1,6 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
@@ -11,7 +12,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 
         public string Description => "Give every user in the room a specific enable ID.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (@params.Length == 1)
             {

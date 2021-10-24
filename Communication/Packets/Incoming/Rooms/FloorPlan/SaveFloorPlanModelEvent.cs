@@ -1,12 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Collections.Generic;
-
-using Plus.HabboHotel.Rooms;
-using Plus.Communication.Packets.Outgoing.Rooms.Session;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Rooms.Notifications;
+using Plus.Communication.Packets.Outgoing.Rooms.Session;
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
 {

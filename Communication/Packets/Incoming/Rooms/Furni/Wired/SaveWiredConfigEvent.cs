@@ -1,8 +1,8 @@
-﻿using Plus.HabboHotel.Rooms;
+﻿using Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Items.Wired;
-using Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired;
-using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Wired
 {

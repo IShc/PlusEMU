@@ -1,6 +1,6 @@
 ﻿using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
@@ -12,7 +12,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 
         public string Description => "Allows you to go faceless!";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
     
             RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);

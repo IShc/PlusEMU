@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Data;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using log4net;
-
 using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Moderation
@@ -243,20 +241,11 @@ namespace Plus.HabboHotel.Moderation
             }
         }
 
-        public ICollection<string> UserMessagePresets
-        {
-            get { return _userPresets; }
-        }
+        public ICollection<string> UserMessagePresets => _userPresets;
 
-        public ICollection<string> RoomMessagePresets
-        {
-            get { return _roomPresets; }
-        }
+        public ICollection<string> RoomMessagePresets => _roomPresets;
 
-        public ICollection<ModerationTicket> GetTickets
-        {
-            get { return _modTickets.Values; }
-        }
+        public ICollection<ModerationTicket> GetTickets => _modTickets.Values;
 
         public Dictionary<string, List<ModerationPresetActions>> UserActionPresets
         {
@@ -339,12 +328,11 @@ namespace Plus.HabboHotel.Moderation
             ModerationBan machineBanRecord = null;
             if (PlusEnvironment.GetGame().GetModerationManager().IsBanned(machineId, out machineBanRecord))
             {
-                DataRow banRow = null;
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.SetQuery("SELECT * FROM `bans` WHERE `bantype` = 'machine' AND `value` = @value LIMIT 1");
                     dbClient.AddParameter("value", machineId);
-                    banRow = dbClient.GetRow();
+                    DataRow banRow = dbClient.GetRow();
 
                     //If there is no more ban record, then we can simply remove it from our cache!
                     if (banRow == null)
@@ -367,12 +355,11 @@ namespace Plus.HabboHotel.Moderation
             ModerationBan usernameBanRecord = null;
             if (PlusEnvironment.GetGame().GetModerationManager().IsBanned(username, out usernameBanRecord))
             {
-                DataRow banRow = null;
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.SetQuery("SELECT * FROM `bans` WHERE `bantype` = 'user' AND `value` = @value LIMIT 1");
                     dbClient.AddParameter("value", username);
-                    banRow = dbClient.GetRow();
+                    DataRow banRow = dbClient.GetRow();
 
                     //If there is no more ban record, then we can simply remove it from our cache!
                     if (banRow == null)

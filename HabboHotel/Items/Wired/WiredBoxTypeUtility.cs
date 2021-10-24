@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Plus.HabboHotel.Items.Wired
 {
@@ -50,11 +50,11 @@ namespace Plus.HabboHotel.Items.Wired
                 case 25:
                     return WiredBoxType.ConditionIsWearingBadge;
                 case 26:
-                    return WiredBoxType.ConditionIsWearingFX;
+                    return WiredBoxType.ConditionIsWearingFx;
                 case 27:
                     return WiredBoxType.ConditionIsNotWearingBadge;
                 case 28:
-                    return WiredBoxType.ConditionIsNotWearingFX;
+                    return WiredBoxType.ConditionIsNotWearingFx;
                 case 29:
                     return WiredBoxType.ConditionMatchStateAndPosition;
                 case 30:
@@ -171,7 +171,7 @@ namespace Plus.HabboHotel.Items.Wired
                 case WiredBoxType.ConditionIsWearingBadge:
                 case WiredBoxType.EffectMoveFurniToNearestUser:
                     return 11;
-                case WiredBoxType.ConditionIsWearingFX:
+                case WiredBoxType.ConditionIsWearingFx:
                 case WiredBoxType.EffectMoveFurniFromNearestUser:
                     return 12;
                 case WiredBoxType.ConditionFurniHasNoUsers:
@@ -195,7 +195,7 @@ namespace Plus.HabboHotel.Items.Wired
                 case WiredBoxType.ConditionIsNotWearingBadge:
                 case WiredBoxType.EffectBotMovesToFurniBox:
                     return 22;
-                case WiredBoxType.ConditionIsNotWearingFX:
+                case WiredBoxType.ConditionIsNotWearingFx:
                 case WiredBoxType.EffectBotCommunicatesToAllBox:
                     return 23;
                 case WiredBoxType.EffectBotGivesHanditemBox:

@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-
-using Plus.HabboHotel.Rooms.AI;
-using Plus.HabboHotel.Items;
-using Plus.HabboHotel.GameClients;
-using Plus.HabboHotel.Users.Inventory.Pets;
-using Plus.HabboHotel.Users.Inventory.Bots;
+using System.Collections.Generic;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Inventory.Furni;
-
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms.AI;
+using Plus.HabboHotel.Users.Inventory.Bots;
+using Plus.HabboHotel.Users.Inventory.Pets;
 
 namespace Plus.HabboHotel.Users.Inventory
 {
@@ -136,13 +134,7 @@ namespace Plus.HabboHotel.Users.Inventory
             return _wallItems.ContainsKey(id) ? _wallItems[id] : null;
         }
 
-        public IEnumerable<Item> GetItems
-        {
-            get
-            {
-                return _floorItems.Values.Concat(_wallItems.Values);
-            }
-        }
+        public IEnumerable<Item> GetItems => _floorItems.Values.Concat(_wallItems.Values);
 
         public Item AddNewItem(int id, int baseItem, string extraData, int group, bool toInsert, bool fromRoom, int limitedNumber, int limitedStack)
         {
@@ -250,11 +242,9 @@ namespace Plus.HabboHotel.Users.Inventory
         {
             if (_petsItems.ContainsKey(petId))
                 return _petsItems.TryRemove(petId, out petItem);
-            else
-            {
-                petItem = null;
-                return false;
-            }
+            
+            petItem = null;
+            return false;
         }
 
         public bool TryGetPet(int petId, out Pet pet)
@@ -339,12 +329,6 @@ namespace Plus.HabboHotel.Users.Inventory
             return _wallItems.Values;
         }
 
-        public IEnumerable<Item> GetWallAndFloor
-        {
-            get
-            {
-                return _floorItems.Values.Concat(_wallItems.Values);
-            }
-        }
+        public IEnumerable<Item> GetWallAndFloor => _floorItems.Values.Concat(_wallItems.Values);
     }
 }

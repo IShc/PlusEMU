@@ -1,8 +1,8 @@
 ﻿using System.Collections.Concurrent;
 using Plus.Communication.Packets.Incoming;
+using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
-using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -10,65 +10,65 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.EffectMuteTriggerer; } }
+        public WiredBoxType Type => WiredBoxType.EffectMuteTriggerer;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public MuteTriggererBox(Room Instance, Item Item)
+        public MuteTriggererBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
 
             if (SetItems.Count > 0)
                 SetItems.Clear();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            int Unknown = Packet.PopInt();
-            int Time = Packet.PopInt();
-            string Message = Packet.PopString();
+            int unknown = packet.PopInt();
+            int time = packet.PopInt();
+            string message = packet.PopString();
 
-            StringData = Time + ";" + Message;
+            StringData = time + ";" + message;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params.Length != 1)
+            if (@params.Length != 1)
                 return false;
 
-            Habbo Player = (Habbo)Params[0];
-            if (Player == null)
+            Habbo player = (Habbo)@params[0];
+            if (player == null)
                 return false;
 
-            RoomUser User = Instance.GetRoomUserManager().GetRoomUserByHabbo(Player.Id);
-            if (User == null)
+            RoomUser user = Instance.GetRoomUserManager().GetRoomUserByHabbo(player.Id);
+            if (user == null)
                 return false;
 
-            if (Player.GetPermissions().HasRight("mod_tool") || Instance.OwnerId == Player.Id)
+            if (player.GetPermissions().HasRight("mod_tool") || Instance.OwnerId == player.Id)
             {
-                Player.GetClient().SendPacket(new WhisperComposer(User.VirtualId, "Wired Mute Exception: Unmutable Player", 0, 0));
+                player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, "Wired Mute Exception: Unmutable Player", 0, 0));
                 return false;
             }
 
-            int Time = (StringData != null ? int.Parse(StringData.Split(';')[0]) : 0);
-            string Message = (StringData != null ? (StringData.Split(';')[1]) : "No message!");
+            int time = (StringData != null ? int.Parse(StringData.Split(';')[0]) : 0);
+            string message = (StringData != null ? (StringData.Split(';')[1]) : "No message!");
 
-            if (Time > 0)
+            if (time > 0)
             {
-                Player.GetClient().SendPacket(new WhisperComposer(User.VirtualId, "Wired Mute: Muted for " + Time + "! Message: " + Message, 0, 0));
-                if (!Instance.MutedUsers.ContainsKey(Player.Id))
-                    Instance.MutedUsers.Add(Player.Id, (PlusEnvironment.GetUnixTimestamp() + (Time * 60)));
+                player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, "Wired Mute: Muted for " + time + "! Message: " + message, 0, 0));
+                if (!Instance.MutedUsers.ContainsKey(player.Id))
+                    Instance.MutedUsers.Add(player.Id, (PlusEnvironment.GetUnixTimestamp() + (time * 60)));
                 else
                 {
-                    Instance.MutedUsers.Remove(Player.Id);
-                    Instance.MutedUsers.Add(Player.Id, (PlusEnvironment.GetUnixTimestamp() + (Time * 60)));
+                    Instance.MutedUsers.Remove(player.Id);
+                    Instance.MutedUsers.Add(player.Id, (PlusEnvironment.GetUnixTimestamp() + (time * 60)));
                 }
             }
 

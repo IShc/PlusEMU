@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-
+using Plus.Communication.Packets.Outgoing.Handshake;
 using Plus.Communication.Packets.Outgoing.Rooms.Avatar;
+using Plus.Communication.Packets.Outgoing.Rooms.Engine;
+using Plus.Communication.Packets.Outgoing.Rooms.Permissions;
+using Plus.Communication.Packets.Outgoing.Rooms.Session;
 using Plus.Core;
+using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Rooms.AI;
+using Plus.HabboHotel.Rooms.Games.Teams;
+using Plus.HabboHotel.Rooms.PathFinding;
 using Plus.HabboHotel.Rooms.Trading;
 using Plus.Utilities;
-using Plus.Communication.Packets.Outgoing.Rooms.Session;
-using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-using Plus.Communication.Packets.Outgoing.Rooms.Permissions;
-using Plus.Communication.Packets.Outgoing.Handshake;
-using Plus.HabboHotel.Rooms.Games.Teams;
-
-using Plus.Database.Interfaces;
-using Plus.HabboHotel.Rooms.PathFinding;
 
 namespace Plus.HabboHotel.Rooms
 {
@@ -33,7 +31,6 @@ namespace Plus.HabboHotel.Rooms
         private int secondaryPrivateUserID;
 
         public int userCount;
-        private int _petCount;
 
 
         public RoomUserManager(Room room)
@@ -46,7 +43,7 @@ namespace Plus.HabboHotel.Rooms
             primaryPrivateUserID = 0;
             secondaryPrivateUserID = 0;
 
-            _petCount = 0;
+            PetCount = 0;
             userCount = 0;
         }
 
@@ -98,7 +95,7 @@ namespace Plus.HabboHotel.Rooms
                 else
                     _pets.TryAdd(user.PetData.PetId, user);
 
-                _petCount++;
+                PetCount++;
             }
             else if (user.IsBot)
             {
@@ -122,7 +119,7 @@ namespace Plus.HabboHotel.Rooms
             {
 
                 _pets.TryRemove(user.PetData.PetId, out RoomUser pet);
-                _petCount--;
+                PetCount--;
             }
             else
             {
@@ -196,7 +193,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 Item item = null;
                 if (session.GetHabbo().IsTeleporting)
-                    item = _room.GetRoomItemHandler().GetItem(session.GetHabbo().TeleporterId);
+                    item = _room.GetRoomItemHandler().GetItem(session.GetHabbo().TeleportId);
                 else if (session.GetHabbo().IsHopping)
                     item = _room.GetRoomItemHandler().GetItem(session.GetHabbo().HopperId);
 
@@ -531,7 +528,7 @@ namespace Plus.HabboHotel.Rooms
                     if (Pet == null)
                         continue;
 
-                    if (Pet.DBState == PetDatabaseUpdateState.NeedsInsert)
+                    if (Pet.DbState == PetDatabaseUpdateState.NeedsInsert)
                     {
                         dbClient.SetQuery("INSERT INTO `bots` (`id`,`user_id`,`room_id`,`name`,`x`,`y`,`z`) VALUES ('" + Pet.PetId + "','" + Pet.OwnerId + "','" + Pet.RoomId + "',@name,'0','0','0')");
                         dbClient.AddParameter("name", Pet.Name);
@@ -542,16 +539,16 @@ namespace Plus.HabboHotel.Rooms
                         dbClient.AddParameter(Pet.PetId + "color", Pet.Color);
                         dbClient.RunQuery();
                     }
-                    else if (Pet.DBState == PetDatabaseUpdateState.NeedsUpdate)
+                    else if (Pet.DbState == PetDatabaseUpdateState.NeedsUpdate)
                     {
                         //Surely this can be *99 better? // TODO
                         RoomUser User = GetRoomUserByVirtualId(Pet.VirtualId);
 
                         dbClient.RunQuery("UPDATE `bots` SET room_id = " + Pet.RoomId + ", x = " + (User != null ? User.X : 0) + ", Y = " + (User != null ? User.Y : 0) + ", Z = " + (User != null ? User.Z : 0) + " WHERE `id` = '" + Pet.PetId + "' LIMIT 1");
-                        dbClient.RunQuery("UPDATE `bots_petdata` SET `experience` = '" + Pet.experience + "', `energy` = '" + Pet.Energy + "', `nutrition` = '" + Pet.Nutrition + "', `respect` = '" + Pet.Respect + "' WHERE `id` = '" + Pet.PetId + "' LIMIT 1");
+                        dbClient.RunQuery("UPDATE `bots_petdata` SET `experience` = '" + Pet.Experience + "', `energy` = '" + Pet.Energy + "', `nutrition` = '" + Pet.Nutrition + "', `respect` = '" + Pet.Respect + "' WHERE `id` = '" + Pet.PetId + "' LIMIT 1");
                     }
 
-                    Pet.DBState = PetDatabaseUpdateState.Updated;
+                    Pet.DbState = PetDatabaseUpdateState.Updated;
                 }
             }
         }
@@ -874,7 +871,7 @@ namespace Plus.HabboHotel.Rooms
                                     if (User.GetClient().GetHabbo().IsTeleporting)
                                     {
                                         User.GetClient().GetHabbo().IsTeleporting = false;
-                                        User.GetClient().GetHabbo().TeleporterId = 0;
+                                        User.GetClient().GetHabbo().TeleportId = 0;
                                     }
                                     else if (User.GetClient().GetHabbo().IsHopping)
                                     {
@@ -1108,16 +1105,16 @@ namespace Plus.HabboHotel.Rooms
                             {
                                 if (cyclegameitems)
                                 {
-                                    int effectID = Convert.ToInt32(Item.team + 32);
+                                    int effectID = Convert.ToInt32(Item.Team + 32);
                                     TeamManager t = User.GetClient().GetHabbo().CurrentRoom.GetTeamManagerForBanzai();
 
                                     if (User.Team == Team.None)
                                     {
-                                        if (t.CanEnterOnTeam(Item.team))
+                                        if (t.CanEnterOnTeam(Item.Team))
                                         {
                                             if (User.Team != Team.None)
                                                 t.OnUserLeave(User);
-                                            User.Team = Item.team;
+                                            User.Team = Item.Team;
 
                                             t.AddUser(User);
 
@@ -1125,7 +1122,7 @@ namespace Plus.HabboHotel.Rooms
                                                 User.GetClient().GetHabbo().Effects().ApplyEffect(effectID);
                                         }
                                     }
-                                    else if (User.Team != Team.None && User.Team != Item.team)
+                                    else if (User.Team != Team.None && User.Team != Item.Team)
                                     {
                                         t.OnUserLeave(User);
                                         User.Team = Team.None;
@@ -1154,23 +1151,23 @@ namespace Plus.HabboHotel.Rooms
                             {
                                 if (cyclegameitems)
                                 {
-                                    int effectID = Convert.ToInt32(Item.team + 39);
+                                    int effectID = Convert.ToInt32(Item.Team + 39);
                                     TeamManager t = User.GetClient().GetHabbo().CurrentRoom.GetTeamManagerForFreeze();
 
                                     if (User.Team == Team.None)
                                     {
-                                        if (t.CanEnterOnTeam(Item.team))
+                                        if (t.CanEnterOnTeam(Item.Team))
                                         {
                                             if (User.Team != Team.None)
                                                 t.OnUserLeave(User);
-                                            User.Team = Item.team;
+                                            User.Team = Item.Team;
                                             t.AddUser(User);
 
                                             if (User.GetClient().GetHabbo().Effects().CurrentEffect != effectID)
                                                 User.GetClient().GetHabbo().Effects().ApplyEffect(effectID);
                                         }
                                     }
-                                    else if (User.Team != Team.None && User.Team != Item.team)
+                                    else if (User.Team != Team.None && User.Team != Item.Team)
                                     {
                                         t.OnUserLeave(User);
                                         User.Team = Team.None;
@@ -1266,8 +1263,8 @@ namespace Plus.HabboHotel.Rooms
                                             if (User != null && !User.IsBot && User.GetClient() != null && User.GetClient().GetHabbo() != null)
                                             {
                                                 User.GetClient().GetHabbo().IsTeleporting = true;
-                                                User.GetClient().GetHabbo().TeleportingRoomID = TeleRoomId;
-                                                User.GetClient().GetHabbo().TeleporterId = LinkedTele;
+                                                User.GetClient().GetHabbo().TeleportingRoomId = TeleRoomId;
+                                                User.GetClient().GetHabbo().TeleportId = LinkedTele;
 
                                                 User.GetClient().GetHabbo().PrepareRoom(TeleRoomId, "");
                                             }
@@ -1330,14 +1327,14 @@ namespace Plus.HabboHotel.Rooms
                     {
                         switch (Type)
                         {
-                            case ItemEffectType.Iceskates:
+                            case ItemEffectType.IceSkates:
                                 {
                                     User.GetClient().GetHabbo().Effects().ApplyEffect(User.GetClient().GetHabbo().Gender == "M" ? 38 : 39);
-                                    User.CurrentItemEffect = ItemEffectType.Iceskates;
+                                    User.CurrentItemEffect = ItemEffectType.IceSkates;
                                     break;
                                 }
 
-                            case ItemEffectType.Normalskates:
+                            case ItemEffectType.NormalSkates:
                                 {
                                     User.GetClient().GetHabbo().Effects().ApplyEffect(User.GetClient().GetHabbo().Gender == "M" ? 55 : 56);
                                     User.CurrentItemEffect = Type;
@@ -1382,10 +1379,7 @@ namespace Plus.HabboHotel.Rooms
             }
         }
 
-        public int PetCount
-        {
-            get { return _petCount; }
-        }
+        public int PetCount { get; private set; }
 
         public ICollection<RoomUser> GetUserList()
         {
@@ -1408,7 +1402,7 @@ namespace Plus.HabboHotel.Rooms
             _bots.Clear();
 
             userCount = 0;
-            _petCount = 0;
+            PetCount = 0;
 
             _users = null;
             _pets = null;

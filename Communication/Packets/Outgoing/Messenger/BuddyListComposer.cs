@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-
+using System.Linq;
 using Plus.HabboHotel.Users;
 using Plus.HabboHotel.Users.Messenger;
 using Plus.HabboHotel.Users.Relationships;
@@ -35,13 +34,13 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
                 Relationship relationship = Habbo.Relationships.FirstOrDefault(x => x.Value.UserId == Convert.ToInt32(friend.UserId)).Value;
 
                 packet.WriteInteger(friend.Id);
-                packet.WriteString(friend.mUsername);
+                packet.WriteString(friend.MUsername);
                 packet.WriteInteger(1);//Gender.
                 packet.WriteBoolean(friend.IsOnline);
                 packet.WriteBoolean(friend.IsOnline && friend.InRoom);
-                packet.WriteString(friend.IsOnline ? friend.mLook : string.Empty);
+                packet.WriteString(friend.IsOnline ? friend.MLook : string.Empty);
                 packet.WriteInteger(0); // category id
-                packet.WriteString(friend.IsOnline ? friend.mMotto : string.Empty);
+                packet.WriteString(friend.IsOnline ? friend.MMotto : string.Empty);
                 packet.WriteString(string.Empty);//Alternative name?
                 packet.WriteString(string.Empty);
                 packet.WriteBoolean(true);

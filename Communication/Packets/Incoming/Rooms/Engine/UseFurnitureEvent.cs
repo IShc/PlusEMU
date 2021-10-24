@@ -1,13 +1,11 @@
-﻿using Plus.HabboHotel.Quests;
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items;
-using Plus.HabboHotel.Items.Wired;
+﻿using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.Communication.Packets.Outgoing.Rooms.Furni;
-using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
-
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Items.Wired;
+using Plus.HabboHotel.Quests;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 {
@@ -49,7 +47,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 return;
             }
 
-            if (item.Data.InteractionType == InteractionType.GNOME_BOX && item.UserID == session.GetHabbo().Id)
+            if (item.Data.InteractionType == InteractionType.GNOME_BOX && item.UserId == session.GetHabbo().Id)
             {
                 session.SendPacket(new GnomeBoxComposer(item.Id));
             }

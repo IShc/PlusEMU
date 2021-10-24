@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Concurrent;
-
+using System.Linq;
 using Plus.Communication.Packets.Incoming;
 using Plus.HabboHotel.Rooms;
 
@@ -13,10 +12,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 
         public Item Item { get; set; }
 
-        public WiredBoxType Type
-        {
-            get { return WiredBoxType.ConditionMatchStateAndPosition; }
-        }
+        public WiredBoxType Type => WiredBoxType.ConditionMatchStateAndPosition;
 
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
 
@@ -26,49 +22,49 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 
         public string ItemsData { get; set; }
 
-        public FurniMatchStateAndPositionBox(Room Instance, Item Item)
+        public FurniMatchStateAndPositionBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            int Unknown = Packet.PopInt();
-            int State = Packet.PopInt();
-            int Direction = Packet.PopInt();
-            int Placement = Packet.PopInt();
-            string Unknown2 = Packet.PopString();
+            int unknown = packet.PopInt();
+            int state = packet.PopInt();
+            int direction = packet.PopInt();
+            int placement = packet.PopInt();
+            string unknown2 = packet.PopString();
 
-            int FurniCount = Packet.PopInt();
-            for (int i = 0; i < FurniCount; i++)
+            int furniCount = packet.PopInt();
+            for (int i = 0; i < furniCount; i++)
             {
-                Item SelectedItem = Instance.GetRoomItemHandler().GetItem(Packet.PopInt());
-                if (SelectedItem != null)
-                    SetItems.TryAdd(SelectedItem.Id, SelectedItem);
+                Item selectedItem = Instance.GetRoomItemHandler().GetItem(packet.PopInt());
+                if (selectedItem != null)
+                    SetItems.TryAdd(selectedItem.Id, selectedItem);
             }
 
-            StringData = State + ";" + Direction + ";" + Placement;
+            StringData = state + ";" + direction + ";" + placement;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params.Length == 0)
+            if (@params.Length == 0)
                 return false;
 
             if (String.IsNullOrEmpty(StringData) || StringData == "0;0;0" || SetItems.Count == 0)
                 return false;
 
-            foreach (Item Item in SetItems.Values.ToList())
+            foreach (Item item in SetItems.Values.ToList())
             {
-                if (Item == null)
+                if (item == null)
                     continue;
 
-                if (!Instance.GetRoomItemHandler().GetFloor.Contains(Item))
+                if (!Instance.GetRoomItemHandler().GetFloor.Contains(item))
                     continue;
 
                 foreach (String I in ItemsData.Split(';'))
@@ -76,8 +72,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                     if (String.IsNullOrEmpty(I))
                         continue;
 
-                    Item II = Instance.GetRoomItemHandler().GetItem(Convert.ToInt32(I.Split(':')[0]));
-                    if (II == null)
+                    Item ii = Instance.GetRoomItemHandler().GetItem(Convert.ToInt32(I.Split(':')[0]));
+                    if (ii == null)
                         continue;
 
                     string[] partsString = I.Split(':');
@@ -87,7 +83,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                     {
                         try
                         {
-                            if (II.ExtraData != part[4].ToString())
+                            if (ii.ExtraData != part[4].ToString())
                                 return false;
                         }
                         catch { }
@@ -97,7 +93,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                     {
                         try
                         {
-                            if (II.Rotation != Convert.ToInt32(part[3]))
+                            if (ii.Rotation != Convert.ToInt32(part[3]))
                                 return false;
                         }
                         catch { }
@@ -107,8 +103,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                     {
                         try
                         {
-                            if (II.GetX != Convert.ToInt32(part[0]) || II.GetY != Convert.ToInt32(part[1]) ||
-                                II.GetZ != Convert.ToDouble(part[2]))
+                            if (ii.GetX != Convert.ToInt32(part[0]) || ii.GetY != Convert.ToInt32(part[1]) ||
+                                ii.GetZ != Convert.ToDouble(part[2]))
                                 return false;
                         }
                         catch { }

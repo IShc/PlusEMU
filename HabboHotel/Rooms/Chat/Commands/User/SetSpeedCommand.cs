@@ -1,4 +1,6 @@
-﻿namespace Plus.HabboHotel.Rooms.Chat.Commands.User
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class SetSpeedCommand : IChatCommand
     {
@@ -8,7 +10,7 @@
 
         public string Description => "Set the speed of the rollers in the current room.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (!room.CheckRights(session, true))
                 return;

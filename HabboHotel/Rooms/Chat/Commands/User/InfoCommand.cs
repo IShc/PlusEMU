@@ -1,6 +1,6 @@
 ﻿using System;
-using Plus.HabboHotel.GameClients;
 using Plus.Communication.Packets.Outgoing.Rooms.Notifications;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {

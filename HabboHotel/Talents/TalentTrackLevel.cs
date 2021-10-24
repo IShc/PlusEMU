@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-
+using System.Data;
 using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Talents
@@ -10,9 +9,6 @@ namespace Plus.HabboHotel.Talents
     {
         public string Type { get; set; }
         public int Level { get; set; }
-
-        private List<string> _dataActions;
-        private List<string> _dataGifts;
 
         private Dictionary<int, TalentTrackSubLevel> _subLevels;
 
@@ -23,14 +19,14 @@ namespace Plus.HabboHotel.Talents
 
             foreach (string Str in DataActions.Split('|'))
             {
-                if (_dataActions == null) { _dataActions = new List<string>(); }
-                _dataActions.Add(Str);
+                if (Actions == null) { Actions = new List<string>(); }
+                Actions.Add(Str);
             }
 
             foreach (string Str in DataGifts.Split('|'))
             {
-                if (_dataGifts == null) { _dataGifts = new List<string>(); }
-                _dataGifts.Add(Str);
+                if (Gifts == null) { Gifts = new List<string>(); }
+                Gifts.Add(Str);
             }
 
             _subLevels = new Dictionary<int, TalentTrackSubLevel>();
@@ -38,17 +34,9 @@ namespace Plus.HabboHotel.Talents
             Init();
         }
 
-        public List<string> Actions
-        {
-            get { return _dataActions; }
-            private set { _dataActions = value; }
-        }
+        public List<string> Actions { get; private set; }
 
-        public List<string> Gifts
-        {
-            get { return _dataGifts; }
-            private set { _dataGifts = value; }
-        }
+        public List<string> Gifts { get; private set; }
 
         public void Init()
         {

@@ -6,8 +6,8 @@ using Plus.Communication.Packets.Outgoing.Rooms.Avatar;
 using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Items.Wired;
 using Plus.HabboHotel.Rooms.AI;
-
 using Plus.HabboHotel.Rooms.Games.Freeze;
 using Plus.HabboHotel.Rooms.Games.Teams;
 using Plus.HabboHotel.Rooms.PathFinding;
@@ -65,7 +65,6 @@ namespace Plus.HabboHotel.Rooms
         public double SetZ;
         public double SignTime;
         public byte SqState;
-        private Dictionary<string, string> _statusses;
         public int TeleDelay; //byte
         public bool TeleportEnabled;
         public bool UpdateNeeded;
@@ -94,10 +93,6 @@ namespace Plus.HabboHotel.Rooms
         public int LLPartner = 0;
         public double TimeInRoom = 0;
 
-        private bool _trading = false;
-        private int _tradePartner = 0;
-        private int _tradeId = 0;
-
         public RoomUser(int HabboId, int RoomId, int VirtualId, Room room)
         {
             Freezed = false;
@@ -113,7 +108,7 @@ namespace Plus.HabboHotel.Rooms
             RotHead = 0;
             RotBody = 0;
             UpdateNeeded = true;
-            _statusses = new Dictionary<string, string>();
+            Statusses = new Dictionary<string, string>();
 
             TeleDelay = -1;
             mRoom = room;
@@ -136,26 +131,17 @@ namespace Plus.HabboHotel.Rooms
             IsJumping = false;
             TimeInRoom = 0;
 
-            _tradeId = 0;
-            _tradePartner = 0;
-            _trading = false;
+            TradeId = 0;
+            TradePartner = 0;
+            IsTrading = false;
         }
 
 
-        public Point Coordinate
-        {
-            get { return new Point(X, Y); }
-        }
+        public Point Coordinate => new Point(X, Y);
 
-        public bool IsPet
-        {
-            get { return (IsBot && BotData.IsPet); }
-        }
+        public bool IsPet => (IsBot && BotData.IsPet);
 
-        public int CurrentEffect
-        {
-            get { return GetClient().GetHabbo().Effects().CurrentEffect; }
-        }
+        public int CurrentEffect => GetClient().GetHabbo().Effects().CurrentEffect;
 
 
         public bool IsDancing
@@ -171,28 +157,16 @@ namespace Plus.HabboHotel.Rooms
             }
         }
 
-        public bool IsTrading
-        {
-            get { return _trading; }
-            set { _trading = value; }
-        }
+        public bool IsTrading { get; set; } = false;
 
-        public int TradePartner
-        {
-            get { return _tradePartner; }
-            set { _tradePartner = value; }
-        }
+        public int TradePartner { get; set; } = 0;
 
-        public int TradeId
-        {
-            get { return _tradeId; }
-            set { _tradeId = value; }
-        }
+        public int TradeId { get; set; } = 0;
 
 
         public Dictionary<string, string> Statusses
         {
-            get { return _statusses; }
+            get;
             //set { this._statusses = value; }
         }
 
@@ -255,7 +229,7 @@ namespace Plus.HabboHotel.Rooms
             if (!IsBot)
             {
                 if (GetClient() != null && GetClient().GetHabbo() != null)
-                    GetClient().GetHabbo().TimeAFK = 0;
+                    GetClient().GetHabbo().TimeAfk = 0;
             }
 
             IdleTime = 0;
@@ -357,7 +331,7 @@ namespace Plus.HabboHotel.Rooms
             if (GetClient() == null || GetClient().GetHabbo() == null || mRoom == null)
                 return;
 
-            if (mRoom.GetWired().TriggerEvent(Items.Wired.WiredBoxType.TriggerUserSays, GetClient().GetHabbo(), Message))
+            if (mRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSays, GetClient().GetHabbo(), Message))
                 return;
 
 
@@ -567,24 +541,24 @@ namespace Plus.HabboHotel.Rooms
 
         public bool HasStatus(string Key)
         {
-            return _statusses.ContainsKey(Key);
+            return Statusses.ContainsKey(Key);
         }
 
         public void RemoveStatus(string Key)
         {
             if (HasStatus(Key))
-                _statusses.Remove(Key);
+                Statusses.Remove(Key);
         }
 
         public void SetStatus(string Key, string Value = "")
         {
-            if (_statusses.ContainsKey(Key))
+            if (Statusses.ContainsKey(Key))
             {
-                _statusses[Key] = Value;
+                Statusses[Key] = Value;
             }
             else
             {
-                _statusses.Add(Key, Value);
+                Statusses.Add(Key, Value);
             }
         }
 

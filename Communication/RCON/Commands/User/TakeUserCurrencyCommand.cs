@@ -1,21 +1,15 @@
 ﻿using System;
-using Plus.HabboHotel.GameClients;
-using Plus.Database.Interfaces;
 using Plus.Communication.Packets.Outgoing.Inventory.Purse;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
     class TakeUserCurrencyCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to take a specified amount of a specified currency from a user."; }
-        }
+        public string Description => "This command is used to take a specified amount of a specified currency from a user.";
 
-        public string Parameters
-        {
-            get { return "%userId% %currency% %amount%"; }
-        }
+        public string Parameters => "%userId% %currency% %amount%";
 
         public bool TryExecute(string[] parameters)
         {
@@ -92,17 +86,17 @@ namespace Plus.Communication.Rcon.Commands.User
 
                 case "gotw":
                     {
-                        client.GetHabbo().GOTWPoints -= amount;
+                        client.GetHabbo().GotwPoints -= amount;
 
                         using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                         {
                             dbClient.SetQuery("UPDATE `users` SET `gotw_points` = @gotw WHERE `id` = @id LIMIT 1");
-                            dbClient.AddParameter("gotw", client.GetHabbo().GOTWPoints);
+                            dbClient.AddParameter("gotw", client.GetHabbo().GotwPoints);
                             dbClient.AddParameter("id", userId);
                             dbClient.RunQuery();
                         }
 
-                        client.SendPacket(new HabboActivityPointNotificationComposer(client.GetHabbo().GOTWPoints, 0, 103));
+                        client.SendPacket(new HabboActivityPointNotificationComposer(client.GetHabbo().GotwPoints, 0, 103));
                         break;
                     }
             }

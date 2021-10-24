@@ -1,5 +1,6 @@
-﻿using Plus.HabboHotel.Users;
-using Plus.Communication.Packets.Outgoing.Handshake;
+﻿using Plus.Communication.Packets.Outgoing.Handshake;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -11,7 +12,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description => "Gives you the option to change your username.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (!CanChangeName(session.GetHabbo()))
             {
@@ -26,13 +27,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
         private bool CanChangeName(Habbo habbo)
         {
-            if (habbo.Rank == 1 && habbo.VIPRank == 0 && habbo.LastNameChange == 0)
+            if (habbo.Rank == 1 && habbo.VipRank == 0 && habbo.LastNameChange == 0)
                 return true;
-            else if (habbo.Rank == 1 && habbo.VIPRank == 1 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 604800) > habbo.LastNameChange))
+            else if (habbo.Rank == 1 && habbo.VipRank == 1 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 604800) > habbo.LastNameChange))
                 return true;
-            else if (habbo.Rank == 1 && habbo.VIPRank == 2 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 86400) > habbo.LastNameChange))
+            else if (habbo.Rank == 1 && habbo.VipRank == 2 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 86400) > habbo.LastNameChange))
                 return true;
-            else if (habbo.Rank == 1 && habbo.VIPRank == 3)
+            else if (habbo.Rank == 1 && habbo.VipRank == 3)
                 return true;
             else if (habbo.GetPermissions().HasRight("mod_tool"))
                 return true;

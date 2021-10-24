@@ -1,20 +1,14 @@
 ﻿using System;
-using Plus.HabboHotel.GameClients;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
     class SyncUserCurrencyCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to sync a users specified currency to the database."; }
-        }
+        public string Description => "This command is used to sync a users specified currency to the database.";
 
-        public string Parameters
-        {
-            get { return "%userId% %currency%"; }
-        }
+        public string Parameters => "%userId% %currency%";
 
         public bool TryExecute(string[] parameters)
         {
@@ -79,7 +73,7 @@ namespace Plus.Communication.Rcon.Commands.User
                         using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                         {
                             dbClient.SetQuery("UPDATE `users` SET `gotw_points` = @gotw WHERE `id` = @id LIMIT 1");
-                            dbClient.AddParameter("gotw", client.GetHabbo().GOTWPoints);
+                            dbClient.AddParameter("gotw", client.GetHabbo().GotwPoints);
                             dbClient.AddParameter("id", userId);
                             dbClient.RunQuery();
                         }

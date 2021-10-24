@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Data;
-using System.Linq;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using Plus.Database.Interfaces;
 using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Items.Wired;
-using Plus.HabboHotel.Items.Wired.Boxes.Triggers;
-
-using Plus.HabboHotel.Items.Wired.Boxes.Effects;
-using Plus.HabboHotel.Items.Wired.Boxes.Conditions;
-using Plus.Database.Interfaces;
-using System.Drawing;
 using Plus.HabboHotel.Items.Wired.Boxes;
+using Plus.HabboHotel.Items.Wired.Boxes.Conditions;
+using Plus.HabboHotel.Items.Wired.Boxes.Effects;
+using Plus.HabboHotel.Items.Wired.Boxes.Triggers;
 
 namespace Plus.HabboHotel.Rooms.Instance
 {
@@ -21,162 +19,162 @@ namespace Plus.HabboHotel.Rooms.Instance
         private readonly Room _room;
         private readonly ConcurrentDictionary<int, IWiredItem> _wiredItems;
 
-        public WiredComponent(Room Instance)//, RoomItem Items)
+        public WiredComponent(Room instance)//, RoomItem Items)
         {
-            _room = Instance;
+            _room = instance;
             _wiredItems = new ConcurrentDictionary<int, IWiredItem>();
         }
 
         public void OnCycle()
         {
-            DateTime Start = DateTime.Now;
-            foreach (KeyValuePair<int, IWiredItem> Item in _wiredItems.ToList())
+            DateTime start = DateTime.Now;
+            foreach (KeyValuePair<int, IWiredItem> item in _wiredItems.ToList())
             {
-                Item SelectedItem = _room.GetRoomItemHandler().GetItem(Item.Value.Item.Id);
+                Item selectedItem = _room.GetRoomItemHandler().GetItem(item.Value.Item.Id);
 
-                if (SelectedItem == null)
-                    TryRemove(Item.Key);
+                if (selectedItem == null)
+                    TryRemove(item.Key);
 
-                if (Item.Value is IWiredCycle)
+                if (item.Value is IWiredCycle)
                 {
-                    IWiredCycle Cycle = (IWiredCycle)Item.Value;
+                    IWiredCycle cycle = (IWiredCycle)item.Value;
 
-                    if (Cycle.TickCount <= 0)
+                    if (cycle.TickCount <= 0)
                     {
-                        Cycle.OnCycle();
+                        cycle.OnCycle();
                     }
                     else
                     {
-                        Cycle.TickCount--;
+                        cycle.TickCount--;
                     }
                 }
             }
-            TimeSpan Span = (DateTime.Now - Start);
-            if (Span.Milliseconds > 400)
+            TimeSpan span = (DateTime.Now - start);
+            if (span.Milliseconds > 400)
             {
                 //log.Warn("<Room " + _room.Id + "> Wired took " + Span.TotalMilliseconds + "ms to execute - Rooms lagging behind");
             }
         }
 
-        public IWiredItem LoadWiredBox(Item Item)
+        public IWiredItem LoadWiredBox(Item item)
         {
-            IWiredItem NewBox = GenerateNewBox(Item);
+            IWiredItem newBox = GenerateNewBox(item);
 
-            DataRow Row = null;
+            DataRow row = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM wired_items WHERE id=@id LIMIT 1");
-                dbClient.AddParameter("id", Item.Id);
-                Row = dbClient.GetRow();
+                dbClient.AddParameter("id", item.Id);
+                row = dbClient.GetRow();
 
-                if (Row != null)
+                if (row != null)
                 {
-                    if (String.IsNullOrEmpty(Convert.ToString(Row["string"])))
+                    if (String.IsNullOrEmpty(Convert.ToString(row["string"])))
                     {
-                        if (NewBox.Type == WiredBoxType.ConditionMatchStateAndPosition || NewBox.Type == WiredBoxType.ConditionDontMatchStateAndPosition)
-                            NewBox.StringData = "0;0;0";
-                        else if (NewBox.Type == WiredBoxType.ConditionUserCountInRoom || NewBox.Type == WiredBoxType.ConditionUserCountDoesntInRoom)
-                            NewBox.StringData = "0;0";
-                        else if (NewBox.Type == WiredBoxType.ConditionFurniHasNoFurni)
-                            NewBox.StringData = "0";
-                        else if (NewBox.Type == WiredBoxType.EffectMatchPosition)
-                            NewBox.StringData = "0;0;0";
-                        else if (NewBox.Type == WiredBoxType.EffectMoveAndRotate)
-                            NewBox.StringData = "0;0";
+                        if (newBox.Type == WiredBoxType.ConditionMatchStateAndPosition || newBox.Type == WiredBoxType.ConditionDontMatchStateAndPosition)
+                            newBox.StringData = "0;0;0";
+                        else if (newBox.Type == WiredBoxType.ConditionUserCountInRoom || newBox.Type == WiredBoxType.ConditionUserCountDoesntInRoom)
+                            newBox.StringData = "0;0";
+                        else if (newBox.Type == WiredBoxType.ConditionFurniHasNoFurni)
+                            newBox.StringData = "0";
+                        else if (newBox.Type == WiredBoxType.EffectMatchPosition)
+                            newBox.StringData = "0;0;0";
+                        else if (newBox.Type == WiredBoxType.EffectMoveAndRotate)
+                            newBox.StringData = "0;0";
                     }
 
-                    NewBox.StringData = Convert.ToString(Row["string"]);
-                    NewBox.BoolData = Convert.ToInt32(Row["bool"]) == 1;
-                    NewBox.ItemsData = Convert.ToString(Row["items"]);
+                    newBox.StringData = Convert.ToString(row["string"]);
+                    newBox.BoolData = Convert.ToInt32(row["bool"]) == 1;
+                    newBox.ItemsData = Convert.ToString(row["items"]);
 
-                    if (NewBox is IWiredCycle)
+                    if (newBox is IWiredCycle)
                     {
-                        IWiredCycle Box = (IWiredCycle)NewBox;
-                        Box.Delay = Convert.ToInt32(Row["delay"]);
+                        IWiredCycle box = (IWiredCycle)newBox;
+                        box.Delay = Convert.ToInt32(row["delay"]);
                     }
 
-                    foreach (string str in Convert.ToString(Row["items"]).Split(';'))
+                    foreach (string str in Convert.ToString(row["items"]).Split(';'))
                     {
-                        int Id = 0;
+                        int id = 0;
                         string sId = "0";
 
                         if (str.Contains(':'))
                             sId = str.Split(':')[0];
 
-                        if (int.TryParse(str, out Id) || int.TryParse(sId, out Id))
+                        if (int.TryParse(str, out id) || int.TryParse(sId, out id))
                         {
-                            Item SelectedItem = _room.GetRoomItemHandler().GetItem(Convert.ToInt32(Id));
-                            if (SelectedItem == null)
+                            Item selectedItem = _room.GetRoomItemHandler().GetItem(Convert.ToInt32(id));
+                            if (selectedItem == null)
                                 continue;
 
-                            NewBox.SetItems.TryAdd(SelectedItem.Id, SelectedItem);
+                            newBox.SetItems.TryAdd(selectedItem.Id, selectedItem);
                         }
                     }
                 }
                 else
                 {
-                    NewBox.ItemsData = "";
-                    NewBox.StringData = "";
-                    NewBox.BoolData = false;
-                    SaveBox(NewBox);
+                    newBox.ItemsData = "";
+                    newBox.StringData = "";
+                    newBox.BoolData = false;
+                    SaveBox(newBox);
                 }
             }
 
-            if (!AddBox(NewBox))
+            if (!AddBox(newBox))
             {
                 // ummm
             }
-            return NewBox;
+            return newBox;
         }
 
-        public IWiredItem GenerateNewBox(Item Item)
+        public IWiredItem GenerateNewBox(Item item)
         {
-            switch (Item.GetBaseItem().WiredType)
+            switch (item.GetBaseItem().WiredType)
             {
                 case WiredBoxType.TriggerRoomEnter:
-                    return new RoomEnterBox(_room, Item);
+                    return new RoomEnterBox(_room, item);
                 case WiredBoxType.TriggerRepeat:
-                    return new RepeaterBox(_room, Item);
+                    return new RepeaterBox(_room, item);
                 case WiredBoxType.TriggerStateChanges:
-                    return new StateChangesBox(_room, Item);
+                    return new StateChangesBox(_room, item);
                 case WiredBoxType.TriggerUserSays:
-                    return new UserSaysBox(_room, Item);
+                    return new UserSaysBox(_room, item);
                 case WiredBoxType.TriggerWalkOffFurni:
-                    return new UserWalksOffBox(_room, Item);
+                    return new UserWalksOffBox(_room, item);
                 case WiredBoxType.TriggerWalkOnFurni:
-                    return new UserWalksOnBox(_room, Item);
+                    return new UserWalksOnBox(_room, item);
                 case WiredBoxType.TriggerGameStarts:
-                    return new GameStartsBox(_room, Item);
+                    return new GameStartsBox(_room, item);
                 case WiredBoxType.TriggerGameEnds:
-                    return new GameEndsBox(_room, Item);
+                    return new GameEndsBox(_room, item);
                 case WiredBoxType.TriggerUserFurniCollision:
-                    return new UserFurniCollision(_room, Item);
+                    return new UserFurniCollision(_room, item);
                 case WiredBoxType.TriggerUserSaysCommand:
-                    return new UserSaysCommandBox(_room, Item);
+                    return new UserSaysCommandBox(_room, item);
 
                 case WiredBoxType.EffectShowMessage:
-                    return new ShowMessageBox(_room, Item);
+                    return new ShowMessageBox(_room, item);
                 case WiredBoxType.EffectTeleportToFurni:
-                    return new TeleportUserBox(_room, Item);
+                    return new TeleportUserBox(_room, item);
                 case WiredBoxType.EffectToggleFurniState:
-                    return new ToggleFurniBox(_room, Item);
+                    return new ToggleFurniBox(_room, item);
                 case WiredBoxType.EffectMoveAndRotate:
-                    return new MoveAndRotateBox(_room, Item);
+                    return new MoveAndRotateBox(_room, item);
                 case WiredBoxType.EffectKickUser:
-                    return new KickUserBox(_room, Item);
+                    return new KickUserBox(_room, item);
                 case WiredBoxType.EffectMuteTriggerer:
-                    return new MuteTriggererBox(_room, Item);
+                    return new MuteTriggererBox(_room, item);
 
                 case WiredBoxType.EffectGiveReward:
-                    return new GiveRewardBox(_room, Item);
+                    return new GiveRewardBox(_room, item);
 
 
                 case WiredBoxType.EffectMatchPosition:
-                    return new MatchPositionBox(_room, Item);
+                    return new MatchPositionBox(_room, item);
                 case WiredBoxType.EffectAddActorToTeam:
-                    return new AddActorToTeamBox(_room, Item);
+                    return new AddActorToTeamBox(_room, item);
                 case WiredBoxType.EffectRemoveActorFromTeam:
-                    return new RemoveActorFromTeamBox(_room, Item);
+                    return new RemoveActorFromTeamBox(_room, item);
                 /*
                 
                 case WiredBoxType.EffectMoveFurniToNearestUser:
@@ -186,41 +184,41 @@ namespace Plus.HabboHotel.Rooms.Instance
 
                    */
                 case WiredBoxType.ConditionFurniHasUsers:
-                    return new FurniHasUsersBox(_room, Item);
+                    return new FurniHasUsersBox(_room, item);
                 case WiredBoxType.ConditionTriggererOnFurni:
-                    return new TriggererOnFurniBox(_room, Item);
+                    return new TriggererOnFurniBox(_room, item);
                 case WiredBoxType.ConditionTriggererNotOnFurni:
-                    return new TriggererNotOnFurniBox(_room, Item);
+                    return new TriggererNotOnFurniBox(_room, item);
                 case WiredBoxType.ConditionFurniHasNoUsers:
-                    return new FurniHasNoUsersBox(_room, Item);
+                    return new FurniHasNoUsersBox(_room, item);
                 case WiredBoxType.ConditionFurniHasFurni:
-                    return new FurniHasFurniBox(_room, Item);
+                    return new FurniHasFurniBox(_room, item);
                 case WiredBoxType.ConditionIsGroupMember:
-                    return new IsGroupMemberBox(_room, Item);
+                    return new IsGroupMemberBox(_room, item);
                 case WiredBoxType.ConditionIsNotGroupMember:
-                    return new IsNotGroupMemberBox(_room, Item);
+                    return new IsNotGroupMemberBox(_room, item);
                 case WiredBoxType.ConditionUserCountInRoom:
-                    return new UserCountInRoomBox(_room, Item);
+                    return new UserCountInRoomBox(_room, item);
                 case WiredBoxType.ConditionUserCountDoesntInRoom:
-                    return new UserCountDoesntInRoomBox(_room, Item);
-                case WiredBoxType.ConditionIsWearingFX:
-                    return new IsWearingFXBox(_room, Item);
-                case WiredBoxType.ConditionIsNotWearingFX:
-                    return new IsNotWearingFXBox(_room, Item);
+                    return new UserCountDoesntInRoomBox(_room, item);
+                case WiredBoxType.ConditionIsWearingFx:
+                    return new IsWearingFxBox(_room, item);
+                case WiredBoxType.ConditionIsNotWearingFx:
+                    return new IsNotWearingFxBox(_room, item);
                 case WiredBoxType.ConditionIsWearingBadge:
-                    return new IsWearingBadgeBox(_room, Item);
+                    return new IsWearingBadgeBox(_room, item);
                 case WiredBoxType.ConditionIsNotWearingBadge:
-                    return new IsNotWearingBadgeBox(_room, Item);
+                    return new IsNotWearingBadgeBox(_room, item);
                 case WiredBoxType.ConditionMatchStateAndPosition:
-                    return new FurniMatchStateAndPositionBox(_room, Item);
+                    return new FurniMatchStateAndPositionBox(_room, item);
                 case WiredBoxType.ConditionDontMatchStateAndPosition:
-                    return new FurniDoesntMatchStateAndPositionBox(_room, Item);
+                    return new FurniDoesntMatchStateAndPositionBox(_room, item);
                 case WiredBoxType.ConditionFurniHasNoFurni:
-                    return new FurniHasNoFurniBox(_room, Item);
+                    return new FurniHasNoFurniBox(_room, item);
                 case WiredBoxType.ConditionActorHasHandItemBox:
-                    return new ActorHasHandItemBox(_room, Item);
+                    return new ActorHasHandItemBox(_room, item);
                 case WiredBoxType.ConditionActorIsInTeamBox:
-                    return new ActorIsInTeamBox(_room, Item);
+                    return new ActorIsInTeamBox(_room, item);
 
 
                 /*
@@ -235,68 +233,68 @@ namespace Plus.HabboHotel.Rooms.Instance
                     return new FurniHasNoFurniBox(_room, Item);*/
 
                 case WiredBoxType.AddonRandomEffect:
-                    return new AddonRandomEffectBox(_room, Item);
+                    return new AddonRandomEffectBox(_room, item);
                 case WiredBoxType.EffectMoveFurniToNearestUser:
-                    return new MoveFurniToUserBox(_room, Item);
+                    return new MoveFurniToUserBox(_room, item);
                 case WiredBoxType.EffectExecuteWiredStacks:
-                    return new ExecuteWiredStacksBox(_room, Item);
+                    return new ExecuteWiredStacksBox(_room, item);
 
                 case WiredBoxType.EffectTeleportBotToFurniBox:
-                    return new TeleportBotToFurniBox(_room, Item);
+                    return new TeleportBotToFurniBox(_room, item);
                 case WiredBoxType.EffectBotChangesClothesBox:
-                    return new BotChangesClothesBox(_room, Item);
+                    return new BotChangesClothesBox(_room, item);
                 case WiredBoxType.EffectBotMovesToFurniBox:
-                    return new BotMovesToFurniBox(_room, Item);
+                    return new BotMovesToFurniBox(_room, item);
                 case WiredBoxType.EffectBotCommunicatesToAllBox:
-                    return new BotCommunicatesToAllBox(_room, Item);
+                    return new BotCommunicatesToAllBox(_room, item);
 
                 case WiredBoxType.EffectBotGivesHanditemBox:
-                    return new BotGivesHandItemBox(_room, Item);
+                    return new BotGivesHandItemBox(_room, item);
                 case WiredBoxType.EffectBotFollowsUserBox:
-                    return new BotFollowsUserBox(_room, Item);
+                    return new BotFollowsUserBox(_room, item);
                 case WiredBoxType.EffectSetRollerSpeed:
-                    return new SetRollerSpeedBox(_room, Item);
+                    return new SetRollerSpeedBox(_room, item);
                 case WiredBoxType.EffectRegenerateMaps:
-                    return new RegenerateMapsBox(_room, Item);
+                    return new RegenerateMapsBox(_room, item);
                 case WiredBoxType.EffectGiveUserBadge:
-                    return new GiveUserBadgeBox(_room, Item);
+                    return new GiveUserBadgeBox(_room, item);
             }
             return null;
         }
 
-        public bool IsTrigger(Item Item)
+        public bool IsTrigger(Item item)
         {
-            return Item.GetBaseItem().InteractionType == InteractionType.WIRED_TRIGGER;
+            return item.GetBaseItem().InteractionType == InteractionType.WIRED_TRIGGER;
         }
 
-        public bool IsEffect(Item Item)
+        public bool IsEffect(Item item)
         {
-            return Item.GetBaseItem().InteractionType == InteractionType.WIRED_EFFECT;
+            return item.GetBaseItem().InteractionType == InteractionType.WIRED_EFFECT;
         }
 
-        public bool IsCondition(Item Item)
+        public bool IsCondition(Item item)
         {
-            return Item.GetBaseItem().InteractionType == InteractionType.WIRED_CONDITION;
+            return item.GetBaseItem().InteractionType == InteractionType.WIRED_CONDITION;
         }
 
-        public bool OtherBoxHasItem(IWiredItem Box, int ItemId)
+        public bool OtherBoxHasItem(IWiredItem box, int itemId)
         {
-            if (Box == null)
+            if (box == null)
                 return false;
 
-            ICollection<IWiredItem> Items = GetEffects(Box).Where(x => x.Item.Id != Box.Item.Id).ToList();
+            ICollection<IWiredItem> items = GetEffects(box).Where(x => x.Item.Id != box.Item.Id).ToList();
 
-            if (Items != null && Items.Count > 0)
+            if (items != null && items.Count > 0)
             {
-                foreach (IWiredItem Item in Items)
+                foreach (IWiredItem item in items)
                 {
-                    if (Item.Type != WiredBoxType.EffectMoveAndRotate && Item.Type != WiredBoxType.EffectMoveFurniFromNearestUser && Item.Type != WiredBoxType.EffectMoveFurniToNearestUser)
+                    if (item.Type != WiredBoxType.EffectMoveAndRotate && item.Type != WiredBoxType.EffectMoveFurniFromNearestUser && item.Type != WiredBoxType.EffectMoveFurniToNearestUser)
                         continue;
 
-                    if (Item.SetItems == null || Item.SetItems.Count == 0)
+                    if (item.SetItems == null || item.SetItems.Count == 0)
                         continue;
 
-                    if (Item.SetItems.ContainsKey(ItemId))
+                    if (item.SetItems.ContainsKey(itemId))
                         return true;
                     else
                         continue;
@@ -307,49 +305,49 @@ namespace Plus.HabboHotel.Rooms.Instance
             return false;
         }
 
-        public bool TriggerEvent(WiredBoxType Type, params object[] Params)
+        public bool TriggerEvent(WiredBoxType type, params object[] @params)
         {
-            bool Finished = false;
+            bool finished = false;
             try
             {
-                if (Type == WiredBoxType.TriggerUserSays)
+                if (type == WiredBoxType.TriggerUserSays)
                 {
-                    List<IWiredItem> RanBoxes = new List<IWiredItem>();
-                    foreach (IWiredItem Box in _wiredItems.Values.ToList())
+                    List<IWiredItem> ranBoxes = new List<IWiredItem>();
+                    foreach (IWiredItem box in _wiredItems.Values.ToList())
                     {
-                        if (Box == null)
+                        if (box == null)
                             continue;
 
-                        if (Box.Type == WiredBoxType.TriggerUserSays)
+                        if (box.Type == WiredBoxType.TriggerUserSays)
                         {
-                            if (!RanBoxes.Contains(Box))
-                                RanBoxes.Add(Box);
+                            if (!ranBoxes.Contains(box))
+                                ranBoxes.Add(box);
                         }
                     }
 
-                    string Message = Convert.ToString(Params[1]);
-                    foreach (IWiredItem Box in RanBoxes.ToList())
+                    string message = Convert.ToString(@params[1]);
+                    foreach (IWiredItem box in ranBoxes.ToList())
                     {
-                        if (Box == null)
+                        if (box == null)
                             continue;
 
-                        if (Message.Contains(" " + Box.StringData) || Message.Contains(Box.StringData + " ") || Message == Box.StringData)
+                        if (message.Contains(" " + box.StringData) || message.Contains(box.StringData + " ") || message == box.StringData)
                         {
-                            Finished = Box.Execute(Params);
+                            finished = box.Execute(@params);
                         }
                     }
-                    return Finished;
+                    return finished;
                 }
                 else
                 {
-                    foreach (IWiredItem Box in _wiredItems.Values.ToList())
+                    foreach (IWiredItem box in _wiredItems.Values.ToList())
                     {
-                        if (Box == null)
+                        if (box == null)
                             continue;
 
-                        if (Box.Type == Type && IsTrigger(Box.Item))
+                        if (box.Type == type && IsTrigger(box.Item))
                         {
-                            Finished = Box.Execute(Params);
+                            finished = box.Execute(@params);
                         }
                     }
                 }
@@ -360,41 +358,41 @@ namespace Plus.HabboHotel.Rooms.Instance
                 return false;
             }
 
-            return Finished;
+            return finished;
         }
 
-        public ICollection<IWiredItem> GetTriggers(IWiredItem Item)
+        public ICollection<IWiredItem> GetTriggers(IWiredItem item)
         {
-            List<IWiredItem> Items = new List<IWiredItem>();
+            List<IWiredItem> items = new List<IWiredItem>();
             foreach (IWiredItem I in _wiredItems.Values)
             {
-                if (IsTrigger(I.Item) && I.Item.GetX == Item.Item.GetX && I.Item.GetY == Item.Item.GetY)
+                if (IsTrigger(I.Item) && I.Item.GetX == item.Item.GetX && I.Item.GetY == item.Item.GetY)
                 {
-                    Items.Add(I);
+                    items.Add(I);
                 }
             }
 
-            return Items;
+            return items;
         }
 
-        public ICollection<IWiredItem> GetEffects(IWiredItem Item)
+        public ICollection<IWiredItem> GetEffects(IWiredItem item)
         {
-            List<IWiredItem> Items = new List<IWiredItem>();
+            List<IWiredItem> items = new List<IWiredItem>();
 
             foreach (IWiredItem I in _wiredItems.Values)
             {
-                if (IsEffect(I.Item) && I.Item.GetX == Item.Item.GetX && I.Item.GetY == Item.Item.GetY)
+                if (IsEffect(I.Item) && I.Item.GetX == item.Item.GetX && I.Item.GetY == item.Item.GetY)
                 {
-                    Items.Add(I);
+                    items.Add(I);
                 }
             }
 
-            return Items.OrderBy(x => x.Item.GetZ).ToList();
+            return items.OrderBy(x => x.Item.GetZ).ToList();
         }
 
-        public IWiredItem GetRandomEffect(ICollection<IWiredItem> Effects)
+        public IWiredItem GetRandomEffect(ICollection<IWiredItem> effects)
         {
-            return Effects.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+            return effects.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
         }
 
         public bool OnUserFurniCollision(Room room, Item item)
@@ -402,19 +400,19 @@ namespace Plus.HabboHotel.Rooms.Instance
             if (room == null || item == null)
                 return false;
 
-            foreach (Point Point in item.GetSides())
+            foreach (Point point in item.GetSides())
             {
-                if (room.GetGameMap().SquareHasUsers(Point.X, Point.Y))
+                if (room.GetGameMap().SquareHasUsers(point.X, point.Y))
                 {
-                    List<RoomUser> Users = room.GetGameMap().GetRoomUsers(Point);
-                    if (Users != null && Users.Count > 0)
+                    List<RoomUser> users = room.GetGameMap().GetRoomUsers(point);
+                    if (users != null && users.Count > 0)
                     {
-                        foreach (RoomUser User in Users.ToList())
+                        foreach (RoomUser user in users.ToList())
                         {
-                            if (User == null)
+                            if (user == null)
                                 continue;
 
-                            item.UserFurniCollision(User);
+                            item.UserFurniCollision(user);
                         }
                     }
                     else
@@ -427,81 +425,81 @@ namespace Plus.HabboHotel.Rooms.Instance
             return true;
         }
 
-        public ICollection<IWiredItem> GetConditions(IWiredItem Item)
+        public ICollection<IWiredItem> GetConditions(IWiredItem item)
         {
-            List<IWiredItem> Items = new List<IWiredItem>();
+            List<IWiredItem> items = new List<IWiredItem>();
 
             foreach (IWiredItem I in _wiredItems.Values)
             {
-                if (IsCondition(I.Item) && I.Item.GetX == Item.Item.GetX && I.Item.GetY == Item.Item.GetY)
+                if (IsCondition(I.Item) && I.Item.GetX == item.Item.GetX && I.Item.GetY == item.Item.GetY)
                 {
-                    Items.Add(I);
+                    items.Add(I);
                 }
             }
 
-            return Items;
+            return items;
         }
 
-        public void OnEvent(Item Item)
+        public void OnEvent(Item item)
         {
-            if (Item.ExtraData == "1")
+            if (item.ExtraData == "1")
                 return;
 
-            Item.ExtraData = "1";
-            Item.UpdateState(false, true);
-            Item.RequestUpdate(2, true);
+            item.ExtraData = "1";
+            item.UpdateState(false, true);
+            item.RequestUpdate(2, true);
         }
 
-        public void SaveBox(IWiredItem Item)
+        public void SaveBox(IWiredItem item)
         {
-            string Items = "";
-            IWiredCycle Cycle = null;
-            if (Item is IWiredCycle)
+            string items = "";
+            IWiredCycle cycle = null;
+            if (item is IWiredCycle)
             {
-                Cycle = (IWiredCycle)Item;
+                cycle = (IWiredCycle)item;
             }
 
-            foreach (Item I in Item.SetItems.Values)
+            foreach (Item I in item.SetItems.Values)
             {
-                Item SelectedItem = _room.GetRoomItemHandler().GetItem(Convert.ToInt32(I.Id));
-                if (SelectedItem == null)
+                Item selectedItem = _room.GetRoomItemHandler().GetItem(Convert.ToInt32(I.Id));
+                if (selectedItem == null)
                     continue;
 
-                if (Item.Type == WiredBoxType.EffectMatchPosition || Item.Type == WiredBoxType.ConditionMatchStateAndPosition || Item.Type == WiredBoxType.ConditionDontMatchStateAndPosition)
-                    Items += I.Id + ":" + I.GetX + "," + I.GetY + "," + I.GetZ + "," + I.Rotation + "," + I.ExtraData + ";";
+                if (item.Type == WiredBoxType.EffectMatchPosition || item.Type == WiredBoxType.ConditionMatchStateAndPosition || item.Type == WiredBoxType.ConditionDontMatchStateAndPosition)
+                    items += I.Id + ":" + I.GetX + "," + I.GetY + "," + I.GetZ + "," + I.Rotation + "," + I.ExtraData + ";";
                 else
-                    Items += I.Id + ";";
+                    items += I.Id + ";";
             }
 
-            if (Item.Type == WiredBoxType.EffectMatchPosition || Item.Type == WiredBoxType.ConditionMatchStateAndPosition || Item.Type == WiredBoxType.ConditionDontMatchStateAndPosition)
-                Item.ItemsData = Items;
+            if (item.Type == WiredBoxType.EffectMatchPosition || item.Type == WiredBoxType.ConditionMatchStateAndPosition || item.Type == WiredBoxType.ConditionDontMatchStateAndPosition)
+                item.ItemsData = items;
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("REPLACE INTO `wired_items` VALUES (@id, @items, @delay, @string, @bool)");
-                dbClient.AddParameter("id", Item.Item.Id);
-                dbClient.AddParameter("items", Items);
-                dbClient.AddParameter("delay", (Item is IWiredCycle) ? Cycle.Delay : 0);
-                dbClient.AddParameter("string", Item.StringData);
-                dbClient.AddParameter("bool", Item.BoolData ? "1" : "0");
+                dbClient.AddParameter("id", item.Item.Id);
+                dbClient.AddParameter("items", items);
+                dbClient.AddParameter("delay", (item is IWiredCycle) ? cycle.Delay : 0);
+                dbClient.AddParameter("string", item.StringData);
+                dbClient.AddParameter("bool", item.BoolData ? "1" : "0");
                 dbClient.RunQuery();
             }
         }
 
-        public bool AddBox(IWiredItem Item)
+        public bool AddBox(IWiredItem item)
         {
-            return _wiredItems.TryAdd(Item.Item.Id, Item);
+            return _wiredItems.TryAdd(item.Item.Id, item);
         }
 
-        public bool TryRemove(int ItemId)
+        public bool TryRemove(int itemId)
         {
-            IWiredItem Item = null;
-            return _wiredItems.TryRemove(ItemId, out Item);
+            IWiredItem item = null;
+            return _wiredItems.TryRemove(itemId, out item);
         }
 
-        public bool TryGet(int id, out IWiredItem Item)
+        public bool TryGet(int id, out IWiredItem item)
         {
-            return _wiredItems.TryGetValue(id, out Item);
+            return _wiredItems.TryGetValue(id, out item);
         }
 
         public void Cleanup()

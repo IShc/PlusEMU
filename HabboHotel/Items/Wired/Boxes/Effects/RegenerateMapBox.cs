@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using Plus.HabboHotel.Rooms;
 using Plus.Communication.Packets.Incoming;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -10,38 +10,35 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public Room Instance { get; set; }
         public Item Item { get; set; }
 
-        public WiredBoxType Type
-        {
-            get { return WiredBoxType.EffectRegenerateMaps; }
-        }
+        public WiredBoxType Type => WiredBoxType.EffectRegenerateMaps;
 
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public RegenerateMapsBox(Room Instance, Item Item)
+        public RegenerateMapsBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             StringData = "";
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            string Unknown2 = Packet.PopString();
+            int unknown = packet.PopInt();
+            string unknown2 = packet.PopString();
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
             if (Instance == null)
                 return false;
 
-            TimeSpan TimeSinceRegen = DateTime.Now - Instance.LastRegeneration;
+            TimeSpan timeSinceRegen = DateTime.Now - Instance.LastRegeneration;
 
-            if (TimeSinceRegen.TotalMinutes > 1)
+            if (timeSinceRegen.TotalMinutes > 1)
             {
                 Instance.GetGameMap().GenerateMaps();
                 Instance.LastRegeneration = DateTime.Now;

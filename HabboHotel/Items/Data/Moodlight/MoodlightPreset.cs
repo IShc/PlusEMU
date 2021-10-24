@@ -6,11 +6,11 @@
         public string ColorCode;
         public int ColorIntensity;
 
-        public MoodlightPreset(string ColorCode, int ColorIntensity, bool BackgroundOnly)
+        public MoodlightPreset(string colorCode, int colorIntensity, bool backgroundOnly)
         {
-            this.ColorCode = ColorCode;
-            this.ColorIntensity = ColorIntensity;
-            this.BackgroundOnly = BackgroundOnly;
+            ColorCode = colorCode;
+            ColorIntensity = colorIntensity;
+            BackgroundOnly = backgroundOnly;
         }
     }
 }

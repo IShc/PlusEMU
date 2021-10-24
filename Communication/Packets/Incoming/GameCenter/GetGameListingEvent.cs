@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
-
-using Plus.HabboHotel.Games;
 using Plus.Communication.Packets.Outgoing.GameCenter;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Games;
 
 namespace Plus.Communication.Packets.Incoming.GameCenter
 {
     class GetGameListingEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             ICollection<GameData> games = PlusEnvironment.GetGame().GetGameDataManager().GameData;
 

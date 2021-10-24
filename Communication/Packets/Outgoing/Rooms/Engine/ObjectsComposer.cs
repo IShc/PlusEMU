@@ -1,7 +1,7 @@
 ﻿using System;
-using Plus.Utilities;
-using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
@@ -29,7 +29,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
             packet.WriteInteger(Objects.Length);
             foreach (Item item in Objects)
             {
-                WriteFloorItem(item, Convert.ToInt32(item.UserID), packet);
+                WriteFloorItem(item, Convert.ToInt32(item.UserId), packet);
             }
         }
 

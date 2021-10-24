@@ -1,7 +1,7 @@
 ﻿using Plus.Database.Interfaces;
-using Plus.HabboHotel.Users;
 using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Moderation;
+using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {

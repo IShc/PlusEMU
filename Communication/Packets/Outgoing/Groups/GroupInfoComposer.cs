@@ -1,6 +1,6 @@
 ﻿using System;
-using Plus.HabboHotel.Groups;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Groups;
 using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Groups

@@ -1,7 +1,7 @@
 ﻿using System;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Users;
-
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
@@ -13,7 +13,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Description => "Trade ban another user.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (@params.Length == 1)
             {

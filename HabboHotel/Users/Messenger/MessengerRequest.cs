@@ -2,30 +2,17 @@
 {
     public class MessengerRequest
     {
-        private int _toUser;
-        private int _fromUser;
-        private string _username;
-
-        public MessengerRequest(int ToUser, int FromUser, string Username)
+        public MessengerRequest(int toUser, int fromUser, string username)
         {
-            _toUser = ToUser;
-            _fromUser = FromUser;
-            _username = Username;
+            To = toUser;
+            From = fromUser;
+            Username = username;
         }
 
-        public string Username
-        {
-            get { return _username; }
-        }
+        public string Username { get; }
 
-        public int To
-        {
-            get { return _toUser; }
-        }
+        public int To { get; }
 
-        public int From
-        {
-            get { return _fromUser; }
-        }
+        public int From { get; }
     }
 }

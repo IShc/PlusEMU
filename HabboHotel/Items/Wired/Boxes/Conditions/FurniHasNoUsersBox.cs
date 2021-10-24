@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Concurrent;
-
+﻿using System.Collections.Concurrent;
+using System.Linq;
 using Plus.Communication.Packets.Incoming;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Rooms.PathFinding;
@@ -13,7 +12,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 
         public Item Item { get; set; }
 
-        public WiredBoxType Type { get { return WiredBoxType.ConditionFurniHasNoUsers; } }
+        public WiredBoxType Type => WiredBoxType.ConditionFurniHasNoUsers;
 
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
 
@@ -22,48 +21,48 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public FurniHasNoUsersBox(Room Instance, Item Item)
+        public FurniHasNoUsersBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            string Unknown2 = Packet.PopString();
+            int unknown = packet.PopInt();
+            string unknown2 = packet.PopString();
 
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            int FurniCount = Packet.PopInt();
-            for (int i = 0; i < FurniCount; i++)
+            int furniCount = packet.PopInt();
+            for (int i = 0; i < furniCount; i++)
             {
-                Item SelectedItem = Instance.GetRoomItemHandler().GetItem(Packet.PopInt());
-                if (SelectedItem != null)
-                    SetItems.TryAdd(SelectedItem.Id, SelectedItem);
+                Item selectedItem = Instance.GetRoomItemHandler().GetItem(packet.PopInt());
+                if (selectedItem != null)
+                    SetItems.TryAdd(selectedItem.Id, selectedItem);
             }
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            foreach (Item Item in SetItems.Values.ToList())
+            foreach (Item item in SetItems.Values.ToList())
             {
-                if (Item == null || !Instance.GetRoomItemHandler().GetFloor.Contains(Item))
+                if (item == null || !Instance.GetRoomItemHandler().GetFloor.Contains(item))
                     continue;
 
-                bool HasUsers = false;
-                foreach (ThreeDCoord Tile in Item.GetAffectedTiles.Values)
+                bool hasUsers = false;
+                foreach (ThreeDCoord tile in item.GetAffectedTiles.Values)
                 {
-                    if (Instance.GetGameMap().SquareHasUsers(Tile.X, Tile.Y))
-                        HasUsers = true;
+                    if (Instance.GetGameMap().SquareHasUsers(tile.X, tile.Y))
+                        hasUsers = true;
                 }
 
-                if (Instance.GetGameMap().SquareHasUsers(Item.GetX, Item.GetY))
-                    HasUsers = true;
+                if (Instance.GetGameMap().SquareHasUsers(item.GetX, item.GetY))
+                    hasUsers = true;
 
-                if (HasUsers)
+                if (hasUsers)
                     return false;
             }
             return true;

@@ -1,5 +1,5 @@
-﻿using Plus.HabboHotel.Cache.Type;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Plus.HabboHotel.Cache.Type;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {

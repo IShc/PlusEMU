@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
-
-using Plus.HabboHotel.Rooms;
 using Plus.Communication.Packets.Incoming;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -10,24 +9,24 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.EffectBotCommunicatesToAllBox; } }
+        public WiredBoxType Type => WiredBoxType.EffectBotCommunicatesToAllBox;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public BotCommunicatesToAllBox(Room Instance, Item Item)
+        public BotCommunicatesToAllBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            int ChatMode = Packet.PopInt();
-            string ChatConfig = Packet.PopString();
+            int unknown = packet.PopInt();
+            int chatMode = packet.PopInt();
+            string chatConfig = packet.PopString();
 
             if (SetItems.Count > 0)
                 SetItems.Clear();
@@ -35,16 +34,16 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             //this.StringData = ChatConfig.Replace('\t', ';') + ";" + ChatMode;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params == null || Params.Length == 0)
+            if (@params == null || @params.Length == 0)
                 return false;
 
             if (String.IsNullOrEmpty(StringData))
                 return false;
 
-            RoomUser User = Instance.GetRoomUserManager().GetBotByName(StringData);
-            if (User == null)
+            RoomUser user = Instance.GetRoomUserManager().GetBotByName(StringData);
+            if (user == null)
                 return false;
 
             //TODO: This needs finishing.

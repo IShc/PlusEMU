@@ -39,7 +39,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 
             packet.WriteInteger(-1); // to-do: check
             packet.WriteInteger((Item.GetBaseItem().Modes > 1) ? 1 : 0);
-            packet.WriteInteger(Item.UserID);
+            packet.WriteInteger(Item.UserId);
             packet.WriteString(Item.Username);
         }
     }

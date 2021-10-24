@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Linq;
-using System.Data;
 using System.Collections.Generic;
-
+using System.Data;
+using System.Linq;
 using log4net;
 using Plus.Database.Interfaces;
-using Plus.HabboHotel.Rooms.AI.Responses;
 using Plus.HabboHotel.Rooms.AI;
+using Plus.HabboHotel.Rooms.AI.Responses;
 
 namespace Plus.HabboHotel.Bots
 {

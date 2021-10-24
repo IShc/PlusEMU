@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.HabboHotel.Games;
 using Plus.HabboHotel.Users;
 
@@ -34,7 +33,7 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
             {
                 num++;
                 packet.WriteInteger(habbo.Id);//Id
-                packet.WriteInteger(habbo.FastfoodScore);//Score
+                packet.WriteInteger(habbo.FastFoodScore);//Score
                 packet.WriteInteger(num);//Rank
                 packet.WriteString(habbo.Username);//Username
                 packet.WriteString(habbo.Look);//Figure

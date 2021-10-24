@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-
-using Plus.HabboHotel.Rooms;
+using System.Collections.Generic;
+using System.Linq;
 using Plus.Communication.Packets.Incoming;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -12,77 +11,77 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.EffectTeleportBotToFurniBox; } }
+        public WiredBoxType Type => WiredBoxType.EffectTeleportBotToFurniBox;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public TeleportBotToFurniBox(Room Instance, Item Item)
+        public TeleportBotToFurniBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            string BotName = Packet.PopString();
+            int unknown = packet.PopInt();
+            string botName = packet.PopString();
 
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            int FurniCount = Packet.PopInt();
-            for (int i = 0; i < FurniCount; i++)
+            int furniCount = packet.PopInt();
+            for (int i = 0; i < furniCount; i++)
             {
-                Item SelectedItem = Instance.GetRoomItemHandler().GetItem(Packet.PopInt());
-                if (SelectedItem != null)
-                    SetItems.TryAdd(SelectedItem.Id, SelectedItem);
+                Item selectedItem = Instance.GetRoomItemHandler().GetItem(packet.PopInt());
+                if (selectedItem != null)
+                    SetItems.TryAdd(selectedItem.Id, selectedItem);
             }
 
-            StringData = BotName;
+            StringData = botName;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
             if (String.IsNullOrEmpty(StringData))
                 return false;
 
-            RoomUser User = Instance.GetRoomUserManager().GetBotByName(StringData);
-            if (User == null)
+            RoomUser user = Instance.GetRoomUserManager().GetBotByName(StringData);
+            if (user == null)
                 return false;
 
             Random rand = new Random();
-            List<Item> Items = SetItems.Values.ToList();
-            Items = Items.OrderBy(x => rand.Next()).ToList();
+            List<Item> items = SetItems.Values.ToList();
+            items = items.OrderBy(x => rand.Next()).ToList();
 
-            if (Items.Count == 0)
+            if (items.Count == 0)
                 return false;
 
-            Item Item = Items.First();
-            if (Item == null)
+            Item item = items.First();
+            if (item == null)
                 return false;
 
-            if (!Instance.GetRoomItemHandler().GetFloor.Contains(Item))
+            if (!Instance.GetRoomItemHandler().GetFloor.Contains(item))
             {
-                SetItems.TryRemove(Item.Id, out Item);
+                SetItems.TryRemove(item.Id, out item);
 
-                if (Items.Contains(Item))
-                    Items.Remove(Item);
+                if (items.Contains(item))
+                    items.Remove(item);
 
-                if (SetItems.Count == 0 || Items.Count == 0)
+                if (SetItems.Count == 0 || items.Count == 0)
                     return false;
 
-                Item = Items.First();
-                if (Item == null)
+                item = items.First();
+                if (item == null)
                     return false;
             }
 
             if (Instance.GetGameMap() == null)
                 return false;
 
-            Instance.GetGameMap().TeleportToItem(User, Item);
+            Instance.GetGameMap().TeleportToItem(user, item);
             Instance.GetRoomUserManager().UpdateUserStatusses();
 
 

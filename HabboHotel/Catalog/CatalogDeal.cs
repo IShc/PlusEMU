@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-
-using Plus.HabboHotel.Items;
+using System.Data;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Catalog
 {
@@ -36,11 +35,11 @@ namespace Plus.HabboHotel.Catalog
                 {
                     foreach (DataRow dRow in data.Rows)
                     {
-                        int item_id = Convert.ToInt32(dRow["base_item"]);
-                        if (roomItems.ContainsKey(item_id))
-                            roomItems[item_id]++;
+                        int itemId = Convert.ToInt32(dRow["base_item"]);
+                        if (roomItems.ContainsKey(itemId))
+                            roomItems[itemId]++;
                         else
-                            roomItems.Add(item_id, 1);
+                            roomItems.Add(itemId, 1);
                     }
                 }
 
@@ -59,13 +58,13 @@ namespace Plus.HabboHotel.Catalog
             foreach (string split in splitItems)
             {
                 string[] item = split.Split('*');
-                if (!int.TryParse(item[0], out int itemId) || !int.TryParse(item[1], out int Amount))
+                if (!int.TryParse(item[0], out int itemId) || !int.TryParse(item[1], out int amount))
                     continue;
 
                 if (!itemDataManager.GetItem(itemId, out ItemData data))
                     continue;
 
-                ItemDataList.Add(new CatalogItem(0, itemId, data, string.Empty, 0, 0, 0, 0, Amount, 0, 0, false, "", "", 0));
+                ItemDataList.Add(new CatalogItem(0, itemId, data, string.Empty, 0, 0, 0, 0, amount, 0, 0, false, "", "", 0));
             }
         }
     }

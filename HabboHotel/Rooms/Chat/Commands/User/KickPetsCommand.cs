@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using System.Drawing;
-using Plus.HabboHotel.Rooms.AI;
-using Plus.HabboHotel.GameClients;
+﻿using System.Drawing;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Inventory.Pets;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms.AI;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -77,7 +77,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.RunQuery("UPDATE `bots` SET `room_id` = '0', `x` = '0', `Y` = '0', `Z` = '0' WHERE `id` = '" + pet.PetId + "' LIMIT 1");
-                    dbClient.RunQuery("UPDATE `bots_petdata` SET `experience` = '" + pet.experience + "', `energy` = '" + pet.Energy + "', `nutrition` = '" + pet.Nutrition + "', `respect` = '" + pet.Respect + "' WHERE `id` = '" + pet.PetId + "' LIMIT 1");
+                    dbClient.RunQuery("UPDATE `bots_petdata` SET `experience` = '" + pet.Experience + "', `energy` = '" + pet.Energy + "', `nutrition` = '" + pet.Nutrition + "', `respect` = '" + pet.Respect + "' WHERE `id` = '" + pet.PetId + "' LIMIT 1");
                 }
             }
 

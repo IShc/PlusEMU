@@ -1,4 +1,5 @@
 ﻿using Plus.Communication.Packets.Outgoing.Rooms.Notifications;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
@@ -10,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description => "Send a message to the entire hotel, with a link.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (@params.Length == 2)
             {

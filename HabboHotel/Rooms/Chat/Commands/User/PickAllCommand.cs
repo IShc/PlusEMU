@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Plus.HabboHotel.Items;
-
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Inventory.Furni;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -16,7 +15,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description => "Picks up all of the furniture from your room.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (!room.CheckRights(session, true))
                 return;

@@ -103,20 +103,11 @@ namespace Plus.HabboHotel.Groups
             }
         }
 
-        public List<int> GetMembers
-        {
-            get { return _members.ToList(); }
-        }
+        public List<int> GetMembers => _members.ToList();
 
-        public List<int> GetRequests
-        {
-            get { return _requests.ToList(); }
-        }
+        public List<int> GetRequests => _requests.ToList();
 
-        public List<int> GetAdministrators
-        {
-            get { return _administrators.ToList(); }
-        }
+        public List<int> GetAdministrators => _administrators.ToList();
 
         public List<int> GetAllMembers
         {
@@ -129,15 +120,9 @@ namespace Plus.HabboHotel.Groups
             }
         }
 
-        public int MemberCount
-        {
-            get { return _members.Count + _administrators.Count; }
-        }
+        public int MemberCount => _members.Count + _administrators.Count;
 
-        public int RequestCount
-        {
-            get { return _requests.Count; }
-        }
+        public int RequestCount => _requests.Count;
 
         public bool IsMember(int id)
         {

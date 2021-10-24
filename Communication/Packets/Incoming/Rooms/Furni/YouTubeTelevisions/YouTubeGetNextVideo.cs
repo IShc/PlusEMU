@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using Plus.HabboHotel.Items.Televisions;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Rooms.Furni.YouTubeTelevisions;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items.Televisions;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions
 {
@@ -26,7 +26,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions
             packet.PopInt(); //next
 
             TelevisionItem item = null;
-            Dictionary<int, TelevisionItem> dict = PlusEnvironment.GetGame().GetTelevisionManager()._televisions;
+            Dictionary<int, TelevisionItem> dict = PlusEnvironment.GetGame().GetTelevisionManager().Televisions;
             foreach (TelevisionItem value in RandomValues(dict).Take(1))
             {
                 item = value;

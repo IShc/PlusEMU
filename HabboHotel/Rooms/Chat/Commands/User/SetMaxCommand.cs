@@ -1,5 +1,5 @@
 ﻿using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -11,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description => "Set the visitor limit to the room.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (!room.CheckRights(session, true))
                 return;

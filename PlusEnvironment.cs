@@ -1,31 +1,29 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading;
-using MySql.Data.MySqlClient;
-using Plus.Core;
-
-using Plus.HabboHotel;
-using Plus.HabboHotel.GameClients;
-using Plus.HabboHotel.Users;
-using Plus.Utilities;
 using log4net;
-using System.Collections.Concurrent;
-using Plus.Communication.Packets.Outgoing.Moderation;
-using Plus.Communication.Encryption.Keys;
+using MySql.Data.MySqlClient;
 using Plus.Communication.Encryption;
-
-using Plus.Database.Interfaces;
-using Plus.Database;
-using Plus.HabboHotel.Cache.Type;
-using Plus.HabboHotel.Users.UserData;
+using Plus.Communication.Encryption.Keys;
+using Plus.Communication.Packets.Outgoing.Moderation;
 using Plus.Communication.Rcon;
+using Plus.Core;
 using Plus.Core.FigureData;
 using Plus.Core.Language;
 using Plus.Core.Settings;
+using Plus.Database;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel;
+using Plus.HabboHotel.Cache.Type;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Users;
+using Plus.HabboHotel.Users.UserData;
 using Plus.Network;
+using Plus.Utilities;
 
 namespace Plus
 {
@@ -53,14 +51,14 @@ namespace Plus
         public static DateTime LastEvent;
         public static DateTime ServerStarted;
 
-        private static readonly List<char> Allowedchars = new(new[]
+        private static readonly List<char> AllowedChars = new(new[]
             {
                 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
                 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
                 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '.'
             });
 
-        private static ConcurrentDictionary<int, Habbo> _usersCached = new();
+        private static readonly ConcurrentDictionary<int, Habbo> _usersCached = new();
 
         public static string SwfRevision = "";
 
@@ -188,12 +186,12 @@ namespace Plus
 
         public static bool EnumToBool(string @enum)
         {
-            return (@enum == "1");
+            return @enum == "1";
         }
 
         public static string BoolToEnum(bool @bool)
         {
-            return (@bool == true ? "1" : "0");
+            return @bool ? "1" : "0";
         }
 
         public static int GetRandomNumber(int min, int max)
@@ -203,13 +201,13 @@ namespace Plus
 
         public static double GetUnixTimestamp()
         {
-            TimeSpan ts = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0);
             return ts.TotalSeconds;
         }
 
         public static long Now()
         {
-            TimeSpan ts = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0));
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0);
             double unixTime = ts.TotalMilliseconds;
             return (long)unixTime;
         }
@@ -227,7 +225,7 @@ namespace Plus
 
         private static bool IsValid(char character)
         {
-            return Allowedchars.Contains(character);
+            return AllowedChars.Contains(character);
         }
 
         public static bool IsValidAlphaNumeric(string inputStr)
@@ -300,7 +298,7 @@ namespace Plus
                             UserData data = UserDataFactory.GetUserData(userId);
                             if (data != null)
                             {
-                                Habbo generated = data.user;
+                                Habbo generated = data.User;
                                 if (generated != null)
                                 {
                                     generated.InitInformation(data);
@@ -336,8 +334,6 @@ namespace Plus
             }
             catch { return null; }
         }
-
-
 
         public static void PerformShutDown()
         {

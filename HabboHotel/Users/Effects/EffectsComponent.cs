@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
-using System.Data;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Rooms.Avatar;
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.Rooms;
@@ -12,7 +12,6 @@ namespace Plus.HabboHotel.Users.Effects
     public sealed class EffectsComponent
     {
         private Habbo _habbo;
-        private int _currentEffect;
 
         /// <summary>
         /// Effects stored by ID > Effect.
@@ -39,9 +38,9 @@ namespace Plus.HabboHotel.Users.Effects
 
                 if (getEffects != null)
                 {
-                    foreach (DataRow Row in getEffects.Rows)
+                    foreach (DataRow row in getEffects.Rows)
                     {
-                        if (_effects.TryAdd(Convert.ToInt32(Row["id"]), new AvatarEffect(Convert.ToInt32(Row["id"]), Convert.ToInt32(Row["user_id"]), Convert.ToInt32(Row["effect_id"]), Convert.ToDouble(Row["total_duration"]), PlusEnvironment.EnumToBool(Row["is_activated"].ToString()), Convert.ToDouble(Row["activated_stamp"]), Convert.ToInt32(Row["quantity"]))))
+                        if (_effects.TryAdd(Convert.ToInt32(row["id"]), new AvatarEffect(Convert.ToInt32(row["id"]), Convert.ToInt32(row["user_id"]), Convert.ToInt32(row["effect_id"]), Convert.ToDouble(row["total_duration"]), PlusEnvironment.EnumToBool(row["is_activated"].ToString()), Convert.ToDouble(row["activated_stamp"]), Convert.ToInt32(row["quantity"]))))
                         {
                             //umm?
                         }
@@ -50,41 +49,41 @@ namespace Plus.HabboHotel.Users.Effects
             }
 
             _habbo = habbo;
-            _currentEffect = 0;
+            CurrentEffect = 0;
             return true;
         }
 
-        public bool TryAdd(AvatarEffect Effect)
+        public bool TryAdd(AvatarEffect effect)
         {
-            return _effects.TryAdd(Effect.Id, Effect);
+            return _effects.TryAdd(effect.Id, effect);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="SpriteId"></param>
-        /// <param name="ActivatedOnly"></param>
-        /// <param name="UnactivatedOnly"></param>
+        /// <param name="spriteId"></param>
+        /// <param name="activatedOnly"></param>
+        /// <param name="unactivatedOnly"></param>
         /// <returns></returns>
-        public bool HasEffect(int SpriteId, bool ActivatedOnly = false, bool UnactivatedOnly = false)
+        public bool HasEffect(int spriteId, bool activatedOnly = false, bool unactivatedOnly = false)
         {
-            return (GetEffectNullable(SpriteId, ActivatedOnly, UnactivatedOnly) != null);
+            return (GetEffectNullable(spriteId, activatedOnly, unactivatedOnly) != null);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="SpriteId"></param>
-        /// <param name="ActivatedOnly"></param>
-        /// <param name="UnactivatedOnly"></param>
+        /// <param name="spriteId"></param>
+        /// <param name="activatedOnly"></param>
+        /// <param name="unactivatedOnly"></param>
         /// <returns></returns>
-        public AvatarEffect GetEffectNullable(int SpriteId, bool ActivatedOnly = false, bool UnactivatedOnly = false)
+        public AvatarEffect GetEffectNullable(int spriteId, bool activatedOnly = false, bool unactivatedOnly = false)
         {
-            foreach (AvatarEffect Effect in _effects.Values.ToList())
+            foreach (AvatarEffect effect in _effects.Values.ToList())
             {
-                if (!Effect.HasExpired && Effect.SpriteId == SpriteId && (!ActivatedOnly || Effect.Activated) && (!UnactivatedOnly || !Effect.Activated))
+                if (!effect.HasExpired && effect.SpriteId == spriteId && (!activatedOnly || effect.Activated) && (!unactivatedOnly || !effect.Activated))
                 {
-                    return Effect;
+                    return effect;
                 }
             }
             return null;
@@ -93,44 +92,37 @@ namespace Plus.HabboHotel.Users.Effects
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="Habbo"></param>
-        public void CheckEffectExpiry(Habbo Habbo)
+        /// <param name="habbo"></param>
+        public void CheckEffectExpiry(Habbo habbo)
         {
-            foreach (AvatarEffect Effect in _effects.Values.ToList())
+            foreach (AvatarEffect effect in _effects.Values.ToList())
             {
-                if (Effect.HasExpired)
+                if (effect.HasExpired)
                 {
-                    Effect.HandleExpiration(Habbo);
+                    effect.HandleExpiration(habbo);
                 }
             }
         }
 
-        public void ApplyEffect(int EffectId)
+        public void ApplyEffect(int effectId)
         {
             if (_habbo == null || _habbo.CurrentRoom == null)
                 return;
 
-            RoomUser User = _habbo.CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(_habbo.Id);
-            if (User == null)
+            RoomUser user = _habbo.CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(_habbo.Id);
+            if (user == null)
                 return;
 
-            _currentEffect = EffectId;
+            CurrentEffect = effectId;
 
-            if (User.IsDancing)
-                _habbo.CurrentRoom.SendPacket(new DanceComposer(User.VirtualId, 0));
-            _habbo.CurrentRoom.SendPacket(new AvatarEffectComposer(User.VirtualId, EffectId));
+            if (user.IsDancing)
+                _habbo.CurrentRoom.SendPacket(new DanceComposer(user.VirtualId, 0));
+            _habbo.CurrentRoom.SendPacket(new AvatarEffectComposer(user.VirtualId, effectId));
         }
 
-        public ICollection<AvatarEffect> GetAllEffects
-        {
-            get { return _effects.Values; }
-        }
+        public ICollection<AvatarEffect> GetAllEffects => _effects.Values;
 
-        public int CurrentEffect
-        {
-            get { return _currentEffect; }
-            set { _currentEffect = value; }
-        }
+        public int CurrentEffect { get; set; }
 
         /// <summary>
         /// Disposes the EffectsComponent.

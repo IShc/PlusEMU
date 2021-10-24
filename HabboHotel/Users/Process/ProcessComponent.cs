@@ -8,7 +8,7 @@ namespace Plus.HabboHotel.Users.Process
 {
     sealed class ProcessComponent
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(ProcessComponent));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ProcessComponent));
 
         /// <summary>
         /// Player to update, handle, change etc.
@@ -57,15 +57,15 @@ namespace Plus.HabboHotel.Users.Process
         /// <summary>
         /// Initializes the ProcessComponent.
         /// </summary>
-        /// <param name="Player">Player.</param>
-        public bool Init(Habbo Player)
+        /// <param name="player">Player.</param>
+        public bool Init(Habbo player)
         {
-            if (Player == null)
+            if (player == null)
                 return false;
             else if (_player != null)
                 return false;
 
-            _player = Player;
+            _player = player;
             _timer = new Timer(new TimerCallback(Run), null, _runtimeInSec * 1000, _runtimeInSec * 1000);
             return true;
         }
@@ -73,8 +73,8 @@ namespace Plus.HabboHotel.Users.Process
         /// <summary>
         /// Called for each time the timer ticks.
         /// </summary>
-        /// <param name="State"></param>
-        public void Run(object State)
+        /// <param name="state"></param>
+        public void Run(object state)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace Plus.HabboHotel.Users.Process
                 if (_timerRunning)
                 {
                     _timerLagging = true;
-                    log.Warn("<Player " + _player.Id + "> Server can't keep up, Player timer is lagging behind.");
+                    Log.Warn("<Player " + _player.Id + "> Server can't keep up, Player timer is lagging behind.");
                     return;
                 }
 
@@ -104,7 +104,7 @@ namespace Plus.HabboHotel.Users.Process
                     _player.MessengerSpamCount = 0;
                 #endregion
 
-                _player.TimeAFK += 1;
+                _player.TimeAfk += 1;
 
                 #region Respect checking
                 if (_player.GetStats().RespectsTimestamp != DateTime.Today.ToString("MM/dd"))
@@ -112,11 +112,11 @@ namespace Plus.HabboHotel.Users.Process
                     _player.GetStats().RespectsTimestamp = DateTime.Today.ToString("MM/dd");
                     using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                     {
-                        dbClient.RunQuery("UPDATE `user_stats` SET `dailyRespectPoints` = '" + (_player.Rank == 1 && _player.VIPRank == 0 ? 10 : _player.VIPRank == 1 ? 15 : 20) + "', `dailyPetRespectPoints` = '" + (_player.Rank == 1 && _player.VIPRank == 0 ? 10 : _player.VIPRank == 1 ? 15 : 20) + "', `respectsTimestamp` = '" + DateTime.Today.ToString("MM/dd") + "' WHERE `id` = '" + _player.Id + "' LIMIT 1");
+                        dbClient.RunQuery("UPDATE `user_stats` SET `dailyRespectPoints` = '" + (_player.Rank == 1 && _player.VipRank == 0 ? 10 : _player.VipRank == 1 ? 15 : 20) + "', `dailyPetRespectPoints` = '" + (_player.Rank == 1 && _player.VipRank == 0 ? 10 : _player.VipRank == 1 ? 15 : 20) + "', `respectsTimestamp` = '" + DateTime.Today.ToString("MM/dd") + "' WHERE `id` = '" + _player.Id + "' LIMIT 1");
                     }
 
-                    _player.GetStats().DailyRespectPoints = (_player.Rank == 1 && _player.VIPRank == 0 ? 10 : _player.VIPRank == 1 ? 15 : 20);
-                    _player.GetStats().DailyPetRespectPoints = (_player.Rank == 1 && _player.VIPRank == 0 ? 10 : _player.VIPRank == 1 ? 15 : 20);
+                    _player.GetStats().DailyRespectPoints = (_player.Rank == 1 && _player.VipRank == 0 ? 10 : _player.VipRank == 1 ? 15 : 20);
+                    _player.GetStats().DailyPetRespectPoints = (_player.Rank == 1 && _player.VipRank == 0 ? 10 : _player.VipRank == 1 ? 15 : 20);
 
                     if (_player.GetClient() != null)
                     {

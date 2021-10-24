@@ -1,5 +1,5 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items;
+﻿using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
@@ -38,7 +38,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 
             try
             {
-                packet.WriteString(item.wallCoord);
+                packet.WriteString(item.WallCoord);
             }
             catch
             {

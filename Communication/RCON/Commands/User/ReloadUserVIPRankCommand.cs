@@ -5,15 +5,9 @@ namespace Plus.Communication.Rcon.Commands.User
 {
     class ReloadUserVIPRankCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to reload a users VIP rank and permissions."; }
-        }
+        public string Description => "This command is used to reload a users VIP rank and permissions.";
 
-        public string Parameters
-        {
-            get { return "%userId%"; }
-        }
+        public string Parameters => "%userId%";
 
         public bool TryExecute(string[] parameters)
         {
@@ -28,7 +22,7 @@ namespace Plus.Communication.Rcon.Commands.User
             {
                 dbClient.SetQuery("SELECT `rank_vip` FROM `users` WHERE `id` = @userId LIMIT 1");
                 dbClient.AddParameter("userId", userId);
-                client.GetHabbo().VIPRank = dbClient.GetInteger();
+                client.GetHabbo().VipRank = dbClient.GetInteger();
             }
 
             client.GetHabbo().GetPermissions().Init(client.GetHabbo());

@@ -1,9 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
-using Plus.HabboHotel.Users.Messenger;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Messenger;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {

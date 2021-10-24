@@ -1,16 +1,15 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items;
-
+﻿using Plus.Communication.Packets.Outgoing.Rooms.AI.Pets;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-using Plus.Communication.Packets.Outgoing.Rooms.AI.Pets;
-
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
 {
     class ApplyHorseEffectEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             if (!session.GetHabbo().InRoom)
                 return;

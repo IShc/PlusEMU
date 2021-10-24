@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Concurrent;
-
 using Plus.Communication.Packets.Incoming;
+using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
-using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -12,7 +11,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.EffectKickUser; } }
+        public WiredBoxType Type => WiredBoxType.EffectKickUser;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public int TickCount { get; set; }
         public string StringData { get; set; }
@@ -21,10 +20,10 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public string ItemsData { get; set; }
         private Queue _toKick;
 
-        public KickUserBox(Room Instance, Item Item)
+        public KickUserBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
             TickCount = Delay;
             _toKick = new Queue();
@@ -33,43 +32,43 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 SetItems.Clear();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            int Unknown = Packet.PopInt();
-            string Message = Packet.PopString();
+            int unknown = packet.PopInt();
+            string message = packet.PopString();
 
-            StringData = Message;
+            StringData = message;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params.Length != 1)
+            if (@params.Length != 1)
                 return false;
 
-            Habbo Player = (Habbo)Params[0];
-            if (Player == null)
+            Habbo player = (Habbo)@params[0];
+            if (player == null)
                 return false;
 
             if (TickCount <= 0)
                 TickCount = 3;
 
-            if (!_toKick.Contains(Player))
+            if (!_toKick.Contains(player))
             {
-                RoomUser User = Instance.GetRoomUserManager().GetRoomUserByHabbo(Player.Id);
-                if (User == null)
+                RoomUser user = Instance.GetRoomUserManager().GetRoomUserByHabbo(player.Id);
+                if (user == null)
                     return false;
 
-                if (Player.GetPermissions().HasRight("mod_tool")  || Instance.OwnerId == Player.Id)
+                if (player.GetPermissions().HasRight("mod_tool")  || Instance.OwnerId == player.Id)
                 {
-                    Player.GetClient().SendPacket(new WhisperComposer(User.VirtualId, "Wired Kick Exception: Unkickable Player", 0, 0));
+                    player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, "Wired Kick Exception: Unkickable Player", 0, 0));
                     return false;
                 }
 
-                _toKick.Enqueue(Player);
-                Player.GetClient().SendPacket(new WhisperComposer(User.VirtualId, StringData, 0, 0));
+                _toKick.Enqueue(player);
+                player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, StringData, 0, 0));
             }
             return true;
         }
@@ -89,11 +88,11 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             {
                 while (_toKick.Count > 0)
                 {
-                    Habbo Player = (Habbo)_toKick.Dequeue();
-                    if (Player == null || !Player.InRoom || Player.CurrentRoom != Instance)
+                    Habbo player = (Habbo)_toKick.Dequeue();
+                    if (player == null || !player.InRoom || player.CurrentRoom != Instance)
                         continue;
 
-                    Instance.GetRoomUserManager().RemoveUserFromRoom(Player.GetClient(), true, false);
+                    Instance.GetRoomUserManager().RemoveUserFromRoom(player.GetClient(), true, false);
                 }
             }
             TickCount = 3;

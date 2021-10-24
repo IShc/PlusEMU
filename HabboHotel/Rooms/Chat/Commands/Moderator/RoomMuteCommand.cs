@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
@@ -10,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public string Description => "Mute the room with a reason.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (@params.Length == 1)
             {

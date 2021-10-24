@@ -1,6 +1,6 @@
 ﻿using System;
-using Plus.HabboHotel.Users;
 using Plus.HabboHotel.Rooms.AI;
+using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
 {
@@ -29,7 +29,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
                 packet.WriteString(Pet.Name);
                 packet.WriteInteger(Pet.Level);
                 packet.WriteInteger(Pet.MaxLevel);
-                packet.WriteInteger(Pet.experience);
+                packet.WriteInteger(Pet.Experience);
                 packet.WriteInteger(Pet.ExperienceGoal);
                 packet.WriteInteger(Pet.Energy);
                 packet.WriteInteger(Pet.MaxEnergy);

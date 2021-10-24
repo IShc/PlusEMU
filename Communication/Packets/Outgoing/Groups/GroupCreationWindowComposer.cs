@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Groups

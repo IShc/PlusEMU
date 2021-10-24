@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Plus.HabboHotel.Users.Inventory.Bots;
 using Plus.Communication.Packets.Outgoing.Inventory.Bots;
-
 using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -16,7 +15,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description => "Kick all of the bots from the room.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (!room.CheckRights(session, true))
             {

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Users;
+using System.Linq;
 using Plus.HabboHotel.Groups;
+using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Rooms.AI;
+using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {

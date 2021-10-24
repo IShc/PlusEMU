@@ -1,6 +1,5 @@
 ﻿using Plus.Database.Interfaces;
-
-
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -12,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description => "Allows you to disable the ability to be mimiced or to enable the ability to be mimiced.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             session.GetHabbo().AllowMimic = !session.GetHabbo().AllowMimic;
             session.SendWhisper("You're " + (session.GetHabbo().AllowMimic == true ? "now" : "no longer") + " able to be mimiced.");

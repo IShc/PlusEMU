@@ -1,10 +1,8 @@
 ﻿using System;
 using Plus.Database.Interfaces;
-using Plus.HabboHotel.Users;
 using Plus.HabboHotel.GameClients;
-
-
 using Plus.HabboHotel.Moderation;
+using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {

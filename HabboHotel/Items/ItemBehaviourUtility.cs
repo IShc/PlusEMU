@@ -1,9 +1,8 @@
 ﻿using System;
-using Plus.HabboHotel.Groups;
-using Plus.HabboHotel.Items.Data.Toner;
-
 using Plus.Communication.Packets.Outgoing;
 using Plus.HabboHotel.Cache.Type;
+using Plus.HabboHotel.Groups;
+using Plus.HabboHotel.Items.Data.Toner;
 
 namespace Plus.HabboHotel.Items
 {
@@ -59,8 +58,8 @@ namespace Plus.HabboHotel.Items
                 case InteractionType.GUILD_ITEM:
                 case InteractionType.GUILD_GATE:
                 case InteractionType.GUILD_FORUM:
-                    Group Group = null;
-                    if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(item.GroupId, out Group))
+                    Group group = null;
+                    if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(item.GroupId, out group))
                     {
                         packet.WriteInteger(1);
                         packet.WriteInteger(0);
@@ -72,10 +71,10 @@ namespace Plus.HabboHotel.Items
                         packet.WriteInteger(2);
                         packet.WriteInteger(5);
                         packet.WriteString(item.ExtraData);
-                        packet.WriteString(Group.Id.ToString());
-                        packet.WriteString(Group.Badge);
-                        packet.WriteString(PlusEnvironment.GetGame().GetGroupManager().GetColourCode(Group.Colour1, true));
-                        packet.WriteString(PlusEnvironment.GetGame().GetGroupManager().GetColourCode(Group.Colour2, false));
+                        packet.WriteString(group.Id.ToString());
+                        packet.WriteString(group.Badge);
+                        packet.WriteString(PlusEnvironment.GetGame().GetGroupManager().GetColourCode(group.Colour1, true));
+                        packet.WriteString(PlusEnvironment.GetGame().GetGroupManager().GetColourCode(group.Colour2, false));
                     }
                     break;
 
@@ -99,8 +98,8 @@ namespace Plus.HabboHotel.Items
 
                 case InteractionType.GIFT:
                     {
-                        string[] ExtraData = item.ExtraData.Split(Convert.ToChar(5));
-                        if (ExtraData.Length != 7)
+                        string[] extraData = item.ExtraData.Split(Convert.ToChar(5));
+                        if (extraData.Length != 7)
                         {
                             packet.WriteInteger(0);
                             packet.WriteInteger(0);
@@ -108,10 +107,10 @@ namespace Plus.HabboHotel.Items
                         }
                         else
                         {
-                            int Style = int.Parse(ExtraData[6]) * 1000 + int.Parse(ExtraData[6]);
+                            int style = int.Parse(extraData[6]) * 1000 + int.Parse(extraData[6]);
 
-                            UserCache Purchaser = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(Convert.ToInt32(ExtraData[2]));
-                            if (Purchaser == null)
+                            UserCache purchaser = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(Convert.ToInt32(extraData[2]));
+                            if (purchaser == null)
                             {
                                 packet.WriteInteger(0);
                                 packet.WriteInteger(0);
@@ -119,17 +118,17 @@ namespace Plus.HabboHotel.Items
                             }
                             else
                             {
-                                packet.WriteInteger(Style);
+                                packet.WriteInteger(style);
                                 packet.WriteInteger(1);
                                 packet.WriteInteger(6);
                                 packet.WriteString("EXTRA_PARAM");
                                 packet.WriteString("");
                                 packet.WriteString("MESSAGE");
-                                packet.WriteString(ExtraData[1]);
+                                packet.WriteString(extraData[1]);
                                 packet.WriteString("PURCHASER_NAME");
-                                packet.WriteString(Purchaser.Username);
+                                packet.WriteString(purchaser.Username);
                                 packet.WriteString("PURCHASER_FIGURE");
-                                packet.WriteString(Purchaser.Look);
+                                packet.WriteString(purchaser.Look);
                                 packet.WriteString("PRODUCT_CODE");
                                 packet.WriteString("A1 KUMIANKKA");
                                 packet.WriteString("state");
@@ -145,13 +144,13 @@ namespace Plus.HabboHotel.Items
                     packet.WriteInteger(3);
                     if (item.ExtraData.Contains(Convert.ToChar(5).ToString()))
                     {
-                        string[] Stuff = item.ExtraData.Split(Convert.ToChar(5));
+                        string[] stuff = item.ExtraData.Split(Convert.ToChar(5));
                         packet.WriteString("GENDER");
-                        packet.WriteString(Stuff[0]);
+                        packet.WriteString(stuff[0]);
                         packet.WriteString("FIGURE");
-                        packet.WriteString(Stuff[1]);
+                        packet.WriteString(stuff[1]);
                         packet.WriteString("OUTFIT_NAME");
-                        packet.WriteString(Stuff[2]);
+                        packet.WriteString(stuff[2]);
                     }
                     else
                     {
@@ -191,13 +190,13 @@ namespace Plus.HabboHotel.Items
                     packet.WriteInteger(2);
                     packet.WriteInteger(4);
 
-                    string[] BadgeData = item.ExtraData.Split(Convert.ToChar(9));
+                    string[] badgeData = item.ExtraData.Split(Convert.ToChar(9));
                     if (item.ExtraData.Contains(Convert.ToChar(9).ToString()))
                     {
                         packet.WriteString("0");//No idea
-                        packet.WriteString(BadgeData[0]);//Badge name
-                        packet.WriteString(BadgeData[1]);//Owner
-                        packet.WriteString(BadgeData[2]);//Date
+                        packet.WriteString(badgeData[0]);//Badge name
+                        packet.WriteString(badgeData[1]);//Owner
+                        packet.WriteString(badgeData[2]);//Date
                     }
                     else
                     {
@@ -221,14 +220,14 @@ namespace Plus.HabboHotel.Items
                 case InteractionType.LOVELOCK:
                     if (item.ExtraData.Contains(Convert.ToChar(5).ToString()))
                     {
-                        var EData = item.ExtraData.Split((char)5);
+                        var eData = item.ExtraData.Split((char)5);
                         int I = 0;
                         packet.WriteInteger(0);
                         packet.WriteInteger(2);
-                        packet.WriteInteger(EData.Length);
-                        while (I < EData.Length)
+                        packet.WriteInteger(eData.Length);
+                        while (I < eData.Length)
                         {
-                            packet.WriteString(EData[I]);
+                            packet.WriteString(eData[I]);
                             I++;
                         }
                     }
@@ -251,16 +250,16 @@ namespace Plus.HabboHotel.Items
             }
         }
 
-        public static void GenerateWallExtradata(Item Item, ServerPacket Message)
+        public static void GenerateWallExtradata(Item item, ServerPacket message)
         {
-            switch (Item.GetBaseItem().InteractionType)
+            switch (item.GetBaseItem().InteractionType)
             {
                 default:
-                    Message.WriteString(Item.ExtraData);
+                    message.WriteString(item.ExtraData);
                     break;
 
                 case InteractionType.POSTIT:
-                    Message.WriteString(Item.ExtraData.Split(' ')[0]);
+                    message.WriteString(item.ExtraData.Split(' ')[0]);
                     break;
             }
         }

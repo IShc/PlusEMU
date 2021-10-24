@@ -1,7 +1,6 @@
 ﻿using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
 
-
 namespace Plus.Communication.Packets.Incoming.Avatar
 {
     class SaveWardrobeOutfitEvent : IPacketEvent

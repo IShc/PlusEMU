@@ -4,23 +4,19 @@ namespace Plus.HabboHotel.Rooms.PathFinding
 {
     sealed class MinHeap<T> where T : IComparable<T>
     {
-        private int count;
         private int capacity;
         private T temp;
         private T mheap;
         private T[] array;
         private T[] tempArray;
 
-        public int Count
-        {
-            get { return count; }
-        }
+        public int Count { get; private set; }
 
         public MinHeap() : this(16) { }
 
         public MinHeap(int capacity)
         {
-            count = 0;
+            Count = 0;
             this.capacity = capacity;
             array = new T[capacity];
         }
@@ -28,7 +24,7 @@ namespace Plus.HabboHotel.Rooms.PathFinding
         public void BuildHead()
         {
             int position;
-            for (position = (count - 1) >> 1; position >= 0; position--)
+            for (position = (Count - 1) >> 1; position >= 0; position--)
             {
                 MinHeapify(position);
             }
@@ -36,13 +32,13 @@ namespace Plus.HabboHotel.Rooms.PathFinding
 
         public void Add(T item)
         {
-            count++;
-            if (count > capacity)
+            Count++;
+            if (Count > capacity)
             {
                 DoubleArray();
             }
-            array[count - 1] = item;
-            int position = count - 1;
+            array[Count - 1] = item;
+            int position = Count - 1;
 
             int parentPosition = ((position - 1) >> 1);
 
@@ -75,13 +71,13 @@ namespace Plus.HabboHotel.Rooms.PathFinding
 
         public T ExtractFirst()
         {
-            if (count == 0)
+            if (Count == 0)
             {
                 throw new InvalidOperationException("Heap is empty");
             }
             temp = array[0];
-            array[0] = array[count - 1];
-            count--;
+            array[0] = array[Count - 1];
+            Count--;
             MinHeapify(0);
             return temp;
         }
@@ -94,7 +90,7 @@ namespace Plus.HabboHotel.Rooms.PathFinding
                 int right = left + 1;
                 int minPosition;
 
-                if (left < count && array[left].CompareTo(array[position]) < 0)
+                if (left < Count && array[left].CompareTo(array[position]) < 0)
                 {
                     minPosition = left;
                 }
@@ -103,7 +99,7 @@ namespace Plus.HabboHotel.Rooms.PathFinding
                     minPosition = position;
                 }
 
-                if (right < count && array[right].CompareTo(array[minPosition]) < 0)
+                if (right < Count && array[right].CompareTo(array[minPosition]) < 0)
                 {
                     minPosition = right;
                 }

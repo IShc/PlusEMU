@@ -1,57 +1,54 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-
 using log4net;
-
 using Plus.Communication.Packets.Incoming;
-using Plus.HabboHotel.GameClients;
-
+using Plus.Communication.Packets.Incoming.Avatar;
 using Plus.Communication.Packets.Incoming.Catalog;
+using Plus.Communication.Packets.Incoming.GameCenter;
+using Plus.Communication.Packets.Incoming.Groups;
 using Plus.Communication.Packets.Incoming.Handshake;
+using Plus.Communication.Packets.Incoming.Help;
+using Plus.Communication.Packets.Incoming.Inventory.Achievements;
+using Plus.Communication.Packets.Incoming.Inventory.AvatarEffects;
+using Plus.Communication.Packets.Incoming.Inventory.Badges;
+using Plus.Communication.Packets.Incoming.Inventory.Bots;
+using Plus.Communication.Packets.Incoming.Inventory.Furni;
+using Plus.Communication.Packets.Incoming.Inventory.Pets;
+using Plus.Communication.Packets.Incoming.Inventory.Purse;
+using Plus.Communication.Packets.Incoming.Inventory.Trading;
+using Plus.Communication.Packets.Incoming.LandingView;
+using Plus.Communication.Packets.Incoming.Marketplace;
+using Plus.Communication.Packets.Incoming.Messenger;
+using Plus.Communication.Packets.Incoming.Misc;
+using Plus.Communication.Packets.Incoming.Moderation;
 using Plus.Communication.Packets.Incoming.Navigator;
 using Plus.Communication.Packets.Incoming.Quests;
+using Plus.Communication.Packets.Incoming.Rooms.Action;
+using Plus.Communication.Packets.Incoming.Rooms.AI.Bots;
+using Plus.Communication.Packets.Incoming.Rooms.AI.Pets;
+using Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse;
 using Plus.Communication.Packets.Incoming.Rooms.Avatar;
 using Plus.Communication.Packets.Incoming.Rooms.Chat;
 using Plus.Communication.Packets.Incoming.Rooms.Connection;
 using Plus.Communication.Packets.Incoming.Rooms.Engine;
-using Plus.Communication.Packets.Incoming.Rooms.Action;
-using Plus.Communication.Packets.Incoming.Users;
-using Plus.Communication.Packets.Incoming.Inventory.AvatarEffects;
-using Plus.Communication.Packets.Incoming.Inventory.Purse;
-using Plus.Communication.Packets.Incoming.Sound;
-using Plus.Communication.Packets.Incoming.Misc;
-using Plus.Communication.Packets.Incoming.Inventory.Badges;
-using Plus.Communication.Packets.Incoming.Avatar;
-using Plus.Communication.Packets.Incoming.Inventory.Achievements;
-using Plus.Communication.Packets.Incoming.Inventory.Bots;
-using Plus.Communication.Packets.Incoming.Inventory.Pets;
-using Plus.Communication.Packets.Incoming.LandingView;
-using Plus.Communication.Packets.Incoming.Messenger;
-using Plus.Communication.Packets.Incoming.Groups;
-
-using Plus.Communication.Packets.Incoming.Rooms.Settings;
-using Plus.Communication.Packets.Incoming.Rooms.AI.Pets;
-using Plus.Communication.Packets.Incoming.Rooms.AI.Bots;
-using Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse;
-using Plus.Communication.Packets.Incoming.Rooms.Furni;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.RentableSpaces;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions;
-using Plus.Communication.Packets.Incoming.Help;
 using Plus.Communication.Packets.Incoming.Rooms.FloorPlan;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.Wired;
-using Plus.Communication.Packets.Incoming.Moderation;
-using Plus.Communication.Packets.Incoming.Inventory.Furni;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight;
-using Plus.Communication.Packets.Incoming.Inventory.Trading;
-using Plus.Communication.Packets.Incoming.GameCenter;
-using Plus.Communication.Packets.Incoming.Marketplace;
+using Plus.Communication.Packets.Incoming.Rooms.Furni;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.LoveLocks;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.RentableSpaces;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.Wired;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions;
+using Plus.Communication.Packets.Incoming.Rooms.Settings;
+using Plus.Communication.Packets.Incoming.Sound;
 using Plus.Communication.Packets.Incoming.Talents;
+using Plus.Communication.Packets.Incoming.Users;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets
 {
@@ -136,7 +133,7 @@ namespace Plus.Communication.Packets
             
             if (!_incomingPackets.TryGetValue(packet.Id, out IPacketEvent pak))
             {
-                if (System.Diagnostics.Debugger.IsAttached)
+                if (Debugger.IsAttached)
                     Log.Debug("Unhandled Packet: " + packet.Id);
                 return;
             }

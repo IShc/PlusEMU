@@ -1,4 +1,5 @@
-﻿using Plus.HabboHotel.Rooms.Games.Teams;
+﻿using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms.Games.Teams;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
@@ -10,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 
         public string Description => "Gives you the ability to set an effect on your user!";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (@params.Length == 1)
             {

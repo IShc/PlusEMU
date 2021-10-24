@@ -1,63 +1,63 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.GameClients;
+﻿using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorDice : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
-            if (Item.ExtraData == "-1")
+            if (item.ExtraData == "-1")
             {
-                Item.ExtraData = "0";
-                Item.UpdateNeeded = true;
+                item.ExtraData = "0";
+                item.UpdateNeeded = true;
             }
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
-            if (Item.ExtraData == "-1")
+            if (item.ExtraData == "-1")
             {
-                Item.ExtraData = "0";
+                item.ExtraData = "0";
             }
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            RoomUser User = null;
-            if (Session != null)
-                User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (User == null)
+            RoomUser user = null;
+            if (session != null)
+                user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (user == null)
                 return;
 
-            if (Gamemap.TilesTouching(Item.GetX, Item.GetY, User.X, User.Y))
+            if (Gamemap.TilesTouching(item.GetX, item.GetY, user.X, user.Y))
             {
-                if (Item.ExtraData != "-1")
+                if (item.ExtraData != "-1")
                 {
-                    if (Request == -1)
+                    if (request == -1)
                     {
-                        Item.ExtraData = "0";
-                        Item.UpdateState();
+                        item.ExtraData = "0";
+                        item.UpdateState();
                     }
                     else
                     {
-                        Item.ExtraData = "-1";
-                        Item.UpdateState(false, true);
-                        Item.RequestUpdate(3, true);
+                        item.ExtraData = "-1";
+                        item.UpdateState(false, true);
+                        item.RequestUpdate(3, true);
                     }
                 }
             }
             else
             {
-                User.MoveTo(Item.SquareInFront);
+                user.MoveTo(item.SquareInFront);
             }
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
-            Item.ExtraData = "-1";
-            Item.UpdateState(false, true);
-            Item.RequestUpdate(4, true);
+            item.ExtraData = "-1";
+            item.UpdateState(false, true);
+            item.RequestUpdate(4, true);
         }
     }
 }

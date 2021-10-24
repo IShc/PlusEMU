@@ -2,15 +2,9 @@
 {
     class ReloadServerSettingsCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to reload the server settings."; }
-        }
+        public string Description => "This command is used to reload the server settings.";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
         public bool TryExecute(string[] parameters)
         {

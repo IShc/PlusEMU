@@ -2,7 +2,6 @@
 using System.Data;
 using Plus.Database.Interfaces;
 
-
 namespace Plus.Communication.Packets.Outgoing.Marketplace
 {
     class MarketPlaceOwnOffersComposer : MessageComposer

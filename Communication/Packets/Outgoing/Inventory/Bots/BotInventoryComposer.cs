@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Bots

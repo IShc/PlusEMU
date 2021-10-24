@@ -1,4 +1,6 @@
-﻿namespace Plus.HabboHotel.Rooms.Chat.Commands.User
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class DisableDiagonalCommand : IChatCommand
     {
@@ -8,7 +10,7 @@
 
         public string Description => "Want to disable diagonal walking in your room? Type this command!";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             if (!room.CheckRights(session, true))
             {

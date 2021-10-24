@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-
-using Plus.HabboHotel.Groups;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.Groups;
+using Plus.Utilities;
 
 namespace Plus.HabboHotel.Rooms
 {
@@ -27,7 +27,7 @@ namespace Plus.HabboHotel.Rooms
         public int AllowPets { get; set; }
         public int AllowPetsEating { get; set; }
         public int RoomBlockingEnabled { get; set; }
-        public int Hidewall { get; set; }
+        public int HideWall { get; set; }
         public int WallThickness { get; set; }
         public int FloorThickness { get; set; }
         public string Wallpaper { get; set; }
@@ -54,19 +54,12 @@ namespace Plus.HabboHotel.Rooms
         public List<string> Tags;
 
         private Group _group;
-        private RoomPromotion _promotion;
-
-        private RoomModel _model;
 
 
-        public RoomModel Model
-        {
-            get { return _model; }
-            set { _model = value; }
-        }
+        public RoomModel Model { get; set; }
 
         public RoomData(int id, string caption, string modelName, string ownerName, int ownerId, string password, int score, string type, string access, int usersNow, int usersMax, int category, string description,
-            string tags, string floor, string landscape, int allowPets, int allowPetsEating, int roomBlockingEnabled, int hidewall, int wallThickness, int floorThickness, string wallpaper, int muteSettings,
+            string tags, string floor, string landscape, int allowPets, int allowPetsEating, int roomBlockingEnabled, int hideWall, int wallThickness, int floorThickness, string wallpaper, int muteSettings,
             int banSettings, int kickSettings, int chatMode, int chatSize, int chatSpeed, int extraFlood, int chatDistance, int tradeSettings, bool pushEnabled, bool pullEnabled, bool superPushEnabled,
             bool superPullEnabled, bool enablesEnabled, bool respectedNotificationsEnabled, bool petMorphsAllowed, int groupId, int salePrice, bool layEnabled, RoomModel model)
         {
@@ -85,9 +78,9 @@ namespace Plus.HabboHotel.Rooms
             Description = description;
 
             Tags = new List<string>();
-            foreach (string Tag in tags.ToString().Split(','))
+            foreach (string tag in tags.Split(','))
             {
-                Tags.Add(Tag);
+                Tags.Add(tag);
             }
 
             Floor = floor;
@@ -95,7 +88,7 @@ namespace Plus.HabboHotel.Rooms
             AllowPets = allowPets;
             AllowPetsEating = allowPetsEating;
             RoomBlockingEnabled = roomBlockingEnabled;
-            Hidewall = hidewall;
+            HideWall = hideWall;
             WallThickness = wallThickness;
             FloorThickness = floorThickness;
             Wallpaper = wallpaper;
@@ -124,19 +117,15 @@ namespace Plus.HabboHotel.Rooms
 
             LoadPromotions();
 
-            _model = model;
+            Model = model;
         }
 
-        public RoomPromotion Promotion
-        {
-            get { return _promotion; }
-            set { _promotion = value; }
-        }
+        public RoomPromotion Promotion { get; set; }
 
         public Group Group
         {
-            get { return _group; }
-            set { _group = value; }
+            get => _group;
+            set => _group = value;
         }
 
         public RoomData(RoomData data)
@@ -160,7 +149,7 @@ namespace Plus.HabboHotel.Rooms
             AllowPets = data.AllowPets;
             AllowPetsEating = data.AllowPetsEating;
             RoomBlockingEnabled = data.RoomBlockingEnabled;
-            Hidewall = data.Hidewall;
+            HideWall = data.HideWall;
             WallThickness = data.WallThickness;
             FloorThickness = data.FloorThickness;
             Wallpaper = data.Wallpaper;
@@ -190,24 +179,20 @@ namespace Plus.HabboHotel.Rooms
 
         public void LoadPromotions()
         {
-            DataRow GetPromotion = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `room_promotions` WHERE `room_id` = " + Id + " LIMIT 1;");
-                GetPromotion = dbClient.GetRow();
+                DataRow getPromotion = dbClient.GetRow();
 
-                if (GetPromotion != null)
+                if (getPromotion != null)
                 {
-                    if (Convert.ToDouble(GetPromotion["timestamp_expire"]) > Utilities.UnixTimestamp.GetNow())
-                        _promotion = new RoomPromotion(Convert.ToString(GetPromotion["title"]), Convert.ToString(GetPromotion["description"]), Convert.ToDouble(GetPromotion["timestamp_start"]), Convert.ToDouble(GetPromotion["timestamp_expire"]), Convert.ToInt32(GetPromotion["category_id"]));
+                    if (Convert.ToDouble(getPromotion["timestamp_expire"]) > UnixTimestamp.GetNow())
+                        Promotion = new RoomPromotion(Convert.ToString(getPromotion["title"]), Convert.ToString(getPromotion["description"]), Convert.ToDouble(getPromotion["timestamp_start"]), Convert.ToDouble(getPromotion["timestamp_expire"]), Convert.ToInt32(getPromotion["category_id"]));
                 }
             }
         }
 
-        public bool HasActivePromotion
-        {
-            get { return Promotion != null; }
-        }
+        public bool HasActivePromotion => Promotion != null;
 
         public void EndPromotion()
         {

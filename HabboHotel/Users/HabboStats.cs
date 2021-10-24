@@ -17,7 +17,7 @@
         public string RespectsTimestamp { get; set; }
         public int ForumPosts { get; set; }
 
-        public HabboStats(int roomVisits, double onlineTime, int respect, int respectGiven, int giftsGiven, int giftsReceived, int dailyRespectPoints, int dailyPetRespectPoints, int achievementPoints, int questID, int questProgress, int groupID, string RespectsTimestamp, int ForumPosts)
+        public HabboStats(int roomVisits, double onlineTime, int respect, int respectGiven, int giftsGiven, int giftsReceived, int dailyRespectPoints, int dailyPetRespectPoints, int achievementPoints, int questId, int questProgress, int groupId, string respectsTimestamp, int forumPosts)
         {
             RoomVisits = roomVisits;
             OnlineTime = onlineTime;
@@ -28,11 +28,11 @@
             DailyRespectPoints = dailyRespectPoints;
             DailyPetRespectPoints = dailyPetRespectPoints;
             AchievementPoints = achievementPoints;
-            QuestId = questID;
+            QuestId = questId;
             QuestProgress = questProgress;
-            FavouriteGroupId = groupID;
-            this.RespectsTimestamp = RespectsTimestamp;
-            this.ForumPosts = ForumPosts;
+            FavouriteGroupId = groupId;
+            RespectsTimestamp = respectsTimestamp;
+            ForumPosts = forumPosts;
         }
     }
 }

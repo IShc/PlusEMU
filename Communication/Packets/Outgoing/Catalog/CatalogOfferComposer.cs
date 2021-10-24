@@ -1,6 +1,6 @@
-﻿using Plus.HabboHotel.Items;
-using Plus.HabboHotel.Catalog;
+﻿using Plus.HabboHotel.Catalog;
 using Plus.HabboHotel.Catalog.Utilities;
+using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
 {
@@ -49,7 +49,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                 packet.WriteInteger(Item.Data.SpriteId);
                 if (Item.Data.InteractionType == InteractionType.WALLPAPER || Item.Data.InteractionType == InteractionType.FLOOR || Item.Data.InteractionType == InteractionType.LANDSCAPE)
                     packet.WriteString(Item.Name.Split('_')[2]);
-                else if (Item.PageID == 9)//Bots
+                else if (Item.PageId == 9)//Bots
                 {
                     CatalogBot cataBot = null;
                     if (!PlusEnvironment.GetGame().GetCatalog().TryGetBot(Item.ItemId, out cataBot))

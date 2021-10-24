@@ -2,12 +2,13 @@
 using System.Data;
 using Plus.Communication.Packets.Outgoing.Marketplace;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
     class GetMarketplaceItemStatsEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             int itemId = packet.PopInt();
             int spriteId = packet.PopInt();

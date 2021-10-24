@@ -2,10 +2,10 @@
 {
     public class FeaturedRoom
     {
-        public int RoomId { get; private set; }
-        public string Caption { get; private set; }
-        public string Description { get; private set; }
-        public string Image { get; private set; }
+        public int RoomId { get; }
+        public string Caption { get; }
+        public string Description { get; }
+        public string Image { get; }
 
         public FeaturedRoom(int roomId, string caption, string description, string images)
         {

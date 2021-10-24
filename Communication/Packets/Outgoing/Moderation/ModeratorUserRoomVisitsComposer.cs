@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-
-using Plus.Utilities;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {

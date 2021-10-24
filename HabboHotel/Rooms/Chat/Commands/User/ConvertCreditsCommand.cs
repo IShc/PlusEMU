@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Data;
-
-using Plus.HabboHotel.Items;
 using Plus.Communication.Packets.Outgoing.Inventory.Purse;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
@@ -15,7 +15,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
         public string Description => "Convert your exchangeable furniture into actual credits.";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             int totalValue = 0;
 

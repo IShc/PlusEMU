@@ -1,4 +1,5 @@
 ﻿using System;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
@@ -10,7 +11,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public string Description => "Allows you to carry a hand item";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] @params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
             int itemId = 0;
             if (!int.TryParse(Convert.ToString(@params[1]), out itemId))

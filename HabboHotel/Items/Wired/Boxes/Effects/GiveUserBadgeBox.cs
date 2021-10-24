@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
-
 using Plus.Communication.Packets.Incoming;
+using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
-using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -14,7 +13,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public Item Item { get; set; }
 
-        public WiredBoxType Type { get { return WiredBoxType.EffectGiveUserBadge; } }
+        public WiredBoxType Type => WiredBoxType.EffectGiveUserBadge;
 
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
 
@@ -24,47 +23,47 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public string ItemsData { get; set; }
 
-        public GiveUserBadgeBox(Room Instance, Item Item)
+        public GiveUserBadgeBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            string Badge = Packet.PopString();
+            int unknown = packet.PopInt();
+            string badge = packet.PopString();
 
-            StringData = Badge;
+            StringData = badge;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params == null || Params.Length == 0)
+            if (@params == null || @params.Length == 0)
                 return false;
 
-            Habbo Owner = PlusEnvironment.GetHabboById(Item.UserID);
-            if (Owner == null || !Owner.GetPermissions().HasRight("room_item_wired_rewards"))
+            Habbo owner = PlusEnvironment.GetHabboById(Item.UserId);
+            if (owner == null || !owner.GetPermissions().HasRight("room_item_wired_rewards"))
                 return false;
 
-            Habbo Player = (Habbo)Params[0];
-            if (Player == null || Player.GetClient() == null)
+            Habbo player = (Habbo)@params[0];
+            if (player == null || player.GetClient() == null)
                 return false;
 
-            RoomUser User = Player.CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(Player.Username);
-            if (User == null)
+            RoomUser user = player.CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(player.Username);
+            if (user == null)
                 return false;
 
             if (String.IsNullOrEmpty(StringData))
                 return false;
 
-            if (Player.GetBadgeComponent().HasBadge(StringData))
-                Player.GetClient().SendPacket(new WhisperComposer(User.VirtualId, "Oops, it appears you have already recieved this badge!", 0, User.LastBubble));
+            if (player.GetBadgeComponent().HasBadge(StringData))
+                player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, "Oops, it appears you have already recieved this badge!", 0, user.LastBubble));
             else
             {
-                Player.GetBadgeComponent().GiveBadge(StringData, true, Player.GetClient());
-                Player.GetClient().SendNotification("You have recieved a badge!");
+                player.GetBadgeComponent().GiveBadge(StringData, true, player.GetClient());
+                player.GetClient().SendNotification("You have recieved a badge!");
             }
 
             return true;

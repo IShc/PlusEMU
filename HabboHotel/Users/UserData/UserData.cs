@@ -9,30 +9,30 @@ namespace Plus.HabboHotel.Users.UserData
 {
     public class UserData
     {
-        public int UserId { get; private set; }
-        public Habbo user;
+        public int UserId { get; }
+        public Habbo User;
 
         public Dictionary<int, Relationship> Relations;
-        public ConcurrentDictionary<string, UserAchievement> achievements;
-        public List<Badge> badges;
-        public List<int> favouritedRooms;
-        public Dictionary<int, MessengerRequest> requests;
-        public Dictionary<int, MessengerBuddy> friends;
-        public Dictionary<int, int> quests;
+        public ConcurrentDictionary<string, UserAchievement> Achievements;
+        public List<Badge> Badges;
+        public List<int> FavoritedRooms;
+        public Dictionary<int, MessengerRequest> Requests;
+        public Dictionary<int, MessengerBuddy> Friends;
+        public Dictionary<int, int> Quests;
 
-        public UserData(int userID, ConcurrentDictionary<string, UserAchievement> achievements, List<int> favouritedRooms,
+        public UserData(int userId, ConcurrentDictionary<string, UserAchievement> achievements, List<int> favoritedRooms,
             List<Badge> badges, Dictionary<int, MessengerBuddy> friends, Dictionary<int, MessengerRequest> requests, Dictionary<int, int> quests, Habbo user, 
-            Dictionary<int, Relationship> Relations)
+            Dictionary<int, Relationship> relations)
         {
-            UserId = userID;
-            this.achievements = achievements;
-            this.favouritedRooms = favouritedRooms;
-            this.badges = badges;
-            this.friends = friends;
-            this.requests = requests;
-            this.quests = quests;
-            this.user = user;
-            this.Relations = Relations;
+            UserId = userId;
+            Achievements = achievements;
+            FavoritedRooms = favoritedRooms;
+            Badges = badges;
+            Friends = friends;
+            Requests = requests;
+            Quests = quests;
+            User = user;
+            Relations = relations;
         }
     }
 }

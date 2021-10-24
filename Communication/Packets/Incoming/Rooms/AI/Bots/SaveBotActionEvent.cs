@@ -1,19 +1,18 @@
 ﻿using System;
-using Plus.HabboHotel.Rooms;
+using System.Data;
 using Plus.Communication.Packets.Outgoing.Rooms.Avatar;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-
-using System.Data;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Rooms.AI;
 using Plus.HabboHotel.Rooms.AI.Speech;
-
-using Plus.Database.Interfaces;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
 {
     class SaveBotActionEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             if (!session.GetHabbo().InRoom)
                 return;
