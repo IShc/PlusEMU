@@ -1,73 +1,73 @@
-﻿using Plus.Communication.Packets.Outgoing.Rooms.Furni.LoveLocks;
+﻿using System;
+using System.Drawing;
+using Plus.Communication.Packets.Outgoing.Rooms.Furni.LoveLocks;
 using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Rooms;
-using System;
-using System.Drawing;
 
 namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorLoveLock : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            RoomUser User = null;
+            RoomUser user = null;
 
-            if (Session != null)
-                User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
+            if (session != null)
+                user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
 
-            if (User == null)
+            if (user == null)
                 return;
 
-            if (Gamemap.TilesTouching(Item.GetX, Item.GetY, User.X, User.Y))
+            if (Gamemap.TilesTouching(item.GetX, item.GetY, user.X, user.Y))
             {
-                if (Item.ExtraData == null || Item.ExtraData.Length <= 1 || !Item.ExtraData.Contains(Convert.ToChar(5).ToString()))
+                if (item.ExtraData == null || item.ExtraData.Length <= 1 || !item.ExtraData.Contains(Convert.ToChar(5).ToString()))
                 {
                     Point pointOne;
                     Point pointTwo;
 
-                    switch (Item.Rotation)
+                    switch (item.Rotation)
                     {
                         case 2:
-                            pointOne = new Point(Item.GetX, Item.GetY + 1);
-                            pointTwo = new Point(Item.GetX, Item.GetY - 1);
+                            pointOne = new Point(item.GetX, item.GetY + 1);
+                            pointTwo = new Point(item.GetX, item.GetY - 1);
                             break;
 
                         case 4:
-                            pointOne = new Point(Item.GetX - 1, Item.GetY);
-                            pointTwo = new Point(Item.GetX + 1, Item.GetY);
+                            pointOne = new Point(item.GetX - 1, item.GetY);
+                            pointTwo = new Point(item.GetX + 1, item.GetY);
                             break;
 
                         default:
                             return;
                     }
 
-                    RoomUser UserOne = Item.GetRoom().GetRoomUserManager().GetUserForSquare(pointOne.X, pointOne.Y);
-                    RoomUser UserTwo = Item.GetRoom().GetRoomUserManager().GetUserForSquare(pointTwo.X, pointTwo.Y);
+                    RoomUser userOne = item.GetRoom().GetRoomUserManager().GetUserForSquare(pointOne.X, pointOne.Y);
+                    RoomUser userTwo = item.GetRoom().GetRoomUserManager().GetUserForSquare(pointTwo.X, pointTwo.Y);
 
-                    if(UserOne == null || UserTwo == null)
-                        Session.SendNotification("We couldn't find a valid user to lock this love lock with.");
-                    else if(UserOne.GetClient() == null || UserTwo.GetClient() == null)
-                        Session.SendNotification("We couldn't find a valid user to lock this love lock with.");
-                    else if(UserOne.HabboId != Item.UserID && UserTwo.HabboId != Item.UserID)
-                        Session.SendNotification("You can only use this item with the item owner.");
+                    if(userOne == null || userTwo == null)
+                        session.SendNotification("We couldn't find a valid user to lock this love lock with.");
+                    else if(userOne.GetClient() == null || userTwo.GetClient() == null)
+                        session.SendNotification("We couldn't find a valid user to lock this love lock with.");
+                    else if(userOne.HabboId != item.UserId && userTwo.HabboId != item.UserId)
+                        session.SendNotification("You can only use this item with the item owner.");
                     else
                     {
-                        UserOne.CanWalk = false;
-                        UserTwo.CanWalk = false;
+                        userOne.CanWalk = false;
+                        userTwo.CanWalk = false;
 
-                        Item.InteractingUser = UserOne.GetClient().GetHabbo().Id;
-                        Item.InteractingUser2 = UserTwo.GetClient().GetHabbo().Id;
+                        item.InteractingUser = userOne.GetClient().GetHabbo().Id;
+                        item.InteractingUser2 = userTwo.GetClient().GetHabbo().Id;
 
-                        UserOne.GetClient().SendPacket(new LoveLockDialogueMessageComposer(Item.Id));
-                        UserTwo.GetClient().SendPacket(new LoveLockDialogueMessageComposer(Item.Id));
+                        userOne.GetClient().SendPacket(new LoveLockDialogueMessageComposer(item.Id));
+                        userTwo.GetClient().SendPacket(new LoveLockDialogueMessageComposer(item.Id));
                     }
 
 
@@ -77,11 +77,11 @@ namespace Plus.HabboHotel.Items.Interactor
             }
             else
             {
-                User.MoveTo(Item.SquareInFront);
+                user.MoveTo(item.SquareInFront);
             }
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
         }
     }

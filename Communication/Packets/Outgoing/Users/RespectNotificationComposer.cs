@@ -7,8 +7,8 @@
         public RespectNotificationComposer(int userId, int respect)
             : base(ServerPacketHeader.RespectNotificationMessageComposer)
         {
-            this.UserId = userId;
-            this.Respect = respect;
+            UserId = userId;
+            Respect = respect;
         }
 
         public override void Compose(ServerPacket packet)

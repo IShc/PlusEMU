@@ -1,23 +1,21 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-
-
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.GameClients;
-
-
-namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
+﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Avatar
 {
-    class AvatarAspectUpdateMessageComposer : ServerPacket
+    class AvatarAspectUpdateMessageComposer : MessageComposer
     {
-        public AvatarAspectUpdateMessageComposer(string Figure, string Gender)
+        public string Figure { get; }
+        public string Gender { get; }
+        
+        public AvatarAspectUpdateMessageComposer(string figure, string gender)
             : base(ServerPacketHeader.AvatarAspectUpdateMessageComposer)
         {
-            base.WriteString(Figure);
-            base.WriteString(Gender);
+            Figure = figure;
+            Gender = gender;
+        }
 
-
+        public override void Compose(ServerPacket packet)
+        {
+            packet.WriteString(Figure);
+            packet.WriteString(Gender);
         }
     }
 }

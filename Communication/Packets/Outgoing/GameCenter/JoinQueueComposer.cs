@@ -4,10 +4,10 @@
     {
         public int GameId { get; }
 
-        public JoinQueueComposer(int GameId)
+        public JoinQueueComposer(int gameId)
             : base(ServerPacketHeader.JoinQueueMessageComposer)
         {
-            this.GameId = GameId;
+            GameId = gameId;
         }
 
         public override void Compose(ServerPacket packet)

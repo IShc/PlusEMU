@@ -1,14 +1,13 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-
-using Plus.Core;
-using Plus.HabboHotel.GameClients;
-using System.Collections.Concurrent;
-using Plus.Database.Interfaces;
 using log4net;
+using Plus.Core;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms
 {
@@ -42,7 +41,7 @@ namespace Plus.HabboHotel.Rooms
                     _cycleLastExecution = DateTime.Now;
                     foreach (Room room in _rooms.Values.ToList())
                     {
-                        if (room.isCrashed)
+                        if (room.IsCrashed)
                             continue;
 
                         if (room.ProcessTask == null || room.ProcessTask.IsCompleted)
@@ -56,7 +55,7 @@ namespace Plus.HabboHotel.Rooms
                             room.IsLagging++;
                             if (room.IsLagging >= 30)
                             {
-                                room.isCrashed = true;
+                                room.IsCrashed = true;
                                 UnloadRoom(room.Id);
                             }
                         }
@@ -69,10 +68,7 @@ namespace Plus.HabboHotel.Rooms
             }
         }
 
-        public int Count
-        {
-            get { return _rooms.Count; }
-        }
+        public int Count => _rooms.Count;
 
         public void LoadModels()
         {

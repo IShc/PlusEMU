@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Outgoing.Users
@@ -11,18 +10,18 @@ namespace Plus.Communication.Packets.Outgoing.Users
         public HabboGroupBadgesComposer(Dictionary<int, string> badges)
             : base(ServerPacketHeader.HabboGroupBadgesMessageComposer)
         {
-            this.Badges = badges;
+            Badges = badges;
         }
 
         public HabboGroupBadgesComposer(Group group)
             : base(ServerPacketHeader.HabboGroupBadgesMessageComposer)
         {
-            this.Group = group;
+            Group = group;
         }
 
         public override void Compose(ServerPacket packet)
         {
-            if(this.Badges != null)
+            if(Badges != null)
             {
                 packet.WriteInteger(Badges.Count);
                 foreach (KeyValuePair<int, string> badge in Badges)

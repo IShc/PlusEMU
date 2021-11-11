@@ -5,15 +5,9 @@ namespace Plus.Communication.Rcon.Commands.User
 {
     class ProgressUserAchievementCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to progress a users achievement."; }
-        }
+        public string Description => "This command is used to progress a users achievement.";
 
-        public string Parameters
-        {
-            get { return "%userId% %achievement% %progess%"; }
-        }
+        public string Parameters => "%userId% %achievement% %progess%";
 
         public bool TryExecute(string[] parameters)
         {

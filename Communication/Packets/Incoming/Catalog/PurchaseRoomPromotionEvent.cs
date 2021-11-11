@@ -1,9 +1,9 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.GameClients;
-using Plus.Communication.Packets.Outgoing.Catalog;
+﻿using Plus.Communication.Packets.Outgoing.Catalog;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {
@@ -56,7 +56,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             if (session.GetHabbo().InRoom && session.GetHabbo().CurrentRoomId == roomId)
                 session.GetHabbo().CurrentRoom.SendPacket(new RoomEventComposer(data, data.Promotion));
 
-            session.GetHabbo().GetMessenger().BroadcastAchievement(session.GetHabbo().Id, HabboHotel.Users.Messenger.MessengerEventTypes.EventStarted, name);
+            session.GetHabbo().GetMessenger().BroadcastAchievement(session.GetHabbo().Id, MessengerEventTypes.EventStarted, name);
         }
     }
 }

@@ -6,12 +6,12 @@
         public int SpriteId { get; }
         public int AveragePrice { get; }
 
-        public MarketplaceItemStatsComposer(int ItemId, int SpriteId, int AveragePrice)
+        public MarketplaceItemStatsComposer(int itemId, int spriteId, int averagePrice)
             : base(ServerPacketHeader.MarketplaceItemStatsMessageComposer)
         {
-            this.ItemId = ItemId;
-            this.SpriteId = SpriteId;
-            this.AveragePrice = AveragePrice;
+            ItemId = itemId;
+            SpriteId = spriteId;
+            AveragePrice = averagePrice;
         }
 
         public override void Compose(ServerPacket packet)

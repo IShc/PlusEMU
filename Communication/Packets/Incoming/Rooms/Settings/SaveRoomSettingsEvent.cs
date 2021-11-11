@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Navigator;
+using System.Text;
 using Plus.Communication.Packets.Outgoing.Navigator;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.Communication.Packets.Outgoing.Rooms.Settings;
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
-
+using Plus.HabboHotel.Navigator;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 {
@@ -128,7 +127,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
             room.AllowPets = allowPets;
             room.AllowPetsEating = allowPetsEat;
             room.RoomBlockingEnabled = roomBlockingEnabled;
-            room.Hidewall = hidewall;
+            room.HideWall = hidewall;
 
             room.Name = name;
             room.Access = access;
@@ -183,7 +182,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
                 dbClient.AddParameter("allowPets", allowPets);
                 dbClient.AddParameter("allowPetsEat", allowPetsEat);
                 dbClient.AddParameter("roomBlockingDisabled", roomBlockingEnabled);
-                dbClient.AddParameter("allowHidewall", room.Hidewall);
+                dbClient.AddParameter("allowHidewall", room.HideWall);
                 dbClient.AddParameter("floorThick", room.FloorThickness);
                 dbClient.AddParameter("wallThick", room.WallThickness);
                 dbClient.AddParameter("muteSettings", room.WhoCanMute);
@@ -210,13 +209,13 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
             {
                 session.SendPacket(new RoomSettingsSavedComposer(room.RoomId));
                 session.SendPacket(new RoomInfoUpdatedComposer(room.RoomId));
-                session.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.Hidewall.ToString())));
+                session.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.HideWall.ToString())));
             }
             else
             {
                 room.SendPacket(new RoomSettingsSavedComposer(room.RoomId));
                 room.SendPacket(new RoomInfoUpdatedComposer(room.RoomId));
-                room.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.Hidewall.ToString())));
+                room.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.HideWall.ToString())));
             }
             
             PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(session, "ACH_SelfModDoorModeSeen", 1);

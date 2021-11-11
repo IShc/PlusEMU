@@ -12,11 +12,11 @@ namespace Plus.Communication.Packets.Outgoing.Sound
         public SoundSettingsComposer(IEnumerable<int> volumes, bool chatPreference, bool invitesStatus, bool focusPreference, int friendBarState)
             : base(ServerPacketHeader.SoundSettingsMessageComposer)
         {
-            this.Volumes = volumes;
-            this.ChatPreference = chatPreference;
-            this.InviteStatus = invitesStatus;
-            this.FocusPreference = focusPreference;
-            this.FriendBarState = friendBarState;
+            Volumes = volumes;
+            ChatPreference = chatPreference;
+            InviteStatus = invitesStatus;
+            FocusPreference = focusPreference;
+            FriendBarState = friendBarState;
         }
 
         public override void Compose(ServerPacket packet)

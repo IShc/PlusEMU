@@ -5,11 +5,11 @@
         public string ItemId { get; }
         public string ExtraData { get; }
 
-        public StickyNoteComposer(string ItemId, string Extradata)
+        public StickyNoteComposer(string itemId, string extradata)
             : base(ServerPacketHeader.StickyNoteMessageComposer)
         {
-            this.ItemId = ItemId;
-            this.ExtraData = Extradata;
+            ItemId = itemId;
+            ExtraData = extradata;
         }
 
         public override void Compose(ServerPacket packet)

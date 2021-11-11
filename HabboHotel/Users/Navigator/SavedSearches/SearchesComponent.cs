@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Data;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Data;
 using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Users.Navigator.SavedSearches
@@ -20,37 +20,34 @@ namespace Plus.HabboHotel.Users.Navigator.SavedSearches
             if (_savedSearches.Count > 0)
                 _savedSearches.Clear();
 
-            DataTable GetSearches = null;
+            DataTable getSearches = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `id`,`filter`,`search_code` FROM `user_saved_searches` WHERE `user_id` = @UserId");
                 dbClient.AddParameter("UserId", habbo.Id);
-                GetSearches = dbClient.GetTable();
+                getSearches = dbClient.GetTable();
 
-                if (GetSearches != null)
+                if (getSearches != null)
                 {
-                    foreach (DataRow Row in GetSearches.Rows)
+                    foreach (DataRow row in getSearches.Rows)
                     {
-                        _savedSearches.TryAdd(Convert.ToInt32(Row["id"]), new SavedSearch(Convert.ToInt32(Row["id"]), Convert.ToString(Row["filter"]), Convert.ToString(Row["search_code"])));
+                        _savedSearches.TryAdd(Convert.ToInt32(row["id"]), new SavedSearch(Convert.ToInt32(row["id"]), Convert.ToString(row["filter"]), Convert.ToString(row["search_code"])));
                     }
                 }
             }
             return true;
         }
 
-        public ICollection<SavedSearch> Searches
+        public ICollection<SavedSearch> Searches => _savedSearches.Values;
+
+        public bool TryAdd(int id, SavedSearch search)
         {
-            get { return _savedSearches.Values; }
+            return _savedSearches.TryAdd(id, search);
         }
 
-        public bool TryAdd(int Id, SavedSearch Search)
+        public bool TryRemove(int id, out SavedSearch removed)
         {
-            return _savedSearches.TryAdd(Id, Search);
-        }
-
-        public bool TryRemove(int Id, out SavedSearch Removed)
-        {
-            return _savedSearches.TryRemove(Id, out Removed);
+            return _savedSearches.TryRemove(id, out removed);
         }
     }
 }

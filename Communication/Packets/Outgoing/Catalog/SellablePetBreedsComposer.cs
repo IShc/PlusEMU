@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.HabboHotel.Catalog.Pets;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
@@ -11,12 +10,12 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
         public int PetId { get; }
         public ICollection<PetRace> Races { get; }
 
-        public SellablePetBreedsComposer(string PetType, int PetId, ICollection<PetRace> Races)
+        public SellablePetBreedsComposer(string petType, int petId, ICollection<PetRace> races)
             : base(ServerPacketHeader.SellablePetBreedsMessageComposer)
         {
-            this.PetType = PetType;
-            this.PetId = PetId;
-            this.Races = Races;
+            PetType = petType;
+            PetId = petId;
+            Races = races;
         }
 
         public override void Compose(ServerPacket packet)
@@ -24,13 +23,13 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
             packet.WriteString(PetType);
 
             packet.WriteInteger(Races.Count);
-            foreach (PetRace Race in Races.ToList())
+            foreach (PetRace race in Races.ToList())
             {
                 packet.WriteInteger(PetId);
-                packet.WriteInteger(Race.PrimaryColour);
-                packet.WriteInteger(Race.SecondaryColour);
-                packet.WriteBoolean(Race.HasPrimaryColour);
-                packet.WriteBoolean(Race.HasSecondaryColour);
+                packet.WriteInteger(race.PrimaryColour);
+                packet.WriteInteger(race.SecondaryColour);
+                packet.WriteBoolean(race.HasPrimaryColour);
+                packet.WriteBoolean(race.HasSecondaryColour);
             }
         }
     }

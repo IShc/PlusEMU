@@ -6,11 +6,11 @@
         public string Description { get; set; }
         public string Badge { get; set; }
 
-        public PermissionGroup(string Name, string Description, string Badge)
+        public PermissionGroup(string name, string description, string badge)
         {
-            this.Name = Name;
-            this.Description = Description;
-            this.Badge = Badge;
+            Name = name;
+            Description = description;
+            Badge = badge;
         }
     }
 }

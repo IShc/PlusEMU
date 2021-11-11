@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items;
-using Plus.Communication.Packets.Outgoing.Rooms.FloorPlan;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
+using Plus.Communication.Packets.Outgoing.Rooms.FloorPlan;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
 {
@@ -27,7 +26,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
 
             session.SendPacket(new FloorPlanFloorMapComposer(floorItems));
             session.SendPacket(new FloorPlanSendDoorComposer(model.DoorX, model.DoorY, model.DoorOrientation));
-            session.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.Hidewall.ToString())));
+            session.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.HideWall.ToString())));
         }
     }
 }

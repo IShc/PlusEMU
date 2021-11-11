@@ -6,10 +6,10 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
     {
         public UserCache UserCache { get; }
 
-        public NewBuddyRequestComposer(UserCache Habbo)
+        public NewBuddyRequestComposer(UserCache habbo)
             : base(ServerPacketHeader.NewBuddyRequestMessageComposer)
         {
-            this.UserCache = Habbo;
+            UserCache = habbo;
         }
 
         public override void Compose(ServerPacket packet)

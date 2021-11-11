@@ -4,10 +4,10 @@
     {
         public int ErrorCode { get; }
 
-        public FollowFriendFailedComposer(int ErrorCode)
+        public FollowFriendFailedComposer(int errorCode)
             : base(ServerPacketHeader.FollowFriendFailedMessageComposer)
         {
-            this.ErrorCode = ErrorCode;
+            ErrorCode = errorCode;
         }
 
         public override void Compose(ServerPacket packet)

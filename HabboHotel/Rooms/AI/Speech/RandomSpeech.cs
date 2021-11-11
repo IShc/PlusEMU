@@ -2,13 +2,13 @@
 {
     public class RandomSpeech
     {
-        public int BotID;
+        public int BotId;
         public string Message;
 
-        public RandomSpeech(string Message, int BotID)
+        public RandomSpeech(string message, int botId)
         {
-            this.BotID = BotID;
-            this.Message = Message;
+            BotId = botId;
+            Message = message;
         }
     }
 }

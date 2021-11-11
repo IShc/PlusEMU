@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Collections.Generic;
 using Plus.Communication.Rcon.Commands;
 
 namespace Plus.Communication.Rcon

@@ -10,29 +10,29 @@ namespace Plus.HabboHotel.Rooms.AI.Responses
         public List<string> Keywords { get; set; }
         public string ResponseText { get; set; }
         public string ResponseType { get; set; }
-        public List<int> BeverageIds { get; private set; }
+        public List<int> BeverageIds { get; }
 
-        public BotResponse(string BotAi, string Keywords, string ResponseText, string ResponseMode, string ResponseBeverages)
+        public BotResponse(string botAi, string keywords, string responseText, string responseMode, string responseBeverages)
         {
-            AiType = BotUtility.GetAIFromString(BotAi);
+            AiType = BotUtility.GetAIFromString(botAi);
            
-            this.Keywords = new List<string>();
-            foreach (string Keyword in Keywords.Split(','))
+            Keywords = new List<string>();
+            foreach (string keyword in keywords.Split(','))
             {
-                this.Keywords.Add(Keyword.ToLower());
+                Keywords.Add(keyword.ToLower());
             }
 
-            this.ResponseText = ResponseText;
-            ResponseType = ResponseMode;
+            ResponseText = responseText;
+            ResponseType = responseMode;
 
             BeverageIds = new List<int>(); 
-            if (ResponseBeverages.Contains(","))
+            if (responseBeverages.Contains(","))
             {
-                foreach (string VendingId in ResponseBeverages.Split(','))
+                foreach (string vendingId in responseBeverages.Split(','))
                 {
                     try
                     {
-                        BeverageIds.Add(int.Parse(VendingId));
+                        BeverageIds.Add(int.Parse(vendingId));
                     }
                     catch
                     {
@@ -40,15 +40,15 @@ namespace Plus.HabboHotel.Rooms.AI.Responses
                     }
                 }
             }
-            else if (!String.IsNullOrEmpty(ResponseBeverages) && (int.Parse(ResponseBeverages)) > 0)
-                BeverageIds.Add(int.Parse(ResponseBeverages));
+            else if (!String.IsNullOrEmpty(responseBeverages) && (int.Parse(responseBeverages)) > 0)
+                BeverageIds.Add(int.Parse(responseBeverages));
         }
 
-        public bool KeywordMatched(string Message)
+        public bool KeywordMatched(string message)
         { 
-            foreach (string Keyword in Keywords)
+            foreach (string keyword in Keywords)
             {
-                if (Message.ToLower().Contains(Keyword.ToLower()))
+                if (message.ToLower().Contains(keyword.ToLower()))
                     return true;
             }
             return false;

@@ -5,11 +5,11 @@
         public int Status { get; }
         public string Username { get; }
 
-        public IgnoreStatusComposer(int Status, string Username)
+        public IgnoreStatusComposer(int status, string username)
             : base(ServerPacketHeader.IgnoreStatusMessageComposer)
         {
-            this.Status = Status;
-            this.Username = Username;
+            Status = status;
+            Username = username;
         }
 
         public override void Compose(ServerPacket packet)

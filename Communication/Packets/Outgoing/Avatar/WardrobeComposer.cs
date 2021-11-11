@@ -11,7 +11,7 @@ namespace Plus.Communication.Packets.Outgoing.Avatar
         public WardrobeComposer(int userId)
             : base(ServerPacketHeader.WardrobeMessageComposer)
         {
-            this.UserId = userId;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)
@@ -20,18 +20,18 @@ namespace Plus.Communication.Packets.Outgoing.Avatar
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `slot_id`,`look`,`gender` FROM `user_wardrobe` WHERE `user_id` = '" + UserId + "'");
-                DataTable WardrobeData = dbClient.GetTable();
+                DataTable wardrobeData = dbClient.GetTable();
 
-                if (WardrobeData == null)
+                if (wardrobeData == null)
                     packet.WriteInteger(0);
                 else
                 {
-                    packet.WriteInteger(WardrobeData.Rows.Count);
-                    foreach (DataRow Row in WardrobeData.Rows)
+                    packet.WriteInteger(wardrobeData.Rows.Count);
+                    foreach (DataRow row in wardrobeData.Rows)
                     {
-                        packet.WriteInteger(Convert.ToInt32(Row["slot_id"]));
-                        packet.WriteString(Convert.ToString(Row["look"]));
-                        packet.WriteString(Row["gender"].ToString().ToUpper());
+                        packet.WriteInteger(Convert.ToInt32(row["slot_id"]));
+                        packet.WriteString(Convert.ToString(row["look"]));
+                        packet.WriteString(row["gender"].ToString().ToUpper());
                     }
                 }
             }

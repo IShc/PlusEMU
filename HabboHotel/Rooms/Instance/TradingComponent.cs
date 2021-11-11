@@ -1,5 +1,4 @@
 ﻿using System.Collections.Concurrent;
-
 using Plus.HabboHotel.Rooms.Trading;
 
 namespace Plus.HabboHotel.Rooms.Instance
@@ -7,44 +6,44 @@ namespace Plus.HabboHotel.Rooms.Instance
     public class TradingComponent
     {
         private int _currentId;
-        private Room _instance;
+        private readonly Room _instance;
         private readonly ConcurrentDictionary<int, Trade> _activeTrades;
 
-        public TradingComponent(Room Instance)
+        public TradingComponent(Room instance)
         {
             _currentId = 1;
-            _instance = Instance;
+            _instance = instance;
             _activeTrades = new ConcurrentDictionary<int, Trade>();
         }
 
-        public bool StartTrade(RoomUser Player1, RoomUser Player2, out Trade Trade)
+        public bool StartTrade(RoomUser player1, RoomUser player2, out Trade trade)
         {
             _currentId++;
-            Trade = new Trade(_currentId, Player1, Player2, _instance);
-            return _activeTrades.TryAdd(_currentId, Trade);
+            trade = new Trade(_currentId, player1, player2, _instance);
+            return _activeTrades.TryAdd(_currentId, trade);
         }
 
-        public bool TryGetTrade(int TradeId, out Trade Trade)
+        public bool TryGetTrade(int tradeId, out Trade trade)
         {
-            return _activeTrades.TryGetValue(TradeId, out Trade);
+            return _activeTrades.TryGetValue(tradeId, out trade);
         }
 
-        public bool RemoveTrade(int Id)
+        public bool RemoveTrade(int id)
         {
-            Trade Trade = null;
-            return _activeTrades.TryRemove(Id, out Trade);
+            Trade trade = null;
+            return _activeTrades.TryRemove(id, out trade);
         }
 
         public void Cleanup()
         {
-            foreach (Trade Trade in _activeTrades.Values)
+            foreach (Trade trade in _activeTrades.Values)
             {
-                foreach (TradeUser User in Trade.Users)
+                foreach (TradeUser user in trade.Users)
                 {
-                    if (User == null || User.RoomUser == null)
+                    if (user == null || user.RoomUser == null)
                         continue;
 
-                    Trade.EndTrade(User.RoomUser.HabboId);
+                    trade.EndTrade(user.RoomUser.HabboId);
                 }
             }
         }

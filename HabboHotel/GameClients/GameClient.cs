@@ -1,29 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using DotNetty.Transport.Channels;
-using Plus.Core;
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Users;
-using Plus.Communication.Interfaces;
-using Plus.Communication.Packets.Outgoing.Sound;
-using Plus.Communication.Packets.Outgoing.Rooms.Chat;
-using Plus.Communication.Packets.Outgoing.Handshake;
-using Plus.Communication.Packets.Outgoing.Navigator;
-using Plus.Communication.Packets.Outgoing.Moderation;
-using Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects;
-using Plus.Communication.Packets.Outgoing.Inventory.Achievements;
-
-using Plus.Communication.Encryption.Crypto.Prng;
 using Plus.Communication.Packets.Outgoing;
-using Plus.HabboHotel.Users.Messenger.FriendBar;
 using Plus.Communication.Packets.Outgoing.BuildersClub;
-
-using Plus.Database.Interfaces;
-using Plus.HabboHotel.Subscriptions;
-using Plus.HabboHotel.Permissions;
+using Plus.Communication.Packets.Outgoing.Handshake;
+using Plus.Communication.Packets.Outgoing.Inventory.Achievements;
+using Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects;
+using Plus.Communication.Packets.Outgoing.Moderation;
+using Plus.Communication.Packets.Outgoing.Navigator;
 using Plus.Communication.Packets.Outgoing.Notifications;
+using Plus.Communication.Packets.Outgoing.Rooms.Chat;
+using Plus.Communication.Packets.Outgoing.Sound;
+using Plus.Core;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.Permissions;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Subscriptions;
+using Plus.HabboHotel.Users;
+using Plus.HabboHotel.Users.Messenger.FriendBar;
 using Plus.HabboHotel.Users.UserData;
 using Plus.Network.Codec;
-using System.Collections.Generic;
 
 namespace Plus.HabboHotel.GameClients
 {
@@ -32,12 +28,12 @@ namespace Plus.HabboHotel.GameClients
         private Habbo _habbo;
         public string MachineId;
         private bool _disconnected;
-        private IChannelHandlerContext channel;
+        private readonly IChannelHandlerContext _channel;
         public int PingCount { get; set; }
 
         public GameClient(IChannelHandlerContext context)
         {
-            channel = context;
+            _channel = context;
         }
 
         public bool TryAuthenticate(string authTicket)
@@ -65,11 +61,11 @@ namespace Plus.HabboHotel.GameClients
                     }
                 }
 
-                if (userData.user != null)
+                if (userData.User != null)
                 {
-                    if (PlusEnvironment.GetGame().GetModerationManager().IsBanned(userData.user.Username, out _))
+                    if (PlusEnvironment.GetGame().GetModerationManager().IsBanned(userData.User.Username, out _))
                     {
-                        if (PlusEnvironment.GetGame().GetModerationManager().UsernameBanCheck(userData.user.Username))
+                        if (PlusEnvironment.GetGame().GetModerationManager().UsernameBanCheck(userData.User.Username))
                         {
                             Disconnect();
                             return false;
@@ -78,21 +74,21 @@ namespace Plus.HabboHotel.GameClients
                 }
                 #endregion
 
-                if (userData.user == null) //Possible NPE
+                if (userData.User == null) //Possible NPE
                 {
                     return false;
                 }
 
-                PlusEnvironment.GetGame().GetClientManager().RegisterClient(this, userData.UserId, userData.user.Username);
-                _habbo = userData.user;
+                PlusEnvironment.GetGame().GetClientManager().RegisterClient(this, userData.UserId, userData.User.Username);
+                _habbo = userData.User;
                 if (_habbo != null)
                 {
-                    userData.user.Init(this, userData);
+                    userData.User.Init(this, userData);
 
-                    SendPacket(new AuthenticationOKComposer());
+                    SendPacket(new AuthenticationOkComposer());
                     SendPacket(new AvatarEffectsComposer(_habbo.Effects().GetAllEffects));
                     SendPacket(new NavigatorSettingsComposer(_habbo.HomeRoom));
-                    SendPacket(new FavouritesComposer(userData.user.FavoriteRooms));
+                    SendPacket(new FavouritesComposer(userData.User.FavoriteRooms));
                     SendPacket(new FigureSetIdsComposer(_habbo.GetClothing().GetClothingParts));
                     SendPacket(new UserRightsComposer(_habbo.Rank));
                     SendPacket(new AvailabilityStatusComposer());
@@ -101,7 +97,7 @@ namespace Plus.HabboHotel.GameClients
                     SendPacket(new CfhTopicsInitComposer(PlusEnvironment.GetGame().GetModerationManager().UserActionPresets));
 
                     SendPacket(new BadgeDefinitionsComposer(PlusEnvironment.GetGame().GetAchievementManager().Achievements));
-                    SendPacket(new SoundSettingsComposer(_habbo.ClientVolume, _habbo.ChatPreference, _habbo.AllowMessengerInvites, _habbo.FocusPreference, FriendBarStateUtility.GetInt(_habbo.FriendbarState)));
+                    SendPacket(new SoundSettingsComposer(_habbo.ClientVolume, _habbo.ChatPreference, _habbo.AllowMessengerInvites, _habbo.FocusPreference, FriendBarStateUtility.GetInt(_habbo.FriendBarState)));
                     //SendMessage(new TalentTrackLevelComposer());
 
                     if (GetHabbo().GetMessenger() != null)
@@ -130,7 +126,7 @@ namespace Plus.HabboHotel.GameClients
                                 _habbo.GetBadgeComponent().GiveBadge(group.Badge, true, this);
                     }
 
-                    if (PlusEnvironment.GetGame().GetSubscriptionManager().TryGetSubscriptionData(_habbo.VIPRank, out SubscriptionData subData))
+                    if (PlusEnvironment.GetGame().GetSubscriptionManager().TryGetSubscriptionData(_habbo.VipRank, out SubscriptionData subData))
                     {
                         if (!String.IsNullOrEmpty(subData.Badge))
                         {
@@ -145,7 +141,7 @@ namespace Plus.HabboHotel.GameClients
                     _habbo.Look = PlusEnvironment.GetFigureManager().ProcessFigure(_habbo.Look, _habbo.Gender, _habbo.GetClothing().GetClothingParts, true);
                     _habbo.InitProcess();
           
-                    if (userData.user.GetPermissions().HasRight("mod_tickets"))
+                    if (userData.User.GetPermissions().HasRight("mod_tickets"))
                     {
                         SendPacket(new ModeratorInitComposer(
                           PlusEnvironment.GetGame().GetModerationManager().UserMessagePresets,
@@ -186,16 +182,16 @@ namespace Plus.HabboHotel.GameClients
 
         public void SendPacket(MessageComposer message)
         {
-            channel.WriteAndFlushAsync(message);
+            _channel.WriteAndFlushAsync(message);
         }
 
         public async void SendPacketsAsync(List<MessageComposer> messages)
         {
             foreach(MessageComposer message in messages)
             {
-                await channel.WriteAsync(message);
+                await _channel.WriteAsync(message);
             }
-            channel.Flush();
+            _channel.Flush();
         }
 
         public Habbo GetHabbo()
@@ -224,8 +220,8 @@ namespace Plus.HabboHotel.GameClients
 
             if (!_disconnected)
             {
-                if (channel != null)
-                    channel.CloseAsync();
+                if (_channel != null)
+                    _channel.CloseAsync();
                 _disconnected = true;
             }
         }
@@ -238,12 +234,12 @@ namespace Plus.HabboHotel.GameClients
             MachineId = string.Empty;
             _disconnected = true;
             _habbo = null;
-            channel.DisconnectAsync();
+            _channel.DisconnectAsync();
         }
 
         public void EnableEncryption(byte[] sharedKey)
         {
-            channel.Channel.Pipeline.AddFirst("gameCrypto", new EncryptionDecoder(sharedKey));
+            _channel.Channel.Pipeline.AddFirst("gameCrypto", new EncryptionDecoder(sharedKey));
         }
     }
 }

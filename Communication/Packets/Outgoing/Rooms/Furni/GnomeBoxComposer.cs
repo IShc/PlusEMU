@@ -4,10 +4,10 @@
     {
         public int ItemId { get; }
 
-        public GnomeBoxComposer(int ItemId)
+        public GnomeBoxComposer(int itemId)
             : base(ServerPacketHeader.GnomeBoxMessageComposer)
         {
-            this.ItemId = ItemId;
+            ItemId = itemId;
         }
 
         public override void Compose(ServerPacket packet)

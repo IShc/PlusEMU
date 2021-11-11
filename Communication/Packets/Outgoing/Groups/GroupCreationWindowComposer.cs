@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Groups
@@ -12,7 +11,7 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public GroupCreationWindowComposer(ICollection<RoomData> rooms)
             : base(ServerPacketHeader.GroupCreationWindowMessageComposer)
         {
-            this.Rooms = rooms;
+            Rooms = rooms;
         }
 
         public override void Compose(ServerPacket packet)

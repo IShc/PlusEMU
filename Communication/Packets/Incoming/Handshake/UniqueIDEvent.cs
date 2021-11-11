@@ -1,9 +1,9 @@
-﻿using Plus.HabboHotel.GameClients;
-using Plus.Communication.Packets.Outgoing.Handshake;
+﻿using Plus.Communication.Packets.Outgoing.Handshake;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Handshake
 {
-    public class UniqueIdEvent : IPacketEvent
+    public class UniqueIDEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

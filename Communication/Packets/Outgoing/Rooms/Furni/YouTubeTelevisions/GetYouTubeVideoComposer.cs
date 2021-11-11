@@ -5,11 +5,11 @@
         public int ItemId { get; }
         public string YouTubeVideo { get; }
 
-        public GetYouTubeVideoComposer(int ItemId, string YouTubeVideo)
+        public GetYouTubeVideoComposer(int itemId, string youTubeVideo)
             : base(ServerPacketHeader.GetYouTubeVideoMessageComposer)
         {
-            this.ItemId = ItemId;
-            this.YouTubeVideo = YouTubeVideo;
+            ItemId = itemId;
+            YouTubeVideo = youTubeVideo;
         }
 
         public override void Compose(ServerPacket packet)

@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items;
-using Plus.HabboHotel.Rooms.Trading;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Inventory.Trading;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Rooms.Trading;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Trading
 {

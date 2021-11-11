@@ -6,12 +6,12 @@
         public int VirtualId { get; }
         public string Username { get; }
 
-        public UserNameChangeComposer(int RoomId, int VirtualId, string Username)
+        public UserNameChangeComposer(int roomId, int virtualId, string username)
             : base(ServerPacketHeader.UserNameChangeMessageComposer)
         {
-            this.RoomId = RoomId;
-            this.VirtualId = VirtualId;
-            this.Username = Username;
+            RoomId = roomId;
+            VirtualId = virtualId;
+            Username = username;
         }
 
         public override void Compose(ServerPacket packet)

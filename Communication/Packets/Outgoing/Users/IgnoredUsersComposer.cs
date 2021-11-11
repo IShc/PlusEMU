@@ -8,7 +8,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
         public IgnoredUsersComposer(IReadOnlyCollection<string> ignoredUsers)
             : base(ServerPacketHeader.IgnoredUsersMessageComposer)
         {
-            this.IgnoredUsers = ignoredUsers;
+            IgnoredUsers = ignoredUsers;
         }
 
         public override void Compose(ServerPacket packet)

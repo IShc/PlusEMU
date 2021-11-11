@@ -1,27 +1,26 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-using Plus.Database.Interfaces;
-
+using System.Data;
 using log4net;
+using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Items.Televisions
 {
     public class TelevisionManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(TelevisionManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(TelevisionManager));
 
-        public Dictionary<int, TelevisionItem> _televisions;
+        public Dictionary<int, TelevisionItem> Televisions;
 
         public TelevisionManager()
         {
-            _televisions =  new Dictionary<int, TelevisionItem>();
+            Televisions =  new Dictionary<int, TelevisionItem>();
         }
 
         public void Init()
         {
-            if (_televisions.Count > 0)
-                _televisions.Clear();
+            if (Televisions.Count > 0)
+                Televisions.Clear();
 
             DataTable getData = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor()) 
@@ -31,29 +30,23 @@ namespace Plus.HabboHotel.Items.Televisions
 
                 if (getData != null)
                 {
-                    foreach (DataRow Row in getData.Rows)
+                    foreach (DataRow row in getData.Rows)
                     {
-                        _televisions.Add(Convert.ToInt32(Row["id"]), new TelevisionItem(Convert.ToInt32(Row["id"]), Row["youtube_id"].ToString(), Row["title"].ToString(), Row["description"].ToString(), PlusEnvironment.EnumToBool(Row["enabled"].ToString())));
+                        Televisions.Add(Convert.ToInt32(row["id"]), new TelevisionItem(Convert.ToInt32(row["id"]), row["youtube_id"].ToString(), row["title"].ToString(), row["description"].ToString(), PlusEnvironment.EnumToBool(row["enabled"].ToString())));
                     }
                 }
             }
 
 
-            log.Info("Television Items -> LOADED");
+            Log.Info("Television Items -> LOADED");
         }
 
 
-        public ICollection<TelevisionItem> TelevisionList
-        {
-            get
-            {
-                return _televisions.Values;
-            }
-        }
+        public ICollection<TelevisionItem> TelevisionList => Televisions.Values;
 
-        public bool TryGet(int ItemId, out TelevisionItem TelevisionItem)
+        public bool TryGet(int itemId, out TelevisionItem televisionItem)
         {
-            if (_televisions.TryGetValue(ItemId, out TelevisionItem))
+            if (Televisions.TryGetValue(itemId, out televisionItem))
                 return true;
             return false;
         }

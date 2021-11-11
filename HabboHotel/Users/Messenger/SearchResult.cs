@@ -8,13 +8,13 @@
         public string Figure;
         public string LastOnline;
 
-        public SearchResult(int UserId, string Username, string Motto, string Figure, string LastOnline)
+        public SearchResult(int userId, string username, string motto, string figure, string lastOnline)
         {
-            this.UserId = UserId;
-            this.Username = Username;
-            this.Motto = Motto;
-            this.Figure = Figure;
-            this.LastOnline = LastOnline;
+            UserId = userId;
+            Username = username;
+            Motto = motto;
+            Figure = figure;
+            LastOnline = lastOnline;
         }
     }
 }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Mime;
-using System.Text;
+﻿using System.Text;
 using DotNetty.Buffers;
 using DotNetty.Common;
-using Plus.Communication.Interfaces;
 
 namespace Plus.Communication.Packets.Outgoing
 {

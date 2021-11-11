@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-
-using Plus.Communication.Packets.Incoming;
-using Plus.HabboHotel.Rooms;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using Plus.Communication.Packets.Incoming;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -16,10 +14,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public Room Instance { get; set; }
         public Item Item { get; set; }
 
-        public WiredBoxType Type
-        {
-            get { return WiredBoxType.EffectMoveFurniToNearestUser; }
-        }
+        public WiredBoxType Type => WiredBoxType.EffectMoveFurniToNearestUser;
 
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
@@ -27,7 +22,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public int Delay
         {
-            get { return _delay; }
+            get => _delay;
             set
             {
                 _delay = value;
@@ -37,41 +32,41 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public int TickCount { get; set; }
         public string ItemsData { get; set; }
-        private bool Requested;
+        private bool _requested;
         private int _delay = 0;
         private long _next = 0;
 
-        public MoveFurniToUserBox(Room Instance, Item Item)
+        public MoveFurniToUserBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
             TickCount = Delay;
-            Requested = false;
+            _requested = false;
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            string Unknown2 = Packet.PopString();
+            int unknown = packet.PopInt();
+            string unknown2 = packet.PopString();
 
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            int FurniCount = Packet.PopInt();
-            for (int i = 0; i < FurniCount; i++)
+            int furniCount = packet.PopInt();
+            for (int i = 0; i < furniCount; i++)
             {
-                Item SelectedItem = Instance.GetRoomItemHandler().GetItem(Packet.PopInt());
+                Item selectedItem = Instance.GetRoomItemHandler().GetItem(packet.PopInt());
 
-                if (SelectedItem != null && !Instance.GetWired().OtherBoxHasItem(this, SelectedItem.Id))
-                    SetItems.TryAdd(SelectedItem.Id, SelectedItem);
+                if (selectedItem != null && !Instance.GetWired().OtherBoxHasItem(this, selectedItem.Id))
+                    SetItems.TryAdd(selectedItem.Id, selectedItem);
             }
 
-            int Delay = Packet.PopInt();
-            this.Delay = Delay;
+            int delay = packet.PopInt();
+            Delay = delay;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
             if (SetItems.Count == 0)
                 return false;
@@ -80,21 +75,21 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (_next == 0 || _next < PlusEnvironment.Now())
                 _next = PlusEnvironment.Now() + Delay;
 
-            if (!Requested)
+            if (!_requested)
             {
                 TickCount = Delay;
-                Requested = true;
+                _requested = true;
             }
             return true;
         }
 
         public bool OnCycle()
         {
-            if (Instance == null || !Requested || _next == 0)
+            if (Instance == null || !_requested || _next == 0)
                 return false;
 
-            long Now = PlusEnvironment.Now();
-            if (_next < Now)
+            long now = PlusEnvironment.Now();
+            if (_next < now)
             {
                 foreach (Item Item in SetItems.Values.ToList())
                 {
@@ -109,20 +104,20 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     if (Instance.GetWired().OtherBoxHasItem(this, Item.Id))
                         SetItems.TryRemove(Item.Id, out toRemove);
 
-                    Point Point = Instance.GetGameMap().GetChaseMovement(Item);
+                    Point point = Instance.GetGameMap().GetChaseMovement(Item);
 
                     Instance.GetWired().OnUserFurniCollision(Instance, Item);
 
-                    if (!Instance.GetGameMap().ItemCanMove(Item, Point))
+                    if (!Instance.GetGameMap().ItemCanMove(Item, point))
                         continue;
 
-                    if (Instance.GetGameMap().CanRollItemHere(Point.X, Point.Y) && !Instance.GetGameMap().SquareHasUsers(Point.X, Point.Y))
+                    if (Instance.GetGameMap().CanRollItemHere(point.X, point.Y) && !Instance.GetGameMap().SquareHasUsers(point.X, point.Y))
                     {    
-                        Double NewZ = Item.GetZ;
-                        bool CanBePlaced = true;
+                        Double newZ = Item.GetZ;
+                        bool canBePlaced = true;
 
-                        List<Item> Items = Instance.GetGameMap().GetCoordinatedItems(Point);
-                        foreach (Item IItem in Items.ToList())
+                        List<Item> items = Instance.GetGameMap().GetCoordinatedItems(point);
+                        foreach (Item IItem in items.ToList())
                         {
                             if (IItem == null || IItem.Id == Item.Id)
                                 continue;
@@ -130,22 +125,22 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                             if (!IItem.GetBaseItem().Walkable)
                             {
                                 _next = 0;
-                                CanBePlaced = false;
+                                canBePlaced = false;
                                 break;
                             }
 
-                            if (IItem.TotalHeight > NewZ)
-                                NewZ = IItem.TotalHeight;
+                            if (IItem.TotalHeight > newZ)
+                                newZ = IItem.TotalHeight;
 
-                            if (CanBePlaced == true && !IItem.GetBaseItem().Stackable)
-                                CanBePlaced = false;
+                            if (canBePlaced && !IItem.GetBaseItem().Stackable)
+                                canBePlaced = false;
                         }
 
-                        if (CanBePlaced && Point != Item.Coordinate)
+                        if (canBePlaced && point != Item.Coordinate)
                         {
-                            Instance.SendPacket(new SlideObjectBundleComposer(Item.GetX, Item.GetY, Item.GetZ, Point.X,
-                                Point.Y, NewZ, 0, 0, Item.Id));
-                            Instance.GetRoomItemHandler().SetFloorItem(Item, Point.X, Point.Y, NewZ);
+                            Instance.SendPacket(new SlideObjectBundleComposer(Item.GetX, Item.GetY, Item.GetZ, point.X,
+                                point.Y, newZ, 0, 0, Item.Id));
+                            Instance.GetRoomItemHandler().SetFloorItem(Item, point.X, point.Y, newZ);
                         }
                     }
                 }

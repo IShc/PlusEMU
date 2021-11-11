@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Concurrent;
-
-using Plus.HabboHotel.Rooms;
 using Plus.Communication.Packets.Incoming;
 using Plus.Communication.Packets.Outgoing;
-using Plus.Database.Interfaces;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -13,64 +12,64 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.EffectBotChangesClothesBox; } }
+        public WiredBoxType Type => WiredBoxType.EffectBotChangesClothesBox;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public BotChangesClothesBox(Room Instance, Item Item)
+        public BotChangesClothesBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            string BotConfiguration = Packet.PopString();
+            int unknown = packet.PopInt();
+            string botConfiguration = packet.PopString();
 
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            StringData = BotConfiguration;
+            StringData = botConfiguration;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params == null || Params.Length == 0)
+            if (@params == null || @params.Length == 0)
                 return false;
 
             if (String.IsNullOrEmpty(StringData))
                 return false;
 
 
-            string[] Stuff = StringData.Split('\t');
-            if (Stuff.Length != 2)
+            string[] stuff = StringData.Split('\t');
+            if (stuff.Length != 2)
                 return false;//This is important, incase a cunt scripts.
 
-            string Username = Stuff[0];
+            string username = stuff[0];
 
-            RoomUser User = Instance.GetRoomUserManager().GetBotByName(Username);
-            if (User == null)
+            RoomUser user = Instance.GetRoomUserManager().GetBotByName(username);
+            if (user == null)
                 return false;      
             
-            string Figure = Stuff[1];
+            string figure = stuff[1];
 
-            User.BotData.Look = Figure;
-            User.BotData.Gender = "M";
+            user.BotData.Look = figure;
+            user.BotData.Gender = "M";
 
-            MessageComposer UserChangeComposer = new UserChangeComposer(User.VirtualId, User.BotData);
-            Instance.SendPacket(UserChangeComposer);
+            MessageComposer userChangeComposer = new UserChangeComposer(user.VirtualId, user.BotData);
+            Instance.SendPacket(userChangeComposer);
 
             
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.SetQuery("UPDATE `bots` SET `look` = @look, `gender` = @gender WHERE `id` = '" + User.BotData.Id + "' LIMIT 1");
-                dbClient.AddParameter("look", User.BotData.Look);
-                dbClient.AddParameter("gender", User.BotData.Gender);
+                dbClient.SetQuery("UPDATE `bots` SET `look` = @look, `gender` = @gender WHERE `id` = '" + user.BotData.Id + "' LIMIT 1");
+                dbClient.AddParameter("look", user.BotData.Look);
+                dbClient.AddParameter("gender", user.BotData.Gender);
                 dbClient.RunQuery();
             }
 

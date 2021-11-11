@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
-using Plus.Utilities;
 using Plus.HabboHotel.Moderation;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
@@ -11,34 +10,34 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public ICollection<string> UserPresets { get; }
         public ICollection<string> RoomPresets { get; }
         public ICollection<ModerationTicket> Tickets { get; }
-        public ModeratorInitComposer(ICollection<string> UserPresets, ICollection<string> RoomPresets, ICollection<ModerationTicket> Tickets)
+        public ModeratorInitComposer(ICollection<string> userPresets, ICollection<string> roomPresets, ICollection<ModerationTicket> tickets)
             : base(ServerPacketHeader.ModeratorInitMessageComposer)
         {
-            this.UserPresets = UserPresets;
-            this.RoomPresets = RoomPresets;
-            this.Tickets = Tickets;
+            UserPresets = userPresets;
+            RoomPresets = roomPresets;
+            Tickets = tickets;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(Tickets.Count);
-            foreach (ModerationTicket Ticket in Tickets)
+            foreach (ModerationTicket ticket in Tickets)
             {
-                packet.WriteInteger(Ticket.Id); // Id
-                packet.WriteInteger(Ticket.GetStatus(Id)); // Tab ID
-                packet.WriteInteger(Ticket.Type); // Type
-                packet.WriteInteger(Ticket.Category); // Category
-                packet.WriteInteger(Convert.ToInt32((DateTime.Now - UnixTimestamp.FromUnixTimestamp(Ticket.Timestamp)).TotalMilliseconds)); // This should fix the overflow?
-                packet.WriteInteger(Ticket.Priority); // Priority
-                packet.WriteInteger(Ticket.Sender == null ? 0 : Ticket.Sender.Id); // Sender ID
+                packet.WriteInteger(ticket.Id); // Id
+                packet.WriteInteger(ticket.GetStatus(Id)); // Tab ID
+                packet.WriteInteger(ticket.Type); // Type
+                packet.WriteInteger(ticket.Category); // Category
+                packet.WriteInteger(Convert.ToInt32((DateTime.Now - UnixTimestamp.FromUnixTimestamp(ticket.Timestamp)).TotalMilliseconds)); // This should fix the overflow?
+                packet.WriteInteger(ticket.Priority); // Priority
+                packet.WriteInteger(ticket.Sender == null ? 0 : ticket.Sender.Id); // Sender ID
                 packet.WriteInteger(1);
-                packet.WriteString(Ticket.Sender == null ? string.Empty : Ticket.Sender.Username); // Sender Name
-                packet.WriteInteger(Ticket.Reported == null ? 0 : Ticket.Reported.Id); // Reported ID
-                packet.WriteString(Ticket.Reported == null ? string.Empty : Ticket.Reported.Username); // Reported Name
-                packet.WriteInteger(Ticket.Moderator == null ? 0 : Ticket.Moderator.Id); // Moderator ID
-                packet.WriteString(Ticket.Moderator == null ? string.Empty : Ticket.Moderator.Username); // Mod Name
-                packet.WriteString(Ticket.Issue); // Issue
-                packet.WriteInteger(Ticket.Room == null ? 0 : Ticket.Room.Id); // Room Id
+                packet.WriteString(ticket.Sender == null ? string.Empty : ticket.Sender.Username); // Sender Name
+                packet.WriteInteger(ticket.Reported == null ? 0 : ticket.Reported.Id); // Reported ID
+                packet.WriteString(ticket.Reported == null ? string.Empty : ticket.Reported.Username); // Reported Name
+                packet.WriteInteger(ticket.Moderator == null ? 0 : ticket.Moderator.Id); // Moderator ID
+                packet.WriteString(ticket.Moderator == null ? string.Empty : ticket.Moderator.Username); // Mod Name
+                packet.WriteString(ticket.Issue); // Issue
+                packet.WriteInteger(ticket.Room == null ? 0 : ticket.Room.Id); // Room Id
                 packet.WriteInteger(0);//LOOP
             }
 

@@ -1,8 +1,6 @@
 ﻿using System.Linq;
-using Plus.HabboHotel.GameClients;
-
 using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {

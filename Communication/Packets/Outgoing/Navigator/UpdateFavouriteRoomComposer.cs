@@ -8,8 +8,8 @@
         public UpdateFavouriteRoomComposer(int roomId, bool added)
             : base(ServerPacketHeader.UpdateFavouriteRoomMessageComposer)
         {
-            this.RoomId = roomId;
-            this.Added = added;
+            RoomId = roomId;
+            Added = added;
         }
 
         public override void Compose(ServerPacket packet)

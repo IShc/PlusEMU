@@ -10,14 +10,14 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
         public int TotalLevels { get; }
         public UserAchievement UserData { get; }
 
-        public AchievementProgressedComposer(Achievement Achievement, int TargetLevel, AchievementLevel TargetLevelData,int TotalLevels, UserAchievement UserData)
+        public AchievementProgressedComposer(Achievement achievement, int targetLevel, AchievementLevel targetLevelData,int totalLevels, UserAchievement userData)
             : base(ServerPacketHeader.AchievementProgressedMessageComposer)
         {
-            this.Achievement = Achievement;
-            this.TargetLevel = TargetLevel;
-            this.TargetLevelData = TargetLevelData;
-            this.TotalLevels = TotalLevels;
-            this.UserData = UserData;
+            Achievement = achievement;
+            TargetLevel = targetLevel;
+            TargetLevelData = targetLevelData;
+            TotalLevels = totalLevels;
+            UserData = userData;
         }
 
         public override void Compose(ServerPacket packet)
@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
             packet.WriteInteger(TargetLevelData.RewardPixels); // Reward Ach Score
             packet.WriteInteger(0); // ?
             packet.WriteInteger(UserData != null ? UserData.Progress : 0); // Current progress
-            packet.WriteBoolean(UserData != null ? (UserData.Level >= TotalLevels) : false); // Set 100% completed(??)
+            packet.WriteBoolean(UserData != null && UserData.Level >= TotalLevels); // Set 100% completed(??)
             packet.WriteString(Achievement.Category); // Category
             packet.WriteString(string.Empty);
             packet.WriteInteger(TotalLevels); // Total amount of levels 

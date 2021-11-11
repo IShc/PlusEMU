@@ -7,11 +7,11 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         public Item Item { get; }
         public int UserId { get; }
 
-        public ObjectRemoveComposer(Item Item, int UserId)
+        public ObjectRemoveComposer(Item item, int userId)
             : base(ServerPacketHeader.ObjectRemoveMessageComposer)
         {
-            this.Item = Item;
-            this.UserId = UserId;
+            Item = item;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)

@@ -10,15 +10,15 @@
         public string ButtonLink { get; set; }
         public string ImageLink { get; set; }
 
-        public Promotion(int Id, string Title, string Text, string ButtonText, int ButtonType, string ButtonLink, string ImageLink)
+        public Promotion(int id, string title, string text, string buttonText, int buttonType, string buttonLink, string imageLink)
         {
-            this.Id = Id;
-            this.Title = Title;
-            this.Text = Text;
-            this.ButtonText = ButtonText;
-            this.ButtonType = ButtonType;
-            this.ButtonLink = ButtonLink;
-            this.ImageLink = ImageLink;
+            this.Id = id;
+            this.Title = title;
+            this.Text = text;
+            this.ButtonText = buttonText;
+            this.ButtonType = buttonType;
+            this.ButtonLink = buttonLink;
+            this.ImageLink = imageLink;
         }
     }
 }

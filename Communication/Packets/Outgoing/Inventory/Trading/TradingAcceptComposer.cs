@@ -5,11 +5,11 @@
         public int UserId { get; }
         public bool Accept { get; }
 
-        public TradingAcceptComposer(int UserId, bool Accept)
+        public TradingAcceptComposer(int userId, bool accept)
             : base(ServerPacketHeader.TradingAcceptMessageComposer)
         {
-            this.UserId = UserId;
-            this.Accept = Accept;
+            UserId = userId;
+            Accept = accept;
         }
 
         public override void Compose(ServerPacket packet)

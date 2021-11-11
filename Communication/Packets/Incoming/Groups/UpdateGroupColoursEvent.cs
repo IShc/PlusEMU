@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Plus.HabboHotel.Groups;
-using Plus.HabboHotel.Items;
 using Plus.Communication.Packets.Outgoing.Groups;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
-
+using Plus.HabboHotel.Groups;
+using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
@@ -48,7 +46,7 @@ namespace Plus.Communication.Packets.Incoming.Groups
                     if (item.GetBaseItem().InteractionType != InteractionType.GUILD_ITEM && item.GetBaseItem().InteractionType != InteractionType.GUILD_GATE || item.GetBaseItem().InteractionType != InteractionType.GUILD_FORUM)
                         continue;
 
-                    session.GetHabbo().CurrentRoom.SendPacket(new ObjectUpdateComposer(item, Convert.ToInt32(item.UserID)));
+                    session.GetHabbo().CurrentRoom.SendPacket(new ObjectUpdateComposer(item, Convert.ToInt32(item.UserId)));
                 }
             }
         }

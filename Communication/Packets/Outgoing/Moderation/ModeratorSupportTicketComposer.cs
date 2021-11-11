@@ -1,7 +1,6 @@
 ﻿using System;
-
-using Plus.Utilities;
 using Plus.HabboHotel.Moderation;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
@@ -10,11 +9,11 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public int TabId { get; }
         public ModerationTicket Ticket { get; }
 
-        public ModeratorSupportTicketComposer(int TabId, ModerationTicket Ticket)
+        public ModeratorSupportTicketComposer(int tabId, ModerationTicket ticket)
           : base(ServerPacketHeader.ModeratorSupportTicketMessageComposer)
         {
-            this.TabId = TabId;
-            this.Ticket = Ticket;
+            TabId = tabId;
+            Ticket = ticket;
         }
 
         public override void Compose(ServerPacket packet)

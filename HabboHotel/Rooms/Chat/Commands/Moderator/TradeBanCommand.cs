@@ -1,84 +1,75 @@
 ﻿using System;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Users;
-
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
     class TradeBanCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_trade_ban"; }
-        }
+        public string PermissionRequired => "command_trade_ban";
 
-        public string Parameters
-        {
-            get { return "%target% %length%"; }
-        }
+        public string Parameters => "%target% %length%";
 
-        public string Description
-        {
-            get { return "Trade ban another user."; }
-        }
+        public string Description => "Trade ban another user.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Please enter a username and a valid length in days (min 1 day, max 365 days).");
+                session.SendWhisper("Please enter a username and a valid length in days (min 1 day, max 365 days).");
                 return;
             }
 
-            Habbo Habbo = PlusEnvironment.GetHabboByUsername(Params[1]);
-            if (Habbo == null)
+            Habbo habbo = PlusEnvironment.GetHabboByUsername(@params[1]);
+            if (habbo == null)
             {
-                Session.SendWhisper("An error occoured whilst finding that user in the database.");
+                session.SendWhisper("An error occoured whilst finding that user in the database.");
                 return;
             }
 
-            if (Convert.ToDouble(Params[2]) == 0)
+            if (Convert.ToDouble(@params[2]) == 0)
             {
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    dbClient.RunQuery("UPDATE `user_info` SET `trading_locked` = '0' WHERE `user_id` = '" + Habbo.Id + "' LIMIT 1");
+                    dbClient.RunQuery("UPDATE `user_info` SET `trading_locked` = '0' WHERE `user_id` = '" + habbo.Id + "' LIMIT 1");
                 }
 
-                if (Habbo.GetClient() != null)
+                if (habbo.GetClient() != null)
                 {
-                    Habbo.TradingLockExpiry = 0;
-                    Habbo.GetClient().SendNotification("Your outstanding trade ban has been removed.");
+                    habbo.TradingLockExpiry = 0;
+                    habbo.GetClient().SendNotification("Your outstanding trade ban has been removed.");
                 }
 
-                Session.SendWhisper("You have successfully removed " + Habbo.Username + "'s trade ban.");
+                session.SendWhisper("You have successfully removed " + habbo.Username + "'s trade ban.");
                 return;
             }
 
-            double Days;
-            if (double.TryParse(Params[2], out Days))
+            double days;
+            if (double.TryParse(@params[2], out days))
             {
-                if (Days < 1)
-                    Days = 1;
+                if (days < 1)
+                    days = 1;
 
-                if (Days > 365)
-                    Days = 365;
+                if (days > 365)
+                    days = 365;
 
-                double Length = (PlusEnvironment.GetUnixTimestamp() + (Days * 86400));
+                double length = (PlusEnvironment.GetUnixTimestamp() + (days * 86400));
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    dbClient.RunQuery("UPDATE `user_info` SET `trading_locked` = '" + Length + "', `trading_locks_count` = `trading_locks_count` + '1' WHERE `user_id` = '" + Habbo.Id + "' LIMIT 1");
+                    dbClient.RunQuery("UPDATE `user_info` SET `trading_locked` = '" + length + "', `trading_locks_count` = `trading_locks_count` + '1' WHERE `user_id` = '" + habbo.Id + "' LIMIT 1");
                 }
 
-                if (Habbo.GetClient() != null)
+                if (habbo.GetClient() != null)
                 {
-                    Habbo.TradingLockExpiry = Length;
-                    Habbo.GetClient().SendNotification("You have been trade banned for " + Days + " day(s)!");
+                    habbo.TradingLockExpiry = length;
+                    habbo.GetClient().SendNotification("You have been trade banned for " + days + " day(s)!");
                 }
 
-                Session.SendWhisper("You have successfully trade banned " + Habbo.Username + " for " + Days + " day(s).");
+                session.SendWhisper("You have successfully trade banned " + habbo.Username + " for " + days + " day(s).");
             }
             else
-                Session.SendWhisper("Please enter a valid integer.");
+                session.SendWhisper("Please enter a valid integer.");
         }
     }
 }

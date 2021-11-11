@@ -1,9 +1,5 @@
-﻿using System;
-using System.Linq;
-using Plus.HabboHotel.GameClients;
-using Plus.HabboHotel.Users.Relationships;
+﻿using Plus.HabboHotel.Users;
 using Plus.HabboHotel.Users.Messenger;
-using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
@@ -14,22 +10,22 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
         public Habbo Habbo { get; }
         public MessengerBuddy Buddy { get; }
 
-        public FriendListUpdateComposer(int FriendId)
+        public FriendListUpdateComposer(int friendId)
             : base(ServerPacketHeader.FriendListUpdateMessageComposer)
         {
-            this.FriendId = FriendId;
+            FriendId = friendId;
         }
 
-        public FriendListUpdateComposer(Habbo habbo, MessengerBuddy Buddy)
+        public FriendListUpdateComposer(Habbo habbo, MessengerBuddy buddy)
             : base(ServerPacketHeader.FriendListUpdateMessageComposer)
         {
-            this.Habbo = habbo;
-            this.Buddy = Buddy;
+            Habbo = habbo;
+            Buddy = buddy;
         }
 
         public override void Compose(ServerPacket packet)
         {
-            if(this.Habbo != null)
+            if(Habbo != null)
             {
                 packet.WriteInteger(0);//Category Count
                 packet.WriteInteger(1);//Updates Count

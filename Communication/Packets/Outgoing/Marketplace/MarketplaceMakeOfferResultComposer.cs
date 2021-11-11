@@ -4,10 +4,10 @@
     {
         public int Success { get; }
 
-        public MarketplaceMakeOfferResultComposer(int Success)
+        public MarketplaceMakeOfferResultComposer(int success)
             : base(ServerPacketHeader.MarketplaceMakeOfferResultMessageComposer)
         {
-            this.Success = Success;
+            Success = success;
         }
 
         public override void Compose(ServerPacket packet)

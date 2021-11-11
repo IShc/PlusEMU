@@ -7,7 +7,7 @@
         public CreditBalanceComposer(int creditsBalance)
             : base(ServerPacketHeader.CreditBalanceMessageComposer)
         {
-            this.CreditsBalance = creditsBalance;
+            CreditsBalance = creditsBalance;
         }
 
         public override void Compose(ServerPacket packet)

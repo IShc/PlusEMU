@@ -9,12 +9,12 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public DataRow Info { get; }
         public DateTime Origin { get; }
 
-        public ModeratorUserInfoComposer(DataRow User, DataRow Info)
+        public ModeratorUserInfoComposer(DataRow user, DataRow info)
             : base(ServerPacketHeader.ModeratorUserInfoMessageComposer)
         {
-            this.User = User;
-            this.Info = Info;
-            this.Origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Convert.ToDouble(Info["trading_locked"]));
+            User = user;
+            Info = info;
+            Origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Convert.ToDouble(info["trading_locked"]));
         }
 
         public override void Compose(ServerPacket packet)

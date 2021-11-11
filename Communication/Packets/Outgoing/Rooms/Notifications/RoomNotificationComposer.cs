@@ -11,28 +11,28 @@
         public string Image { get; }
         public string HotelName { get; }
         public string HotelUrl { get; }
-        public RoomNotificationComposer(string Type, string Key, string Value)
+        public RoomNotificationComposer(string type, string key, string value)
             : base(ServerPacketHeader.RoomNotificationMessageComposer)
         {
-            this.Type = Type;
-            this.Key = Key;
-            this.Value = Value;
+            Type = type;
+            Key = key;
+            Value = value;
         }
 
-        public RoomNotificationComposer(string Type)
+        public RoomNotificationComposer(string type)
             : base(ServerPacketHeader.RoomNotificationMessageComposer)
         {
-            this.Type = Type;
+            Type = type;
         }
 
-        public RoomNotificationComposer(string Title, string Message, string Image, string HotelName = "", string HotelURL = "")
+        public RoomNotificationComposer(string title, string message, string image, string hotelName = "", string hotelUrl = "")
             : base(ServerPacketHeader.RoomNotificationMessageComposer)
         {
-            this.Title = Title;
-            this.Message = Message;
-            this.Image = Image;
-            this.HotelName = HotelName;
-            this.HotelUrl = HotelURL;
+            Title = title;
+            Message = message;
+            Image = image;
+            HotelName = hotelName;
+            HotelUrl = hotelUrl;
         }
 
         public override void Compose(ServerPacket packet)

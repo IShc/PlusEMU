@@ -1,4 +1,6 @@
-﻿namespace Plus.HabboHotel.Quests
+﻿using Plus.Utilities;
+
+namespace Plus.HabboHotel.Quests
 {
     public class Quest
     {
@@ -26,13 +28,10 @@
             DataBit = dataBit;
             RewardType = rewardType;
             TimeUnlock = timeUnlock;
-            HasEnded = (timeLock >= Utilities.UnixTimestamp.GetNow() && timeLock > 0) ? true : false;
+            HasEnded = (timeLock >= UnixTimestamp.GetNow() && timeLock > 0) ? true : false;
         }
 
-        public string ActionName
-        {
-            get { return QuestTypeUtillity.GetString(GoalType); }
-        }
+        public string ActionName => QuestTypeUtillity.GetString(GoalType);
 
         public bool IsCompleted(int progress)
         {

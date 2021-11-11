@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-
-using Plus.HabboHotel.GameClients;
-
-using Plus.Communication.Packets.Outgoing.Inventory.Purse;
-using Plus.Communication.Packets.Outgoing.Inventory.Achievements;
-
-using Plus.Database.Interfaces;
+using System.Linq;
 using log4net;
+using Plus.Communication.Packets.Outgoing.Inventory.Achievements;
+using Plus.Communication.Packets.Outgoing.Inventory.Purse;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.HabboHotel.Achievements
 {
     public class AchievementManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(AchievementManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(AchievementManager));
 
         public Dictionary<string, Achievement> Achievements;
 
@@ -89,7 +87,7 @@ namespace Plus.HabboHotel.Achievements
                 }
 
                 session.SendPacket(new AchievementUnlockedComposer(data, targetLevel, level.RewardPoints, level.RewardPixels));
-                session.GetHabbo().GetMessenger().BroadcastAchievement(session.GetHabbo().Id, Users.Messenger.MessengerEventTypes.AchievementUnlocked, group + targetLevel);
+                session.GetHabbo().GetMessenger().BroadcastAchievement(session.GetHabbo().Id, MessengerEventTypes.AchievementUnlocked, group + targetLevel);
 
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {

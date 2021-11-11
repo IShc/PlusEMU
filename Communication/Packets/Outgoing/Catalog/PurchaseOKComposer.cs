@@ -8,11 +8,11 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
         public CatalogItem Item { get; }
         public ItemData BaseItem { get; }
 
-        public PurchaseOKComposer(CatalogItem Item, ItemData BaseItem)
+        public PurchaseOKComposer(CatalogItem item, ItemData baseItem)
             : base(ServerPacketHeader.PurchaseOKMessageComposer)
         {
-            this.Item = Item;
-            this.BaseItem = BaseItem;
+            Item = item;
+            BaseItem = baseItem;
         }
 
         public PurchaseOKComposer()

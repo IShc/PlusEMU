@@ -4,10 +4,10 @@
     {
         public int UserId { get; }
 
-        public UserRemoveComposer(int Id)
+        public UserRemoveComposer(int id)
             : base(ServerPacketHeader.UserRemoveMessageComposer)
         {
-            this.UserId = Id;
+            UserId = id;
         }
 
         public override void Compose(ServerPacket packet)

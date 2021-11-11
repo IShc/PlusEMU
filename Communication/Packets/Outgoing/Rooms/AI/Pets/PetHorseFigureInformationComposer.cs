@@ -6,10 +6,10 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
     {
         public RoomUser PetUser { get; }
 
-        public PetHorseFigureInformationComposer(RoomUser PetUser)
+        public PetHorseFigureInformationComposer(RoomUser petUser)
             : base(ServerPacketHeader.PetHorseFigureInformationMessageComposer)
         {
-            this.PetUser = PetUser;
+            PetUser = petUser;
         }
 
         public override void Compose(ServerPacket packet)

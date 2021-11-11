@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-
-using Plus.HabboHotel.GameClients;
+using log4net;
 using Plus.Communication.Packets.Incoming;
 using Plus.Communication.Packets.Outgoing.Inventory.Purse;
 using Plus.Communication.Packets.Outgoing.Quests;
-
 using Plus.Database.Interfaces;
-using log4net;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.HabboHotel.Quests
 {
@@ -159,12 +158,12 @@ namespace Plus.HabboHotel.Quests
                     dbClient.RunQuery("UPDATE `user_stats` SET `quest_id` = '0' WHERE `id` = '" + session.GetHabbo().Id + "' LIMIT 1");
             }
 
-            session.GetHabbo().quests[session.GetHabbo().GetStats().QuestId] = totalProgress;
+            session.GetHabbo().Quests[session.GetHabbo().GetStats().QuestId] = totalProgress;
             session.SendPacket(new QuestStartedComposer(session, quest));
 
             if (completeQuest)
             {
-                session.GetHabbo().GetMessenger().BroadcastAchievement(session.GetHabbo().Id, Users.Messenger.MessengerEventTypes.QuestCompleted, quest.Category + "." + quest.Name);
+                session.GetHabbo().GetMessenger().BroadcastAchievement(session.GetHabbo().Id, MessengerEventTypes.QuestCompleted, quest.Category + "." + quest.Name);
 
                 session.GetHabbo().GetStats().QuestId = 0;
                 session.GetHabbo().QuestLastCompleted = quest.Id;

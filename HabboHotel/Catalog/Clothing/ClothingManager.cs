@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
+using System.Data;
 using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Catalog.Clothing
@@ -40,9 +40,6 @@ namespace Plus.HabboHotel.Catalog.Clothing
             return _clothing.TryGetValue(itemId, out clothing);
         }
 
-        public ICollection<ClothingItem> GetClothingAllParts
-        {
-            get { return _clothing.Values; }
-        }
+        public ICollection<ClothingItem> GetClothingAllParts => _clothing.Values;
     }
 }

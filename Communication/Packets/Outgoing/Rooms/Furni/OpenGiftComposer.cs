@@ -9,13 +9,13 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni
         public Item Item { get; }
         public bool ItemIsInRoom { get; }
 
-        public OpenGiftComposer(ItemData Data, string Text, Item Item, bool ItemIsInRoom)
+        public OpenGiftComposer(ItemData data, string text, Item item, bool itemIsInRoom)
             : base(ServerPacketHeader.OpenGiftMessageComposer)
         {
-            this.Data = Data;
-            this.Text = Text;
-            this.Item = Item;
-            this.ItemIsInRoom = ItemIsInRoom;
+            Data = data;
+            Text = text;
+            Item = item;
+            ItemIsInRoom = itemIsInRoom;
         }
 
         public override void Compose(ServerPacket packet)

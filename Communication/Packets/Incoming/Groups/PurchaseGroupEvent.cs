@@ -1,12 +1,12 @@
 ﻿using System;
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Groups;
-using Plus.Communication.Packets.Outgoing.Groups;
 using Plus.Communication.Packets.Outgoing.Catalog;
-using Plus.Communication.Packets.Outgoing.Rooms.Session;
+using Plus.Communication.Packets.Outgoing.Groups;
 using Plus.Communication.Packets.Outgoing.Inventory.Purse;
 using Plus.Communication.Packets.Outgoing.Moderation;
+using Plus.Communication.Packets.Outgoing.Rooms.Session;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Groups;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {

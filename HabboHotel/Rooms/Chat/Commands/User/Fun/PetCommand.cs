@@ -1,84 +1,76 @@
 ﻿using Plus.Communication.Packets.Outgoing.Rooms.Engine;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun 
 {
     class PetCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_pet"; }
-        }
+        public string PermissionRequired => "command_pet";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Allows you to transform into a pet.."; }
-        }
+        public string Description => "Allows you to transform into a pet..";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            RoomUser RoomUser = Session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (RoomUser == null)
+            RoomUser roomUser = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (roomUser == null)
                 return;
 
-            if (!Room.PetMorphsAllowed)
+            if (!room.PetMorphsAllowed)
             {
-                Session.SendWhisper("The room owner has disabled the ability to use a pet morph in this room.");
-                if (Session.GetHabbo().PetId > 0)
+                session.SendWhisper("The room owner has disabled the ability to use a pet morph in this room.");
+                if (session.GetHabbo().PetId > 0)
                 {
-                    Session.SendWhisper("Oops, you still have a morph, un-morphing you.");
+                    session.SendWhisper("Oops, you still have a morph, un-morphing you.");
                     //Change the users Pet Id.
-                    Session.GetHabbo().PetId = 0;
+                    session.GetHabbo().PetId = 0;
 
                     //Quickly remove the old user instance.
-                    Room.SendPacket(new UserRemoveComposer(RoomUser.VirtualId));
+                    room.SendPacket(new UserRemoveComposer(roomUser.VirtualId));
 
                     //Add the new one, they won't even notice a thing!!11 8-)
-                    Room.SendPacket(new UsersComposer(RoomUser));
+                    room.SendPacket(new UsersComposer(roomUser));
                 }
                 return;
             }
 
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Oops, you forgot to choose the type of pet you'd like to turn into! Use :pet list to see the availiable morphs!");
+                session.SendWhisper("Oops, you forgot to choose the type of pet you'd like to turn into! Use :pet list to see the availiable morphs!");
                 return;
             }
 
-            if (Params[1].ToString().ToLower() == "list")
+            if (@params[1].ToString().ToLower() == "list")
             {
-                Session.SendWhisper("Habbo, Dog, Cat, Terrier, Croc, Bear, Pig, Lion, Rhino, Spider, Turtle, Chick, Frog, Drag, Monkey, Horse, Bunny, Pigeon, Demon and Gnome.");
+                session.SendWhisper("Habbo, Dog, Cat, Terrier, Croc, Bear, Pig, Lion, Rhino, Spider, Turtle, Chick, Frog, Drag, Monkey, Horse, Bunny, Pigeon, Demon and Gnome.");
                 return;
             }
 
-            int TargetPetId = GetPetIdByString(Params[1].ToString());
-            if (TargetPetId == 0)
+            int targetPetId = GetPetIdByString(@params[1].ToString());
+            if (targetPetId == 0)
             {
-                Session.SendWhisper("Oops, couldn't find a pet by that name!");
+                session.SendWhisper("Oops, couldn't find a pet by that name!");
                 return;
             }
 
             //Change the users Pet Id.
-            Session.GetHabbo().PetId = (TargetPetId == -1 ? 0 : TargetPetId);
+            session.GetHabbo().PetId = (targetPetId == -1 ? 0 : targetPetId);
 
             //Quickly remove the old user instance.
-            Room.SendPacket(new UserRemoveComposer(RoomUser.VirtualId));
+            room.SendPacket(new UserRemoveComposer(roomUser.VirtualId));
 
             //Add the new one, they won't even notice a thing!!11 8-)
-            Room.SendPacket(new UsersComposer(RoomUser));
+            room.SendPacket(new UsersComposer(roomUser));
 
             //Tell them a quick message.
-            if (Session.GetHabbo().PetId > 0)
-                Session.SendWhisper("Use ':pet habbo' to turn back into a Habbo!");
+            if (session.GetHabbo().PetId > 0)
+                session.SendWhisper("Use ':pet habbo' to turn back into a Habbo!");
         }
 
-        private int GetPetIdByString(string Pet)
+        private int GetPetIdByString(string pet)
         {
-            switch (Pet.ToLower())
+            switch (pet.ToLower())
             {
                 default:
                     return 0;

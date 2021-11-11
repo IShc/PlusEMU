@@ -1,11 +1,9 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items;
-using Plus.HabboHotel.GameClients;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 {
@@ -47,7 +45,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 
             foreach (Item item in itemsToRemove)
             {
-                GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(item.UserID);
+                GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(item.UserId);
                 if (targetClient != null && targetClient.GetHabbo() != null)//Again, do we have an active client?
                 {
                     room.GetRoomItemHandler().RemoveFurniture(targetClient, item.Id);

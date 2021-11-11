@@ -9,7 +9,7 @@ namespace Plus.Communication.Packets.Outgoing.Navigator
         public FavouritesComposer(ArrayList favouriteIds)
             : base(ServerPacketHeader.FavouritesMessageComposer)
         {
-            this.FavouriteIds = favouriteIds;
+            FavouriteIds = favouriteIds;
         }
 
         public override void Compose(ServerPacket packet)

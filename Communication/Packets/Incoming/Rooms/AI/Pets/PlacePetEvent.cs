@@ -1,14 +1,12 @@
-﻿using System.Collections.Generic;
-
-using Plus.HabboHotel.Rooms.AI;
-using Plus.HabboHotel.Rooms;
-using Plus.Communication.Packets.Outgoing.Inventory.Pets;
-
-using Plus.HabboHotel.Rooms.AI.Speech;
+﻿using System;
+using System.Collections.Generic;
 using log4net;
+using Plus.Communication.Packets.Outgoing.Inventory.Pets;
 using Plus.Communication.Packets.Outgoing.Rooms.Notifications;
-using System;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Rooms.AI;
+using Plus.HabboHotel.Rooms.AI.Speech;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 {
@@ -73,7 +71,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 
             room.GetRoomUserManager().DeployBot(roomBot, pet);
 
-            pet.DBState = PetDatabaseUpdateState.NeedsUpdate;
+            pet.DbState = PetDatabaseUpdateState.NeedsUpdate;
             room.GetRoomUserManager().UpdatePets();
 
             if (!session.GetHabbo().GetInventoryComponent().TryRemovePet(pet.PetId, out Pet toRemove))

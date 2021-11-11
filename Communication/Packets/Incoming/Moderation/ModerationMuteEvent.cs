@@ -1,11 +1,12 @@
 ﻿using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
     class ModerationMuteEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             if (session == null || session.GetHabbo() == null || !session.GetHabbo().GetPermissions().HasRight("mod_mute"))
                 return;

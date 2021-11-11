@@ -1,40 +1,33 @@
-﻿namespace Plus.HabboHotel.Rooms.Chat.Commands.User
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class SetSpeedCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_setspeed"; }
-        }
+        public string PermissionRequired => "command_setspeed";
 
-        public string Parameters
-        {
-            get { return "%value%"; }
-        }
+        public string Parameters => "%value%";
 
-        public string Description
-        {
-            get { return "Set the speed of the rollers in the current room."; }
-        }
+        public string Description => "Set the speed of the rollers in the current room.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (!Room.CheckRights(Session, true))
+            if (!room.CheckRights(session, true))
                 return;
 
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Please enter a value for the roller speed.");
+                session.SendWhisper("Please enter a value for the roller speed.");
                 return;
             }
 
-            int Speed;
-            if (int.TryParse(Params[1], out Speed))
+            int speed;
+            if (int.TryParse(@params[1], out speed))
             {
-                Session.GetHabbo().CurrentRoom.GetRoomItemHandler().SetSpeed(Speed);
+                session.GetHabbo().CurrentRoom.GetRoomItemHandler().SetSpeed(speed);
             }
             else
-                Session.SendWhisper("Invalid amount, please enter a valid number.");
+                session.SendWhisper("Invalid amount, please enter a valid number.");
         }
     }
 }

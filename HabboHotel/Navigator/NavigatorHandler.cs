@@ -1,13 +1,13 @@
-﻿using Plus.Communication.Packets.Outgoing;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using Plus.Communication.Packets.Outgoing;
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.Groups;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
 using Plus.HabboHotel.Users.Messenger;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 
 namespace Plus.HabboHotel.Navigator
 {

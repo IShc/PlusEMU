@@ -11,19 +11,19 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         public RoomBot BotData { get; }
         public int VirtualId { get; }
 
-        public UserChangeComposer(RoomUser User, bool Self)
+        public UserChangeComposer(RoomUser user, bool self)
             : base(ServerPacketHeader.UserChangeMessageComposer)
         {
-            this.User = User;
-            this.VirtualId = User.VirtualId;
-            this.Self = Self;
+            User = user;
+            VirtualId = user.VirtualId;
+            Self = self;
         }
 
-        public UserChangeComposer(int VirtualId, RoomBot BotData)
+        public UserChangeComposer(int virtualId, RoomBot botData)
             :base(ServerPacketHeader.UserChangeMessageComposer)
         {
-            this.VirtualId = VirtualId;
-            this.BotData = BotData;
+            VirtualId = virtualId;
+            BotData = botData;
         }
 
         public override void Compose(ServerPacket packet)

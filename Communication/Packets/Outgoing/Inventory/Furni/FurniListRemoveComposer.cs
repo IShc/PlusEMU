@@ -4,10 +4,10 @@
     {
         public int FurniId { get; }
 
-        public FurniListRemoveComposer(int Id)
+        public FurniListRemoveComposer(int id)
             : base(ServerPacketHeader.FurniListRemoveMessageComposer)
         {
-            this.FurniId = Id;
+            FurniId = id;
         }
 
         public override void Compose(ServerPacket packet)

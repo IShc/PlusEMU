@@ -1,77 +1,68 @@
 ﻿using System.Linq;
 using Plus.Database.Interfaces;
-using Plus.HabboHotel.Items;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class EjectAllCommand :IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_ejectall"; }
-        }
+        public string PermissionRequired => "command_ejectall";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Removes all of the items from the room."; }
-        }
+        public string Description => "Removes all of the items from the room.";
 
-        public void Execute(GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Session.GetHabbo().Id == Room.OwnerId)
+            if (session.GetHabbo().Id == room.OwnerId)
             {
                 //Let us check anyway.
-                if (!Room.CheckRights(Session, true))
+                if (!room.CheckRights(session, true))
                     return;
 
-                foreach (Item Item in Room.GetRoomItemHandler().GetWallAndFloor.ToList())
+                foreach (Item item in room.GetRoomItemHandler().GetWallAndFloor.ToList())
                 {
-                    if (Item == null || Item.UserID == Session.GetHabbo().Id)
+                    if (item == null || item.UserId == session.GetHabbo().Id)
                         continue;
 
-                    GameClient TargetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(Item.UserID);
-                    if (TargetClient != null && TargetClient.GetHabbo() != null)
+                    GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(item.UserId);
+                    if (targetClient != null && targetClient.GetHabbo() != null)
                     {
-                        Room.GetRoomItemHandler().RemoveFurniture(TargetClient, Item.Id);
-                        TargetClient.GetHabbo().GetInventoryComponent().AddNewItem(Item.Id, Item.BaseItem, Item.ExtraData, Item.GroupId, true, true, Item.LimitedNo, Item.LimitedTot);
-                        TargetClient.GetHabbo().GetInventoryComponent().UpdateItems(false);
+                        room.GetRoomItemHandler().RemoveFurniture(targetClient, item.Id);
+                        targetClient.GetHabbo().GetInventoryComponent().AddNewItem(item.Id, item.BaseItem, item.ExtraData, item.GroupId, true, true, item.LimitedNo, item.LimitedTot);
+                        targetClient.GetHabbo().GetInventoryComponent().UpdateItems(false);
                     }
                     else
                     {
-                        Room.GetRoomItemHandler().RemoveFurniture(null, Item.Id);
+                        room.GetRoomItemHandler().RemoveFurniture(null, item.Id);
                         using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                         {
-                            dbClient.RunQuery("UPDATE `items` SET `room_id` = '0' WHERE `id` = '" + Item.Id + "' LIMIT 1");
+                            dbClient.RunQuery("UPDATE `items` SET `room_id` = '0' WHERE `id` = '" + item.Id + "' LIMIT 1");
                         }
                     }
                 }
             }
             else
             {
-                foreach (Item Item in Room.GetRoomItemHandler().GetWallAndFloor.ToList())
+                foreach (Item item in room.GetRoomItemHandler().GetWallAndFloor.ToList())
                 {
-                    if (Item == null || Item.UserID != Session.GetHabbo().Id)
+                    if (item == null || item.UserId != session.GetHabbo().Id)
                         continue;
 
-                    GameClient TargetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(Item.UserID);
-                    if (TargetClient != null && TargetClient.GetHabbo() != null)
+                    GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(item.UserId);
+                    if (targetClient != null && targetClient.GetHabbo() != null)
                     {
-                        Room.GetRoomItemHandler().RemoveFurniture(TargetClient, Item.Id);
-                        TargetClient.GetHabbo().GetInventoryComponent().AddNewItem(Item.Id, Item.BaseItem, Item.ExtraData, Item.GroupId, true, true, Item.LimitedNo, Item.LimitedTot);
-                        TargetClient.GetHabbo().GetInventoryComponent().UpdateItems(false);
+                        room.GetRoomItemHandler().RemoveFurniture(targetClient, item.Id);
+                        targetClient.GetHabbo().GetInventoryComponent().AddNewItem(item.Id, item.BaseItem, item.ExtraData, item.GroupId, true, true, item.LimitedNo, item.LimitedTot);
+                        targetClient.GetHabbo().GetInventoryComponent().UpdateItems(false);
                     }
                     else
                     {
-                        Room.GetRoomItemHandler().RemoveFurniture(null, Item.Id);
+                        room.GetRoomItemHandler().RemoveFurniture(null, item.Id);
                         using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                         {
-                            dbClient.RunQuery("UPDATE `items` SET `room_id` = '0' WHERE `id` = '" + Item.Id + "' LIMIT 1");
+                            dbClient.RunQuery("UPDATE `items` SET `room_id` = '0' WHERE `id` = '" + item.Id + "' LIMIT 1");
                         }
                     }
                 }

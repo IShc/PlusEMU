@@ -2,15 +2,9 @@
 {
     class ReloadQuestsCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to reload the quests manager."; }
-        }
+        public string Description => "This command is used to reload the quests manager.";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
         public bool TryExecute(string[] parameters)
         {

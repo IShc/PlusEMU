@@ -1,82 +1,73 @@
 ﻿using System;
 using System.Data;
-
-using Plus.HabboHotel.Items;
 using Plus.Communication.Packets.Outgoing.Inventory.Purse;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class ConvertCreditsCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_convert_credits"; }
-        }
+        public string PermissionRequired => "command_convert_credits";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Convert your exchangeable furniture into actual credits."; }
-        }
+        public string Description => "Convert your exchangeable furniture into actual credits.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            int TotalValue = 0;
+            int totalValue = 0;
 
             try 
             {
-                DataTable Table = null;           
+                DataTable table = null;           
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    dbClient.SetQuery("SELECT `id` FROM `items` WHERE `user_id` = '" + Session.GetHabbo().Id + "' AND (`room_id`=  '0' OR `room_id` = '')");
-                    Table = dbClient.GetTable();
+                    dbClient.SetQuery("SELECT `id` FROM `items` WHERE `user_id` = '" + session.GetHabbo().Id + "' AND (`room_id`=  '0' OR `room_id` = '')");
+                    table = dbClient.GetTable();
                 }
 
-                if (Table == null)
+                if (table == null)
                 {
-                    Session.SendWhisper("You currently have no items in your inventory!");
+                    session.SendWhisper("You currently have no items in your inventory!");
                     return;
                 }
-                if (Table.Rows.Count > 0)
+                if (table.Rows.Count > 0)
                 {
                     using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                     {
-                        foreach (DataRow Row in Table.Rows)
+                        foreach (DataRow row in table.Rows)
                         {
-                            Item Item = Session.GetHabbo().GetInventoryComponent().GetItem(Convert.ToInt32(Row[0]));
-                            if (Item == null || Item.RoomId > 0 || Item.Data.InteractionType != InteractionType.EXCHANGE)
+                            Item item = session.GetHabbo().GetInventoryComponent().GetItem(Convert.ToInt32(row[0]));
+                            if (item == null || item.RoomId > 0 || item.Data.InteractionType != InteractionType.EXCHANGE)
                                 continue;
                             
-                            int Value = Item.Data.BehaviourData;
+                            int value = item.Data.BehaviourData;
 
-                            dbClient.RunQuery("DELETE FROM `items` WHERE `id` = '" + Item.Id + "' LIMIT 1");
+                            dbClient.RunQuery("DELETE FROM `items` WHERE `id` = '" + item.Id + "' LIMIT 1");
 
-                            Session.GetHabbo().GetInventoryComponent().RemoveItem(Item.Id);
+                            session.GetHabbo().GetInventoryComponent().RemoveItem(item.Id);
 
-                            TotalValue += Value;
+                            totalValue += value;
 
-                            if (Value > 0)
+                            if (value > 0)
                             {
-                                Session.GetHabbo().Credits += Value;
-                                Session.SendPacket(new CreditBalanceComposer(Session.GetHabbo().Credits));
+                                session.GetHabbo().Credits += value;
+                                session.SendPacket(new CreditBalanceComposer(session.GetHabbo().Credits));
                             }
                         }
                     }
                 }
 
-                if (TotalValue > 0)
-                    Session.SendNotification("All credits have successfully been converted!\r\r(Total value: " + TotalValue + " credits!");
+                if (totalValue > 0)
+                    session.SendNotification("All credits have successfully been converted!\r\r(Total value: " + totalValue + " credits!");
                 else
-                    Session.SendNotification("It appears you don't have any exchangeable items!");
+                    session.SendNotification("It appears you don't have any exchangeable items!");
             }
             catch
             {
-                Session.SendNotification("Oops, an error occoured whilst converting your credits!");
+                session.SendNotification("Oops, an error occoured whilst converting your credits!");
             }
         }
     }

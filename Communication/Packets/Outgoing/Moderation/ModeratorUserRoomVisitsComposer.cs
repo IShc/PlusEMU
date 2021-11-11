@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-
-using Plus.Utilities;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
@@ -11,11 +10,11 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public Habbo Habbo { get; }
         public Dictionary<double, RoomData> Visits { get; }
 
-        public ModeratorUserRoomVisitsComposer(Habbo Data, Dictionary<double, RoomData> Visits)
+        public ModeratorUserRoomVisitsComposer(Habbo data, Dictionary<double, RoomData> visits)
             : base(ServerPacketHeader.ModeratorUserRoomVisitsMessageComposer)
         {
-            this.Habbo = Data;
-            this.Visits = Visits;
+            Habbo = data;
+            Visits = visits;
         }
 
         public override void Compose(ServerPacket packet)
@@ -24,12 +23,12 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteString(Habbo.Username);
             packet.WriteInteger(Visits.Count);
 
-            foreach (KeyValuePair<double, RoomData> Visit in Visits)
+            foreach (KeyValuePair<double, RoomData> visit in Visits)
             {
-                packet.WriteInteger(Visit.Value.Id);
-                packet.WriteString(Visit.Value.Name);
-                packet.WriteInteger(UnixTimestamp.FromUnixTimestamp(Visit.Key).Hour);
-                packet.WriteInteger(UnixTimestamp.FromUnixTimestamp(Visit.Key).Minute);
+                packet.WriteInteger(visit.Value.Id);
+                packet.WriteString(visit.Value.Name);
+                packet.WriteInteger(UnixTimestamp.FromUnixTimestamp(visit.Key).Hour);
+                packet.WriteInteger(UnixTimestamp.FromUnixTimestamp(visit.Key).Minute);
             }
         }
     }

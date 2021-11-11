@@ -3,10 +3,10 @@
     public class RoomForwardComposer : MessageComposer
     {
         public int RoomId { get; }
-        public RoomForwardComposer(int RoomId)
+        public RoomForwardComposer(int roomId)
             : base(ServerPacketHeader.RoomForwardMessageComposer)
         {
-            this.RoomId = RoomId;
+            RoomId = roomId;
         }
 
         public override void Compose(ServerPacket packet)

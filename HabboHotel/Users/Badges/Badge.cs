@@ -5,10 +5,10 @@
         public string Code;
         public int Slot;
 
-        public Badge(string Code, int Slot)
+        public Badge(string code, int slot)
         {
-            this.Code = Code;
-            this.Slot = Slot;
+            Code = code;
+            Slot = slot;
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Users;
-
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
-
 
 namespace Plus.Communication.Packets.Incoming.Users
 {

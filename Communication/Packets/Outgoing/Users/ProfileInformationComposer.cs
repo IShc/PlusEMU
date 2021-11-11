@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Plus.HabboHotel.Users;
-using Plus.HabboHotel.Groups;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Groups;
+using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Users
 {
@@ -15,10 +15,10 @@ namespace Plus.Communication.Packets.Outgoing.Users
         public ProfileInformationComposer(Habbo habbo, GameClient session, List<Group> groups, int friendCount)
             : base(ServerPacketHeader.ProfileInformationMessageComposer)
         {
-            this.TargetHabbo = habbo;
-            this.Groups = groups;
-            this.FriendCount = friendCount;
-            this.MyHabbo = session.GetHabbo();
+            TargetHabbo = habbo;
+            Groups = groups;
+            FriendCount = friendCount;
+            MyHabbo = session.GetHabbo();
         }
 
         public override void Compose(ServerPacket packet)

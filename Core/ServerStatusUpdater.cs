@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-
 using log4net;
 using Plus.Database.Interfaces;
 
@@ -8,7 +7,7 @@ namespace Plus.Core
 {
     public class ServerStatusUpdater : IDisposable
     {
-        private static ILog _log = LogManager.GetLogger(typeof(ServerStatusUpdater));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(ServerStatusUpdater));
 
         private const int UpdateInSeconds = 30;
 
@@ -20,7 +19,7 @@ namespace Plus.Core
 
             Console.Title = "Plus Emulator - 0 users online - 0 rooms loaded - 0 day(s) 0 hour(s) uptime";
 
-            _log.Info("Server Status Updater has been started.");
+            Log.Info("Server Status Updater has been started.");
         }
 
         public void OnTick(object obj)

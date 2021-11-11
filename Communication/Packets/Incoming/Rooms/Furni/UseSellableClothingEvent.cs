@@ -1,13 +1,10 @@
-﻿using Plus.HabboHotel.Items;
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Catalog.Clothing;
-
-
-
+﻿using Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects;
 using Plus.Communication.Packets.Outgoing.Rooms.Notifications;
-using Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.Catalog.Clothing;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
@@ -31,7 +28,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             if (item.Data == null)
                 return;
 
-            if (item.UserID != session.GetHabbo().Id)
+            if (item.UserId != session.GetHabbo().Id)
                 return;
 
             if (item.Data.InteractionType != InteractionType.PURCHASABLE_CLOTHING)

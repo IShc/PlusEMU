@@ -1,9 +1,8 @@
 ﻿using System.Collections.Concurrent;
-
 using Plus.Communication.Packets.Incoming;
+using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
-using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -13,7 +12,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public Item Item { get; set; }
 
-        public WiredBoxType Type { get { return WiredBoxType.EffectShowMessage; } }
+        public WiredBoxType Type => WiredBoxType.EffectShowMessage;
 
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
 
@@ -23,51 +22,51 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public string ItemsData { get; set; }
 
-        public ShowMessageBox(Room Instance, Item Item)
+        public ShowMessageBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            string Message = Packet.PopString();
+            int unknown = packet.PopInt();
+            string message = packet.PopString();
 
-            StringData = Message;
+            StringData = message;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params == null || Params.Length == 0)
+            if (@params == null || @params.Length == 0)
                 return false;
 
-            Habbo Player = (Habbo)Params[0];
-            if (Player == null || Player.GetClient() == null || string.IsNullOrWhiteSpace(StringData))
+            Habbo player = (Habbo)@params[0];
+            if (player == null || player.GetClient() == null || string.IsNullOrWhiteSpace(StringData))
                 return false;
 
-            RoomUser User = Player.CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(Player.Username);
-            if (User == null)
+            RoomUser user = player.CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(player.Username);
+            if (user == null)
                 return false;
 
-            string Message = StringData;
+            string message = StringData;
 
             if (StringData.Contains("%USERNAME%"))
-                Message = Message.Replace("%USERNAME%", Player.Username);
+                message = message.Replace("%USERNAME%", player.Username);
 
             if (StringData.Contains("%ROOMNAME%"))
-                Message = Message.Replace("%ROOMNAME%", Player.CurrentRoom.Name);
+                message = message.Replace("%ROOMNAME%", player.CurrentRoom.Name);
 
             if (StringData.Contains("%USERCOUNT%"))
-                Message = Message.Replace("%USERCOUNT%", Player.CurrentRoom.UserCount.ToString());
+                message = message.Replace("%USERCOUNT%", player.CurrentRoom.UserCount.ToString());
 
             if (StringData.Contains("%USERSONLINE%"))
-                Message = Message.Replace("%USERSONLINE%", PlusEnvironment.GetGame().GetClientManager().Count.ToString());
+                message = message.Replace("%USERSONLINE%", PlusEnvironment.GetGame().GetClientManager().Count.ToString());
 
 
 
-            Player.GetClient().SendPacket(new WhisperComposer(User.VirtualId, Message, 0, 34));
+            player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, message, 0, 34));
             return true;
         }
     }

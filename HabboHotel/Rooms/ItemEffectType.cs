@@ -6,7 +6,7 @@
         Swim,
         SwimLow,
         SwimHalloween,
-        Iceskates,
-        Normalskates
+        IceSkates,
+        NormalSkates
     }
 }

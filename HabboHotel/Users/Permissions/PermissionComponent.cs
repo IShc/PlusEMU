@@ -40,21 +40,21 @@ namespace Plus.HabboHotel.Users.Permissions
         /// <summary>
         /// Checks if the user has the specified right.
         /// </summary>
-        /// <param name="Right"></param>
+        /// <param name="right"></param>
         /// <returns></returns>
-        public bool HasRight(string Right)
+        public bool HasRight(string right)
         {
-            return _permissions.Contains(Right);
+            return _permissions.Contains(right);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="Command"></param>
+        /// <param name="command"></param>
         /// <returns></returns>
-        public bool HasCommand(string Command)
+        public bool HasCommand(string command)
         {
-            return _commands.Contains(Command);
+            return _commands.Contains(command);
         }
 
         /// <summary>

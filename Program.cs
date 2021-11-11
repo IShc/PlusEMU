@@ -1,12 +1,11 @@
 ﻿using System;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Security.Permissions;
-using Plus.Core;
+using log4net;
 using log4net.Config;
 using log4net.Repository;
-using System.Reflection;
-using log4net;
-using System.IO;
+using Plus.Core;
 
 namespace Plus
 {
@@ -27,7 +26,7 @@ namespace Plus
         [DllImport("kernel32.dll", ExactSpelling = true)]
         private static extern IntPtr GetConsoleWindow();
 
-        private static readonly ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         public static void Main(string[] Args)
         {

@@ -6,12 +6,12 @@
         public string Message { get; }
         public int Time { get; }
 
-        public NewConsoleMessageComposer(int Sender, string Message, int Time = 0)
+        public NewConsoleMessageComposer(int sender, string message, int time = 0)
             : base(ServerPacketHeader.NewConsoleMessageMessageComposer)
         {
-            this.Sender = Sender;
-            this.Message = Message;
-            this.Time = Time;
+            Sender = sender;
+            Message = message;
+            Time = time;
         }
 
         public override void Compose(ServerPacket packet)

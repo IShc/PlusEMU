@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.HabboHotel.Moderation;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
@@ -8,25 +8,25 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
     {
         public Dictionary<string, List<ModerationPresetActions>> UserActionPresets { get; }
 
-        public CfhTopicsInitComposer(Dictionary<string, List<ModerationPresetActions>> UserActionPresets)
+        public CfhTopicsInitComposer(Dictionary<string, List<ModerationPresetActions>> userActionPresets)
             : base(ServerPacketHeader.CfhTopicsInitMessageComposer)
         {
 
-            this.UserActionPresets = UserActionPresets;
+            UserActionPresets = userActionPresets;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(UserActionPresets.Count);
-            foreach (KeyValuePair<string, List<ModerationPresetActions>> Cat in UserActionPresets.ToList())
+            foreach (KeyValuePair<string, List<ModerationPresetActions>> cat in UserActionPresets.ToList())
             {
-                packet.WriteString(Cat.Key);
-                packet.WriteInteger(Cat.Value.Count);
-                foreach (ModerationPresetActions Preset in Cat.Value.ToList())
+                packet.WriteString(cat.Key);
+                packet.WriteInteger(cat.Value.Count);
+                foreach (ModerationPresetActions preset in cat.Value.ToList())
                 {
-                    packet.WriteString(Preset.Caption);
-                    packet.WriteInteger(Preset.Id);
-                    packet.WriteString(Preset.Type);
+                    packet.WriteString(preset.Caption);
+                    packet.WriteInteger(preset.Id);
+                    packet.WriteString(preset.Type);
                 }
             }
         }

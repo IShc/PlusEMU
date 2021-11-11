@@ -1,7 +1,6 @@
 ﻿using System;
-using Plus.Utilities;
 using Plus.HabboHotel.Items;
-
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
@@ -10,11 +9,11 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         public Item Item { get; }
         public int UserId { get; }
 
-         public ObjectUpdateComposer(Item Item, int UserId)
+         public ObjectUpdateComposer(Item item, int userId)
              : base(ServerPacketHeader.ObjectUpdateMessageComposer)
          {
-            this.Item = Item;
-            this.UserId = UserId;
+            Item = item;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)

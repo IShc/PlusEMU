@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-
-using Plus.HabboHotel.Users;
 using Plus.HabboHotel.Rooms;
-using Plus.Utilities;
 using Plus.HabboHotel.Rooms.Chat.Logs;
+using Plus.HabboHotel.Users;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
@@ -15,8 +14,8 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public ModeratorUserChatlogComposer(Habbo habbo, List<KeyValuePair<RoomData, List<ChatlogEntry>>> chatlogs)
             : base(ServerPacketHeader.ModeratorUserChatlogMessageComposer)
         {
-            this.Habbo = habbo;
-            this.ChatLogs = chatlogs;
+            Habbo = habbo;
+            ChatLogs = chatlogs;
         }
 
         public override void Compose(ServerPacket packet)
@@ -25,31 +24,31 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteString(Habbo.Username);
 
             packet.WriteInteger(ChatLogs.Count); // Room Visits Count
-            foreach (KeyValuePair<RoomData, List<ChatlogEntry>> Chatlog in ChatLogs)
+            foreach (KeyValuePair<RoomData, List<ChatlogEntry>> chatlog in ChatLogs)
             {
                 packet.WriteByte(1);
                 packet.WriteShort(2);//Count
                 packet.WriteString("roomName");
                 packet.WriteByte(2);
-                packet.WriteString(Chatlog.Key.Name); // room name
+                packet.WriteString(chatlog.Key.Name); // room name
                 packet.WriteString("roomId");
                 packet.WriteByte(1);
-                packet.WriteInteger(Chatlog.Key.Id);
+                packet.WriteInteger(chatlog.Key.Id);
 
-                packet.WriteShort(Chatlog.Value.Count); // Chatlogs Count
-                foreach (ChatlogEntry Entry in Chatlog.Value)
+                packet.WriteShort(chatlog.Value.Count); // Chatlogs Count
+                foreach (ChatlogEntry entry in chatlog.Value)
                 {
-                    string Username = "NOT FOUND";
-                    if (Entry.PlayerNullable() != null)
+                    string username = "NOT FOUND";
+                    if (entry.PlayerNullable() != null)
                     {
-                        Username = Entry.PlayerNullable().Username;
+                        username = entry.PlayerNullable().Username;
                     }
 
-                    packet.WriteString(UnixTimestamp.FromUnixTimestamp(Entry.Timestamp).ToShortTimeString());
-                    packet.WriteInteger(Entry.PlayerId); // UserId of message
-                    packet.WriteString(Username); // Username of message
-                    packet.WriteString(!string.IsNullOrEmpty(Entry.Message) ? Entry.Message : "** user sent a blank message **"); // Message        
-                    packet.WriteBoolean(Habbo.Id == Entry.PlayerId);
+                    packet.WriteString(UnixTimestamp.FromUnixTimestamp(entry.Timestamp).ToShortTimeString());
+                    packet.WriteInteger(entry.PlayerId); // UserId of message
+                    packet.WriteString(username); // Username of message
+                    packet.WriteString(!string.IsNullOrEmpty(entry.Message) ? entry.Message : "** user sent a blank message **"); // Message        
+                    packet.WriteBoolean(Habbo.Id == entry.PlayerId);
                 }
             }
         }

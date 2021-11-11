@@ -1,9 +1,8 @@
-﻿using Plus.HabboHotel.Rooms;
+﻿using Plus.Database.Interfaces;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Quests;
-using Plus.HabboHotel.GameClients;
-
-using Plus.Database.Interfaces;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 {
@@ -30,7 +29,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 return;
 
             bool itemRights = false;
-            if (item.UserID == session.GetHabbo().Id || room.CheckRights(session, false))
+            if (item.UserId == session.GetHabbo().Id || room.CheckRights(session, false))
                 itemRights = true;
             else if (room.Group != null && room.CheckRights(session, false, true))//Room has a group, this user has group rights.
                 itemRights = true;
@@ -58,7 +57,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 }
 
 
-                if (item.UserID == session.GetHabbo().Id)
+                if (item.UserId == session.GetHabbo().Id)
                 {
                     room.GetRoomItemHandler().RemoveFurniture(session, item.Id);
                     session.GetHabbo().GetInventoryComponent().AddNewItem(item.Id, item.BaseItem, item.ExtraData, item.GroupId, true, true, item.LimitedNo, item.LimitedTot);
@@ -73,7 +72,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 }
                 else//Item is being ejected.
                 {
-                    GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(item.UserID);
+                    GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(item.UserId);
                     if (targetClient != null && targetClient.GetHabbo() != null)//Again, do we have an active client?
                     {
                         room.GetRoomItemHandler().RemoveFurniture(targetClient, item.Id);

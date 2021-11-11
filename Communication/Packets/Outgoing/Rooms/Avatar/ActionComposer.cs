@@ -5,11 +5,11 @@
         public int VirtualId { get; }
         public int Action { get; }
 
-        public ActionComposer(int VirtualId, int Action)
+        public ActionComposer(int virtualId, int action)
             : base(ServerPacketHeader.ActionMessageComposer)
         {
-            this.VirtualId = VirtualId;
-            this.Action = Action;
+            VirtualId = virtualId;
+            Action = action;
         }
 
         public override void Compose(ServerPacket packet)

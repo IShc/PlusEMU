@@ -3,10 +3,10 @@
     class RoomErrorNotifComposer : MessageComposer
     {
         public int Error { get; }
-        public RoomErrorNotifComposer(int Error)
+        public RoomErrorNotifComposer(int error)
             : base(ServerPacketHeader.RoomErrorNotifMessageComposer)
         {
-            this.Error = Error;
+            Error = error;
         }
 
         public override void Compose(ServerPacket packet)

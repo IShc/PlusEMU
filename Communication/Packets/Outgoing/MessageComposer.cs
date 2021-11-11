@@ -1,10 +1,4 @@
 ﻿using DotNetty.Buffers;
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Plus.Communication.Packets.Outgoing
 {
@@ -12,9 +6,9 @@ namespace Plus.Communication.Packets.Outgoing
     {
         protected short Id { get; }
 
-        public MessageComposer(short Id)
+        public MessageComposer(short id)
         {
-            this.Id = Id;
+            Id = id;
         }
 
         public ServerPacket WriteMessage(IByteBuffer buf)
@@ -22,10 +16,10 @@ namespace Plus.Communication.Packets.Outgoing
             ServerPacket packet = new ServerPacket(Id, buf);
             try
             {
-                this.Compose(packet);
+                Compose(packet);
             } finally
             {
-                this.Dispose();
+                Dispose();
             }
             return packet;
         }

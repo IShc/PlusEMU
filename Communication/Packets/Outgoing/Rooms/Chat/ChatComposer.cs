@@ -7,13 +7,13 @@
         public int Emotion { get; }
         public int Colour { get; }
 
-        public ChatComposer(int VirtualId, string Message, int Emotion, int Colour)
+        public ChatComposer(int virtualId, string message, int emotion, int colour)
             : base(ServerPacketHeader.ChatMessageComposer)
         {
-            this.VirtualId = VirtualId;
-            this.Message = Message;
-            this.Emotion = Emotion;
-            this.Colour = Colour;
+            VirtualId = virtualId;
+            Message = message;
+            Emotion = emotion;
+            Colour = colour;
         }
 
         public override void Compose(ServerPacket packet)

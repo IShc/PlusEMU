@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Linq;
-using System.Drawing;
 using System.Collections.Concurrent;
-using Plus.HabboHotel.Items;
+using System.Drawing;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-using Plus.HabboHotel.Rooms.Games.Teams;
+using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Items.Wired;
+using Plus.HabboHotel.Rooms.Games.Teams;
 using Plus.HabboHotel.Rooms.PathFinding;
 
 namespace Plus.HabboHotel.Rooms.Games.Football
@@ -15,24 +15,20 @@ namespace Plus.HabboHotel.Rooms.Games.Football
         private Room _room;
         private Item[] gates;
         private ConcurrentDictionary<int, Item> _balls;
-        private bool _gameStarted;
 
         public Soccer(Room room)
         {
             _room = room;
             gates = new Item[4];
             _balls = new ConcurrentDictionary<int, Item>();
-            _gameStarted = false;
+            GameIsStarted = false;
         }
 
-        public bool GameIsStarted
-        {
-            get { return _gameStarted; }
-        }
+        public bool GameIsStarted { get; private set; }
 
         public void StopGame(bool triggeredByUser = false)
         {
-            _gameStarted = false;
+            GameIsStarted = false;
 
             if (!triggeredByUser)
                 _room.GetWired().TriggerEvent(WiredBoxType.TriggerGameEnds, null);
@@ -40,7 +36,7 @@ namespace Plus.HabboHotel.Rooms.Games.Football
 
         public void StartGame()
         {
-            _gameStarted = true;
+            GameIsStarted = true;
         }
 
         public void AddBall(Item item)
@@ -184,29 +180,29 @@ namespace Plus.HabboHotel.Rooms.Games.Football
         {
             if (gates[0] == null)
             {
-                item.team = Team.Blue;
+                item.Team = Team.Blue;
                 gates[0] = item;
             }
             else if (gates[1] == null)
             {
-                item.team = Team.Red;
+                item.Team = Team.Red;
                 gates[1] = item;
             }
             else if (gates[2] == null)
             {
-                item.team = Team.Green;
+                item.Team = Team.Green;
                 gates[2] = item;
             }
             else if (gates[3] == null)
             {
-                item.team = Team.Yellow;
+                item.Team = Team.Yellow;
                 gates[3] = item;
             }
         }
 
         public void UnRegisterGate(Item item)
         {
-            switch (item.team)
+            switch (item.Team)
             {
                 case Team.Blue:
                     {

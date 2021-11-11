@@ -5,12 +5,12 @@
         public int RoomId { get; }
         public int UserId { get; }
         public string Username { get; }
-        public FlatControllerAddedComposer(int RoomId, int UserId, string Username)
+        public FlatControllerAddedComposer(int roomId, int userId, string username)
             : base(ServerPacketHeader.FlatControllerAddedMessageComposer)
         {
-            this.RoomId = RoomId;
-            this.UserId = UserId;
-            this.Username = Username;
+            RoomId = roomId;
+            UserId = userId;
+            Username = username;
         }
 
         public override void Compose(ServerPacket packet)

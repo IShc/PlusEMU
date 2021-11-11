@@ -36,10 +36,10 @@ namespace Plus.HabboHotel.Rooms.Games
                 if (item == null)
                     continue;
 
-                if (item.interactionCountHelper == 0 && item.ExtraData == "1")
+                if (item.InteractionCountHelper == 0 && item.ExtraData == "1")
                 {
                     _room.GetGameMap().RemoveFromMap(item, false);
-                    item.interactionCountHelper = 1;
+                    item.InteractionCountHelper = 1;
                 }
 
                 if (string.IsNullOrEmpty(item.ExtraData))

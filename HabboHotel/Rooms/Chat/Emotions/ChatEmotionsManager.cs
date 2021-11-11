@@ -4,7 +4,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Emotions
 {
     public sealed class ChatEmotionsManager
     {
-        private readonly Dictionary<string, ChatEmotions> _emotions = new Dictionary<string, ChatEmotions>()
+        private readonly Dictionary<string, ChatEmotions> _emotions = new()
             {
                 // Smile
                 { ":)", ChatEmotions.Smile },

@@ -1,109 +1,108 @@
 ﻿using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items.Wired;
 
-
 namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorGate : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            int Modes = Item.GetBaseItem().Modes - 1;
+            int modes = item.GetBaseItem().Modes - 1;
 
-            if (!HasRights)
+            if (!hasRights)
             {
                 return;
             }
-            else if (Modes <= 0)
+            else if (modes <= 0)
             {
-                Item.UpdateState(false, true);
+                item.UpdateState(false, true);
             }
 
-            int CurrentMode = 0;
-            int NewMode = 0;
+            int currentMode = 0;
+            int newMode = 0;
 
-            if (!int.TryParse(Item.ExtraData, out CurrentMode))
+            if (!int.TryParse(item.ExtraData, out currentMode))
             {
             }
 
-            if (CurrentMode <= 0)
+            if (currentMode <= 0)
             {
-                NewMode = 1;
+                newMode = 1;
             }
-            else if (CurrentMode >= Modes)
+            else if (currentMode >= modes)
             {
-                NewMode = 0;
+                newMode = 0;
             }
             else
             {
-                NewMode = CurrentMode + 1;
+                newMode = currentMode + 1;
             }
 
-            if (NewMode == 0)
+            if (newMode == 0)
             {
-                if (!Item.GetRoom().GetGameMap().ItemCanBePlaced(Item.GetX, Item.GetY))
+                if (!item.GetRoom().GetGameMap().ItemCanBePlaced(item.GetX, item.GetY))
                 {
                     return;
                 }
             }
 
-            Item.ExtraData = NewMode.ToString();
-            Item.UpdateState();
+            item.ExtraData = newMode.ToString();
+            item.UpdateState();
 
-            Item.GetRoom().GetGameMap().UpdateMapForItem(Item);
-            Item.GetRoom().GetWired().TriggerEvent(WiredBoxType.TriggerStateChanges, Session.GetHabbo(), Item);
+            item.GetRoom().GetGameMap().UpdateMapForItem(item);
+            item.GetRoom().GetWired().TriggerEvent(WiredBoxType.TriggerStateChanges, session.GetHabbo(), item);
             //Item.GetRoom().GenerateMaps();
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
-            int Modes = Item.GetBaseItem().Modes - 1;
+            int modes = item.GetBaseItem().Modes - 1;
 
-            if (Modes <= 0)
+            if (modes <= 0)
             {
-                Item.UpdateState(false, true);
+                item.UpdateState(false, true);
             }
 
-            int CurrentMode = 0;
-            int NewMode = 0;
+            int currentMode = 0;
+            int newMode = 0;
 
-            if (!int.TryParse(Item.ExtraData, out CurrentMode))
+            if (!int.TryParse(item.ExtraData, out currentMode))
             {
             }
 
-            if (CurrentMode <= 0)
+            if (currentMode <= 0)
             {
-                NewMode = 1;
+                newMode = 1;
             }
-            else if (CurrentMode >= Modes)
+            else if (currentMode >= modes)
             {
-                NewMode = 0;
+                newMode = 0;
             }
             else
             {
-                NewMode = CurrentMode + 1;
+                newMode = currentMode + 1;
             }
 
-            if (NewMode == 0)
+            if (newMode == 0)
             {
-                if (!Item.GetRoom().GetGameMap().ItemCanBePlaced(Item.GetX, Item.GetY))
+                if (!item.GetRoom().GetGameMap().ItemCanBePlaced(item.GetX, item.GetY))
                 {
                     return;
                 }
             }
 
-            Item.ExtraData = NewMode.ToString();
-            Item.UpdateState();
+            item.ExtraData = newMode.ToString();
+            item.UpdateState();
 
-            Item.GetRoom().GetGameMap().UpdateMapForItem(Item);
+            item.GetRoom().GetGameMap().UpdateMapForItem(item);
             //Item.GetRoom().GenerateMaps();
         }
     }

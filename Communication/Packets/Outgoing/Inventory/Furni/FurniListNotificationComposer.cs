@@ -5,11 +5,11 @@
         public int FurniId { get; }
         public int Type { get; }
 
-        public FurniListNotificationComposer(int Id, int Type)
+        public FurniListNotificationComposer(int id, int type)
             : base(ServerPacketHeader.FurniListNotificationMessageComposer)
         {
-            this.FurniId = Id;
-            this.Type = Type;
+            FurniId = id;
+            Type = type;
         }
 
         public override void Compose(ServerPacket packet)

@@ -8,8 +8,8 @@
         public RoomRatingComposer(int score, bool canVote)
             : base(ServerPacketHeader.RoomRatingMessageComposer)
         {
-            this.Score = score;
-            this.CanVote = canVote;
+            Score = score;
+            CanVote = canVote;
         }
 
         public override void Compose(ServerPacket packet)

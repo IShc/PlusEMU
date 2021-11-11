@@ -8,8 +8,8 @@
         public CampaignComposer(string campaignString, string campaignName)
             : base(ServerPacketHeader.CampaignMessageComposer)
         {
-            this.CampaignName = campaignName;
-            this.CampaignString = campaignString;
+            CampaignName = campaignName;
+            CampaignString = campaignString;
         }
 
         public override void Compose(ServerPacket packet)

@@ -1,34 +1,26 @@
 ﻿using Plus.Communication.Packets.Outgoing.Moderation;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
     class StaffAlertCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_staff_alert"; }
-        }
+        public string PermissionRequired => "command_staff_alert";
 
-        public string Parameters
-        {
-            get { return "%message%"; }
-        }
+        public string Parameters => "%message%";
 
-        public string Description
-        {
-            get { return "Sends a message typed by you to the current online staff members."; }
-        }
+        public string Description => "Sends a message typed by you to the current online staff members.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Please enter a message to send.");
+                session.SendWhisper("Please enter a message to send.");
                 return;
             }
 
-            string Message = CommandManager.MergeParams(Params, 1);
-            PlusEnvironment.GetGame().GetClientManager().StaffAlert(new BroadcastMessageAlertComposer("Staff Alert:\r\r" + Message + "\r\n" + "- " + Session.GetHabbo().Username));
+            string message = CommandManager.MergeParams(@params, 1);
+            PlusEnvironment.GetGame().GetClientManager().StaffAlert(new BroadcastMessageAlertComposer("Staff Alert:\r\r" + message + "\r\n" + "- " + session.GetHabbo().Username));
             return;
         }
     }

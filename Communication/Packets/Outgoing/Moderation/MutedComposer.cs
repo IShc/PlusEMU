@@ -6,10 +6,10 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
     {
         public double TimeMuted { get; }
 
-        public MutedComposer(double TimeMuted)
+        public MutedComposer(double timeMuted)
             : base(ServerPacketHeader.MutedMessageComposer)
         {
-            this.TimeMuted = TimeMuted;
+            TimeMuted = timeMuted;
         }
 
         public override void Compose(ServerPacket packet)

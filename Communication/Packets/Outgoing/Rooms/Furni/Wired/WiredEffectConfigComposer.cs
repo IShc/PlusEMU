@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-
+using System.Linq;
 using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Items.Wired;
-
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
 {
@@ -13,11 +11,11 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
         public IWiredItem WiredItem { get; }
         public List<int> BlockedItems { get; }
 
-        public WiredEffectConfigComposer(IWiredItem Box, List<int> BlockedItems)
+        public WiredEffectConfigComposer(IWiredItem box, List<int> blockedItems)
             : base(ServerPacketHeader.WiredEffectConfigMessageComposer)
         {
-            this.WiredItem = Box;
-            this.BlockedItems = BlockedItems;
+            WiredItem = box;
+            BlockedItems = blockedItems;
         }
 
         public override void Compose(ServerPacket packet)
@@ -26,9 +24,9 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             packet.WriteInteger(15);
 
             packet.WriteInteger(WiredItem.SetItems.Count);
-            foreach (Item Item in WiredItem.SetItems.Values.ToList())
+            foreach (Item item in WiredItem.SetItems.Values.ToList())
             {
-                packet.WriteInteger(Item.Id);
+                packet.WriteInteger(item.Id);
             }
 
             packet.WriteInteger(WiredItem.Item.GetBaseItem().SpriteId);
@@ -94,17 +92,17 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
 
             if (WiredItem is IWiredCycle && WiredItem.Type != WiredBoxType.EffectKickUser && WiredItem.Type != WiredBoxType.EffectMatchPosition && WiredItem.Type != WiredBoxType.EffectMoveAndRotate && WiredItem.Type != WiredBoxType.EffectSetRollerSpeed)
             {
-                IWiredCycle Cycle = (IWiredCycle)WiredItem;
+                IWiredCycle cycle = (IWiredCycle)WiredItem;
                 packet.WriteInteger(WiredBoxTypeUtility.GetWiredId(WiredItem.Type));
                 packet.WriteInteger(0);
-                packet.WriteInteger(Cycle.Delay);
+                packet.WriteInteger(cycle.Delay);
             }
             else if (WiredItem.Type == WiredBoxType.EffectMatchPosition || WiredItem.Type == WiredBoxType.EffectMoveAndRotate)
             {
-                IWiredCycle Cycle = (IWiredCycle)WiredItem;
+                IWiredCycle cycle = (IWiredCycle)WiredItem;
                 packet.WriteInteger(0);
                 packet.WriteInteger(WiredBoxTypeUtility.GetWiredId(WiredItem.Type));
-                packet.WriteInteger(Cycle.Delay);
+                packet.WriteInteger(cycle.Delay);
             }
             else
             {
@@ -116,8 +114,8 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             packet.WriteInteger(BlockedItems.Count()); // Incompatable items loop
             if (BlockedItems.Count() > 0)
             {
-                foreach (int ItemId in BlockedItems.ToList())
-                    packet.WriteInteger(ItemId);
+                foreach (int itemId in BlockedItems.ToList())
+                    packet.WriteInteger(itemId);
             }
         }
     }

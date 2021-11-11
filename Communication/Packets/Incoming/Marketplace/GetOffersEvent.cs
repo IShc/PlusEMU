@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Text;
-using System.Data;
 using System.Collections.Generic;
-
-using Plus.HabboHotel.Catalog.Marketplace;
+using System.Data;
+using System.Text;
 using Plus.Communication.Packets.Outgoing.Marketplace;
-
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.Catalog.Marketplace;
 using Plus.HabboHotel.GameClients;
-
 
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
@@ -79,10 +76,10 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
                 {
                     if (item.LimitedNumber > 0)
                     {
-                        if (!dictionary.ContainsKey(item.OfferID))
-                            dictionary.Add(item.OfferID, item);
-                        if (!dictionary2.ContainsKey(item.OfferID))
-                            dictionary2.Add(item.OfferID, 1);
+                        if (!dictionary.ContainsKey(item.OfferId))
+                            dictionary.Add(item.OfferId, item);
+                        if (!dictionary2.ContainsKey(item.OfferId))
+                            dictionary2.Add(item.OfferId, 1);
                     }
                     else
                     {

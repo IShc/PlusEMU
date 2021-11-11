@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-
-using Plus.HabboHotel.GameClients;
 using Plus.Communication.Packets.Outgoing.Inventory.Badges;
 using Plus.Communication.Packets.Outgoing.Inventory.Furni;
-
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.Badges;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Users.Badges
 {
@@ -14,15 +12,15 @@ namespace Plus.HabboHotel.Users.Badges
         private readonly Habbo _player;
         private readonly Dictionary<string, Badge> _badges;
 
-        public BadgeComponent(Habbo Player, UserData.UserData data)
+        public BadgeComponent(Habbo player, UserData.UserData data)
         {
-            _player = Player;
+            _player = player;
             _badges = new Dictionary<string, Badge>();
 
-            foreach (Badge badge in data.badges)
+            foreach (Badge badge in data.Badges)
             {
-                BadgeDefinition BadgeDefinition = null;
-                if (!PlusEnvironment.GetGame().GetBadgeManager().TryGetBadge(badge.Code, out BadgeDefinition) || BadgeDefinition.RequiredRight.Length > 0 && !Player.GetPermissions().HasRight(BadgeDefinition.RequiredRight))
+                BadgeDefinition badgeDefinition = null;
+                if (!PlusEnvironment.GetGame().GetBadgeManager().TryGetBadge(badge.Code, out badgeDefinition) || badgeDefinition.RequiredRight.Length > 0 && !player.GetPermissions().HasRight(badgeDefinition.RequiredRight))
                     continue;
 
                 if (!_badges.ContainsKey(badge.Code))
@@ -30,10 +28,7 @@ namespace Plus.HabboHotel.Users.Badges
             }     
         }
 
-        public int Count
-        {
-            get { return _badges.Count; }
-        }
+        public int Count => _badges.Count;
 
         public int EquippedCount
         {
@@ -108,15 +103,15 @@ namespace Plus.HabboHotel.Users.Badges
 
         public void ResetSlots()
         {
-            foreach (Badge Badge in _badges.Values)
+            foreach (Badge badge in _badges.Values)
             {
-                Badge.Slot = 0;
+                badge.Slot = 0;
             }
         }
 
-        public void RemoveBadge(string Badge)
+        public void RemoveBadge(string badge)
         {
-            if (!HasBadge(Badge))
+            if (!HasBadge(badge))
             {
                 return;
             }
@@ -124,12 +119,12 @@ namespace Plus.HabboHotel.Users.Badges
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("DELETE FROM user_badges WHERE badge_id = @badge AND user_id = " + _player.Id + " LIMIT 1");
-                dbClient.AddParameter("badge", Badge);
+                dbClient.AddParameter("badge", badge);
                 dbClient.RunQuery();
             }
 
-            if (_badges.ContainsKey(Badge))
-                _badges.Remove(Badge);
+            if (_badges.ContainsKey(badge))
+                _badges.Remove(badge);
         }
     }
 }

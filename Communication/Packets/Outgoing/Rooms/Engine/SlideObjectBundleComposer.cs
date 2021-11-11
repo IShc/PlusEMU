@@ -12,31 +12,31 @@
         public int AvatarId { get; }
         public int ItemId { get; }
 
-        public SlideObjectBundleComposer(int FromX, int FromY, double FromZ, int ToX, int ToY, double ToZ, int RollerId, int AvatarId, int ItemId)
+        public SlideObjectBundleComposer(int fromX, int fromY, double fromZ, int toX, int toY, double toZ, int rollerId, int avatarId, int itemId)
             : base(ServerPacketHeader.SlideObjectBundleMessageComposer)
         {
-            this.FromX = FromX;
-            this.FromY = FromY;
-            this.FromZ = FromZ;
-            this.ToX = ToX;
-            this.ToY = ToY;
-            this.ToZ = ToZ;
-            this.RollerId = RollerId;
-            this.AvatarId = AvatarId;
-            this.ItemId = ItemId;
+            FromX = fromX;
+            FromY = fromY;
+            FromZ = fromZ;
+            ToX = toX;
+            ToY = toY;
+            ToZ = toZ;
+            RollerId = rollerId;
+            AvatarId = avatarId;
+            ItemId = itemId;
         }
 
         public override void Compose(ServerPacket packet)
         {
-            bool IsItem = ItemId > 0;
+            bool isItem = ItemId > 0;
 
             packet.WriteInteger(FromX);
             packet.WriteInteger(FromY);
             packet.WriteInteger(ToX);
             packet.WriteInteger(ToY);
-            packet.WriteInteger(IsItem ? 1 : 0);
+            packet.WriteInteger(isItem ? 1 : 0);
 
-            if (IsItem)
+            if (isItem)
                 packet.WriteInteger(ItemId);
             else
             {
@@ -48,7 +48,7 @@
             packet.WriteDouble(FromZ);
             packet.WriteDouble(ToZ);
 
-            if (IsItem)
+            if (isItem)
             {
                 packet.WriteInteger(RollerId);
             }

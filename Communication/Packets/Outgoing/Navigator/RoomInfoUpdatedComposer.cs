@@ -7,7 +7,7 @@
         public RoomInfoUpdatedComposer(int roomId)
             : base(ServerPacketHeader.RoomInfoUpdatedMessageComposer)
         {
-            this.RoomId = roomId;
+            RoomId = roomId;
         }
 
         public override void Compose(ServerPacket packet)

@@ -2,33 +2,17 @@
 {
     public class SavedSearch
     {
-        private int _id;
-        private string _filter;
-        private string _search;
-
         public SavedSearch(int id, string filter, string search)
         {
-            _id = id;
-            _filter = filter;
-            _search = search;
+            Id = id;
+            Filter = filter;
+            Search = search;
         }
 
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public int Id { get; set; }
 
-        public string Filter
-        {
-            get { return _filter; }
-            set { _filter = value; }
-        }
+        public string Filter { get; set; }
 
-        public string Search
-        {
-            get { return _search; }
-            set { _search = value; }
-        }
+        public string Search { get; set; }
     }
 }

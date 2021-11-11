@@ -1,11 +1,10 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
-using Plus.HabboHotel.Users;
-using System.Collections.Concurrent;
-
-using Plus.Database.Interfaces;
 using log4net;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Groups
 {
@@ -194,29 +193,14 @@ namespace Plus.HabboHotel.Groups
         }
 
 
-        public ICollection<GroupBadgeParts> BadgeBases
-        {
-            get { return _bases; }
-        }
+        public ICollection<GroupBadgeParts> BadgeBases => _bases;
 
-        public ICollection<GroupBadgeParts> BadgeSymbols
-        {
-            get { return _symbols; }
-        }
+        public ICollection<GroupBadgeParts> BadgeSymbols => _symbols;
 
-        public ICollection<GroupColours> BadgeBaseColours
-        {
-            get { return _baseColours; }
-        }
+        public ICollection<GroupColours> BadgeBaseColours => _baseColours;
 
-        public ICollection<GroupColours> BadgeSymbolColours
-        {
-            get { return _symbolColours.Values; }
-        }
+        public ICollection<GroupColours> BadgeSymbolColours => _symbolColours.Values;
 
-        public ICollection<GroupColours> BadgeBackColours
-        {
-            get { return _backgroundColours.Values; }
-        }
+        public ICollection<GroupColours> BadgeBackColours => _backgroundColours.Values;
     }
 }

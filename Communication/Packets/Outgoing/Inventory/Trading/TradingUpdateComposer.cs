@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using Plus.HabboHotel.Rooms.Trading;
 using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms.Trading;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
 {
@@ -11,7 +11,7 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
         public TradingUpdateComposer(Trade trade)
             : base(ServerPacketHeader.TradingUpdateMessageComposer)
         {
-            this.Trade = trade;
+            Trade = trade;
         }
 
         public override void Compose(ServerPacket packet)

@@ -3,10 +3,10 @@
     class RoomSettingsSavedComposer : MessageComposer
     {
         public int RoomId { get; }
-        public RoomSettingsSavedComposer(int roomID)
+        public RoomSettingsSavedComposer(int roomId)
             : base(ServerPacketHeader.RoomSettingsSavedMessageComposer)
         {
-            this.RoomId = roomID;
+            RoomId = roomId;
         }
 
         public override void Compose(ServerPacket packet)

@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
-
+using Plus.Communication.Packets.Incoming;
 using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
-using Plus.Communication.Packets.Incoming;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -11,75 +10,75 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.EffectBotFollowsUserBox; } }
+        public WiredBoxType Type => WiredBoxType.EffectBotFollowsUserBox;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public BotFollowsUserBox(Room Instance, Item Item)
+        public BotFollowsUserBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            int FollowMode = Packet.PopInt();//1 = follow, 0 = don't.
-            string BotConfiguration = Packet.PopString();
+            int unknown = packet.PopInt();
+            int followMode = packet.PopInt();//1 = follow, 0 = don't.
+            string botConfiguration = packet.PopString();
        
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            StringData = FollowMode + ";" +BotConfiguration;
+            StringData = followMode + ";" +botConfiguration;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params == null || Params.Length == 0)
+            if (@params == null || @params.Length == 0)
                 return false;
 
             if (String.IsNullOrEmpty(StringData))
                 return false;
 
-            Habbo Player = (Habbo)Params[0];
-            if (Player == null)
+            Habbo player = (Habbo)@params[0];
+            if (player == null)
                 return false;
 
-            RoomUser Human = Instance.GetRoomUserManager().GetRoomUserByHabbo(Player.Id);
-            if (Human == null)
+            RoomUser human = Instance.GetRoomUserManager().GetRoomUserByHabbo(player.Id);
+            if (human == null)
                 return false;
 
-            string[] Stuff = StringData.Split(';');
-            if (Stuff.Length != 2)
+            string[] stuff = StringData.Split(';');
+            if (stuff.Length != 2)
                 return false;//This is important, incase a cunt scripts.
 
-            string Username = Stuff[1];
+            string username = stuff[1];
 
-            RoomUser User = Instance.GetRoomUserManager().GetBotByName(Username);
-            if (User == null)
+            RoomUser user = Instance.GetRoomUserManager().GetBotByName(username);
+            if (user == null)
                 return false;
 
-            int FollowMode = 0;
-            if (!int.TryParse(Stuff[0], out FollowMode))
+            int followMode = 0;
+            if (!int.TryParse(stuff[0], out followMode))
                 return false;
 
-            if (FollowMode == 0)
+            if (followMode == 0)
             {
-                User.BotData.ForcedUserTargetMovement = 0;
+                user.BotData.ForcedUserTargetMovement = 0;
 
-                if (User.IsWalking)
-                    User.ClearMovement(true);
+                if (user.IsWalking)
+                    user.ClearMovement(true);
             }
-            else if (FollowMode == 1)
+            else if (followMode == 1)
             {
-                User.BotData.ForcedUserTargetMovement = Player.Id;
+                user.BotData.ForcedUserTargetMovement = player.Id;
 
-                if (User.IsWalking)
-                    User.ClearMovement(true);
-                User.MoveTo(Human.X, Human.Y);
+                if (user.IsWalking)
+                    user.ClearMovement(true);
+                user.MoveTo(human.X, human.Y);
             }
 
             return true;

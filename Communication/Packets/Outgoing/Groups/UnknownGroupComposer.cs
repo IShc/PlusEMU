@@ -5,11 +5,11 @@
         public int GroupId { get; }
         public int HabboId { get; }
 
-        public UnknownGroupComposer(int GroupId, int HabboId)
+        public UnknownGroupComposer(int groupId, int habboId)
             : base(ServerPacketHeader.UnknownGroupMessageComposer)
         {
-            this.GroupId = GroupId;
-            this.HabboId = HabboId;
+            GroupId = groupId;
+            HabboId = habboId;
         }
 
         public override void Compose(ServerPacket packet)

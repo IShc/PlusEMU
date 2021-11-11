@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Data;
-
 using MySql.Data.MySqlClient;
-using Plus.Database.Interfaces;
 using Plus.Database.Adapter;
+using Plus.Database.Interfaces;
 
 namespace Plus.Database
 {

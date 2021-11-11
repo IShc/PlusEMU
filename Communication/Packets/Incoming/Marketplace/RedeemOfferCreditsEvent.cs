@@ -4,7 +4,6 @@ using Plus.Communication.Packets.Outgoing.Inventory.Purse;
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
 
-
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
     class RedeemOfferCreditsEvent : IPacketEvent

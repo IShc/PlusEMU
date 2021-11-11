@@ -7,24 +7,24 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
     {
         public Dictionary<string, Achievement> Achievements { get; }
 
-        public BadgeDefinitionsComposer(Dictionary<string, Achievement> Achievements)
+        public BadgeDefinitionsComposer(Dictionary<string, Achievement> achievements)
             : base(ServerPacketHeader.BadgeDefinitionsMessageComposer)
         {
-            this.Achievements = Achievements;
+            Achievements = achievements;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(Achievements.Count);
 
-            foreach (Achievement Achievement in Achievements.Values)
+            foreach (Achievement achievement in Achievements.Values)
             {
-                packet.WriteString(Achievement.GroupName.Replace("ACH_", ""));
-                packet.WriteInteger(Achievement.Levels.Count);
-                foreach (AchievementLevel Level in Achievement.Levels.Values)
+                packet.WriteString(achievement.GroupName.Replace("ACH_", ""));
+                packet.WriteInteger(achievement.Levels.Count);
+                foreach (AchievementLevel level in achievement.Levels.Values)
                 {
-                    packet.WriteInteger(Level.Level);
-                    packet.WriteInteger(Level.Requirement);
+                    packet.WriteInteger(level.Level);
+                    packet.WriteInteger(level.Requirement);
                 }
             }
         }

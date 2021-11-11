@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Linq;
-using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items;
-
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
     class SetMannequinFigureEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             Room room = session.GetHabbo().CurrentRoom;
             if (room == null || !room.CheckRights(session, true))

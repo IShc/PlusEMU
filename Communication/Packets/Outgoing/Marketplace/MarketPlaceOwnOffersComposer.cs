@@ -2,17 +2,16 @@
 using System.Data;
 using Plus.Database.Interfaces;
 
-
 namespace Plus.Communication.Packets.Outgoing.Marketplace
 {
     class MarketPlaceOwnOffersComposer : MessageComposer
     {
         public int UserId { get; }
 
-        public MarketPlaceOwnOffersComposer(int UserId)
+        public MarketPlaceOwnOffersComposer(int userId)
             : base(ServerPacketHeader.MarketPlaceOwnOffersMessageComposer)
         {
-            this.UserId = UserId;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)

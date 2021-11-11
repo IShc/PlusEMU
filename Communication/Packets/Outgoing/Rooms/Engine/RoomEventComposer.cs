@@ -8,11 +8,11 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         public RoomData Data { get; }
         public RoomPromotion Promotion { get; }
 
-        public RoomEventComposer(RoomData Data, RoomPromotion Promotion)
+        public RoomEventComposer(RoomData data, RoomPromotion promotion)
             : base(ServerPacketHeader.RoomEventMessageComposer)
         {
-            this.Data = Data;
-            this.Promotion = Promotion;
+            Data = data;
+            Promotion = promotion;
         }
 
         public override void Compose(ServerPacket packet)

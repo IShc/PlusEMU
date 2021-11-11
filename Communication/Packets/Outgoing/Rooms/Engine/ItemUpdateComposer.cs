@@ -7,11 +7,11 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         public Item Item { get; }
         public int UserId { get; }
 
-        public ItemUpdateComposer(Item Item, int UserId)
+        public ItemUpdateComposer(Item item, int userId)
             : base(ServerPacketHeader.ItemUpdateMessageComposer)
         {
-            this.Item = Item;
-            this.UserId = UserId;
+            Item = item;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)
@@ -19,24 +19,24 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
             WriteWallItem(Item, UserId, packet);
         }
 
-        private void WriteWallItem(Item Item, int UserId, ServerPacket packet)
+        private void WriteWallItem(Item item, int userId, ServerPacket packet)
         {
-            packet.WriteString(Item.Id.ToString());
-            packet.WriteInteger(Item.GetBaseItem().SpriteId);
-            packet.WriteString(Item.wallCoord);
-            switch (Item.GetBaseItem().InteractionType)
+            packet.WriteString(item.Id.ToString());
+            packet.WriteInteger(item.GetBaseItem().SpriteId);
+            packet.WriteString(item.WallCoord);
+            switch (item.GetBaseItem().InteractionType)
             {
                 case InteractionType.POSTIT:
-                    packet.WriteString(Item.ExtraData.Split(' ')[0]);
+                    packet.WriteString(item.ExtraData.Split(' ')[0]);
                     break;
 
                 default:
-                    packet.WriteString(Item.ExtraData);
+                    packet.WriteString(item.ExtraData);
                     break;
             }
             packet.WriteInteger(-1);
-            packet.WriteInteger((Item.GetBaseItem().Modes > 1) ? 1 : 0);
-            packet.WriteInteger(UserId);
+            packet.WriteInteger((item.GetBaseItem().Modes > 1) ? 1 : 0);
+            packet.WriteInteger(userId);
         }
     }
 }

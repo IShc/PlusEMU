@@ -1,12 +1,13 @@
 ﻿using System;
+using Plus.Communication.Packets.Outgoing.Moderation;
 using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Moderation;
 using Plus.HabboHotel.Quests;
 using Plus.HabboHotel.Rooms;
-using Plus.Utilities;
-using Plus.Communication.Packets.Outgoing.Moderation;
-using Plus.HabboHotel.Rooms.Chat.Styles;
 using Plus.HabboHotel.Rooms.Chat.Logs;
+using Plus.HabboHotel.Rooms.Chat.Styles;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Chat
 {
@@ -70,7 +71,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
                 session.GetHabbo().BannedPhraseCount++;
                 if (session.GetHabbo().BannedPhraseCount >= Convert.ToInt32(PlusEnvironment.GetSettingsManager().TryGetValue("room.chat.filter.banned_phrases.chances")))
                 {
-                    PlusEnvironment.GetGame().GetModerationManager().BanUser("System", HabboHotel.Moderation.ModerationBanType.Username, session.GetHabbo().Username, "Spamming banned phrases (" + message + ")", PlusEnvironment.GetUnixTimestamp() + 78892200);
+                    PlusEnvironment.GetGame().GetModerationManager().BanUser("System", ModerationBanType.Username, session.GetHabbo().Username, "Spamming banned phrases (" + message + ")", PlusEnvironment.GetUnixTimestamp() + 78892200);
                     session.Disconnect();
                     return;
                 }

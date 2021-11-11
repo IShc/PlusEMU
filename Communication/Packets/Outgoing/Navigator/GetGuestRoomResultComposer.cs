@@ -1,5 +1,5 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.GameClients;
+﻿using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Navigator
@@ -14,10 +14,10 @@ namespace Plus.Communication.Packets.Outgoing.Navigator
         public GetGuestRoomResultComposer(GameClient session, RoomData data, bool isLoading, bool checkEntry)
             : base(ServerPacketHeader.GetGuestRoomResultMessageComposer)
         {
-            this.Habbo = session.GetHabbo();
-            this.Data = data;
-            this.IsLoading = isLoading;
-            this.CheckEntry = checkEntry;
+            Habbo = session.GetHabbo();
+            Data = data;
+            IsLoading = isLoading;
+            CheckEntry = checkEntry;
         }
 
         public override void Compose(ServerPacket packet)

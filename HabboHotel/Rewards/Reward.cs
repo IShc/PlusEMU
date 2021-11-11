@@ -23,8 +23,8 @@ namespace Plus.HabboHotel.Rewards
         {
             get
             {
-                double Now = UnixTimestamp.GetNow();
-                return (Now >= RewardStart && Now <= RewardEnd);
+                double now = UnixTimestamp.GetNow();
+                return (now >= RewardStart && now <= RewardEnd);
             }
         }
     }

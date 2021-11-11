@@ -8,8 +8,8 @@
         public FlatCreatedComposer(int roomId, string roomName)
             : base(ServerPacketHeader.FlatCreatedMessageComposer)
         {
-            this.RoomId = roomId;
-            this.RoomName = roomName;
+            RoomId = roomId;
+            RoomName = roomName;
         }
 
         public override void Compose(ServerPacket packet)

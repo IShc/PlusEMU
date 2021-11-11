@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Plus.HabboHotel.LandingView.Promotions;
 using Plus.Communication.Packets.Outgoing.LandingView;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.LandingView.Promotions;
 
 namespace Plus.Communication.Packets.Incoming.LandingView
 {

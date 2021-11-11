@@ -1,88 +1,43 @@
-﻿using Plus.Utilities;
-
-
-using Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects;
-
+﻿using Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects;
 using Plus.Database.Interfaces;
+using Plus.Utilities;
 
 namespace Plus.HabboHotel.Users.Effects
 {
     public sealed class AvatarEffect
     {
-        private int _id;
-        private int _userId;
-        private int _spriteId;
-        private double _duration;
-        private bool _activated;
-        private double _timestampActivated;
-        private int _quantity;
-
-        public AvatarEffect(int Id, int UserId, int SpriteId, double Duration, bool Activated, double TimestampActivated, int Quantity)
+        public AvatarEffect(int id, int userId, int spriteId, double duration, bool activated, double timestampActivated, int quantity)
         {
-            this.Id = Id;
-            this.UserId = UserId;
-            this.SpriteId = SpriteId;
-            this.Duration = Duration;
-            this.Activated = Activated;
-            this.TimestampActivated = TimestampActivated;
-            this.Quantity = Quantity;
+            Id = id;
+            UserId = userId;
+            SpriteId = spriteId;
+            Duration = duration;
+            Activated = activated;
+            TimestampActivated = timestampActivated;
+            Quantity = quantity;
         }
 
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
+        public int Id { get; set; }
 
-        public int UserId
-        {
-            get { return _userId; }
-            set { _userId = value; }
-        }
+        public int UserId { get; set; }
 
-        public int SpriteId
-        {
-            get { return _spriteId; }
-            set { _spriteId = value; }
-        }
+        public int SpriteId { get; set; }
 
-        public double Duration
-        {
-            get { return _duration; }
-            set { _duration = value; }
-        }
+        public double Duration { get; set; }
 
-        public bool Activated
-        {
-            get { return _activated; }
-            set { _activated = value; }
-        }
+        public bool Activated { get; set; }
 
-        public double TimestampActivated
-        {
-            get { return _timestampActivated; }
-            set { _timestampActivated = value; }
-        }
+        public double TimestampActivated { get; set; }
 
-        public int Quantity
-        {
-            get { return _quantity; }
-            set { _quantity = value; }
-        }
+        public int Quantity { get; set; }
 
-        public double TimeUsed
-        {
-            get
-            {
-                return (UnixTimestamp.GetNow() - _timestampActivated);
-            }
-        }
+        public double TimeUsed => (UnixTimestamp.GetNow() - TimestampActivated);
 
         public double TimeLeft
         {
             get
             {
-                double tl = (_activated ? _duration - TimeUsed : _duration);
+                double tl = (Activated ? Duration - TimeUsed : Duration);
 
                 if (tl < 0)
                 {
@@ -93,44 +48,38 @@ namespace Plus.HabboHotel.Users.Effects
             }
         }
 
-        public bool HasExpired
-        {
-            get
-            {
-                return (_activated && TimeLeft <= 0);
-            }
-        }
+        public bool HasExpired => (Activated && TimeLeft <= 0);
 
         /// <summary>
         /// Activates the AvatarEffect
         /// </summary>
         public bool Activate()
         {
-            double TsNow = UnixTimestamp.GetNow();
+            double tsNow = UnixTimestamp.GetNow();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("UPDATE `user_effects` SET `is_activated` = '1', `activated_stamp` = @ts WHERE `id` = @id");
-                dbClient.AddParameter("ts", TsNow);
+                dbClient.AddParameter("ts", tsNow);
                 dbClient.AddParameter("id", Id);
                 dbClient.RunQuery();
 
-                _activated = true;
-                _timestampActivated = TsNow;
+                Activated = true;
+                TimestampActivated = tsNow;
                 return true;
             }
         }
 
-        public void HandleExpiration(Habbo Habbo)
+        public void HandleExpiration(Habbo habbo)
         {
-            _quantity--;
+            Quantity--;
 
-            _activated = false;
-            _timestampActivated = 0;
+            Activated = false;
+            TimestampActivated = 0;
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                if (_quantity < 1)
+                if (Quantity < 1)
                 {
                     dbClient.SetQuery("DELETE FROM `user_effects` WHERE `id` = @id");
                     dbClient.AddParameter("id", Id);
@@ -145,13 +94,13 @@ namespace Plus.HabboHotel.Users.Effects
                 }
             }
 
-            Habbo.GetClient().SendPacket(new AvatarEffectExpiredComposer(this));
+            habbo.GetClient().SendPacket(new AvatarEffectExpiredComposer(this));
             // reset fx if in room?
         }
 
         public void AddToQuantity()
         {
-            _quantity++;
+            Quantity++;
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

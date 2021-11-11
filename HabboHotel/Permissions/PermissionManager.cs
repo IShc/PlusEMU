@@ -1,26 +1,26 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using log4net;
 using Plus.Database.Interfaces;
-using System.Data;
 using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Permissions
 {
     public sealed class PermissionManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(PermissionManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(PermissionManager));
 
-        private readonly Dictionary<int, Permission> Permissions = new Dictionary<int, Permission>();
+        private readonly Dictionary<int, Permission> _permissions = new();
 
-        private readonly Dictionary<string, PermissionCommand> _commands = new Dictionary<string, PermissionCommand>();
+        private readonly Dictionary<string, PermissionCommand> _commands = new();
 
-        private readonly Dictionary<int, PermissionGroup> PermissionGroups = new Dictionary<int, PermissionGroup>();
+        private readonly Dictionary<int, PermissionGroup> _permissionGroups = new();
 
-        private readonly Dictionary<int, List<string>> PermissionGroupRights = new Dictionary<int, List<string>>();
+        private readonly Dictionary<int, List<string>> _permissionGroupRights = new();
 
-        private readonly Dictionary<int, List<string>> PermissionSubscriptionRights = new Dictionary<int, List<string>>();
+        private readonly Dictionary<int, List<string>> _permissionSubscriptionRights = new();
 
         public PermissionManager()
         {
@@ -29,21 +29,21 @@ namespace Plus.HabboHotel.Permissions
 
         public void Init()
         {
-            Permissions.Clear();
+            _permissions.Clear();
             _commands.Clear();
-            PermissionGroups.Clear();
-            PermissionGroupRights.Clear();
+            _permissionGroups.Clear();
+            _permissionGroupRights.Clear();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `permissions`");
-                DataTable GetPermissions = dbClient.GetTable();
+                DataTable getPermissions = dbClient.GetTable();
 
-                if (GetPermissions != null)
+                if (getPermissions != null)
                 {
-                    foreach (DataRow Row in GetPermissions.Rows)
+                    foreach (DataRow row in getPermissions.Rows)
                     {
-                        Permissions.Add(Convert.ToInt32(Row["id"]), new Permission(Convert.ToInt32(Row["id"]), Convert.ToString(Row["permission"]), Convert.ToString(Row["description"])));
+                        _permissions.Add(Convert.ToInt32(row["id"]), new Permission(Convert.ToInt32(row["id"]), Convert.ToString(row["permission"]), Convert.ToString(row["description"])));
                     }
                 }
             }
@@ -51,13 +51,13 @@ namespace Plus.HabboHotel.Permissions
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `permissions_commands`");
-                DataTable GetCommands = dbClient.GetTable();
+                DataTable getCommands = dbClient.GetTable();
 
-                if (GetCommands != null)
+                if (getCommands != null)
                 {
-                    foreach (DataRow Row in GetCommands.Rows)
+                    foreach (DataRow row in getCommands.Rows)
                     {
-                         _commands.Add(Convert.ToString(Row["command"]), new PermissionCommand(Convert.ToString(Row["command"]), Convert.ToInt32(Row["group_id"]), Convert.ToInt32(Row["subscription_id"])));
+                         _commands.Add(Convert.ToString(row["command"]), new PermissionCommand(Convert.ToString(row["command"]), Convert.ToInt32(row["group_id"]), Convert.ToInt32(row["subscription_id"])));
                     }
                 }
             }
@@ -65,13 +65,13 @@ namespace Plus.HabboHotel.Permissions
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `permissions_groups`");
-                DataTable GetPermissionGroups = dbClient.GetTable();
+                DataTable getPermissionGroups = dbClient.GetTable();
 
-                if (GetPermissionGroups != null)
+                if (getPermissionGroups != null)
                 {
-                    foreach (DataRow Row in GetPermissionGroups.Rows)
+                    foreach (DataRow row in getPermissionGroups.Rows)
                     {
-                        PermissionGroups.Add(Convert.ToInt32(Row["id"]), new PermissionGroup(Convert.ToString("name"), Convert.ToString("description"), Convert.ToString("badge")));
+                        _permissionGroups.Add(Convert.ToInt32(row["id"]), new PermissionGroup(Convert.ToString("name"), Convert.ToString("description"), Convert.ToString("badge")));
                     }
                 }
             }
@@ -79,39 +79,39 @@ namespace Plus.HabboHotel.Permissions
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `permissions_rights`");
-                DataTable GetPermissionRights = dbClient.GetTable();
+                DataTable getPermissionRights = dbClient.GetTable();
 
-                if (GetPermissionRights != null)
+                if (getPermissionRights != null)
                 {
-                    foreach (DataRow Row in GetPermissionRights.Rows)
+                    foreach (DataRow row in getPermissionRights.Rows)
                     {
-                        int GroupId = Convert.ToInt32(Row["group_id"]);
-                        int PermissionId = Convert.ToInt32(Row["permission_id"]);
+                        int groupId = Convert.ToInt32(row["group_id"]);
+                        int permissionId = Convert.ToInt32(row["permission_id"]);
 
-                        if (!PermissionGroups.ContainsKey(GroupId))
+                        if (!_permissionGroups.ContainsKey(groupId))
                         {
                             continue; // permission group does not exist
                         }
 
-                        Permission Permission = null;
+                        Permission permission = null;
 
-                        if (!Permissions.TryGetValue(PermissionId, out Permission))
+                        if (!_permissions.TryGetValue(permissionId, out permission))
                         {
                             continue; // permission does not exist
                         }
 
-                        if (PermissionGroupRights.ContainsKey(GroupId))
+                        if (_permissionGroupRights.ContainsKey(groupId))
                         {
-                            PermissionGroupRights[GroupId].Add(Permission.PermissionName);
+                            _permissionGroupRights[groupId].Add(permission.PermissionName);
                         }
                         else
                         {
-                            List<string> RightsSet = new List<string>()
+                            List<string> rightsSet = new List<string>()
                                 {
-                                    Permission.PermissionName
+                                    permission.PermissionName
                                 };
 
-                            PermissionGroupRights.Add(GroupId, RightsSet);
+                            _permissionGroupRights.Add(groupId, rightsSet);
                         }
 
                     }
@@ -121,69 +121,69 @@ namespace Plus.HabboHotel.Permissions
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `permissions_subscriptions`");
-                DataTable GetPermissionSubscriptions = dbClient.GetTable();
+                DataTable getPermissionSubscriptions = dbClient.GetTable();
 
-                if (GetPermissionSubscriptions != null)
+                if (getPermissionSubscriptions != null)
                 {
-                    foreach (DataRow Row in GetPermissionSubscriptions.Rows)
+                    foreach (DataRow row in getPermissionSubscriptions.Rows)
                     {
-                        int PermissionId = Convert.ToInt32(Row["permission_id"]);
-                        int SubscriptionId = Convert.ToInt32(Row["subscription_id"]);
+                        int permissionId = Convert.ToInt32(row["permission_id"]);
+                        int subscriptionId = Convert.ToInt32(row["subscription_id"]);
 
-                        Permission Permission = null;
-                        if (!Permissions.TryGetValue(PermissionId, out Permission))
+                        Permission permission = null;
+                        if (!_permissions.TryGetValue(permissionId, out permission))
                             continue; // permission does not exist
 
-                        if (PermissionSubscriptionRights.ContainsKey(SubscriptionId))
+                        if (_permissionSubscriptionRights.ContainsKey(subscriptionId))
                         {
-                            PermissionSubscriptionRights[SubscriptionId].Add(Permission.PermissionName);
+                            _permissionSubscriptionRights[subscriptionId].Add(permission.PermissionName);
                         }
                         else
                         {
-                            List<string> RightsSet = new List<string>()
+                            List<string> rightsSet = new List<string>()
                                 {
-                                    Permission.PermissionName
+                                    permission.PermissionName
                                 };
 
-                            PermissionSubscriptionRights.Add(SubscriptionId, RightsSet);
+                            _permissionSubscriptionRights.Add(subscriptionId, rightsSet);
                         }
                     }
                 }
             }
 
-            log.Info("Loaded " + Permissions.Count + " permissions.");
-            log.Info("Loaded " + PermissionGroups.Count + " permissions groups.");
-            log.Info("Loaded " + PermissionGroupRights.Count + " permissions group rights.");
-            log.Info("Loaded " + PermissionSubscriptionRights.Count + " permissions subscription rights.");
+            Log.Info("Loaded " + _permissions.Count + " permissions.");
+            Log.Info("Loaded " + _permissionGroups.Count + " permissions groups.");
+            Log.Info("Loaded " + _permissionGroupRights.Count + " permissions group rights.");
+            Log.Info("Loaded " + _permissionSubscriptionRights.Count + " permissions subscription rights.");
         }
 
-        public bool TryGetGroup(int Id, out PermissionGroup Group)
+        public bool TryGetGroup(int id, out PermissionGroup @group)
         {
-            return PermissionGroups.TryGetValue(Id, out Group);
+            return _permissionGroups.TryGetValue(id, out @group);
         }
 
-        public List<string> GetPermissionsForPlayer(Habbo Player)
+        public List<string> GetPermissionsForPlayer(Habbo player)
         {
-            List<string> PermissionSet = new List<string>();
+            List<string> permissionSet = new List<string>();
 
-            List<string> PermRights = null;
-            if (PermissionGroupRights.TryGetValue(Player.Rank, out PermRights))
+            List<string> permRights = null;
+            if (_permissionGroupRights.TryGetValue(player.Rank, out permRights))
             {
-                PermissionSet.AddRange(PermRights);
+                permissionSet.AddRange(permRights);
             }
 
-            List<string> SubscriptionRights = null;
-            if (PermissionSubscriptionRights.TryGetValue(Player.VIPRank, out SubscriptionRights))
+            List<string> subscriptionRights = null;
+            if (_permissionSubscriptionRights.TryGetValue(player.VipRank, out subscriptionRights))
             {
-                PermissionSet.AddRange(SubscriptionRights);
+                permissionSet.AddRange(subscriptionRights);
             }
 
-            return PermissionSet;
+            return permissionSet;
         }
 
-        public List<string> GetCommandsForPlayer(Habbo Player)
+        public List<string> GetCommandsForPlayer(Habbo player)
         {
-            return _commands.Where(x => Player.Rank >= x.Value.GroupId && Player.VIPRank >= x.Value.SubscriptionId).Select(x => x.Key).ToList();
+            return _commands.Where(x => player.Rank >= x.Value.GroupId && player.VipRank >= x.Value.SubscriptionId).Select(x => x.Key).ToList();
         }
     }
 }

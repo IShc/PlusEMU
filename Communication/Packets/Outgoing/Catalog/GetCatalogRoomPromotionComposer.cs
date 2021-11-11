@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
@@ -8,20 +7,20 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
     {
         public List<RoomData> UsersRooms { get; }
 
-        public GetCatalogRoomPromotionComposer(List<RoomData> UsersRooms)
+        public GetCatalogRoomPromotionComposer(List<RoomData> usersRooms)
             : base(ServerPacketHeader.PromotableRoomsMessageComposer)
         {
-            this.UsersRooms = UsersRooms;
+            UsersRooms = usersRooms;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteBoolean(true);//wat
             packet.WriteInteger(UsersRooms.Count);//Count of rooms?
-            foreach (RoomData Room in UsersRooms)
+            foreach (RoomData room in UsersRooms)
             {
-                packet.WriteInteger(Room.Id);
-                packet.WriteString(Room.Name);
+                packet.WriteInteger(room.Id);
+                packet.WriteString(room.Name);
                 packet.WriteBoolean(true);
             }
         }

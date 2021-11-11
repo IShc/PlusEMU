@@ -2,15 +2,9 @@
 {
     class ReloadFilterCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to reload the chatting filter manager."; }
-        }
+        public string Description => "This command is used to reload the chatting filter manager.";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
         public bool TryExecute(string[] parameters)
         {

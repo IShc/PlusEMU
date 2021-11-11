@@ -19,7 +19,7 @@
                 case MessengerMessageErrors.FriendMuted:
                     return 3;
 
-                case MessengerMessageErrors.yourMuted:
+                case MessengerMessageErrors.YourMuted:
                     return 4;
 
                 case MessengerMessageErrors.FriendOffline:

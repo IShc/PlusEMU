@@ -1,18 +1,15 @@
 ﻿using System;
-using System.Text;
-using System.Data;
 using System.Collections.Generic;
-
-using Plus.HabboHotel.GameClients;
-
-using Plus.HabboHotel.Items;
-using Plus.HabboHotel.Catalog.Marketplace;
-using Plus.Communication.Packets.Outgoing.Marketplace;
-using Plus.Communication.Packets.Outgoing.Inventory.Purse;
+using System.Data;
+using System.Text;
+using Plus.Communication.Packets.Outgoing.Catalog;
 using Plus.Communication.Packets.Outgoing.Inventory.Furni;
-
+using Plus.Communication.Packets.Outgoing.Inventory.Purse;
+using Plus.Communication.Packets.Outgoing.Marketplace;
 using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.Catalog.Marketplace;
+using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
@@ -80,7 +77,7 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
                     session.GetHabbo().GetInventoryComponent().TryAddItem(giveItem);
                     session.SendPacket(new FurniListNotificationComposer(giveItem.Id, 1));
 
-                    session.SendPacket(new Outgoing.Catalog.PurchaseOKComposer());
+                    session.SendPacket(new PurchaseOKComposer());
                     session.SendPacket(new FurniListAddComposer(giveItem));
                     session.SendPacket(new FurniListUpdateComposer());
                 }

@@ -8,28 +8,28 @@ namespace Plus.HabboHotel.Items.Wired.Boxes
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.AddonRandomEffect; } }
+        public WiredBoxType Type => WiredBoxType.AddonRandomEffect;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public AddonRandomEffectBox(Room Instance, Item Item)
+        public AddonRandomEffectBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
 
             if (SetItems.Count > 0)
                 SetItems.Clear();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
 
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
             return true;
         }

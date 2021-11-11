@@ -1,9 +1,9 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Handshake
 {
-    public class AuthenticationOKComposer : MessageComposer
+    public class AuthenticationOkComposer : MessageComposer
     {
-        public AuthenticationOKComposer()
-            : base(ServerPacketHeader.AuthenticationOKMessageComposer)
+        public AuthenticationOkComposer()
+            : base(ServerPacketHeader.AuthenticationOkMessageComposer)
         {
         }
 

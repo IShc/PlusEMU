@@ -1,59 +1,50 @@
 ﻿using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.Database.Interfaces;
-
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
     class FacelessCommand :IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_faceless"; }
-        }
+        public string PermissionRequired => "command_faceless";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Allows you to go faceless!"; }
-        }
+        public string Description => "Allows you to go faceless!";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
     
-            RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (User == null || User.GetClient() == null)
+            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (user == null || user.GetClient() == null)
                 return;
 
             string[] headParts;
-            string[] figureParts = Session.GetHabbo().Look.Split('.');
-            foreach (string Part in figureParts)
+            string[] figureParts = session.GetHabbo().Look.Split('.');
+            foreach (string part in figureParts)
             {
-                if (Part.StartsWith("hd"))
+                if (part.StartsWith("hd"))
                 {
-                    headParts = Part.Split('-');
+                    headParts = part.Split('-');
                     if (!headParts[1].Equals("99999"))
                         headParts[1] = "99999";
                     else
                         return;
 
-                    Session.GetHabbo().Look = Session.GetHabbo().Look.Replace(Part, "hd-" + headParts[1] + "-" + headParts[2]);
+                    session.GetHabbo().Look = session.GetHabbo().Look.Replace(part, "hd-" + headParts[1] + "-" + headParts[2]);
                     break;
                 }
             }
 
-            Session.GetHabbo().Look = PlusEnvironment.GetFigureManager().ProcessFigure(Session.GetHabbo().Look, Session.GetHabbo().Gender, Session.GetHabbo().GetClothing().GetClothingParts, true);
+            session.GetHabbo().Look = PlusEnvironment.GetFigureManager().ProcessFigure(session.GetHabbo().Look, session.GetHabbo().Gender, session.GetHabbo().GetClothing().GetClothingParts, true);
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("UPDATE `users` SET `look` = '" + Session.GetHabbo().Look + "' WHERE `id` = '" + Session.GetHabbo().Id + "' LIMIT 1");
+                dbClient.RunQuery("UPDATE `users` SET `look` = '" + session.GetHabbo().Look + "' WHERE `id` = '" + session.GetHabbo().Id + "' LIMIT 1");
             }
 
-            Session.SendPacket(new UserChangeComposer(User, true));
-            Session.GetHabbo().CurrentRoom.SendPacket(new UserChangeComposer(User, false));
+            session.SendPacket(new UserChangeComposer(user, true));
+            session.GetHabbo().CurrentRoom.SendPacket(new UserChangeComposer(user, false));
             return;
         }
     }

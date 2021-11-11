@@ -1,8 +1,10 @@
-﻿namespace Plus.Communication.Packets.Incoming.Messenger
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.Communication.Packets.Incoming.Messenger
 {
     class DeclineBuddyEvent : IPacketEvent
     {
-        public void Parse(HabboHotel.GameClients.GameClient session, ClientPacket packet)
+        public void Parse(GameClient session, ClientPacket packet)
         {
             if (session == null || session.GetHabbo() == null || session.GetHabbo().GetMessenger() == null)
                 return;

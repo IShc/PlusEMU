@@ -1,12 +1,9 @@
 ﻿using System.Data;
-
-using Plus.HabboHotel.GameClients;
-using Plus.HabboHotel.Catalog.Vouchers;
-
 using Plus.Communication.Packets.Outgoing.Catalog;
 using Plus.Communication.Packets.Outgoing.Inventory.Purse;
-
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.Catalog.Vouchers;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {

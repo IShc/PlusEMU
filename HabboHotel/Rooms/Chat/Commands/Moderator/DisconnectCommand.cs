@@ -4,43 +4,34 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
     class DisconnectCommand :IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_disconnect"; }
-        }
+        public string PermissionRequired => "command_disconnect";
 
-        public string Parameters
-        {
-            get { return "%username%"; }
-        }
+        public string Parameters => "%username%";
 
-        public string Description
-        {
-            get { return "Disconnects another user from the hotel."; }
-        }
+        public string Description => "Disconnects another user from the hotel.";
 
-        public void Execute(GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("Please enter the username of the user you wish to Disconnect.");
+                session.SendWhisper("Please enter the username of the user you wish to Disconnect.");
                 return;
             }
 
-            GameClient TargetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(Params[1]);
-            if (TargetClient == null)
+            GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(@params[1]);
+            if (targetClient == null)
             {
-                Session.SendWhisper("An error occoured whilst finding that user, maybe they're not online.");
+                session.SendWhisper("An error occoured whilst finding that user, maybe they're not online.");
                 return;
             }
 
-            if (TargetClient.GetHabbo().GetPermissions().HasRight("mod_tool") && !Session.GetHabbo().GetPermissions().HasRight("mod_disconnect_any"))
+            if (targetClient.GetHabbo().GetPermissions().HasRight("mod_tool") && !session.GetHabbo().GetPermissions().HasRight("mod_disconnect_any"))
             {
-                Session.SendWhisper("You are not allowed to Disconnect that user.");
+                session.SendWhisper("You are not allowed to Disconnect that user.");
                 return;
             }
 
-            TargetClient.Disconnect();
+            targetClient.Disconnect();
         }
     }
 }

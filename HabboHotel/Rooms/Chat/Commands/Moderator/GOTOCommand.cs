@@ -1,37 +1,30 @@
-﻿namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class GOTOCommand : IChatCommand
+    class GotoCommand : IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_goto"; }
-        }
+        public string PermissionRequired => "command_goto";
 
-        public string Parameters
-        {
-            get { return "%room_id%"; }
-        }
+        public string Parameters => "%room_id%";
 
-        public string Description
-        {
-            get { return ""; }
-        }
+        public string Description => "";
 
-        public void Execute(GameClients.GameClient session, Room room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
                 session.SendWhisper("You must specify a room id!");
                 return;
             }
 
 
-            if (!int.TryParse(Params[1], out int roomId))
+            if (!int.TryParse(@params[1], out int roomId))
                 session.SendWhisper("You must enter a valid room ID");
             else
             {
-                RoomData Data = null;
-                if (!RoomFactory.TryGetData(roomId, out Data))
+                RoomData data = null;
+                if (!RoomFactory.TryGetData(roomId, out data))
                 {
                     session.SendWhisper("This room does not exist!");
                     return;

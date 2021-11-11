@@ -10,7 +10,7 @@
                 case "user":
                     return ModerationBanType.Username;
                 case "ip":
-                    return ModerationBanType.IP;
+                    return ModerationBanType.Ip;
                 case "machine":
                     return ModerationBanType.Machine;
             }
@@ -23,7 +23,7 @@
                 default:
                 case ModerationBanType.Username:
                     return "user";
-                case ModerationBanType.IP:
+                case ModerationBanType.Ip:
                     return "ip";
                 case ModerationBanType.Machine:
                     return "machine";

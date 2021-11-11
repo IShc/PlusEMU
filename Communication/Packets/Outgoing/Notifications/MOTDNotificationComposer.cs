@@ -4,9 +4,9 @@
     {
         public string Message { get; }
         public MotdNotificationComposer(string message)
-            : base(ServerPacketHeader.MOTDNotificationMessageComposer)
+            : base(ServerPacketHeader.MotdNotificationMessageComposer)
         {
-            this.Message = message;
+            Message = message;
         }
 
         public override void Compose(ServerPacket packet)

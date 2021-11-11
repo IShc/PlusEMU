@@ -2,15 +2,9 @@
 {
     class ReloadNavigatorCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to reload the navigator."; }
-        }
+        public string Description => "This command is used to reload the navigator.";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
         public bool TryExecute(string[] parameters)
         {

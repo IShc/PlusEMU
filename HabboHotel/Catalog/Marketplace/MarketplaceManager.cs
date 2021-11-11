@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Catalog.Marketplace
 {
     public class MarketplaceManager
     {
-        public List<int> MarketItemKeys = new List<int>();
-        public List<MarketOffer> MarketItems = new List<MarketOffer>();
-        public Dictionary<int, int> MarketCounts = new Dictionary<int, int>();
-        public Dictionary<int, int> MarketAverages = new Dictionary<int, int>();
+        public List<int> MarketItemKeys = new();
+        public List<MarketOffer> MarketItems = new();
+        public Dictionary<int, int> MarketCounts = new();
+        public Dictionary<int, int> MarketAverages = new();
 
         public MarketplaceManager()
         {
@@ -55,10 +54,10 @@ namespace Plus.HabboHotel.Catalog.Marketplace
 
         public double FormatTimestamp()
         {
-            return (PlusEnvironment.GetUnixTimestamp() - 172800.0);
+            return PlusEnvironment.GetUnixTimestamp() - 172800.0;
         }
 
-        public int OfferCountForSprite(int SpriteID)
+        public int OfferCountForSprite(int spriteId)
         {
             Dictionary<int, MarketOffer> dictionary = new Dictionary<int, MarketOffer>();
             Dictionary<int, int> dictionary2 = new Dictionary<int, int>();
@@ -83,14 +82,14 @@ namespace Plus.HabboHotel.Catalog.Marketplace
                 }
             }
 
-            if (dictionary2.ContainsKey(SpriteID))
+            if (dictionary2.ContainsKey(spriteId))
             {
-                return dictionary2[SpriteID];
+                return dictionary2[spriteId];
             }
             return 0;
         }
 
-        public int CalculateComissionPrice(float price)
+        public int CalculateCommissionPrice(float price)
         {
             return Convert.ToInt32(Math.Ceiling(price / 100 * 1));
         }

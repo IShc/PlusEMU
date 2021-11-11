@@ -1,41 +1,34 @@
-﻿namespace Plus.HabboHotel.Rooms.Chat.Commands.User
+﻿using Plus.HabboHotel.GameClients;
+
+namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
     class StandCommand :IChatCommand
     {
-        public string PermissionRequired
-        {
-            get { return "command_stand"; }
-        }
+        public string PermissionRequired => "command_stand";
 
-        public string Parameters
-        {
-            get { return ""; ; }
-        }
+        public string Parameters => "";
 
-        public string Description
-        {
-            get { return "Allows you to stand up if not stood already."; }
-        }
+        public string Description => "Allows you to stand up if not stood already.";
 
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            RoomUser User = Room.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Username);
-            if (User == null)
+            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Username);
+            if (user == null)
                 return;
 
-            if (User.isSitting)
+            if (user.isSitting)
             {
-                User.Statusses.Remove("sit");
-                User.Z += 0.35;
-                User.isSitting = false;
-                User.UpdateNeeded = true;
+                user.Statusses.Remove("sit");
+                user.Z += 0.35;
+                user.isSitting = false;
+                user.UpdateNeeded = true;
             }
-            else if (User.isLying)
+            else if (user.isLying)
             {
-                User.Statusses.Remove("lay");
-                User.Z += 0.35;
-                User.isLying = false;
-                User.UpdateNeeded = true;
+                user.Statusses.Remove("lay");
+                user.Z += 0.35;
+                user.isLying = false;
+                user.UpdateNeeded = true;
             }
         }
     }

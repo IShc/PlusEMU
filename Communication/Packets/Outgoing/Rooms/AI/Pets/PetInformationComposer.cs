@@ -1,7 +1,6 @@
 ﻿using System;
-using Plus.HabboHotel.Users;
 using Plus.HabboHotel.Rooms.AI;
-using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
 {
@@ -10,16 +9,16 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
         public Pet Pet { get; }
         public Habbo Habbo { get; }
 
-        public PetInformationComposer(Pet Pet)
+        public PetInformationComposer(Pet pet)
             : base(ServerPacketHeader.PetInformationMessageComposer)
         {
-            this.Pet = Pet;
+            Pet = pet;
         }
 
-        public PetInformationComposer(Habbo Habbo)
+        public PetInformationComposer(Habbo habbo)
             : base(ServerPacketHeader.PetInformationMessageComposer)
         {
-            this.Habbo = Habbo;
+            Habbo = habbo;
         }
 
         public override void Compose(ServerPacket packet)
@@ -30,7 +29,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
                 packet.WriteString(Pet.Name);
                 packet.WriteInteger(Pet.Level);
                 packet.WriteInteger(Pet.MaxLevel);
-                packet.WriteInteger(Pet.experience);
+                packet.WriteInteger(Pet.Experience);
                 packet.WriteInteger(Pet.ExperienceGoal);
                 packet.WriteInteger(Pet.Energy);
                 packet.WriteInteger(Pet.MaxEnergy);

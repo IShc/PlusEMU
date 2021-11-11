@@ -1,9 +1,8 @@
 ﻿using System.Linq;
-using Plus.HabboHotel.Rooms;
 using Plus.Communication.Packets.Outgoing.Rooms.AI.Bots;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Rooms.AI.Speech;
-
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
 {

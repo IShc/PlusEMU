@@ -1,23 +1,22 @@
-﻿using Plus.HabboHotel.Rooms;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
     class GetRoomFilterListComposer : MessageComposer
     {
         public List<string> WordFilterList { get; }
-        public GetRoomFilterListComposer(List<string> WordFilterList)
+        public GetRoomFilterListComposer(List<string> wordFilterList)
             : base(ServerPacketHeader.GetRoomFilterListMessageComposer)
         {
-            this.WordFilterList = WordFilterList;
+            WordFilterList = wordFilterList;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(WordFilterList.Count);
-            foreach (string Word in WordFilterList)
+            foreach (string word in WordFilterList)
             {
-                packet.WriteString(Word);
+                packet.WriteString(word);
             }
         }
     }

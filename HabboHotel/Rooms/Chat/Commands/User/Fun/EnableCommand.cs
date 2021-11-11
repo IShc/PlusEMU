@@ -1,72 +1,64 @@
-﻿using Plus.HabboHotel.Rooms.Games.Teams;
+﻿using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms.Games.Teams;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
     class EnableCommand : IChatCommand
     {
-        public string PermissionRequired
+        public string PermissionRequired => "command_enable";
+
+        public string Parameters => "%EffectId%";
+
+        public string Description => "Gives you the ability to set an effect on your user!";
+
+        public void Execute(GameClient session, Room room, string[] @params)
         {
-            get { return "command_enable"; }
-        }
-
-        public string Parameters
-        {
-            get { return "%EffectId%"; }
-        }
-
-        public string Description
-        {
-            get { return "Gives you the ability to set an effect on your user!"; }
-        }
-
-        public void Execute(GameClients.GameClient Session, Room Room, string[] Params)
-        {
-            if (Params.Length == 1)
+            if (@params.Length == 1)
             {
-                Session.SendWhisper("You must enter an effect ID!");
+                session.SendWhisper("You must enter an effect ID!");
                 return;
             }
 
-            if (!Room.EnablesEnabled && !Session.GetHabbo().GetPermissions().HasRight("mod_tool"))
+            if (!room.EnablesEnabled && !session.GetHabbo().GetPermissions().HasRight("mod_tool"))
             {
-                Session.SendWhisper("Oops, it appears that the room owner has disabled the ability to use the enable command in here.");
+                session.SendWhisper("Oops, it appears that the room owner has disabled the ability to use the enable command in here.");
                 return;
             }
 
-            RoomUser ThisUser = Session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Username);
-            if (ThisUser == null)
+            RoomUser thisUser = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Username);
+            if (thisUser == null)
                 return;
 
-            if (ThisUser.RidingHorse)
+            if (thisUser.RidingHorse)
             {
-                Session.SendWhisper("You cannot enable effects whilst riding a horse!");
+                session.SendWhisper("You cannot enable effects whilst riding a horse!");
                 return;
             }
-            else if (ThisUser.Team != Team.None)
+            else if (thisUser.Team != Team.None)
                 return;
-            else if (ThisUser.isLying)
-                return;
-
-            int EffectId = 0;
-            if (!int.TryParse(Params[1], out EffectId))
+            else if (thisUser.isLying)
                 return;
 
-            if (EffectId > int.MaxValue || EffectId < int.MinValue)
+            int effectId = 0;
+            if (!int.TryParse(@params[1], out effectId))
                 return;
 
-            if ((EffectId == 102 || EffectId == 187) && !Session.GetHabbo().GetPermissions().HasRight("mod_tool"))
+            if (effectId > int.MaxValue || effectId < int.MinValue)
+                return;
+
+            if ((effectId == 102 || effectId == 187) && !session.GetHabbo().GetPermissions().HasRight("mod_tool"))
             {
-                Session.SendWhisper("Sorry, only staff members can use this effects.");
-                return;
-            }
-
-            if (EffectId == 178 && (!Session.GetHabbo().GetPermissions().HasRight("gold_vip") && !Session.GetHabbo().GetPermissions().HasRight("events_staff")))
-            {
-                Session.SendWhisper("Sorry, only Gold VIP and Events Staff members can use this effect.");
+                session.SendWhisper("Sorry, only staff members can use this effects.");
                 return;
             }
 
-            Session.GetHabbo().Effects().ApplyEffect(EffectId);
+            if (effectId == 178 && (!session.GetHabbo().GetPermissions().HasRight("gold_vip") && !session.GetHabbo().GetPermissions().HasRight("events_staff")))
+            {
+                session.SendWhisper("Sorry, only Gold VIP and Events Staff members can use this effect.");
+                return;
+            }
+
+            session.GetHabbo().Effects().ApplyEffect(effectId);
         }
     }
 }

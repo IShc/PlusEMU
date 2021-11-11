@@ -2,7 +2,7 @@
 {
     public class Vector2D
     {
-        public static Vector2D Zero = new Vector2D(0, 0);
+        public static Vector2D Zero = new(0, 0);
 
         public Vector2D()
         {

@@ -1,6 +1,5 @@
-﻿using System.Data;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Data;
 using log4net;
 using Plus.Database.Interfaces;
 
@@ -10,7 +9,7 @@ namespace Plus.Core.Language
     {
         private readonly Dictionary<string, string> _values;
 
-        private static readonly ILog log = LogManager.GetLogger(typeof(LanguageManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(LanguageManager));
 
         public LanguageManager()
         {
@@ -25,18 +24,18 @@ namespace Plus.Core.Language
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `server_locale`");
-                DataTable Table = dbClient.GetTable();
+                DataTable table = dbClient.GetTable();
 
-                if (Table != null)
+                if (table != null)
                 {
-                    foreach (DataRow Row in Table.Rows)
+                    foreach (DataRow row in table.Rows)
                     {
-                        _values.Add(Row["key"].ToString(), Row["value"].ToString());
+                        _values.Add(row["key"].ToString(), row["value"].ToString());
                     }
                 }
             }
 
-            log.Info("Loaded " + _values.Count + " language locales.");
+            Log.Info("Loaded " + _values.Count + " language locales.");
         }
 
         public string TryGetValue(string value)

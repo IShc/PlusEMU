@@ -4,10 +4,10 @@
     {
         public bool Found { get; }
 
-        public FindFriendsProcessResultComposer(bool Found)
+        public FindFriendsProcessResultComposer(bool found)
             : base(ServerPacketHeader.FindFriendsProcessResultMessageComposer)
         {
-            this.Found = Found;
+            Found = found;
         }
 
         public override void Compose(ServerPacket packet)

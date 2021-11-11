@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.HabboHotel.Games;
 using Plus.HabboHotel.Users;
 
@@ -11,11 +10,11 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
         public GameData GameData { get; }
         public ICollection<Habbo> Habbos { get; }
 
-        public Game3WeeklyLeaderboardComposer(GameData GameData, ICollection<Habbo> Habbos)
+        public Game3WeeklyLeaderboardComposer(GameData gameData, ICollection<Habbo> habbos)
             : base(ServerPacketHeader.Game3WeeklyLeaderboardMessageComposer)
         {
-            this.GameData = GameData;
-            this.Habbos = Habbos;
+            GameData = gameData;
+            Habbos = habbos;
         }
 
         public override void Compose(ServerPacket packet)
@@ -30,15 +29,15 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
             int num = 0;
 
             packet.WriteInteger(Habbos.Count);//Count
-            foreach (Habbo Habbo in Habbos.ToList())
+            foreach (Habbo habbo in Habbos.ToList())
             {
                 num++;
-                packet.WriteInteger(Habbo.Id);//Id
-                packet.WriteInteger(Habbo.FastfoodScore);//Score
+                packet.WriteInteger(habbo.Id);//Id
+                packet.WriteInteger(habbo.FastFoodScore);//Score
                 packet.WriteInteger(num);//Rank
-                packet.WriteString(Habbo.Username);//Username
-                packet.WriteString(Habbo.Look);//Figure
-                packet.WriteString(Habbo.Gender.ToLower());//Gender .ToLower()
+                packet.WriteString(habbo.Username);//Username
+                packet.WriteString(habbo.Look);//Figure
+                packet.WriteString(habbo.Gender.ToLower());//Gender .ToLower()
             }
 
             packet.WriteInteger(0);//

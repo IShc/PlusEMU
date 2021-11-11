@@ -1,9 +1,8 @@
-﻿using Plus.HabboHotel.Quests;
-using Plus.Communication.Packets.Outgoing.Users;
+﻿using Plus.Communication.Packets.Outgoing.Users;
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Quests;
 using Plus.HabboHotel.Rooms;
-
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Badges
 {

@@ -1,9 +1,8 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Items;
-using Plus.Communication.Packets.Outgoing.Rooms.Engine;
+﻿using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
-
+using Plus.HabboHotel.Items;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {

@@ -4,10 +4,10 @@
     {
         public int UserId { get; }
 
-        public TradingClosedComposer(int UserId)
+        public TradingClosedComposer(int userId)
             : base(ServerPacketHeader.TradingClosedMessageComposer)
         {
-            this.UserId = UserId;
+            UserId = userId;
         }
 
         public override void Compose(ServerPacket packet)

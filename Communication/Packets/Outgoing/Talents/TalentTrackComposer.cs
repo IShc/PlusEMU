@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.HabboHotel.Talents;
 
 namespace Plus.Communication.Packets.Outgoing.Talents
@@ -12,8 +11,8 @@ namespace Plus.Communication.Packets.Outgoing.Talents
         public TalentTrackComposer(ICollection<TalentTrackLevel> levels, string type)
             : base(ServerPacketHeader.TalentTrackMessageComposer)
         {
-            this.Levels = levels;
-            this.Type = type;
+            Levels = levels;
+            Type = type;
         }
 
         public override void Compose(ServerPacket packet)

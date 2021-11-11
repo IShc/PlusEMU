@@ -4,10 +4,10 @@
     {
         public string UniqueId { get; }
 
-        public SetUniqueIdComposer(string Id)
+        public SetUniqueIdComposer(string id)
             : base(ServerPacketHeader.SetUniqueIdMessageComposer)
         {
-            this.UniqueId = Id;
+            UniqueId = id;
         }
 
         public override void Compose(ServerPacket packet)

@@ -1,14 +1,12 @@
 ﻿using System.Linq;
-
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Users;
-using Plus.Communication.Packets.Outgoing.Users;
 using Plus.Communication.Packets.Outgoing.Navigator;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
-
-using Plus.Database.Interfaces;
 using Plus.Communication.Packets.Outgoing.Rooms.Session;
+using Plus.Communication.Packets.Outgoing.Users;
+using Plus.Database.Interfaces;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
@@ -114,13 +112,13 @@ namespace Plus.Communication.Packets.Incoming.Users
         private static bool CanChangeName(Habbo habbo)
         {
 
-            if (habbo.Rank == 1 && habbo.VIPRank == 0 && habbo.LastNameChange == 0)
+            if (habbo.Rank == 1 && habbo.VipRank == 0 && habbo.LastNameChange == 0)
                 return true;
-            if (habbo.Rank == 1 && habbo.VIPRank == 1 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 604800) > habbo.LastNameChange))
+            if (habbo.Rank == 1 && habbo.VipRank == 1 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 604800) > habbo.LastNameChange))
                 return true;
-            if (habbo.Rank == 1 && habbo.VIPRank == 2 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 86400) > habbo.LastNameChange))
+            if (habbo.Rank == 1 && habbo.VipRank == 2 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 86400) > habbo.LastNameChange))
                 return true;
-            if (habbo.Rank == 1 && habbo.VIPRank == 3)
+            if (habbo.Rank == 1 && habbo.VipRank == 3)
                 return true;
             if (habbo.GetPermissions().HasRight("mod_tool"))
                 return true;

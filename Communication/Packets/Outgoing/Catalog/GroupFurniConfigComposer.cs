@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
@@ -11,7 +10,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
         public GroupFurniConfigComposer(ICollection<Group> groups)
             : base(ServerPacketHeader.GroupFurniConfigMessageComposer)
         {
-            this.Groups = groups;
+            Groups = groups;
         }
 
         public override void Compose(ServerPacket packet)

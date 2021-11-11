@@ -1,57 +1,48 @@
 ﻿using System;
-using System.Linq;
-using System.Drawing;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
-
-using Plus.HabboHotel.Items;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using Plus.Communication.Packets.Outgoing.Rooms.Avatar;
 using Plus.Communication.Packets.Outgoing.Rooms.Freeze;
-using Plus.HabboHotel.Rooms.Games.Teams;
+using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Items.Wired;
+using Plus.HabboHotel.Rooms.Games.Teams;
 
 namespace Plus.HabboHotel.Rooms.Games.Freeze
 {
     public class Freeze
     {
         private Room _room;
-        private bool _gameStarted;
         private Random _random;
         private readonly ConcurrentDictionary<int, Item> _freezeBlocks;
         private readonly ConcurrentDictionary<int, Item> _freezeTiles;
-        private readonly ConcurrentDictionary<int, Item> _exitTeleports;
 
         public Freeze(Room room)
         {
             _room = room;
-            _gameStarted = false;
-            _exitTeleports = new ConcurrentDictionary<int, Item>();
+            GameIsStarted = false;
+            ExitTeleports = new ConcurrentDictionary<int, Item>();
             _random = new Random();
             _freezeTiles = new ConcurrentDictionary<int, Item>();
             _freezeBlocks = new ConcurrentDictionary<int, Item>();
         }
 
-        public bool GameIsStarted
-        {
-            get { return _gameStarted; }
-        }
+        public bool GameIsStarted { get; private set; }
 
-        public ConcurrentDictionary<int, Item> ExitTeleports
-        {
-            get { return _exitTeleports; }
-        }
+        public ConcurrentDictionary<int, Item> ExitTeleports { get; }
 
         public void AddExitTile(Item Item)
         {
-            if (!_exitTeleports.ContainsKey(Item.Id))
-                _exitTeleports.TryAdd(Item.Id, Item);
+            if (!ExitTeleports.ContainsKey(Item.Id))
+                ExitTeleports.TryAdd(Item.Id, Item);
         }
 
         public void RemoveExitTile(int Id)
         {
             Item Temp;
-            if (_exitTeleports.ContainsKey(Id))
-                _exitTeleports.TryRemove(Id, out Temp);
+            if (ExitTeleports.ContainsKey(Id))
+                ExitTeleports.TryRemove(Id, out Temp);
         }
 
         public Item GetRandomExitTile()
@@ -61,7 +52,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
 
         public void StartGame()
         {
-            _gameStarted = true;
+            GameIsStarted = true;
             CountTeamPoints();
             ResetGame();
 
@@ -81,7 +72,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
 
         public void StopGame(bool userTriggered = false)
         {
-            _gameStarted = false;
+            GameIsStarted = false;
             _room.GetGameManager().UnlockGates();
             _room.GetGameManager().StopGame();
 
@@ -164,7 +155,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
             {
                 if (!string.IsNullOrEmpty(Item.ExtraData))
                 {
-                    Item.interactionCountHelper = 0;
+                    Item.InteractionCountHelper = 0;
                     Item.ExtraData = "";
                     Item.UpdateState(false, true);
                     _room.GetGameMap().AddItemToMap(Item, false);
@@ -184,20 +175,20 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
 
         public void OnUserWalk(RoomUser User)
         {
-            if (!_gameStarted || User.Team == Team.None)
+            if (!GameIsStarted || User.Team == Team.None)
                 return;
 
             foreach (Item Item in _freezeTiles.Values.ToList())
             {
                 if (User.GoalX == Item.GetX && User.GoalY == Item.GetY && User.FreezeInteracting)
                 {
-                    if (Item.interactionCountHelper == 0)
+                    if (Item.InteractionCountHelper == 0)
                     {
-                        Item.interactionCountHelper = 1;
+                        Item.InteractionCountHelper = 1;
                         Item.ExtraData = "1000";
                         Item.UpdateState();
                         Item.InteractingUser = User.UserId;
-                        Item.freezePowerUp = User.banzaiPowerUp;
+                        Item.FreezePowerUp = User.banzaiPowerUp;
                         Item.RequestUpdate(4, true);
 
                         switch (User.banzaiPowerUp)
@@ -218,7 +209,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
             {
                 if (User.GoalX == Item.GetX && User.GoalY == Item.GetY)
                 {
-                    if (Item.freezePowerUp != FreezePowerUp.None)
+                    if (Item.FreezePowerUp != FreezePowerUp.None)
                     {
                         PickUpPowerUp(Item, User);
                     }
@@ -325,43 +316,43 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
                 case 2:
                     {
                         item.ExtraData = "2000";
-                        item.freezePowerUp = FreezePowerUp.BlueArrow;
+                        item.FreezePowerUp = FreezePowerUp.BlueArrow;
                         break;
                     }
                 case 3:
                     {
                         item.ExtraData = "3000";
-                        item.freezePowerUp = FreezePowerUp.Snowballs;
+                        item.FreezePowerUp = FreezePowerUp.Snowballs;
                         break;
                     }
                 case 4:
                     {
                         item.ExtraData = "4000";
-                        item.freezePowerUp = FreezePowerUp.GreenArrow;
+                        item.FreezePowerUp = FreezePowerUp.GreenArrow;
                         break;
                     }
                 case 5:
                     {
                         item.ExtraData = "5000";
-                        item.freezePowerUp = FreezePowerUp.OrangeSnowball;
+                        item.FreezePowerUp = FreezePowerUp.OrangeSnowball;
                         break;
                     }
                 case 6:
                     {
                         item.ExtraData = "6000";
-                        item.freezePowerUp = FreezePowerUp.Heart;
+                        item.FreezePowerUp = FreezePowerUp.Heart;
                         break;
                     }
                 case 7:
                     {
                         item.ExtraData = "7000";
-                        item.freezePowerUp = FreezePowerUp.Shield;
+                        item.FreezePowerUp = FreezePowerUp.Shield;
                         break;
                     }
                 default:
                     {
                         item.ExtraData = "1000";
-                        item.freezePowerUp = FreezePowerUp.None;
+                        item.FreezePowerUp = FreezePowerUp.None;
                         break;
                     }
             }
@@ -372,7 +363,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
 
         private void PickUpPowerUp(Item item, RoomUser User)
         {
-            switch (item.freezePowerUp)
+            switch (item.FreezePowerUp)
             {
                 case FreezePowerUp.Heart:
                     {
@@ -394,12 +385,12 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
                 case FreezePowerUp.GreenArrow:
                 case FreezePowerUp.OrangeSnowball:
                     {
-                        User.banzaiPowerUp = item.freezePowerUp;
+                        User.banzaiPowerUp = item.FreezePowerUp;
                         break;
                     }
             }
 
-            item.freezePowerUp = FreezePowerUp.None;
+            item.FreezePowerUp = FreezePowerUp.None;
             item.ExtraData = "1" + item.ExtraData;
             item.UpdateState(false, true);
         }
@@ -462,7 +453,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
                 TeamManager t = _room.GetTeamManagerForFreeze();
                 t.OnUserLeave(User);
                 User.Team = Team.None;
-                if (_exitTeleports.Count > 0)
+                if (ExitTeleports.Count > 0)
                     _room.GetGameMap().TeleportToItem(User, GetRandomExitTile());
 
                 User.Freezed = false;
@@ -650,7 +641,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
         {
             _room = null;
             _random = null;
-            _exitTeleports.Clear();
+            ExitTeleports.Clear();
             _freezeTiles.Clear();
             _freezeBlocks.Clear();
         }

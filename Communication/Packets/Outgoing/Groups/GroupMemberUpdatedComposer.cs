@@ -8,12 +8,12 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public Habbo  Habbo { get; }
         public int Type { get; }
 
-        public GroupMemberUpdatedComposer(int GroupId, Habbo Habbo, int Type)
+        public GroupMemberUpdatedComposer(int groupId, Habbo habbo, int type)
             : base(ServerPacketHeader.GroupMemberUpdatedMessageComposer)
         {
-            this.GroupId = GroupId;
-            this.Habbo = Habbo;
-            this.Type = Type; 
+            GroupId = groupId;
+            Habbo = habbo;
+            Type = type; 
         }
 
         public override void Compose(ServerPacket packet)

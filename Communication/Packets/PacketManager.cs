@@ -1,57 +1,54 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Collections.Concurrent;
-
 using log4net;
-
 using Plus.Communication.Packets.Incoming;
-using Plus.HabboHotel.GameClients;
-
+using Plus.Communication.Packets.Incoming.Avatar;
 using Plus.Communication.Packets.Incoming.Catalog;
+using Plus.Communication.Packets.Incoming.GameCenter;
+using Plus.Communication.Packets.Incoming.Groups;
 using Plus.Communication.Packets.Incoming.Handshake;
+using Plus.Communication.Packets.Incoming.Help;
+using Plus.Communication.Packets.Incoming.Inventory.Achievements;
+using Plus.Communication.Packets.Incoming.Inventory.AvatarEffects;
+using Plus.Communication.Packets.Incoming.Inventory.Badges;
+using Plus.Communication.Packets.Incoming.Inventory.Bots;
+using Plus.Communication.Packets.Incoming.Inventory.Furni;
+using Plus.Communication.Packets.Incoming.Inventory.Pets;
+using Plus.Communication.Packets.Incoming.Inventory.Purse;
+using Plus.Communication.Packets.Incoming.Inventory.Trading;
+using Plus.Communication.Packets.Incoming.LandingView;
+using Plus.Communication.Packets.Incoming.Marketplace;
+using Plus.Communication.Packets.Incoming.Messenger;
+using Plus.Communication.Packets.Incoming.Misc;
+using Plus.Communication.Packets.Incoming.Moderation;
 using Plus.Communication.Packets.Incoming.Navigator;
 using Plus.Communication.Packets.Incoming.Quests;
+using Plus.Communication.Packets.Incoming.Rooms.Action;
+using Plus.Communication.Packets.Incoming.Rooms.AI.Bots;
+using Plus.Communication.Packets.Incoming.Rooms.AI.Pets;
+using Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse;
 using Plus.Communication.Packets.Incoming.Rooms.Avatar;
 using Plus.Communication.Packets.Incoming.Rooms.Chat;
 using Plus.Communication.Packets.Incoming.Rooms.Connection;
 using Plus.Communication.Packets.Incoming.Rooms.Engine;
-using Plus.Communication.Packets.Incoming.Rooms.Action;
-using Plus.Communication.Packets.Incoming.Users;
-using Plus.Communication.Packets.Incoming.Inventory.AvatarEffects;
-using Plus.Communication.Packets.Incoming.Inventory.Purse;
-using Plus.Communication.Packets.Incoming.Sound;
-using Plus.Communication.Packets.Incoming.Misc;
-using Plus.Communication.Packets.Incoming.Inventory.Badges;
-using Plus.Communication.Packets.Incoming.Avatar;
-using Plus.Communication.Packets.Incoming.Inventory.Achievements;
-using Plus.Communication.Packets.Incoming.Inventory.Bots;
-using Plus.Communication.Packets.Incoming.Inventory.Pets;
-using Plus.Communication.Packets.Incoming.LandingView;
-using Plus.Communication.Packets.Incoming.Messenger;
-using Plus.Communication.Packets.Incoming.Groups;
-
-using Plus.Communication.Packets.Incoming.Rooms.Settings;
-using Plus.Communication.Packets.Incoming.Rooms.AI.Pets;
-using Plus.Communication.Packets.Incoming.Rooms.AI.Bots;
-using Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse;
-using Plus.Communication.Packets.Incoming.Rooms.Furni;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.RentableSpaces;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions;
-using Plus.Communication.Packets.Incoming.Help;
 using Plus.Communication.Packets.Incoming.Rooms.FloorPlan;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.Wired;
-using Plus.Communication.Packets.Incoming.Moderation;
-using Plus.Communication.Packets.Incoming.Inventory.Furni;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight;
-using Plus.Communication.Packets.Incoming.Inventory.Trading;
-using Plus.Communication.Packets.Incoming.GameCenter;
-using Plus.Communication.Packets.Incoming.Marketplace;
+using Plus.Communication.Packets.Incoming.Rooms.Furni;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.LoveLocks;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.RentableSpaces;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.Wired;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions;
+using Plus.Communication.Packets.Incoming.Rooms.Settings;
+using Plus.Communication.Packets.Incoming.Sound;
 using Plus.Communication.Packets.Incoming.Talents;
+using Plus.Communication.Packets.Incoming.Users;
+using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets
 {
@@ -62,18 +59,18 @@ namespace Plus.Communication.Packets
         /// <summary>
         ///     Testing the Task code
         /// </summary>
-        private readonly bool _ignoreTasks = true;
+        private const bool IgnoreTasks = true;
 
         /// <summary>
         ///     The maximum time a task can run for before it is considered dead
         ///     (can be used for debugging any locking issues with certain areas of code)
         /// </summary>
-        private readonly int _maximumRunTimeInSec = 300; // 5 minutes
+        private const int MaximumRunTimeInSec = 300; // 5 minutes
 
         /// <summary>
         ///     Should the handler throw errors or log and continue.
         /// </summary>
-        private readonly bool _throwUserErrors = false;
+        private const bool ThrowUserErrors = false;
 
         /// <summary>
         ///     The task factory which is used for running Asynchronous tasks, in this case we use it to execute packets.
@@ -136,7 +133,7 @@ namespace Plus.Communication.Packets
             
             if (!_incomingPackets.TryGetValue(packet.Id, out IPacketEvent pak))
             {
-                if (System.Diagnostics.Debugger.IsAttached)
+                if (Debugger.IsAttached)
                     Log.Debug("Unhandled Packet: " + packet.Id);
                 return;
             }
@@ -149,7 +146,7 @@ namespace Plus.Communication.Packets
                     Log.Debug("Handled Packet: [" + packet.Id + "] UnnamedPacketEvent");
 //            }
 
-            if (!_ignoreTasks)
+            if (!IgnoreTasks)
                 ExecutePacketAsync(session, packet, pak);
             else
                 pak.Parse(session, packet);
@@ -170,7 +167,7 @@ namespace Plus.Communication.Packets
 
             try
             {
-                if (!t.Wait(_maximumRunTimeInSec * 1000, token))
+                if (!t.Wait(MaximumRunTimeInSec * 1000, token))
                 {
                     cancelSource.Cancel();
                 }
@@ -179,11 +176,6 @@ namespace Plus.Communication.Packets
             {
                 foreach (Exception e in ex.Flatten().InnerExceptions)
                 {
-                    if (_throwUserErrors)
-                    {
-                        throw e;
-                    }
-                    else
                     {
                         //log.Fatal("Unhandled Error: " + e.Message + " - " + e.StackTrace);
                         session.Disconnect();
@@ -222,8 +214,8 @@ namespace Plus.Communication.Packets
             _incomingPackets.Add(ClientPacketHeader.GetClientVersionMessageEvent, new GetClientVersionEvent());
             _incomingPackets.Add(ClientPacketHeader.InitCryptoMessageEvent, new InitCryptoEvent());
             _incomingPackets.Add(ClientPacketHeader.GenerateSecretKeyMessageEvent, new GenerateSecretKeyEvent());
-            _incomingPackets.Add(ClientPacketHeader.UniqueIDMessageEvent, new UniqueIdEvent());
-            _incomingPackets.Add(ClientPacketHeader.SSOTicketMessageEvent, new SsoTicketEvent());
+            _incomingPackets.Add(ClientPacketHeader.UniqueIDMessageEvent, new UniqueIDEvent());
+            _incomingPackets.Add(ClientPacketHeader.SSOTicketMessageEvent, new SSOTicketEvent());
             _incomingPackets.Add(ClientPacketHeader.InfoRetrieveMessageEvent, new InfoRetrieveEvent());
             _incomingPackets.Add(ClientPacketHeader.PingMessageEvent, new PingEvent());
         }

@@ -1,20 +1,13 @@
 ﻿using System;
-
 using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
     class TakeUserBadgeCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to take a badge from a user."; }
-        }
+        public string Description => "This command is used to take a badge from a user.";
 
-        public string Parameters
-        {
-            get { return "%userId% %badgeId%"; }
-        }
+        public string Parameters => "%userId% %badgeId%";
 
         public bool TryExecute(string[] parameters)
         {

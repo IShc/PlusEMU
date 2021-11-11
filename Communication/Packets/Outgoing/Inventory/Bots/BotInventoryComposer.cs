@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Bots
@@ -8,22 +8,22 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Bots
     {
         public ICollection<Bot> Bots { get; }
 
-        public BotInventoryComposer(ICollection<Bot> Bots)
+        public BotInventoryComposer(ICollection<Bot> bots)
             : base(ServerPacketHeader.BotInventoryMessageComposer)
         {
-            this.Bots = Bots;
+            Bots = bots;
         }
 
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(Bots.Count);
-            foreach (Bot Bot in Bots.ToList())
+            foreach (Bot bot in Bots.ToList())
             {
-                packet.WriteInteger(Bot.Id);
-                packet.WriteString(Bot.Name);
-                packet.WriteString(Bot.Motto);
-                packet.WriteString(Bot.Gender);
-                packet.WriteString(Bot.Figure);
+                packet.WriteInteger(bot.Id);
+                packet.WriteString(bot.Name);
+                packet.WriteString(bot.Motto);
+                packet.WriteString(bot.Gender);
+                packet.WriteString(bot.Figure);
             }
         }
     }

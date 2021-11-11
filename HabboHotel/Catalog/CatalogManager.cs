@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
-
+using System.Data;
 using log4net;
-
-using Plus.HabboHotel.Items;
+using Plus.Database.Interfaces;
+using Plus.HabboHotel.Catalog.Clothing;
+using Plus.HabboHotel.Catalog.Marketplace;
 using Plus.HabboHotel.Catalog.Pets;
 using Plus.HabboHotel.Catalog.Vouchers;
-using Plus.HabboHotel.Catalog.Marketplace;
-using Plus.HabboHotel.Catalog.Clothing;
-
-using Plus.Database.Interfaces;
+using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Catalog
 {
     public class CatalogManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(CatalogManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(CatalogManager));
 
-        private MarketplaceManager _marketplace;
-        private PetRaceManager _petRaceManager;
-        private VoucherManager _voucherManager;
-        private ClothingManager _clothingManager;
+        private readonly MarketplaceManager _marketplace;
+        private readonly PetRaceManager _petRaceManager;
+        private readonly VoucherManager _voucherManager;
+        private readonly ClothingManager _clothingManager;
 
         private Dictionary<int, int> _itemOffers;
         private readonly Dictionary<int, CatalogPage> _pages;
@@ -49,7 +46,7 @@ namespace Plus.HabboHotel.Catalog
             _promotions = new Dictionary<int, CatalogPromotion>();
         }
 
-        public void Init(ItemDataManager ItemDataManager)
+        public void Init(ItemDataManager itemDataManager)
         {
             if (_pages.Count > 0)
                 _pages.Clear();
@@ -65,70 +62,70 @@ namespace Plus.HabboHotel.Catalog
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `id`,`item_id`,`catalog_name`,`cost_credits`,`cost_pixels`,`cost_diamonds`,`amount`,`page_id`,`limited_sells`,`limited_stack`,`offer_active`,`extradata`,`badge`,`offer_id` FROM `catalog_items`");
-                DataTable CatalogueItems = dbClient.GetTable();
+                DataTable catalogueItems = dbClient.GetTable();
 
-                if (CatalogueItems != null)
+                if (catalogueItems != null)
                 {
-                    foreach (DataRow Row in CatalogueItems.Rows)
+                    foreach (DataRow row in catalogueItems.Rows)
                     {
-                        if (Convert.ToInt32(Row["amount"]) <= 0)
+                        if (Convert.ToInt32(row["amount"]) <= 0)
                             continue;
 
-                        int ItemId = Convert.ToInt32(Row["id"]);
-                        int PageId = Convert.ToInt32(Row["page_id"]);
-                        int BaseId = Convert.ToInt32(Row["item_id"]);
-                        int OfferId = Convert.ToInt32(Row["offer_id"]);
+                        int itemId = Convert.ToInt32(row["id"]);
+                        int pageId = Convert.ToInt32(row["page_id"]);
+                        int baseId = Convert.ToInt32(row["item_id"]);
+                        int offerId = Convert.ToInt32(row["offer_id"]);
                         
-                        if (!ItemDataManager.GetItem(BaseId, out ItemData Data))
+                        if (!itemDataManager.GetItem(baseId, out ItemData data))
                         {
-                            log.Error("Couldn't load Catalog Item " + ItemId + ", no furniture record found.");
+                            Log.Error("Couldn't load Catalog Item " + itemId + ", no furniture record found.");
                             continue;
                         }
 
-                        if (!_items.ContainsKey(PageId))
-                            _items[PageId] = new Dictionary<int, CatalogItem>();
+                        if (!_items.ContainsKey(pageId))
+                            _items[pageId] = new Dictionary<int, CatalogItem>();
 
-                        if (OfferId != -1 && !_itemOffers.ContainsKey(OfferId))
-                            _itemOffers.Add(OfferId, PageId);
+                        if (offerId != -1 && !_itemOffers.ContainsKey(offerId))
+                            _itemOffers.Add(offerId, pageId);
 
-                        _items[PageId].Add(Convert.ToInt32(Row["id"]), new CatalogItem(Convert.ToInt32(Row["id"]), Convert.ToInt32(Row["item_id"]),
-                            Data, Convert.ToString(Row["catalog_name"]), Convert.ToInt32(Row["page_id"]), Convert.ToInt32(Row["cost_credits"]), Convert.ToInt32(Row["cost_pixels"]), Convert.ToInt32(Row["cost_diamonds"]),
-                            Convert.ToInt32(Row["amount"]), Convert.ToInt32(Row["limited_sells"]), Convert.ToInt32(Row["limited_stack"]), PlusEnvironment.EnumToBool(Row["offer_active"].ToString()),
-                            Convert.ToString(Row["extradata"]), Convert.ToString(Row["badge"]), Convert.ToInt32(Row["offer_id"])));
+                        _items[pageId].Add(Convert.ToInt32(row["id"]), new CatalogItem(Convert.ToInt32(row["id"]), Convert.ToInt32(row["item_id"]),
+                            data, Convert.ToString(row["catalog_name"]), Convert.ToInt32(row["page_id"]), Convert.ToInt32(row["cost_credits"]), Convert.ToInt32(row["cost_pixels"]), Convert.ToInt32(row["cost_diamonds"]),
+                            Convert.ToInt32(row["amount"]), Convert.ToInt32(row["limited_sells"]), Convert.ToInt32(row["limited_stack"]), PlusEnvironment.EnumToBool(row["offer_active"].ToString()),
+                            Convert.ToString(row["extradata"]), Convert.ToString(row["badge"]), Convert.ToInt32(row["offer_id"])));
                     }
                 }
 
                 dbClient.SetQuery("SELECT `id`, `items`, `name`, `room_id` FROM `catalog_deals`");
-                DataTable GetDeals = dbClient.GetTable();
+                DataTable getDeals = dbClient.GetTable();
 
-                if (GetDeals != null)
+                if (getDeals != null)
                 {
-                    foreach (DataRow Row in GetDeals.Rows)
+                    foreach (DataRow row in getDeals.Rows)
                     {
-                        int Id = Convert.ToInt32(Row["id"]);
-                        string Items = Convert.ToString(Row["items"]);
-                        string Name = Convert.ToString(Row["name"]);
-                        int RoomId = Convert.ToInt32(Row["room_id"]);
+                        int id = Convert.ToInt32(row["id"]);
+                        string items = Convert.ToString(row["items"]);
+                        string name = Convert.ToString(row["name"]);
+                        int roomId = Convert.ToInt32(row["room_id"]);
 
-                        CatalogDeal Deal = new CatalogDeal(Id, Items, Name, RoomId, ItemDataManager);
+                        CatalogDeal deal = new CatalogDeal(id, items, name, roomId, itemDataManager);
 
-                        if (!_deals.ContainsKey(Id))
-                            _deals.Add(Deal.Id, Deal);
+                        if (!_deals.ContainsKey(id))
+                            _deals.Add(deal.Id, deal);
                     }
                 }
 
 
                 dbClient.SetQuery("SELECT `id`,`parent_id`,`caption`,`page_link`,`visible`,`enabled`,`min_rank`,`min_vip`,`icon_image`,`page_layout`,`page_strings_1`,`page_strings_2` FROM `catalog_pages` ORDER BY `order_num`");
-                DataTable CatalogPages = dbClient.GetTable();
+                DataTable catalogPages = dbClient.GetTable();
 
-                if (CatalogPages != null)
+                if (catalogPages != null)
                 {
-                    foreach (DataRow Row in CatalogPages.Rows)
+                    foreach (DataRow row in catalogPages.Rows)
                     {
-                        _pages.Add(Convert.ToInt32(Row["id"]), new CatalogPage(Convert.ToInt32(Row["id"]), Convert.ToInt32(Row["parent_id"]), Row["enabled"].ToString(), Convert.ToString(Row["caption"]),
-                            Convert.ToString(Row["page_link"]), Convert.ToInt32(Row["icon_image"]), Convert.ToInt32(Row["min_rank"]), Convert.ToInt32(Row["min_vip"]), Row["visible"].ToString(), Convert.ToString(Row["page_layout"]), 
-                            Convert.ToString(Row["page_strings_1"]), Convert.ToString(Row["page_strings_2"]),
-                            _items.ContainsKey(Convert.ToInt32(Row["id"])) ? _items[Convert.ToInt32(Row["id"])] : new Dictionary<int, CatalogItem>(), ref _itemOffers));
+                        _pages.Add(Convert.ToInt32(row["id"]), new CatalogPage(Convert.ToInt32(row["id"]), Convert.ToInt32(row["parent_id"]), row["enabled"].ToString(), Convert.ToString(row["caption"]),
+                            Convert.ToString(row["page_link"]), Convert.ToInt32(row["icon_image"]), Convert.ToInt32(row["min_rank"]), Convert.ToInt32(row["min_vip"]), row["visible"].ToString(), Convert.ToString(row["page_layout"]), 
+                            Convert.ToString(row["page_strings_1"]), Convert.ToString(row["page_strings_2"]),
+                            _items.ContainsKey(Convert.ToInt32(row["id"])) ? _items[Convert.ToInt32(row["id"])] : new Dictionary<int, CatalogItem>(), ref _itemOffers));
                     }
                 }
 
@@ -144,11 +141,11 @@ namespace Plus.HabboHotel.Catalog
                 }
 
                 dbClient.SetQuery("SELECT * FROM `catalog_promotions`");
-                DataTable GetPromotions = dbClient.GetTable();
+                DataTable getPromotions = dbClient.GetTable();
 
-                if (GetPromotions != null)
+                if (getPromotions != null)
                 {
-                    foreach (DataRow row in GetPromotions.Rows)
+                    foreach (DataRow row in getPromotions.Rows)
                     {
                         if (!_promotions.ContainsKey(Convert.ToInt32(row["id"])))
                             _promotions.Add(Convert.ToInt32(row["id"]), new CatalogPromotion(Convert.ToInt32(row["id"]), Convert.ToString(row["title"]), Convert.ToString(row["image"]), Convert.ToInt32(row["unknown"]), Convert.ToString(row["page_link"]), Convert.ToInt32(row["parent_id"])));
@@ -159,18 +156,15 @@ namespace Plus.HabboHotel.Catalog
                 _clothingManager.Init();
             }
 
-            log.Info("Catalog Manager -> LOADED");
+            Log.Info("Catalog Manager -> LOADED");
         }
 
-        public bool TryGetBot(int ItemId, out CatalogBot Bot)
+        public bool TryGetBot(int itemId, out CatalogBot bot)
         {
-            return _botPresets.TryGetValue(ItemId, out Bot);
+            return _botPresets.TryGetValue(itemId, out bot);
         }
 
-        public Dictionary<int, int> ItemOffers
-        {
-            get { return _itemOffers; }
-        }
+        public Dictionary<int, int> ItemOffers => _itemOffers;
 
         public bool TryGetPage(int pageId, out CatalogPage page)
         {

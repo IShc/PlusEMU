@@ -1,18 +1,16 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using System.Collections.Generic;
-using Plus.HabboHotel.GameClients;
-
-using Plus.HabboHotel.Rooms.Chat.Commands.User;
-using Plus.HabboHotel.Rooms.Chat.Commands.User.Fun;
-using Plus.HabboHotel.Rooms.Chat.Commands.Moderator;
-using Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun;
-using Plus.HabboHotel.Rooms.Chat.Commands.Administrator;
 using Plus.Communication.Packets.Outgoing.Notifications;
 using Plus.Database.Interfaces;
-using Plus.HabboHotel.Rooms.Chat.Commands.Events;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Items.Wired;
-
+using Plus.HabboHotel.Rooms.Chat.Commands.Administrator;
+using Plus.HabboHotel.Rooms.Chat.Commands.Events;
+using Plus.HabboHotel.Rooms.Chat.Commands.Moderator;
+using Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun;
+using Plus.HabboHotel.Rooms.Chat.Commands.User;
+using Plus.HabboHotel.Rooms.Chat.Commands.User.Fun;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands
 {
@@ -21,7 +19,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
         /// <summary>
         /// Command Prefix only applies to custom commands.
         /// </summary>
-        private string _prefix = ":";
+        private readonly string _prefix = ":";
 
         /// <summary>
         /// Commands registered for use.
@@ -31,73 +29,73 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
         /// <summary>
         /// The default initializer for the CommandManager
         /// </summary>
-        public CommandManager(string Prefix)
+        public CommandManager(string prefix)
         {
-            _prefix = Prefix;
+            _prefix = prefix;
             _commands = new Dictionary<string, IChatCommand>();
 
-            RegisterVIP();
+            RegisterVip();
             RegisterUser();
             RegisterEvents();
             RegisterModerator();
             RegisterAdministrator();
         }
-
+        
         /// <summary>
         /// Request the text to parse and check for commands that need to be executed.
         /// </summary>
-        /// <param name="Session">Session calling this method.</param>
-        /// <param name="Message">The message to parse.</param>
+        /// <param name="session">Session calling this method.</param>
+        /// <param name="message">The message to parse.</param>
         /// <returns>True if parsed or false if not.</returns>
-        public bool Parse(GameClient Session, string Message)
+        public bool Parse(GameClient session, string message)
         {
-            if (Session == null || Session.GetHabbo() == null || Session.GetHabbo().CurrentRoom == null)
+            if (session == null || session.GetHabbo() == null || session.GetHabbo().CurrentRoom == null)
                 return false;
 
-            if (!Message.StartsWith(_prefix))
+            if (!message.StartsWith(_prefix))
                 return false;
 
-            if (Message == _prefix + "commands")
+            if (message == _prefix + "commands")
             {
-                StringBuilder List = new StringBuilder();
-                List.Append("This is the list of commands you have available:\n");
-                foreach (var CmdList in _commands.ToList())
+                StringBuilder list = new StringBuilder();
+                list.Append("This is the list of commands you have available:\n");
+                foreach (var cmdList in _commands.ToList())
                 {
-                    if (!string.IsNullOrEmpty(CmdList.Value.PermissionRequired))
+                    if (!string.IsNullOrEmpty(cmdList.Value.PermissionRequired))
                     {
-                        if (!Session.GetHabbo().GetPermissions().HasCommand(CmdList.Value.PermissionRequired))
+                        if (!session.GetHabbo().GetPermissions().HasCommand(cmdList.Value.PermissionRequired))
                             continue;
                     }
 
-                    List.Append(":" + CmdList.Key + " " + CmdList.Value.Parameters + " - " + CmdList.Value.Description + "\n");
+                    list.Append(":" + cmdList.Key + " " + cmdList.Value.Parameters + " - " + cmdList.Value.Description + "\n");
                 }
-                Session.SendPacket(new MotdNotificationComposer(List.ToString()));
+                session.SendPacket(new MotdNotificationComposer(list.ToString()));
                 return true;
             }
 
-            Message = Message.Substring(1);
-            string[] Split = Message.Split(' ');
+            message = message.Substring(1);
+            string[] split = message.Split(' ');
 
-            if (Split.Length == 0)
+            if (split.Length == 0)
                 return false;
 
-            IChatCommand Cmd = null;
-            if (_commands.TryGetValue(Split[0].ToLower(), out Cmd))
+            IChatCommand cmd = null;
+            if (_commands.TryGetValue(split[0].ToLower(), out cmd))
             {
-                if (Session.GetHabbo().GetPermissions().HasRight("mod_tool"))
-                    LogCommand(Session.GetHabbo().Id, Message, Session.GetHabbo().MachineId);
+                if (session.GetHabbo().GetPermissions().HasRight("mod_tool"))
+                    LogCommand(session.GetHabbo().Id, message, session.GetHabbo().MachineId);
 
-                if (!string.IsNullOrEmpty(Cmd.PermissionRequired))
+                if (!string.IsNullOrEmpty(cmd.PermissionRequired))
                 {
-                    if (!Session.GetHabbo().GetPermissions().HasCommand(Cmd.PermissionRequired))
+                    if (!session.GetHabbo().GetPermissions().HasCommand(cmd.PermissionRequired))
                         return false;
                 }
 
 
-                Session.GetHabbo().IChatCommand = Cmd;
-                Session.GetHabbo().CurrentRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSaysCommand, Session.GetHabbo(), this);
+                session.GetHabbo().ChatCommand = cmd;
+                session.GetHabbo().CurrentRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSaysCommand, session.GetHabbo(), this);
 
-                Cmd.Execute(Session, Session.GetHabbo().CurrentRoom, Split);
+                cmd.Execute(session, session.GetHabbo().CurrentRoom, split);
                 return true;
             }
             return false;
@@ -106,7 +104,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
         /// <summary>
         /// Registers the VIP set of commands.
         /// </summary>
-        private void RegisterVIP()
+        private void RegisterVip()
         {
             Register("spull", new SuperPullCommand());
         }
@@ -156,7 +154,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
             Register("kickbots", new KickBotsCommand());
 
             Register("room", new RoomCommand());
-            Register("dnd", new DNDCommand());
+            Register("dnd", new DndCommand());
             Register("disablegifts", new DisableGiftsCommand());
             Register("convertcredits", new ConvertCreditsCommand());
             Register("disablewhispers", new DisableWhispersCommand());
@@ -174,8 +172,8 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
         private void RegisterModerator()
         {
             Register("ban", new BanCommand());
-            Register("mip", new MIPCommand());
-            Register("ipban", new IPBanCommand());
+            Register("mip", new MipCommand());
+            Register("ipban", new IpBanCommand());
 
             Register("ui", new UserInfoCommand());
             Register("userinfo", new UserInfoCommand());
@@ -193,7 +191,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
             Register("skick", new KickCommand());
             Register("ha", new HotelAlertCommand());
             Register("hotelalert", new HotelAlertCommand());
-            Register("hal", new HALCommand());
+            Register("hal", new HalCommand());
             Register("give", new GiveCommand());
             Register("givebadge", new GiveBadgeCommand());
             Register("dc", new DisconnectCommand());
@@ -217,7 +215,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
             Register("forcesit", new ForceSitCommand());
 
             Register("ignorewhispers", new IgnoreWhispersCommand());
-            Register("forced_effects", new DisableForcedFXCommand());
+            Register("forced_effects", new DisableForcedFxCommand());
 
             Register("makesay", new MakeSayCommand());
             Register("flaguser", new FlagUserCommand());
@@ -232,48 +230,48 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
             Register("update", new UpdateCommand());
             Register("deletegroup", new DeleteGroupCommand());
             Register("carry", new CarryCommand());
-            Register("goto", new GOTOCommand());
+            Register("goto", new GotoCommand());
         }
 
         /// <summary>
         /// Registers a Chat Command.
         /// </summary>
-        /// <param name="CommandText">Text to type for this command.</param>
-        /// <param name="Command">The command to execute.</param>
-        public void Register(string CommandText, IChatCommand Command)
+        /// <param name="commandText">Text to type for this command.</param>
+        /// <param name="command">The command to execute.</param>
+        public void Register(string commandText, IChatCommand command)
         {
-            _commands.Add(CommandText, Command);
+            _commands.Add(commandText, command);
         }
 
-        public static string MergeParams(string[] Params, int Start)
+        public static string MergeParams(string[] @params, int start)
         {
-            var Merged = new StringBuilder();
-            for (int i = Start; i < Params.Length; i++)
+            var merged = new StringBuilder();
+            for (int i = start; i < @params.Length; i++)
             {
-                if (i > Start)
-                    Merged.Append(" ");
-                Merged.Append(Params[i]);
+                if (i > start)
+                    merged.Append(" ");
+                merged.Append(@params[i]);
             }
 
-            return Merged.ToString();
+            return merged.ToString();
         }
 
-        public void LogCommand(int UserId, string Data, string MachineId)
+        public void LogCommand(int userId, string data, string machineId)
         {
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("INSERT INTO `logs_client_staff` (`user_id`,`data_string`,`machine_id`, `timestamp`) VALUES (@UserId,@Data,@MachineId,@Timestamp)");
-                dbClient.AddParameter("UserId", UserId);
-                dbClient.AddParameter("Data", Data);
-                dbClient.AddParameter("MachineId", MachineId);
+                dbClient.AddParameter("UserId", userId);
+                dbClient.AddParameter("Data", data);
+                dbClient.AddParameter("MachineId", machineId);
                 dbClient.AddParameter("Timestamp", PlusEnvironment.GetUnixTimestamp());
                 dbClient.RunQuery();
             }
         }
 
-        public bool TryGetCommand(string Command, out IChatCommand IChatCommand)
+        public bool TryGetCommand(string command, out IChatCommand chatCommand)
         {
-            return _commands.TryGetValue(Command, out IChatCommand);
+            return _commands.TryGetValue(command, out chatCommand);
         }
     }
 }

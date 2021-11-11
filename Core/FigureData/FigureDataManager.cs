@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-
+using System.IO;
+using System.Linq;
+using System.Xml;
 using log4net;
 using Plus.Core.FigureData.Types;
-using System.Xml;
 using Plus.HabboHotel.Catalog.Clothing;
 using Plus.HabboHotel.Users.Clothing.Parts;
-using System.IO;
 
 namespace Plus.Core.FigureData
 {

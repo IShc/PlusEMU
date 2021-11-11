@@ -11,9 +11,9 @@
                 case 1:
                     return ItemEffectType.Swim;
                 case 2:
-                    return ItemEffectType.Normalskates;
+                    return ItemEffectType.NormalSkates;
                 case 3:
-                    return ItemEffectType.Iceskates;
+                    return ItemEffectType.IceSkates;
                 case 4:
                     return ItemEffectType.SwimLow;
                 case 5:

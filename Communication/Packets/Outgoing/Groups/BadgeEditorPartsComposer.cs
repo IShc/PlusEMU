@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Outgoing.Groups
@@ -16,11 +15,11 @@ namespace Plus.Communication.Packets.Outgoing.Groups
           ICollection<GroupColours> backgroundColours)
           : base(ServerPacketHeader.BadgeEditorPartsMessageComposer)
         {
-            this.Bases = bases;
-            this.Symbols = symbols;
-            this.BaseColours = baseColours;
-            this.SymbolColours = symbolColours;
-            this.BackgroundColours = backgroundColours;
+            Bases = bases;
+            Symbols = symbols;
+            BaseColours = baseColours;
+            SymbolColours = symbolColours;
+            BackgroundColours = backgroundColours;
         }
 
         public override void Compose(ServerPacket packet)

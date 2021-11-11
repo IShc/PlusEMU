@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Plus.Communication.Packets.Outgoing.Moderation;
 using Plus.Communication.Packets.Outgoing.Rooms.Chat;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Moderation;
 using Plus.HabboHotel.Quests;
 using Plus.HabboHotel.Rooms;
-using Plus.Communication.Packets.Outgoing.Moderation;
-using Plus.Utilities;
-using Plus.HabboHotel.Rooms.Chat.Styles;
 using Plus.HabboHotel.Rooms.Chat.Logs;
+using Plus.HabboHotel.Rooms.Chat.Styles;
+using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Chat
 {
@@ -31,9 +32,9 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
             if (PlusEnvironment.GetUnixTimestamp() < session.GetHabbo().FloodTime && session.GetHabbo().FloodTime != 0)
                 return;
 
-            string Params = packet.PopString();
-            string toUser = Params.Split(' ')[0];
-            string message = Params.Substring(toUser.Length + 1);
+            string @params = packet.PopString();
+            string toUser = @params.Split(' ')[0];
+            string message = @params.Substring(toUser.Length + 1);
             int colour = packet.PopInt();
 
             RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
@@ -80,7 +81,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
                 session.GetHabbo().BannedPhraseCount++;
                 if (session.GetHabbo().BannedPhraseCount >= Convert.ToInt32(PlusEnvironment.GetSettingsManager().TryGetValue("room.chat.filter.banned_phrases.chances")))
                 {
-                    PlusEnvironment.GetGame().GetModerationManager().BanUser("System", HabboHotel.Moderation.ModerationBanType.Username, session.GetHabbo().Username, "Spamming banned phrases (" + message + ")", PlusEnvironment.GetUnixTimestamp() + 78892200);
+                    PlusEnvironment.GetGame().GetModerationManager().BanUser("System", ModerationBanType.Username, session.GetHabbo().Username, "Spamming banned phrases (" + message + ")", PlusEnvironment.GetUnixTimestamp() + 78892200);
                     session.Disconnect();
                     return;
                 }

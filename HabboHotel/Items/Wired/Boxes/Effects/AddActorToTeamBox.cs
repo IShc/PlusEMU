@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
-
-using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Users;
-using Plus.HabboHotel.Rooms.Games.Teams;
 using Plus.Communication.Packets.Incoming;
+using Plus.HabboHotel.Rooms;
+using Plus.HabboHotel.Rooms.Games.Teams;
+using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -12,56 +11,56 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.EffectAddActorToTeam; } }
+        public WiredBoxType Type => WiredBoxType.EffectAddActorToTeam;
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
         public string ItemsData { get; set; }
 
-        public AddActorToTeamBox(Room Instance, Item Item)
+        public AddActorToTeamBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
 
             SetItems = new ConcurrentDictionary<int, Item>();
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
-            int Unknown = Packet.PopInt();
-            int Team = Packet.PopInt();
+            int unknown = packet.PopInt();
+            int team = packet.PopInt();
 
-            StringData = Team.ToString();
+            StringData = team.ToString();
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (Params.Length == 0 || Instance == null || String.IsNullOrEmpty(StringData))
+            if (@params.Length == 0 || Instance == null || String.IsNullOrEmpty(StringData))
                 return false;
 
-            Habbo Player = (Habbo)Params[0];
-            if (Player == null)
+            Habbo player = (Habbo)@params[0];
+            if (player == null)
                 return false;
 
-            RoomUser User = Instance.GetRoomUserManager().GetRoomUserByHabbo(Player.Id);
-            if (User == null)
+            RoomUser user = Instance.GetRoomUserManager().GetRoomUserByHabbo(player.Id);
+            if (user == null)
                 return false;
 
-            Team ToJoin = (int.Parse(StringData) == 1 ? Rooms.Games.Teams.Team.Red : int.Parse(StringData) == 2 ? Rooms.Games.Teams.Team.Green : int.Parse(StringData) == 3 ? Rooms.Games.Teams.Team.Blue : int.Parse(StringData) == 4 ? Rooms.Games.Teams.Team.Yellow : Rooms.Games.Teams.Team.None);
+            Team toJoin = (int.Parse(StringData) == 1 ? Team.Red : int.Parse(StringData) == 2 ? Team.Green : int.Parse(StringData) == 3 ? Team.Blue : int.Parse(StringData) == 4 ? Team.Yellow : Team.None);
 
-            TeamManager Team = Instance.GetTeamManagerForFreeze();
-            if (Team != null)
+            TeamManager team = Instance.GetTeamManagerForFreeze();
+            if (team != null)
             {
-                if (Team.CanEnterOnTeam(ToJoin))
+                if (team.CanEnterOnTeam(toJoin))
                 {
-                    if (User.Team != Rooms.Games.Teams.Team.None)
-                        Team.OnUserLeave(User);
+                    if (user.Team != Team.None)
+                        team.OnUserLeave(user);
 
-                    User.Team = ToJoin;
-                    Team.AddUser(User);
+                    user.Team = toJoin;
+                    team.AddUser(user);
 
-                    if (User.GetClient().GetHabbo().Effects().CurrentEffect != Convert.ToInt32(ToJoin + 39))
-                        User.GetClient().GetHabbo().Effects().ApplyEffect(Convert.ToInt32(ToJoin + 39));
+                    if (user.GetClient().GetHabbo().Effects().CurrentEffect != Convert.ToInt32(toJoin + 39))
+                        user.GetClient().GetHabbo().Effects().ApplyEffect(Convert.ToInt32(toJoin + 39));
                 }
             }
             return true;

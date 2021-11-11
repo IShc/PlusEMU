@@ -5,11 +5,11 @@
         public int UserId { get; }
         public bool Confirmed { get; }
 
-        public TradingConfirmedComposer(int UserId, bool Confirmed)
+        public TradingConfirmedComposer(int userId, bool confirmed)
             : base(ServerPacketHeader.TradingConfirmedMessageComposer)
         {
-            this.UserId = UserId;
-            this.Confirmed = Confirmed;
+            UserId = userId;
+            Confirmed = confirmed;
         }
 
         public override void Compose(ServerPacket packet)

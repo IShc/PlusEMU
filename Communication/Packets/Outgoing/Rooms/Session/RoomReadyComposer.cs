@@ -4,11 +4,11 @@
     {
         public int RoomId { get; }
         public string Model { get; }
-        public RoomReadyComposer(int RoomId, string Model)
+        public RoomReadyComposer(int roomId, string model)
             : base(ServerPacketHeader.RoomReadyMessageComposer)
         {
-            this.RoomId = RoomId;
-            this.Model = Model;
+            RoomId = roomId;
+            Model = model;
         }
 
         public override void Compose(ServerPacket packet)

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-
 using Plus.HabboHotel.Catalog.Marketplace;
 
 namespace Plus.Communication.Packets.Outgoing.Marketplace
@@ -12,8 +11,8 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
         public MarketPlaceOffersComposer(Dictionary<int, MarketOffer> dictionary, Dictionary<int, int> dictionary2)
             : base(ServerPacketHeader.MarketPlaceOffersMessageComposer)
         {
-            this.Offers = dictionary;
-            this.Dictionary2 = dictionary2;
+            Offers = dictionary;
+            Dictionary2 = dictionary2;
         }
 
         public override void Compose(ServerPacket packet)
@@ -23,7 +22,7 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
             {
                 foreach (KeyValuePair<int, MarketOffer> pair in Offers)
                 {
-                    packet.WriteInteger(pair.Value.OfferID);
+                    packet.WriteInteger(pair.Value.OfferId);
                     packet.WriteInteger(1);//State
                     packet.WriteInteger(1);
                     packet.WriteInteger(pair.Value.SpriteId);

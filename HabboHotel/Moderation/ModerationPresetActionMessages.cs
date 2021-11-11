@@ -8,21 +8,21 @@
         public string MessageText { get; set; }
         public int MuteTime { get; set; }
         public int BanTime { get; set; }
-        public int IPBanTime { get; set; }
+        public int IpBanTime { get; set; }
         public int TradeLockTime { get; set; }
         public string Notice { get; set; }
 
-        public ModerationPresetActionMessages(int Id, int ParentId, string Caption, string MessageText, int MuteTime, int BanTime, int IPBanTime, int TradeLockTime, string Notice)
+        public ModerationPresetActionMessages(int id, int parentId, string caption, string messageText, int muteTime, int banTime, int ipBanTime, int tradeLockTime, string notice)
         {
-            this.Id = Id;
-            this.ParentId = ParentId;
-            this.Caption = Caption;
-            this.MessageText = MessageText;
-            this.MuteTime = MuteTime;
-            this.BanTime = BanTime;
-            this.IPBanTime = IPBanTime;
-            this.TradeLockTime = TradeLockTime;
-            this.Notice = Notice;
+            this.Id = id;
+            this.ParentId = parentId;
+            this.Caption = caption;
+            this.MessageText = messageText;
+            this.MuteTime = muteTime;
+            this.BanTime = banTime;
+            this.IpBanTime = ipBanTime;
+            this.TradeLockTime = tradeLockTime;
+            this.Notice = notice;
         }
     }
 }

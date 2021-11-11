@@ -8,12 +8,12 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
         public MessengerEventTypes Type { get; }
         public string Data { get; }
 
-        public FriendNotificationComposer(int UserId, MessengerEventTypes type, string data)
+        public FriendNotificationComposer(int userId, MessengerEventTypes type, string data)
             : base(ServerPacketHeader.FriendNotificationMessageComposer)
         {
-            this.UserId = UserId;
-            this.Type = type;
-            this.Data = data;
+            UserId = userId;
+            Type = type;
+            Data = data;
         }
 
         public override void Compose(ServerPacket packet)

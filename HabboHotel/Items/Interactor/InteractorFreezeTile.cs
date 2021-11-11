@@ -1,42 +1,42 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.GameClients;
+﻿using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 using Plus.HabboHotel.Rooms.Games.Teams;
 
 namespace Plus.HabboHotel.Items.Interactor
 {
     class InteractorFreezeTile : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            if (Session == null || !Session.GetHabbo().InRoom || Item == null || Item.InteractingUser > 0)
+            if (session == null || !session.GetHabbo().InRoom || item == null || item.InteractingUser > 0)
                 return;
 
-            RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (User == null)
+            RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (user == null)
                 return;
 
-            if (User.Team != Team.None)
+            if (user.Team != Team.None)
             {
-                User.FreezeInteracting = true;
-                Item.InteractingUser = Session.GetHabbo().Id;
+                user.FreezeInteracting = true;
+                item.InteractingUser = session.GetHabbo().Id;
 
-                if (Item.Data.InteractionType == InteractionType.FREEZE_TILE_BLOCK)
+                if (item.Data.InteractionType == InteractionType.FREEZE_TILE_BLOCK)
                 {
-                    if (Gamemap.TileDistance(User.X, User.Y, Item.GetX, Item.GetY) < 2)
-                        Item.GetRoom().GetFreeze().onFreezeTiles(Item, Item.freezePowerUp);
+                    if (Gamemap.TileDistance(user.X, user.Y, item.GetX, item.GetY) < 2)
+                        item.GetRoom().GetFreeze().onFreezeTiles(item, item.FreezePowerUp);
                 }
             }
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
 
         }

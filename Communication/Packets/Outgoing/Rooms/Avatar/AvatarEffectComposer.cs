@@ -5,11 +5,11 @@
         public int PlayerId { get; }
         public int EffectId { get; }
 
-        public AvatarEffectComposer(int playerID, int effectID)
+        public AvatarEffectComposer(int playerId, int effectId)
             : base(ServerPacketHeader.AvatarEffectMessageComposer)
         {
-            this.PlayerId = playerID;
-            this.EffectId = effectID;
+            PlayerId = playerId;
+            EffectId = effectId;
         }
 
         public override void Compose(ServerPacket packet)

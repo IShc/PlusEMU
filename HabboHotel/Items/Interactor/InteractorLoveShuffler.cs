@@ -4,39 +4,39 @@ namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorLoveShuffler : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
-            Item.ExtraData = "-1";
-            Item.UpdateNeeded = true;
+            item.ExtraData = "-1";
+            item.UpdateNeeded = true;
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
-            Item.ExtraData = "-1";
+            item.ExtraData = "-1";
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            if (!HasRights)
+            if (!hasRights)
             {
                 return;
             }
 
-            if (Item.ExtraData != "0")
+            if (item.ExtraData != "0")
             {
-                Item.ExtraData = "0";
-                Item.UpdateState(false, true);
-                Item.RequestUpdate(10, true);
+                item.ExtraData = "0";
+                item.UpdateState(false, true);
+                item.RequestUpdate(10, true);
             }
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
-            if (Item.ExtraData != "0")
+            if (item.ExtraData != "0")
             {
-                Item.ExtraData = "0";
-                Item.UpdateState(false, true);
-                Item.RequestUpdate(10, true);
+                item.ExtraData = "0";
+                item.UpdateState(false, true);
+                item.RequestUpdate(10, true);
             }
         }
     }

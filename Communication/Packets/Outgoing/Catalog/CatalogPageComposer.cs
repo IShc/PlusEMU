@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using Plus.HabboHotel.Items;
 using Plus.HabboHotel.Catalog;
 using Plus.HabboHotel.Catalog.Utilities;
+using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
 {
@@ -10,11 +10,11 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
         public CatalogPage Page { get; }
         public string CatalogueMode { get; }
 
-        public CatalogPageComposer(CatalogPage Page, string CataMode)
+        public CatalogPageComposer(CatalogPage page, string cataMode)
             : base(ServerPacketHeader.CatalogPageMessageComposer)
         {
-            this.Page = Page;
-            this.CatalogueMode = CataMode;
+            Page = page;
+            CatalogueMode = cataMode;
         }
 
         public override void Compose(ServerPacket packet)
@@ -38,30 +38,30 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
             if (!Page.Template.Equals("frontpage") && !Page.Template.Equals("club_buy"))
             {
                 packet.WriteInteger(Page.Items.Count);
-                foreach (CatalogItem Item in Page.Items.Values)
+                foreach (CatalogItem item in Page.Items.Values)
                 {
-                    packet.WriteInteger(Item.Id);
-                    packet.WriteString(Item.Name);
+                    packet.WriteInteger(item.Id);
+                    packet.WriteString(item.Name);
                     packet.WriteBoolean(false);//IsRentable
-                    packet.WriteInteger(Item.CostCredits);
+                    packet.WriteInteger(item.CostCredits);
 
-                    if (Item.CostDiamonds > 0)
+                    if (item.CostDiamonds > 0)
                     {
-                        packet.WriteInteger(Item.CostDiamonds);
+                        packet.WriteInteger(item.CostDiamonds);
                         packet.WriteInteger(5); // Diamonds
                     }
                     else
                     {
-                        packet.WriteInteger(Item.CostPixels);
+                        packet.WriteInteger(item.CostPixels);
                         packet.WriteInteger(0); // Type of PixelCost
                     }
 
-                    packet.WriteBoolean(ItemUtility.CanGiftItem(Item));
+                    packet.WriteBoolean(ItemUtility.CanGiftItem(item));
 
-                    if (Item.Data.InteractionType == InteractionType.DEAL || Item.Data.InteractionType == InteractionType.ROOMDEAL)
+                    if (item.Data.InteractionType == InteractionType.DEAL || item.Data.InteractionType == InteractionType.ROOMDEAL)
                     {
                         CatalogDeal deal = null;
-                        if (!PlusEnvironment.GetGame().GetCatalog().TryGetDeal(Item.Data.BehaviourData, out deal))
+                        if (!PlusEnvironment.GetGame().GetCatalog().TryGetDeal(item.Data.BehaviourData, out deal))
                         {
                             packet.WriteInteger(0);//Count
                         }
@@ -81,50 +81,50 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                     }
                     else
                     {
-                        packet.WriteInteger(string.IsNullOrEmpty(Item.Badge) ? 1 : 2);//Count 1 item if there is no badge, otherwise count as 2.
+                        packet.WriteInteger(string.IsNullOrEmpty(item.Badge) ? 1 : 2);//Count 1 item if there is no badge, otherwise count as 2.
 
-                        if (!string.IsNullOrEmpty(Item.Badge))
+                        if (!string.IsNullOrEmpty(item.Badge))
                         {
                             packet.WriteString("b");
-                            packet.WriteString(Item.Badge);
+                            packet.WriteString(item.Badge);
                         }
 
-                        packet.WriteString(Item.Data.Type.ToString());
-                        if (Item.Data.Type.ToString().ToLower() == "b")
+                        packet.WriteString(item.Data.Type.ToString());
+                        if (item.Data.Type.ToString().ToLower() == "b")
                         {
                             //This is just a badge, append the name.
-                            packet.WriteString(Item.Data.ItemName);
+                            packet.WriteString(item.Data.ItemName);
                         }
                         else
                         {
-                            packet.WriteInteger(Item.Data.SpriteId);
-                            if (Item.Data.InteractionType == InteractionType.WALLPAPER || Item.Data.InteractionType == InteractionType.FLOOR || Item.Data.InteractionType == InteractionType.LANDSCAPE)
+                            packet.WriteInteger(item.Data.SpriteId);
+                            if (item.Data.InteractionType == InteractionType.WALLPAPER || item.Data.InteractionType == InteractionType.FLOOR || item.Data.InteractionType == InteractionType.LANDSCAPE)
                             {
-                                packet.WriteString(Item.Name.Split('_')[2]);
+                                packet.WriteString(item.Name.Split('_')[2]);
                             }
-                            else if (Item.Data.InteractionType == InteractionType.BOT)//Bots
+                            else if (item.Data.InteractionType == InteractionType.BOT)//Bots
                             {
-                                CatalogBot CatalogBot = null;
-                                if (!PlusEnvironment.GetGame().GetCatalog().TryGetBot(Item.ItemId, out CatalogBot))
+                                CatalogBot catalogBot = null;
+                                if (!PlusEnvironment.GetGame().GetCatalog().TryGetBot(item.ItemId, out catalogBot))
                                     packet.WriteString("hd-180-7.ea-1406-62.ch-210-1321.hr-831-49.ca-1813-62.sh-295-1321.lg-285-92");
                                 else
-                                    packet.WriteString(CatalogBot.Figure);
+                                    packet.WriteString(catalogBot.Figure);
                             }
-                            else if (Item.ExtraData != null)
+                            else if (item.ExtraData != null)
                             {
-                                packet.WriteString(Item.ExtraData != null ? Item.ExtraData : string.Empty);
+                                packet.WriteString(item.ExtraData != null ? item.ExtraData : string.Empty);
                             }
-                            packet.WriteInteger(Item.Amount);
-                            packet.WriteBoolean(Item.IsLimited); // IsLimited
-                            if (Item.IsLimited)
+                            packet.WriteInteger(item.Amount);
+                            packet.WriteBoolean(item.IsLimited); // IsLimited
+                            if (item.IsLimited)
                             {
-                                packet.WriteInteger(Item.LimitedEditionStack);
-                                packet.WriteInteger(Item.LimitedEditionStack - Item.LimitedEditionSells);
+                                packet.WriteInteger(item.LimitedEditionStack);
+                                packet.WriteInteger(item.LimitedEditionStack - item.LimitedEditionSells);
                             }
                         }
                     }
                     packet.WriteInteger(0); //club_level
-                    packet.WriteBoolean(ItemUtility.CanSelectAmount(Item));
+                    packet.WriteBoolean(ItemUtility.CanSelectAmount(item));
 
                     packet.WriteBoolean(false);// TODO: Figure out
                     packet.WriteString("");//previewImage -> e.g; catalogue/pet_lion.png
@@ -136,14 +136,14 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
             packet.WriteBoolean(false);
 
             packet.WriteInteger(PlusEnvironment.GetGame().GetCatalog().GetPromotions().ToList().Count);//Count
-            foreach (CatalogPromotion Promotion in PlusEnvironment.GetGame().GetCatalog().GetPromotions().ToList())
+            foreach (CatalogPromotion promotion in PlusEnvironment.GetGame().GetCatalog().GetPromotions().ToList())
             {
-                packet.WriteInteger(Promotion.Id);
-                packet.WriteString(Promotion.Title);
-                packet.WriteString(Promotion.Image);
-                packet.WriteInteger(Promotion.Unknown);
-                packet.WriteString(Promotion.PageLink);
-                packet.WriteInteger(Promotion.ParentId);
+                packet.WriteInteger(promotion.Id);
+                packet.WriteString(promotion.Title);
+                packet.WriteString(promotion.Image);
+                packet.WriteInteger(promotion.Unknown);
+                packet.WriteString(promotion.PageLink);
+                packet.WriteInteger(promotion.ParentId);
             }
         }
     }

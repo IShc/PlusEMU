@@ -1,12 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Collections.Generic;
-
 using log4net;
-using Plus.HabboHotel.Users;
 using Plus.Core;
 using Plus.HabboHotel.Cache.Type;
+using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Cache.Process
 {
@@ -37,7 +36,7 @@ namespace Plus.HabboHotel.Cache.Process
         /// <summary>
         /// Used for disposing the ProcessComponent safely.
         /// </summary>
-        private readonly AutoResetEvent _resetEvent = new AutoResetEvent(true);
+        private readonly AutoResetEvent _resetEvent = new(true);
 
         /// <summary>
         /// How often the timer should execute.

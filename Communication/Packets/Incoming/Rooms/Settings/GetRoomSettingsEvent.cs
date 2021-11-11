@@ -1,6 +1,6 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.Communication.Packets.Outgoing.Rooms.Settings;
+﻿using Plus.Communication.Packets.Outgoing.Rooms.Settings;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 {

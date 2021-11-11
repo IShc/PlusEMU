@@ -2,37 +2,20 @@
 {
     sealed class WordFilter
     {
-        private string _word;
-        private string _replacement;
-        private bool _strict;
-        private bool _bannable;
-
         public WordFilter(string word, string replacement, bool strict, bool bannable)
         {
-            _word = word;
-            _replacement = replacement;
-            _strict = strict;
-            _bannable = bannable;
+            Word = word;
+            Replacement = replacement;
+            IsStrict = strict;
+            IsBannable = bannable;
         }
 
-        public string Word
-        {
-            get { return _word; }
-        }
+        public string Word { get; }
 
-        public string Replacement
-        {
-            get { return _replacement; }
-        }
+        public string Replacement { get; }
 
-        public bool IsStrict
-        {
-            get { return _strict; }
-        }
+        public bool IsStrict { get; }
 
-        public bool IsBannable
-        {
-            get { return _bannable; }
-        }
+        public bool IsBannable { get; }
     }
 }

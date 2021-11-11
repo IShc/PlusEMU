@@ -1,8 +1,7 @@
 ﻿using System.Linq;
-
+using Plus.HabboHotel.Cache.Type;
 using Plus.HabboHotel.Users;
 using Plus.HabboHotel.Users.Relationships;
-using Plus.HabboHotel.Cache.Type;
 
 namespace Plus.Communication.Packets.Outgoing.Users
 {
@@ -12,7 +11,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
         public GetRelationshipsComposer(Habbo habbo)
             : base(ServerPacketHeader.GetRelationshipsMessageComposer)
         {
-            this.Habbo = habbo;
+            Habbo = habbo;
         }
 
         public override void Compose(ServerPacket packet)

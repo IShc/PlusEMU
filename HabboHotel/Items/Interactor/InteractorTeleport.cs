@@ -5,103 +5,103 @@ namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorTeleport : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
-            Item.ExtraData = "0";
+            item.ExtraData = "0";
 
-            if (Item.InteractingUser != 0)
+            if (item.InteractingUser != 0)
             {
-                RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Item.InteractingUser);
+                RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser);
 
-                if (User != null)
+                if (user != null)
                 {
-                    User.ClearMovement(true);
-                    User.AllowOverride = false;
-                    User.CanWalk = true;
+                    user.ClearMovement(true);
+                    user.AllowOverride = false;
+                    user.CanWalk = true;
                 }
 
-                Item.InteractingUser = 0;
+                item.InteractingUser = 0;
             }
 
-            if (Item.InteractingUser2 != 0)
+            if (item.InteractingUser2 != 0)
             {
-                RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Item.InteractingUser2);
+                RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser2);
 
-                if (User != null)
+                if (user != null)
                 {
-                    User.ClearMovement(true);
-                    User.AllowOverride = false;
-                    User.CanWalk = true;
+                    user.ClearMovement(true);
+                    user.AllowOverride = false;
+                    user.CanWalk = true;
                 }
 
-                Item.InteractingUser2 = 0;
+                item.InteractingUser2 = 0;
             }
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
-            Item.ExtraData = "0";
+            item.ExtraData = "0";
 
-            if (Item.InteractingUser != 0)
+            if (item.InteractingUser != 0)
             {
-                RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Item.InteractingUser);
+                RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser);
 
-                if (User != null)
+                if (user != null)
                 {
-                    User.UnlockWalking();
+                    user.UnlockWalking();
                 }
 
-                Item.InteractingUser = 0;
+                item.InteractingUser = 0;
             }
 
-            if (Item.InteractingUser2 != 0)
+            if (item.InteractingUser2 != 0)
             {
-                RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Item.InteractingUser2);
+                RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser2);
 
-                if (User != null)
+                if (user != null)
                 {
-                    User.UnlockWalking();
+                    user.UnlockWalking();
                 }
 
-                Item.InteractingUser2 = 0;
+                item.InteractingUser2 = 0;
             }
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            if (Item == null || Item.GetRoom() == null || Session == null || Session.GetHabbo() == null)
+            if (item == null || item.GetRoom() == null || session == null || session.GetHabbo() == null)
                 return;
 
-            RoomUser User = Item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(Session.GetHabbo().Id);
-            if (User == null)
+            RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            if (user == null)
                 return;
 
-            User.LastInteraction = PlusEnvironment.GetUnixTimestamp();
+            user.LastInteraction = PlusEnvironment.GetUnixTimestamp();
 
             // Alright. But is this user in the right position?
-            if (User.Coordinate == Item.Coordinate || User.Coordinate == Item.SquareInFront)
+            if (user.Coordinate == item.Coordinate || user.Coordinate == item.SquareInFront)
             {
                 // Fine. But is this tele even free?
-                if (Item.InteractingUser != 0)
+                if (item.InteractingUser != 0)
                 {
                     return;
                 }
 
-                if (!User.CanWalk || Session.GetHabbo().IsTeleporting || Session.GetHabbo().TeleporterId != 0 ||
-                    (User.LastInteraction + 2) - PlusEnvironment.GetUnixTimestamp() < 0)
+                if (!user.CanWalk || session.GetHabbo().IsTeleporting || session.GetHabbo().TeleportId != 0 ||
+                    (user.LastInteraction + 2) - PlusEnvironment.GetUnixTimestamp() < 0)
                     return;
 
-                User.TeleDelay = 2;
+                user.TeleDelay = 2;
 
-                Item.InteractingUser = User.GetClient().GetHabbo().Id;
+                item.InteractingUser = user.GetClient().GetHabbo().Id;
             }
-            else if (User.CanWalk)
+            else if (user.CanWalk)
             {
-                User.MoveTo(Item.SquareInFront);
+                user.MoveTo(item.SquareInFront);
             }
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
         }
     }

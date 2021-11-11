@@ -7,11 +7,11 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public RoomData Data { get; }
         public bool OwnerInRoom { get; }
 
-        public ModeratorRoomInfoComposer(RoomData Data, bool OwnerInRoom)
+        public ModeratorRoomInfoComposer(RoomData data, bool ownerInRoom)
             : base(ServerPacketHeader.ModeratorRoomInfoMessageComposer)
         {
-            this.Data = Data;
-            this.OwnerInRoom = OwnerInRoom;
+            Data = data;
+            OwnerInRoom = ownerInRoom;
         }
 
         public override void Compose(ServerPacket packet)
@@ -26,9 +26,9 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteString(Data.Description);
 
             packet.WriteInteger(Data.Tags.Count);
-            foreach (string Tag in Data.Tags)
+            foreach (string tag in Data.Tags)
             {
-                packet.WriteString(Tag);
+                packet.WriteString(tag);
             }
 
             packet.WriteBoolean(false);

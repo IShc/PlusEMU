@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-
-using Plus.HabboHotel.GameClients;
+﻿using System.Collections.Generic;
 using Plus.HabboHotel.Users.Badges;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Badges
@@ -10,31 +7,31 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Badges
     {
         public ICollection<Badge> Badges { get; }
 
-        public BadgesComposer(ICollection<Badge> Badges)
+        public BadgesComposer(ICollection<Badge> badges)
             : base(ServerPacketHeader.BadgesMessageComposer)
         {
-            this.Badges = Badges;
+            Badges = badges;
         }
 
         public override void Compose(ServerPacket packet)
         {
-            List<Badge> EquippedBadges = new List<Badge>();
+            List<Badge> equippedBadges = new List<Badge>();
 
             packet.WriteInteger(Badges.Count);
-            foreach (Badge Badge in Badges)
+            foreach (Badge badge in Badges)
             {
                 packet.WriteInteger(1);
-                packet.WriteString(Badge.Code);
+                packet.WriteString(badge.Code);
 
-                if (Badge.Slot > 0)
-                    EquippedBadges.Add(Badge);
+                if (badge.Slot > 0)
+                    equippedBadges.Add(badge);
             }
 
-            packet.WriteInteger(EquippedBadges.Count);
-            foreach (Badge Badge in EquippedBadges)
+            packet.WriteInteger(equippedBadges.Count);
+            foreach (Badge badge in equippedBadges)
             {
-                packet.WriteInteger(Badge.Slot);
-                packet.WriteString(Badge.Code);
+                packet.WriteInteger(badge.Slot);
+                packet.WriteString(badge.Code);
             }
         }
     }

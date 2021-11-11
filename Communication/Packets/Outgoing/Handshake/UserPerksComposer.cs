@@ -6,10 +6,10 @@ namespace Plus.Communication.Packets.Outgoing.Handshake
     {
         public Habbo Habbo { get; }
 
-        public UserPerksComposer(Habbo Habbo)
+        public UserPerksComposer(Habbo habbo)
             : base(ServerPacketHeader.UserPerksMessageComposer)
         {
-            this.Habbo = Habbo;
+            Habbo = habbo;
         }
 
         public override void Compose(ServerPacket packet)

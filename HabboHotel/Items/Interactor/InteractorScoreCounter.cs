@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Rooms.Games.Teams;
 
@@ -7,61 +6,61 @@ namespace Plus.HabboHotel.Items.Interactor
 {
     public class InteractorScoreCounter : IFurniInteractor
     {
-        public void OnPlace(GameClient Session, Item Item)
+        public void OnPlace(GameClient session, Item item)
         {
-            if (Item.team == Team.None)
+            if (item.Team == Team.None)
                 return;
 
-            Item.ExtraData = Item.GetRoom().GetGameManager().Points[Convert.ToInt32( Item.team)].ToString();
-            Item.UpdateState(false, true);
+            item.ExtraData = item.GetRoom().GetGameManager().Points[Convert.ToInt32( item.Team)].ToString();
+            item.UpdateState(false, true);
         }
 
-        public void OnRemove(GameClient Session, Item Item)
+        public void OnRemove(GameClient session, Item item)
         {
         }
 
-        public void OnTrigger(GameClient Session, Item Item, int Request, bool HasRights)
+        public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
         {
-            if (!HasRights)
+            if (!hasRights)
             {
                 return;
             }
 
-            int OldValue = 0;
+            int oldValue = 0;
 
-            if (!int.TryParse(Item.ExtraData, out OldValue))
+            if (!int.TryParse(item.ExtraData, out oldValue))
             {
-            }
-
-            if (Request == 1)
-            {
-                OldValue++;
-            }
-            else if (Request == 2)
-            {
-                OldValue--;
-            }
-            else if (Request == 3)
-            {
-                OldValue = 0;
             }
 
-            Item.ExtraData = OldValue.ToString();
-            Item.UpdateState(false, true);
+            if (request == 1)
+            {
+                oldValue++;
+            }
+            else if (request == 2)
+            {
+                oldValue--;
+            }
+            else if (request == 3)
+            {
+                oldValue = 0;
+            }
+
+            item.ExtraData = oldValue.ToString();
+            item.UpdateState(false, true);
         }
 
-        public void OnWiredTrigger(Item Item)
+        public void OnWiredTrigger(Item item)
         {
-            int OldValue = 0;
+            int oldValue = 0;
 
-            if (!int.TryParse(Item.ExtraData, out OldValue))
+            if (!int.TryParse(item.ExtraData, out oldValue))
             {
             }
 
-            OldValue++;
+            oldValue++;
 
-            Item.ExtraData = OldValue.ToString();
-            Item.UpdateState(false, true);
+            item.ExtraData = oldValue.ToString();
+            item.UpdateState(false, true);
         }
     }
 }

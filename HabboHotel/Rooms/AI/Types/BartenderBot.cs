@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Drawing;
-
-using Plus.HabboHotel.GameClients;
-using Plus.HabboHotel.Rooms.AI.Speech;
 using Plus.Communication.Packets.Outgoing.Rooms.Chat;
+using Plus.HabboHotel.GameClients;
 using Plus.HabboHotel.Rooms.AI.Responses;
+using Plus.HabboHotel.Rooms.AI.Speech;
 using Plus.Utilities;
 
 namespace Plus.HabboHotel.Rooms.AI.Types
 {
     class BartenderBot : BotAI
     {
-        private int VirtualId;
-        private int ActionTimer = 0;
-        private int SpeechTimer = 0;
+        private int _virtualId;
+        private int _actionTimer;
+        private int _speechTimer;
 
-        public BartenderBot(int VirtualId)
+        public BartenderBot(int virtualId)
         {
-            this.VirtualId = VirtualId;
+            _virtualId = virtualId;
         }
 
         public override void OnSelfEnterRoom()
@@ -25,82 +24,82 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 
         }
 
-        public override void OnSelfLeaveRoom(bool Kicked)
+        public override void OnSelfLeaveRoom(bool kicked)
         {
         }
 
-        public override void OnUserEnterRoom(RoomUser User)
+        public override void OnUserEnterRoom(RoomUser user)
         {
         }
 
-        public override void OnUserLeaveRoom(GameClient Client)
+        public override void OnUserLeaveRoom(GameClient client)
         {
             //if ()
         }
 
-        public override void OnUserSay(RoomUser User, string Message)
+        public override void OnUserSay(RoomUser user, string message)
         {
-            if (User == null || User.GetClient() == null || User.GetClient().GetHabbo() == null)
+            if (user == null || user.GetClient() == null || user.GetClient().GetHabbo() == null)
                 return;
 
-            if (Gamemap.TileDistance(GetRoomUser().X, GetRoomUser().Y, User.X, User.Y) > 8)
+            if (Gamemap.TileDistance(GetRoomUser().X, GetRoomUser().Y, user.X, user.Y) > 8)
                 return;
 
-            BotResponse Response = PlusEnvironment.GetGame().GetBotManager().GetResponse(GetBotData().AiType, Message);
-            if (Response == null)
+            BotResponse response = PlusEnvironment.GetGame().GetBotManager().GetResponse(GetBotData().AiType, message);
+            if (response == null)
                 return;
 
-            switch (Response.ResponseType.ToLower())
+            switch (response.ResponseType.ToLower())
             {
                 case "say":
-                    GetRoomUser().Chat(Response.ResponseText.Replace("{username}", User.GetClient().GetHabbo().Username));
+                    GetRoomUser().Chat(response.ResponseText.Replace("{username}", user.GetClient().GetHabbo().Username));
                     break;
 
                 case "shout":
-                    GetRoomUser().Chat(Response.ResponseText.Replace("{username}", User.GetClient().GetHabbo().Username));
+                    GetRoomUser().Chat(response.ResponseText.Replace("{username}", user.GetClient().GetHabbo().Username));
                     break;
 
                 case "whisper":
-                    User.GetClient().SendPacket(new WhisperComposer(GetRoomUser().VirtualId, Response.ResponseText.Replace("{username}", User.GetClient().GetHabbo().Username), 0, 0));
+                    user.GetClient().SendPacket(new WhisperComposer(GetRoomUser().VirtualId, response.ResponseText.Replace("{username}", user.GetClient().GetHabbo().Username), 0, 0));
                     break;
             }
 
-            if (Response.BeverageIds.Count > 0)
+            if (response.BeverageIds.Count > 0)
             {
-                User.CarryItem(Response.BeverageIds[RandomNumber.GenerateRandom(0, (Response.BeverageIds.Count - 1))]);
+                user.CarryItem(response.BeverageIds[RandomNumber.GenerateRandom(0, (response.BeverageIds.Count - 1))]);
             }
         }
 
-        public override void OnUserShout(RoomUser User, string Message)
+        public override void OnUserShout(RoomUser user, string message)
         {
-            if (User == null || User.GetClient() == null || User.GetClient().GetHabbo() == null)
+            if (user == null || user.GetClient() == null || user.GetClient().GetHabbo() == null)
                 return;
 
-            if (Gamemap.TileDistance(GetRoomUser().X, GetRoomUser().Y, User.X, User.Y) > 8)
+            if (Gamemap.TileDistance(GetRoomUser().X, GetRoomUser().Y, user.X, user.Y) > 8)
                 return;
 
-            BotResponse Response = PlusEnvironment.GetGame().GetBotManager().GetResponse(GetBotData().AiType, Message);
-            if (Response == null)
+            BotResponse response = PlusEnvironment.GetGame().GetBotManager().GetResponse(GetBotData().AiType, message);
+            if (response == null)
                 return;
 
-            switch (Response.ResponseType.ToLower())
+            switch (response.ResponseType.ToLower())
             {
                 case "say":
-                    GetRoomUser().Chat(Response.ResponseText.Replace("{username}", User.GetClient().GetHabbo().Username));
+                    GetRoomUser().Chat(response.ResponseText.Replace("{username}", user.GetClient().GetHabbo().Username));
                     break;
 
                 case "shout":
-                    GetRoomUser().Chat(Response.ResponseText.Replace("{username}", User.GetClient().GetHabbo().Username));
+                    GetRoomUser().Chat(response.ResponseText.Replace("{username}", user.GetClient().GetHabbo().Username));
                     break;
 
                 case "whisper":
-                    User.GetClient().SendPacket(new WhisperComposer(GetRoomUser().VirtualId, Response.ResponseText.Replace("{username}", User.GetClient().GetHabbo().Username), 0, 0));
+                    user.GetClient().SendPacket(new WhisperComposer(GetRoomUser().VirtualId, response.ResponseText.Replace("{username}", user.GetClient().GetHabbo().Username), 0, 0));
                     break;
             }
 
-            if (Response.BeverageIds.Count > 0)
+            if (response.BeverageIds.Count > 0)
             {
-                User.CarryItem(Response.BeverageIds[RandomNumber.GenerateRandom(0, (Response.BeverageIds.Count - 1))]);
+                user.CarryItem(response.BeverageIds[RandomNumber.GenerateRandom(0, (response.BeverageIds.Count - 1))]);
             }
         }
 
@@ -109,26 +108,26 @@ namespace Plus.HabboHotel.Rooms.AI.Types
             if (GetBotData() == null)
                 return;
 
-            if (SpeechTimer <= 0)
+            if (_speechTimer <= 0)
             {
                 if (GetBotData().RandomSpeech.Count > 0)
                 {
                     if (GetBotData().AutomaticChat == false)
                         return;
 
-                    RandomSpeech Speech = GetBotData().GetRandomSpeech();
+                    RandomSpeech speech = GetBotData().GetRandomSpeech();
 
-                    string String = PlusEnvironment.GetGame().GetChatManager().GetFilter().CheckMessage(Speech.Message);
-                    if (String.Contains("<img src") || String.Contains("<font ") || String.Contains("</font>") || String.Contains("</a>") || String.Contains("<i>"))
-                        String = "I really shouldn't be using HTML within bot speeches.";
-                    GetRoomUser().Chat(String, GetBotData().ChatBubble);
+                    string @string = PlusEnvironment.GetGame().GetChatManager().GetFilter().CheckMessage(speech.Message);
+                    if (@string.Contains("<img src") || @string.Contains("<font ") || @string.Contains("</font>") || @string.Contains("</a>") || @string.Contains("<i>"))
+                        @string = "I really shouldn't be using HTML within bot speeches.";
+                    GetRoomUser().Chat(@string, GetBotData().ChatBubble);
                 }
-                SpeechTimer = GetBotData().SpeakingInterval;
+                _speechTimer = GetBotData().SpeakingInterval;
             }
             else
-                SpeechTimer--;
+                _speechTimer--;
 
-            if (ActionTimer <= 0)
+            if (_actionTimer <= 0)
             {
                 Point nextCoord;
                 switch (GetBotData().WalkingMode.ToLower())
@@ -151,35 +150,35 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         }
                         else if (GetBotData().ForcedUserTargetMovement > 0)
                         {
-                            RoomUser Target = GetRoom().GetRoomUserManager().GetRoomUserByHabbo(GetBotData().ForcedUserTargetMovement);
-                            if (Target == null)
+                            RoomUser target = GetRoom().GetRoomUserManager().GetRoomUserByHabbo(GetBotData().ForcedUserTargetMovement);
+                            if (target == null)
                             {
                                 GetBotData().ForcedUserTargetMovement = 0;
                                 GetRoomUser().ClearMovement(true);
                             }
                             else
                             {
-                                var Sq = new Point(Target.X, Target.Y);
+                                var sq = new Point(target.X, target.Y);
 
-                                if (Target.RotBody == 0)
+                                if (target.RotBody == 0)
                                 {
-                                    Sq.Y--;
+                                    sq.Y--;
                                 }
-                                else if (Target.RotBody == 2)
+                                else if (target.RotBody == 2)
                                 {
-                                    Sq.X++;
+                                    sq.X++;
                                 }
-                                else if (Target.RotBody == 4)
+                                else if (target.RotBody == 4)
                                 {
-                                    Sq.Y++;
+                                    sq.Y++;
                                 }
-                                else if (Target.RotBody == 6)
+                                else if (target.RotBody == 6)
                                 {
-                                    Sq.X--;
+                                    sq.X--;
                                 }
 
 
-                                GetRoomUser().MoveTo(Sq);
+                                GetRoomUser().MoveTo(sq);
                             }
                         }
                         else if (GetBotData().TargetUser == 0)
@@ -194,10 +193,10 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         break;
                 }
 
-                ActionTimer = new Random(DateTime.Now.Millisecond + VirtualId ^ 2).Next(5, 15);
+                _actionTimer = new Random(DateTime.Now.Millisecond + _virtualId ^ 2).Next(5, 15);
             }
             else
-                ActionTimer--;
+                _actionTimer--;
         }
     }
 }

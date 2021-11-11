@@ -68,7 +68,7 @@
         public const int FloorPlanSendDoorMessageComposer = 1664; // PRODUCTION-201611291003-338511768
         public const int SleepMessageComposer = 1797; // PRODUCTION-201611291003-338511768
         public const int FlatControllerRemovedMessageComposer = 1327; // PRODUCTION-201611291003-338511768
-        public const int UniqueMachineIDMessageComposer = 1488; // PRODUCTION-201611291003-338511768
+        public const int UniqueMachineIdMessageComposer = 1488; // PRODUCTION-201611291003-338511768
         public const int ItemAddMessageComposer = 2187; // PRODUCTION-201611291003-338511768
         public const int FigureSetIdsMessageComposer = 1450; // PRODUCTION-201611291003-338511768
         public const int InstantMessageErrorMessageComposer = 3359; // PRODUCTION-201611291003-338511768
@@ -93,7 +93,7 @@
         public const int ModeratorRoomChatlogMessageComposer = 3434; // PRODUCTION-201611291003-338511768
         public const int ClubGiftsMessageComposer = 619; // PRODUCTION-201611291003-338511768
         public const int MarketplaceMakeOfferResultMessageComposer = 1359; // PRODUCTION-201611291003-338511768
-        public const int MOTDNotificationMessageComposer = 2035; // PRODUCTION-201611291003-338511768
+        public const int MotdNotificationMessageComposer = 2035; // PRODUCTION-201611291003-338511768
         public const int TalentTrackMessageComposer = 3406; // PRODUCTION-201611291003-338511768
         public const int MessengerErrorMessageComposer = 892; // PRODUCTION-201611291003-338511768
         public const int GroupInfoMessageComposer = 1702; // PRODUCTION-201611291003-338511768
@@ -194,7 +194,7 @@
         public const int BuddyRequestsMessageComposer = 280; // PRODUCTION-201611291003-338511768
         public const int CameraStorageUrlMessageComposer = 3696; // PRODUCTION-201611291003-338511768
         public const int Game3WeeklyLeaderboardMessageComposer = 2196; // PRODUCTION-201611291003-338511768
-        public const int AuthenticationOKMessageComposer = 2491; // PRODUCTION-201611291003-338511768
+        public const int AuthenticationOkMessageComposer = 2491; // PRODUCTION-201611291003-338511768
         public const int QuestStartedMessageComposer = 230; // PRODUCTION-201611291003-338511768
         public const int BotInventoryMessageComposer = 3086; // PRODUCTION-201611291003-338511768
         public const int GameListMessageComposer = 222; // PRODUCTION-201611291003-338511768

@@ -1,16 +1,16 @@
-﻿using log4net;
-using Plus.Database.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using log4net;
+using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Subscriptions
 {
     public class SubscriptionManager
     {
-        private static ILog log = LogManager.GetLogger(typeof(SubscriptionManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(SubscriptionManager));
 
-        private readonly Dictionary<int, SubscriptionData> _subscriptions = new Dictionary<int, SubscriptionData>();
+        private readonly Dictionary<int, SubscriptionData> _subscriptions = new();
 
         public SubscriptionManager()
         {
@@ -24,24 +24,24 @@ namespace Plus.HabboHotel.Subscriptions
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `subscriptions`;");
-                DataTable GetSubscriptions = dbClient.GetTable();
+                DataTable getSubscriptions = dbClient.GetTable();
 
-                if (GetSubscriptions != null)
+                if (getSubscriptions != null)
                 {
-                    foreach (DataRow Row in GetSubscriptions.Rows)
+                    foreach (DataRow row in getSubscriptions.Rows)
                     {
-                        if (!_subscriptions.ContainsKey(Convert.ToInt32(Row["id"])))
-                            _subscriptions.Add(Convert.ToInt32(Row["id"]), new SubscriptionData(Convert.ToInt32(Row["id"]), Convert.ToString(Row["name"]), Convert.ToString(Row["badge_code"]), Convert.ToInt32(Row["credits"]), Convert.ToInt32(Row["duckets"]), Convert.ToInt32(Row["respects"])));
+                        if (!_subscriptions.ContainsKey(Convert.ToInt32(row["id"])))
+                            _subscriptions.Add(Convert.ToInt32(row["id"]), new SubscriptionData(Convert.ToInt32(row["id"]), Convert.ToString(row["name"]), Convert.ToString(row["badge_code"]), Convert.ToInt32(row["credits"]), Convert.ToInt32(row["duckets"]), Convert.ToInt32(row["respects"])));
                     }
                 }
             }
 
-            log.Info("Loaded " + _subscriptions.Count + " subscriptions.");
+            Log.Info("Loaded " + _subscriptions.Count + " subscriptions.");
         }
 
-        public bool TryGetSubscriptionData(int Id, out SubscriptionData Data)
+        public bool TryGetSubscriptionData(int id, out SubscriptionData data)
         {
-            return _subscriptions.TryGetValue(Id, out Data);
+            return _subscriptions.TryGetValue(id, out data);
         }
     }
 }

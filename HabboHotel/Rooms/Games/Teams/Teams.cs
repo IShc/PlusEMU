@@ -1,12 +1,10 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Collections.Generic;
-
+using System.Linq;
 using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Rooms.Games.Teams
 {
-
     public class TeamManager
     {
         public string Game;

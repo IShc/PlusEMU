@@ -2,7 +2,6 @@
 using System.Data;
 using Plus.Database.Interfaces;
 
-
 namespace Plus.HabboHotel.Items.Data.Toner
 {
     public class TonerData
@@ -13,33 +12,33 @@ namespace Plus.HabboHotel.Items.Data.Toner
         public int Lightness;
         public int Enabled;
 
-        public TonerData(int Item)
+        public TonerData(int item)
         {
-            ItemId = Item;
+            ItemId = item;
 
-            DataRow Row;
+            DataRow row;
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT enabled,data1,data2,data3 FROM room_items_toner WHERE id=" + ItemId +" LIMIT 1");
-                Row = dbClient.GetRow();
+                row = dbClient.GetRow();
             }
 
-            if (Row == null)
+            if (row == null)
             {
                 //throw new NullReferenceException("No toner data found in the database for " + ItemId);
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.RunQuery("INSERT INTO `room_items_toner` VALUES (" + ItemId + ",'0',0,0,0)");
                     dbClient.SetQuery("SELECT enabled,data1,data2,data3 FROM room_items_toner WHERE id=" + ItemId + " LIMIT 1");
-                    Row = dbClient.GetRow();
+                    row = dbClient.GetRow();
                 }
             }
 
-            Enabled = int.Parse(Row[0].ToString());
-            Hue = Convert.ToInt32(Row[1]);
-            Saturation = Convert.ToInt32(Row[2]);
-            Lightness = Convert.ToInt32(Row[3]);
+            Enabled = int.Parse(row[0].ToString());
+            Hue = Convert.ToInt32(row[1]);
+            Saturation = Convert.ToInt32(row[2]);
+            Lightness = Convert.ToInt32(row[3]);
         }
     }
 }

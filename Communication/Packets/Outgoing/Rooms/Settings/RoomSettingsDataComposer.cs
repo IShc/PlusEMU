@@ -8,7 +8,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
         public RoomSettingsDataComposer(Room room)
             : base(ServerPacketHeader.RoomSettingsDataMessageComposer)
         {
-            this.Room = room;
+            Room = room;
         }
 
         public override void Compose(ServerPacket packet)
@@ -22,16 +22,16 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
             packet.WriteInteger(((Room.Model.MapSizeX * Room.Model.MapSizeY) > 100) ? 50 : 25);
 
             packet.WriteInteger(Room.Tags.Count);
-            foreach (string Tag in Room.Tags.ToArray())
+            foreach (string tag in Room.Tags.ToArray())
             {
-                packet.WriteString(Tag);
+                packet.WriteString(tag);
             }
 
             packet.WriteInteger(Room.TradeSettings); //Trade
             packet.WriteInteger(Room.AllowPets); // allows pets in room - pet system lacking, so always off
             packet.WriteInteger(Room.AllowPetsEating);// allows pets to eat your food - pet system lacking, so always off
             packet.WriteInteger(Room.RoomBlockingEnabled);
-            packet.WriteInteger(Room.Hidewall);
+            packet.WriteInteger(Room.HideWall);
             packet.WriteInteger(Room.WallThickness);
             packet.WriteInteger(Room.FloorThickness);
 

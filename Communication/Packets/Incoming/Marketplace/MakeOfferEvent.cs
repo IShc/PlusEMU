@@ -1,9 +1,8 @@
-﻿using Plus.HabboHotel.Items;
-using Plus.HabboHotel.Catalog.Utilities;
-using Plus.Communication.Packets.Outgoing.Marketplace;
+﻿using Plus.Communication.Packets.Outgoing.Marketplace;
 using Plus.Database.Interfaces;
+using Plus.HabboHotel.Catalog.Utilities;
 using Plus.HabboHotel.GameClients;
-
+using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
@@ -34,8 +33,8 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
                 return;
             }
 
-            int comission = PlusEnvironment.GetGame().GetCatalog().GetMarketplace().CalculateComissionPrice(sellingPrice);
-            int totalPrice = sellingPrice + comission;
+            int commission = PlusEnvironment.GetGame().GetCatalog().GetMarketplace().CalculateCommissionPrice(sellingPrice);
+            int totalPrice = sellingPrice + commission;
             int itemType = 1;
             if (item.GetBaseItem().Type == 'i')
                 itemType++;

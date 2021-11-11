@@ -1,6 +1,6 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.Communication.Packets.Outgoing.Navigator;
+﻿using Plus.Communication.Packets.Outgoing.Navigator;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Navigator
 {

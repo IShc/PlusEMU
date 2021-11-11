@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Concurrent;
-
+using System.Linq;
 using Plus.Communication.Packets.Incoming;
-using Plus.HabboHotel.Rooms;
 using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.Core;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
@@ -15,7 +14,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public Room Instance { get; set; }
 
         public Item Item { get; set; }
-        public WiredBoxType Type { get { return WiredBoxType.EffectMatchPosition; } }
+        public WiredBoxType Type => WiredBoxType.EffectMatchPosition;
 
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
 
@@ -23,60 +22,61 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public bool BoolData { get; set; }
 
-        public int Delay { get { return _delay; } set { _delay = value; TickCount = value + 1; } }
+        public int Delay { get => _delay;
+            set { _delay = value; TickCount = value + 1; } }
 
         public int TickCount { get; set; }
 
-        private bool Requested;
+        private bool _requested;
         public string ItemsData { get; set; }
 
-        public MatchPositionBox(Room Instance, Item Item)
+        public MatchPositionBox(Room instance, Item item)
         {
-            this.Instance = Instance;
-            this.Item = Item;
+            Instance = instance;
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
             TickCount = Delay;
-            Requested = false;
+            _requested = false;
         }
 
-        public void HandleSave(ClientPacket Packet)
+        public void HandleSave(ClientPacket packet)
         {
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            int Unknown = Packet.PopInt();
-            int State = Packet.PopInt();
-            int Direction = Packet.PopInt();
-            int Placement = Packet.PopInt();
-            string Unknown2 = Packet.PopString();
+            int unknown = packet.PopInt();
+            int state = packet.PopInt();
+            int direction = packet.PopInt();
+            int placement = packet.PopInt();
+            string unknown2 = packet.PopString();
 
-            int FurniCount = Packet.PopInt();
-            for (int i = 0; i < FurniCount; i++)
+            int furniCount = packet.PopInt();
+            for (int i = 0; i < furniCount; i++)
             {
-                Item SelectedItem = Instance.GetRoomItemHandler().GetItem(Packet.PopInt());
-                if (SelectedItem != null)
-                    SetItems.TryAdd(SelectedItem.Id, SelectedItem);
+                Item selectedItem = Instance.GetRoomItemHandler().GetItem(packet.PopInt());
+                if (selectedItem != null)
+                    SetItems.TryAdd(selectedItem.Id, selectedItem);
             }
 
-            StringData = State + ";" + Direction + ";" + Placement;
+            StringData = state + ";" + direction + ";" + placement;
 
-            int Delay = Packet.PopInt();
-            this.Delay = Delay;
+            int delay = packet.PopInt();
+            Delay = delay;
         }
 
-        public bool Execute(params object[] Params)
+        public bool Execute(params object[] @params)
         {
-            if (!Requested)
+            if (!_requested)
             {
                 TickCount = Delay;
-                Requested = true;
+                _requested = true;
             }
             return true;
         }
 
         public bool OnCycle()
         {
-            if (!Requested || String.IsNullOrEmpty(StringData) || StringData == "0;0;0" || SetItems.Count == 0)
+            if (!_requested || String.IsNullOrEmpty(StringData) || StringData == "0;0;0" || SetItems.Count == 0)
                 return false;
 
             foreach (Item item in SetItems.Values.ToList())
@@ -90,8 +90,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                         continue;
 
                     int itemId = Convert.ToInt32(I.Split(':')[0]);
-                    Item II = Instance.GetRoomItemHandler().GetItem(Convert.ToInt32(itemId));
-                    if (II == null)
+                    Item ii = Instance.GetRoomItemHandler().GetItem(Convert.ToInt32(itemId));
+                    if (ii == null)
                         continue;
 
                     string[] partsString = I.Split(':');
@@ -109,9 +109,9 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                         if (int.Parse(StringData.Split(';')[0]) == 1)//State
                         {
                             if (part.Count() >= 4)
-                                SetState(II, part[4].ToString());
+                                SetState(ii, part[4].ToString());
                             else
-                                SetState(II, "1");
+                                SetState(ii, "1");
                         }
                     }
                     catch (Exception e) { ExceptionLogger.LogWiredException(e); }
@@ -119,48 +119,48 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     try
                     {
                         if (int.Parse(StringData.Split(';')[1]) == 1)//Direction
-                            SetRotation(II, Convert.ToInt32(part[3]));
+                            SetRotation(ii, Convert.ToInt32(part[3]));
                     }
                     catch (Exception e) { ExceptionLogger.LogWiredException(e); }
 
                     try
                     {
                         if (int.Parse(StringData.Split(';')[2]) == 1)//Position
-                            SetPosition(II, Convert.ToInt32(part[0].ToString()), Convert.ToInt32(part[1].ToString()), Convert.ToDouble(part[2].ToString()));
+                            SetPosition(ii, Convert.ToInt32(part[0].ToString()), Convert.ToInt32(part[1].ToString()), Convert.ToDouble(part[2].ToString()));
                     }
                     catch (Exception e) { ExceptionLogger.LogWiredException(e); }
                 }
             }
-            Requested = false;
+            _requested = false;
             return true;
         }
 
-        private void SetState(Item Item, string Extradata)
+        private void SetState(Item item, string extradata)
         {
-            if (Item.ExtraData == Extradata)
+            if (item.ExtraData == extradata)
                 return;
 
-            if (Item.GetBaseItem().InteractionType == InteractionType.DICE)
+            if (item.GetBaseItem().InteractionType == InteractionType.DICE)
                 return;
 
-            Item.ExtraData = Extradata;
-            Item.UpdateState(false, true);
+            item.ExtraData = extradata;
+            item.UpdateState(false, true);
         }
 
-        private void SetRotation(Item Item, int Rotation)
+        private void SetRotation(Item item, int rotation)
         {
-            if (Item.Rotation == Rotation)
+            if (item.Rotation == rotation)
                 return;
 
-            Item.Rotation = Rotation;
-            Item.UpdateState(false, true);
+            item.Rotation = rotation;
+            item.UpdateState(false, true);
         }
 
-        private void SetPosition(Item Item, int CoordX, int CoordY, double CoordZ)
+        private void SetPosition(Item item, int coordX, int coordY, double coordZ)
         {
-            Instance.SendPacket(new SlideObjectBundleComposer(Item.GetX, Item.GetY, Item.GetZ, CoordX, CoordY, CoordZ, 0, 0, Item.Id));
+            Instance.SendPacket(new SlideObjectBundleComposer(item.GetX, item.GetY, item.GetZ, coordX, coordY, coordZ, 0, 0, item.Id));
 
-            Instance.GetRoomItemHandler().SetFloorItem(Item, CoordX, CoordY, CoordZ);
+            Instance.GetRoomItemHandler().SetFloorItem(item, coordX, coordY, coordZ);
             //Instance.GetGameMap().GenerateMaps();
         }
     }

@@ -5,15 +5,9 @@ namespace Plus.Communication.Rcon.Commands.Hotel
 {
     class ReloadRanksCommand : IRconCommand
     {
-        public string Description
-        {
-            get { return "This command is used to reload user permissions."; }
-        }
+        public string Description => "This command is used to reload user permissions.";
 
-        public string Parameters
-        {
-            get { return ""; }
-        }
+        public string Parameters => "";
 
         public bool TryExecute(string[] parameters)
         {

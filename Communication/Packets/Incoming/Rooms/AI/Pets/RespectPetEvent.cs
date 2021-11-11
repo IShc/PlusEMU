@@ -1,8 +1,8 @@
-﻿using Plus.HabboHotel.Rooms;
-using Plus.HabboHotel.Quests;
-using Plus.Communication.Packets.Outgoing.Pets;
+﻿using Plus.Communication.Packets.Outgoing.Pets;
 using Plus.Communication.Packets.Outgoing.Rooms.Avatar;
 using Plus.HabboHotel.GameClients;
+using Plus.HabboHotel.Quests;
+using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 {

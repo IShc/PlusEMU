@@ -7,7 +7,7 @@
         public FlatAccessDeniedComposer(string username)
             : base(ServerPacketHeader.FlatAccessDeniedMessageComposer)
         {
-            this.Username = username;
+            Username = username;
         }
 
         public override void Compose(ServerPacket packet)
