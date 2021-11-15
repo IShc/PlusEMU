@@ -22,11 +22,10 @@ namespace Plus.HabboHotel.Rooms.Chat.Styles
             if (_styles.Count > 0)
                 _styles.Clear();
 
-            DataTable table = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `room_chat_styles`;");
-                table = dbClient.GetTable();
+                DataTable table = dbClient.GetTable();
 
                 if (table != null)
                 {

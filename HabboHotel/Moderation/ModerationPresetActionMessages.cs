@@ -14,15 +14,15 @@
 
         public ModerationPresetActionMessages(int id, int parentId, string caption, string messageText, int muteTime, int banTime, int ipBanTime, int tradeLockTime, string notice)
         {
-            this.Id = id;
-            this.ParentId = parentId;
-            this.Caption = caption;
-            this.MessageText = messageText;
-            this.MuteTime = muteTime;
-            this.BanTime = banTime;
-            this.IpBanTime = ipBanTime;
-            this.TradeLockTime = tradeLockTime;
-            this.Notice = notice;
+            Id = id;
+            ParentId = parentId;
+            Caption = caption;
+            MessageText = messageText;
+            MuteTime = muteTime;
+            BanTime = banTime;
+            IpBanTime = ipBanTime;
+            TradeLockTime = tradeLockTime;
+            Notice = notice;
         }
     }
 }

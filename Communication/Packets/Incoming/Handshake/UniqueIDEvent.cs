@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Handshake
 {
-    public class UniqueIDEvent : IPacketEvent
+    public class UniqueIdEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -64,8 +64,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
 
                     user.RidingHorse = true;
                     pet.RidingHorse = true;
-                    pet.HorseID = user.VirtualId;
-                    user.HorseID = pet.VirtualId;
+                    pet.HorseId = user.VirtualId;
+                    user.HorseId = pet.VirtualId;
 
                     user.ApplyEffect(77);
 
@@ -78,7 +78,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
             }
             else
             {
-                if (user.VirtualId == pet.HorseID)
+                if (user.VirtualId == pet.HorseId)
                 {
                     pet.Statusses.Remove("sit");
                     pet.Statusses.Remove("lay");
@@ -87,9 +87,9 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
                     pet.Statusses.Remove("ded");
                     pet.Statusses.Remove("jmp");
                     user.RidingHorse = false;
-                    user.HorseID = 0;
+                    user.HorseId = 0;
                     pet.RidingHorse = false;
-                    pet.HorseID = 0;
+                    pet.HorseId = 0;
                     user.MoveTo(new Point(user.X + 2, user.Y + 2));
                     user.ApplyEffect(-1);
                     user.UpdateNeeded = true;

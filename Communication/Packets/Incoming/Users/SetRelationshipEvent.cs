@@ -41,10 +41,12 @@ namespace Plus.Communication.Packets.Incoming.Users
             {
                 if (type == 0)
                 {
-                    dbClient.SetQuery("SELECT `id` FROM `user_relationships` WHERE `user_id` = '" + session.GetHabbo().Id + "' AND `target` = @target LIMIT 1");
+                    dbClient.SetQuery("SELECT `id` FROM `user_relationships` WHERE `user_id` = @userId AND `target` = @target LIMIT 1");
+                    dbClient.AddParameter("userId", session.GetHabbo().Id);
                     dbClient.AddParameter("target", user);
 
-                    dbClient.SetQuery("DELETE FROM `user_relationships` WHERE `user_id` = '" + session.GetHabbo().Id + "' AND `target` = @target LIMIT 1");
+                    dbClient.SetQuery("DELETE FROM `user_relationships` WHERE `user_id` = @userId AND `target` = @target LIMIT 1");
+                    dbClient.AddParameter("userId", session.GetHabbo().Id);
                     dbClient.AddParameter("target", user);
                     dbClient.RunQuery();
 
@@ -53,13 +55,15 @@ namespace Plus.Communication.Packets.Incoming.Users
                 }
                 else
                 {
-                    dbClient.SetQuery("SELECT `id` FROM `user_relationships` WHERE `user_id` = '" + session.GetHabbo().Id + "' AND `target` = @target LIMIT 1");
+                    dbClient.SetQuery("SELECT `id` FROM `user_relationships` WHERE `user_id` = @userId AND `target` = @target LIMIT 1");
+                    dbClient.AddParameter("userId", session.GetHabbo().Id);
                     dbClient.AddParameter("target", user);
                     int id = dbClient.GetInteger();
 
                     if (id > 0)
                     {
-                        dbClient.SetQuery("DELETE FROM `user_relationships` WHERE `user_id` = '" + session.GetHabbo().Id + "' AND `target` = @target LIMIT 1");
+                        dbClient.SetQuery("DELETE FROM `user_relationships` WHERE `user_id` = @userId AND `target` = @target LIMIT 1");
+                        dbClient.AddParameter("userId", session.GetHabbo().Id);
                         dbClient.AddParameter("target", user);
                         dbClient.RunQuery();
 
@@ -67,7 +71,8 @@ namespace Plus.Communication.Packets.Incoming.Users
                             session.GetHabbo().Relationships.Remove(id);
                     }
 
-                    dbClient.SetQuery("INSERT INTO `user_relationships` (`user_id`,`target`,`type`) VALUES ('" + session.GetHabbo().Id + "', @target, @type)");
+                    dbClient.SetQuery("INSERT INTO `user_relationships` (`user_id`,`target`,`type`) VALUES (@userId, @target, @type)");
+                    dbClient.AddParameter("userId", session.GetHabbo().Id);
                     dbClient.AddParameter("target", user);
                     dbClient.AddParameter("type", type);
                     int newId = Convert.ToInt32(dbClient.InsertQuery());

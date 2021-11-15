@@ -28,10 +28,10 @@ namespace Plus
 
         private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public static void Main(string[] Args)
+        public static void Main(string[] args)
         {
             ILoggerRepository repository = LogManager.GetRepository(Assembly.GetCallingAssembly());
-            var fileInfo = new FileInfo(@"app.config");
+            var fileInfo = new FileInfo(@"log4net.config");
 
             XmlConfigurator.Configure(repository, fileInfo);
 
@@ -47,11 +47,11 @@ namespace Plus
                 if (Console.ReadKey(true).Key == ConsoleKey.Enter)
                 {
                     Console.Write("plus> ");
-                    string Input = Console.ReadLine();
+                    string input = Console.ReadLine();
 
-                    if (Input.Length > 0)
+                    if (input.Length > 0)
                     {
-                        string s = Input.Split(' ')[0];
+                        string s = input.Split(' ')[0];
 
                         ConsoleCommands.InvokeCommand(s);
                     }

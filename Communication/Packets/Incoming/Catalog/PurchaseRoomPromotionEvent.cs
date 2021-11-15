@@ -52,7 +52,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             if (!session.GetHabbo().GetBadgeComponent().HasBadge("RADZZ"))
                 session.GetHabbo().GetBadgeComponent().GiveBadge("RADZZ", true, session);
 
-            session.SendPacket(new PurchaseOKComposer());
+            session.SendPacket(new PurchaseOkComposer());
             if (session.GetHabbo().InRoom && session.GetHabbo().CurrentRoomId == roomId)
                 session.GetHabbo().CurrentRoom.SendPacket(new RoomEventComposer(data, data.Promotion));
 

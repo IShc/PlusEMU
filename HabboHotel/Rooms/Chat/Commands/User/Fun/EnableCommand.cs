@@ -36,7 +36,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
             }
             else if (thisUser.Team != Team.None)
                 return;
-            else if (thisUser.isLying)
+            else if (thisUser.IsLying)
                 return;
 
             int effectId = 0;

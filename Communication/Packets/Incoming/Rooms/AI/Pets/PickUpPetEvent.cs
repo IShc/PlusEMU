@@ -57,7 +57,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 
             if (pet.RidingHorse)
             {
-                RoomUser userRiding = room.GetRoomUserManager().GetRoomUserByVirtualId(pet.HorseID);
+                RoomUser userRiding = room.GetRoomUserManager().GetRoomUserByVirtualId(pet.HorseId);
                 if (userRiding != null)
                 {
                     userRiding.RidingHorse = false;

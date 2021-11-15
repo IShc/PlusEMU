@@ -37,10 +37,10 @@ namespace Plus.HabboHotel.Rooms
         public int GoalX; //byte
         public int GoalY; //byte
         public int HabboId;
-        public int HorseID = 0;
+        public int HorseId = 0;
         public int IdleTime; //byte
         public bool InteractingGate;
-        public int InternalRoomID;
+        public int InternalRoomId;
         public bool IsAsleep;
         public bool IsWalking;
         public int LastBubble = 0;
@@ -74,31 +74,31 @@ namespace Plus.HabboHotel.Rooms
         public int Y; //byte
         public double Z;
 
-        public FreezePowerUp banzaiPowerUp;
-        public bool isLying = false;
-        public bool isSitting = false;
-        private GameClient mClient;
-        private Room mRoom;
-        public bool moonwalkEnabled = false;
-        public bool shieldActive;
-        public int shieldCounter;
+        public FreezePowerUp BanzaiPowerUp;
+        public bool IsLying = false;
+        public bool IsSitting = false;
+        private GameClient _mClient;
+        private Room _mRoom;
+        public bool MoonwalkEnabled = false;
+        public bool ShieldActive;
+        public int ShieldCounter;
         public Team Team;
         public bool FreezeInteracting;
         public int UserId;
         public bool IsJumping;
 
-        public bool isRolling = false;
-        public int rollerDelay = 0;
+        public bool IsRolling = false;
+        public int RollerDelay = 0;
 
         public int LLPartner = 0;
         public double TimeInRoom = 0;
 
-        public RoomUser(int HabboId, int RoomId, int VirtualId, Room room)
+        public RoomUser(int habboId, int roomId, int virtualId, Room room)
         {
             Freezed = false;
-            this.HabboId = HabboId;
-            this.RoomId = RoomId;
-            this.VirtualId = VirtualId;
+            HabboId = habboId;
+            RoomId = roomId;
+            VirtualId = virtualId;
             IdleTime = 0;
 
             X = 0;
@@ -111,15 +111,14 @@ namespace Plus.HabboHotel.Rooms
             Statusses = new Dictionary<string, string>();
 
             TeleDelay = -1;
-            mRoom = room;
+            _mRoom = room;
 
             AllowOverride = false;
             CanWalk = true;
-
-
+            
             SqState = 3;
 
-            InternalRoomID = 0;
+            InternalRoomId = 0;
             CurrentItemEffect = ItemEffectType.None;
 
             FreezeLives = 0;
@@ -135,43 +134,24 @@ namespace Plus.HabboHotel.Rooms
             TradePartner = 0;
             IsTrading = false;
         }
+        
+        public Point Coordinate => new(X, Y);
 
-
-        public Point Coordinate => new Point(X, Y);
-
-        public bool IsPet => (IsBot && BotData.IsPet);
+        public bool IsPet => IsBot && BotData.IsPet;
 
         public int CurrentEffect => GetClient().GetHabbo().Effects().CurrentEffect;
+        
+        public bool IsDancing => DanceId >= 1;
 
+        public bool IsTrading { get; set; }
 
-        public bool IsDancing
-        {
-            get
-            {
-                if (DanceId >= 1)
-                {
-                    return true;
-                }
+        public int TradePartner { get; set; }
 
-                return false;
-            }
-        }
+        public int TradeId { get; set; }
 
-        public bool IsTrading { get; set; } = false;
-
-        public int TradePartner { get; set; } = 0;
-
-        public int TradeId { get; set; } = 0;
-
-
-        public Dictionary<string, string> Statusses
-        {
-            get;
-            //set { this._statusses = value; }
-        }
-
-
-        public bool NeedsAutokick
+        public Dictionary<string, string> Statusses { get; }
+        
+        public bool NeedsAutoKick
         {
             get
             {
@@ -194,16 +174,7 @@ namespace Plus.HabboHotel.Rooms
             }
         }
 
-        public bool IsBot
-        {
-            get
-            {
-                if (BotData != null)
-                    return true;
-
-                return false;
-            }
-        }
+        public bool IsBot => BotData != null;
 
         public string GetUsername()
         {
@@ -216,12 +187,12 @@ namespace Plus.HabboHotel.Rooms
                 {
                     return GetClient().GetHabbo().Username;
                 }
-                else
-                    return PlusEnvironment.GetUsernameById(HabboId);
+
+                return PlusEnvironment.GetUsernameById(HabboId);
 
             }
-            else
-                return PlusEnvironment.GetUsernameById(HabboId);
+
+            return PlusEnvironment.GetUsernameById(HabboId);
         }
 
         public void UnIdle()
@@ -237,52 +208,51 @@ namespace Plus.HabboHotel.Rooms
             if (IsAsleep)
             {
                 IsAsleep = false;
-                GetRoom().SendPacket(new SleepComposer(this.VirtualId, false));
+                GetRoom().SendPacket(new SleepComposer(VirtualId, false));
             }
         }
 
         public void Dispose()
         {
             Statusses.Clear();
-            mRoom = null;
-            mClient = null;
+            _mRoom = null;
+            _mClient = null;
         }
 
-        public void Chat(string Message, int colour = 0)
+        public void Chat(string message, int colour = 0)
         {
             if (GetRoom() == null)
                 return;
 
             if (!IsBot)
                 return;
-
-
+            
             if (IsPet)
             {
-                foreach (RoomUser User in GetRoom().GetRoomUserManager().GetUserList().ToList())
+                foreach (RoomUser user in GetRoom().GetRoomUserManager().GetUserList().ToList())
                 {
-                    if (User == null || User.IsBot)
+                    if (user == null || user.IsBot)
                         continue;
 
-                    if (User.GetClient() == null || User.GetClient().GetHabbo() == null)
+                    if (user.GetClient() == null || user.GetClient().GetHabbo() == null)
                         return;
 
-                    if (!User.GetClient().GetHabbo().AllowPetSpeech)
-                        User.GetClient().SendPacket(new ChatComposer(VirtualId, Message, 0, 0));
+                    if (!user.GetClient().GetHabbo().AllowPetSpeech)
+                        user.GetClient().SendPacket(new ChatComposer(VirtualId, message, 0, 0));
                 }
             }
             else
             {
-                foreach (RoomUser User in GetRoom().GetRoomUserManager().GetUserList().ToList())
+                foreach (RoomUser user in GetRoom().GetRoomUserManager().GetUserList().ToList())
                 {
-                    if (User == null || User.IsBot)
+                    if (user == null || user.IsBot)
                         continue;
 
-                    if (User.GetClient() == null || User.GetClient().GetHabbo() == null)
+                    if (user.GetClient() == null || user.GetClient().GetHabbo() == null)
                         return;
 
-                    if (!User.GetClient().GetHabbo().AllowBotSpeech)
-                        User.GetClient().SendPacket(new ChatComposer(VirtualId, Message, 0, (colour == 0 ? 2 : colour)));
+                    if (!user.GetClient().GetHabbo().AllowBotSpeech)
+                        user.GetClient().SendPacket(new ChatComposer(VirtualId, message, 0, (colour == 0 ? 2 : colour)));
                 }
             }
         }
@@ -300,9 +270,9 @@ namespace Plus.HabboHotel.Rooms
             }
         }
 
-        public bool IncrementAndCheckFlood(out int MuteTime)
+        public bool IncrementAndCheckFlood(out int muteTime)
         {
-            MuteTime = 0;
+            muteTime = 0;
 
             ChatSpamCount++;
             if (ChatSpamTicks == -1)
@@ -310,15 +280,15 @@ namespace Plus.HabboHotel.Rooms
             else if (ChatSpamCount >= 6)
             {
                 if (GetClient().GetHabbo().GetPermissions().HasRight("events_staff"))
-                    MuteTime = 3;
+                    muteTime = 3;
                 else if (GetClient().GetHabbo().GetPermissions().HasRight("gold_vip"))
-                    MuteTime = 7;
+                    muteTime = 7;
                 else if (GetClient().GetHabbo().GetPermissions().HasRight("silver_vip"))
-                    MuteTime = 10;
+                    muteTime = 10;
                 else
-                    MuteTime = 20;
+                    muteTime = 20;
 
-                GetClient().GetHabbo().FloodTime = PlusEnvironment.GetUnixTimestamp() + MuteTime;
+                GetClient().GetHabbo().FloodTime = PlusEnvironment.GetUnixTimestamp() + muteTime;
 
                 ChatSpamCount = 0;
                 return true;
@@ -326,40 +296,39 @@ namespace Plus.HabboHotel.Rooms
             return false;
         }
 
-        public void OnChat(int Colour, string Message, bool Shout)
+        public void OnChat(int colour, string message, bool shout)
         {
-            if (GetClient() == null || GetClient().GetHabbo() == null || mRoom == null)
+            if (GetClient() == null || GetClient().GetHabbo() == null || _mRoom == null)
                 return;
 
-            if (mRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSays, GetClient().GetHabbo(), Message))
+            if (_mRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSays, GetClient().GetHabbo(), message))
                 return;
-
 
             GetClient().GetHabbo().HasSpoken = true;
 
-            if (mRoom.WordFilterList.Count > 0 && !GetClient().GetHabbo().GetPermissions().HasRight("word_filter_override"))
+            if (_mRoom.WordFilterList.Count > 0 && !GetClient().GetHabbo().GetPermissions().HasRight("word_filter_override"))
             {
-                Message = mRoom.GetFilter().CheckMessage(Message);
+                message = _mRoom.GetFilter().CheckMessage(message);
             }
 
-            MessageComposer Packet = null;
-            if (Shout)
-                Packet = new ShoutComposer(VirtualId, Message, PlusEnvironment.GetGame().GetChatManager().GetEmotions().GetEmotionsForText(Message), Colour);
+            MessageComposer packet;
+            if (shout)
+                packet = new ShoutComposer(VirtualId, message, PlusEnvironment.GetGame().GetChatManager().GetEmotions().GetEmotionsForText(message), colour);
             else
-                Packet = new ChatComposer(VirtualId, Message, PlusEnvironment.GetGame().GetChatManager().GetEmotions().GetEmotionsForText(Message), Colour);
+                packet = new ChatComposer(VirtualId, message, PlusEnvironment.GetGame().GetChatManager().GetEmotions().GetEmotionsForText(message), colour);
 
 
             if (GetClient().GetHabbo().TentId > 0)
             {
-                mRoom.SendToTent(GetClient().GetHabbo().Id, GetClient().GetHabbo().TentId, Packet);
+                _mRoom.SendToTent(GetClient().GetHabbo().Id, GetClient().GetHabbo().TentId, packet);
 
-                Packet = new WhisperComposer(VirtualId, "[Tent Chat] " + Message, 0, Colour);
+                packet = new WhisperComposer(VirtualId, "[Tent Chat] " + message, 0, colour);
 
-                List<RoomUser> ToNotify = mRoom.GetRoomUserManager().GetRoomUserByRank(2);
+                List<RoomUser> toNotify = _mRoom.GetRoomUserManager().GetRoomUserByRank(2);
 
-                if (ToNotify.Count > 0)
+                if (toNotify.Count > 0)
                 {
-                    foreach (RoomUser user in ToNotify)
+                    foreach (RoomUser user in toNotify)
                     {
                         if (user == null || user.GetClient() == null || user.GetClient().GetHabbo() == null ||
                             user.GetClient().GetHabbo().TentId == GetClient().GetHabbo().TentId)
@@ -367,52 +336,52 @@ namespace Plus.HabboHotel.Rooms
                             continue;
                         }
 
-                        user.GetClient().SendPacket(Packet);
+                        user.GetClient().SendPacket(packet);
                     }
                 }
             }
             else
             {
-                foreach (RoomUser User in mRoom.GetRoomUserManager().GetRoomUsers().ToList())
+                foreach (RoomUser user in _mRoom.GetRoomUserManager().GetRoomUsers().ToList())
                 {
-                    if (User == null || User.GetClient() == null || User.GetClient().GetHabbo() == null || User.GetClient().GetHabbo().GetIgnores().IgnoredUserIds().Contains(mClient.GetHabbo().Id))
+                    if (user == null || user.GetClient() == null || user.GetClient().GetHabbo() == null || user.GetClient().GetHabbo().GetIgnores().IgnoredUserIds().Contains(_mClient.GetHabbo().Id))
                         continue;
 
-                    if (mRoom.ChatDistance > 0 && Gamemap.TileDistance(X, Y, User.X, User.Y) > mRoom.ChatDistance)
+                    if (_mRoom.ChatDistance > 0 && Gamemap.TileDistance(X, Y, user.X, user.Y) > _mRoom.ChatDistance)
                         continue;
 
-                    User.GetClient().SendPacket(Packet);
+                    user.GetClient().SendPacket(packet);
                 }
             }
 
             #region Pets/Bots responces
-            if (Shout)
+            if (shout)
             {
-                foreach (RoomUser User in mRoom.GetRoomUserManager().GetUserList().ToList())
+                foreach (RoomUser user in _mRoom.GetRoomUserManager().GetUserList().ToList())
                 {
-                    if (!User.IsBot)
+                    if (!user.IsBot)
                         continue;
 
-                    if (User.IsBot)
-                        User.BotAI.OnUserShout(this, Message);
+                    if (user.IsBot)
+                        user.BotAI.OnUserShout(this, message);
                 }
             }
             else
             {
-                foreach (RoomUser User in mRoom.GetRoomUserManager().GetUserList().ToList())
+                foreach (RoomUser user in _mRoom.GetRoomUserManager().GetUserList().ToList())
                 {
-                    if (!User.IsBot)
+                    if (!user.IsBot)
                         continue;
 
-                    if (User.IsBot)
-                        User.BotAI.OnUserSay(this, Message);
+                    if (user.IsBot)
+                        user.BotAI.OnUserSay(this, message);
                 }
             }
             #endregion
 
         }
 
-        public void ClearMovement(bool Update)
+        public void ClearMovement(bool update)
         {
             IsWalking = false;
             Statusses.Remove("mv");
@@ -423,7 +392,7 @@ namespace Plus.HabboHotel.Rooms
             SetY = 0;
             SetZ = 0;
 
-            if (Update)
+            if (update)
             {
                 UpdateNeeded = true;
             }
@@ -476,31 +445,31 @@ namespace Plus.HabboHotel.Rooms
             Z = pZ;
         }
 
-        public void CarryItem(int Item)
+        public void CarryItem(int item)
         {
-            CarryItemId = Item;
+            CarryItemId = item;
 
-            if (Item > 0)
+            if (item > 0)
                 CarryTimer = 240;
             else
                 CarryTimer = 0;
 
-            GetRoom().SendPacket(new CarryObjectComposer(VirtualId, Item));
+            GetRoom().SendPacket(new CarryObjectComposer(VirtualId, item));
         }
 
 
-        public void SetRot(int Rotation, bool HeadOnly)
+        public void SetRot(int rotation, bool headOnly)
         {
             if (Statusses.ContainsKey("lay") || IsWalking)
             {
                 return;
             }
 
-            int diff = RotBody - Rotation;
+            int diff = RotBody - rotation;
 
             RotHead = RotBody;
 
-            if (Statusses.ContainsKey("sit") || HeadOnly)
+            if (Statusses.ContainsKey("sit") || headOnly)
             {
                 if (RotBody == 2 || RotBody == 4)
                 {
@@ -527,80 +496,78 @@ namespace Plus.HabboHotel.Rooms
             }
             else if (diff <= -2 || diff >= 2)
             {
-                RotHead = Rotation;
-                RotBody = Rotation;
+                RotHead = rotation;
+                RotBody = rotation;
             }
             else
             {
-                RotHead = Rotation;
+                RotHead = rotation;
             }
 
             UpdateNeeded = true;
         }
-
-
-        public bool HasStatus(string Key)
+        
+        public bool HasStatus(string key)
         {
-            return Statusses.ContainsKey(Key);
+            return Statusses.ContainsKey(key);
         }
 
-        public void RemoveStatus(string Key)
+        public void RemoveStatus(string key)
         {
-            if (HasStatus(Key))
-                Statusses.Remove(Key);
+            if (HasStatus(key))
+                Statusses.Remove(key);
         }
 
-        public void SetStatus(string Key, string Value = "")
+        public void SetStatus(string key, string value = "")
         {
-            if (Statusses.ContainsKey(Key))
+            if (Statusses.ContainsKey(key))
             {
-                Statusses[Key] = Value;
+                Statusses[key] = value;
             }
             else
             {
-                Statusses.Add(Key, Value);
+                Statusses.Add(key, value);
             }
         }
 
-
-        public void ApplyEffect(int effectID)
+        public void ApplyEffect(int effectId)
         {
             if (IsBot)
             {
-                mRoom.SendPacket(new AvatarEffectComposer(VirtualId, effectID));
+                _mRoom.SendPacket(new AvatarEffectComposer(VirtualId, effectId));
                 return;
             }
 
             if (IsBot || GetClient() == null || GetClient().GetHabbo() == null || GetClient().GetHabbo().Effects() == null)
                 return;
 
-            GetClient().GetHabbo().Effects().ApplyEffect(effectID);
+            GetClient().GetHabbo().Effects().ApplyEffect(effectId);
         }
 
         public Point SquareInFront
         {
             get
             {
-                var Sq = new Point(X, Y);
+                var sq = new Point(X, Y);
 
                 if (RotBody == 0)
                 {
-                    Sq.Y--;
+                    sq.Y--;
                 }
                 else if (RotBody == 2)
                 {
-                    Sq.X++;
+                    sq.X++;
                 }
                 else if (RotBody == 4)
                 {
-                    Sq.Y++;
+                    sq.Y++;
                 }
                 else if (RotBody == 6)
                 {
-                    Sq.X--;
+                    sq.X--;
                 }
 
-                return Sq;
+                return sq;
             }
         }
 
@@ -608,26 +575,26 @@ namespace Plus.HabboHotel.Rooms
         {
             get
             {
-                var Sq = new Point(X, Y);
+                var sq = new Point(X, Y);
 
                 if (RotBody == 0)
                 {
-                    Sq.Y++;
+                    sq.Y++;
                 }
                 else if (RotBody == 2)
                 {
-                    Sq.X--;
+                    sq.X--;
                 }
                 else if (RotBody == 4)
                 {
-                    Sq.Y--;
+                    sq.Y--;
                 }
                 else if (RotBody == 6)
                 {
-                    Sq.X++;
+                    sq.X++;
                 }
 
-                return Sq;
+                return sq;
             }
         }
 
@@ -635,26 +602,26 @@ namespace Plus.HabboHotel.Rooms
         {
             get
             {
-                var Sq = new Point(X, Y);
+                var sq = new Point(X, Y);
 
                 if (RotBody == 0)
                 {
-                    Sq.X++;
+                    sq.X++;
                 }
                 else if (RotBody == 2)
                 {
-                    Sq.Y--;
+                    sq.Y--;
                 }
                 else if (RotBody == 4)
                 {
-                    Sq.X--;
+                    sq.X--;
                 }
                 else if (RotBody == 6)
                 {
-                    Sq.Y++;
+                    sq.Y++;
                 }
 
-                return Sq;
+                return sq;
             }
         }
 
@@ -662,28 +629,27 @@ namespace Plus.HabboHotel.Rooms
         {
             get
             {
-                var Sq = new Point(X, Y);
+                var sq = new Point(X, Y);
 
                 if (RotBody == 0)
                 {
-                    Sq.X--;
+                    sq.X--;
                 }
                 else if (RotBody == 2)
                 {
-                    Sq.Y++;
+                    sq.Y++;
                 }
                 else if (RotBody == 4)
                 {
-                    Sq.X++;
+                    sq.X++;
                 }
                 else if (RotBody == 6)
                 {
-                    Sq.Y--;
+                    sq.Y--;
                 }
-                return Sq;
+                return sq;
             }
         }
-
 
         public GameClient GetClient()
         {
@@ -691,18 +657,18 @@ namespace Plus.HabboHotel.Rooms
             {
                 return null;
             }
-            if (mClient == null)
-                mClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(HabboId);
-            return mClient;
+            if (_mClient == null)
+                _mClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(HabboId);
+            return _mClient;
         }
 
         private Room GetRoom()
         {
-            if (mRoom == null)
-                if (PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(RoomId, out mRoom))
-                    return mRoom;
+            if (_mRoom == null)
+                if (PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(RoomId, out _mRoom))
+                    return _mRoom;
 
-            return mRoom;
+            return _mRoom;
         }
     }
 }

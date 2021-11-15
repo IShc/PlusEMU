@@ -51,7 +51,7 @@ namespace Plus.Communication.Packets.Incoming.Groups
                 return;
             }
 
-            session.SendPacket(new PurchaseOKComposer());
+            session.SendPacket(new PurchaseOkComposer());
 
             room.Group = group;
 

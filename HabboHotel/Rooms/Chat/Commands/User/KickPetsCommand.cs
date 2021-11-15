@@ -35,7 +35,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
                 if (bot.RidingHorse)
                 {
-                    RoomUser rider = room.GetRoomUserManager().GetRoomUserByVirtualId(bot.HorseID);
+                    RoomUser rider = room.GetRoomUserManager().GetRoomUserByVirtualId(bot.HorseId);
                     if (rider != null)
                     {
                         rider.RidingHorse = false;
