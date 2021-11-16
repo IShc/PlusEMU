@@ -28,7 +28,7 @@ namespace Plus.HabboHotel.Items.Interactor
                 user.FreezeInteracting = true;
                 item.InteractingUser = session.GetHabbo().Id;
 
-                if (item.Data.InteractionType == InteractionType.FREEZE_TILE_BLOCK)
+                if (item.Data.InteractionType == InteractionType.FreezeTileBlock)
                 {
                     if (Gamemap.TileDistance(user.X, user.Y, item.GetX, item.GetY) < 2)
                         item.GetRoom().GetFreeze().onFreezeTiles(item, item.FreezePowerUp);

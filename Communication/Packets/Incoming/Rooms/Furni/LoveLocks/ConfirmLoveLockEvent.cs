@@ -20,7 +20,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.LoveLocks
 
             Item item = room.GetRoomItemHandler().GetItem(pId);
 
-            if (item == null || item.GetBaseItem() == null || item.GetBaseItem().InteractionType != InteractionType.LOVELOCK)
+            if (item == null || item.GetBaseItem() == null || item.GetBaseItem().InteractionType != InteractionType.LoveLock)
                 return;
 
             int userOneId = item.InteractingUser;

@@ -24,7 +24,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight
             {
                 foreach (Item item in room.GetRoomItemHandler().GetWall.ToList())
                 {
-                    if (item.GetBaseItem().InteractionType == InteractionType.MOODLIGHT)
+                    if (item.GetBaseItem().InteractionType == InteractionType.Moodlight)
                         room.MoodlightData = new MoodlightData(item.Id);
                 }
             }

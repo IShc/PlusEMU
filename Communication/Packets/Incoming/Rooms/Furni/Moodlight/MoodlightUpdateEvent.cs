@@ -18,7 +18,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight
                 return;
 
             Item item = room.GetRoomItemHandler().GetItem(room.MoodlightData.ItemId);
-            if (item == null || item.GetBaseItem().InteractionType != InteractionType.MOODLIGHT)
+            if (item == null || item.GetBaseItem().InteractionType != InteractionType.Moodlight)
                 return;
 
             int preset = packet.PopInt();

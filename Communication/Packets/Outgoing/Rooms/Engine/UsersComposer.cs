@@ -31,15 +31,15 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
             {
                 Habbo habbo = user.GetClient().GetHabbo();
 
-                Group @group = null;
+                Group group = null;
                 if (habbo != null)
                 {
                     if (habbo.GetStats() != null)
                     {
                         if (habbo.GetStats().FavouriteGroupId > 0)
                         {
-                            if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(habbo.GetStats().FavouriteGroupId, out @group))
-                                @group = null;
+                            if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(habbo.GetStats().FavouriteGroupId, out group))
+                                group = null;
                         }
                     }
                 }
@@ -59,11 +59,11 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                     packet.WriteInteger(1);//1 for user, 2 for pet, 3 for bot.
                     packet.WriteString(habbo.Gender.ToLower());
 
-                    if (@group != null)
+                    if (group != null)
                     {
-                        packet.WriteInteger(@group.Id);
+                        packet.WriteInteger(group.Id);
                         packet.WriteInteger(0);
-                        packet.WriteString(@group.Name);
+                        packet.WriteString(group.Name);
                     }
                     else
                     {

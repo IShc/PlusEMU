@@ -15,49 +15,49 @@ namespace Plus.HabboHotel.Items
                 default:
                     packet.WriteInteger(1);
                     packet.WriteInteger(0);
-                    packet.WriteString(item.GetBaseItem().InteractionType != InteractionType.FOOTBALL_GATE ? item.ExtraData : string.Empty);
+                    packet.WriteString(item.GetBaseItem().InteractionType != InteractionType.FootballGate ? item.ExtraData : string.Empty);
                     break;
 
-                case InteractionType.GNOME_BOX:
+                case InteractionType.GnomeBox:
                     packet.WriteInteger(0);
                     packet.WriteInteger(0);
                     packet.WriteString("");
                     break;
 
-                case InteractionType.PET_BREEDING_BOX:
-                case InteractionType.PURCHASABLE_CLOTHING:
+                case InteractionType.PetBreedingBox:
+                case InteractionType.PurchasableClothing:
                     packet.WriteInteger(0);
                     packet.WriteInteger(0);
                     packet.WriteString("0");
                     break;
 
-                case InteractionType.STACKTOOL:
+                case InteractionType.StackTool:
                     packet.WriteInteger(0);
                     packet.WriteInteger(0);
                     packet.WriteString("");
                     break;
 
-                case InteractionType.WALLPAPER:
+                case InteractionType.Wallpaper:
                     packet.WriteInteger(2);
                     packet.WriteInteger(0);
                     packet.WriteString(item.ExtraData);
 
                     break;
-                case InteractionType.FLOOR:
+                case InteractionType.Floor:
                     packet.WriteInteger(3);
                     packet.WriteInteger(0);
                     packet.WriteString(item.ExtraData);
                     break;
 
-                case InteractionType.LANDSCAPE:
+                case InteractionType.Landscape:
                     packet.WriteInteger(4);
                     packet.WriteInteger(0);
                     packet.WriteString(item.ExtraData);
                     break;
 
-                case InteractionType.GUILD_ITEM:
-                case InteractionType.GUILD_GATE:
-                case InteractionType.GUILD_FORUM:
+                case InteractionType.GuildItem:
+                case InteractionType.GuildGate:
+                case InteractionType.GuildForum:
                     Group group = null;
                     if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(item.GroupId, out group))
                     {
@@ -78,7 +78,7 @@ namespace Plus.HabboHotel.Items
                     }
                     break;
 
-                case InteractionType.BACKGROUND:
+                case InteractionType.Background:
                     packet.WriteInteger(0);
                     packet.WriteInteger(1);
                     if (!String.IsNullOrEmpty(item.ExtraData))
@@ -96,7 +96,7 @@ namespace Plus.HabboHotel.Items
                     }
                     break;
 
-                case InteractionType.GIFT:
+                case InteractionType.Gift:
                     {
                         string[] extraData = item.ExtraData.Split(Convert.ToChar(5));
                         if (extraData.Length != 7)
@@ -138,7 +138,7 @@ namespace Plus.HabboHotel.Items
                     }
                     break;
 
-                case InteractionType.MANNEQUIN:
+                case InteractionType.Mannequin:
                     packet.WriteInteger(0);
                     packet.WriteInteger(1);
                     packet.WriteInteger(3);
@@ -163,7 +163,7 @@ namespace Plus.HabboHotel.Items
                     }
                     break;
 
-                case InteractionType.TONER:
+                case InteractionType.Toner:
                     if (item.RoomId != 0)
                     {
                         if (item.GetRoom().TonerData == null)
@@ -185,7 +185,7 @@ namespace Plus.HabboHotel.Items
                     }
                     break;
 
-                case InteractionType.BADGE_DISPLAY:
+                case InteractionType.BadgeDisplay:
                     packet.WriteInteger(0);
                     packet.WriteInteger(2);
                     packet.WriteInteger(4);
@@ -207,7 +207,7 @@ namespace Plus.HabboHotel.Items
                     }
                     break;
 
-                case InteractionType.TELEVISION:
+                case InteractionType.Television:
                     packet.WriteInteger(0);
                     packet.WriteInteger(1);
                     packet.WriteInteger(1);
@@ -217,7 +217,7 @@ namespace Plus.HabboHotel.Items
                     packet.WriteString("");
                     break;
 
-                case InteractionType.LOVELOCK:
+                case InteractionType.LoveLock:
                     if (item.ExtraData.Contains(Convert.ToChar(5).ToString()))
                     {
                         var eData = item.ExtraData.Split((char)5);
@@ -239,7 +239,7 @@ namespace Plus.HabboHotel.Items
                     }
                     break;
 
-                case InteractionType.MONSTERPLANT_SEED:
+                case InteractionType.MonsterPlantSeed:
                     packet.WriteInteger(0);
                     packet.WriteInteger(1);
                     packet.WriteInteger(1);
@@ -258,7 +258,7 @@ namespace Plus.HabboHotel.Items
                     message.WriteString(item.ExtraData);
                     break;
 
-                case InteractionType.POSTIT:
+                case InteractionType.PostIt:
                     message.WriteString(item.ExtraData.Split(' ')[0]);
                     break;
             }

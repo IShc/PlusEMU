@@ -88,7 +88,7 @@ namespace Plus.HabboHotel.Items
             EffectId = effectId;
 
             int wiredId = 0;
-            if (InteractionType == InteractionType.WIRED_CONDITION || InteractionType == InteractionType.WIRED_TRIGGER || InteractionType == InteractionType.WIRED_EFFECT)
+            if (InteractionType == InteractionType.WiredCondition || InteractionType == InteractionType.WiredTrigger || InteractionType == InteractionType.WiredEffect)
                 wiredId = BehaviourData;
 
             WiredType = WiredBoxTypeUtility.FromWiredId(wiredId);

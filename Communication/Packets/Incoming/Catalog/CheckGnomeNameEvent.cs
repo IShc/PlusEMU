@@ -26,7 +26,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             int itemId = packet.PopInt();
             Item item = room.GetRoomItemHandler().GetItem(itemId);
 
-            if (item == null || item.Data == null || item.UserId != session.GetHabbo().Id || item.Data.InteractionType != InteractionType.GNOME_BOX)
+            if (item == null || item.Data == null || item.UserId != session.GetHabbo().Id || item.Data.InteractionType != InteractionType.GnomeBox)
                 return;
 
             string petName = packet.PopString();

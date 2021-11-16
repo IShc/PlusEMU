@@ -21,7 +21,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 
             Item item = room.GetRoomItemHandler().GetItem(room.TonerData.ItemId);
 
-            if (item == null || item.GetBaseItem().InteractionType != InteractionType.TONER)
+            if (item == null || item.GetBaseItem().InteractionType != InteractionType.Toner)
                 return;
 
             packet.PopInt(); //id

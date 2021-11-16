@@ -26,10 +26,10 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 
             bool hasRights = room.CheckRights(session, false, true);
 
-            if (item.GetBaseItem().InteractionType == InteractionType.banzaitele)
+            if (item.GetBaseItem().InteractionType == InteractionType.BanzaiTele)
                 return;
 
-            if (item.GetBaseItem().InteractionType == InteractionType.TONER)
+            if (item.GetBaseItem().InteractionType == InteractionType.Toner)
             {
                 if (!room.CheckRights(session, true))
                     return;
@@ -47,13 +47,13 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 return;
             }
 
-            if (item.Data.InteractionType == InteractionType.GNOME_BOX && item.UserId == session.GetHabbo().Id)
+            if (item.Data.InteractionType == InteractionType.GnomeBox && item.UserId == session.GetHabbo().Id)
             {
                 session.SendPacket(new GnomeBoxComposer(item.Id));
             }
 
             bool toggle = true;
-            if (item.GetBaseItem().InteractionType == InteractionType.WF_FLOOR_SWITCH_1 || item.GetBaseItem().InteractionType == InteractionType.WF_FLOOR_SWITCH_2)
+            if (item.GetBaseItem().InteractionType == InteractionType.WfFloorSwitch1 || item.GetBaseItem().InteractionType == InteractionType.WfFloorSwitch2)
             {
                 RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
                 if (user == null)

@@ -1059,8 +1059,8 @@ namespace Plus.HabboHotel.Rooms
                     switch (item.GetBaseItem().InteractionType)
                     {
                         #region Beds & Tents
-                        case InteractionType.BED:
-                        case InteractionType.TENT_SMALL:
+                        case InteractionType.Bed:
+                        case InteractionType.TentSmall:
                             {
                                 if (!user.Statusses.ContainsKey("lay"))
                                     user.Statusses.Add("lay", TextHandling.GetString(item.GetBaseItem().Height) + " null");
@@ -1075,10 +1075,10 @@ namespace Plus.HabboHotel.Rooms
                         #endregion
 
                         #region Banzai Gates
-                        case InteractionType.banzaigategreen:
-                        case InteractionType.banzaigateblue:
-                        case InteractionType.banzaigatered:
-                        case InteractionType.banzaigateyellow:
+                        case InteractionType.BanzaiGateGreen:
+                        case InteractionType.BanzaiGateBlue:
+                        case InteractionType.BanzaiGateRed:
+                        case InteractionType.BanzaiGateYellow:
                             {
                                 if (cycleGameItems)
                                 {
@@ -1121,10 +1121,10 @@ namespace Plus.HabboHotel.Rooms
                         #endregion
 
                         #region Freeze Gates
-                        case InteractionType.FREEZE_YELLOW_GATE:
-                        case InteractionType.FREEZE_RED_GATE:
-                        case InteractionType.FREEZE_GREEN_GATE:
-                        case InteractionType.FREEZE_BLUE_GATE:
+                        case InteractionType.FreezeYellowGate:
+                        case InteractionType.FreezeRedGate:
+                        case InteractionType.FreezeGreenGate:
+                        case InteractionType.FreezeBlueGate:
                             {
                                 if (cycleGameItems)
                                 {
@@ -1166,7 +1166,7 @@ namespace Plus.HabboHotel.Rooms
                         #endregion
 
                         #region Banzai Teles
-                        case InteractionType.banzaitele:
+                        case InteractionType.BanzaiTele:
                             {
                                 if (user.Statusses.ContainsKey("mv"))
                                     _room.GetGameItemHandler().OnTeleportRoomUserEnter(user, item);
@@ -1179,7 +1179,7 @@ namespace Plus.HabboHotel.Rooms
                         #endregion
 
                         #region Effects
-                        case InteractionType.EFFECT:
+                        case InteractionType.Effect:
                             {
                                 if (user == null)
                                     return;
@@ -1202,7 +1202,7 @@ namespace Plus.HabboHotel.Rooms
                         #endregion
 
                         #region Arrows
-                        case InteractionType.ARROW:
+                        case InteractionType.Arrow:
                             {
                                 if (user.GoalX == item.GetX && user.GoalY == item.GetY)
                                 {

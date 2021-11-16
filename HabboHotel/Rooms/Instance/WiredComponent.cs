@@ -258,17 +258,17 @@ namespace Plus.HabboHotel.Rooms.Instance
 
         public bool IsTrigger(Item item)
         {
-            return item.GetBaseItem().InteractionType == InteractionType.WIRED_TRIGGER;
+            return item.GetBaseItem().InteractionType == InteractionType.WiredTrigger;
         }
 
         public bool IsEffect(Item item)
         {
-            return item.GetBaseItem().InteractionType == InteractionType.WIRED_EFFECT;
+            return item.GetBaseItem().InteractionType == InteractionType.WiredEffect;
         }
 
         public bool IsCondition(Item item)
         {
-            return item.GetBaseItem().InteractionType == InteractionType.WIRED_CONDITION;
+            return item.GetBaseItem().InteractionType == InteractionType.WiredCondition;
         }
 
         public bool OtherBoxHasItem(IWiredItem box, int itemId)

@@ -140,7 +140,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (item.ExtraData == extradata)
                 return;
 
-            if (item.GetBaseItem().InteractionType == InteractionType.DICE)
+            if (item.GetBaseItem().InteractionType == InteractionType.Dice)
                 return;
 
             item.ExtraData = extradata;

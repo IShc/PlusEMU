@@ -283,14 +283,14 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
             {
                 switch (item.GetBaseItem().InteractionType)
                 {
-                    case InteractionType.FREEZE_TILE:
+                    case InteractionType.FreezeTile:
                         {
                             item.ExtraData = "11000";
                             item.UpdateState(false, true);
                             continue;
                         }
 
-                    case InteractionType.FREEZE_TILE_BLOCK:
+                    case InteractionType.FreezeTileBlock:
                         {
                             SetRandomPowerUp(item);
                             item.UpdateState(false, true);
@@ -619,7 +619,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
         {
             foreach (Item item in items)
             {
-                if (item.GetBaseItem().InteractionType == InteractionType.FREEZE_TILE)
+                if (item.GetBaseItem().InteractionType == InteractionType.FreezeTile)
                     return true;
             }
 
@@ -630,7 +630,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
         {
             foreach (Item item in items)
             {
-                if (item.GetBaseItem().InteractionType == InteractionType.FREEZE_TILE_BLOCK)
+                if (item.GetBaseItem().InteractionType == InteractionType.FreezeTileBlock)
                     return true;
             }
 

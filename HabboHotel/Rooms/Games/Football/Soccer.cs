@@ -231,26 +231,26 @@ namespace Plus.HabboHotel.Rooms.Games.Football
         {
             switch (item.GetBaseItem().InteractionType)
             {
-                case InteractionType.FOOTBALL_GOAL_RED:
-                case InteractionType.footballcounterred:
+                case InteractionType.FootballGoalRed:
+                case InteractionType.FootballCounterRed:
                     {
                         _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Red);
                         break;
                     }
-                case InteractionType.FOOTBALL_GOAL_GREEN:
-                case InteractionType.footballcountergreen:
+                case InteractionType.FootballGoalGreen:
+                case InteractionType.FootballCounterGreen:
                     {
                         _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Green);
                         break;
                     }
-                case InteractionType.FOOTBALL_GOAL_BLUE:
-                case InteractionType.footballcounterblue:
+                case InteractionType.FootballGoalBlue:
+                case InteractionType.FootballCounterBlue:
                     {
                         _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Blue);
                         break;
                     }
-                case InteractionType.FOOTBALL_GOAL_YELLOW:
-                case InteractionType.footballcounteryellow:
+                case InteractionType.FootballGoalYellow:
+                case InteractionType.FootballCounterYellow:
                     {
                         _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Yellow);
                         break;

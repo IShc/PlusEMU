@@ -47,7 +47,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
             else
             {
                 packet.WriteInteger(Item.Data.SpriteId);
-                if (Item.Data.InteractionType == InteractionType.WALLPAPER || Item.Data.InteractionType == InteractionType.FLOOR || Item.Data.InteractionType == InteractionType.LANDSCAPE)
+                if (Item.Data.InteractionType == InteractionType.Wallpaper || Item.Data.InteractionType == InteractionType.Floor || Item.Data.InteractionType == InteractionType.Landscape)
                     packet.WriteString(Item.Name.Split('_')[2]);
                 else if (Item.PageId == 9)//Bots
                 {

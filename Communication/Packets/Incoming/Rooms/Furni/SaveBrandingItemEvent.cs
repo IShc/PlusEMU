@@ -24,7 +24,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             if (item == null)
                 return;
 
-            if (item.Data.InteractionType == InteractionType.BACKGROUND)
+            if (item.Data.InteractionType == InteractionType.Background)
             {
                 int data = packet.PopInt();
                 string brandData = "state" + Convert.ToChar(9) + "0";
@@ -36,7 +36,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 
                 item.ExtraData = brandData;
             }
-            else if (item.Data.InteractionType == InteractionType.FX_PROVIDER)
+            else if (item.Data.InteractionType == InteractionType.FxProvider)
             {
                 /*int Unknown = Packet.PopInt();
                 string Data = Packet.PopString();

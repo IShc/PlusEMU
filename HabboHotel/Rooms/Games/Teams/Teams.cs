@@ -61,7 +61,7 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                             if (Item == null)
                                 continue;
 
-                            if (Item.GetBaseItem().InteractionType.Equals(InteractionType.banzaigateblue))
+                            if (Item.GetBaseItem().InteractionType.Equals(InteractionType.BanzaiGateBlue))
                             {
                                 Item.ExtraData = BlueTeam.Count.ToString();
                                 Item.UpdateState();
@@ -75,7 +75,7 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                                     room.GetGameMap().GameMap[Item.GetX, Item.GetY] = 0;
                                 }
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.banzaigatered))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.BanzaiGateRed))
                             {
                                 Item.ExtraData = RedTeam.Count.ToString();
                                 Item.UpdateState();
@@ -89,7 +89,7 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                                     room.GetGameMap().GameMap[Item.GetX, Item.GetY] = 0;
                                 }
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.banzaigategreen))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.BanzaiGateGreen))
                             {
                                 Item.ExtraData = GreenTeam.Count.ToString();
                                 Item.UpdateState();
@@ -101,7 +101,7 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                                     room.GetGameMap().GameMap[Item.GetX, Item.GetY] = 0;
                                 }
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.banzaigateyellow))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.BanzaiGateYellow))
                             {
                                 Item.ExtraData = YellowTeam.Count.ToString();
                                 Item.UpdateState();
@@ -128,22 +128,22 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                             if (Item == null)
                                 continue;
 
-                            if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FREEZE_BLUE_GATE))
+                            if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FreezeBlueGate))
                             {
                                 Item.ExtraData = BlueTeam.Count.ToString();
                                 Item.UpdateState();
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FREEZE_RED_GATE))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FreezeRedGate))
                             {
                                 Item.ExtraData = RedTeam.Count.ToString();
                                 Item.UpdateState();
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FREEZE_GREEN_GATE))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FreezeGreenGate))
                             {
                                 Item.ExtraData = GreenTeam.Count.ToString();
                                 Item.UpdateState();
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FREEZE_YELLOW_GATE))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FreezeYellowGate))
                             {
                                 Item.ExtraData = YellowTeam.Count.ToString();
                                 Item.UpdateState();
@@ -179,7 +179,7 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                             if (Item == null)
                                 continue;
 
-                            if (Item.GetBaseItem().InteractionType.Equals(InteractionType.banzaigateblue))
+                            if (Item.GetBaseItem().InteractionType.Equals(InteractionType.BanzaiGateBlue))
                             {
                                 Item.ExtraData = BlueTeam.Count.ToString();
                                 Item.UpdateState();
@@ -191,7 +191,7 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                                     room.GetGameMap().GameMap[Item.GetX, Item.GetY] = 1;
                                 }
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.banzaigatered))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.BanzaiGateRed))
                             {
                                 Item.ExtraData = RedTeam.Count.ToString();
                                 Item.UpdateState();
@@ -204,7 +204,7 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                                     room.GetGameMap().GameMap[Item.GetX, Item.GetY] = 1;
                                 }
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.banzaigategreen))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.BanzaiGateGreen))
                             {
                                 Item.ExtraData = GreenTeam.Count.ToString();
                                 Item.UpdateState();
@@ -218,7 +218,7 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                                     room.GetGameMap().GameMap[Item.GetX, Item.GetY] = 1;
                                 }
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.banzaigateyellow))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.BanzaiGateYellow))
                             {
                                 Item.ExtraData = YellowTeam.Count.ToString();
                                 Item.UpdateState();
@@ -245,22 +245,22 @@ namespace Plus.HabboHotel.Rooms.Games.Teams
                             if (Item == null)
                                 continue;
 
-                            if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FREEZE_BLUE_GATE))
+                            if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FreezeBlueGate))
                             {
                                 Item.ExtraData = BlueTeam.Count.ToString();
                                 Item.UpdateState();
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FREEZE_RED_GATE))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FreezeRedGate))
                             {
                                 Item.ExtraData = RedTeam.Count.ToString();
                                 Item.UpdateState();
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FREEZE_GREEN_GATE))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FreezeGreenGate))
                             {
                                 Item.ExtraData = GreenTeam.Count.ToString();
                                 Item.UpdateState();
                             }
-                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FREEZE_YELLOW_GATE))
+                            else if (Item.GetBaseItem().InteractionType.Equals(InteractionType.FreezeYellowGate))
                             {
                                 Item.ExtraData = YellowTeam.Count.ToString();
                                 Item.UpdateState();

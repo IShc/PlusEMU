@@ -19,7 +19,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             if (item == null)
                 return;
 
-            if (item.Data.InteractionType != InteractionType.GUILD_GATE)
+            if (item.Data.InteractionType != InteractionType.GuildGate)
                 return;
 
             if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(groupId, out Group group))

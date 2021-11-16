@@ -7,10 +7,10 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public Group Group { get; }
         public int VirtualId { get; }
 
-        public UpdateFavouriteGroupComposer(Group @group, int virtualId)
+        public UpdateFavouriteGroupComposer(Group group, int virtualId)
             : base(ServerPacketHeader.UpdateFavouriteGroupMessageComposer)
         {
-            Group = @group;
+            Group = group;
             VirtualId = virtualId;
         }
 

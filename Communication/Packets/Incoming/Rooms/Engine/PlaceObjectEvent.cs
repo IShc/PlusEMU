@@ -44,7 +44,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 return;
             }
 
-            if (item.Data.InteractionType == InteractionType.EXCHANGE && room.OwnerId != session.GetHabbo().Id && !session.GetHabbo().GetPermissions().HasRight("room_item_place_exchange_anywhere"))
+            if (item.Data.InteractionType == InteractionType.Exchange && room.OwnerId != session.GetHabbo().Id && !session.GetHabbo().GetPermissions().HasRight("room_item_place_exchange_anywhere"))
             {
                 session.SendNotification("You cannot place exchange items in other people's rooms!");
                 return;
@@ -54,7 +54,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
             switch (item.GetBaseItem().InteractionType)
             {
                 #region Interaction Types
-                case InteractionType.MOODLIGHT:
+                case InteractionType.Moodlight:
                     {
                         MoodlightData moodData = room.MoodlightData;
                         if (moodData != null && room.GetRoomItemHandler().GetItem(moodData.ItemId) != null)
@@ -64,7 +64,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                         }
                         break;
                     }
-                case InteractionType.TONER:
+                case InteractionType.Toner:
                     {
                         TonerData tonerData = room.TonerData;
                         if (tonerData != null && room.GetRoomItemHandler().GetItem(tonerData.ItemId) != null)
@@ -74,7 +74,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                         }
                         break;
                     }
-                case InteractionType.HOPPER:
+                case InteractionType.Hopper:
                     {
                         if (room.GetRoomItemHandler().HopperCount > 0)
                         {
@@ -84,8 +84,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                         break;
                     }
 
-                case InteractionType.TENT:
-                case InteractionType.TENT_SMALL:
+                case InteractionType.Tent:
+                case InteractionType.TentSmall:
                     {
                         room.AddTent(item.Id);
                         break;

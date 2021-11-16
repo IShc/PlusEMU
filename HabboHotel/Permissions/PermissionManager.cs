@@ -157,9 +157,9 @@ namespace Plus.HabboHotel.Permissions
             Log.Info("Loaded " + _permissionSubscriptionRights.Count + " permissions subscription rights.");
         }
 
-        public bool TryGetGroup(int id, out PermissionGroup @group)
+        public bool TryGetGroup(int id, out PermissionGroup group)
         {
-            return _permissionGroups.TryGetValue(id, out @group);
+            return _permissionGroups.TryGetValue(id, out group);
         }
 
         public List<string> GetPermissionsForPlayer(Habbo player)

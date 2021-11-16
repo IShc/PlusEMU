@@ -14,10 +14,10 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public int ReqType { get; }
         public string SearchVal { get; }
 
-        public GroupMembersComposer(Group @group, ICollection<UserCache> members, int membersCount, int page, bool admin, int reqType, string searchVal)
+        public GroupMembersComposer(Group group, ICollection<UserCache> members, int membersCount, int page, bool admin, int reqType, string searchVal)
             : base(ServerPacketHeader.GroupMembersMessageComposer)
         {
-            Group = @group;
+            Group = group;
             Members = members;
             MembersCount = membersCount;
             Page = page;

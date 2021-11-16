@@ -229,10 +229,10 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
                 switch (type)
                 {
-                    case InteractionType.banzaiscoreblue:
-                    case InteractionType.banzaiscoregreen:
-                    case InteractionType.banzaiscorered:
-                    case InteractionType.banzaiscoreyellow:
+                    case InteractionType.BanzaiScoreBlue:
+                    case InteractionType.BanzaiScoreGreen:
+                    case InteractionType.BanzaiScoreRed:
+                    case InteractionType.BanzaiScoreYellow:
                         {
                             item.ExtraData = "0";
                             item.UpdateState();
@@ -408,7 +408,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 if (_item == null)
                     continue;
 
-                if (_item.GetBaseItem().InteractionType != InteractionType.banzaifloor)
+                if (_item.GetBaseItem().InteractionType != InteractionType.BanzaiFloor)
                 {
                     user.Team = Team.None;
                     user.ApplyEffect(0);
@@ -447,7 +447,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 if (_item == null)
                     continue;
 
-                if (_item.GetBaseItem().InteractionType != InteractionType.banzaifloor)
+                if (_item.GetBaseItem().InteractionType != InteractionType.BanzaiFloor)
                     continue;
 
                 if (_item.GetX != coord.X || _item.GetY != coord.Y)

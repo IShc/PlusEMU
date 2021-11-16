@@ -58,7 +58,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
 
                     packet.WriteBoolean(ItemUtility.CanGiftItem(item));
 
-                    if (item.Data.InteractionType == InteractionType.DEAL || item.Data.InteractionType == InteractionType.ROOMDEAL)
+                    if (item.Data.InteractionType == InteractionType.Deal || item.Data.InteractionType == InteractionType.RoomDeal)
                     {
                         CatalogDeal deal = null;
                         if (!PlusEnvironment.GetGame().GetCatalog().TryGetDeal(item.Data.BehaviourData, out deal))
@@ -98,11 +98,11 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                         else
                         {
                             packet.WriteInteger(item.Data.SpriteId);
-                            if (item.Data.InteractionType == InteractionType.WALLPAPER || item.Data.InteractionType == InteractionType.FLOOR || item.Data.InteractionType == InteractionType.LANDSCAPE)
+                            if (item.Data.InteractionType == InteractionType.Wallpaper || item.Data.InteractionType == InteractionType.Floor || item.Data.InteractionType == InteractionType.Landscape)
                             {
                                 packet.WriteString(item.Name.Split('_')[2]);
                             }
-                            else if (item.Data.InteractionType == InteractionType.BOT)//Bots
+                            else if (item.Data.InteractionType == InteractionType.Bot)//Bots
                             {
                                 CatalogBot catalogBot = null;
                                 if (!PlusEnvironment.GetGame().GetCatalog().TryGetBot(item.ItemId, out catalogBot))

@@ -25,7 +25,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
             if (item == null)
                 return;
 
-            if (item.GetBaseItem().InteractionType == InteractionType.POSTIT)
+            if (item.GetBaseItem().InteractionType == InteractionType.PostIt)
                 return;
 
             bool itemRights = false;
@@ -38,17 +38,17 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 
             if (itemRights)
             {
-                if (item.GetBaseItem().InteractionType == InteractionType.TENT || item.GetBaseItem().InteractionType == InteractionType.TENT_SMALL)
+                if (item.GetBaseItem().InteractionType == InteractionType.Tent || item.GetBaseItem().InteractionType == InteractionType.TentSmall)
                     room.RemoveTent(item.Id);
 
-                if (item.GetBaseItem().InteractionType == InteractionType.MOODLIGHT)
+                if (item.GetBaseItem().InteractionType == InteractionType.Moodlight)
                 {
                     using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                     {
                         dbClient.RunQuery("DELETE FROM `room_items_moodlight` WHERE `item_id` = '" + item.Id + "' LIMIT 1");
                     }
                 }
-                else if (item.GetBaseItem().InteractionType == InteractionType.TONER)
+                else if (item.GetBaseItem().InteractionType == InteractionType.Toner)
                 {
                     using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                     {

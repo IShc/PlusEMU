@@ -8,10 +8,10 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public int ItemId { get; }
         public int UserId { get; }
 
-        public GroupFurniSettingsComposer(Group @group, int itemId, int userId)
+        public GroupFurniSettingsComposer(Group group, int itemId, int userId)
             : base(ServerPacketHeader.GroupFurniSettingsMessageComposer)
         {
-            Group = @group;
+            Group = group;
             ItemId = itemId;
             UserId = userId;
         }

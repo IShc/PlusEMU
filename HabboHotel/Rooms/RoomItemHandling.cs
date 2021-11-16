@@ -200,12 +200,12 @@ namespace Plus.HabboHotel.Rooms
                 {
                     GotRollers = true;
                 }
-                else if (item.GetBaseItem().InteractionType == InteractionType.MOODLIGHT)
+                else if (item.GetBaseItem().InteractionType == InteractionType.Moodlight)
                 {
                     if (_room.MoodlightData == null)
                         _room.MoodlightData = new MoodlightData(item.Id);
                 }
-                else if (item.GetBaseItem().InteractionType == InteractionType.TONER)
+                else if (item.GetBaseItem().InteractionType == InteractionType.Toner)
                 {
                     if (_room.TonerData == null)
                         _room.TonerData = new TonerData(item.Id);
@@ -220,7 +220,7 @@ namespace Plus.HabboHotel.Rooms
 
                     _room.GetWired().LoadWiredBox(item);
                 }
-                else if (item.GetBaseItem().InteractionType == InteractionType.HOPPER)
+                else if (item.GetBaseItem().InteractionType == InteractionType.Hopper)
                     HopperCount++;
             }
         }
@@ -247,13 +247,13 @@ namespace Plus.HabboHotel.Rooms
             if (item == null)
                 return;
 
-            if (item.GetBaseItem().InteractionType == InteractionType.FOOTBALL_GATE)
+            if (item.GetBaseItem().InteractionType == InteractionType.FootballGate)
                 _room.GetSoccer().UnRegisterGate(item);
 
-            if (item.GetBaseItem().InteractionType != InteractionType.GIFT)
+            if (item.GetBaseItem().InteractionType != InteractionType.Gift)
                 item.Interactor.OnRemove(session, item);
 
-            if (item.GetBaseItem().InteractionType == InteractionType.GUILD_GATE)
+            if (item.GetBaseItem().InteractionType == InteractionType.GuildGate)
             {
                 item.UpdateCounter = 0;
                 item.UpdateNeeded = false;
@@ -311,7 +311,7 @@ namespace Plus.HabboHotel.Rooms
                     if (itemsOnRoller.Count > 10)
                         itemsOnRoller = _room.GetGameMap().GetRoomItemForSquare(roller.GetX, roller.GetY, roller.GetZ).Take(10).ToList();
 
-                    bool nextSquareIsRoller = (itemsOnNext.Count(x => x.GetBaseItem().InteractionType == InteractionType.ROLLER) > 0);
+                    bool nextSquareIsRoller = (itemsOnNext.Count(x => x.GetBaseItem().InteractionType == InteractionType.Roller) > 0);
                     bool nextRollerClear = true;
 
                     double nextZ = 0.0;
@@ -478,7 +478,7 @@ namespace Plus.HabboHotel.Rooms
             }
 
             List<Item> itemsOnTile = GetFurniObjects(newX, newY);
-            if (item.GetBaseItem().InteractionType == InteractionType.ROLLER && itemsOnTile.Count(x => x.GetBaseItem().InteractionType == InteractionType.ROLLER && x.Id != item.Id)> 0)
+            if (item.GetBaseItem().InteractionType == InteractionType.Roller && itemsOnTile.Count(x => x.GetBaseItem().InteractionType == InteractionType.Roller && x.Id != item.Id)> 0)
                 return false;
 
             if (!newItem)
@@ -606,7 +606,7 @@ namespace Plus.HabboHotel.Rooms
                         if (i.Id == item.Id)
                             continue;
 
-                        if (i.GetBaseItem().InteractionType == InteractionType.STACKTOOL)
+                        if (i.GetBaseItem().InteractionType == InteractionType.StackTool)
                         {                       
                             newZ = i.GetZ;
                             break;
@@ -666,7 +666,7 @@ namespace Plus.HabboHotel.Rooms
             if (updateRoomUserStatuses)
                 _room.GetRoomUserManager().UpdateUserStatusses();
 
-            if (item.GetBaseItem().InteractionType == InteractionType.TENT || item.GetBaseItem().InteractionType == InteractionType.TENT_SMALL)
+            if (item.GetBaseItem().InteractionType == InteractionType.Tent || item.GetBaseItem().InteractionType == InteractionType.TentSmall)
             {
                 _room.RemoveTent(item.Id);
                 _room.AddTent(item.Id);
@@ -695,7 +695,7 @@ namespace Plus.HabboHotel.Rooms
             _room.GetGameMap().RemoveFromMap(item);
 
             item.SetState(newX, newY, newZ, Gamemap.GetAffectedTiles(item.GetBaseItem().Length, item.GetBaseItem().Width, newX, newY, item.Rotation));
-            if (item.GetBaseItem().InteractionType == InteractionType.TONER)
+            if (item.GetBaseItem().InteractionType == InteractionType.Toner)
             {
                 if (_room.TonerData == null)
                 {
@@ -719,7 +719,7 @@ namespace Plus.HabboHotel.Rooms
             }
 
             item.Interactor.OnPlace(session, item);
-            if (item.GetBaseItem().InteractionType == InteractionType.MOODLIGHT)
+            if (item.GetBaseItem().InteractionType == InteractionType.Moodlight)
             {
                 if (_room.MoodlightData == null)
                 {
