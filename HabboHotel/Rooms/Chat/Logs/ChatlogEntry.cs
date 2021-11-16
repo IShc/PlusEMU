@@ -5,8 +5,8 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
 {
     public sealed class ChatlogEntry
     {
-        private WeakReference _playerReference;
-        private WeakReference _roomReference;
+        private readonly WeakReference _playerReference;
+        private readonly WeakReference _roomReference;
 
         public ChatlogEntry(int playerId, int roomId, string message, double timestamp, Habbo player = null, RoomData instance = null)
         {

@@ -294,10 +294,7 @@ namespace Plus.HabboHotel.Rooms
                 _rollerItemsMoved.Clear();
                 _rollerUsersMoved.Clear();
                 _rollerMessages.Clear();
-
-                List<Item> itemsOnRoller;
-                List<Item> itemsOnNext;
-
+                
                 foreach (Item roller in _rollers.Values.ToList())
                 {
                     if (roller == null)
@@ -305,8 +302,8 @@ namespace Plus.HabboHotel.Rooms
 
                     Point nextSquare = roller.SquareInFront;
 
-                    itemsOnRoller = _room.GetGameMap().GetRoomItemForSquare(roller.GetX, roller.GetY, roller.GetZ);
-                    itemsOnNext = _room.GetGameMap().GetAllRoomItemForSquare(nextSquare.X, nextSquare.Y).ToList();
+                    List<Item> itemsOnRoller = _room.GetGameMap().GetRoomItemForSquare(roller.GetX, roller.GetY, roller.GetZ);
+                    List<Item> itemsOnNext = _room.GetGameMap().GetAllRoomItemForSquare(nextSquare.X, nextSquare.Y).ToList();
 
                     if (itemsOnRoller.Count > 10)
                         itemsOnRoller = _room.GetGameMap().GetRoomItemForSquare(roller.GetX, roller.GetY, roller.GetZ).Take(10).ToList();
@@ -561,8 +558,7 @@ namespace Plus.HabboHotel.Rooms
                         itemsAffected.AddRange(temp);
                     }
                 }
-
-
+                
                 itemsComplete.AddRange(itemsOnTile);
                 itemsComplete.AddRange(itemsAffected);
 
@@ -678,10 +674,7 @@ namespace Plus.HabboHotel.Rooms
             }
             return true;
         }
-
-
-
-
+        
         public List<Item> GetFurniObjects(int x, int y)
         {
             return _room.GetGameMap().GetCoordinatedItems(new Point(x, y));
@@ -749,7 +742,6 @@ namespace Plus.HabboHotel.Rooms
             if (!_movedItems.ContainsKey(item.Id))
                 _movedItems.TryAdd(item.Id, item);
         }
-
 
         public void RemoveItem(Item item)
         {
@@ -837,7 +829,6 @@ namespace Plus.HabboHotel.Rooms
 
         public IEnumerable<Item> GetWallAndFloor => _floorItems.Values.Concat(_wallItems.Values);
 
-
         public bool CheckPosItem(Item item, int newX, int newY, int newRot)
         {
             try
@@ -845,8 +836,7 @@ namespace Plus.HabboHotel.Rooms
                 Dictionary<int, ThreeDCoord> dictionary = Gamemap.GetAffectedTiles(item.GetBaseItem().Length, item.GetBaseItem().Width, newX, newY, newRot);
                 if (!_room.GetGameMap().ValidTile(newX, newY))
                     return false;
-
-
+                
                 foreach (ThreeDCoord coord in dictionary.Values.ToList())
                 {
                     if ((_room.GetGameMap().Model.DoorX == coord.X) && (_room.GetGameMap().Model.DoorY == coord.Y))
@@ -855,14 +845,13 @@ namespace Plus.HabboHotel.Rooms
 
                 if ((_room.GetGameMap().Model.DoorX == newX) && (_room.GetGameMap().Model.DoorY == newY))
                     return false;
-
-
+                
                 foreach (ThreeDCoord coord in dictionary.Values.ToList())
                 {
                     if (!_room.GetGameMap().ValidTile(coord.X, coord.Y))
                         return false;
                 }
-
+                
                 double num = _room.GetGameMap().Model.SqFloorHeight[newX, newY];
                 if ((((item.Rotation == newRot) && (item.GetX == newX)) && (item.GetY == newY)) && (item.GetZ != num))
                     return false;
@@ -916,7 +905,6 @@ namespace Plus.HabboHotel.Rooms
             }
         }
 
-
         public ICollection<Item> GetRollers()
         {
             return _rollers.Values;
@@ -942,4 +930,3 @@ namespace Plus.HabboHotel.Rooms
         }
     }
 }
- 

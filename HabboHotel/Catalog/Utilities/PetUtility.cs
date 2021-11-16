@@ -11,10 +11,7 @@ namespace Plus.HabboHotel.Catalog.Utilities
             if (name.Length < 1 || name.Length > 16)
                 return false;
 
-            if (!PlusEnvironment.IsValidAlphaNumeric(name))
-                return false;
-
-            return true;
+            return PlusEnvironment.IsValidAlphaNumeric(name);
         }
 
         public static Pet CreatePet(int userId, string name, int type, string race, string colour)

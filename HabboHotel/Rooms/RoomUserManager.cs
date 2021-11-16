@@ -463,8 +463,7 @@ namespace Plus.HabboHotel.Rooms
 
         public RoomUser GetRoomUserByVirtualId(int virtualId)
         {
-            RoomUser user;
-            if (!_users.TryGetValue(virtualId, out user))
+            if (!_users.TryGetValue(virtualId, out RoomUser user))
                 return null;
             return user;
         }
@@ -1208,10 +1207,8 @@ namespace Plus.HabboHotel.Rooms
                                 {
                                     if (user == null || user.GetClient() == null || user.GetClient().GetHabbo() == null)
                                         continue;
-
-                                    Room room;
-
-                                    if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(user.GetClient().GetHabbo().CurrentRoomId, out room))
+                                    
+                                    if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(user.GetClient().GetHabbo().CurrentRoomId, out Room room))
                                         return;
 
                                     if (!ItemTeleporterFinder.IsTeleLinked(item.Id, room))
@@ -1230,10 +1227,8 @@ namespace Plus.HabboHotel.Rooms
                                                     user.GetClient().SendWhisper("Hey, that arrow is poorly!");
                                                 return;
                                             }
-                                            else
-                                            {
-                                                room.GetGameMap().TeleportToItem(user, targetItem);
-                                            }
+
+                                            room.GetGameMap().TeleportToItem(user, targetItem);
                                         }
                                         else if (teleRoomId != room.RoomId)
                                         {

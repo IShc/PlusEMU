@@ -45,8 +45,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 return;
             }
 
-            double days;
-            if (double.TryParse(@params[2], out days))
+            if (double.TryParse(@params[2], out double days))
             {
                 if (days < 1)
                     days = 1;

@@ -31,7 +31,7 @@ namespace Plus.HabboHotel.Items.Interactor
                 if (item.Data.InteractionType == InteractionType.FreezeTileBlock)
                 {
                     if (Gamemap.TileDistance(user.X, user.Y, item.GetX, item.GetY) < 2)
-                        item.GetRoom().GetFreeze().onFreezeTiles(item, item.FreezePowerUp);
+                        item.GetRoom().GetFreeze().OnFreezeTiles(item, item.FreezePowerUp);
                 }
             }
         }

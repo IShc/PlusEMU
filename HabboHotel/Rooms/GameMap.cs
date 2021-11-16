@@ -199,7 +199,7 @@ namespace Plus.HabboHotel.Rooms
                 if (maxY < Model.MapSizeY)
                     maxY = Model.MapSizeY;
 
-                Model.SetMapsize(maxX + 7, maxY + 7);
+                Model.SetMapSize(maxX + 7, maxY + 7);
                 GenerateMaps(false);
                 return;
             }

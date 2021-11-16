@@ -9,7 +9,7 @@ namespace Plus.HabboHotel.Catalog
     public class CatalogDeal
     {
         public int Id { get; set; }
-        public List<CatalogItem> ItemDataList { get; private set; }
+        public List<CatalogItem> ItemDataList { get; }
         public string DisplayName { get; set; }
         public int RoomId { get; set; }
 

@@ -1181,7 +1181,7 @@ namespace Plus.HabboHotel.Items
                                 {
                                     ExtraData = "11000";
                                     UpdateState(false, true);
-                                    GetRoom().GetFreeze().onFreezeTiles(this, FreezePowerUp);
+                                    GetRoom().GetFreeze().OnFreezeTiles(this, FreezePowerUp);
                                     InteractingUser = 0;
                                     InteractionCountHelper = 0;
                                 }

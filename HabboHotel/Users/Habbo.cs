@@ -312,13 +312,12 @@ namespace Plus.HabboHotel.Users
                     if (Convert.ToString(statRow["respectsTimestamp"]) != DateTime.Today.ToString("MM/dd"))
                     {
                         _habboStats.RespectsTimestamp = DateTime.Today.ToString("MM/dd");
-                        SubscriptionData subData;
 
                         int dailyRespects = 10;
 
                         if (_permissions.HasRight("mod_tool"))
                             dailyRespects = 20;
-                        else if (PlusEnvironment.GetGame().GetSubscriptionManager().TryGetSubscriptionData(vipRank, out subData))
+                        else if (PlusEnvironment.GetGame().GetSubscriptionManager().TryGetSubscriptionData(vipRank, out SubscriptionData subData))
                             dailyRespects = subData.Respects;
 
                         _habboStats.DailyRespectPoints = dailyRespects;
@@ -536,8 +535,7 @@ namespace Plus.HabboHotel.Users
                     int creditUpdate = Convert.ToInt32(PlusEnvironment.GetSettingsManager().TryGetValue("user.currency_scheduler.credit_reward"));
                     int ducketUpdate = Convert.ToInt32(PlusEnvironment.GetSettingsManager().TryGetValue("user.currency_scheduler.ducket_reward"));
 
-                    SubscriptionData subData;
-                    if (PlusEnvironment.GetGame().GetSubscriptionManager().TryGetSubscriptionData(VipRank, out subData))
+                    if (PlusEnvironment.GetGame().GetSubscriptionManager().TryGetSubscriptionData(VipRank, out SubscriptionData subData))
                     {
                         creditUpdate += subData.Credits;
                         ducketUpdate += subData.Duckets;
@@ -595,8 +593,7 @@ namespace Plus.HabboHotel.Users
 
         public int GetQuestProgress(int p)
         {
-            int progress = 0;
-            Quests.TryGetValue(p, out progress);
+            Quests.TryGetValue(p, out int progress);
             return progress;
         }
 

@@ -93,19 +93,18 @@ namespace Plus.HabboHotel.Rooms.AI
             TargetUser = 0;
         }
 
-        public bool IsPet => (AiType == BotAIType.Pet);
+        public bool IsPet => AiType == BotAIType.Pet;
 
         #region Speech Related
-        public void LoadRandomSpeech(List<RandomSpeech> Speeches)
+        public void LoadRandomSpeech(List<RandomSpeech> speeches)
         {
             RandomSpeech = new List<RandomSpeech>();
-            foreach (RandomSpeech Speech in Speeches)
+            foreach (RandomSpeech speech in speeches)
             {
-                if (Speech.BotId == BotId)
-                    RandomSpeech.Add(Speech);
+                if (speech.BotId == BotId)
+                    RandomSpeech.Add(speech);
             }
         }
-
 
         public RandomSpeech GetRandomSpeech()
         {
@@ -113,23 +112,23 @@ namespace Plus.HabboHotel.Rooms.AI
 
             if (RandomSpeech.Count < 1)
                 return new RandomSpeech("", 0);
-            return RandomSpeech[rand.Next(0, (RandomSpeech.Count - 1))];
+            return RandomSpeech[rand.Next(0, RandomSpeech.Count - 1)];
         }
         #endregion
 
         #region AI Related
-        public BotAI GenerateBotAI(int VirtualId)
+        public BotAI GenerateBotAI(int virtualId)
         {
             switch (AiType)
             {
                 case BotAIType.Pet:
-                    return new PetBot(VirtualId);
+                    return new PetBot(virtualId);
                 case BotAIType.Generic:
-                    return new GenericBot(VirtualId);
+                    return new GenericBot(virtualId);
                 case BotAIType.Bartender:
-                    return new BartenderBot(VirtualId);
+                    return new BartenderBot(virtualId);
                 default:
-                    return new GenericBot(VirtualId);
+                    return new GenericBot(virtualId);
             }
         }
         #endregion

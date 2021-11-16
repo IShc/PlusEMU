@@ -15,14 +15,6 @@
             Expire = expire;
         }
 
-        public bool Expired
-        {
-            get
-            {
-                if (PlusEnvironment.GetUnixTimestamp() >= Expire)
-                    return true;
-                return false;
-            }
-        }
+        public bool Expired => PlusEnvironment.GetUnixTimestamp() >= Expire;
     }
 }

@@ -76,8 +76,7 @@ namespace Plus.HabboHotel.Rooms.Instance
             double banTime = _bans[userId] - UnixTimestamp.GetNow();
             if (banTime <= 0)
             {
-                double time;
-                _bans.TryRemove(userId, out time);
+                _bans.TryRemove(userId, out double time);
 
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {

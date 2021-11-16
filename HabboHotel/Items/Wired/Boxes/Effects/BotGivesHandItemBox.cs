@@ -64,10 +64,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     return false;
 
                 string[] data = StringData.Split(';');
-
-                int drinkId;
-
-                if (!int.TryParse(data[1], out drinkId))
+                
+                if (!int.TryParse(data[1], out int drinkId))
                     return false;
 
                 user.CarryItem(drinkId);

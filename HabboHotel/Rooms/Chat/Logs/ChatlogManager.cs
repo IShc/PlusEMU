@@ -44,7 +44,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
                 {
                     foreach (ChatlogEntry entry in _chatlogs)
                     {
-                        dbClient.SetQuery("INSERT INTO chatlogs (`user_id`, `room_id`, `timestamp`, `message`) VALUES " + "(@uid, @rid, @time, @msg)");
+                        dbClient.SetQuery("INSERT INTO chatlogs (`user_id`, `room_id`, `timestamp`, `message`) VALUES (@uid, @rid, @time, @msg)");
                         dbClient.AddParameter("uid", entry.PlayerId);
                         dbClient.AddParameter("rid", entry.RoomId);
                         dbClient.AddParameter("time", entry.Timestamp);
