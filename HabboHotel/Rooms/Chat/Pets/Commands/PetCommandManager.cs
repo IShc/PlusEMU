@@ -7,9 +7,9 @@ namespace Plus.HabboHotel.Rooms.Chat.Pets.Commands
 {
     public class PetCommandManager
     {
-        private Dictionary<int, string> _commandRegister;
-        private Dictionary<string, string> _commandDatabase;
-        private Dictionary<string, PetCommand> _petCommands;
+        private readonly Dictionary<int, string> _commandRegister;
+        private readonly Dictionary<string, string> _commandDatabase;
+        private readonly Dictionary<string, PetCommand> _petCommands;
 
         public PetCommandManager()
         {
@@ -26,11 +26,10 @@ namespace Plus.HabboHotel.Rooms.Chat.Pets.Commands
             _commandRegister.Clear();
             _commandDatabase.Clear();
 
-            DataTable table = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `bots_pet_commands`");
-                table = dbClient.GetTable();
+                DataTable table = dbClient.GetTable();
 
                 if (table != null)
                 {
@@ -57,8 +56,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Pets.Commands
 
         public int TryInvoke(string input)
         {
-            PetCommand command = null;
-            if (_petCommands.TryGetValue(input.ToLower(), out command))
+            if (_petCommands.TryGetValue(input.ToLower(), out PetCommand command))
                 return command.Id;
             return 0;
         }

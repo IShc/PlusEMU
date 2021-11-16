@@ -178,7 +178,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                 {
                     session.SendNotification("This item has sold out!\n\n" + "Please note, you have not recieved another item (You have also not been charged for it!)");
                     session.SendPacket(new CatalogUpdatedComposer());
-                    session.SendPacket(new PurchaseOKComposer());
+                    session.SendPacket(new PurchaseOkComposer());
                     return;
                 }
 
@@ -440,7 +440,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                 session.GetHabbo().GetBadgeComponent().GiveBadge(badge.Code, true, session);
             }
 
-            session.SendPacket(new PurchaseOKComposer(item, item.Data));
+            session.SendPacket(new PurchaseOkComposer(item, item.Data));
             session.SendPacket(new FurniListUpdateComposer());
         }
     }

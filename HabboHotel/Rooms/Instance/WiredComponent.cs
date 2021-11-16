@@ -35,10 +35,8 @@ namespace Plus.HabboHotel.Rooms.Instance
                 if (selectedItem == null)
                     TryRemove(item.Key);
 
-                if (item.Value is IWiredCycle)
+                if (item.Value is IWiredCycle cycle)
                 {
-                    IWiredCycle cycle = (IWiredCycle)item.Value;
-
                     if (cycle.TickCount <= 0)
                     {
                         cycle.OnCycle();
@@ -60,12 +58,11 @@ namespace Plus.HabboHotel.Rooms.Instance
         {
             IWiredItem newBox = GenerateNewBox(item);
 
-            DataRow row = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM wired_items WHERE id=@id LIMIT 1");
                 dbClient.AddParameter("id", item.Id);
-                row = dbClient.GetRow();
+                DataRow row = dbClient.GetRow();
 
                 if (row != null)
                 {
@@ -87,9 +84,8 @@ namespace Plus.HabboHotel.Rooms.Instance
                     newBox.BoolData = Convert.ToInt32(row["bool"]) == 1;
                     newBox.ItemsData = Convert.ToString(row["items"]);
 
-                    if (newBox is IWiredCycle)
+                    if (newBox is IWiredCycle box)
                     {
-                        IWiredCycle box = (IWiredCycle)newBox;
                         box.Delay = Convert.ToInt32(row["delay"]);
                     }
 
@@ -167,8 +163,7 @@ namespace Plus.HabboHotel.Rooms.Instance
 
                 case WiredBoxType.EffectGiveReward:
                     return new GiveRewardBox(_room, item);
-
-
+                
                 case WiredBoxType.EffectMatchPosition:
                     return new MatchPositionBox(_room, item);
                 case WiredBoxType.EffectAddActorToTeam:
@@ -219,8 +214,7 @@ namespace Plus.HabboHotel.Rooms.Instance
                     return new ActorHasHandItemBox(_room, item);
                 case WiredBoxType.ConditionActorIsInTeamBox:
                     return new ActorIsInTeamBox(_room, item);
-
-
+                
                 /*
                 case WiredBoxType.ConditionMatchStateAndPosition:
                     return new FurniMatchStateAndPositionBox(_room, Item);
@@ -454,9 +448,9 @@ namespace Plus.HabboHotel.Rooms.Instance
         {
             string items = "";
             IWiredCycle cycle = null;
-            if (item is IWiredCycle)
+            if (item is IWiredCycle wiredCycle)
             {
-                cycle = (IWiredCycle)item;
+                cycle = wiredCycle;
             }
 
             foreach (Item I in item.SetItems.Values)

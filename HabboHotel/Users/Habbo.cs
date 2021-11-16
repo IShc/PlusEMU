@@ -663,7 +663,7 @@ namespace Plus.HabboHotel.Users
 
             GetClient().GetHabbo().CurrentRoomId = room.RoomId;
 
-            if (room.GetRoomUserManager().userCount >= room.UsersMax && !GetClient().GetHabbo().GetPermissions().HasRight("room_enter_full") && GetClient().GetHabbo().Id != room.OwnerId)
+            if (room.GetRoomUserManager().UserCount >= room.UsersMax && !GetClient().GetHabbo().GetPermissions().HasRight("room_enter_full") && GetClient().GetHabbo().Id != room.OwnerId)
             {
                 GetClient().SendPacket(new CantConnectComposer(1));
                 GetClient().SendPacket(new CloseConnectionComposer());

@@ -16,15 +16,13 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
 
         public override void Compose(ServerPacket packet)
         {
-            int i = 0;
-            DataTable table = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT timestamp, state, offer_id, item_type, sprite_id, total_price, limited_number, limited_stack FROM catalog_marketplace_offers WHERE user_id = '" + UserId + "'");
-                table = dbClient.GetTable();
+                DataTable table = dbClient.GetTable();
 
                 dbClient.SetQuery("SELECT SUM(asking_price) FROM catalog_marketplace_offers WHERE state = '2' AND user_id = '" + UserId + "'");
-                i = dbClient.GetInteger();
+                int i = dbClient.GetInteger();
 
                 packet.WriteInteger(i);
                 if (table != null)
@@ -32,7 +30,7 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
                     packet.WriteInteger(table.Rows.Count);
                     foreach (DataRow row in table.Rows)
                     {
-                        int num2 = Convert.ToInt32(Math.Floor((double)(((((double)row["timestamp"]) + 172800.0) - PlusEnvironment.GetUnixTimestamp()) / 60.0)));
+                        int num2 = Convert.ToInt32(Math.Floor(((double)row["timestamp"] + 172800.0 - PlusEnvironment.GetUnixTimestamp()) / 60.0));
                         int num3 = int.Parse(row["state"].ToString());
                         if ((num2 <= 0) && (num3 != 2))
                         {

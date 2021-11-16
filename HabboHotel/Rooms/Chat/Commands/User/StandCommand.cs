@@ -16,18 +16,18 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
             if (user == null)
                 return;
 
-            if (user.isSitting)
+            if (user.IsSitting)
             {
                 user.Statusses.Remove("sit");
                 user.Z += 0.35;
-                user.isSitting = false;
+                user.IsSitting = false;
                 user.UpdateNeeded = true;
             }
-            else if (user.isLying)
+            else if (user.IsLying)
             {
                 user.Statusses.Remove("lay");
                 user.Z += 0.35;
-                user.isLying = false;
+                user.IsLying = false;
                 user.UpdateNeeded = true;
             }
         }

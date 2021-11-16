@@ -89,12 +89,14 @@ namespace Plus.Communication.Packets.Incoming.Users
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.SetQuery("INSERT INTO `logs_client_namechange` (`user_id`,`new_name`,`old_name`,`timestamp`) VALUES ('" + session.GetHabbo().Id + "', @name, '" + oldName + "', '" + PlusEnvironment.GetUnixTimestamp() + "')");
+                dbClient.SetQuery("INSERT INTO `logs_client_namechange` (`user_id`,`new_name`,`old_name`,`timestamp`) VALUES (@userId, @name, @oldName, @timestamp)");
+                dbClient.AddParameter("userId", session.GetHabbo().Id);
                 dbClient.AddParameter("name", newName);
+                dbClient.AddParameter("oldName", oldName);
+                dbClient.AddParameter("timestamp", PlusEnvironment.GetUnixTimestamp());
                 dbClient.RunQuery();
             }
-
-
+            
             foreach (Room ownRooms in PlusEnvironment.GetGame().GetRoomManager().GetRooms().ToList())
             {
                 if (ownRooms == null || ownRooms.OwnerId != session.GetHabbo().Id || ownRooms.OwnerName == newName)

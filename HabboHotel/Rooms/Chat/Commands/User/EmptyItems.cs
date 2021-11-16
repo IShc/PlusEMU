@@ -19,19 +19,17 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                  "PLEASE NOTE! If you have more than 3000 items, the hidden items will also be DELETED.");
                 return;
             }
-            else
+
+            if (@params.Length == 2 && @params[1] == "yes")
             {
-                if (@params.Length == 2 && @params[1].ToString() == "yes")
-                {
-                    session.GetHabbo().GetInventoryComponent().ClearItems();
-                    session.SendNotification("Your inventory has been cleared!");   
-                    return;
-                }
-                else if (@params.Length == 2 && @params[1].ToString() != "yes")
-                {
-                    session.SendNotification("To confirm, you must type in :emptyitems yes");
-                    return;
-                }
+                session.GetHabbo().GetInventoryComponent().ClearItems();
+                session.SendNotification("Your inventory has been cleared!");   
+                return;
+            }
+
+            if (@params.Length == 2 && @params[1] != "yes")
+            {
+                session.SendNotification("To confirm, you must type in :emptyitems yes");
             }
         }
     }

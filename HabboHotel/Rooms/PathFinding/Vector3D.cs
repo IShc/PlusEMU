@@ -12,9 +12,9 @@
 
         public Vector3D(int x, int y, double z)
         {
-            this.X = x;
-            this.Y = y;
-            this.Z = z;
+            X = x;
+            Y = y;
+            Z = z;
         }
 
         public Vector2D ToVector2D()

@@ -22,7 +22,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
             if (user == null)
                 return;
 
-            if (user.Statusses.ContainsKey("lie") || user.isLying || user.RidingHorse || user.IsWalking)
+            if (user.Statusses.ContainsKey("lie") || user.IsLying || user.RidingHorse || user.IsWalking)
                 return;
 
             if (!user.Statusses.ContainsKey("sit"))
@@ -36,7 +36,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
                     {
                         user.Statusses.Add("sit", "1.0");
                         user.Z -= 0.35;
-                        user.isSitting = true;
+                        user.IsSitting = true;
                         user.UpdateNeeded = true;
                     }
                     catch { }
@@ -46,16 +46,16 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
                     user.RotBody--;
                     user.Statusses.Add("sit", "1.0");
                     user.Z -= 0.35;
-                    user.isSitting = true;
+                    user.IsSitting = true;
                     user.UpdateNeeded = true;
                 }
             }
-            else if (user.isSitting == true)
+            else if (user.IsSitting == true)
             {
                 user.Z += 0.35;
                 user.Statusses.Remove("sit");
                 user.Statusses.Remove("1.0");
-                user.isSitting = false;
+                user.IsSitting = false;
                 user.UpdateNeeded = true;
             }
         }

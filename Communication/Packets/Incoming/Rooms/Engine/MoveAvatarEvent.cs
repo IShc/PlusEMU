@@ -29,7 +29,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 
             if (user.RidingHorse)
             {
-                RoomUser horse = room.GetRoomUserManager().GetRoomUserByVirtualId(user.HorseID);
+                RoomUser horse = room.GetRoomUserManager().GetRoomUserByVirtualId(user.HorseId);
                 if (horse != null)
                     horse.MoveTo(moveX, moveY);
             }

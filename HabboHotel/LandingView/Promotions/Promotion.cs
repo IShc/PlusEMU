@@ -12,13 +12,13 @@
 
         public Promotion(int id, string title, string text, string buttonText, int buttonType, string buttonLink, string imageLink)
         {
-            this.Id = id;
-            this.Title = title;
-            this.Text = text;
-            this.ButtonText = buttonText;
-            this.ButtonType = buttonType;
-            this.ButtonLink = buttonLink;
-            this.ImageLink = imageLink;
+            Id = id;
+            Title = title;
+            Text = text;
+            ButtonText = buttonText;
+            ButtonType = buttonType;
+            ButtonLink = buttonLink;
+            ImageLink = imageLink;
         }
     }
 }

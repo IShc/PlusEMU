@@ -13,17 +13,16 @@ namespace Plus.HabboHotel.Rooms
 {
     public class RoomManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(RoomManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(RoomManager));
 
         private readonly object _roomLoadingSync;
 
-        private Dictionary<string, RoomModel> _roomModels;
+        private readonly Dictionary<string, RoomModel> _roomModels;
 
-        private ConcurrentDictionary<int, Room> _rooms;
+        private readonly ConcurrentDictionary<int, Room> _rooms;
 
         private DateTime _cycleLastExecution;
-
-
+        
         public RoomManager()
         {
             _roomModels = new Dictionary<string, RoomModel>();
@@ -87,27 +86,29 @@ namespace Plus.HabboHotel.Rooms
                 {
                     string model = Convert.ToString(row["id"]);
 
-                    _roomModels.Add(model, new RoomModel(model, Convert.ToInt32(row["door_x"]), Convert.ToInt32(row["door_y"]), (Double)row["door_z"], Convert.ToInt32(row["door_dir"]),
-                        Convert.ToString(row["heightmap"]), PlusEnvironment.EnumToBool(row["club_only"].ToString()), Convert.ToInt32(row["wall_height"]), false));
+                    if (model != null)
+                        _roomModels.Add(model, new RoomModel(model, Convert.ToInt32(row["door_x"]),
+                            Convert.ToInt32(row["door_y"]), (Double) row["door_z"], Convert.ToInt32(row["door_dir"]),
+                            Convert.ToString(row["heightmap"]), PlusEnvironment.EnumToBool(row["club_only"].ToString()),
+                            Convert.ToInt32(row["wall_height"]), false));
                 }
             }
         }
 
         public bool LoadModel(string id)
         {
-            DataRow row = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT id,door_x,door_y,door_z,door_dir,heightmap,club_only,poolmap,`wall_height` FROM `room_models` WHERE `custom` = '1' AND `id` = @modelId LIMIT 1");
                 dbClient.AddParameter("modelId", id);
-                row = dbClient.GetRow();
+                DataRow row = dbClient.GetRow();
 
                 if (row == null)
                     return false;
 
                 string model = Convert.ToString(row["id"]);
 
-                if (!_roomModels.ContainsKey(model))
+                if (model != null && !_roomModels.ContainsKey(model))
                 {
                     _roomModels.Add(model, new RoomModel(model, Convert.ToInt32(row["door_x"]), Convert.ToInt32(row["door_y"]), Convert.ToDouble(row["door_z"]), Convert.ToInt32(row["door_dir"]),
                       Convert.ToString(row["heightmap"]), PlusEnvironment.EnumToBool(row["club_only"].ToString()), Convert.ToInt32(row["wall_height"]), true));
@@ -161,8 +162,7 @@ namespace Plus.HabboHotel.Rooms
 
         public bool TryLoadRoom(int roomId, out Room room)
         {
-            Room inst = null;
-            if (_rooms.TryGetValue(roomId, out inst))
+            if (_rooms.TryGetValue(roomId, out Room inst))
             {
                 if (!inst.Unloaded)
                 {
@@ -222,9 +222,9 @@ namespace Plus.HabboHotel.Rooms
             return _rooms.Values.Where(x => x.UsersNow > 0 && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.UsersNow).Take(amount).ToList();
         }
 
-        public List<Room> GetRecommendedRooms(int amount = 50, int CurrentRoomId = 0)
+        public List<Room> GetRecommendedRooms(int amount = 50, int currentRoomId = 0)
         {
-            return _rooms.Values.Where(x => x.Id != CurrentRoomId && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.UsersNow).OrderByDescending(x => x.Score).Take(amount).ToList();
+            return _rooms.Values.Where(x => x.Id != currentRoomId && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.UsersNow).OrderByDescending(x => x.Score).Take(amount).ToList();
         }
 
         public List<Room> GetPopularRatedRooms(int amount = 50)
@@ -319,10 +319,10 @@ namespace Plus.HabboHotel.Rooms
 
                 PlusEnvironment.GetGame().GetRoomManager().UnloadRoom(room.Id);
                 Console.Clear();
-                log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + String.Format("{0:0.##}", ((double)i / length) * 100) + "%");
+                Log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + String.Format("{0:0.##}", ((double)i / length) * 100) + "%");
                 i++;
             }
-            log.Info("Done disposing rooms!");
+            Log.Info("Done disposing rooms!");
         }
     }
 }

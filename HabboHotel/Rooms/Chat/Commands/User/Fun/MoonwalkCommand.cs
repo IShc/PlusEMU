@@ -16,9 +16,9 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
             if (user == null)
                 return;
 
-            user.moonwalkEnabled = !user.moonwalkEnabled;
+            user.MoonwalkEnabled = !user.MoonwalkEnabled;
 
-            if (user.moonwalkEnabled)
+            if (user.MoonwalkEnabled)
                 session.SendWhisper("Moonwalk enabled!");
             else
                 session.SendWhisper("Moonwalk disabled!");

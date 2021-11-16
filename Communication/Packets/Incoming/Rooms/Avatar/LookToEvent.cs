@@ -33,7 +33,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Avatar
 
             if (user.RidingHorse)
             {
-                RoomUser horse = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByVirtualId(user.HorseID);
+                RoomUser horse = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByVirtualId(user.HorseId);
                 if (horse != null)
                 {
                     horse.SetRot(rot, false);

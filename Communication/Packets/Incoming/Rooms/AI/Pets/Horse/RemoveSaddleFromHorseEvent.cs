@@ -46,7 +46,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
             {
                 session.GetHabbo().GetInventoryComponent().TryAddItem(item);
                 session.SendPacket(new FurniListNotificationComposer(item.Id, 1));
-                session.SendPacket(new PurchaseOKComposer());
+                session.SendPacket(new PurchaseOkComposer());
                 session.SendPacket(new FurniListAddComposer(item));
                 session.SendPacket(new FurniListUpdateComposer());
             }

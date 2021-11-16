@@ -137,13 +137,13 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
                 }
             }
 
-            if (User.shieldActive)
+            if (User.ShieldActive)
             {
-                User.shieldCounter++;
-                if (User.shieldCounter > 10)
+                User.ShieldCounter++;
+                if (User.ShieldCounter > 10)
                 {
-                    User.shieldActive = false;
-                    User.shieldCounter = 10;
+                    User.ShieldActive = false;
+                    User.ShieldCounter = 10;
                     User.ApplyEffect(Convert.ToInt32(User.Team) + 39);
                 }
             }
@@ -188,15 +188,15 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
                         Item.ExtraData = "1000";
                         Item.UpdateState();
                         Item.InteractingUser = User.UserId;
-                        Item.FreezePowerUp = User.banzaiPowerUp;
+                        Item.FreezePowerUp = User.BanzaiPowerUp;
                         Item.RequestUpdate(4, true);
 
-                        switch (User.banzaiPowerUp)
+                        switch (User.BanzaiPowerUp)
                         {
                             case FreezePowerUp.GreenArrow:
                             case FreezePowerUp.OrangeSnowball:
                                 {
-                                    User.banzaiPowerUp = FreezePowerUp.None;
+                                    User.BanzaiPowerUp = FreezePowerUp.None;
                                     break;
                                 }
                         }
@@ -226,13 +226,13 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
                 if (User.IsBot || User.Team == Team.None || User.GetClient() == null)
                     continue;
 
-                User.banzaiPowerUp = FreezePowerUp.None;
+                User.BanzaiPowerUp = FreezePowerUp.None;
                 User.FreezeLives = 3;
-                User.shieldActive = false;
-                User.shieldCounter = 11;
+                User.ShieldActive = false;
+                User.ShieldCounter = 11;
 
                 _room.GetGameManager().AddPointToTeam(User.Team, 30);
-                User.GetClient().SendPacket(new UpdateFreezeLivesComposer(User.InternalRoomID, User.FreezeLives));
+                User.GetClient().SendPacket(new UpdateFreezeLivesComposer(User.InternalRoomId, User.FreezeLives));
             }
         }
 
@@ -273,8 +273,8 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
         private static void ActivateShield(RoomUser User)
         {
             User.ApplyEffect(Convert.ToInt32(User.Team + 48));
-            User.shieldActive = true;
-            User.shieldCounter = 0;
+            User.ShieldActive = true;
+            User.ShieldCounter = 0;
         }
 
         private void HandleBanzaiFreezeItems(List<Item> items)
@@ -373,7 +373,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
                             _room.GetGameManager().AddPointToTeam(User.Team, 10);
                         }
 
-                        User.GetClient().SendPacket(new UpdateFreezeLivesComposer(User.InternalRoomID, User.FreezeLives));
+                        User.GetClient().SendPacket(new UpdateFreezeLivesComposer(User.InternalRoomId, User.FreezeLives));
                         break;
                     }
                 case FreezePowerUp.Shield:
@@ -385,7 +385,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
                 case FreezePowerUp.GreenArrow:
                 case FreezePowerUp.OrangeSnowball:
                     {
-                        User.banzaiPowerUp = item.FreezePowerUp;
+                        User.BanzaiPowerUp = item.FreezePowerUp;
                         break;
                     }
             }
@@ -437,7 +437,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
 
         private void FreezeUser(RoomUser User)
         {
-            if (User.IsBot || User.shieldActive || User.Team == Team.None || User.Freezed)
+            if (User.IsBot || User.ShieldActive || User.Team == Team.None || User.Freezed)
                 return;
 
             User.Freezed = true;
@@ -446,7 +446,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
             User.FreezeLives--;
             if (User.FreezeLives <= 0)
             {
-                User.GetClient().SendPacket(new UpdateFreezeLivesComposer(User.InternalRoomID, User.FreezeLives));
+                User.GetClient().SendPacket(new UpdateFreezeLivesComposer(User.InternalRoomId, User.FreezeLives));
 
                 User.ApplyEffect(-1);
                 _room.GetGameManager().AddPointToTeam(User.Team, -10);
@@ -478,7 +478,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
             _room.GetGameManager().AddPointToTeam(User.Team, -10);
             User.ApplyEffect(12);
 
-            User.GetClient().SendPacket(new UpdateFreezeLivesComposer(User.InternalRoomID, User.FreezeLives));
+            User.GetClient().SendPacket(new UpdateFreezeLivesComposer(User.InternalRoomId, User.FreezeLives));
         }
 
         private List<Item> GetVerticalItems(int x, int y, int length)

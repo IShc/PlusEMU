@@ -218,7 +218,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                 {
                     receiver.GetHabbo().GetInventoryComponent().TryAddItem(giveItem);
                     receiver.SendPacket(new FurniListNotificationComposer(giveItem.Id, 1));
-                    receiver.SendPacket(new PurchaseOKComposer());
+                    receiver.SendPacket(new PurchaseOkComposer());
                     receiver.SendPacket(new FurniListAddComposer(giveItem));
                     receiver.SendPacket(new FurniListUpdateComposer());
                 }
@@ -232,7 +232,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                 }
             }
        
-            session.SendPacket(new PurchaseOKComposer(item, presentData));
+            session.SendPacket(new PurchaseOkComposer(item, presentData));
 
             if (item.CostCredits > 0)
             {

@@ -3,19 +3,19 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    public class PurchaseOKComposer : MessageComposer
+    public class PurchaseOkComposer : MessageComposer
     {
         public CatalogItem Item { get; }
         public ItemData BaseItem { get; }
 
-        public PurchaseOKComposer(CatalogItem item, ItemData baseItem)
+        public PurchaseOkComposer(CatalogItem item, ItemData baseItem)
             : base(ServerPacketHeader.PurchaseOKMessageComposer)
         {
             Item = item;
             BaseItem = baseItem;
         }
 
-        public PurchaseOKComposer()
+        public PurchaseOkComposer()
             : base(ServerPacketHeader.PurchaseOKMessageComposer)
         {
             

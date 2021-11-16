@@ -91,8 +91,11 @@ namespace Plus.HabboHotel.Achievements
 
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    dbClient.SetQuery("REPLACE INTO `user_achievements` VALUES ('" + session.GetHabbo().Id + "', @group, '" + newLevel + "', '" + newProgress + "')");
+                    dbClient.SetQuery("REPLACE INTO `user_achievements` VALUES (@userId, @group, @newLevel, @newProgress)");
+                    dbClient.AddParameter("userId", session.GetHabbo().Id);
                     dbClient.AddParameter("group", group);
+                    dbClient.AddParameter("newLevel", newLevel);
+                    dbClient.AddParameter("newProgress", newProgress);
                     dbClient.RunQuery();
                 }
 
@@ -115,8 +118,11 @@ namespace Plus.HabboHotel.Achievements
                 userData.Progress = newProgress;
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    dbClient.SetQuery("REPLACE INTO `user_achievements` VALUES ('" + session.GetHabbo().Id + "', @group, '" + newLevel + "', '" + newProgress + "')");
+                    dbClient.SetQuery("REPLACE INTO `user_achievements` VALUES (@userId, @group, @newLevel, @newProgress)");
+                    dbClient.AddParameter("userId", session.GetHabbo().Id);
                     dbClient.AddParameter("group", group);
+                    dbClient.AddParameter("newLevel", newLevel);
+                    dbClient.AddParameter("newProgress", newProgress);
                     dbClient.RunQuery();
                 }
 

@@ -13,7 +13,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
         public void Execute(GameClient session, Room room, string[] @params)
         {
             session.GetHabbo().AllowConsoleMessages = !session.GetHabbo().AllowConsoleMessages;
-            session.SendWhisper("You're " + (session.GetHabbo().AllowConsoleMessages == true ? "now" : "no longer") + " accepting console messages.");
+            session.SendWhisper("You're " + (session.GetHabbo().AllowConsoleMessages ? "now" : "no longer") + " accepting console messages.");
         }
     }
 }

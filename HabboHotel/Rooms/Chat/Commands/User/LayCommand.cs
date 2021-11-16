@@ -22,34 +22,31 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                 return;
             }
 
-            if (user.Statusses.ContainsKey("sit") || user.isSitting || user.RidingHorse || user.IsWalking)
+            if (user.HasStatus("sit") || user.IsSitting || user.RidingHorse || user.IsWalking)
                 return;
 
             if (session.GetHabbo().Effects().CurrentEffect > 0)
                 session.GetHabbo().Effects().ApplyEffect(0);
 
-            if (!user.Statusses.ContainsKey("lay"))
+            if (!user.HasStatus("lay"))
             {
-                if ((user.RotBody % 2) == 0)
+                if (user.RotBody % 2 == 0)
                 {
-                    if (user == null)
-                        return;
-
                     try
                     {
                         user.Statusses.Add("lay", "1.0 null");
                         user.Z -= 0.35;
-                        user.isLying = true;
+                        user.IsLying = true;
                         user.UpdateNeeded = true;
                     }
                     catch { }
                 }
                 else
                 {
-                    user.RotBody--;//
+                    user.RotBody--;
                     user.Statusses.Add("lay", "1.0 null");
                     user.Z -= 0.35;
-                    user.isLying = true;
+                    user.IsLying = true;
                     user.UpdateNeeded = true;
                 }
 
@@ -59,7 +56,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                 user.Z += 0.35;
                 user.Statusses.Remove("lay");
                 user.Statusses.Remove("1.0");
-                user.isLying = false;
+                user.IsLying = false;
                 user.UpdateNeeded = true;
             }
         }

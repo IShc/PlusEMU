@@ -684,7 +684,7 @@ namespace Plus.HabboHotel.Rooms
             if (packets.Count == 0)
                 return;
 
-             BroadcastPacket(packets);
+            BroadcastPacket(packets);
         }
         #endregion
 
