@@ -10,7 +10,7 @@ namespace Plus.Communication.Packets.Incoming.Handshake
         {
             string cipherPublicKey = packet.PopString();
            
-            BigInteger sharedKey = HabboEncryptionV2.CalculateDiffieHellmanSharedKey(cipherPublicKeys);
+            BigInteger sharedKey = HabboEncryptionV2.CalculateDiffieHellmanSharedKey(cipherPublicKey);
             if (sharedKey != 0)
             {
                 session.SendPacket(new SecretKeyComposer(HabboEncryptionV2.GetRsaDiffieHellmanPublicKey()));
