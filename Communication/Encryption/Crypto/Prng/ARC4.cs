@@ -6,7 +6,7 @@ namespace Plus.Communication.Encryption.Crypto.Prng
     {
         private int i;
         private int j;
-        private byte[] bytes;
+        private readonly byte[] bytes;
 
         public const int POOLSIZE = 256;
 

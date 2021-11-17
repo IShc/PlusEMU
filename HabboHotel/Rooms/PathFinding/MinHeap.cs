@@ -4,11 +4,11 @@ namespace Plus.HabboHotel.Rooms.PathFinding
 {
     sealed class MinHeap<T> where T : IComparable<T>
     {
-        private int capacity;
-        private T temp;
-        private T mheap;
-        private T[] array;
-        private T[] tempArray;
+        private int _capacity;
+        private T _temp;
+        private T _mHeap;
+        private T[] _array;
+        private T[] _tempArray;
 
         public int Count { get; private set; }
 
@@ -17,8 +17,8 @@ namespace Plus.HabboHotel.Rooms.PathFinding
         public MinHeap(int capacity)
         {
             Count = 0;
-            this.capacity = capacity;
-            array = new T[capacity];
+            _capacity = capacity;
+            _array = new T[capacity];
         }
 
         public void BuildHead()
@@ -33,20 +33,20 @@ namespace Plus.HabboHotel.Rooms.PathFinding
         public void Add(T item)
         {
             Count++;
-            if (Count > capacity)
+            if (Count > _capacity)
             {
                 DoubleArray();
             }
-            array[Count - 1] = item;
+            _array[Count - 1] = item;
             int position = Count - 1;
 
             int parentPosition = ((position - 1) >> 1);
 
-            while (position > 0 && array[parentPosition].CompareTo(array[position]) > 0)
+            while (position > 0 && _array[parentPosition].CompareTo(_array[position]) > 0)
             {
-                temp = array[position];
-                array[position] = array[parentPosition];
-                array[parentPosition] = temp;
+                _temp = _array[position];
+                _array[position] = _array[parentPosition];
+                _array[parentPosition] = _temp;
                 position = parentPosition;
                 parentPosition = ((position - 1) >> 1);
             }
@@ -54,10 +54,10 @@ namespace Plus.HabboHotel.Rooms.PathFinding
 
         private void DoubleArray()
         {
-            capacity <<= 1;
-            tempArray = new T[capacity];
-            CopyArray(array, tempArray);
-            array = tempArray;
+            _capacity <<= 1;
+            _tempArray = new T[_capacity];
+            CopyArray(_array, _tempArray);
+            _array = _tempArray;
         }
 
         private static void CopyArray(T[] source, T[] destination)
@@ -75,11 +75,11 @@ namespace Plus.HabboHotel.Rooms.PathFinding
             {
                 throw new InvalidOperationException("Heap is empty");
             }
-            temp = array[0];
-            array[0] = array[Count - 1];
+            _temp = _array[0];
+            _array[0] = _array[Count - 1];
             Count--;
             MinHeapify(0);
-            return temp;
+            return _temp;
         }
 
         private void MinHeapify(int position)
@@ -90,7 +90,7 @@ namespace Plus.HabboHotel.Rooms.PathFinding
                 int right = left + 1;
                 int minPosition;
 
-                if (left < Count && array[left].CompareTo(array[position]) < 0)
+                if (left < Count && _array[left].CompareTo(_array[position]) < 0)
                 {
                     minPosition = left;
                 }
@@ -99,16 +99,16 @@ namespace Plus.HabboHotel.Rooms.PathFinding
                     minPosition = position;
                 }
 
-                if (right < Count && array[right].CompareTo(array[minPosition]) < 0)
+                if (right < Count && _array[right].CompareTo(_array[minPosition]) < 0)
                 {
                     minPosition = right;
                 }
 
                 if (minPosition != position)
                 {
-                    mheap = array[position];
-                    array[position] = array[minPosition];
-                    array[minPosition] = mheap;
+                    _mHeap = _array[position];
+                    _array[position] = _array[minPosition];
+                    _array[minPosition] = _mHeap;
                     position = minPosition;
                 }
                 else

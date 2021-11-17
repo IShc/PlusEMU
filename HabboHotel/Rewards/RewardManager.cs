@@ -10,8 +10,8 @@ namespace Plus.HabboHotel.Rewards
 {
     public class RewardManager
     {
-        private ConcurrentDictionary<int, Reward> _rewards;
-        private ConcurrentDictionary<int, List<int>> _rewardLogs;
+        private readonly ConcurrentDictionary<int, Reward> _rewards;
+        private readonly ConcurrentDictionary<int, List<int>> _rewardLogs;
 
         public RewardManager()
         {
@@ -54,13 +54,7 @@ namespace Plus.HabboHotel.Rewards
 
         public bool HasReward(int id, int rewardId)
         {
-            if (!_rewardLogs.ContainsKey(id))
-                return false;
-
-            if (_rewardLogs[id].Contains(rewardId))
-                return true;
-
-            return false;
+            return _rewardLogs.ContainsKey(id) && _rewardLogs[id].Contains(rewardId);
         }
 
         public void LogReward(int id, int rewardId)

@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
 
             PlusEnvironment.GetGame().GetChatManager().GetLogs().FlushAndSave();
 
-            List<KeyValuePair<RoomData, List<ChatlogEntry>>> chatlogs = new List<KeyValuePair<RoomData, List<ChatlogEntry>>>();
+            List<KeyValuePair<RoomData, List<ChatLogEntry>>> chatlogs = new List<KeyValuePair<RoomData, List<ChatLogEntry>>>();
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `room_id`,`entry_timestamp`,`exit_timestamp` FROM `user_roomvisits` WHERE `user_id` = '" + data.Id + "' ORDER BY `entry_timestamp` DESC LIMIT 7");
@@ -45,7 +45,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
 
                         double timestampExit = (Convert.ToDouble(row["exit_timestamp"]) <= 0 ? UnixTimestamp.GetNow() : Convert.ToDouble(row["exit_timestamp"]));
 
-                        chatlogs.Add(new KeyValuePair<RoomData, List<ChatlogEntry>>(roomData, GetChatlogs(roomData, Convert.ToDouble(row["entry_timestamp"]), timestampExit)));
+                        chatlogs.Add(new KeyValuePair<RoomData, List<ChatLogEntry>>(roomData, GetChatlogs(roomData, Convert.ToDouble(row["entry_timestamp"]), timestampExit)));
                     }
                 }
 
@@ -53,9 +53,9 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             }
         }
 
-        private List<ChatlogEntry> GetChatlogs(RoomData roomData, double timeEnter, double timeExit)
+        private List<ChatLogEntry> GetChatlogs(RoomData roomData, double timeEnter, double timeExit)
         {
-            List<ChatlogEntry> chats = new List<ChatlogEntry>();
+            List<ChatLogEntry> chats = new List<ChatLogEntry>();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -70,7 +70,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
 
                         if (habbo != null)
                         {
-                            chats.Add(new ChatlogEntry(Convert.ToInt32(row["user_id"]), roomData.Id, Convert.ToString(row["message"]), Convert.ToDouble(row["timestamp"]), habbo));
+                            chats.Add(new ChatLogEntry(Convert.ToInt32(row["user_id"]), roomData.Id, Convert.ToString(row["message"]), Convert.ToDouble(row["timestamp"]), habbo));
                         }
                     }
                 }

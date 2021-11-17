@@ -8,7 +8,7 @@ namespace Plus.HabboHotel.Talents
 {
     public class TalentTrackManager
     {
-        private static ILog log = LogManager.GetLogger(typeof(TalentTrackManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(TalentTrackManager));
 
         private readonly Dictionary<int, TalentTrackLevel> _citizenshipLevels;
 
@@ -34,7 +34,7 @@ namespace Plus.HabboHotel.Talents
                 }
             }
 
-            log.Info("Loaded " + _citizenshipLevels.Count + " talent track levels");
+            Log.Info("Loaded " + _citizenshipLevels.Count + " talent track levels");
         }
 
         public ICollection<TalentTrackLevel> GetLevels()

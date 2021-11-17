@@ -4,33 +4,33 @@ using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Rooms.Chat.Logs
 {
-    public sealed class ChatlogManager
+    public sealed class ChatLogManager
     {
         private const int FlushOnCount = 10;
 
-        private readonly List<ChatlogEntry> _chatlogs;
+        private readonly List<ChatLogEntry> _chatLogs;
         private readonly ReaderWriterLockSlim _lock;
 
-        public ChatlogManager()
+        public ChatLogManager()
         {
-            _chatlogs = new List<ChatlogEntry>();
+            _chatLogs = new List<ChatLogEntry>();
             _lock = new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion);
         }
 
-        public void StoreChatlog(ChatlogEntry entry)
+        public void StoreChatLog(ChatLogEntry entry)
         {
             _lock.EnterUpgradeableReadLock();
 
-            _chatlogs.Add(entry);
+            _chatLogs.Add(entry);
 
-            OnChatlogStore();
+            OnChatLogStore();
 
             _lock.ExitUpgradeableReadLock();
         }
 
-        private void OnChatlogStore()
+        private void OnChatLogStore()
         {
-            if (_chatlogs.Count >= FlushOnCount)
+            if (_chatLogs.Count >= FlushOnCount)
                 FlushAndSave();
         }
 
@@ -38,11 +38,11 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
         {
             _lock.EnterWriteLock();
 
-            if (_chatlogs.Count > 0)
+            if (_chatLogs.Count > 0)
             {
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    foreach (ChatlogEntry entry in _chatlogs)
+                    foreach (ChatLogEntry entry in _chatLogs)
                     {
                         dbClient.SetQuery("INSERT INTO chatlogs (`user_id`, `room_id`, `timestamp`, `message`) VALUES (@uid, @rid, @time, @msg)");
                         dbClient.AddParameter("uid", entry.PlayerId);
@@ -54,7 +54,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Logs
                 }
             }
 
-            _chatlogs.Clear();
+            _chatLogs.Clear();
             _lock.ExitWriteLock();
         }
     }

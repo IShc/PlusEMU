@@ -142,7 +142,7 @@ namespace Plus.HabboHotel.Users
         public List<int> RatedRooms;
 
         private GameClient _client;
-        private HabboStats _habboStats;
+        private readonly HabboStats _habboStats;
         private HabboMessenger _messenger;
         private ProcessComponent _process;
         public ArrayList FavoriteRooms;

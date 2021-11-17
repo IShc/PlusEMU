@@ -8,7 +8,7 @@ namespace Plus.HabboHotel.Catalog.Pets
 {
     public class PetRaceManager
     {
-        private List<PetRace> _races = new();
+        private readonly List<PetRace> _races = new();
 
         public void Init()
         {

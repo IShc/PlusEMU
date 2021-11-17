@@ -12,7 +12,7 @@ namespace Plus.HabboHotel.Rooms.Instance
         /// <summary>
         /// The RoomInstance that created this BanComponent.
         /// </summary>
-        private Room _instance = null;
+        private Room _instance;
 
         /// <summary>
         /// The bans collection for storing them for this room.
@@ -31,11 +31,10 @@ namespace Plus.HabboHotel.Rooms.Instance
             _instance = instance;
             _bans = new ConcurrentDictionary<int, double>();
 
-            DataTable getBans = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `user_id`, `expire` FROM `room_bans` WHERE `room_id` = " + _instance.Id + " AND `expire` > UNIX_TIMESTAMP();");
-                getBans = dbClient.GetTable();
+                DataTable getBans = dbClient.GetTable();
 
                 if (getBans != null)
                 {
@@ -113,13 +112,12 @@ namespace Plus.HabboHotel.Rooms.Instance
 
         public List<int> BannedUsers()
         {
-            DataTable getBans = null;
             List<int> bans = new List<int>();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `user_id` FROM `room_bans` WHERE `room_id` = '" + _instance.Id + "' AND `expire` > UNIX_TIMESTAMP();");
-                getBans = dbClient.GetTable();
+                DataTable getBans = dbClient.GetTable();
 
                 if (getBans != null)
                 {

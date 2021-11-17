@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
 
             PlusEnvironment.GetGame().GetChatManager().GetLogs().FlushAndSave();
 
-            List<ChatlogEntry> chats = new List<ChatlogEntry>();
+            List<ChatLogEntry> chats = new List<ChatLogEntry>();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -46,7 +46,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
 
                         if (habbo != null)
                         {
-                            chats.Add(new ChatlogEntry(Convert.ToInt32(row["user_id"]), roomId, Convert.ToString(row["message"]), Convert.ToDouble(row["timestamp"]), habbo));
+                            chats.Add(new ChatLogEntry(Convert.ToInt32(row["user_id"]), roomId, Convert.ToString(row["message"]), Convert.ToDouble(row["timestamp"]), habbo));
                         }
                     }
                 }

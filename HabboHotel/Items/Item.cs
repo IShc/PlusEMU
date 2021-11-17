@@ -47,9 +47,9 @@ namespace Plus.HabboHotel.Items
         private bool _updateNeeded;
 
         private Room _room;
-        private static Random _random = new();
+        private static readonly Random _random = new();
 
-        public Item(int id, int roomId, int baseItem, string extraData, int x, int y, double z, int rot, int userid, int group, int limitedNumber, int limitedStack, string wallCoord, Room room = null)
+        public Item(int id, int roomId, int baseItem, string extraData, int x, int y, double z, int rot, int userId, int group, int limitedNumber, int limitedStack, string wallCoord, Room room = null)
         {
             if (PlusEnvironment.GetGame().GetItemManager().GetItem(baseItem, out ItemData data))
             {
@@ -74,8 +74,8 @@ namespace Plus.HabboHotel.Items
                 InteractionCount = 0;
                 Value = 0;
 
-                UserId = userid;
-                Username = PlusEnvironment.GetUsernameById(userid);
+                UserId = userId;
+                Username = PlusEnvironment.GetUsernameById(userId);
                 
                 LimitedNo = limitedNumber;
                 LimitedTot = limitedStack;
@@ -644,7 +644,7 @@ namespace Plus.HabboHotel.Items
                                                 int roomHopId = ItemHopperFinder.GetAHopper(user.RoomId);
                                                 int nextHopperId = ItemHopperFinder.GetHopperId(roomHopId);
 
-                                                if (!user.IsBot && user != null && user.GetClient() != null &&
+                                                if (!user.IsBot && user.GetClient() != null &&
                                                     user.GetClient().GetHabbo() != null)
                                                 {
                                                     user.GetClient().GetHabbo().IsHopping = true;

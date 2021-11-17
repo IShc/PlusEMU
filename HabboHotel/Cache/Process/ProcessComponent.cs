@@ -41,7 +41,7 @@ namespace Plus.HabboHotel.Cache.Process
         /// <summary>
         /// How often the timer should execute.
         /// </summary>
-        private static int _runtimeInSec = 1200;
+        private static readonly int _runtimeInSec = 1200;
 
         /// <summary>
         /// Initializes the ProcessComponent.

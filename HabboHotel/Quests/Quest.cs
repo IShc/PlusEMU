@@ -4,17 +4,17 @@ namespace Plus.HabboHotel.Quests
 {
     public class Quest
     {
-        public int Id { get; private set; }
-        public string Category { get; private set; }
-        public string DataBit { get; private set; }
-        public int GoalData { get; private set; }
-        public QuestType GoalType { get; private set; }
-        public bool HasEnded { get; private set; }
-        public string Name { get; private set; }
-        public int Number { get; private set; }
-        public int Reward { get; private set; }
-        public int RewardType { get; private set; }
-        public int TimeUnlock { get; private set; }
+        public int Id { get; }
+        public string Category { get; }
+        public string DataBit { get; }
+        public int GoalData { get; }
+        public QuestType GoalType { get; }
+        public bool HasEnded { get; }
+        public string Name { get; }
+        public int Number { get; }
+        public int Reward { get; }
+        public int RewardType { get; }
+        public int TimeUnlock { get; }
 
         public Quest(int id, string category, int number, QuestType goalType, int goalData, string name, int reward, string dataBit, int rewardType, int timeUnlock, int timeLock)
         {
@@ -28,7 +28,7 @@ namespace Plus.HabboHotel.Quests
             DataBit = dataBit;
             RewardType = rewardType;
             TimeUnlock = timeUnlock;
-            HasEnded = (timeLock >= UnixTimestamp.GetNow() && timeLock > 0) ? true : false;
+            HasEnded = timeLock >= UnixTimestamp.GetNow() && timeLock > 0;
         }
 
         public string ActionName => QuestTypeUtillity.GetString(GoalType);
@@ -38,9 +38,9 @@ namespace Plus.HabboHotel.Quests
             switch (GoalType)
             {
                 default:
-                    return (progress >= GoalData);
+                    return progress >= GoalData;
                 case QuestType.ExploreFindItem:
-                    return (progress >= 1);
+                    return progress >= 1;
             }
         }
     }

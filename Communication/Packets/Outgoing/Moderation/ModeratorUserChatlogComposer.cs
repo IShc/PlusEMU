@@ -9,9 +9,9 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
     class ModeratorUserChatlogComposer : MessageComposer
     {
         public Habbo Habbo { get; }
-        public List<KeyValuePair<RoomData, List<ChatlogEntry>>> ChatLogs { get; }
+        public List<KeyValuePair<RoomData, List<ChatLogEntry>>> ChatLogs { get; }
 
-        public ModeratorUserChatlogComposer(Habbo habbo, List<KeyValuePair<RoomData, List<ChatlogEntry>>> chatlogs)
+        public ModeratorUserChatlogComposer(Habbo habbo, List<KeyValuePair<RoomData, List<ChatLogEntry>>> chatlogs)
             : base(ServerPacketHeader.ModeratorUserChatlogMessageComposer)
         {
             Habbo = habbo;
@@ -24,7 +24,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteString(Habbo.Username);
 
             packet.WriteInteger(ChatLogs.Count); // Room Visits Count
-            foreach (KeyValuePair<RoomData, List<ChatlogEntry>> chatlog in ChatLogs)
+            foreach (KeyValuePair<RoomData, List<ChatLogEntry>> chatlog in ChatLogs)
             {
                 packet.WriteByte(1);
                 packet.WriteShort(2);//Count
@@ -36,7 +36,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
                 packet.WriteInteger(chatlog.Key.Id);
 
                 packet.WriteShort(chatlog.Value.Count); // Chatlogs Count
-                foreach (ChatlogEntry entry in chatlog.Value)
+                foreach (ChatLogEntry entry in chatlog.Value)
                 {
                     string username = "NOT FOUND";
                     if (entry.PlayerNullable() != null)

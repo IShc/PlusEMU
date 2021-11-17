@@ -9,7 +9,7 @@ namespace Plus.HabboHotel.Games
 {
     public class GameDataManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(GameDataManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(GameDataManager));
 
         private readonly Dictionary<int, GameData> _games;
 
@@ -25,9 +25,8 @@ namespace Plus.HabboHotel.Games
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                DataTable data = null;
                 dbClient.SetQuery("SELECT `id`,`name`,`colour_one`,`colour_two`,`resource_path`,`string_three`,`game_swf`,`game_assets`,`game_server_host`,`game_server_port`,`socket_policy_port`,`game_enabled` FROM `games_config`");
-                data = dbClient.GetTable();
+                DataTable data = dbClient.GetTable();
 
                 if (data != null)
                 {
@@ -38,7 +37,7 @@ namespace Plus.HabboHotel.Games
                 }
             }
 
-            log.Info("Game Data Manager -> LOADED");
+            Log.Info("Game Data Manager -> LOADED");
         }
 
         public bool TryGetGame(int gameId, out GameData data)

@@ -79,8 +79,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
             RoomUser pet = GetRoomUser();
             if (pet == null)
                 return;
-
-
+            
             #region Speech
 
             if (_speechTimer <= 0)
@@ -195,9 +194,6 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                     switch (PlusEnvironment.GetGame().GetChatManager().GetPetCommands().TryInvoke(command))
                     {
                         // TODO - Level you can use the commands at...
-
-
-
                         #region free
 
                         case 1:
@@ -215,9 +211,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         #endregion
 
                         #region here
-
                         case 2:
-
                             RemovePetStatus();
 
                             int newX = user.X;
@@ -330,7 +324,6 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         #endregion
 
                         #region sleep
-
                         case 6:
                             // Remove Status
                             RemovePetStatus();
@@ -350,7 +343,6 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         #endregion
 
                         #region jump
-
                         case 7:
                             // Remove Status
                             RemovePetStatus();
@@ -371,7 +363,6 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 
                         #region breed
                         case 46:
-
                             break;
                         #endregion
 

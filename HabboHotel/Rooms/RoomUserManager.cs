@@ -418,8 +418,7 @@ namespace Plus.HabboHotel.Rooms
             _room.GetGameMap().RemoveUserFromMap(user, new Point(user.X, user.Y));
             _room.SendPacket(new UserRemoveComposer(user.VirtualId));
 
-            RoomUser toRemove = null;
-            if (_users.TryRemove(user.InternalRoomId, out toRemove))
+            if (_users.TryRemove(user.InternalRoomId, out RoomUser toRemove))
             {
                 //uhmm, could put the below stuff in but idk.
             }

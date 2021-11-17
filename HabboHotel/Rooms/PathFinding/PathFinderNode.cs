@@ -4,15 +4,15 @@ namespace Plus.HabboHotel.Rooms.PathFinding
 {
     public sealed class PathFinderNode : IComparable<PathFinderNode>
     {
-        public Vector2D Position;
+        public readonly Vector2D Position;
         public PathFinderNode Next;
-        public int Cost = Int32.MaxValue;
+        public int Cost = int.MaxValue;
         public bool InOpen = false;
         public bool InClosed = false;
 
-        public PathFinderNode(Vector2D Position)
+        public PathFinderNode(Vector2D position)
         {
-            this.Position = Position;
+            Position = position;
         }
 
         public override bool Equals(object obj)
@@ -20,9 +20,9 @@ namespace Plus.HabboHotel.Rooms.PathFinding
             return (obj is PathFinderNode) && ((PathFinderNode)obj).Position.Equals(Position);
         }
 
-        public bool Equals(PathFinderNode Breadcrumb)
+        public bool Equals(PathFinderNode breadcrumb)
         {
-            return Breadcrumb.Position.Equals(Position);
+            return breadcrumb.Position.Equals(Position);
         }
 
         public override int GetHashCode()
@@ -30,9 +30,9 @@ namespace Plus.HabboHotel.Rooms.PathFinding
             return Position.GetHashCode();
         }
 
-        public int CompareTo(PathFinderNode Other)
+        public int CompareTo(PathFinderNode other)
         {
-            return Cost.CompareTo(Other.Cost);
+            return Cost.CompareTo(other.Cost);
         }
     }
 }

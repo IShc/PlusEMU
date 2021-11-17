@@ -18,10 +18,10 @@
 
         public int Y { get; set; }
 
-        public int GetDistanceSquared(Vector2D Point)
+        public int GetDistanceSquared(Vector2D point)
         {
-            int dx = X - Point.X;
-            int dy = Y - Point.Y;
+            int dx = X - point.X;
+            int dy = Y - point.Y;
             return (dx * dx) + (dy * dy);
         }
 
@@ -46,14 +46,14 @@
             return X + ", " + Y;
         }
 
-        public static Vector2D operator +(Vector2D One, Vector2D Two)
+        public static Vector2D operator +(Vector2D one, Vector2D two)
         {
-            return new Vector2D(One.X + Two.X, One.Y + Two.Y);
+            return new Vector2D(one.X + two.X, one.Y + two.Y);
         }
 
-        public static Vector2D operator -(Vector2D One, Vector2D Two)
+        public static Vector2D operator -(Vector2D one, Vector2D two)
         {
-            return new Vector2D(One.X - Two.X, One.Y - Two.Y);
+            return new Vector2D(one.X - two.X, one.Y - two.Y);
         }
     }
 }

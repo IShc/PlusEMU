@@ -30,8 +30,7 @@ namespace Plus.HabboHotel.Rooms.Instance
 
         public bool RemoveTrade(int id)
         {
-            Trade trade = null;
-            return _activeTrades.TryRemove(id, out trade);
+            return _activeTrades.TryRemove(id, out Trade trade);
         }
 
         public void Cleanup()

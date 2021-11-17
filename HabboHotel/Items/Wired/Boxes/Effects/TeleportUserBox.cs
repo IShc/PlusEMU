@@ -22,7 +22,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public int TickCount { get; set; }
         public string ItemsData { get; set; }
 
-        private Queue _queue;
+        private readonly Queue _queue;
         private int _delay = 0;
 
         public TeleportUserBox(Room instance, Item item)

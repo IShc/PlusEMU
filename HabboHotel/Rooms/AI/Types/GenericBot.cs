@@ -7,13 +7,13 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 {
     public class GenericBot : BotAI
     {
-        private int VirtualId;
-        private int ActionTimer = 0;
-        private int SpeechTimer = 0;
+        private readonly int _virtualId;
+        private int _actionTimer;
+        private int _speechTimer;
 
-        public GenericBot(int VirtualId)
+        public GenericBot(int virtualId)
         {
-            this.VirtualId = VirtualId;
+            _virtualId = virtualId;
         }
 
         public override void OnSelfEnterRoom()
@@ -21,27 +21,27 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 
         }
 
-        public override void OnSelfLeaveRoom(bool Kicked)
+        public override void OnSelfLeaveRoom(bool kicked)
         {
 
         }
 
-        public override void OnUserEnterRoom(RoomUser User)
+        public override void OnUserEnterRoom(RoomUser user)
         {
 
         }
 
-        public override void OnUserLeaveRoom(GameClient Client)
+        public override void OnUserLeaveRoom(GameClient client)
         {
 
         }
 
-        public override void OnUserSay(RoomUser User, string Message)
+        public override void OnUserSay(RoomUser user, string message)
         {
 
         }
 
-        public override void OnUserShout(RoomUser User, string Message)
+        public override void OnUserShout(RoomUser user, string message)
         {
 
         }
@@ -51,28 +51,27 @@ namespace Plus.HabboHotel.Rooms.AI.Types
             if (GetBotData() == null)
                 return;
 
-            if (SpeechTimer <= 0)
+            if (_speechTimer <= 0)
             {
                 if (GetBotData().RandomSpeech.Count > 0)
                 {
                     if (GetBotData().AutomaticChat == false)
                         return;
 
-                    RandomSpeech Speech = GetBotData().GetRandomSpeech();
+                    RandomSpeech speech = GetBotData().GetRandomSpeech();
 
-                    string String = PlusEnvironment.GetGame().GetChatManager().GetFilter().CheckMessage(Speech.Message);
-                    if (String.Contains("<img src") || String.Contains("<font ") || String.Contains("</font>") || String.Contains("</a>") || String.Contains("<i>"))
-                        String = "I really shouldn't be using HTML within bot speeches.";
-                    GetRoomUser().Chat(String, GetBotData().ChatBubble);
+                    string @string = PlusEnvironment.GetGame().GetChatManager().GetFilter().CheckMessage(speech.Message);
+                    if (@string.Contains("<img src") || @string.Contains("<font ") || @string.Contains("</font>") || @string.Contains("</a>") || @string.Contains("<i>"))
+                        @string = "I really shouldn't be using HTML within bot speeches.";
+                    GetRoomUser().Chat(@string, GetBotData().ChatBubble);
                 }
-                SpeechTimer = GetBotData().SpeakingInterval;
+                _speechTimer = GetBotData().SpeakingInterval;
             }
             else
-                SpeechTimer--;
+                _speechTimer--;
            
-            if (ActionTimer <= 0)
+            if (_actionTimer <= 0)
             {
-                Point nextCoord;
                 switch (GetBotData().WalkingMode.ToLower())
                 {
                     default:
@@ -93,53 +92,51 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         }
                         else if (GetBotData().ForcedUserTargetMovement > 0)
                         {
-                            RoomUser Target = GetRoom().GetRoomUserManager().GetRoomUserByHabbo(GetBotData().ForcedUserTargetMovement);
-                            if (Target == null)
+                            RoomUser target = GetRoom().GetRoomUserManager().GetRoomUserByHabbo(GetBotData().ForcedUserTargetMovement);
+                            if (target == null)
                             {
                                 GetBotData().ForcedUserTargetMovement = 0;
                                 GetRoomUser().ClearMovement(true);
                             }
                             else
                             {
-                                var Sq = new Point(Target.X, Target.Y);
+                                var sq = new Point(target.X, target.Y);
 
-                                if (Target.RotBody == 0)
+                                if (target.RotBody == 0)
                                 {
-                                    Sq.Y--;
+                                    sq.Y--;
                                 }
-                                else if (Target.RotBody == 2)
+                                else if (target.RotBody == 2)
                                 {
-                                    Sq.X++;
+                                    sq.X++;
                                 }
-                                else if (Target.RotBody == 4)
+                                else if (target.RotBody == 4)
                                 {
-                                    Sq.Y++;
+                                    sq.Y++;
                                 }
-                                else if (Target.RotBody == 6)
+                                else if (target.RotBody == 6)
                                 {
-                                    Sq.X--;
+                                    sq.X--;
                                 }
 
-
-                                GetRoomUser().MoveTo(Sq);
+                                GetRoomUser().MoveTo(sq);
                             }
                         }
                         else if(GetBotData().TargetUser == 0)
                         {
-                            nextCoord = GetRoom().GetGameMap().GetRandomWalkableSquare();
+                            Point nextCoord = GetRoom().GetGameMap().GetRandomWalkableSquare();
                             GetRoomUser().MoveTo(nextCoord.X, nextCoord.Y);
                         }
                         break;
 
                     case "specified_range":
-
                         break;
                 }
 
-                ActionTimer = new Random(DateTime.Now.Millisecond + VirtualId ^ 2).Next(5, 15);
+                _actionTimer = new Random(DateTime.Now.Millisecond + _virtualId ^ 2).Next(5, 15);
             }
             else
-                ActionTimer--;
+                _actionTimer--;
         }
     }
 }

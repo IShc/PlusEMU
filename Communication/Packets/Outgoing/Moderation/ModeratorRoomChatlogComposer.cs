@@ -8,9 +8,9 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
     class ModeratorRoomChatlogComposer : MessageComposer
     {
         public Room Room { get; }
-        public ICollection<ChatlogEntry> Chats { get; }
+        public ICollection<ChatLogEntry> Chats { get; }
 
-        public ModeratorRoomChatlogComposer(Room room, ICollection<ChatlogEntry> chats)
+        public ModeratorRoomChatlogComposer(Room room, ICollection<ChatLogEntry> chats)
             : base(ServerPacketHeader.ModeratorRoomChatlogMessageComposer)
         {
             Room = room;
@@ -29,7 +29,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteInteger(Room.Id);
 
             packet.WriteShort(Chats.Count);
-            foreach (ChatlogEntry entry in Chats)
+            foreach (ChatLogEntry entry in Chats)
             {
                 string username = "Unknown";
                 if (entry.PlayerNullable() != null)
