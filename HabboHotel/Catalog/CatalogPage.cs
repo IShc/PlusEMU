@@ -9,13 +9,13 @@ namespace Plus.HabboHotel.Catalog
         {
             Id = id;
             ParentId = parentId;
-            Enabled = enabled.ToLower() == "1" ? true : false;
+            Enabled = enabled.ToLower() == "1";
             Caption = caption;
             PageLink = pageLink;
             Icon = icon;
             MinimumRank = minRank;
             MinimumVip = minVip;
-            Visible = visible.ToLower() == "1" ? true : false;
+            Visible = visible.ToLower() == "1";
             Template = template;
 
             foreach (string str in pageStrings1.Split('|'))
@@ -69,18 +69,18 @@ namespace Plus.HabboHotel.Catalog
 
         public string Template { get; set; }
 
-        public List<string> PageStrings1 { get; private set; }
+        public List<string> PageStrings1 { get; }
 
-        public List<string> PageStrings2 { get; private set; }
+        public List<string> PageStrings2 { get; }
 
-        public Dictionary<int, CatalogItem> Items { get; private set; }
+        public Dictionary<int, CatalogItem> Items { get; }
 
-        public Dictionary<int, CatalogItem> ItemOffers { get; private set; }
+        public Dictionary<int, CatalogItem> ItemOffers { get; }
 
         public CatalogItem GetItem(int pId)
         {
             if (Items.ContainsKey(pId))
-                return (CatalogItem)Items[pId];
+                return Items[pId];
             return null;
         }
     }

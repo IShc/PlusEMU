@@ -43,7 +43,7 @@ namespace Plus.Communication.Packets.Incoming.Groups
                     if (item == null || item.GetBaseItem() == null)
                         continue;
 
-                    if (item.GetBaseItem().InteractionType != InteractionType.GUILD_ITEM && item.GetBaseItem().InteractionType != InteractionType.GUILD_GATE || item.GetBaseItem().InteractionType != InteractionType.GUILD_FORUM)
+                    if (item.GetBaseItem().InteractionType != InteractionType.GuildItem && item.GetBaseItem().InteractionType != InteractionType.GuildGate || item.GetBaseItem().InteractionType != InteractionType.GuildForum)
                         continue;
 
                     session.GetHabbo().CurrentRoom.SendPacket(new ObjectUpdateComposer(item, Convert.ToInt32(item.UserId)));

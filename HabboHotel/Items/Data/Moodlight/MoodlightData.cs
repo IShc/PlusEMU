@@ -151,12 +151,7 @@ namespace Plus.HabboHotel.Items.Data.Moodlight
 
         public static bool IsValidIntensity(int intensity)
         {
-            if (intensity < 0 || intensity > 255)
-            {
-                return false;
-            }
-
-            return true;
+            return intensity >= 0 && intensity <= 255;
         }
 
         public string GenerateExtraData()

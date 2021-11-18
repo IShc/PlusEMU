@@ -4,8 +4,7 @@ namespace Plus.HabboHotel.Rooms.PathFinding
 {
     public static class PathFinder
     {
-        public static Vector2D[] DiagMovePoints = new[]
-            {
+        public static Vector2D[] DiagMovePoints = {
                 new Vector2D(-1, -1),
                 new Vector2D(0, -1),
                 new Vector2D(1, -1),
@@ -16,108 +15,107 @@ namespace Plus.HabboHotel.Rooms.PathFinding
                 new Vector2D(-1, 0)
             };
 
-        public static Vector2D[] NoDiagMovePoints = new[]
-            {
+        public static Vector2D[] NoDiagMovePoints = {
                 new Vector2D(0, -1),
                 new Vector2D(1, 0),
                 new Vector2D(0, 1),
                 new Vector2D(-1, 0)
             };
 
-        public static List<Vector2D> FindPath(RoomUser User, bool Diag, Gamemap Map, Vector2D Start, Vector2D End)
+        public static List<Vector2D> FindPath(RoomUser user, bool diag, Gamemap map, Vector2D start, Vector2D end)
         {
-            var Path = new List<Vector2D>();
+            var path = new List<Vector2D>();
 
-            PathFinderNode Nodes = FindPathReversed(User, Diag, Map, Start, End);
+            PathFinderNode nodes = FindPathReversed(user, diag, map, start, end);
 
-            if (Nodes != null)
+            if (nodes != null)
             {
-                Path.Add(End);
+                path.Add(end);
 
-                while (Nodes.Next != null)
+                while (nodes.Next != null)
                 {
-                    Path.Add(Nodes.Next.Position);
-                    Nodes = Nodes.Next;
+                    path.Add(nodes.Next.Position);
+                    nodes = nodes.Next;
                 }
             }
 
-            return Path;
+            return path;
         }
 
-        public static PathFinderNode FindPathReversed(RoomUser User, bool Diag, Gamemap Map, Vector2D Start,
-                                                      Vector2D End)
+        public static PathFinderNode FindPathReversed(RoomUser user, bool diag, Gamemap map, Vector2D start,
+                                                      Vector2D end)
         {
-            var OpenList = new MinHeap<PathFinderNode>(256);
+            var openList = new MinHeap<PathFinderNode>(256);
 
-            var PfMap = new PathFinderNode[Map.Model.MapSizeX, Map.Model.MapSizeY];
-            PathFinderNode Node;
-            Vector2D Tmp;
-            int Cost;
-            int Diff;
+            var pfMap = new PathFinderNode[map.Model.MapSizeX, map.Model.MapSizeY];
+            PathFinderNode node;
+            Vector2D tmp;
+            int cost;
+            int diff;
 
-            var current = new PathFinderNode(Start)
+            var current = new PathFinderNode(start)
             {
                 Cost = 0
             };
 
-            var Finish = new PathFinderNode(End);
-            PfMap[current.Position.X, current.Position.Y] = current;
-            OpenList.Add(current);
+            var finish = new PathFinderNode(end);
+            pfMap[current.Position.X, current.Position.Y] = current;
+            openList.Add(current);
 
-            while (OpenList.Count > 0)
+            while (openList.Count > 0)
             {
-                current = OpenList.ExtractFirst();
+                current = openList.ExtractFirst();
                 current.InClosed = true;
 
-                for (int i = 0; Diag ? i < DiagMovePoints.Length : i < NoDiagMovePoints.Length; i++)
+                for (int i = 0; diag ? i < DiagMovePoints.Length : i < NoDiagMovePoints.Length; i++)
                 {
-                    Tmp = current.Position + (Diag ? DiagMovePoints[i] : NoDiagMovePoints[i]);
-                    bool IsFinalMove = (Tmp.X == End.X && Tmp.Y == End.Y);
+                    tmp = current.Position + (diag ? DiagMovePoints[i] : NoDiagMovePoints[i]);
+                    bool isFinalMove = (tmp.X == end.X && tmp.Y == end.Y);
 
-                    if (Map.IsValidStep(new Vector2D(current.Position.X, current.Position.Y), Tmp, IsFinalMove, User.AllowOverride))
+                    if (map.IsValidStep(new Vector2D(current.Position.X, current.Position.Y), tmp, isFinalMove, user.AllowOverride))
                     {
-                        if (PfMap[Tmp.X, Tmp.Y] == null)
+                        if (pfMap[tmp.X, tmp.Y] == null)
                         {
-                            Node = new PathFinderNode(Tmp);
-                            PfMap[Tmp.X, Tmp.Y] = Node;
+                            node = new PathFinderNode(tmp);
+                            pfMap[tmp.X, tmp.Y] = node;
                         }
                         else
                         {
-                            Node = PfMap[Tmp.X, Tmp.Y];
+                            node = pfMap[tmp.X, tmp.Y];
                         }
 
-                        if (!Node.InClosed)
+                        if (!node.InClosed)
                         {
-                            Diff = 0;
+                            diff = 0;
 
-                            if (current.Position.X != Node.Position.X)
+                            if (current.Position.X != node.Position.X)
                             {
-                                Diff += 1;
+                                diff += 1;
                             }
 
-                            if (current.Position.Y != Node.Position.Y)
+                            if (current.Position.Y != node.Position.Y)
                             {
-                                Diff += 1;
+                                diff += 1;
                             }
 
-                            Cost = current.Cost + Diff + Node.Position.GetDistanceSquared(End);
+                            cost = current.Cost + diff + node.Position.GetDistanceSquared(end);
 
-                            if (Cost < Node.Cost)
+                            if (cost < node.Cost)
                             {
-                                Node.Cost = Cost;
-                                Node.Next = current;
+                                node.Cost = cost;
+                                node.Next = current;
                             }
 
-                            if (!Node.InOpen)
+                            if (!node.InOpen)
                             {
-                                if (Node.Equals(Finish))
+                                if (node.Equals(finish))
                                 {
-                                    Node.Next = current;
-                                    return Node;
+                                    node.Next = current;
+                                    return node;
                                 }
 
-                                Node.InOpen = true;
-                                OpenList.Add(Node);
+                                node.InOpen = true;
+                                openList.Add(node);
                             }
                         }
                     }

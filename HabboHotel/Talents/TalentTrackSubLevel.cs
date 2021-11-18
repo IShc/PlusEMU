@@ -6,11 +6,11 @@
         public string Badge { get; set; }
         public int RequiredProgress { get; set; }
 
-        public TalentTrackSubLevel(int Level, string Badge, int RequiredProgress)
+        public TalentTrackSubLevel(int level, string badge, int requiredProgress)
         {
-            this.Level = Level;
-            this.Badge = Badge;
-            this.RequiredProgress = RequiredProgress;
+            Level = level;
+            Badge = badge;
+            RequiredProgress = requiredProgress;
         }
     }
 }

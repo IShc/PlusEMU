@@ -23,8 +23,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
                 return;
             }
 
-            int danceId;
-            if (int.TryParse(@params[1], out danceId))
+            if (int.TryParse(@params[1], out int danceId))
             {
                 if (danceId > 4 || danceId < 0)
                 {

@@ -30,15 +30,15 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
             string decorationKey = string.Empty;
             switch (item.GetBaseItem().InteractionType)
             {
-                case InteractionType.FLOOR:
+                case InteractionType.Floor:
                     decorationKey = "floor";
                     break;
 
-                case InteractionType.WALLPAPER:
+                case InteractionType.Wallpaper:
                     decorationKey = "wallpaper";
                     break;
 
-                case InteractionType.LANDSCAPE:
+                case InteractionType.Landscape:
                     decorationKey = "landscape";
                     break;
             }

@@ -53,7 +53,7 @@ namespace Plus.HabboHotel.Items
 
 
             Item item = pRoom.GetRoomItemHandler().GetItem(linkId);
-            if (item != null && item.GetBaseItem().InteractionType == InteractionType.TELEPORT)
+            if (item != null && item.GetBaseItem().InteractionType == InteractionType.Teleport)
                 return true;
 
             int roomId = GetTeleRoomId(linkId, pRoom);

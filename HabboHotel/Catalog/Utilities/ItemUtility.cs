@@ -6,22 +6,22 @@ namespace Plus.HabboHotel.Catalog.Utilities
     {
         public static bool CanGiftItem(CatalogItem item)
         {
-            if (!item.Data.AllowGift || item.IsLimited || item.Amount > 1 || item.Data.InteractionType == InteractionType.EXCHANGE ||
-                item.Data.InteractionType == InteractionType.BADGE || (item.Data.Type != 's' && item.Data.Type != 'i') || item.CostDiamonds > 0 ||
-                item.Data.InteractionType == InteractionType.TELEPORT || item.Data.InteractionType == InteractionType.DEAL)
+            if (!item.Data.AllowGift || item.IsLimited || item.Amount > 1 || item.Data.InteractionType == InteractionType.Exchange ||
+                item.Data.InteractionType == InteractionType.Badge || (item.Data.Type != 's' && item.Data.Type != 'i') || item.CostDiamonds > 0 ||
+                item.Data.InteractionType == InteractionType.Teleport || item.Data.InteractionType == InteractionType.Deal)
                 return false;
 
             if (item.Data.IsRare)
                 return false;
 
-            if (item.Data.InteractionType == InteractionType.PET)
+            if (item.Data.InteractionType == InteractionType.Pet)
                 return false;
             return true;
         }
 
         public static bool CanSelectAmount(CatalogItem item)
         {
-            if (item.IsLimited || item.Amount > 1 || item.Data.InteractionType == InteractionType.EXCHANGE || !item.HaveOffer || item.Data.InteractionType == InteractionType.BADGE || item.Data.InteractionType == InteractionType.DEAL)
+            if (item.IsLimited || item.Amount > 1 || item.Data.InteractionType == InteractionType.Exchange || !item.HaveOffer || item.Data.InteractionType == InteractionType.Badge || item.Data.InteractionType == InteractionType.Deal)
                 return false;
             return true;
         }

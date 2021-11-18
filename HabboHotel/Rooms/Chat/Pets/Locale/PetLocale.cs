@@ -35,8 +35,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Pets.Locale
 
         public string[] GetValue(string key)
         {
-            string[] value;
-            if (_values.TryGetValue(key, out value))
+            if (_values.TryGetValue(key, out string[] value))
                 return value;
             return new[] { "Unknown pet speach:" + key };
         }

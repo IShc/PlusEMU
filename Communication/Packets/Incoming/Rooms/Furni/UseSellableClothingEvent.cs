@@ -31,7 +31,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             if (item.UserId != session.GetHabbo().Id)
                 return;
 
-            if (item.Data.InteractionType != InteractionType.PURCHASABLE_CLOTHING)
+            if (item.Data.InteractionType != InteractionType.PurchasableClothing)
             {
                 session.SendNotification("Oops, this item isn't set as a sellable clothing item!");
                 return;

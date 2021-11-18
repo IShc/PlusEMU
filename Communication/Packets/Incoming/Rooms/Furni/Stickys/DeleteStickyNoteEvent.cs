@@ -22,7 +22,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys
             if (item == null)
                 return;
 
-            if (item.GetBaseItem().InteractionType == InteractionType.POSTIT || item.GetBaseItem().InteractionType == InteractionType.CAMERA_PICTURE)
+            if (item.GetBaseItem().InteractionType == InteractionType.PostIt || item.GetBaseItem().InteractionType == InteractionType.CameraPicture)
             {
                 room.GetRoomItemHandler().RemoveFurniture(session, item.Id);
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())

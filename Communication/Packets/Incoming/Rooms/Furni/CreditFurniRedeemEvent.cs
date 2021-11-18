@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             if (exchange == null)
                 return;
 
-            if (exchange.Data.InteractionType != InteractionType.EXCHANGE)
+            if (exchange.Data.InteractionType != InteractionType.Exchange)
                 return;
 
 

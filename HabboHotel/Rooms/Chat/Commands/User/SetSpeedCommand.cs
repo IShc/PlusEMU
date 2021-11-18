@@ -21,8 +21,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                 return;
             }
 
-            int speed;
-            if (int.TryParse(@params[1], out speed))
+            if (int.TryParse(@params[1], out int speed))
             {
                 session.GetHabbo().CurrentRoom.GetRoomItemHandler().SetSpeed(speed);
             }

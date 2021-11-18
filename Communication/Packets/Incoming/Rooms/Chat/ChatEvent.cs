@@ -63,7 +63,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
                 }
             }
 
-            PlusEnvironment.GetGame().GetChatManager().GetLogs().StoreChatlog(new ChatlogEntry(session.GetHabbo().Id, room.Id, message, UnixTimestamp.GetNow(), session.GetHabbo(), room));
+            PlusEnvironment.GetGame().GetChatManager().GetLogs().StoreChatLog(new ChatLogEntry(session.GetHabbo().Id, room.Id, message, UnixTimestamp.GetNow(), session.GetHabbo(), room));
 
             if (message.StartsWith(":", StringComparison.CurrentCulture) && PlusEnvironment.GetGame().GetChatManager().GetCommands().Parse(session, message))
                 return;

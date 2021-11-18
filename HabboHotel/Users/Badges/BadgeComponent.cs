@@ -19,8 +19,8 @@ namespace Plus.HabboHotel.Users.Badges
 
             foreach (Badge badge in data.Badges)
             {
-                BadgeDefinition badgeDefinition = null;
-                if (!PlusEnvironment.GetGame().GetBadgeManager().TryGetBadge(badge.Code, out badgeDefinition) || badgeDefinition.RequiredRight.Length > 0 && !player.GetPermissions().HasRight(badgeDefinition.RequiredRight))
+                if (!PlusEnvironment.GetGame().GetBadgeManager().TryGetBadge(badge.Code, out BadgeDefinition badgeDefinition) || 
+                    badgeDefinition.RequiredRight.Length > 0 && !player.GetPermissions().HasRight(badgeDefinition.RequiredRight))
                     continue;
 
                 if (!_badges.ContainsKey(badge.Code))
@@ -57,10 +57,7 @@ namespace Plus.HabboHotel.Users.Badges
 
         public Badge GetBadge(string badge)
         {
-            if (_badges.ContainsKey(badge))
-                return _badges[badge];
-
-            return null;
+            return _badges.ContainsKey(badge) ? _badges[badge] : null;
         }
 
         public bool TryGetBadge(string code, out Badge badge)
@@ -78,16 +75,17 @@ namespace Plus.HabboHotel.Users.Badges
             if (HasBadge(code))
                 return;
 
-            BadgeDefinition badge = null;
-            if (!PlusEnvironment.GetGame().GetBadgeManager().TryGetBadge(code.ToUpper(), out badge) || badge.RequiredRight.Length > 0 && !session.GetHabbo().GetPermissions().HasRight(badge.RequiredRight))
+            if (!PlusEnvironment.GetGame().GetBadgeManager().TryGetBadge(code.ToUpper(), out BadgeDefinition badge) || badge.RequiredRight.Length > 0 && !session.GetHabbo().GetPermissions().HasRight(badge.RequiredRight))
                 return;
 
             if (inDatabase)
             {
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    dbClient.SetQuery("REPLACE INTO `user_badges` (`user_id`,`badge_id`,`badge_slot`) VALUES ('" + _player.Id + "', @badge, '" + 0 + "')");
+                    dbClient.SetQuery("REPLACE INTO `user_badges` (`user_id`,`badge_id`,`badge_slot`) VALUES (@userId, @badge, @slot)");
+                    dbClient.AddParameter("userId", _player.Id);
                     dbClient.AddParameter("badge", code);
+                    dbClient.AddParameter("slot", 0);
                     dbClient.RunQuery();
                 }
             }
@@ -118,8 +116,9 @@ namespace Plus.HabboHotel.Users.Badges
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.SetQuery("DELETE FROM user_badges WHERE badge_id = @badge AND user_id = " + _player.Id + " LIMIT 1");
+                dbClient.SetQuery("DELETE FROM user_badges WHERE badge_id = @badge AND user_id = @userId LIMIT 1");
                 dbClient.AddParameter("badge", badge);
+                dbClient.AddParameter("userId", _player.Id);
                 dbClient.RunQuery();
             }
 

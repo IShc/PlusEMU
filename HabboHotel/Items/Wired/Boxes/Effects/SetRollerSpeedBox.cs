@@ -34,8 +34,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
             StringData = message;
 
-            int speed;
-            if (!int.TryParse(StringData, out speed))
+            if (!int.TryParse(StringData, out int speed))
             {
                 StringData = "";
             }
@@ -43,8 +42,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public bool Execute(params object[] @params)
         {
-            int speed;
-            if (int.TryParse(StringData, out speed))
+            if (int.TryParse(StringData, out int speed))
             {
                 Instance.GetRoomItemHandler().SetSpeed(speed);
             }

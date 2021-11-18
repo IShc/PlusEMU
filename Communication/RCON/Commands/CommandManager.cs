@@ -62,7 +62,7 @@ namespace Plus.Communication.Rcon.Commands
             Register("sync_user_currency", new SyncUserCurrencyCommand());
             Register("reload_user_currency", new ReloadUserCurrencyCommand());
             Register("reload_user_rank", new ReloadUserRankCommand());
-            Register("reload_user_vip_rank", new ReloadUserVIPRankCommand());
+            Register("reload_user_vip_rank", new ReloadUserVipRankCommand());
             Register("progress_user_achievement", new ProgressUserAchievementCommand());
             Register("give_user_badge", new GiveUserBadgeCommand());
             Register("take_user_badge", new TakeUserBadgeCommand());

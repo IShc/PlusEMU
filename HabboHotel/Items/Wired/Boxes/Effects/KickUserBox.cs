@@ -18,7 +18,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public bool BoolData { get; set; }
         public int Delay { get; set; }
         public string ItemsData { get; set; }
-        private Queue _toKick;
+        private readonly Queue _toKick;
 
         public KickUserBox(Room instance, Item item)
         {

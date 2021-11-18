@@ -237,14 +237,14 @@ namespace Plus.HabboHotel.Rooms
             return _rooms.Values.Where(x => x.Category == category && x.Access != RoomAccess.Invisible && x.UsersNow > 0).OrderByDescending(x => x.UsersNow).Take(amount).ToList();
         }
 
-        public List<Room> GetOnGoingRoomPromotions(int Mode, int Amount = 50)
+        public List<Room> GetOnGoingRoomPromotions(int mode, int amount = 50)
         {
-            if (Mode == 17)
+            if (mode == 17)
             {
-                return _rooms.Values.Where(x => x.HasActivePromotion && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.Promotion.TimestampStarted).Take(Amount).ToList();
+                return _rooms.Values.Where(x => x.HasActivePromotion && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.Promotion.TimestampStarted).Take(amount).ToList();
             }
 
-            return _rooms.Values.Where(x => x.HasActivePromotion && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.UsersNow).Take(Amount).ToList();
+            return _rooms.Values.Where(x => x.HasActivePromotion && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.UsersNow).Take(amount).ToList();
         }
 
         public List<Room> GetPromotedRooms(int categoryId, int amount = 50)

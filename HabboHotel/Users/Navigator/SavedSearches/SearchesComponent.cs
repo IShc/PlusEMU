@@ -8,7 +8,7 @@ namespace Plus.HabboHotel.Users.Navigator.SavedSearches
 {
     public class SearchesComponent
     {
-        private ConcurrentDictionary<int, SavedSearch> _savedSearches;
+        private readonly ConcurrentDictionary<int, SavedSearch> _savedSearches;
 
         public SearchesComponent()
         {

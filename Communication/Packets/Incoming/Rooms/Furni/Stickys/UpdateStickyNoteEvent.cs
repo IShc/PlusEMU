@@ -15,7 +15,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys
                 return;
 
             Item item = room.GetRoomItemHandler().GetItem(packet.PopInt());
-            if (item == null || item.GetBaseItem().InteractionType != InteractionType.POSTIT)
+            if (item == null || item.GetBaseItem().InteractionType != InteractionType.PostIt)
                 return;
 
             string color = packet.PopString();

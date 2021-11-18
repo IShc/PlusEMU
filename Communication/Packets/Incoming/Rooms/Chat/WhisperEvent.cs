@@ -74,7 +74,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
                 return;
             }
             
-            PlusEnvironment.GetGame().GetChatManager().GetLogs().StoreChatlog(new ChatlogEntry(session.GetHabbo().Id, room.Id, "<Whisper to " + toUser + ">: " + message, UnixTimestamp.GetNow(), session.GetHabbo(), room));
+            PlusEnvironment.GetGame().GetChatManager().GetLogs().StoreChatLog(new ChatLogEntry(session.GetHabbo().Id, room.Id, "<Whisper to " + toUser + ">: " + message, UnixTimestamp.GetNow(), session.GetHabbo(), room));
 
             if (PlusEnvironment.GetGame().GetChatManager().GetFilter().CheckBannedWords(message))
             {

@@ -22,8 +22,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                 return;
             }
 
-            int maxAmount;
-            if (int.TryParse(@params[1], out maxAmount))
+            if (int.TryParse(@params[1], out int maxAmount))
             {
                 if (maxAmount == 0)
                 {

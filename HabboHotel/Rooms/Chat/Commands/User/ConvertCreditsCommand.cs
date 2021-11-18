@@ -40,7 +40,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                         foreach (DataRow row in table.Rows)
                         {
                             Item item = session.GetHabbo().GetInventoryComponent().GetItem(Convert.ToInt32(row[0]));
-                            if (item == null || item.RoomId > 0 || item.Data.InteractionType != InteractionType.EXCHANGE)
+                            if (item == null || item.RoomId > 0 || item.Data.InteractionType != InteractionType.Exchange)
                                 continue;
                             
                             int value = item.Data.BehaviourData;

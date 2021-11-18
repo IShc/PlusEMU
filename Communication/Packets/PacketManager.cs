@@ -176,6 +176,11 @@ namespace Plus.Communication.Packets
             {
                 foreach (Exception e in ex.Flatten().InnerExceptions)
                 {
+                    if (ThrowUserErrors)
+                    {
+                        throw e;
+                    }
+                    else
                     {
                         //log.Fatal("Unhandled Error: " + e.Message + " - " + e.StackTrace);
                         session.Disconnect();

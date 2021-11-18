@@ -13,39 +13,39 @@ namespace Plus.HabboHotel.Users.Process
         /// <summary>
         /// Player to update, handle, change etc.
         /// </summary>
-        private Habbo _player = null;
+        private Habbo _player;
 
         /// <summary>
         /// ThreadPooled Timer.
         /// </summary>
-        private Timer _timer = null;
+        private Timer _timer;
 
         /// <summary>
         /// Prevents the timer from overlapping itself.
         /// </summary>
-        private bool _timerRunning = false;
+        private bool _timerRunning;
 
 #pragma warning disable CS0414 // The field 'ProcessComponent._timerLagging' is assigned but its value is never used
         /// <summary>
         /// Checks if the timer is lagging behind (server can't keep up).
         /// </summary>
-        private bool _timerLagging = false;
+        private bool _timerLagging;
 #pragma warning restore CS0414 // The field 'ProcessComponent._timerLagging' is assigned but its value is never used
 
         /// <summary>
         /// Enable/Disable the timer WITHOUT disabling the timer itself.
         /// </summary>
-        private bool _disabled = false;
+        private bool _disabled;
 
         /// <summary>
         /// Used for disposing the ProcessComponent safely.
         /// </summary>
-        private AutoResetEvent _resetEvent = new(true);
+        private readonly AutoResetEvent _resetEvent = new(true);
 
         /// <summary>
         /// How often the timer should execute.
         /// </summary>
-        private static int _runtimeInSec = 60;
+        private static readonly int _runtimeInSec = 60;
 
         /// <summary>
         /// Default.
@@ -62,11 +62,11 @@ namespace Plus.HabboHotel.Users.Process
         {
             if (player == null)
                 return false;
-            else if (_player != null)
+            if (_player != null)
                 return false;
 
             _player = player;
-            _timer = new Timer(new TimerCallback(Run), null, _runtimeInSec * 1000, _runtimeInSec * 1000);
+            _timer = new Timer(Run, null, _runtimeInSec * 1000, _runtimeInSec * 1000);
             return true;
         }
 

@@ -81,9 +81,7 @@ namespace Plus.HabboHotel.Items
 
         public bool GetItem(int id, out ItemData item)
         {
-            if (Items.TryGetValue(id, out item))
-                return true;
-            return false;
+            return Items.TryGetValue(id, out item);
         }
 
         public ItemData GetItemByName(string name)
@@ -99,9 +97,7 @@ namespace Plus.HabboHotel.Items
 
         public bool GetGift(int spriteId, out ItemData item)
         {
-            if (Gifts.TryGetValue(spriteId, out item))
-                return true;
-            return false;
+            return Gifts.TryGetValue(spriteId, out item);
         }
     }
 }

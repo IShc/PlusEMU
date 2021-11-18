@@ -55,7 +55,7 @@ namespace Plus.HabboHotel.Items.Interactor
             {
                 return;
             }
-            if (item.GetBaseItem().InteractionType == InteractionType.ONE_WAY_GATE)
+            if (item.GetBaseItem().InteractionType == InteractionType.OneWayGate)
             {
             if (user.Coordinate != item.SquareInFront && user.CanWalk)
             {

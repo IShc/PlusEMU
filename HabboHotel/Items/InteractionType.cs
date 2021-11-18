@@ -2,124 +2,122 @@
 {
     public enum InteractionType
     {
-        NONE,
-        GATE,
-        POSTIT,
-        MOODLIGHT,
-        TROPHY,
-        BED,
-        SCOREBOARD,
-        VENDING_MACHINE,
-        ALERT,
-        ONE_WAY_GATE,
-        LOVE_SHUFFLER,
-        HABBO_WHEEL,
-        DICE,
-        BOTTLE,
-        HOPPER,
-        TELEPORT,
-        POOL,
-        ROLLER,
-        FOOTBALL_GATE,
-        PET,
-        ICE_SKATES,
-        NORMAL_SKATES,
-        lowpool,
-        haloweenpool,
-        FOOTBALL,
-        FOOTBALL_GOAL_GREEN,
-        FOOTBALL_GOAL_YELLOW,
-        FOOTBALL_GOAL_BLUE,
-        FOOTBALL_GOAL_RED,
-        footballcountergreen,
-        footballcounteryellow,
-        footballcounterblue,
-        footballcounterred,
-        banzaigateblue,
-        banzaigatered,
-        banzaigateyellow,
-        banzaigategreen,
-        banzaifloor,
-        banzaiscoreblue,
-        banzaiscorered,
-        banzaiscoreyellow,
-        banzaiscoregreen,
-        banzaicounter,
-        banzaitele,
-        banzaipuck,
-        banzaipyramid,
-        freezetimer,
-        freezeexit,
-        freezeredcounter,
-        freezebluecounter,
-        freezeyellowcounter,
-        freezegreencounter,
-        FREEZE_YELLOW_GATE,
-        FREEZE_RED_GATE,
-        FREEZE_GREEN_GATE,
-        FREEZE_BLUE_GATE,
-        FREEZE_TILE_BLOCK,
-        FREEZE_TILE,
-        JUKEBOX,
-        MUSIC_DISC,
-        PUZZLE_BOX,
-        TONER,
+        None,
+        Gate,
+        PostIt,
+        Moodlight,
+        Trophy,
+        Bed,
+        Scoreboard,
+        VendingMachine,
+        Alert,
+        OneWayGate,
+        LoveShuffler,
+        HabboWheel,
+        Dice,
+        Bottle,
+        Hopper,
+        Teleport,
+        Pool,
+        Roller,
+        FootballGate,
+        Pet,
+        IceSkates,
+        NormalSkates,
+        LowPool,
+        HalloweenPool,
+        Football,
+        FootballGoalGreen,
+        FootballGoalYellow,
+        FootballGoalBlue,
+        FootballGoalRed,
+        FootballCounterGreen,
+        FootballCounterYellow,
+        FootballCounterBlue,
+        FootballCounterRed,
+        BanzaiGateBlue,
+        BanzaiGateRed,
+        BanzaiGateYellow,
+        BanzaiGateGreen,
+        BanzaiFloor,
+        BanzaiScoreBlue,
+        BanzaiScoreRed,
+        BanzaiScoreYellow,
+        BanzaiScoreGreen,
+        BanzaiCounter,
+        BanzaiTele,
+        BanzaiPuck,
+        BanzaiPyramid,
+        FreezeTimer,
+        FreezeExit,
+        FreezeRedCounter,
+        FreezeBlueCounter,
+        FreezeYellowCounter,
+        FreezeGreenCounter,
+        FreezeYellowGate,
+        FreezeRedGate,
+        FreezeGreenGate,
+        FreezeBlueGate,
+        FreezeTileBlock,
+        FreezeTile,
+        Jukebox,
+        MusicDisc,
+        PuzzleBox,
+        Toner,
 
+        PressurePad,
 
-        PRESSURE_PAD,
+        WfFloorSwitch1,
+        WfFloorSwitch2,
 
-        WF_FLOOR_SWITCH_1,
-        WF_FLOOR_SWITCH_2,
+        Gift,
+        Background,
+        Mannequin,
+        GateVip,
+        GuildItem,
+        GuildGate,
+        GuildForum,
 
-        GIFT,
-        BACKGROUND,
-        MANNEQUIN,
-        GATE_VIP,
-        GUILD_ITEM,
-        GUILD_GATE,
-        GUILD_FORUM,
+        Tent,
+        TentSmall,
+        BadgeDisplay,
+        StackTool,
+        Television,
 
-        TENT,
-        TENT_SMALL,
-        BADGE_DISPLAY,
-        STACKTOOL,
-        TELEVISION,
+        WiredEffect,
+        WiredTrigger,
+        WiredCondition,
 
-        WIRED_EFFECT,
-        WIRED_TRIGGER,
-        WIRED_CONDITION,
+        Wallpaper,
+        Floor,
+        Landscape,
 
-        WALLPAPER,
-        FLOOR,
-        LANDSCAPE,
+        Badge,
+        CrackableEgg,
+        Effect,
+        Deal,
+        RoomDeal,
 
-        BADGE,
-        CRACKABLE_EGG,
-        EFFECT,
-        DEAL,
-        ROOMDEAL,
+        HorseSaddle1,
+        HorseSaddle2,
+        HorseHairstyle,
+        HorseBodyDye,
+        HorseHairDye,
 
-        HORSE_SADDLE_1,
-        HORSE_SADDLE_2,
-        HORSE_HAIRSTYLE,
-        HORSE_BODY_DYE,
-        HORSE_HAIR_DYE,
-
-        GNOME_BOX,
-        BOT,
-        PURCHASABLE_CLOTHING,
-        PET_BREEDING_BOX,
-        ARROW,
-        LOVELOCK,
-        MONSTERPLANT_SEED,
-        CANNON,
-        COUNTER,
-        CAMERA_PICTURE,
-        FX_PROVIDER,
-        EXCHANGE
+        GnomeBox,
+        Bot,
+        PurchasableClothing,
+        PetBreedingBox,
+        Arrow,
+        LoveLock,
+        MonsterPlantSeed,
+        Cannon,
+        Counter,
+        CameraPicture,
+        FxProvider,
+        Exchange
     }
-
-
+    
     public static class InteractionTypes
     {
         public static InteractionType GetTypeFromString(string type)
@@ -128,235 +126,234 @@
             {
                 case "":
                 case "default":
-                    return InteractionType.NONE;
+                    return InteractionType.None;
                 case "gate":
-                    return InteractionType.GATE;
+                    return InteractionType.Gate;
                 case "postit":
-                    return InteractionType.POSTIT;
+                    return InteractionType.PostIt;
                 case "dimmer":
-                    return InteractionType.MOODLIGHT;
+                    return InteractionType.Moodlight;
                 case "trophy":
-                    return InteractionType.TROPHY;
+                    return InteractionType.Trophy;
                 case "bed":
-                    return InteractionType.BED;
+                    return InteractionType.Bed;
                 case "scoreboard":
-                    return InteractionType.SCOREBOARD;
+                    return InteractionType.Scoreboard;
                 case "vendingmachine":
-                    return InteractionType.VENDING_MACHINE;
+                    return InteractionType.VendingMachine;
                 case "alert":
-                    return InteractionType.ALERT;
+                    return InteractionType.Alert;
                 case "onewaygate":
-                    return InteractionType.ONE_WAY_GATE;
+                    return InteractionType.OneWayGate;
                 case "loveshuffler":
-                    return InteractionType.LOVE_SHUFFLER;
+                    return InteractionType.LoveShuffler;
                 case "habbowheel":
-                    return InteractionType.HABBO_WHEEL;
+                    return InteractionType.HabboWheel;
                 case "dice":
-                    return InteractionType.DICE;
+                    return InteractionType.Dice;
                 case "hopper":
-                    return InteractionType.HOPPER;
+                    return InteractionType.Hopper;
                 case "bottle":
-                    return InteractionType.BOTTLE;
+                    return InteractionType.Bottle;
                 case "teleport":
-                    return InteractionType.TELEPORT;
+                    return InteractionType.Teleport;
                 case "pool":
-                    return InteractionType.POOL;
+                    return InteractionType.Pool;
                 case "roller":
-                    return InteractionType.ROLLER;
+                    return InteractionType.Roller;
                 case "fbgate":
-                    return InteractionType.FOOTBALL_GATE;
+                    return InteractionType.FootballGate;
                 case "iceskates":
-                    return InteractionType.ICE_SKATES;
+                    return InteractionType.IceSkates;
                 case "rollerskate":
-                    return InteractionType.NORMAL_SKATES;
+                    return InteractionType.NormalSkates;
                 case "lowpool":
-                    return InteractionType.lowpool;
+                    return InteractionType.LowPool;
                 case "haloweenpool":
-                    return InteractionType.haloweenpool;
+                    return InteractionType.HalloweenPool;
                 case "ball":
-                    return InteractionType.FOOTBALL;
+                    return InteractionType.Football;
 
                 case "green_goal":
-                    return InteractionType.FOOTBALL_GOAL_GREEN;
+                    return InteractionType.FootballGoalGreen;
                 case "yellow_goal":
-                    return InteractionType.FOOTBALL_GOAL_YELLOW;
+                    return InteractionType.FootballGoalYellow;
                 case "red_goal":
-                    return InteractionType.FOOTBALL_GOAL_RED;
+                    return InteractionType.FootballGoalRed;
                 case "blue_goal":
-                    return InteractionType.FOOTBALL_GOAL_BLUE;
+                    return InteractionType.FootballGoalBlue;
 
                 case "green_score":
-                    return InteractionType.footballcountergreen;
+                    return InteractionType.FootballCounterGreen;
                 case "yellow_score":
-                    return InteractionType.footballcounteryellow;
+                    return InteractionType.FootballCounterYellow;
                 case "blue_score":
-                    return InteractionType.footballcounterblue;
+                    return InteractionType.FootballCounterBlue;
                 case "red_score":
-                    return InteractionType.footballcounterred;
+                    return InteractionType.FootballCounterRed;
 
                 case "bb_blue_gate":
-                    return InteractionType.banzaigateblue;
+                    return InteractionType.BanzaiGateBlue;
                 case "bb_red_gate":
-                    return InteractionType.banzaigatered;
+                    return InteractionType.BanzaiGateRed;
                 case "bb_yellow_gate":
-                    return InteractionType.banzaigateyellow;
+                    return InteractionType.BanzaiGateYellow;
                 case "bb_green_gate":
-                    return InteractionType.banzaigategreen;
+                    return InteractionType.BanzaiGateGreen;
                 case "bb_patch":
-                    return InteractionType.banzaifloor;
+                    return InteractionType.BanzaiFloor;
 
                 case "bb_blue_score":
-                    return InteractionType.banzaiscoreblue;
+                    return InteractionType.BanzaiScoreBlue;
                 case "bb_red_score":
-                    return InteractionType.banzaiscorered;
+                    return InteractionType.BanzaiScoreRed;
                 case "bb_yellow_score":
-                    return InteractionType.banzaiscoreyellow;
+                    return InteractionType.BanzaiScoreYellow;
                 case "bb_green_score":
-                    return InteractionType.banzaiscoregreen;
+                    return InteractionType.BanzaiScoreGreen;
 
                 case "banzaicounter":
-                    return InteractionType.banzaicounter;
+                    return InteractionType.BanzaiCounter;
                 case "bb_teleport":
-                    return InteractionType.banzaitele;
+                    return InteractionType.BanzaiTele;
                 case "banzaipuck":
-                    return InteractionType.banzaipuck;
+                    return InteractionType.BanzaiPuck;
                 case "bb_pyramid":
-                    return InteractionType.banzaipyramid;
+                    return InteractionType.BanzaiPyramid;
 
                 case "freezetimer":
-                    return InteractionType.freezetimer;
+                    return InteractionType.FreezeTimer;
                 case "freezeexit":
-                    return InteractionType.freezeexit;
+                    return InteractionType.FreezeExit;
                 case "freezeredcounter":
-                    return InteractionType.freezeredcounter;
+                    return InteractionType.FreezeRedCounter;
                 case "freezebluecounter":
-                    return InteractionType.freezebluecounter;
+                    return InteractionType.FreezeBlueCounter;
                 case "freezeyellowcounter":
-                    return InteractionType.freezeyellowcounter;
+                    return InteractionType.FreezeYellowCounter;
                 case "freezegreencounter":
-                    return InteractionType.freezegreencounter;
+                    return InteractionType.FreezeGreenCounter;
                 case "freezeyellowgate":
-                    return InteractionType.FREEZE_YELLOW_GATE;
+                    return InteractionType.FreezeYellowGate;
                 case "freezeredgate":
-                    return InteractionType.FREEZE_RED_GATE;
+                    return InteractionType.FreezeRedGate;
                 case "freezegreengate":
-                    return InteractionType.FREEZE_GREEN_GATE;
+                    return InteractionType.FreezeGreenGate;
                 case "freezebluegate":
-                    return InteractionType.FREEZE_BLUE_GATE;
+                    return InteractionType.FreezeBlueGate;
                 case "freezetileblock":
-                    return InteractionType.FREEZE_TILE_BLOCK;
+                    return InteractionType.FreezeTileBlock;
                 case "freezetile":
-                    return InteractionType.FREEZE_TILE;
+                    return InteractionType.FreezeTile;
 
                 case "jukebox":
-                    return InteractionType.JUKEBOX;
+                    return InteractionType.Jukebox;
                 case "musicdisc":
-                    return InteractionType.MUSIC_DISC;
+                    return InteractionType.MusicDisc;
 
                 case "pressure_pad":
-                    return InteractionType.PRESSURE_PAD;
+                    return InteractionType.PressurePad;
                 case "wf_floor_switch1":
-                    return InteractionType.WF_FLOOR_SWITCH_1;
+                    return InteractionType.WfFloorSwitch1;
                 case "wf_floor_switch2":
-                    return InteractionType.WF_FLOOR_SWITCH_2;
+                    return InteractionType.WfFloorSwitch2;
                 case "puzzlebox":
-                    return InteractionType.PUZZLE_BOX;
+                    return InteractionType.PuzzleBox;
                 case "water":
-                    return InteractionType.POOL;
+                    return InteractionType.Pool;
                 case "gift":
-                    return InteractionType.GIFT;
+                    return InteractionType.Gift;
                 case "background":
-                    return InteractionType.BACKGROUND;
+                    return InteractionType.Background;
                 case "mannequin":
-                    return InteractionType.MANNEQUIN;
+                    return InteractionType.Mannequin;
                 case "vip_gate":
-                    return InteractionType.GATE_VIP;
+                    return InteractionType.GateVip;
                 case "roombg":
-                    return InteractionType.TONER;
+                    return InteractionType.Toner;
                 case "gld_item":
-                    return InteractionType.GUILD_ITEM;
+                    return InteractionType.GuildItem;
                 case "gld_gate":
-                    return InteractionType.GUILD_GATE;
+                    return InteractionType.GuildGate;
                 case "guild_forum":
-                    return InteractionType.GUILD_FORUM;
+                    return InteractionType.GuildForum;
                 case "tent":
-                    return InteractionType.TENT;
+                    return InteractionType.Tent;
                 case "tent_small":
-                    return InteractionType.TENT_SMALL;
+                    return InteractionType.TentSmall;
 
                 case "badge_display":
-                    return InteractionType.BADGE_DISPLAY;
+                    return InteractionType.BadgeDisplay;
                 case "stacktool":
-                    return InteractionType.STACKTOOL;
+                    return InteractionType.StackTool;
                 case "television":
-                    return InteractionType.TELEVISION;
-
-
+                    return InteractionType.Television;
+                
                 case "wired_effect":
-                    return InteractionType.WIRED_EFFECT;
+                    return InteractionType.WiredEffect;
                 case "wired_trigger":
-                    return InteractionType.WIRED_TRIGGER;
+                    return InteractionType.WiredTrigger;
                 case "wired_condition":
-                    return InteractionType.WIRED_CONDITION;
+                    return InteractionType.WiredCondition;
 
                 case "floor":
-                    return InteractionType.FLOOR;
+                    return InteractionType.Floor;
                 case "wallpaper":
-                    return InteractionType.WALLPAPER;
+                    return InteractionType.Wallpaper;
                 case "landscape":
-                    return InteractionType.LANDSCAPE;
+                    return InteractionType.Landscape;
 
                 case "badge":
-                    return InteractionType.BADGE;
+                    return InteractionType.Badge;
 
                 case "crackable_egg":
-                    return InteractionType.CRACKABLE_EGG;
+                    return InteractionType.CrackableEgg;
                 case "effect":
-                    return InteractionType.EFFECT;
+                    return InteractionType.Effect;
                 case "deal":
-                    return InteractionType.DEAL;
+                    return InteractionType.Deal;
                 case "roomdeal":
-                    return InteractionType.ROOMDEAL;
+                    return InteractionType.RoomDeal;
 
                 case "horse_saddle_1":
-                    return InteractionType.HORSE_SADDLE_1;
+                    return InteractionType.HorseSaddle1;
                 case "horse_saddle_2":
-                    return InteractionType.HORSE_SADDLE_2;
+                    return InteractionType.HorseSaddle2;
                 case "horse_hairstyle":
-                    return InteractionType.HORSE_HAIRSTYLE;
+                    return InteractionType.HorseHairstyle;
                 case "horse_body_dye":
-                    return InteractionType.HORSE_BODY_DYE;
+                    return InteractionType.HorseBodyDye;
                 case "horse_hair_dye":
-                    return InteractionType.HORSE_HAIR_DYE;
+                    return InteractionType.HorseHairDye;
 
                 case "gnome_box":
-                    return InteractionType.GNOME_BOX;
+                    return InteractionType.GnomeBox;
                 case "bot":
-                    return InteractionType.BOT;
+                    return InteractionType.Bot;
                 case "purchasable_clothing":
-                    return InteractionType.PURCHASABLE_CLOTHING;
+                    return InteractionType.PurchasableClothing;
                 case "pet_breeding_box":
-                    return InteractionType.PET_BREEDING_BOX;
+                    return InteractionType.PetBreedingBox;
                 case "arrow":
-                    return InteractionType.ARROW;
+                    return InteractionType.Arrow;
                 case "lovelock":
-                    return InteractionType.LOVELOCK;
+                    return InteractionType.LoveLock;
                 case "cannon":
-                    return InteractionType.CANNON;
+                    return InteractionType.Cannon;
                 case "counter":
-                    return InteractionType.COUNTER;
+                    return InteractionType.Counter;
                 case "camera_picture":
-                    return InteractionType.CAMERA_PICTURE;
+                    return InteractionType.CameraPicture;
                 case "fx_provider":
-                    return InteractionType.FX_PROVIDER;
+                    return InteractionType.FxProvider;
                 case "exchange":
-                    return InteractionType.EXCHANGE;
+                    return InteractionType.Exchange;
                 case "pet":
-                    return InteractionType.PET;
+                    return InteractionType.Pet;
                 default:
                     {
                         //Logging.WriteLine("Unknown interaction type in parse code: " + pType, ConsoleColor.Yellow);
-                        return InteractionType.NONE;
+                        return InteractionType.None;
                     }
             }
         }

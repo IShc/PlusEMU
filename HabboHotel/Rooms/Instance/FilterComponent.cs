@@ -5,7 +5,7 @@ namespace Plus.HabboHotel.Rooms.Instance
 {
     public class FilterComponent
     {
-        private Room _instance = null;
+        private Room _instance;
 
         public FilterComponent(Room instance)
         {

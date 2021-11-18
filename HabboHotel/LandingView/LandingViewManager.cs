@@ -11,7 +11,7 @@ namespace Plus.HabboHotel.LandingView
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(LandingViewManager));
 
-        private Dictionary<int, Promotion> _promotionItems;
+        private readonly Dictionary<int, Promotion> _promotionItems;
 
         public LandingViewManager()
         {

@@ -17,9 +17,9 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
     public class BattleBanzai
     {
         private Room _room;
-        private byte[,] floorMap;
-        private double timestarted;
-        private GameField field;
+        private byte[,] _floorMap;
+        private double _timeStarted;
+        private GameField _field;
         private ConcurrentDictionary<int, Item> _pucks;
         private ConcurrentDictionary<int, Item> _banzaiTiles;
 
@@ -27,7 +27,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
         {
             _room = room;
             IsBanzaiActive = false;
-            timestarted = 0;
+            _timeStarted = 0;
             _pucks = new ConcurrentDictionary<int, Item>();
             _banzaiTiles = new ConcurrentDictionary<int, Item>();
         }
@@ -42,7 +42,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
         public void RemoveTile(int itemId)
         {
-            _banzaiTiles.TryRemove(itemId, out Item Item);
+            _banzaiTiles.TryRemove(itemId, out Item item);
         }
 
         public void AddPuck(Item item)
@@ -53,7 +53,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
         public void RemovePuck(int itemId)
         {
-            _pucks.TryRemove(itemId, out Item Item);
+            _pucks.TryRemove(itemId, out Item item);
         }
 
         public void OnUserWalk(RoomUser user)
@@ -63,8 +63,8 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
             foreach (Item item in _pucks.Values.ToList())
             {
-                int NewX = 0;
-                int NewY = 0;
+                int newX = 0;
+                int newY = 0;
                 int differenceX = user.X - item.GetX;
                 int differenceY = user.Y - item.GetY;
 
@@ -72,108 +72,108 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 {
                     if (user.RotBody == 4)
                     {
-                        NewX = user.X;
-                        NewY = user.Y + 2;
+                        newX = user.X;
+                        newY = user.Y + 2;
 
                     }
                     else if (user.RotBody == 6)
                     {
-                        NewX = user.X - 2;
-                        NewY = user.Y;
+                        newX = user.X - 2;
+                        newY = user.Y;
 
                     }
                     else if (user.RotBody == 0)
                     {
-                        NewX = user.X;
-                        NewY = user.Y - 2;
+                        newX = user.X;
+                        newY = user.Y - 2;
 
                     }
                     else if (user.RotBody == 2)
                     {
-                        NewX = user.X + 2;
-                        NewY = user.Y;
+                        newX = user.X + 2;
+                        newY = user.Y;
 
                     }
                     else if (user.RotBody == 1)
                     {
-                        NewX = user.X + 2;
-                        NewY = user.Y - 2;
+                        newX = user.X + 2;
+                        newY = user.Y - 2;
 
                     }
                     else if (user.RotBody == 7)
                     {
-                        NewX = user.X - 2;
-                        NewY = user.Y - 2;
+                        newX = user.X - 2;
+                        newY = user.Y - 2;
 
                     }
                     else if (user.RotBody == 3)
                     {
-                        NewX = user.X + 2;
-                        NewY = user.Y + 2;
+                        newX = user.X + 2;
+                        newY = user.Y + 2;
 
                     }
                     else if (user.RotBody == 5)
                     {
-                        NewX = user.X - 2;
-                        NewY = user.Y + 2;
+                        newX = user.X - 2;
+                        newY = user.Y + 2;
                     }
 
-                    if (!_room.GetRoomItemHandler().CheckPosItem(item, NewX, NewY, item.Rotation))
+                    if (!_room.GetRoomItemHandler().CheckPosItem(item, newX, newY, item.Rotation))
                     {
                         if (user.RotBody == 0)
                         {
-                            NewX = user.X;
-                            NewY = user.Y + 1;
+                            newX = user.X;
+                            newY = user.Y + 1;
                         }
                         else if (user.RotBody == 2)
                         {
-                            NewX = user.X - 1;
-                            NewY = user.Y;
+                            newX = user.X - 1;
+                            newY = user.Y;
                         }
                         else if (user.RotBody == 4)
                         {
-                            NewX = user.X;
-                            NewY = user.Y - 1;
+                            newX = user.X;
+                            newY = user.Y - 1;
                         }
                         else if (user.RotBody == 6)
                         {
-                            NewX = user.X + 1;
-                            NewY = user.Y;
+                            newX = user.X + 1;
+                            newY = user.Y;
                         }
                         else if (user.RotBody == 5)
                         {
-                            NewX = user.X + 1;
-                            NewY = user.Y - 1;
+                            newX = user.X + 1;
+                            newY = user.Y - 1;
                         }
                         else if (user.RotBody == 3)
                         {
-                            NewX = user.X - 1;
-                            NewY = user.Y - 1;
+                            newX = user.X - 1;
+                            newY = user.Y - 1;
                         }
                         else if (user.RotBody == 7)
                         {
-                            NewX = user.X + 1;
-                            NewY = user.Y + 1;
+                            newX = user.X + 1;
+                            newY = user.Y + 1;
                         }
                         else if (user.RotBody == 1)
                         {
-                            NewX = user.X - 1;
-                            NewY = user.Y + 1;
+                            newX = user.X - 1;
+                            newY = user.Y + 1;
                         }
                     }
                 }
                 else if (differenceX <= 1 && differenceX >= -1 && differenceY <= 1 && differenceY >= -1 && VerifyPuck(user, item.Coordinate.X, item.Coordinate.Y))//VERYFIC BALL CHECAR SI ESTA EN DIRECCION ASIA LA PELOTA
                 {
-                    NewX = differenceX * -1;
-                    NewY = differenceY * -1;
+                    newX = differenceX * -1;
+                    newY = differenceY * -1;
 
-                    NewX = NewX + item.GetX;
-                    NewY = NewY + item.GetY;
+                    newX = newX + item.GetX;
+                    newY = newY + item.GetY;
                 }
 
-                if (item.GetRoom().GetGameMap().ValidTile(NewX, NewY))
+                if (item.GetRoom().GetGameMap().ValidTile(newX, newY))
                 {
-                    MovePuck(item, user.GetClient(), NewX, NewY, user.Team);
+                    MovePuck(item, user.GetClient(), newX, newY, user.Team);
                 }
             }
 
@@ -193,9 +193,9 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             if (IsBanzaiActive)
                 return;
 
-            floorMap = new byte[_room.GetGameMap().Model.MapSizeY, _room.GetGameMap().Model.MapSizeX];
-            field = new GameField(floorMap, true);
-            timestarted = PlusEnvironment.GetUnixTimestamp();
+            _floorMap = new byte[_room.GetGameMap().Model.MapSizeY, _room.GetGameMap().Model.MapSizeX];
+            _field = new GameField(_floorMap, true);
+            _timeStarted = PlusEnvironment.GetUnixTimestamp();
             _room.GetGameManager().LockGates();
             for (int i = 1; i < 5; i++)
             {
@@ -229,10 +229,10 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
                 switch (type)
                 {
-                    case InteractionType.banzaiscoreblue:
-                    case InteractionType.banzaiscoregreen:
-                    case InteractionType.banzaiscorered:
-                    case InteractionType.banzaiscoreyellow:
+                    case InteractionType.BanzaiScoreBlue:
+                    case InteractionType.BanzaiScoreGreen:
+                    case InteractionType.BanzaiScoreRed:
+                    case InteractionType.BanzaiScoreYellow:
                         {
                             item.ExtraData = "0";
                             item.UpdateState();
@@ -246,16 +246,16 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
         {
             IsBanzaiActive = false;
             _room.GetGameManager().StopGame();
-            floorMap = null;
+            _floorMap = null;
 
             if (!triggeredByUser)
                 _room.GetWired().TriggerEvent(WiredBoxType.TriggerGameEnds, null);
 
-            Team winners = _room.GetGameManager().GetWinningTeam();
+            Team winner = _room.GetGameManager().GetWinningTeam();
             _room.GetGameManager().UnlockGates();
             foreach (Item tile in _banzaiTiles.Values)
             {
-                if (tile.Team == winners)
+                if (tile.Team == winner)
                 {
                     tile.InteractionCount = 0;
                     tile.InteractionCountHelper = 0;
@@ -268,59 +268,59 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 }
             }
 
-            if (winners != Team.None)
+            if (winner != Team.None)
             {
-                List<RoomUser> Winners = _room.GetRoomUserManager().GetRoomUsers();
+                List<RoomUser> winners = _room.GetRoomUserManager().GetRoomUsers();
 
-                foreach (RoomUser User in Winners.ToList())
+                foreach (RoomUser user in winners.ToList())
                 {
-                    if (User.Team != Team.None)
+                    if (user.Team != Team.None)
                     {
-                        if (PlusEnvironment.GetUnixTimestamp() - timestarted > 5)
+                        if (PlusEnvironment.GetUnixTimestamp() - _timeStarted > 5)
                         {
-                            PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_BattleBallTilesLocked", User.LockedTilesCount);
-                            PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_BattleBallPlayer", 1);
+                            PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(user.GetClient(), "ACH_BattleBallTilesLocked", user.LockedTilesCount);
+                            PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(user.GetClient(), "ACH_BattleBallPlayer", 1);
                         }
                     }
-                    if (winners == Team.Blue)
+                    if (winner == Team.Blue)
                     {
-                        if (User.CurrentEffect == 35)
+                        if (user.CurrentEffect == 35)
                         {
-                            if (PlusEnvironment.GetUnixTimestamp() - timestarted > 5)
-                                PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_BattleBallWinner", 1);
-                            _room.SendPacket(new ActionComposer(User.VirtualId, 1));
+                            if (PlusEnvironment.GetUnixTimestamp() - _timeStarted > 5)
+                                PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(user.GetClient(), "ACH_BattleBallWinner", 1);
+                            _room.SendPacket(new ActionComposer(user.VirtualId, 1));
                         }
                     }
-                    else if (winners == Team.Red)
+                    else if (winner == Team.Red)
                     {
-                        if (User.CurrentEffect == 33)
+                        if (user.CurrentEffect == 33)
                         {
-                            if (PlusEnvironment.GetUnixTimestamp() - timestarted > 5)
-                                PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_BattleBallWinner", 1);
-                            _room.SendPacket(new ActionComposer(User.VirtualId, 1));
+                            if (PlusEnvironment.GetUnixTimestamp() - _timeStarted > 5)
+                                PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(user.GetClient(), "ACH_BattleBallWinner", 1);
+                            _room.SendPacket(new ActionComposer(user.VirtualId, 1));
                         }
                     }
-                    else if (winners == Team.Green)
+                    else if (winner == Team.Green)
                     {
-                        if (User.CurrentEffect == 34)
+                        if (user.CurrentEffect == 34)
                         {
-                            if (PlusEnvironment.GetUnixTimestamp() - timestarted > 5)
-                                PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_BattleBallWinner", 1);
-                            _room.SendPacket(new ActionComposer(User.VirtualId, 1));
+                            if (PlusEnvironment.GetUnixTimestamp() - _timeStarted > 5)
+                                PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(user.GetClient(), "ACH_BattleBallWinner", 1);
+                            _room.SendPacket(new ActionComposer(user.VirtualId, 1));
                         }
                     }
-                    else if (winners == Team.Yellow)
+                    else if (winner == Team.Yellow)
                     {
-                        if (User.CurrentEffect == 36)
+                        if (user.CurrentEffect == 36)
                         {
-                            if (PlusEnvironment.GetUnixTimestamp() - timestarted > 5)
-                                PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(User.GetClient(), "ACH_BattleBallWinner", 1);
-                            _room.SendPacket(new ActionComposer(User.VirtualId, 1));
+                            if (PlusEnvironment.GetUnixTimestamp() - _timeStarted > 5)
+                                PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(user.GetClient(), "ACH_BattleBallWinner", 1);
+                            _room.SendPacket(new ActionComposer(user.VirtualId, 1));
                         }
                     }
                 }
-                if (field != null)
-                    field.Dispose();
+                if (_field != null)
+                    _field.Dispose();
             }
         }
 
@@ -330,8 +330,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 return;
 
             Point oldRoomCoord = item.Coordinate;
-
-
+            
             if (oldRoomCoord.X == newX && oldRoomCoord.Y == newY)
                 return;
 
@@ -339,9 +338,9 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             item.UpdateNeeded = true;
             item.UpdateState();
 
-            Double NewZ = _room.GetGameMap().Model.SqFloorHeight[newX, newY];
+            Double newZ = _room.GetGameMap().Model.SqFloorHeight[newX, newY];
 
-            _room.SendPacket(new SlideObjectBundleComposer(item.GetX, item.GetY, item.GetZ, newX, newY, NewZ, 0, 0, item.Id));
+            _room.SendPacket(new SlideObjectBundleComposer(item.GetX, item.GetY, item.GetZ, newX, newY, newZ, 0, 0, item.Id));
 
             _room.GetRoomItemHandler().SetFloorItem(mover, item, newX, newY, item.Rotation, false, false, false, false);
 
@@ -353,7 +352,6 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             {
                 HandleBanzaiTiles(new Point(newX, newY), team, user);
             }
-
         }
 
         private void SetTile(Item item, Team team, RoomUser user)
@@ -367,16 +365,16 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                     {
                         user.LockedTilesCount++;
                         _room.GetGameManager().AddPointToTeam(item.Team, 1);
-                        field.UpdateLocation(item.GetX, item.GetY, (byte)team);
-                        List<PointField> gfield = field.DoUpdate();
+                        _field.UpdateLocation(item.GetX, item.GetY, (byte)team);
+                        List<PointField> gField = _field.DoUpdate();
                         Team t;
-                        foreach (PointField gameField in gfield)
+                        foreach (PointField gameField in gField)
                         {
                             t = (Team)gameField.ForValue;
                             foreach (Point p in gameField.GetPoints())
                             {
                                 HandleMaxBanzaiTiles(new Point(p.X, p.Y), t);
-                                floorMap[p.Y, p.X] = gameField.ForValue;
+                                _floorMap[p.Y, p.X] = gameField.ForValue;
                             }
                         }
                     }
@@ -391,7 +389,6 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 }
             }
 
-
             int newColor = item.Value + (Convert.ToInt32(item.Team) * 3) - 1;
             item.ExtraData = newColor.ToString();
         }
@@ -403,33 +400,33 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
             List<Item> items = _room.GetGameMap().GetCoordinatedItems(coord);
             int i = 0;
-            foreach (Item _item in _banzaiTiles.Values.ToList())
+            foreach (Item item in _banzaiTiles.Values.ToList())
             {
-                if (_item == null)
+                if (item == null)
                     continue;
 
-                if (_item.GetBaseItem().InteractionType != InteractionType.banzaifloor)
+                if (item.GetBaseItem().InteractionType != InteractionType.BanzaiFloor)
                 {
                     user.Team = Team.None;
                     user.ApplyEffect(0);
                     continue;
                 }
 
-                if (_item.ExtraData.Equals("5") || _item.ExtraData.Equals("8") || _item.ExtraData.Equals("11") ||
-                    _item.ExtraData.Equals("14"))
+                if (item.ExtraData.Equals("5") || item.ExtraData.Equals("8") || item.ExtraData.Equals("11") ||
+                    item.ExtraData.Equals("14"))
                 {
                     i++;
                     continue;
                 }
 
-                if (_item.GetX != coord.X || _item.GetY != coord.Y)
+                if (item.GetX != coord.X || item.GetY != coord.Y)
                     continue;
 
-                SetTile(_item, team, user);
-                if (_item.ExtraData.Equals("5") || _item.ExtraData.Equals("8") || _item.ExtraData.Equals("11") ||
-                    _item.ExtraData.Equals("14"))
+                SetTile(item, team, user);
+                if (item.ExtraData.Equals("5") || item.ExtraData.Equals("8") || item.ExtraData.Equals("11") ||
+                    item.ExtraData.Equals("14"))
                     i++;
-                _item.UpdateState(false, true);
+                item.UpdateState(false, true);
             }
             if (i == _banzaiTiles.Count)
                 BanzaiEnd();
@@ -442,20 +439,20 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
 
             List<Item> items = _room.GetGameMap().GetCoordinatedItems(coord);
 
-            foreach (Item _item in _banzaiTiles.Values.ToList())
+            foreach (Item item in _banzaiTiles.Values.ToList())
             {
-                if (_item == null)
+                if (item == null)
                     continue;
 
-                if (_item.GetBaseItem().InteractionType != InteractionType.banzaifloor)
+                if (item.GetBaseItem().InteractionType != InteractionType.BanzaiFloor)
                     continue;
 
-                if (_item.GetX != coord.X || _item.GetY != coord.Y)
+                if (item.GetX != coord.X || item.GetY != coord.Y)
                     continue;
 
-                SetMaxForTile(_item, team);
+                SetMaxForTile(item, team);
                 _room.GetGameManager().AddPointToTeam(team, 1);
-                _item.UpdateState(false, true);
+                item.UpdateState(false, true);
             }
         }
 
@@ -476,17 +473,17 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             _banzaiTiles.Clear();
             _pucks.Clear();
 
-            if (floorMap != null)
-                Array.Clear(floorMap, 0, floorMap.Length);
+            if (_floorMap != null)
+                Array.Clear(_floorMap, 0, _floorMap.Length);
 
-            if (field != null)
-                field.Dispose();
+            if (_field != null)
+                _field.Dispose();
 
             _room = null;
             _banzaiTiles = null;
             _pucks = null;
-            floorMap = null;
-            field = null;
+            _floorMap = null;
+            _field = null;
         }
     }
 }

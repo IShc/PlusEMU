@@ -21,7 +21,7 @@ namespace Plus.HabboHotel.Rooms.Chat
         /// <summary>
         /// Chatlog Manager
         /// </summary>
-        private readonly ChatlogManager _logs;
+        private readonly ChatLogManager _logs;
 
         /// <summary>
         /// Filter Manager.
@@ -54,7 +54,7 @@ namespace Plus.HabboHotel.Rooms.Chat
         public ChatManager()
         {
             _emotions = new ChatEmotionsManager();
-            _logs = new ChatlogManager();
+            _logs = new ChatLogManager();
          
             _filter = new WordFilterManager();
             _filter.Init();
@@ -74,7 +74,7 @@ namespace Plus.HabboHotel.Rooms.Chat
             return _emotions;
         }
 
-        public ChatlogManager GetLogs()
+        public ChatLogManager GetLogs()
         {
             return _logs;
         }

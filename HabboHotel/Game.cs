@@ -53,7 +53,7 @@ namespace Plus.HabboHotel
         private bool _cycleEnded;
         private bool _cycleActive;
         private Task _gameCycle;
-        private int _cycleSleepTime = 25;
+        private readonly int _cycleSleepTime = 25;
 
         public Game()
         {

@@ -33,8 +33,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 return;
             }
 
-            double time;
-            if (double.TryParse(@params[2], out time))
+            if (double.TryParse(@params[2], out double time))
             {
                 if (time > 600 && !session.GetHabbo().GetPermissions().HasRight("mod_mute_limit_override"))
                     time = 600;

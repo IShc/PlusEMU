@@ -6,11 +6,11 @@
         public string Username { get; set; }
         public string Look { get; set; }
 
-        public GroupMember(int Id, string Username, string Look)
+        public GroupMember(int id, string username, string look)
         {
-            this.Id = Id;
-            this.Username = Username;
-            this.Look = Look;
+            Id = id;
+            Username = username;
+            Look = look;
         }
     }
 }

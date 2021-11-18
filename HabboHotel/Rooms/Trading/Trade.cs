@@ -167,7 +167,7 @@ namespace Plus.HabboHotel.Rooms.Trading
                 {
                     logUserOne += item.Id + ";";
                     roomUserOne.GetClient().GetHabbo().GetInventoryComponent().RemoveItem(item.Id);
-                    if (item.Data.InteractionType == InteractionType.EXCHANGE && PlusEnvironment.GetSettingsManager().TryGetValue("trading.auto_exchange_redeemables") == "1")
+                    if (item.Data.InteractionType == InteractionType.Exchange && PlusEnvironment.GetSettingsManager().TryGetValue("trading.auto_exchange_redeemables") == "1")
                     {
                         roomUserTwo.GetClient().GetHabbo().Credits += item.Data.BehaviourData;
                         roomUserTwo.GetClient().SendPacket(new CreditBalanceComposer(roomUserTwo.GetClient().GetHabbo().Credits));
@@ -195,7 +195,7 @@ namespace Plus.HabboHotel.Rooms.Trading
                 {
                     logUserTwo += item.Id + ";";
                     roomUserTwo.GetClient().GetHabbo().GetInventoryComponent().RemoveItem(item.Id);
-                    if (item.Data.InteractionType == InteractionType.EXCHANGE && PlusEnvironment.GetSettingsManager().TryGetValue("trading.auto_exchange_redeemables") == "1")
+                    if (item.Data.InteractionType == InteractionType.Exchange && PlusEnvironment.GetSettingsManager().TryGetValue("trading.auto_exchange_redeemables") == "1")
                     {
                         roomUserOne.GetClient().GetHabbo().Credits += item.Data.BehaviourData;
                         roomUserOne.GetClient().SendPacket(new CreditBalanceComposer(roomUserOne.GetClient().GetHabbo().Credits));

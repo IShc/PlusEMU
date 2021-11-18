@@ -92,10 +92,8 @@ namespace Plus.HabboHotel.Permissions
                         {
                             continue; // permission group does not exist
                         }
-
-                        Permission permission = null;
-
-                        if (!_permissions.TryGetValue(permissionId, out permission))
+                        
+                        if (!_permissions.TryGetValue(permissionId, out Permission permission))
                         {
                             continue; // permission does not exist
                         }
@@ -130,8 +128,7 @@ namespace Plus.HabboHotel.Permissions
                         int permissionId = Convert.ToInt32(row["permission_id"]);
                         int subscriptionId = Convert.ToInt32(row["subscription_id"]);
 
-                        Permission permission = null;
-                        if (!_permissions.TryGetValue(permissionId, out permission))
+                        if (!_permissions.TryGetValue(permissionId, out Permission permission))
                             continue; // permission does not exist
 
                         if (_permissionSubscriptionRights.ContainsKey(subscriptionId))
@@ -157,23 +154,21 @@ namespace Plus.HabboHotel.Permissions
             Log.Info("Loaded " + _permissionSubscriptionRights.Count + " permissions subscription rights.");
         }
 
-        public bool TryGetGroup(int id, out PermissionGroup @group)
+        public bool TryGetGroup(int id, out PermissionGroup group)
         {
-            return _permissionGroups.TryGetValue(id, out @group);
+            return _permissionGroups.TryGetValue(id, out group);
         }
 
         public List<string> GetPermissionsForPlayer(Habbo player)
         {
             List<string> permissionSet = new List<string>();
 
-            List<string> permRights = null;
-            if (_permissionGroupRights.TryGetValue(player.Rank, out permRights))
+            if (_permissionGroupRights.TryGetValue(player.Rank, out List<string> permRights))
             {
                 permissionSet.AddRange(permRights);
             }
 
-            List<string> subscriptionRights = null;
-            if (_permissionSubscriptionRights.TryGetValue(player.VipRank, out subscriptionRights))
+            if (_permissionSubscriptionRights.TryGetValue(player.VipRank, out List<string> subscriptionRights))
             {
                 permissionSet.AddRange(subscriptionRights);
             }

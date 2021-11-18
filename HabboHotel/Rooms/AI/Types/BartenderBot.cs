@@ -10,7 +10,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 {
     class BartenderBot : BotAI
     {
-        private int _virtualId;
+        private readonly int _virtualId;
         private int _actionTimer;
         private int _speechTimer;
 
@@ -129,7 +129,6 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 
             if (_actionTimer <= 0)
             {
-                Point nextCoord;
                 switch (GetBotData().WalkingMode.ToLower())
                 {
                     default:
@@ -183,7 +182,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         }
                         else if (GetBotData().TargetUser == 0)
                         {
-                            nextCoord = GetRoom().GetGameMap().GetRandomWalkableSquare();
+                            Point nextCoord = GetRoom().GetGameMap().GetRandomWalkableSquare();
                             GetRoomUser().MoveTo(nextCoord.X, nextCoord.Y);
                         }
                         break;

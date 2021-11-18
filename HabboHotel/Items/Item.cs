@@ -47,9 +47,9 @@ namespace Plus.HabboHotel.Items
         private bool _updateNeeded;
 
         private Room _room;
-        private static Random _random = new();
+        private static readonly Random _random = new();
 
-        public Item(int id, int roomId, int baseItem, string extraData, int x, int y, double z, int rot, int userid, int group, int limitedNumber, int limitedStack, string wallCoord, Room room = null)
+        public Item(int id, int roomId, int baseItem, string extraData, int x, int y, double z, int rot, int userId, int group, int limitedNumber, int limitedStack, string wallCoord, Room room = null)
         {
             if (PlusEnvironment.GetGame().GetItemManager().GetItem(baseItem, out ItemData data))
             {
@@ -74,23 +74,23 @@ namespace Plus.HabboHotel.Items
                 InteractionCount = 0;
                 Value = 0;
 
-                UserId = userid;
-                Username = PlusEnvironment.GetUsernameById(userid);
+                UserId = userId;
+                Username = PlusEnvironment.GetUsernameById(userId);
                 
                 LimitedNo = limitedNumber;
                 LimitedTot = limitedStack;
 
                 switch (GetBaseItem().InteractionType)
                 {
-                    case InteractionType.TELEPORT:
+                    case InteractionType.Teleport:
                         RequestUpdate(0, true);
                         break;
 
-                    case InteractionType.HOPPER:
+                    case InteractionType.Hopper:
                         RequestUpdate(0, true);
                         break;
 
-                    case InteractionType.ROLLER:
+                    case InteractionType.Roller:
                         IsRoller = true;
                         if (roomId > 0)
                         {
@@ -98,39 +98,39 @@ namespace Plus.HabboHotel.Items
                         }
                         break;
 
-                    case InteractionType.banzaiscoreblue:
-                    case InteractionType.footballcounterblue:
-                    case InteractionType.banzaigateblue:
-                    case InteractionType.FREEZE_BLUE_GATE:
-                    case InteractionType.freezebluecounter:
+                    case InteractionType.BanzaiScoreBlue:
+                    case InteractionType.FootballCounterBlue:
+                    case InteractionType.BanzaiGateBlue:
+                    case InteractionType.FreezeBlueGate:
+                    case InteractionType.FreezeBlueCounter:
                         Team = Team.Blue;
                         break;
 
-                    case InteractionType.banzaiscoregreen:
-                    case InteractionType.footballcountergreen:
-                    case InteractionType.banzaigategreen:
-                    case InteractionType.freezegreencounter:
-                    case InteractionType.FREEZE_GREEN_GATE:
+                    case InteractionType.BanzaiScoreGreen:
+                    case InteractionType.FootballCounterGreen:
+                    case InteractionType.BanzaiGateGreen:
+                    case InteractionType.FreezeGreenCounter:
+                    case InteractionType.FreezeGreenGate:
                         Team = Team.Green;
                         break;
 
-                    case InteractionType.banzaiscorered:
-                    case InteractionType.footballcounterred:
-                    case InteractionType.banzaigatered:
-                    case InteractionType.freezeredcounter:
-                    case InteractionType.FREEZE_RED_GATE:
+                    case InteractionType.BanzaiScoreRed:
+                    case InteractionType.FootballCounterRed:
+                    case InteractionType.BanzaiGateRed:
+                    case InteractionType.FreezeRedCounter:
+                    case InteractionType.FreezeRedGate:
                         Team = Team.Red;
                         break;
 
-                    case InteractionType.banzaiscoreyellow:
-                    case InteractionType.footballcounteryellow:
-                    case InteractionType.banzaigateyellow:
-                    case InteractionType.freezeyellowcounter:
-                    case InteractionType.FREEZE_YELLOW_GATE:
+                    case InteractionType.BanzaiScoreYellow:
+                    case InteractionType.FootballCounterYellow:
+                    case InteractionType.BanzaiGateYellow:
+                    case InteractionType.FreezeYellowCounter:
+                    case InteractionType.FreezeYellowGate:
                         Team = Team.Yellow;
                         break;
 
-                    case InteractionType.banzaitele:
+                    case InteractionType.BanzaiTele:
                         {
                             ExtraData = "";
                             break;
@@ -351,81 +351,81 @@ namespace Plus.HabboHotel.Items
 
                 switch (GetBaseItem().InteractionType)
                 {
-                    case InteractionType.GATE:
+                    case InteractionType.Gate:
                         return new InteractorGate();
 
-                    case InteractionType.TELEPORT:
+                    case InteractionType.Teleport:
                         return new InteractorTeleport();
 
-                    case InteractionType.HOPPER:
+                    case InteractionType.Hopper:
                         return new InteractorHopper();
 
-                    case InteractionType.BOTTLE:
+                    case InteractionType.Bottle:
                         return new InteractorSpinningBottle();
 
-                    case InteractionType.DICE:
+                    case InteractionType.Dice:
                         return new InteractorDice();
 
-                    case InteractionType.HABBO_WHEEL:
+                    case InteractionType.HabboWheel:
                         return new InteractorHabboWheel();
 
-                    case InteractionType.LOVE_SHUFFLER:
+                    case InteractionType.LoveShuffler:
                         return new InteractorLoveShuffler();
 
-                    case InteractionType.ONE_WAY_GATE:
+                    case InteractionType.OneWayGate:
                         return new InteractorOneWayGate();
 
-                    case InteractionType.ALERT:
+                    case InteractionType.Alert:
                         return new InteractorAlert();
 
-                    case InteractionType.VENDING_MACHINE:
+                    case InteractionType.VendingMachine:
                         return new InteractorVendor();
 
-                    case InteractionType.SCOREBOARD:
+                    case InteractionType.Scoreboard:
                         return new InteractorScoreboard();
 
-                    case InteractionType.PUZZLE_BOX:
+                    case InteractionType.PuzzleBox:
                         return new InteractorPuzzleBox();
 
-                    case InteractionType.MANNEQUIN:
+                    case InteractionType.Mannequin:
                         return new InteractorMannequin();
 
-                    case InteractionType.banzaicounter:
+                    case InteractionType.BanzaiCounter:
                         return new InteractorBanzaiTimer();
 
-                    case InteractionType.freezetimer:
+                    case InteractionType.FreezeTimer:
                         return new InteractorFreezeTimer();
 
-                    case InteractionType.FREEZE_TILE_BLOCK:
-                    case InteractionType.FREEZE_TILE:
+                    case InteractionType.FreezeTileBlock:
+                    case InteractionType.FreezeTile:
                         return new InteractorFreezeTile();
 
-                    case InteractionType.footballcounterblue:
-                    case InteractionType.footballcountergreen:
-                    case InteractionType.footballcounterred:
-                    case InteractionType.footballcounteryellow:
+                    case InteractionType.FootballCounterBlue:
+                    case InteractionType.FootballCounterGreen:
+                    case InteractionType.FootballCounterRed:
+                    case InteractionType.FootballCounterYellow:
                         return new InteractorScoreCounter();
 
-                    case InteractionType.banzaiscoreblue:
-                    case InteractionType.banzaiscoregreen:
-                    case InteractionType.banzaiscorered:
-                    case InteractionType.banzaiscoreyellow:
+                    case InteractionType.BanzaiScoreBlue:
+                    case InteractionType.BanzaiScoreGreen:
+                    case InteractionType.BanzaiScoreRed:
+                    case InteractionType.BanzaiScoreYellow:
                         return new InteractorBanzaiScoreCounter();
 
-                    case InteractionType.WF_FLOOR_SWITCH_1:
-                    case InteractionType.WF_FLOOR_SWITCH_2:
+                    case InteractionType.WfFloorSwitch1:
+                    case InteractionType.WfFloorSwitch2:
                         return new InteractorSwitch();
 
-                    case InteractionType.LOVELOCK:
+                    case InteractionType.LoveLock:
                         return new InteractorLoveLock();
 
-                    case InteractionType.CANNON:
+                    case InteractionType.Cannon:
                         return new InteractorCannon();
 
-                    case InteractionType.COUNTER:
+                    case InteractionType.Counter:
                         return new InteractorCounter();
 
-                    case InteractionType.NONE:
+                    case InteractionType.None:
                     default:
                         return new InteractorGenericSwitch();
                 }
@@ -438,9 +438,9 @@ namespace Plus.HabboHotel.Items
             {
                 switch (GetBaseItem().InteractionType)
                 {
-                    case InteractionType.WIRED_EFFECT:
-                    case InteractionType.WIRED_TRIGGER:
-                    case InteractionType.WIRED_CONDITION:
+                    case InteractionType.WiredEffect:
+                    case InteractionType.WiredTrigger:
+                    case InteractionType.WiredCondition:
                         return true;
                 }
 
@@ -476,7 +476,7 @@ namespace Plus.HabboHotel.Items
                     switch (GetBaseItem().InteractionType)
                     {
                         #region Group Gates
-                        case InteractionType.GUILD_GATE:
+                        case InteractionType.GuildGate:
                             {
                                 if (ExtraData == "1")
                                 {
@@ -495,7 +495,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Item Effects
-                        case InteractionType.EFFECT:
+                        case InteractionType.Effect:
                             {
                                 if (ExtraData == "1")
                                 {
@@ -514,7 +514,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region One way gates
-                        case InteractionType.ONE_WAY_GATE:
+                        case InteractionType.OneWayGate:
 
                             user = null;
 
@@ -558,7 +558,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region VIP Gate
-                        case InteractionType.GATE_VIP:
+                        case InteractionType.GateVip:
 
                             user = null;
 
@@ -617,7 +617,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Hopper
-                        case InteractionType.HOPPER:
+                        case InteractionType.Hopper:
                             {
                                 user = null;
                                 user2 = null;
@@ -644,7 +644,7 @@ namespace Plus.HabboHotel.Items
                                                 int roomHopId = ItemHopperFinder.GetAHopper(user.RoomId);
                                                 int nextHopperId = ItemHopperFinder.GetHopperId(roomHopId);
 
-                                                if (!user.IsBot && user != null && user.GetClient() != null &&
+                                                if (!user.IsBot && user.GetClient() != null &&
                                                     user.GetClient().GetHabbo() != null)
                                                 {
                                                     user.GetClient().GetHabbo().IsHopping = true;
@@ -749,7 +749,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Teleports
-                        case InteractionType.TELEPORT:
+                        case InteractionType.Teleport:
                             {
                                 user = null;
                                 user2 = null;
@@ -930,14 +930,14 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Bottle
-                        case InteractionType.BOTTLE:
+                        case InteractionType.Bottle:
                             ExtraData = RandomNumber.GenerateNewRandom(0, 7).ToString();
                             UpdateState();
                             break;
                         #endregion
 
                         #region Dice
-                        case InteractionType.DICE:
+                        case InteractionType.Dice:
                             {
                                 string[] numbers = new string[] { "1", "2", "3", "4", "5", "6" };
                                 if (ExtraData == "-1")
@@ -948,14 +948,14 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Habbo Wheel
-                        case InteractionType.HABBO_WHEEL:
+                        case InteractionType.HabboWheel:
                             ExtraData = RandomNumber.GenerateRandom(1, 10).ToString();
                             UpdateState();
                             break;
                         #endregion
 
                         #region Love Shuffler
-                        case InteractionType.LOVE_SHUFFLER:
+                        case InteractionType.LoveShuffler:
 
                             if (ExtraData == "0")
                             {
@@ -972,7 +972,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Alert
-                        case InteractionType.ALERT:
+                        case InteractionType.Alert:
                             if (ExtraData == "1")
                             {
                                 ExtraData = "0";
@@ -982,7 +982,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Vending Machine
-                        case InteractionType.VENDING_MACHINE:
+                        case InteractionType.VendingMachine:
 
                             if (ExtraData == "1")
                             {
@@ -1006,7 +1006,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Scoreboard
-                        case InteractionType.SCOREBOARD:
+                        case InteractionType.Scoreboard:
                             {
                                 if (string.IsNullOrEmpty(ExtraData))
                                     break;
@@ -1045,7 +1045,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Banzai Counter
-                        case InteractionType.banzaicounter:
+                        case InteractionType.BanzaiCounter:
                             {
                                 if (string.IsNullOrEmpty(ExtraData))
                                     break;
@@ -1091,7 +1091,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Banzai Tele
-                        case InteractionType.banzaitele:
+                        case InteractionType.BanzaiTele:
                             {
                                 ExtraData = string.Empty;
                                 UpdateState();
@@ -1100,7 +1100,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Banzai Floor
-                        case InteractionType.banzaifloor:
+                        case InteractionType.BanzaiFloor:
                             {
                                 if (Value == 3)
                                 {
@@ -1157,7 +1157,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Banzai Puck
-                        case InteractionType.banzaipuck:
+                        case InteractionType.BanzaiPuck:
                             {
                                 if (InteractionCount > 4)
                                 {
@@ -1175,13 +1175,13 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Freeze Tile
-                        case InteractionType.FREEZE_TILE:
+                        case InteractionType.FreezeTile:
                             {
                                 if (InteractingUser > 0)
                                 {
                                     ExtraData = "11000";
                                     UpdateState(false, true);
-                                    GetRoom().GetFreeze().onFreezeTiles(this, FreezePowerUp);
+                                    GetRoom().GetFreeze().OnFreezeTiles(this, FreezePowerUp);
                                     InteractingUser = 0;
                                     InteractionCountHelper = 0;
                                 }
@@ -1190,7 +1190,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Football Counter
-                        case InteractionType.COUNTER:
+                        case InteractionType.Counter:
                             {
                                 if (string.IsNullOrEmpty(ExtraData))
                                     break;
@@ -1235,7 +1235,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Freeze Timer
-                        case InteractionType.freezetimer:
+                        case InteractionType.FreezeTimer:
                             {
                                 if (string.IsNullOrEmpty(ExtraData))
                                     break;
@@ -1280,7 +1280,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Pressure Pad
-                        case InteractionType.PRESSURE_PAD:
+                        case InteractionType.PressurePad:
                             {
                                 ExtraData = "1";
                                 UpdateState();
@@ -1289,9 +1289,9 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Wired
-                        case InteractionType.WIRED_EFFECT:
-                        case InteractionType.WIRED_TRIGGER:
-                        case InteractionType.WIRED_CONDITION:
+                        case InteractionType.WiredEffect:
+                        case InteractionType.WiredTrigger:
+                        case InteractionType.WiredCondition:
                             {
                                 if (ExtraData == "1")
                                 {
@@ -1303,7 +1303,7 @@ namespace Plus.HabboHotel.Items
                         #endregion
 
                         #region Cannon
-                        case InteractionType.CANNON:
+                        case InteractionType.Cannon:
                             {
                                 if (ExtraData != "1")
                                     break;
@@ -1526,7 +1526,7 @@ namespace Plus.HabboHotel.Items
             if (user == null || user.GetClient() == null || user.GetClient().GetHabbo() == null)
                 return;
 
-            if (GetBaseItem().InteractionType == InteractionType.TENT || GetBaseItem().InteractionType == InteractionType.TENT_SMALL)
+            if (GetBaseItem().InteractionType == InteractionType.Tent || GetBaseItem().InteractionType == InteractionType.TentSmall)
             {
                 GetRoom().AddUserToTent(Id, user);
             }
@@ -1540,7 +1540,7 @@ namespace Plus.HabboHotel.Items
             if (user == null || user.GetClient() == null || user.GetClient().GetHabbo() == null)
                 return;
 
-            if (GetBaseItem().InteractionType == InteractionType.TENT || GetBaseItem().InteractionType == InteractionType.TENT_SMALL)
+            if (GetBaseItem().InteractionType == InteractionType.Tent || GetBaseItem().InteractionType == InteractionType.TentSmall)
                 GetRoom().RemoveUserFromTent(Id, user);
 
             GetRoom().GetWired().TriggerEvent(WiredBoxType.TriggerWalkOffFurni, user.GetClient().GetHabbo(), this);

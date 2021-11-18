@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
                 if (item == null)
                     continue;
 
-                if (item.GetBaseItem().InteractionType == InteractionType.MOODLIGHT)
+                if (item.GetBaseItem().InteractionType == InteractionType.Moodlight)
                 {
                     using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                     {

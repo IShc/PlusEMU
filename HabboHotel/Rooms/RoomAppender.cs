@@ -26,22 +26,22 @@ namespace Plus.HabboHotel.Rooms
                 packet.WriteString(tag);
             }
 
-            int RoomType = 0;
+            int roomType = 0;
             if (data.Group != null)
-                RoomType += 2;
+                roomType += 2;
             if (data.Promotion != null)
-                RoomType += 4;
+                roomType += 4;
             if (data.Type == "private")
-                RoomType += 8;
+                roomType += 8;
             if (data.AllowPets == 1)
-                RoomType += 16;
+                roomType += 16;
             
             if (PlusEnvironment.GetGame().GetNavigator().TryGetFeaturedRoom(data.Id, out FeaturedRoom item))
             {
-                RoomType += 1;
+                roomType += 1;
             }
 
-            packet.WriteInteger(RoomType);
+            packet.WriteInteger(roomType);
 
             if (item != null)
             {

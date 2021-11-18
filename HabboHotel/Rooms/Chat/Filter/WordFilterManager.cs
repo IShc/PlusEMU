@@ -9,7 +9,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Filter
 {
     public sealed class WordFilterManager
     {
-        private List<WordFilter> _filteredWords;
+        private readonly List<WordFilter> _filteredWords;
 
         public WordFilterManager()
         {

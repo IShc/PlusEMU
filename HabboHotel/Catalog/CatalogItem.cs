@@ -4,22 +4,22 @@ namespace Plus.HabboHotel.Catalog
 {
     public class CatalogItem
     {
-        public int Id { get; private set; }
-        public int ItemId { get; private set; }
-        public ItemData Data { get; private set; }
-        public int Amount { get; private set; }
-        public int CostCredits { get; private set; }
-        public string ExtraData { get; private set; }
-        public bool HaveOffer { get; private set; }
-        public bool IsLimited { get; private set; }
-        public string Name { get; private set; }
-        public int PageId { get; private set; }
-        public int CostPixels { get; private set; }
-        public int LimitedEditionStack { get; private set; }
+        public int Id { get; }
+        public int ItemId { get; }
+        public ItemData Data { get; }
+        public int Amount { get; }
+        public int CostCredits { get; }
+        public string ExtraData { get; }
+        public bool HaveOffer { get; }
+        public bool IsLimited { get; }
+        public string Name { get; }
+        public int PageId { get; }
+        public int CostPixels { get; }
+        public int LimitedEditionStack { get; }
         public int LimitedEditionSells { get; set; }
-        public int CostDiamonds { get; private set; }
-        public string Badge { get; private set; }
-        public int OfferId { get; private set; }
+        public int CostDiamonds { get; }
+        public string Badge { get; }
+        public int OfferId { get; }
 
         public CatalogItem(int id, int itemId, ItemData data, string catalogName, int pageId, int costCredits, int costPixels,
             int costDiamonds, int amount, int limitedEditionSells, int limitedEditionStack, bool hasOffer, string extraData, string badge, int offerId)

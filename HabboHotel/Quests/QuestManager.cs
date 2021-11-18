@@ -14,10 +14,10 @@ namespace Plus.HabboHotel.Quests
 {
     public class QuestManager
     {
-        private static readonly ILog log = LogManager.GetLogger(typeof(QuestManager));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(QuestManager));
 
-        private Dictionary<int, Quest> _quests;
-        private Dictionary<string, int> _questCount;
+        private readonly Dictionary<int, Quest> _quests;
+        private readonly Dictionary<string, int> _questCount;
 
         public QuestManager()
         {
@@ -28,7 +28,7 @@ namespace Plus.HabboHotel.Quests
         public void Init()
         {
             if (_quests.Count > 0)
-            _quests.Clear();
+                _quests.Clear();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -57,13 +57,12 @@ namespace Plus.HabboHotel.Quests
                 }
             }
 
-            log.Info("Quest Manager -> LOADED");
+            Log.Info("Quest Manager -> LOADED");
         }
 
         private void AddToCounter(string category)
         {
-            int count = 0;
-            if (_questCount.TryGetValue(category, out count))
+            if (_questCount.TryGetValue(category, out int count))
             {
                 _questCount[category] = count + 1;
             }
@@ -106,18 +105,15 @@ namespace Plus.HabboHotel.Quests
             switch (type)
             {
                 default:
-
                     totalProgress++;
 
                     if (totalProgress >= quest.GoalData)
                     {
                         completeQuest = true;
                     }
-
                     break;
-
+                    
                 case QuestType.ExploreFindItem:
-
                     if (data != quest.GoalData)
                         return;
 
@@ -126,7 +122,6 @@ namespace Plus.HabboHotel.Quests
                     break;
 
                 case QuestType.StandOn:
-
                     if (data != quest.GoalData)
                         return;
 
@@ -141,7 +136,6 @@ namespace Plus.HabboHotel.Quests
                     break;
 
                 case QuestType.GiveItem:
-
                     if (data != quest.GoalData)
                         return;
 
@@ -189,56 +183,56 @@ namespace Plus.HabboHotel.Quests
 
         public void GetList(GameClient session, ClientPacket message)
         {
-            Dictionary<string, int> UserQuestGoals = new Dictionary<string, int>();
-            Dictionary<string, Quest> UserQuests = new Dictionary<string, Quest>();
+            Dictionary<string, int> userQuestGoals = new Dictionary<string, int>();
+            Dictionary<string, Quest> userQuests = new Dictionary<string, Quest>();
 
             foreach (Quest quest in _quests.Values.ToList())
             {
                 if (quest.Category.Contains("xmas2012"))
                     continue;
 
-                if (!UserQuestGoals.ContainsKey(quest.Category))
+                if (!userQuestGoals.ContainsKey(quest.Category))
                 {
-                    UserQuestGoals.Add(quest.Category, 1);
-                    UserQuests.Add(quest.Category, null);
+                    userQuestGoals.Add(quest.Category, 1);
+                    userQuests.Add(quest.Category, null);
                 }
 
-                if (quest.Number >= UserQuestGoals[quest.Category])
+                if (quest.Number >= userQuestGoals[quest.Category])
                 {
-                    int UserProgress = session.GetHabbo().GetQuestProgress(quest.Id);
+                    int userProgress = session.GetHabbo().GetQuestProgress(quest.Id);
 
-                    if (session.GetHabbo().GetStats().QuestId != quest.Id && UserProgress >= quest.GoalData)
+                    if (session.GetHabbo().GetStats().QuestId != quest.Id && userProgress >= quest.GoalData)
                     {
-                        UserQuestGoals[quest.Category] = quest.Number + 1;
+                        userQuestGoals[quest.Category] = quest.Number + 1;
                     }
                 }
             }
 
             foreach (Quest quest in _quests.Values.ToList())
             {
-                foreach (var Goal in UserQuestGoals)
+                foreach (var goal in userQuestGoals)
                 {
                     if (quest.Category.Contains("xmas2012"))
                         continue;
 
-                    if (quest.Category == Goal.Key && quest.Number == Goal.Value)
+                    if (quest.Category == goal.Key && quest.Number == goal.Value)
                     {
-                        UserQuests[Goal.Key] = quest;
+                        userQuests[goal.Key] = quest;
                         break;
                     }
                 }
             }
 
-            session.SendPacket(new QuestListComposer(session, (message != null), UserQuests));
+            session.SendPacket(new QuestListComposer(session, (message != null), userQuests));
         }
 
         public void QuestReminder(GameClient session, int questId)
         {
-            Quest Quest = GetQuest(questId);
-            if (Quest == null)
+            Quest quest = GetQuest(questId);
+            if (quest == null)
                 return;
 
-            session.SendPacket(new QuestStartedComposer(session, Quest));
+            session.SendPacket(new QuestStartedComposer(session, quest));
         }
     }
 }

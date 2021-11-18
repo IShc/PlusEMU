@@ -12,11 +12,11 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public Habbo Habbo { get; }
         public DateTime Origin { get; }
 
-        public GroupInfoComposer(Group @group, GameClient session, bool newWindow = false)
+        public GroupInfoComposer(Group group, GameClient session, bool newWindow = false)
             : base(ServerPacketHeader.GroupInfoMessageComposer)
         {
-            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(@group.CreateTime);
-            Group = @group;
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(group.CreateTime);
+            Group = group;
             NewWindow = newWindow;
             Habbo = session.GetHabbo();
         }

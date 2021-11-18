@@ -73,17 +73,17 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             #region Create the extradata
                 switch (item.Data.InteractionType)
             {
-                case InteractionType.NONE:
+                case InteractionType.None:
                     extraData = "";
                     break;
 
-                case InteractionType.GUILD_ITEM:
-                case InteractionType.GUILD_GATE:
+                case InteractionType.GuildItem:
+                case InteractionType.GuildGate:
                     break;
 
                 #region Pet handling
 
-                case InteractionType.PET:
+                case InteractionType.Pet:
                     try
                     {
                         string[] bits = extraData.Split('\n');
@@ -112,9 +112,9 @@ namespace Plus.Communication.Packets.Incoming.Catalog
 
                 #endregion
 
-                case InteractionType.FLOOR:
-                case InteractionType.WALLPAPER:
-                case InteractionType.LANDSCAPE:
+                case InteractionType.Floor:
+                case InteractionType.Wallpaper:
+                case InteractionType.Landscape:
 
                     double number = 0;
 
@@ -130,23 +130,23 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                     extraData = number.ToString(CultureInfo.CurrentCulture).Replace(',', '.');
                     break; // maintain extra data // todo: validate
 
-                case InteractionType.POSTIT:
+                case InteractionType.PostIt:
                     extraData = "FFFF33";
                     break;
 
-                case InteractionType.MOODLIGHT:
+                case InteractionType.Moodlight:
                     extraData = "1,1,1,#000000,255";
                     break;
 
-                case InteractionType.TROPHY:
+                case InteractionType.Trophy:
                     extraData = session.GetHabbo().Username + Convert.ToChar(9) + DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + Convert.ToChar(9) + extraData;
                     break;
 
-                case InteractionType.MANNEQUIN:
+                case InteractionType.Mannequin:
                     extraData = "m" + Convert.ToChar(5) + ".ch-210-1321.lg-285-92" + Convert.ToChar(5) + "Default Mannequin";
                     break;
 
-                case InteractionType.BADGE_DISPLAY:
+                case InteractionType.BadgeDisplay:
                     if (!session.GetHabbo().GetBadgeComponent().HasBadge(extraData))
                     {
                         session.SendPacket(new BroadcastMessageAlertComposer("Oops, it appears that you do not own this badge."));
@@ -156,7 +156,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                     extraData = extraData + Convert.ToChar(9) + session.GetHabbo().Username + Convert.ToChar(9) + DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year;
                     break;
 
-                case InteractionType.BADGE:
+                case InteractionType.Badge:
                     {
                         if (session.GetHabbo().GetBadgeComponent().HasBadge(item.Data.ItemName))
                         {
@@ -242,9 +242,9 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                             }
                             break;
 
-                        case InteractionType.GUILD_GATE:
-                        case InteractionType.GUILD_ITEM:
-                        case InteractionType.GUILD_FORUM:
+                        case InteractionType.GuildGate:
+                        case InteractionType.GuildItem:
+                        case InteractionType.GuildForum:
                             if (amountPurchase > 1)
                             {
                                 List<Item> items = ItemFactory.CreateMultipleItems(item.Data, session.GetHabbo(), extraData, amountPurchase, Convert.ToInt32(extraData));
@@ -265,8 +265,8 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                             }
                             break;
 
-                        case InteractionType.ARROW:
-                        case InteractionType.TELEPORT:
+                        case InteractionType.Arrow:
+                        case InteractionType.Teleport:
                             for (int i = 0; i < amountPurchase; i++)
                             {
                                 List<Item> teleItems = ItemFactory.CreateTeleporterItems(item.Data, session.GetHabbo());
@@ -278,7 +278,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                             }
                             break;
 
-                        case InteractionType.MOODLIGHT:
+                        case InteractionType.Moodlight:
                             {
                                 if (amountPurchase > 1)
                                 {
@@ -306,7 +306,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                             }
                             break;
 
-                        case InteractionType.TONER:
+                        case InteractionType.Toner:
                             {
                                 if (amountPurchase > 1)
                                 {
@@ -334,7 +334,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                             }
                             break;
 
-                        case InteractionType.DEAL:
+                        case InteractionType.Deal:
                             {
                                 if (PlusEnvironment.GetGame().GetCatalog().TryGetDeal(item.Data.BehaviourData, out CatalogDeal deal))
                                 {
