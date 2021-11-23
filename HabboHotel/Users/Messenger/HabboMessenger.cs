@@ -125,8 +125,7 @@ namespace Plus.HabboHotel.Users.Messenger
                 if (notification)
                 {
                     GameClient userclient = GetClient();
-                    if (userclient != null)
-                        userclient.SendPacket(SerializeUpdate(_friends[userid]));
+                    userclient?.SendPacket(SerializeUpdate(_friends[userid]));
                 }
             }
         }

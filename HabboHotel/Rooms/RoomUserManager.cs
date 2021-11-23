@@ -144,10 +144,7 @@ namespace Plus.HabboHotel.Rooms
             if (_room == null)
                 return false;
 
-            if (session == null)
-                return false;
-
-            if (session.GetHabbo().CurrentRoom == null)
+            if (session?.GetHabbo().CurrentRoom == null)
                 return false;
             
             RoomUser user = new(session.GetHabbo().Id, _room.RoomId, _primaryPrivateUserId++, _room);
@@ -859,8 +856,7 @@ namespace Plus.HabboHotel.Rooms
                                 if (!user.IsBot && user.RidingHorse && user.IsPet == false)
                                 {
                                     RoomUser horse = GetRoomUserByVirtualId(user.HorseId);
-                                    if (horse != null)
-                                        horse.SetStatus("mv", nextX + "," + nextY + "," + TextHandling.GetString(nextZ));
+                                    horse?.SetStatus("mv", nextX + "," + nextY + "," + TextHandling.GetString(nextZ));
 
                                     user.SetStatus("mv", +nextX + "," + nextY + "," + TextHandling.GetString(nextZ + 1));
 

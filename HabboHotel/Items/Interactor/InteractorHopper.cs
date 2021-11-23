@@ -49,10 +49,7 @@ namespace Plus.HabboHotel.Items.Interactor
             {
                 RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser);
 
-                if (user != null)
-                {
-                    user.UnlockWalking();
-                }
+                user?.UnlockWalking();
 
                 item.InteractingUser = 0;
             }

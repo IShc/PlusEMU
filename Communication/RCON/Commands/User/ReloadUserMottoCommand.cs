@@ -35,14 +35,11 @@ namespace Plus.Communication.Rcon.Commands.User
 
             //We are in a room, let's try to run the packets.
             Room room = client.GetHabbo().CurrentRoom;
-            if (room != null)
+            RoomUser user = room?.GetRoomUserManager().GetRoomUserByHabbo(client.GetHabbo().Id);
+            if (user != null)
             {
-                RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(client.GetHabbo().Id);
-                if (user != null)
-                {
-                    room.SendPacket(new UserChangeComposer(user, false));
-                    return true;
-                }
+                room.SendPacket(new UserChangeComposer(user, false));
+                return true;
             }
 
             return false;

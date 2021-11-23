@@ -9,10 +9,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
         public void Parse(GameClient session, ClientPacket packet)
         {
             Room room = session.GetHabbo().CurrentRoom;
-            if (room == null)
-                return;
 
-            Item item = room.GetRoomItemHandler().GetItem(packet.PopInt());
+            Item item = room?.GetRoomItemHandler().GetItem(packet.PopInt());
             if (item == null)
                 return;
 

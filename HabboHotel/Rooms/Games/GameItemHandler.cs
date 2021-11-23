@@ -129,10 +129,8 @@ namespace Plus.HabboHotel.Rooms.Games
 
         public void Dispose()
         {
-            if (_banzaiTeleports != null)
-                _banzaiTeleports.Clear();
-            if (_banzaiPyramids != null)
-                _banzaiPyramids.Clear();
+            _banzaiTeleports?.Clear();
+            _banzaiPyramids?.Clear();
             _banzaiPyramids = null;
             _banzaiTeleports = null;
             _room = null;

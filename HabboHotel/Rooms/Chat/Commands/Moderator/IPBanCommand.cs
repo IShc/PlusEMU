@@ -57,8 +57,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
             PlusEnvironment.GetGame().GetModerationManager().BanUser(session.GetHabbo().Username, ModerationBanType.Username, habbo.Username, reason, expire);
 
             GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(username);
-            if (targetClient != null)
-                targetClient.Disconnect();
+            targetClient?.Disconnect();
 
 
             session.SendWhisper("Success, you have IP and account banned the user '" + username + "' for '" + reason + "'!");

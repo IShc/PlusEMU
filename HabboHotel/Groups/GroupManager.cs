@@ -165,10 +165,7 @@ namespace Plus.HabboHotel.Groups
             if (_groups.ContainsKey(id))
                 _groups.TryRemove(id, out group);
 
-            if (group != null)
-            {
-                group.Dispose();
-            }
+            group?.Dispose();
         }
 
         public List<Group> GetGroupsForUser(int userId)

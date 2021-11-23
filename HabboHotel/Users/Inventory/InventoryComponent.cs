@@ -94,23 +94,18 @@ namespace Plus.HabboHotel.Users.Inventory
             _floorItems.Clear();
             _wallItems.Clear();
 
-            if (_client != null)
-                _client.SendPacket(new FurniListUpdateComposer());
+            _client?.SendPacket(new FurniListUpdateComposer());
         }
 
         public void SetIdleState()
         {
-            if (_botItems != null)
-                _botItems.Clear();
+            _botItems?.Clear();
 
-            if (_petsItems != null)
-                _petsItems.Clear();
+            _petsItems?.Clear();
 
-            if (_floorItems != null)
-                _floorItems.Clear();
+            _floorItems?.Clear();
 
-            if (_wallItems != null)
-                _wallItems.Clear();
+            _wallItems?.Clear();
 
             _client = null;
         }
@@ -120,10 +115,7 @@ namespace Plus.HabboHotel.Users.Inventory
             if (fromDatabase)
                 Init();
 
-            if (_client != null)
-            {
-                _client.SendPacket(new FurniListUpdateComposer());
-            }
+            _client?.SendPacket(new FurniListUpdateComposer());
         }
 
         public Item GetItem(int id)

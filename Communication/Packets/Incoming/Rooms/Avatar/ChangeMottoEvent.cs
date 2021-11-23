@@ -58,10 +58,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Avatar
             if (session.GetHabbo().InRoom)
             {
                 Room room = session.GetHabbo().CurrentRoom;
-                if (room == null)
-                    return;
 
-                RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+                RoomUser user = room?.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
                 if (user == null || user.GetClient() == null)
                     return;
 

@@ -319,8 +319,8 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                         }
                     }
                 }
-                if (_field != null)
-                    _field.Dispose();
+
+                _field?.Dispose();
             }
         }
 
@@ -476,8 +476,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             if (_floorMap != null)
                 Array.Clear(_floorMap, 0, _floorMap.Length);
 
-            if (_field != null)
-                _field.Dispose();
+            _field?.Dispose();
 
             _room = null;
             _banzaiTiles = null;

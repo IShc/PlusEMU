@@ -212,10 +212,7 @@ namespace Plus.HabboHotel.Rooms
                 }
                 else if (item.IsWired)
                 {
-                    if (_room == null)
-                        continue;
-
-                    if (_room.GetWired() == null)
+                    if (_room?.GetWired() == null)
                         continue;
 
                     _room.GetWired().LoadWiredBox(item);
@@ -634,8 +631,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 if (_floorItems.ContainsKey(item.Id))
                 {
-                    if (session != null)
-                        session.SendNotification(PlusEnvironment.GetLanguageManager().TryGetValue("room.item.already_placed"));
+                    session?.SendNotification(PlusEnvironment.GetLanguageManager().TryGetValue("room.item.already_placed"));
                     _room.GetGameMap().RemoveFromMap(item);
                     return true;
                 }

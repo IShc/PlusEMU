@@ -21,10 +21,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 return;
 
             Item item = session.GetHabbo().GetInventoryComponent().GetItem(packet.PopInt());
-            if (item == null)
-                return;
 
-            if (item.GetBaseItem() == null)
+            if (item?.GetBaseItem() == null)
                 return;
 
             string decorationKey = string.Empty;

@@ -56,8 +56,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             }
 
             GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(habbo.Username);
-            if (targetClient != null)
-                targetClient.Disconnect();
+            targetClient?.Disconnect();
         }
     }
 }

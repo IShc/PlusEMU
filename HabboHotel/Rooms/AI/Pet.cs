@@ -83,8 +83,7 @@ namespace Plus.HabboHotel.Rooms.AI
             {
                 Experience = 150000;
 
-                if (Room != null)
-                    Room.SendPacket(new AddExperiencePointsComposer(PetId, VirtualId, amount));
+                Room?.SendPacket(new AddExperiencePointsComposer(PetId, VirtualId, amount));
 
                 return;
             }

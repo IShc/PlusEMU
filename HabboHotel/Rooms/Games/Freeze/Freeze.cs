@@ -419,10 +419,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
 
         private void HandleUserFreeze(Point point)
         {
-            if (_room == null)
-                return;
-
-            RoomUser user = _room.GetGameMap().GetRoomUsers(point).FirstOrDefault();
+            RoomUser user = _room?.GetGameMap().GetRoomUsers(point).FirstOrDefault();
             if (user != null)
             {
                 if (user.IsWalking && user.SetX != point.X && user.SetY != point.Y)

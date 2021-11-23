@@ -19,10 +19,8 @@ namespace Plus.HabboHotel.Items.Interactor
                 return;
 
             Room room = session.GetHabbo().CurrentRoom;
-            if(room == null)
-                return;
 
-            RoomUser actor = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            RoomUser actor = room?.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (actor == null)
                 return;
 

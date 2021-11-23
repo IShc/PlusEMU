@@ -119,13 +119,13 @@ namespace Plus.HabboHotel.Achievements
             {
                 dbClient.SetQuery("REPLACE INTO `user_achievements` VALUES (@userId, @group, @newLevel, @newProgress)");
                 dbClient.AddParameter("userId", session.GetHabbo().Id);
-                dbClient.AddParameter("group", @group);
+                dbClient.AddParameter("group", group);
                 dbClient.AddParameter("newLevel", newLevel);
                 dbClient.AddParameter("newProgress", newProgress);
                 dbClient.RunQuery();
             }
 
-            session.SendPacket(new AchievementProgressedComposer(data, targetLevel, level, totalLevels, session.GetHabbo().GetAchievementData(@group)));
+            session.SendPacket(new AchievementProgressedComposer(data, targetLevel, level, totalLevels, session.GetHabbo().GetAchievementData(group)));
             return false;
         }
 

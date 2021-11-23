@@ -104,8 +104,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
                     if (!success)
                         return false;
 
-                    if (Instance != null)
-                        Instance.GetWired().OnEvent(effect.Item);
+                    Instance?.GetWired().OnEvent(effect.Item);
                 }
             }
 

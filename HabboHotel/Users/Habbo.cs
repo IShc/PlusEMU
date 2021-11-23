@@ -468,8 +468,7 @@ namespace Plus.HabboHotel.Users
 
             try
             {
-                if (_process != null)
-                    _process.Dispose();
+                _process?.Dispose();
             }
             catch { }
 
@@ -497,8 +496,7 @@ namespace Plus.HabboHotel.Users
 
         public void Dispose()
         {
-            if (_inventoryComponent != null)
-                _inventoryComponent.SetIdleState();
+            _inventoryComponent?.SetIdleState();
 
             if (InRoom && CurrentRoom != null)
                 CurrentRoom.GetRoomUserManager().RemoveUserFromRoom(_client, false);
@@ -509,14 +507,11 @@ namespace Plus.HabboHotel.Users
                 _messenger.Destroy();
             }
 
-            if (_fx != null)
-                _fx.Dispose();
+            _fx?.Dispose();
 
-            if (_clothing != null)
-                _clothing.Dispose();
+            _clothing?.Dispose();
 
-            if (_permissions != null)
-                _permissions.Dispose();
+            _permissions?.Dispose();
 
             if (_ignores != null)
                 _permissions.Dispose();

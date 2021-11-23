@@ -294,15 +294,12 @@ namespace Plus
                         if (_usersCached.ContainsKey(userId))
                             return _usersCached[userId];
                         UserData data = UserDataFactory.GetUserData(userId);
-                        if (data != null)
+                        Habbo generated = data?.User;
+                        if (generated != null)
                         {
-                            Habbo generated = data.User;
-                            if (generated != null)
-                            {
-                                generated.InitInformation(data);
-                                _usersCached.TryAdd(userId, generated);
-                                return generated;
-                            }
+                            generated.InitInformation(data);
+                            _usersCached.TryAdd(userId, generated);
+                            return generated;
                         }
                     }
                     catch { return null; }

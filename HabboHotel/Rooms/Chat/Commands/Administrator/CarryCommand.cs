@@ -20,10 +20,8 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
             }
 
             RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
-            if (user == null)
-                return;
 
-            user.CarryItem(itemId);
+            user?.CarryItem(itemId);
         }
     }
 }

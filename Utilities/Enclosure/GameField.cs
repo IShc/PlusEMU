@@ -255,8 +255,7 @@ namespace Plus.Utilities.Enclosure
         {
             _currentField = null;
 
-            if (_newEntries != null)
-                _newEntries.Clear();
+            _newEntries?.Clear();
         }
     }
 }

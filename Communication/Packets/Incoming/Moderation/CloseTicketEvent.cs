@@ -23,10 +23,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
                 return;
 
             GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(ticket.Sender.Id);
-            if (client != null)
-            {
-                client.SendPacket(new ModeratorSupportTicketResponseComposer(result));
-            }
+            client?.SendPacket(new ModeratorSupportTicketResponseComposer(result));
 
             if (result == 2)
             {

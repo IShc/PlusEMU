@@ -369,10 +369,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                     {
                         effect = session.GetHabbo().Effects().GetEffectNullable(item.Data.SpriteId);
 
-                        if (effect != null)
-                        {
-                            effect.AddToQuantity();
-                        }
+                        effect?.AddToQuantity();
                     }
                     else
                         effect = AvatarEffectFactory.CreateNullable(session.GetHabbo(), item.Data.SpriteId, 3600);

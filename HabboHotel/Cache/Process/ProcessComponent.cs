@@ -106,8 +106,7 @@ namespace Plus.HabboHotel.Cache.Process
                             if (data.CacheExpired())
                                 PlusEnvironment.RemoveFromCache(data.Id, out temp);
 
-                            if (temp != null)
-                                temp.Dispose();
+                            temp?.Dispose();
                         }
                         catch (Exception e)
                         {
@@ -147,8 +146,7 @@ namespace Plus.HabboHotel.Cache.Process
             // Dispose the timer to disable it.
             try
             {
-                if (_timer != null)
-                    _timer.Dispose();
+                _timer?.Dispose();
             }
             catch { }
 

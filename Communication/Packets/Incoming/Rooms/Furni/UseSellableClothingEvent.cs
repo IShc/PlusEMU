@@ -22,10 +22,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             int itemId = packet.PopInt();
 
             Item item = room.GetRoomItemHandler().GetItem(itemId);
-            if (item == null)
-                return;
 
-            if (item.Data == null)
+            if (item?.Data == null)
                 return;
 
             if (item.UserId != session.GetHabbo().Id)

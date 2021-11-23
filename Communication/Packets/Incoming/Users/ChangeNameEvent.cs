@@ -18,10 +18,8 @@ namespace Plus.Communication.Packets.Incoming.Users
                 return;
 
             Room room = session.GetHabbo().CurrentRoom;
-            if (room == null)
-                return;
 
-            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Username);
+            RoomUser user = room?.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Username);
             if (user == null)
                 return;
 

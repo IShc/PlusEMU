@@ -812,7 +812,7 @@ namespace Plus.HabboHotel.Items
                                                         if (user.TeleDelay == 0)
                                                         {
                                                             // Let's run the teleport delegate to take futher care of this.. WHY DARIO?!
-                                                            if (!user.IsBot && user != null && user.GetClient() != null &&
+                                                            if (!user.IsBot && user.GetClient() != null &&
                                                                 user.GetClient().GetHabbo() != null)
                                                             {
                                                                 user.GetClient().GetHabbo().IsTeleporting = true;

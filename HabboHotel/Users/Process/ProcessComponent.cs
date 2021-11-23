@@ -163,8 +163,7 @@ namespace Plus.HabboHotel.Users.Process
             // Dispose the timer to disable it.
             try
             {
-                if (_timer != null)
-                    _timer.Dispose();
+                _timer?.Dispose();
             }
             catch { }
 

@@ -220,8 +220,7 @@ namespace Plus.HabboHotel.GameClients
 
             if (!_disconnected)
             {
-                if (_channel != null)
-                    _channel.CloseAsync();
+                _channel?.CloseAsync();
                 _disconnected = true;
             }
         }

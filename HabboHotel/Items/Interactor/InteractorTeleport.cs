@@ -46,10 +46,7 @@ namespace Plus.HabboHotel.Items.Interactor
             {
                 RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser);
 
-                if (user != null)
-                {
-                    user.UnlockWalking();
-                }
+                user?.UnlockWalking();
 
                 item.InteractingUser = 0;
             }
@@ -58,10 +55,7 @@ namespace Plus.HabboHotel.Items.Interactor
             {
                 RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(item.InteractingUser2);
 
-                if (user != null)
-                {
-                    user.UnlockWalking();
-                }
+                user?.UnlockWalking();
 
                 item.InteractingUser2 = 0;
             }

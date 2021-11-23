@@ -305,7 +305,7 @@ namespace Plus.HabboHotel.Rooms
         {
             WordFilterList = new List<string>();
 
-            DataTable data = null;
+            DataTable data;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `room_filter` WHERE `room_id` = @roomid;");
@@ -457,8 +457,7 @@ namespace Plus.HabboHotel.Rooms
                 #region Game Item Cycle
                 try
                 {
-                    if (_gameItemHandler != null)
-                        _gameItemHandler.OnCycle();
+                    _gameItemHandler?.OnCycle();
                 }
                 catch (Exception e)
                 {
@@ -784,17 +783,10 @@ namespace Plus.HabboHotel.Rooms
                 if (WordFilterList.Count > 0)
                     WordFilterList.Clear();
 
-                if (_filterComponent != null)
-                    _filterComponent.Cleanup();
-
-                if (_wiredComponent != null)
-                    _wiredComponent.Cleanup();
-
-                if (_bansComponent != null)
-                    _bansComponent.Cleanup();
-
-                if (_tradingComponent != null)
-                    _tradingComponent.Cleanup();
+                _filterComponent?.Cleanup();
+                _wiredComponent?.Cleanup();
+                _bansComponent?.Cleanup();
+                _tradingComponent?.Cleanup();
             }
         }
     }

@@ -95,10 +95,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         private void TeleportUser(Habbo player)
         {
-            if (player == null)
-                return;
-
-            Room room = player.CurrentRoom;
+            Room room = player?.CurrentRoom;
             if (room == null)
                 return;
 

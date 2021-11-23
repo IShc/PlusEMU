@@ -15,10 +15,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.LoveLocks
             bool isConfirmed = packet.PopBoolean();
 
             Room room = session.GetHabbo().CurrentRoom;
-            if (room == null)
-                return;
 
-            Item item = room.GetRoomItemHandler().GetItem(pId);
+            Item item = room?.GetRoomItemHandler().GetItem(pId);
 
             if (item == null || item.GetBaseItem() == null || item.GetBaseItem().InteractionType != InteractionType.LoveLock)
                 return;

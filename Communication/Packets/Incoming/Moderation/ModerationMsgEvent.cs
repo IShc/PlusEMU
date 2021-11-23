@@ -13,10 +13,8 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             string message = packet.PopString();
 
             GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(userId);
-            if (client == null)
-                return;
 
-            client.SendNotification(message);
+            client?.SendNotification(message);
         }
     }
 }
