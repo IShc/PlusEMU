@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Furni
 {
-    class OpenGiftComposer : MessageComposer
+    internal class OpenGiftComposer : MessageComposer
     {
         public ItemData Data { get; }
         public string Text { get; }

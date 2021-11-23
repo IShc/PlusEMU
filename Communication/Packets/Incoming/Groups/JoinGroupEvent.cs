@@ -8,7 +8,7 @@ using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class JoinGroupEvent : IPacketEvent
+    internal class JoinGroupEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

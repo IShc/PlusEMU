@@ -183,8 +183,8 @@ namespace Plus.HabboHotel.Quests
 
         public void GetList(GameClient session, ClientPacket message)
         {
-            Dictionary<string, int> userQuestGoals = new Dictionary<string, int>();
-            Dictionary<string, Quest> userQuests = new Dictionary<string, Quest>();
+            Dictionary<string, int> userQuestGoals = new();
+            Dictionary<string, Quest> userQuests = new();
 
             foreach (Quest quest in _quests.Values.ToList())
             {

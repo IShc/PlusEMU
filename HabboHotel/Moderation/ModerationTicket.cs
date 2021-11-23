@@ -39,13 +39,12 @@ namespace Plus.HabboHotel.Moderation
         public int GetStatus(int id)
         {
             if (Moderator == null)
-                return 1;         
-            else if (Moderator.Id == id && !Answered)
+                return 1;
+            if (Moderator.Id == id && !Answered)
                 return 2;
-            else if (Answered)
+            if (Answered)
                 return 3;
-            else
-                return 3;           
+            return 3;
         }
     }
 }

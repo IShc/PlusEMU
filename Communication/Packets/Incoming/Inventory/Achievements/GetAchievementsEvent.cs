@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Achievements
 {
-    class GetAchievementsEvent : IPacketEvent
+    internal class GetAchievementsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

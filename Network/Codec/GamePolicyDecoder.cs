@@ -6,7 +6,7 @@ using DotNetty.Transport.Channels;
 
 namespace Plus.Network.Codec
 {
-    class GamePolicyDecoder : ByteToMessageDecoder
+    internal class GamePolicyDecoder : ByteToMessageDecoder
     {
         protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object> output)
         {

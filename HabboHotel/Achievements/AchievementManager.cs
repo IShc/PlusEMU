@@ -112,28 +112,26 @@ namespace Plus.HabboHotel.Achievements
 
                 return true;
             }
-            else
-            {
-                userData.Level = newLevel;
-                userData.Progress = newProgress;
-                using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
-                {
-                    dbClient.SetQuery("REPLACE INTO `user_achievements` VALUES (@userId, @group, @newLevel, @newProgress)");
-                    dbClient.AddParameter("userId", session.GetHabbo().Id);
-                    dbClient.AddParameter("group", group);
-                    dbClient.AddParameter("newLevel", newLevel);
-                    dbClient.AddParameter("newProgress", newProgress);
-                    dbClient.RunQuery();
-                }
 
-                session.SendPacket(new AchievementProgressedComposer(data, targetLevel, level, totalLevels, session.GetHabbo().GetAchievementData(group)));
+            userData.Level = newLevel;
+            userData.Progress = newProgress;
+            using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
+            {
+                dbClient.SetQuery("REPLACE INTO `user_achievements` VALUES (@userId, @group, @newLevel, @newProgress)");
+                dbClient.AddParameter("userId", session.GetHabbo().Id);
+                dbClient.AddParameter("group", @group);
+                dbClient.AddParameter("newLevel", newLevel);
+                dbClient.AddParameter("newProgress", newProgress);
+                dbClient.RunQuery();
             }
+
+            session.SendPacket(new AchievementProgressedComposer(data, targetLevel, level, totalLevels, session.GetHabbo().GetAchievementData(@group)));
             return false;
         }
 
         public ICollection<Achievement> GetGameAchievements(int gameId)
         {
-            List<Achievement> achievements = new List<Achievement>();
+            List<Achievement> achievements = new();
 
             foreach (Achievement achievement in Achievements.Values.ToList())
             {

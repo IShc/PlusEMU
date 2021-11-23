@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class BanCommand : IChatCommand
+    internal class BanCommand : IChatCommand
     {
 
         public string PermissionRequired => "command_ban";
@@ -36,14 +36,14 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 return;
             }
 
-            double expire = 0;
+            double expire;
             string hours = @params[2];
-            if (String.IsNullOrEmpty(hours) || hours == "perm")
+            if (string.IsNullOrEmpty(hours) || hours == "perm")
                 expire = PlusEnvironment.GetUnixTimestamp() + 78892200;
             else
                 expire = (PlusEnvironment.GetUnixTimestamp() + (Convert.ToDouble(hours) * 3600));
 
-            string reason = null;
+            string reason;
             if (@params.Length >= 4)
                 reason = CommandManager.MergeParams(@params, 3);
             else

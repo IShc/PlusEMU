@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    class GetCatalogRoomPromotionComposer : MessageComposer
+    internal class GetCatalogRoomPromotionComposer : MessageComposer
     {
         public List<RoomData> UsersRooms { get; }
 

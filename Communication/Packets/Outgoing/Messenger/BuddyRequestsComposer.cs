@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class BuddyRequestsComposer : MessageComposer
+    internal class BuddyRequestsComposer : MessageComposer
     {
         public ICollection<MessengerRequest> Requests { get; }
 

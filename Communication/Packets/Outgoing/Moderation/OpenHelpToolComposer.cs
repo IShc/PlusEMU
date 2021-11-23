@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class OpenHelpToolComposer : MessageComposer
+    internal class OpenHelpToolComposer : MessageComposer
     {
         public OpenHelpToolComposer()
             : base(ServerPacketHeader.OpenHelpToolMessageComposer)

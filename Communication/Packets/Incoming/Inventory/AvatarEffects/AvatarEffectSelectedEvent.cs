@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.AvatarEffects
 {
-    class AvatarEffectSelectedEvent : IPacketEvent
+    internal class AvatarEffectSelectedEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

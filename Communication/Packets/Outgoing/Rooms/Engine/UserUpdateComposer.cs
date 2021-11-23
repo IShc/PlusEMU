@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class UserUpdateComposer : MessageComposer
+    internal class UserUpdateComposer : MessageComposer
     {
         public ICollection<RoomUser> Users { get; }
 
@@ -28,14 +28,14 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                 packet.WriteInteger(user.RotHead);
                 packet.WriteInteger(user.RotBody);
 
-                StringBuilder statusComposer = new StringBuilder();
+                StringBuilder statusComposer = new();
                 statusComposer.Append("/");
 
                 foreach (KeyValuePair<string, string> status in user.Statusses.ToList())
                 {
                     statusComposer.Append(status.Key);
 
-                    if (!String.IsNullOrEmpty(status.Value))
+                    if (!string.IsNullOrEmpty(status.Value))
                     {
                         statusComposer.Append(" ");
                         statusComposer.Append(status.Value);

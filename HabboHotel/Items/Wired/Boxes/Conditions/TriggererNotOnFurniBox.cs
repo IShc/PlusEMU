@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    class TriggererNotOnFurniBox : IWiredItem
+    internal class TriggererNotOnFurniBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -62,7 +62,6 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
             {
                 if (SetItems.ContainsKey(item.Id))
                     return false;
-                else continue;
             }
 
             return true;

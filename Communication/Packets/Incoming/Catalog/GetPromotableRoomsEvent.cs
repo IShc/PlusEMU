@@ -7,7 +7,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {
-    class GetPromotableRoomsEvent : IPacketEvent
+    internal class GetPromotableRoomsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

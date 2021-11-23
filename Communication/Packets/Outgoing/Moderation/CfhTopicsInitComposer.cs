@@ -4,7 +4,7 @@ using Plus.HabboHotel.Moderation;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class CfhTopicsInitComposer : MessageComposer
+    internal class CfhTopicsInitComposer : MessageComposer
     {
         public Dictionary<string, List<ModerationPresetActions>> UserActionPresets { get; }
 

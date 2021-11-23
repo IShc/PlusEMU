@@ -47,12 +47,11 @@ namespace Plus.HabboHotel.Users.Messenger
 
         public void ProcessOfflineMessages()
         {
-            DataTable getMessages = null;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `messenger_offline_messages` WHERE `to_id` = @id;");
                 dbClient.AddParameter("id", _userId);
-                getMessages = dbClient.GetTable();
+                DataTable getMessages = dbClient.GetTable();
 
                 if (getMessages != null)
                 {
@@ -106,14 +105,13 @@ namespace Plus.HabboHotel.Users.Messenger
 
                     client.GetHabbo().GetMessenger().UpdateFriend(_userId, client, true);
 
-                    if (client == null || client.GetHabbo() == null)
+                    if (client.GetHabbo() == null)
                         continue;
 
                     UpdateFriend(client.GetHabbo().Id, client, notification);
                 }
                 catch
                 {
-                    continue;
                 }
             }
         }
@@ -257,7 +255,7 @@ namespace Plus.HabboHotel.Users.Messenger
         public bool RequestBuddy(string userQuery)
         {
             int userId;
-            bool hasFQDisabled;
+            bool hasFqDisabled;
 
             GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(userQuery);
             if (client == null)
@@ -274,15 +272,15 @@ namespace Plus.HabboHotel.Users.Messenger
                     return false;
 
                 userId = Convert.ToInt32(row["id"]);
-                hasFQDisabled = PlusEnvironment.EnumToBool(row["block_newfriends"].ToString());
+                hasFqDisabled = PlusEnvironment.EnumToBool(row["block_newfriends"].ToString());
             }
             else
             {
                 userId = client.GetHabbo().Id;
-                hasFQDisabled = client.GetHabbo().AllowFriendRequests;
+                hasFqDisabled = client.GetHabbo().AllowFriendRequests;
             }
 
-            if (hasFQDisabled)
+            if (hasFqDisabled)
             {
                 GetClient().SendPacket(new MessengerErrorComposer(39, 3));
                 return false;
@@ -303,7 +301,7 @@ namespace Plus.HabboHotel.Users.Messenger
             if (toUser == null || toUser.GetHabbo() == null)
                 return true;
 
-            MessengerRequest request = new MessengerRequest(toId, _userId, PlusEnvironment.GetGame().GetClientManager().GetNameById(_userId));
+            MessengerRequest request = new(toId, _userId, PlusEnvironment.GetGame().GetClientManager().GetNameById(_userId));
 
             toUser.GetHabbo().GetMessenger().OnNewRequest(_userId);
 
@@ -346,7 +344,8 @@ namespace Plus.HabboHotel.Users.Messenger
                 GetClient().SendNotification("You cannot send a message, you have flooded the console.\n\nYou can send a message in 60 seconds.");
                 return;
             }
-            else if (GetClient().GetHabbo().MessengerSpamTime > PlusEnvironment.GetUnixTimestamp())
+
+            if (GetClient().GetHabbo().MessengerSpamTime > PlusEnvironment.GetUnixTimestamp())
             {
                 double time = GetClient().GetHabbo().MessengerSpamTime - PlusEnvironment.GetUnixTimestamp();
                 GetClient().SendNotification("You cannot send a message, you have flooded the console.\n\nYou can send a message in " + time + " seconds.");
@@ -387,7 +386,7 @@ namespace Plus.HabboHotel.Users.Messenger
                 GetClient().SendPacket(new InstantMessageErrorComposer(MessengerMessageErrors.FriendMuted, toId));
             }
 
-            if (String.IsNullOrEmpty(message))
+            if (string.IsNullOrEmpty(message))
                 return;
 
             client.SendPacket(new NewConsoleMessageComposer(_userId, message));

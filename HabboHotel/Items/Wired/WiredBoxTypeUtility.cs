@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Plus.HabboHotel.Items.Wired
 {
-    static class WiredBoxTypeUtility
+    internal static class WiredBoxTypeUtility
     {
         public static WiredBoxType FromWiredId(int id)
         {
@@ -213,7 +213,7 @@ namespace Plus.HabboHotel.Items.Wired
 
         public static List<int> ContainsBlockedTrigger(IWiredItem box, ICollection<IWiredItem> triggers)
         {
-            List<int> blockedItems = new List<int>();
+            List<int> blockedItems = new();
 
             if (box.Type != WiredBoxType.EffectShowMessage && box.Type != WiredBoxType.EffectMuteTriggerer && box.Type != WiredBoxType.EffectTeleportToFurni && box.Type != WiredBoxType.EffectKickUser && box.Type != WiredBoxType.ConditionTriggererOnFurni)
                 return blockedItems;
@@ -234,7 +234,7 @@ namespace Plus.HabboHotel.Items.Wired
 
         public static List<int> ContainsBlockedEffect(IWiredItem box,  ICollection<IWiredItem> effects)
         {
-            List<int> blockedItems = new List<int>();
+            List<int> blockedItems = new();
 
             if (box.Type != WiredBoxType.TriggerRepeat)
                 return blockedItems;

@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users.Messenger.FriendBar;
 
 namespace Plus.Communication.Packets.Incoming.Misc
 {
-    class SetFriendBarStateEvent : IPacketEvent
+    internal class SetFriendBarStateEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

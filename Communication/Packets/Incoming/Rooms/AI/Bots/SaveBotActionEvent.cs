@@ -10,7 +10,7 @@ using Plus.HabboHotel.Rooms.AI.Speech;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
 {
-    class SaveBotActionEvent : IPacketEvent
+    internal class SaveBotActionEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -54,7 +54,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
                         bot.BotData.Look = session.GetHabbo().Look;
                         bot.BotData.Gender = session.GetHabbo().Gender;
 
-                        UserChangeComposer userChangeComposer = new UserChangeComposer(bot.VirtualId, bot.BotData);
+                        UserChangeComposer userChangeComposer = new(bot.VirtualId, bot.BotData);
                         
                         room.SendPacket(userChangeComposer);
 
@@ -91,7 +91,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
                         string speakingInterval = Convert.ToString(configData[2]);
                         string mixChat = Convert.ToString(configData[3]);
 
-                        if (String.IsNullOrEmpty(speakingInterval) || Convert.ToInt32(speakingInterval) <= 0 || Convert.ToInt32(speakingInterval) < 7)
+                        if (string.IsNullOrEmpty(speakingInterval) || Convert.ToInt32(speakingInterval) <= 0 || Convert.ToInt32(speakingInterval) < 7)
                             speakingInterval = "7";
 
                         roomBot.AutomaticChat = Convert.ToBoolean(automaticChat);
@@ -162,7 +162,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
                             bot.BotData.DanceId = 0;
                         else
                         {
-                            Random randomDance = new Random();
+                            Random randomDance = new();
                             bot.BotData.DanceId = randomDance.Next(1, 4);
                         }
 
@@ -179,7 +179,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
                             session.SendWhisper("Come on, atleast give the bot a name!");
                             return;
                         }
-                        else if (dataString.Length >= 16)
+
+                        if (dataString.Length >= 16)
                         {
                             session.SendWhisper("Come on, the bot doesn't need a name that long!");
                             return;

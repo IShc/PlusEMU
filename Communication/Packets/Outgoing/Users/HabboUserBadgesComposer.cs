@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users.Badges;
 
 namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class HabboUserBadgesComposer : MessageComposer
+    internal class HabboUserBadgesComposer : MessageComposer
     {
         public Habbo Habbo { get; }
         public HabboUserBadgesComposer(Habbo habbo)

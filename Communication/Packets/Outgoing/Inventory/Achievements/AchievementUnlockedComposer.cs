@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
 {
-    class AchievementUnlockedComposer : MessageComposer
+    internal class AchievementUnlockedComposer : MessageComposer
     {
         public Achievement Achievement { get; }
         public int Level { get; }

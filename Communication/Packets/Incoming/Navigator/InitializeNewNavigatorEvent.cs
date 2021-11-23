@@ -5,7 +5,7 @@ using Plus.HabboHotel.Navigator;
 
 namespace Plus.Communication.Packets.Incoming.Navigator
 {
-    class InitializeNewNavigatorEvent : IPacketEvent
+    internal class InitializeNewNavigatorEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

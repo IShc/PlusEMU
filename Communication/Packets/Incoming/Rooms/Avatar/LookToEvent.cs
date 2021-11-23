@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms.PathFinding;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Avatar
 {
-    class LookToEvent : IPacketEvent
+    internal class LookToEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

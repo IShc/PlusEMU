@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Avatar
 {
-    class SitEvent : IPacketEvent
+    internal class SitEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

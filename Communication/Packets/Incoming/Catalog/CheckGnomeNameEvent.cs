@@ -12,7 +12,7 @@ using Plus.HabboHotel.Rooms.AI.Speech;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {
-    class CheckGnomeNameEvent : IPacketEvent
+    internal class CheckGnomeNameEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -67,7 +67,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                 return;
             }
 
-            List<RandomSpeech> rndSpeechList = new List<RandomSpeech>();
+            List<RandomSpeech> rndSpeechList = new();
 
             pet.RoomId = session.GetHabbo().CurrentRoomId;
             pet.GnomeClothing = RandomClothing();
@@ -98,7 +98,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
 
         private static string RandomClothing()
         {
-            Random random = new Random();
+            Random random = new();
 
             int randomNumber = random.Next(1, 6);
             switch (randomNumber)

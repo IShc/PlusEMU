@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects
 {
-    class AvatarEffectExpiredComposer : MessageComposer
+    internal class AvatarEffectExpiredComposer : MessageComposer
     {
         public AvatarEffect Effect { get; }
 

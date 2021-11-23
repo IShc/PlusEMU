@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.LandingView
 {
-    class ConcurrentUsersGoalProgressComposer : MessageComposer
+    internal class ConcurrentUsersGoalProgressComposer : MessageComposer
     {
         public int UsersNow { get; }
 

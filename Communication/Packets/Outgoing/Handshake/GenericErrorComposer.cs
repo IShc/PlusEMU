@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Handshake
 {
-    class GenericErrorComposer : MessageComposer
+    internal class GenericErrorComposer : MessageComposer
     {
         public int ErrorId { get; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class UserTagsComposer : MessageComposer
+    internal class UserTagsComposer : MessageComposer
     {
         public int UserId { get; }
         public UserTagsComposer(int userId)

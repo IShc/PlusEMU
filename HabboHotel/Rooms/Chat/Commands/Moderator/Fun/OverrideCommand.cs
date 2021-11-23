@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class OverrideCommand : IChatCommand
+    internal class OverrideCommand : IChatCommand
     {
         public string PermissionRequired => "command_override";
 

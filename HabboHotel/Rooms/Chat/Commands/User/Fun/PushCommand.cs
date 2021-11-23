@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
-    class PushCommand : IChatCommand
+    internal class PushCommand : IChatCommand
     {
         public string PermissionRequired => "command_push";
 

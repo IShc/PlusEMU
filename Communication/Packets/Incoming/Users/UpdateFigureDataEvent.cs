@@ -10,7 +10,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class UpdateFigureDataEvent : IPacketEvent
+    internal class UpdateFigureDataEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

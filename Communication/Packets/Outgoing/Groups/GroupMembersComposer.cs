@@ -4,7 +4,7 @@ using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class GroupMembersComposer : MessageComposer
+    internal class GroupMembersComposer : MessageComposer
     {
         public Group Group { get; }
         public ICollection<UserCache> Members { get; }

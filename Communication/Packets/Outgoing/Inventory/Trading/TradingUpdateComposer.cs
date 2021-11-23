@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms.Trading;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
 {
-    class TradingUpdateComposer : MessageComposer
+    internal class TradingUpdateComposer : MessageComposer
     {
         public Trade Trade { get; }
 

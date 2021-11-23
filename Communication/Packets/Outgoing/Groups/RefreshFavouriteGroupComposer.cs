@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class RefreshFavouriteGroupComposer : MessageComposer
+    internal class RefreshFavouriteGroupComposer : MessageComposer
     {
         public int GroupId { get; }
 

@@ -5,11 +5,11 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class GetIgnoredUsersEvent : IPacketEvent
+    internal class GetIgnoredUsersEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
-            List<string> ignoredUsers = new List<string>();
+            List<string> ignoredUsers = new();
 
             foreach (int userId in new List<int>(session.GetHabbo().GetIgnores().IgnoredUserIds()))
             {

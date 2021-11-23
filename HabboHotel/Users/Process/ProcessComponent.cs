@@ -6,7 +6,7 @@ using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Users.Process
 {
-    sealed class ProcessComponent
+    internal sealed class ProcessComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ProcessComponent));
 
@@ -25,12 +25,10 @@ namespace Plus.HabboHotel.Users.Process
         /// </summary>
         private bool _timerRunning;
 
-#pragma warning disable CS0414 // The field 'ProcessComponent._timerLagging' is assigned but its value is never used
         /// <summary>
         /// Checks if the timer is lagging behind (server can't keep up).
         /// </summary>
         private bool _timerLagging;
-#pragma warning restore CS0414 // The field 'ProcessComponent._timerLagging' is assigned but its value is never used
 
         /// <summary>
         /// Enable/Disable the timer WITHOUT disabling the timer itself.
@@ -46,13 +44,6 @@ namespace Plus.HabboHotel.Users.Process
         /// How often the timer should execute.
         /// </summary>
         private static readonly int _runtimeInSec = 60;
-
-        /// <summary>
-        /// Default.
-        /// </summary>
-        public ProcessComponent()
-        {
-        }
 
         /// <summary>
         /// Initializes the ProcessComponent.

@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class PopularRoomTagsResultComposer : MessageComposer
+    internal class PopularRoomTagsResultComposer : MessageComposer
     {
         public ICollection<KeyValuePair<string, int>> Tags { get; }
 

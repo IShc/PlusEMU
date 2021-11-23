@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Help
 {
-    class SendBullyReportComposer : MessageComposer
+    internal class SendBullyReportComposer : MessageComposer
     {
         public SendBullyReportComposer()
             : base(ServerPacketHeader.SendBullyReportMessageComposer)

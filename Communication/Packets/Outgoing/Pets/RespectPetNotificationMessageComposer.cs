@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms.AI;
 
 namespace Plus.Communication.Packets.Outgoing.Pets
 {
-    class RespectPetNotificationMessageComposer : MessageComposer
+    internal class RespectPetNotificationMessageComposer : MessageComposer
     {
         public Pet Pet { get; }
         public RoomUser RoomUser { get; }

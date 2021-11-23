@@ -7,7 +7,7 @@ using Plus.HabboHotel.Items.Televisions;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions
 {
-    class GetYouTubeTelevisionEvent : IPacketEvent
+    internal class GetYouTubeTelevisionEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -33,7 +33,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions
 
         private static IEnumerable<TValue> RandomValues<TKey, TValue>(IDictionary<TKey, TValue> dict)
         {
-            Random rand = new Random();
+            Random rand = new();
             List<TValue> values = dict.Values.ToList();
             int size = dict.Count;
             while (true)

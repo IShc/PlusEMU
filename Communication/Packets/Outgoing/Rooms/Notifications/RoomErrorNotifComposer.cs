@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Notifications
 {
-    class RoomErrorNotifComposer : MessageComposer
+    internal class RoomErrorNotifComposer : MessageComposer
     {
         public int Error { get; }
         public RoomErrorNotifComposer(int error)

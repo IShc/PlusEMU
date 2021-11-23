@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 {
-    class GetPetInformationEvent : IPacketEvent
+    internal class GetPetInformationEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

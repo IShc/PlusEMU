@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys
 {
-    class DeleteStickyNoteEvent : IPacketEvent
+    internal class DeleteStickyNoteEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

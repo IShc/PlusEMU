@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class ProfileInformationComposer : MessageComposer
+    internal class ProfileInformationComposer : MessageComposer
     {
         public Habbo TargetHabbo { get; }
         public List<Group> Groups { get; }

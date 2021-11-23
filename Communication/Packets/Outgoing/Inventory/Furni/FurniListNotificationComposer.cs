@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
 {
-    class FurniListNotificationComposer : MessageComposer
+    internal class FurniListNotificationComposer : MessageComposer
     {
         public int FurniId { get; }
         public int Type { get; }

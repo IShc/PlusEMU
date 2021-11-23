@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator.New
 {
-    class NavigatorLiftedRoomsComposer : MessageComposer
+    internal class NavigatorLiftedRoomsComposer : MessageComposer
     {
         public NavigatorLiftedRoomsComposer()
             : base(ServerPacketHeader.NavigatorLiftedRoomsMessageComposer)

@@ -6,7 +6,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class ModeratorUserChatlogComposer : MessageComposer
+    internal class ModeratorUserChatlogComposer : MessageComposer
     {
         public Habbo Habbo { get; }
         public List<KeyValuePair<RoomData, List<ChatLogEntry>>> ChatLogs { get; }

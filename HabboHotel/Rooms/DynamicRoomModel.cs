@@ -147,8 +147,7 @@ namespace Plus.HabboHotel.Rooms
         {
             if (DoorX > SqFloorHeight.GetUpperBound(0) || DoorY > SqFloorHeight.GetUpperBound(1))
                 return false;
-            else
-                return true;
+            return true;
         }
 
         public void SetMapSize(int x, int y)

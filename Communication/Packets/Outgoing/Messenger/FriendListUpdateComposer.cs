@@ -3,7 +3,7 @@ using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class FriendListUpdateComposer : MessageComposer
+    internal class FriendListUpdateComposer : MessageComposer
     {
         public int FriendId { get; }
         

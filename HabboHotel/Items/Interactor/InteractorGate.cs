@@ -21,7 +21,8 @@ namespace Plus.HabboHotel.Items.Interactor
             {
                 return;
             }
-            else if (modes <= 0)
+
+            if (modes <= 0)
             {
                 item.UpdateState(false, true);
             }

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class ModeratorSupportTicketResponseComposer : MessageComposer
+    internal class ModeratorSupportTicketResponseComposer : MessageComposer
     {
         public int Result { get; }
 

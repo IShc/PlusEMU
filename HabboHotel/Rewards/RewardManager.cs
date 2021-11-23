@@ -120,7 +120,7 @@ namespace Plus.HabboHotel.Rewards
                             }
                     }
 
-                    if (!String.IsNullOrEmpty(reward.Message))
+                    if (!string.IsNullOrEmpty(reward.Message))
                         session.SendNotification(reward.Message);
 
                     LogReward(session.GetHabbo().Id, id);

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class CanCreateRoomComposer : MessageComposer
+    internal class CanCreateRoomComposer : MessageComposer
     {
         public bool Error { get; }
         public int MaxRoomsPerUser { get; }

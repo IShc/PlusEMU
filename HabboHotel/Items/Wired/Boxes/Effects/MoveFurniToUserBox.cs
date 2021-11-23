@@ -33,8 +33,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public int TickCount { get; set; }
         public string ItemsData { get; set; }
         private bool _requested;
-        private int _delay = 0;
-        private long _next = 0;
+        private int _delay;
+        private long _next;
 
         public MoveFurniToUserBox(Room instance, Item item)
         {
@@ -113,7 +113,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
                     if (Instance.GetGameMap().CanRollItemHere(point.X, point.Y) && !Instance.GetGameMap().SquareHasUsers(point.X, point.Y))
                     {    
-                        Double newZ = Item.GetZ;
+                        double newZ = Item.GetZ;
                         bool canBePlaced = true;
 
                         List<Item> items = Instance.GetGameMap().GetCoordinatedItems(point);

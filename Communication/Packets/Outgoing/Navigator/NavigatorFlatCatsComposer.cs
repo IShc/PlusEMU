@@ -4,7 +4,7 @@ using Plus.HabboHotel.Navigator;
 
 namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class NavigatorFlatCatsComposer : MessageComposer
+    internal class NavigatorFlatCatsComposer : MessageComposer
     {
         public ICollection<SearchResultList> Categories { get; }
 

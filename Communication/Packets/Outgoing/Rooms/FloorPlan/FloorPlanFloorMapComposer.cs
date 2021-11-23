@@ -4,7 +4,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.FloorPlan
 {
-    class FloorPlanFloorMapComposer : MessageComposer
+    internal class FloorPlanFloorMapComposer : MessageComposer
     {
         public ICollection<Item> Items { get; }
 

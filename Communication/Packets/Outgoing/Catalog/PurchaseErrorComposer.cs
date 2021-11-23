@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    class PurchaseErrorComposer : MessageComposer
+    internal class PurchaseErrorComposer : MessageComposer
     {
         public int ErrorCode { get; }
 

@@ -11,7 +11,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
-    class OpenGiftEvent : IPacketEvent
+    internal class OpenGiftEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -103,7 +103,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             present.MagicRemove = true;
             room.SendPacket(new ObjectUpdateComposer(present, Convert.ToInt32(session.GetHabbo().Id)));
 
-            Thread thread = new Thread(() => FinishOpenGift(session, baseItem, present, room, data));
+            Thread thread = new(() => FinishOpenGift(session, baseItem, present, room, data));
             thread.Start();
 
 

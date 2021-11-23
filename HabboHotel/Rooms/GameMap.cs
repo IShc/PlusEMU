@@ -40,7 +40,7 @@ namespace Plus.HabboHotel.Rooms
             }
             else
             {
-                List<RoomUser> users = new List<RoomUser>
+                List<RoomUser> users = new()
                 {
                     user
                 };
@@ -386,9 +386,7 @@ namespace Plus.HabboHotel.Rooms
 
         public void AddCoordinatedItem(Item item, Point coord)
         {
-            List<int> items; //mCoordinatedItems[CoordForItem];
-
-            if (!_coordinatedItems.TryGetValue(coord, out items))
+            if (!_coordinatedItems.TryGetValue(coord, out List<int> items))
             {
                 items = new List<int>();
 
@@ -411,12 +409,11 @@ namespace Plus.HabboHotel.Rooms
         public List<Item> GetCoordinatedItems(Point coord)
         {
             var point = new Point(coord.X, coord.Y);
-            List<Item> items = new List<Item>();
 
             if (_coordinatedItems.ContainsKey(point))
             {
                 List<int> ids = _coordinatedItems[point];
-                items = GetItemsFromIds(ids);
+                List<Item> items = GetItemsFromIds(ids);
                 return items;
             }
 
@@ -425,7 +422,7 @@ namespace Plus.HabboHotel.Rooms
 
         public bool RemoveCoordinatedItem(Item item, Point coord)
         {
-            Point point = new Point(coord.X, coord.Y);
+            Point point = new(coord.X, coord.Y);
             if (_coordinatedItems != null && _coordinatedItems.ContainsKey(point))
             {
                 _coordinatedItems[point].RemoveAll(x => x == item.Id);
@@ -566,10 +563,10 @@ namespace Plus.HabboHotel.Rooms
                     isRemoved = true;
             }
 
-            ConcurrentDictionary<Point, List<Item>> items = new ConcurrentDictionary<Point, List<Item>>();
+            ConcurrentDictionary<Point, List<Item>> items = new();
             foreach (Point tile in item.GetCoords.ToList())
             {
-                Point point = new Point(tile.X, tile.Y);
+                Point point = new(tile.X, tile.Y);
                 if (_coordinatedItems.ContainsKey(point))
                 {
                     List<int> ids = _coordinatedItems[point];
@@ -821,7 +818,7 @@ namespace Plus.HabboHotel.Rooms
         public Point GetChaseMovement(Item item)
         {
             int distance = 99;
-            Point coord = new Point(0, 0);
+            Point coord = new(0, 0);
             int iX = item.GetX;
             int iY = item.GetY;
             bool x = false;
@@ -839,9 +836,6 @@ namespace Plus.HabboHotel.Rooms
                             coord = user.Coordinate;
                             x = false;
                         }
-                        else
-                            continue;
-
                     }
                     else if (user.Y == item.GetY)
                     {
@@ -852,11 +846,7 @@ namespace Plus.HabboHotel.Rooms
                             coord = user.Coordinate;
                             x = true;
                         }
-                        else
-                            continue;
                     }
-                    else
-                        continue;
                 }
             }
 
@@ -870,27 +860,24 @@ namespace Plus.HabboHotel.Rooms
                     iX--;
                     return new Point(iX, iY);
                 }
-                else
-                {
-                    iX++;
-                    return new Point(iX, iY);
-                }
+
+                iX++;
+                return new Point(iX, iY);
             }
-            else if (!x && distance < 99)
+
+            if (!x && distance < 99)
             {
                 if (iY > coord.Y)
                 {
                     iY--;
                     return new Point(iX, iY);
                 }
-                else
-                {
-                    iY++;
-                    return new Point(iX, iY);
-                }
+
+                iY++;
+                return new Point(iX, iY);
             }
-            else
-                return item.Coordinate;
+
+            return item.Coordinate;
         }
 
         public bool IsValidStep2(RoomUser user, Vector2D from, Vector2D to, bool endOfPath, bool @override)
@@ -936,13 +923,11 @@ namespace Plus.HabboHotel.Rooms
 
                             return true;
                         }
-                        else
-                        {
-                            if (user.Path.Count > 0)
-                                user.Path.Clear();
-                            user.PathRecalcNeeded = false;
-                            return false;
-                        }
+
+                        if (user.Path.Count > 0)
+                            user.Path.Clear();
+                        user.PathRecalcNeeded = false;
+                        return false;
                     }
                 }
             }
@@ -1050,7 +1035,7 @@ namespace Plus.HabboHotel.Rooms
 
         public double SqAbsoluteHeight(int x, int y)
         {
-            Point points = new Point(x, y);
+            Point points = new(x, y);
             
             if (_coordinatedItems.TryGetValue(points, out List<int> ids))
             {
@@ -1201,7 +1186,7 @@ namespace Plus.HabboHotel.Rooms
             if (input == null || input.Count == 0)
                 return new List<Item>();
 
-            List<Item> items = new List<Item>();
+            List<Item> items = new();
 
             lock (input)
             {
@@ -1256,7 +1241,7 @@ namespace Plus.HabboHotel.Rooms
 
         public List<Item> GetAllRoomItemForSquare(int x, int y)
         {
-            Point coord = new Point(x, y);
+            Point coord = new(x, y);
 
             List<Item> items;
 

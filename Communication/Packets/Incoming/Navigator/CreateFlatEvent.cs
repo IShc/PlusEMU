@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Navigator
 {
-    class CreateFlatEvent : IPacketEvent
+    internal class CreateFlatEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

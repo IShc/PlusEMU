@@ -148,13 +148,12 @@ namespace Plus.Communication.Packets
 
             if (!IgnoreTasks)
                 ExecutePacketAsync(session, packet, pak);
-            else
-                pak.Parse(session, packet);
+            pak.Parse(session, packet);
         }
 
         private void ExecutePacketAsync(GameClient session, ClientPacket packet, IPacketEvent pak)
         {
-            CancellationTokenSource cancelSource = new CancellationTokenSource();
+            CancellationTokenSource cancelSource = new();
             CancellationToken token = cancelSource.Token;
 
             Task t = _eventDispatcher.StartNew(() =>
@@ -180,11 +179,9 @@ namespace Plus.Communication.Packets
                     {
                         throw e;
                     }
-                    else
-                    {
-                        //log.Fatal("Unhandled Error: " + e.Message + " - " + e.StackTrace);
-                        session.Disconnect();
-                    }
+
+                    //log.Fatal("Unhandled Error: " + e.Message + " - " + e.StackTrace);
+                    session.Disconnect();
                 }
             }
             catch (OperationCanceledException)

@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
-    class ThrowDiceEvent : IPacketEvent
+    internal class ThrowDiceEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

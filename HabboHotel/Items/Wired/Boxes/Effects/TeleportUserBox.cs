@@ -9,7 +9,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class TeleportUserBox : IWiredItem, IWiredCycle
+    internal class TeleportUserBox : IWiredItem, IWiredCycle
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -23,7 +23,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public string ItemsData { get; set; }
 
         private readonly Queue _queue;
-        private int _delay = 0;
+        private int _delay;
 
         public TeleportUserBox(Room instance, Item item)
         {
@@ -109,7 +109,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (player.IsTeleporting || player.IsHopping || player.TeleportId != 0)
                 return;
 
-            Random rand = new Random();
+            Random rand = new();
             List<Item> items = SetItems.Values.ToList();
             items = items.OrderBy(x => rand.Next()).ToList();
 

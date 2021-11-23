@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 {
-    class ToggleMuteToolEvent : IPacketEvent
+    internal class ToggleMuteToolEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

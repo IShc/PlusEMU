@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms.Chat.Styles;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
-    class BubbleCommand : IChatCommand
+    internal class BubbleCommand : IChatCommand
     {
         public string PermissionRequired => "command_bubble";
 
@@ -23,15 +23,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
                 return;
             }
 
-            int bubble = 0;
-            if (!int.TryParse(@params[1].ToString(), out bubble))
+            if (!int.TryParse(@params[1], out int bubble))
             {
                 session.SendWhisper("Please enter a valid number.");
                 return;
             }
 
-            ChatStyle style = null;
-            if (!PlusEnvironment.GetGame().GetChatManager().GetChatStyles().TryGetStyle(bubble, out style) || (style.RequiredRight.Length > 0 && !session.GetHabbo().GetPermissions().HasRight(style.RequiredRight)))
+            if (!PlusEnvironment.GetGame().GetChatManager().GetChatStyles().TryGetStyle(bubble, out ChatStyle style) || (style.RequiredRight.Length > 0 && !session.GetHabbo().GetPermissions().HasRight(style.RequiredRight)))
             {
                 session.SendWhisper("Oops, you cannot use this bubble due to a rank requirement, sorry!");
                 return;

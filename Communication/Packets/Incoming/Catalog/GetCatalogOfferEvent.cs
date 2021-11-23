@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {
-    class GetCatalogOfferEvent : IPacketEvent
+    internal class GetCatalogOfferEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

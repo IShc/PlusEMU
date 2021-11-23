@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
-    class CarryCommand : IChatCommand
+    internal class CarryCommand : IChatCommand
     {
         public string PermissionRequired => "command_carry";
 
@@ -13,8 +13,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 
         public void Execute(GameClient session, Room room, string[] @params)
         {
-            int itemId = 0;
-            if (!int.TryParse(Convert.ToString(@params[1]), out itemId))
+            if (!int.TryParse(Convert.ToString(@params[1]), out int itemId))
             {
                 session.SendWhisper("Please enter a valid integer.");
                 return;

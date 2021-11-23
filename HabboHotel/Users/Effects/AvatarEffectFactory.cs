@@ -3,7 +3,7 @@ using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Users.Effects
 {
-    static class AvatarEffectFactory
+    internal static class AvatarEffectFactory
     {
         /// <summary>
         /// Creates a new AvatarEffect with the specified details.

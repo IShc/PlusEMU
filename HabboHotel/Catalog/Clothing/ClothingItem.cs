@@ -22,7 +22,7 @@ namespace Plus.HabboHotel.Catalog.Clothing
                     PartIds.Add(int.Parse(partId));
                 }
             }
-            else if (!String.IsNullOrEmpty(partIds) && (int.Parse(partIds)) > 0)
+            else if (!string.IsNullOrEmpty(partIds) && (int.Parse(partIds)) > 0)
             {
                 PartIds.Add(int.Parse(partIds));
             }

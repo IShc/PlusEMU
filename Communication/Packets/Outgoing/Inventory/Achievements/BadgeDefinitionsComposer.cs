@@ -3,7 +3,7 @@ using Plus.HabboHotel.Achievements;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
 {
-    class BadgeDefinitionsComposer : MessageComposer
+    internal class BadgeDefinitionsComposer : MessageComposer
     {
         public Dictionary<string, Achievement> Achievements { get; }
 

@@ -4,7 +4,7 @@ using Plus.Database.Interfaces;
 
 namespace Plus.Communication.Packets.Outgoing.Marketplace
 {
-    class MarketPlaceOwnOffersComposer : MessageComposer
+    internal class MarketPlaceOwnOffersComposer : MessageComposer
     {
         public int UserId { get; }
 

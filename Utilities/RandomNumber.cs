@@ -5,7 +5,7 @@ namespace Plus.Utilities
     public static class RandomNumber
     {
         private static readonly Random r = new();
-        private static readonly Object l = new();
+        private static readonly object l = new();
 
         private static readonly Random globalRandom = new();
         [ThreadStatic] private static Random localRandom;

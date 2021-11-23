@@ -8,7 +8,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Avatar
 {
-    class ChangeMottoEvent : IPacketEvent
+    internal class ChangeMottoEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

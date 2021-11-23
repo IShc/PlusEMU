@@ -5,21 +5,21 @@ namespace Plus.HabboHotel.Rooms.PathFinding
     public static class PathFinder
     {
         public static Vector2D[] DiagMovePoints = {
-                new Vector2D(-1, -1),
-                new Vector2D(0, -1),
-                new Vector2D(1, -1),
-                new Vector2D(1, 0),
-                new Vector2D(1, 1),
-                new Vector2D(0, 1),
-                new Vector2D(-1, 1),
-                new Vector2D(-1, 0)
+                new(-1, -1),
+                new(0, -1),
+                new(1, -1),
+                new(1, 0),
+                new(1, 1),
+                new(0, 1),
+                new(-1, 1),
+                new(-1, 0)
             };
 
         public static Vector2D[] NoDiagMovePoints = {
-                new Vector2D(0, -1),
-                new Vector2D(1, 0),
-                new Vector2D(0, 1),
-                new Vector2D(-1, 0)
+                new(0, -1),
+                new(1, 0),
+                new(0, 1),
+                new(-1, 0)
             };
 
         public static List<Vector2D> FindPath(RoomUser user, bool diag, Gamemap map, Vector2D start, Vector2D end)

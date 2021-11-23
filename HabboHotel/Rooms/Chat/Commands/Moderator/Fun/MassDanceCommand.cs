@@ -6,7 +6,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class MassDanceCommand : IChatCommand
+    internal class MassDanceCommand : IChatCommand
     {
         public string PermissionRequired => "command_massdance";
 

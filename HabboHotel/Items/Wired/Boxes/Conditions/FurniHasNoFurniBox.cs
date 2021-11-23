@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    class FurniHasNoFurniBox : IWiredItem
+    internal class FurniHasNoFurniBox : IWiredItem
     {
         public Room Instance { get; set; }
 

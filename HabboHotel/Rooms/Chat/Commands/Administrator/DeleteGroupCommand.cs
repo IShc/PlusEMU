@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
-    class DeleteGroupCommand : IChatCommand
+    internal class DeleteGroupCommand : IChatCommand
     {
         public string PermissionRequired => "command_delete_group";
 
@@ -40,7 +40,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
             PlusEnvironment.GetGame().GetRoomManager().UnloadRoom(room.Id);
 
             session.SendNotification("Success, group deleted.");
-            return;
         }
     }
 }

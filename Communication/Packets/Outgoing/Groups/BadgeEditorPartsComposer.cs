@@ -3,7 +3,7 @@ using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class BadgeEditorPartsComposer : MessageComposer
+    internal class BadgeEditorPartsComposer : MessageComposer
     {
         public ICollection<GroupBadgeParts> Bases { get; }
         public ICollection<GroupBadgeParts> Symbols { get; }

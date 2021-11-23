@@ -3,7 +3,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
 {
-    class FurniListAddComposer : MessageComposer
+    internal class FurniListAddComposer : MessageComposer
     {
         public Item Item { get; }
 

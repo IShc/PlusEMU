@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.GameCenter
 {
-    class JoinQueueComposer : MessageComposer
+    internal class JoinQueueComposer : MessageComposer
     {
         public int GameId { get; }
 

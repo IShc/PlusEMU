@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Handshake
 {
-    class SetUniqueIdComposer : MessageComposer
+    internal class SetUniqueIdComposer : MessageComposer
     {
         public string UniqueId { get; }
 

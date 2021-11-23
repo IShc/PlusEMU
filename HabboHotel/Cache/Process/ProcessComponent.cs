@@ -9,7 +9,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Cache.Process
 {
-    sealed class ProcessComponent
+    internal sealed class ProcessComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ProcessComponent));
 

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Avatar
 {
-    class GetWardrobeEvent : IPacketEvent
+    internal class GetWardrobeEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -8,7 +8,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 {
-    class UserWalksOffBox : IWiredItem
+    internal class UserWalksOffBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }

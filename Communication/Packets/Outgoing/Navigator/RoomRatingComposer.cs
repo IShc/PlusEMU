@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class RoomRatingComposer : MessageComposer
+    internal class RoomRatingComposer : MessageComposer
     {
         public int Score { get; }
         public bool CanVote { get; }

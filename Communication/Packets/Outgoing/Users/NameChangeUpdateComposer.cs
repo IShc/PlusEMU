@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class NameChangeUpdateComposer : MessageComposer
+    internal class NameChangeUpdateComposer : MessageComposer
     {
         public int Error { get; }
         public string Name { get; }

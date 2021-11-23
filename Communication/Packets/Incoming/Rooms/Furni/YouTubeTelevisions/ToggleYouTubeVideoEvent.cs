@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions
 {
-    class ToggleYouTubeVideoEvent : IPacketEvent
+    internal class ToggleYouTubeVideoEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

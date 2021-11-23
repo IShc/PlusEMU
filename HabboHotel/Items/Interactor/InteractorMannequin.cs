@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Interactor
 {
-    class InteractorMannequin : IFurniInteractor
+    internal class InteractorMannequin : IFurniInteractor
     {
         public void OnPlace(GameClient session, Item item)
         {
@@ -21,13 +21,13 @@ namespace Plus.HabboHotel.Items.Interactor
         {
             if (item.ExtraData.Contains(Convert.ToChar(5).ToString()))
             {
-                String[] stuff = item.ExtraData.Split(Convert.ToChar(5));
+                string[] stuff = item.ExtraData.Split(Convert.ToChar(5));
                 session.GetHabbo().Gender = stuff[0].ToUpper();
-                Dictionary<String, String> newFig = new Dictionary<String, String>();
+                Dictionary<string, string> newFig = new();
                 newFig.Clear();
-                foreach (String man in stuff[1].Split('.'))
+                foreach (string man in stuff[1].Split('.'))
                 {
-                    foreach (String fig in session.GetHabbo().Look.Split('.'))
+                    foreach (string fig in session.GetHabbo().Look.Split('.'))
                     {
                         if (fig.Split('-')[0] == man.Split('-')[0])
                         {
@@ -52,7 +52,7 @@ namespace Plus.HabboHotel.Items.Interactor
                 }
 
                 string final = "";
-                foreach (String str in newFig.Values)
+                foreach (string str in newFig.Values)
                 {
                     final += str + ".";
                 }

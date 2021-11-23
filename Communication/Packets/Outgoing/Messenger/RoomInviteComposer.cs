@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class RoomInviteComposer : MessageComposer
+    internal class RoomInviteComposer : MessageComposer
     {
         public int SenderId { get; }
         public string Text { get; }

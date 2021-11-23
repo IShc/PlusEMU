@@ -59,7 +59,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
             {
                 foreach (Item exitTile in ExitTeleports.Values.ToList())
                 {
-                    if (exitTile.ExtraData == "0" || String.IsNullOrEmpty(exitTile.ExtraData))
+                    if (exitTile.ExtraData == "0" || string.IsNullOrEmpty(exitTile.ExtraData))
                         exitTile.ExtraData = "1";
 
                     exitTile.UpdateState();
@@ -81,7 +81,7 @@ namespace Plus.HabboHotel.Rooms.Games.Freeze
             {
                 foreach (Item exitTile in ExitTeleports.Values.ToList())
                 {
-                    if (exitTile.ExtraData == "1" || String.IsNullOrEmpty(exitTile.ExtraData))
+                    if (exitTile.ExtraData == "1" || string.IsNullOrEmpty(exitTile.ExtraData))
                         exitTile.ExtraData = "0";
 
                     exitTile.UpdateState();

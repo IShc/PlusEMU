@@ -35,8 +35,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public int TickCount { get; set; }
         public string ItemsData { get; set; }
         private bool _requested;
-        private int _delay = 0;
-        private long _next = 0;
+        private int _delay;
+        private long _next;
 
         public MoveAndRotateBox(Room instance, Item item)
         {
@@ -138,7 +138,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                             if (IItem.TotalHeight > newZ)
                                 newZ = IItem.TotalHeight;
 
-                            if (canBePlaced == true && !IItem.GetBaseItem().Stackable)
+                            if (canBePlaced && !IItem.GetBaseItem().Stackable)
                                 canBePlaced = false;
                         }
 
@@ -213,7 +213,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         private Point HandleMovement(int mode, Point position)
         {
-            Point newPos = new Point();
+            Point newPos = new();
             switch (mode)
             {
                 case 0:

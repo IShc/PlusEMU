@@ -11,7 +11,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 {
-    class SaveRoomSettingsEvent : IPacketEvent
+    internal class SaveRoomSettingsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -31,8 +31,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
             int categoryId = packet.PopInt();
             int tagCount = packet.PopInt();
 
-            List<string> tags = new List<string>();
-            StringBuilder formattedTags = new StringBuilder();
+            List<string> tags = new();
+            StringBuilder formattedTags = new();
 
             for (int i = 0; i < tagCount; i++)
             {

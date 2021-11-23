@@ -27,11 +27,11 @@ namespace Plus.HabboHotel.Achievements
                         int rewardPoints = Convert.ToInt32(row["reward_points"]);
                         int progressNeeded = Convert.ToInt32(row["progress_needed"]);
 
-                        AchievementLevel level = new AchievementLevel(Convert.ToInt32(row["level"]), rewardPixels, rewardPoints, progressNeeded);
+                        AchievementLevel level = new(Convert.ToInt32(row["level"]), rewardPixels, rewardPoints, progressNeeded);
 
                         if (!achievements.ContainsKey(groupName))
                         {
-                            Achievement achievement = new Achievement(id, groupName, category, Convert.ToInt32(row["game_id"]));
+                            Achievement achievement = new(id, groupName, category, Convert.ToInt32(row["game_id"]));
                             achievement.AddLevel(level);
                             achievements.Add(groupName, achievement);
                         }

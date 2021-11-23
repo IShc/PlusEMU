@@ -3,7 +3,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class CallForHelpPendingCallsComposer : MessageComposer
+    internal class CallForHelpPendingCallsComposer : MessageComposer
     {
         public ModerationTicket Ticket { get; }
 

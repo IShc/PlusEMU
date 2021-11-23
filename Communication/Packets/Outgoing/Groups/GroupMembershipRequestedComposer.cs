@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class GroupMembershipRequestedComposer : MessageComposer
+    internal class GroupMembershipRequestedComposer : MessageComposer
     {
         public int GroupId { get; }
         public Habbo Habbo { get; }

@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class AlertCommand : IChatCommand
+    internal class AlertCommand : IChatCommand
     {
         public string PermissionRequired => "command_alert_user";
 

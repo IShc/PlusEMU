@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 {
-    class DeleteRoomEvent : IPacketEvent
+    internal class DeleteRoomEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -24,7 +24,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
             if (room.OwnerId != session.GetHabbo().Id && !session.GetHabbo().GetPermissions().HasRight("room_delete_any"))
                 return;
 
-            List<Item> itemsToRemove = new List<Item>();
+            List<Item> itemsToRemove = new();
             foreach (Item item in room.GetRoomItemHandler().GetWallAndFloor.ToList())
             {
                 if (item == null)

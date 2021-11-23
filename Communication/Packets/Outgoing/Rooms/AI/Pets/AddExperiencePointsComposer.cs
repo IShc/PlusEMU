@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
 {
-    class AddExperiencePointsComposer : MessageComposer
+    internal class AddExperiencePointsComposer : MessageComposer
     {
         public int PetId { get; }
         public int VirtualId { get; }

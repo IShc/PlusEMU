@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
 {
-    class AchievementsComposer : MessageComposer
+    internal class AchievementsComposer : MessageComposer
     {
         public List<Achievement> Achievements { get; }
         public Habbo Habbo { get; }

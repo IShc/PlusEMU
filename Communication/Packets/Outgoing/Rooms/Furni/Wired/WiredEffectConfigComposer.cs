@@ -6,7 +6,7 @@ using Plus.HabboHotel.Items.Wired;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
 {
-    class WiredEffectConfigComposer : MessageComposer
+    internal class WiredEffectConfigComposer : MessageComposer
     {
         public IWiredItem WiredItem { get; }
         public List<int> BlockedItems { get; }
@@ -34,14 +34,14 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
 
             if (WiredItem.Type == WiredBoxType.EffectBotGivesHanditemBox)
             {
-                if (String.IsNullOrEmpty(WiredItem.StringData))
+                if (string.IsNullOrEmpty(WiredItem.StringData))
                     WiredItem.StringData = "Bot name;0";
 
                 packet.WriteString(WiredItem.StringData != null ? (WiredItem.StringData.Split(';')[0]) : "");
             }
             else if (WiredItem.Type == WiredBoxType.EffectBotFollowsUserBox)
             {
-                if (String.IsNullOrEmpty(WiredItem.StringData))
+                if (string.IsNullOrEmpty(WiredItem.StringData))
                     WiredItem.StringData = "0;Bot name";
 
                 packet.WriteString(WiredItem.StringData != null ? (WiredItem.StringData.Split(';')[1]) : "");
@@ -55,7 +55,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
                 packet.WriteInteger(0); // Loop
             else if (WiredItem.Type == WiredBoxType.EffectMatchPosition)
             {
-                if (String.IsNullOrEmpty(WiredItem.StringData))
+                if (string.IsNullOrEmpty(WiredItem.StringData))
                     WiredItem.StringData = "0;0;0";
 
                 packet.WriteInteger(3);
@@ -65,7 +65,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             }
             else if (WiredItem.Type == WiredBoxType.EffectMoveAndRotate)
             {
-                if (String.IsNullOrEmpty(WiredItem.StringData))
+                if (string.IsNullOrEmpty(WiredItem.StringData))
                     WiredItem.StringData = "0;0";
 
                 packet.WriteInteger(2);
@@ -74,7 +74,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             }
             else if (WiredItem.Type == WiredBoxType.EffectMuteTriggerer)
             {
-                if (String.IsNullOrEmpty(WiredItem.StringData))
+                if (string.IsNullOrEmpty(WiredItem.StringData))
                     WiredItem.StringData = "0;Message";
 
                 packet.WriteInteger(1);//Count, for the time.

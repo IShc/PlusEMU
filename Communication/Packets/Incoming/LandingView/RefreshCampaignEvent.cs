@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.LandingView
 {
-    class RefreshCampaignEvent : IPacketEvent
+    internal class RefreshCampaignEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

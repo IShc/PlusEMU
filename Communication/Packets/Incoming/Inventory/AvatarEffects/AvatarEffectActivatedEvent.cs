@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users.Effects;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.AvatarEffects
 {
-    class AvatarEffectActivatedEvent : IPacketEvent
+    internal class AvatarEffectActivatedEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

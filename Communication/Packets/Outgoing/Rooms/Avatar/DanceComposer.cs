@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Avatar
 {
-    class DanceComposer : MessageComposer
+    internal class DanceComposer : MessageComposer
     {
         public int VirtualId { get; }
         public int Dance { get; }

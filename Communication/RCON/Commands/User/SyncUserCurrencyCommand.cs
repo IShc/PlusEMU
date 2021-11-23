@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class SyncUserCurrencyCommand : IRconCommand
+    internal class SyncUserCurrencyCommand : IRconCommand
     {
         public string Description => "This command is used to sync a users specified currency to the database.";
 

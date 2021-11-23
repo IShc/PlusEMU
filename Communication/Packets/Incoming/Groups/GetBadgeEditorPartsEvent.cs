@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class GetBadgeEditorPartsEvent : IPacketEvent
+    internal class GetBadgeEditorPartsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

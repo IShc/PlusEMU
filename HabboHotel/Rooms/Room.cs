@@ -217,7 +217,7 @@ namespace Plus.HabboHotel.Rooms
                     dbClient.SetQuery("SELECT `text` FROM `bots_speech` WHERE `bot_id` = '" + Convert.ToInt32(bot["id"]) + "'");
                     DataTable botSpeech = dbClient.GetTable();
 
-                    List<RandomSpeech> speeches = new List<RandomSpeech>();
+                    List<RandomSpeech> speeches = new();
 
                     foreach (DataRow speech in botSpeech.Rows)
                     {
@@ -246,7 +246,7 @@ namespace Plus.HabboHotel.Rooms
                     if (mRow == null)
                         continue;
 
-                    Pet pet = new Pet(Convert.ToInt32(row["id"]), Convert.ToInt32(row["user_id"]), Convert.ToInt32(row["room_id"]), Convert.ToString(row["name"]), Convert.ToInt32(mRow["type"]), Convert.ToString(mRow["race"]),
+                    Pet pet = new(Convert.ToInt32(row["id"]), Convert.ToInt32(row["user_id"]), Convert.ToInt32(row["room_id"]), Convert.ToString(row["name"]), Convert.ToInt32(mRow["type"]), Convert.ToString(mRow["race"]),
                         Convert.ToString(mRow["color"]), Convert.ToInt32(mRow["experience"]), Convert.ToInt32(mRow["energy"]), Convert.ToInt32(mRow["nutrition"]), Convert.ToInt32(mRow["respect"]), Convert.ToDouble(mRow["createstamp"]), Convert.ToInt32(row["x"]), Convert.ToInt32(row["y"]),
                         Convert.ToDouble(row["z"]), Convert.ToInt32(mRow["have_saddle"]), Convert.ToInt32(mRow["anyone_ride"]), Convert.ToInt32(mRow["hairdye"]), Convert.ToInt32(mRow["pethair"]), Convert.ToString(mRow["gnome_clothing"]));
 
@@ -376,7 +376,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 if (item.GetBaseItem().ItemName.StartsWith("fball_goal_"))
                 {
-                    key = item.GetBaseItem().ItemName.Split(new char[] { '_' })[2];
+                    key = item.GetBaseItem().ItemName.Split(new[] { '_' })[2];
                     user.UnIdle();
                     user.DanceId = 0;
 
@@ -394,11 +394,11 @@ namespace Plus.HabboHotel.Rooms
                     predicate = p => p.GetBaseItem().ItemName == "fball_score_" + key;
                 }
 
-                foreach (Item item2 in GetRoomItemHandler().GetFloor.Where<Item>(predicate).ToList())
+                foreach (Item item2 in GetRoomItemHandler().GetFloor.Where(predicate).ToList())
                 {
                     if (item2.GetBaseItem().ItemName == "fball_score_" + key)
                     {
-                        if (!String.IsNullOrEmpty(item2.ExtraData))
+                        if (!string.IsNullOrEmpty(item2.ExtraData))
                             item2.ExtraData = (Convert.ToInt32(item2.ExtraData) + 1).ToString();
                         else
                             item2.ExtraData = "1";
@@ -493,7 +493,7 @@ namespace Plus.HabboHotel.Rooms
 
                     try
                     {
-                        GetRoomUserManager().RemoveUserFromRoom(user.GetClient(), true, false);
+                        GetRoomUserManager().RemoveUserFromRoom(user.GetClient(), true);
                     }
                     catch (Exception e2)
                     {
@@ -639,10 +639,9 @@ namespace Plus.HabboHotel.Rooms
 
             try
             {
-
                 List<RoomUser> users = _roomUserManager.GetUserList().ToList();
 
-                if (_roomUserManager == null || users == null)
+                if (_roomUserManager == null)
                     return;
 
                 foreach (RoomUser user in users)

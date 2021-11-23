@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class AllAroundMeCommand : IChatCommand
+    internal class AllAroundMeCommand : IChatCommand
     {
         public string PermissionRequired => "command_allaroundme";
 

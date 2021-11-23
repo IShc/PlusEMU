@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Notifications
 {
-    class RoomNotificationComposer : MessageComposer
+    internal class RoomNotificationComposer : MessageComposer
     {
         public string Type { get; }
         public string Key { get; }

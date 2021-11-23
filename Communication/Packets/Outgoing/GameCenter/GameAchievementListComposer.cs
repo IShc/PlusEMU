@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.GameCenter
 {
-    class GameAchievementListComposer : MessageComposer
+    internal class GameAchievementListComposer : MessageComposer
     {
         public Habbo Habbo { get; }
         public ICollection<Achievement> Achievements { get; }

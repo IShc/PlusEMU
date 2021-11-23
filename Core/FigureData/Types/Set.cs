@@ -2,7 +2,7 @@
 
 namespace Plus.Core.FigureData.Types
 {
-    class Set
+    internal class Set
     {
         public int Id { get; set; }
         public string Gender { get; set; }

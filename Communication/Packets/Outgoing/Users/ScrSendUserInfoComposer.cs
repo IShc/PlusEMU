@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class ScrSendUserInfoComposer : MessageComposer
+    internal class ScrSendUserInfoComposer : MessageComposer
     {
         public ScrSendUserInfoComposer()
             : base(ServerPacketHeader.ScrSendUserInfoMessageComposer)

@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Action
 {
-    class RemoveRightsEvent : IPacketEvent
+    internal class RemoveRightsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class ManageGroupComposer : MessageComposer
+    internal class ManageGroupComposer : MessageComposer
     {
         public Group Group { get; }
         public string[] BadgeParts { get; }

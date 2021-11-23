@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Action
 {
-    class UnIgnoreUserEvent : IPacketEvent
+    internal class UnIgnoreUserEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class GiveUserBadgeBox : IWiredItem
+    internal class GiveUserBadgeBox : IWiredItem
     {
         public Room Instance { get; set; }
 
@@ -55,7 +55,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (user == null)
                 return false;
 
-            if (String.IsNullOrEmpty(StringData))
+            if (string.IsNullOrEmpty(StringData))
                 return false;
 
             if (player.GetBadgeComponent().HasBadge(StringData))

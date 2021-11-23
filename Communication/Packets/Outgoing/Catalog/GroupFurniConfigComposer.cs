@@ -3,7 +3,7 @@ using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    class GroupFurniConfigComposer : MessageComposer
+    internal class GroupFurniConfigComposer : MessageComposer
     {
         public ICollection<Group> Groups { get; }
 

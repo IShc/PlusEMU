@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class ToggleFurniBox : IWiredItem, IWiredCycle
+    internal class ToggleFurniBox : IWiredItem, IWiredCycle
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -19,8 +19,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public string ItemsData { get; set; }
 
         private long _next;
-        private int _delay = 0;
-        private bool _requested = false;
+        private int _delay;
+        private bool _requested;
 
         public ToggleFurniBox(Room instance, Item item)
         {

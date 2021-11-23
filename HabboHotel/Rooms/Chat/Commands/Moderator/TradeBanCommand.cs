@@ -5,7 +5,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class TradeBanCommand : IChatCommand
+    internal class TradeBanCommand : IChatCommand
     {
         public string PermissionRequired => "command_trade_ban";
 

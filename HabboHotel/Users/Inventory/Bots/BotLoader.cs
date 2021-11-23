@@ -5,11 +5,11 @@ using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Users.Inventory.Bots
 {
-    class BotLoader
+    internal class BotLoader
     {
         public static List<Bot> GetBotsForUser(int userId)
         {
-            List<Bot> b = new List<Bot>();
+            List<Bot> b = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

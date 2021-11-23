@@ -3,7 +3,7 @@ using Plus.HabboHotel.Navigator;
 
 namespace Plus.HabboHotel.Rooms
 {
-    static class RoomAppender
+    internal static class RoomAppender
     {
         public static void WriteRoom(ServerPacket packet, RoomData data, RoomPromotion promotion)
         {

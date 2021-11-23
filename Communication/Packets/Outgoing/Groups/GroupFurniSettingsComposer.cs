@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class GroupFurniSettingsComposer : MessageComposer
+    internal class GroupFurniSettingsComposer : MessageComposer
     {
         public Group Group { get; }
         public int ItemId { get; }

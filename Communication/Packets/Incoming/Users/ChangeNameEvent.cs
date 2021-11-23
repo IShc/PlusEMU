@@ -10,7 +10,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class ChangeNameEvent : IPacketEvent
+    internal class ChangeNameEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

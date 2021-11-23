@@ -144,7 +144,7 @@ namespace Plus.HabboHotel.GameClients
             if (reporter == null || target == null || reporter.GetHabbo() == null || target.GetHabbo() == null)
                 return;
 
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
             builder.Append("New report submitted!\r\r");
             builder.Append("Reporter: " + reporter.GetHabbo().Username + "\r");
             builder.Append("Reported User: " + target.GetHabbo().Username + "\r\r");
@@ -194,7 +194,7 @@ namespace Plus.HabboHotel.GameClients
 
         public void CreateAndStartClient(IChannelHandlerContext connection)
         {
-            GameClient client = new GameClient(connection);
+            GameClient client = new(connection);
             if (_clients.TryAdd(connection.Channel.Id, client))
             {
                 //Hmmmmm?
@@ -302,7 +302,7 @@ namespace Plus.HabboHotel.GameClients
             {
                 _clientPingStopwatch.Restart();
 
-                List<GameClient> toPing = new List<GameClient>();
+                List<GameClient> toPing = new();
 
                 foreach (GameClient client in _clients.Values.ToList())
                 {

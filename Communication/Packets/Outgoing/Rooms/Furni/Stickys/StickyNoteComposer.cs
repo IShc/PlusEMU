@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Stickys
 {
-    class StickyNoteComposer : MessageComposer
+    internal class StickyNoteComposer : MessageComposer
     {
         public string ItemId { get; }
         public string ExtraData { get; }

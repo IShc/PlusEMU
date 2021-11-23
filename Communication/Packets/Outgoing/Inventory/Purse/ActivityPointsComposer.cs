@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.Purse
 {
-    class ActivityPointsComposer : MessageComposer
+    internal class ActivityPointsComposer : MessageComposer
     {
         public int PixelsBalance { get; }
         public int SeasonalCurrency { get; }

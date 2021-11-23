@@ -22,11 +22,6 @@ namespace Plus.HabboHotel.Permissions
 
         private readonly Dictionary<int, List<string>> _permissionSubscriptionRights = new();
 
-        public PermissionManager()
-        {
-
-        }
-
         public void Init()
         {
             _permissions.Clear();
@@ -104,8 +99,8 @@ namespace Plus.HabboHotel.Permissions
                         }
                         else
                         {
-                            List<string> rightsSet = new List<string>()
-                                {
+                            List<string> rightsSet = new()
+                            {
                                     permission.PermissionName
                                 };
 
@@ -137,8 +132,8 @@ namespace Plus.HabboHotel.Permissions
                         }
                         else
                         {
-                            List<string> rightsSet = new List<string>()
-                                {
+                            List<string> rightsSet = new()
+                            {
                                     permission.PermissionName
                                 };
 
@@ -161,7 +156,7 @@ namespace Plus.HabboHotel.Permissions
 
         public List<string> GetPermissionsForPlayer(Habbo player)
         {
-            List<string> permissionSet = new List<string>();
+            List<string> permissionSet = new();
 
             if (_permissionGroupRights.TryGetValue(player.Rank, out List<string> permRights))
             {

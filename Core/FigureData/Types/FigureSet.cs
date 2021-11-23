@@ -2,7 +2,7 @@
 
 namespace Plus.Core.FigureData.Types
 {
-    class FigureSet
+    internal class FigureSet
     {
         public SetType Type { get; set; }
         public int PalletId { get; set; }

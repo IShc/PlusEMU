@@ -8,7 +8,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
-    class UseSellableClothingEvent : IPacketEvent
+    internal class UseSellableClothingEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

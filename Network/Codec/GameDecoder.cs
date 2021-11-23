@@ -14,10 +14,10 @@ namespace Plus.Network.Codec
             try
             {
                 short id = message.ReadShort();
-                ClientPacket packet = new ClientPacket(id, message.ReadBytes(message.ReadableBytes));
-               
+                ClientPacket packet = new(id, message.ReadBytes(message.ReadableBytes));
+                
                 output.Add(packet);
-            }catch (Exception e)
+            } catch (Exception)
             {
                 
             }

@@ -24,7 +24,7 @@ namespace Plus.HabboHotel.Catalog.Pets
                 {
                     foreach (DataRow row in data.Rows)
                     {
-                        PetRace race = new PetRace(Convert.ToInt32(row["raceid"]), Convert.ToInt32(row["color1"]), Convert.ToInt32(row["color2"]), (Convert.ToString(row["has1color"]) == "1"), (Convert.ToString(row["has2color"]) == "1"));
+                        PetRace race = new(Convert.ToInt32(row["raceid"]), Convert.ToInt32(row["color1"]), Convert.ToInt32(row["color2"]), (Convert.ToString(row["has1color"]) == "1"), (Convert.ToString(row["has2color"]) == "1"));
                         if (!_races.Contains(race))
                             _races.Add(race);
                     }

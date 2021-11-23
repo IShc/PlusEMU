@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Polls
 {
-    class PollOfferComposer : MessageComposer
+    internal class PollOfferComposer : MessageComposer
     {
         public PollOfferComposer()
             : base(1074)

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
 {
-    class AchievementScoreComposer : MessageComposer
+    internal class AchievementScoreComposer : MessageComposer
     {
         public int AchievementScore { get; }
 

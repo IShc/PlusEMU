@@ -22,7 +22,7 @@ namespace Plus.HabboHotel.Rooms
         public bool CanWalk;
         public int CarryItemId; //byte
         public int CarryTimer; //byte
-        public int ChatSpamCount = 0;
+        public int ChatSpamCount;
         public int ChatSpamTicks = 16;
         public ItemEffectType CurrentItemEffect;
         public int DanceId;
@@ -49,7 +49,7 @@ namespace Plus.HabboHotel.Rooms
         public int LockedTilesCount;
 
         public List<Vector2D> Path = new();
-        public bool PathRecalcNeeded = false;
+        public bool PathRecalcNeeded;
         public int PathStep = 1;
         public Pet PetData;
 
@@ -91,7 +91,7 @@ namespace Plus.HabboHotel.Rooms
         public int RollerDelay = 0;
 
         public int LLPartner = 0;
-        public double TimeInRoom = 0;
+        public double TimeInRoom;
 
         public RoomUser(int habboId, int roomId, int virtualId, Room room)
         {

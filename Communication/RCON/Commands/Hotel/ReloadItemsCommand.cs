@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Rcon.Commands.Hotel
 {
-    class ReloadItemsCommand : IRconCommand
+    internal class ReloadItemsCommand : IRconCommand
     {
         public string Description => "This command is used to reload the game items.";
 

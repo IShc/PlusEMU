@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class GetUserTagsEvent : IPacketEvent
+    internal class GetUserTagsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

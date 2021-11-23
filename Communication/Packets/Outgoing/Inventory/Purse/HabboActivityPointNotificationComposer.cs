@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.Purse
 {
-    class HabboActivityPointNotificationComposer : MessageComposer
+    internal class HabboActivityPointNotificationComposer : MessageComposer
     {
         public int Balance { get; }
         public int Notify { get; }

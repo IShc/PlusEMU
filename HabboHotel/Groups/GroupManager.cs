@@ -173,7 +173,7 @@ namespace Plus.HabboHotel.Groups
 
         public List<Group> GetGroupsForUser(int userId)
         {
-            List<Group> groups = new List<Group>();
+            List<Group> groups = new();
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT g.id FROM `group_memberships` AS m RIGHT JOIN `groups` AS g ON m.group_id = g.id WHERE m.user_id = @user");

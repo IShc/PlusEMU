@@ -91,25 +91,25 @@ namespace Plus.HabboHotel.Users.UserData
                 dbClient.RunQuery("UPDATE `users` SET `online` = '1', `auth_ticket` = '' WHERE `id` = '" + userId + "' LIMIT 1");
             }
 
-            ConcurrentDictionary<string, UserAchievement> achievements = new ConcurrentDictionary<string, UserAchievement>();
+            ConcurrentDictionary<string, UserAchievement> achievements = new();
             foreach (DataRow dRow in dAchievements.Rows)
             {
                 achievements.TryAdd(Convert.ToString(dRow["group"]), new UserAchievement(Convert.ToString(dRow["group"]), Convert.ToInt32(dRow["level"]), Convert.ToInt32(dRow["progress"])));
             }
 
-            List<int> favouritedRooms = new List<int>();
+            List<int> favouritedRooms = new();
             foreach (DataRow dRow in dFavouriteRooms.Rows)
             {
                 favouritedRooms.Add(Convert.ToInt32(dRow["room_id"]));
             }
 
-            List<Badge> badges = new List<Badge>();
+            List<Badge> badges = new();
             foreach (DataRow dRow in dBadges.Rows)
             {
                 badges.Add(new Badge(Convert.ToString(dRow["badge_id"]), Convert.ToInt32(dRow["badge_slot"])));
             }
 
-            Dictionary<int, MessengerBuddy> friends = new Dictionary<int, MessengerBuddy>();
+            Dictionary<int, MessengerBuddy> friends = new();
             foreach (DataRow dRow in dFriends.Rows)
             {
                 int friendId = Convert.ToInt32(dRow["id"]);
@@ -127,7 +127,7 @@ namespace Plus.HabboHotel.Users.UserData
                     friends.Add(friendId, new MessengerBuddy(friendId, friendName, friendLook, friendMotto, friendLastOnline, friendHideOnline, friendHideRoom));
             }
 
-            Dictionary<int, MessengerRequest> requests = new Dictionary<int, MessengerRequest>();
+            Dictionary<int, MessengerRequest> requests = new();
             foreach (DataRow dRow in dRequests.Rows)
             {
                 int receiverId = Convert.ToInt32(dRow["from_id"]);
@@ -147,7 +147,7 @@ namespace Plus.HabboHotel.Users.UserData
                 }
             }
 
-            Dictionary<int, int> quests = new Dictionary<int, int>();
+            Dictionary<int, int> quests = new();
             foreach (DataRow dRow in dQuests.Rows)
             {
                 int questId = Convert.ToInt32(dRow["quest_id"]);
@@ -158,7 +158,7 @@ namespace Plus.HabboHotel.Users.UserData
                 quests.Add(questId, Convert.ToInt32(dRow["progress"]));
             }
 
-            Dictionary<int, Relationship> relationships = new Dictionary<int, Relationship>();
+            Dictionary<int, Relationship> relationships = new();
             foreach (DataRow row in dRelations.Rows)
             {
                 if (friends.ContainsKey(Convert.ToInt32(row[2])))
@@ -219,14 +219,14 @@ namespace Plus.HabboHotel.Users.UserData
                 dRelations = dbClient.GetTable();
             }
 
-            ConcurrentDictionary<string, UserAchievement> achievements = new ConcurrentDictionary<string, UserAchievement>();
-            List<int> favouritedRooms = new List<int>();
-            List<Badge> badges = new List<Badge>();
-            Dictionary<int, MessengerBuddy> friends = new Dictionary<int, MessengerBuddy>();
-            Dictionary<int, MessengerRequest> friendRequests = new Dictionary<int, MessengerRequest>();
-            Dictionary<int, int> quests = new Dictionary<int, int>();
+            ConcurrentDictionary<string, UserAchievement> achievements = new();
+            List<int> favouritedRooms = new();
+            List<Badge> badges = new();
+            Dictionary<int, MessengerBuddy> friends = new();
+            Dictionary<int, MessengerRequest> friendRequests = new();
+            Dictionary<int, int> quests = new();
 
-            Dictionary<int, Relationship> relationships = new Dictionary<int, Relationship>();
+            Dictionary<int, Relationship> relationships = new();
             foreach (DataRow row in dRelations.Rows)
             {
                 if (!relationships.ContainsKey(Convert.ToInt32(row["id"])))

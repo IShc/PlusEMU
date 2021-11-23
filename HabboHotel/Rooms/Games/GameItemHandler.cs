@@ -29,7 +29,7 @@ namespace Plus.HabboHotel.Rooms.Games
 
         private void CyclePyramids()
         {
-            Random rnd = new Random();
+            Random rnd = new();
 
             foreach (Item item in _banzaiPyramids.Values.ToList())
             {

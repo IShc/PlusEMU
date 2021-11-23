@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class ModerationCautionEvent : IPacketEvent
+    internal class ModerationCautionEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

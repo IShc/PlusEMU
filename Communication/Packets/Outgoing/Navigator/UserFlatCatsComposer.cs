@@ -3,7 +3,7 @@ using Plus.HabboHotel.Navigator;
 
 namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class UserFlatCatsComposer : MessageComposer
+    internal class UserFlatCatsComposer : MessageComposer
     {
         public ICollection<SearchResultList> Categories { get; }
         public int Rank { get; }

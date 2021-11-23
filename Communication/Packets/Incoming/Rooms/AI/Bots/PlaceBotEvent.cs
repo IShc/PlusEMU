@@ -13,7 +13,7 @@ using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
 {
-    class PlaceBotEvent : IPacketEvent
+    internal class PlaceBotEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -65,7 +65,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
                 dbClient.RunQuery();
             }
 
-            List<RandomSpeech> botSpeechList = new List<RandomSpeech>();
+            List<RandomSpeech> botSpeechList = new();
 
             //TODO: Grab data?
             DataRow getData;

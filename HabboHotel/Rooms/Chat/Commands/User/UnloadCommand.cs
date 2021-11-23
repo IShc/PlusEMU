@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class UnloadCommand : IChatCommand
+    internal class UnloadCommand : IChatCommand
     {
         public string PermissionRequired => "command_unload";
 

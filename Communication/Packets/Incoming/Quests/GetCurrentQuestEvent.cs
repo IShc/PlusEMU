@@ -5,7 +5,7 @@ using Plus.HabboHotel.Quests;
 
 namespace Plus.Communication.Packets.Incoming.Quests
 {
-    class GetCurrentQuestEvent : IPacketEvent
+    internal class GetCurrentQuestEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

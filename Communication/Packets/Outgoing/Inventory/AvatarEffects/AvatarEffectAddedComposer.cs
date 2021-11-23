@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects
 {
-    class AvatarEffectAddedComposer : MessageComposer
+    internal class AvatarEffectAddedComposer : MessageComposer
     {
         public int SpriteId { get; }
         public int Duration { get; }

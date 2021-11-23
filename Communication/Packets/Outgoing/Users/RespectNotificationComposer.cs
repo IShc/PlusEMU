@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class RespectNotificationComposer : MessageComposer
+    internal class RespectNotificationComposer : MessageComposer
     {
         public int UserId { get; }
         public int Respect { get; }

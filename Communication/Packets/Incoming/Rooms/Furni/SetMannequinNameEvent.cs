@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
-    class SetMannequinNameEvent : IPacketEvent
+    internal class SetMannequinNameEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

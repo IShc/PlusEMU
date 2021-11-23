@@ -56,7 +56,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
             if (@params.Length == 0)
                 return false;
 
-            if (String.IsNullOrEmpty(StringData) || StringData == "0;0;0" || SetItems.Count == 0)
+            if (string.IsNullOrEmpty(StringData) || StringData == "0;0;0" || SetItems.Count == 0)
                 return false;
 
             foreach (Item item in SetItems.Values.ToList())
@@ -67,9 +67,9 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                 if (!Instance.GetRoomItemHandler().GetFloor.Contains(item))
                     continue;
 
-                foreach (String I in ItemsData.Split(';'))
+                foreach (string I in ItemsData.Split(';'))
                 {
-                    if (String.IsNullOrEmpty(I))
+                    if (string.IsNullOrEmpty(I))
                         continue;
 
                     Item ii = Instance.GetRoomItemHandler().GetItem(Convert.ToInt32(I.Split(':')[0]));
@@ -83,7 +83,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                     {
                         try
                         {
-                            if (ii.ExtraData != part[4].ToString())
+                            if (ii.ExtraData != part[4])
                                 return false;
                         }
                         catch { }

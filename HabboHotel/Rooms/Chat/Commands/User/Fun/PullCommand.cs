@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
-    class PullCommand : IChatCommand
+    internal class PullCommand : IChatCommand
     {
         public string PermissionRequired => "command_pull";
 
@@ -90,11 +90,8 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
                     targetUser.MoveTo(thisUser.X - 1, thisUser.Y);
                 return;
             }
-            else
-            {
-                session.SendWhisper("That user is not close enough to you to be pulled, try getting closer!");
-                return;
-            }
+
+            session.SendWhisper("That user is not close enough to you to be pulled, try getting closer!");
         }
     }
 }

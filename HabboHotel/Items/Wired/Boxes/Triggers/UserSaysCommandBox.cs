@@ -9,7 +9,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 {
-    class UserSaysCommandBox : IWiredItem
+    internal class UserSaysCommandBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }

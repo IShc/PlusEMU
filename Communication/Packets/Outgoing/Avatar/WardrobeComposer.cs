@@ -4,7 +4,7 @@ using Plus.Database.Interfaces;
 
 namespace Plus.Communication.Packets.Outgoing.Avatar
 {
-    class WardrobeComposer : MessageComposer
+    internal class WardrobeComposer : MessageComposer
     {
         public int UserId { get; }
 

@@ -5,7 +5,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class RoomCommand : IChatCommand
+    internal class RoomCommand : IChatCommand
     {
         public string PermissionRequired => "command_room";
 
@@ -32,16 +32,16 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
             {
                 case "list":
                 {
-                    StringBuilder list = new StringBuilder("");
+                    StringBuilder list = new("");
                     list.AppendLine("Room Command List");
                     list.AppendLine("-------------------------");
-                    list.AppendLine("Pet Morphs: " + (room.PetMorphsAllowed == true ? "enabled" : "disabled"));
-                    list.AppendLine("Pull: " + (room.PullEnabled == true ? "enabled" : "disabled"));
-                    list.AppendLine("Push: " + (room.PushEnabled == true ? "enabled" : "disabled"));
-                    list.AppendLine("Super Pull: " + (room.SuperPullEnabled == true ? "enabled" : "disabled"));
-                    list.AppendLine("Super Push: " + (room.SuperPushEnabled == true ? "enabled" : "disabled"));
-                    list.AppendLine("Respect: " + (room.RespectNotificationsEnabled == true ? "enabled" : "disabled"));
-                    list.AppendLine("Enables: " + (room.EnablesEnabled == true ? "enabled" : "disabled"));
+                    list.AppendLine("Pet Morphs: " + (room.PetMorphsAllowed ? "enabled" : "disabled"));
+                    list.AppendLine("Pull: " + (room.PullEnabled ? "enabled" : "disabled"));
+                    list.AppendLine("Push: " + (room.PushEnabled ? "enabled" : "disabled"));
+                    list.AppendLine("Super Pull: " + (room.SuperPullEnabled ? "enabled" : "disabled"));
+                    list.AppendLine("Super Push: " + (room.SuperPushEnabled ? "enabled" : "disabled"));
+                    list.AppendLine("Respect: " + (room.RespectNotificationsEnabled ? "enabled" : "disabled"));
+                    list.AppendLine("Enables: " + (room.EnablesEnabled ? "enabled" : "disabled"));
                     session.SendNotification(list.ToString());
                     break;
                 }
@@ -56,7 +56,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                             dbClient.RunQuery();
                         }
 
-                        session.SendWhisper("Push mode is now " + (room.PushEnabled == true ? "enabled!" : "disabled!"));
+                        session.SendWhisper("Push mode is now " + (room.PushEnabled ? "enabled!" : "disabled!"));
                         break;
                     }
 
@@ -70,7 +70,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                             dbClient.RunQuery();
                         }
 
-                        session.SendWhisper("Super Push mode is now " + (room.SuperPushEnabled == true ? "enabled!" : "disabled!"));
+                        session.SendWhisper("Super Push mode is now " + (room.SuperPushEnabled ? "enabled!" : "disabled!"));
                         break;
                     }
 
@@ -84,7 +84,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                             dbClient.RunQuery();
                         }
 
-                        session.SendWhisper("Super Pull mode is now " + (room.SuperPullEnabled == true ? "enabled!" : "disabled!"));
+                        session.SendWhisper("Super Pull mode is now " + (room.SuperPullEnabled ? "enabled!" : "disabled!"));
                         break;
                     }
 
@@ -98,7 +98,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                             dbClient.RunQuery();
                         }
 
-                        session.SendWhisper("Pull mode is now " + (room.PullEnabled == true ? "enabled!" : "disabled!"));
+                        session.SendWhisper("Pull mode is now " + (room.PullEnabled ? "enabled!" : "disabled!"));
                         break;
                     }
 
@@ -113,7 +113,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                             dbClient.RunQuery();
                         }
 
-                        session.SendWhisper("Enables mode set to " + (room.EnablesEnabled == true ? "enabled!" : "disabled!"));
+                        session.SendWhisper("Enables mode set to " + (room.EnablesEnabled ? "enabled!" : "disabled!"));
                         break;
                     }
 
@@ -127,7 +127,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                             dbClient.RunQuery();
                         }
 
-                        session.SendWhisper("Respect notifications mode set to " + (room.RespectNotificationsEnabled == true ? "enabled!" : "disabled!"));
+                        session.SendWhisper("Respect notifications mode set to " + (room.RespectNotificationsEnabled ? "enabled!" : "disabled!"));
                         break;
                     }
 
@@ -142,7 +142,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                             dbClient.RunQuery();
                         }
 
-                        session.SendWhisper("Human pet morphs notifications mode set to " + (room.PetMorphsAllowed == true ? "enabled!" : "disabled!"));
+                        session.SendWhisper("Human pet morphs notifications mode set to " + (room.PetMorphsAllowed ? "enabled!" : "disabled!"));
                         
                         if (!room.PetMorphsAllowed)
                         {

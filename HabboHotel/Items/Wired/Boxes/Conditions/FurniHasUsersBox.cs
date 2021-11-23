@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms.PathFinding;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    class FurniHasUsersBox : IWiredItem
+    internal class FurniHasUsersBox : IWiredItem
     {
         public Room Instance { get; set; }
 

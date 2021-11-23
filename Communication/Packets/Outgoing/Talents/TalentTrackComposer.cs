@@ -4,7 +4,7 @@ using Plus.HabboHotel.Talents;
 
 namespace Plus.Communication.Packets.Outgoing.Talents
 {
-    class TalentTrackComposer : MessageComposer
+    internal class TalentTrackComposer : MessageComposer
     {
         public ICollection<TalentTrackLevel> Levels { get; }
         public string Type { get; }

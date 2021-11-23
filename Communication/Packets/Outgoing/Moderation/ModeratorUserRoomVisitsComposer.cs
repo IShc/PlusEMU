@@ -5,7 +5,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class ModeratorUserRoomVisitsComposer : MessageComposer
+    internal class ModeratorUserRoomVisitsComposer : MessageComposer
     {
         public Habbo Habbo { get; }
         public Dictionary<double, RoomData> Visits { get; }

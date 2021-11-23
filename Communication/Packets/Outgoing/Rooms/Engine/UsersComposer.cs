@@ -8,7 +8,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class UsersComposer : MessageComposer
+    internal class UsersComposer : MessageComposer
     {
         public ICollection<RoomUser> Users { get; }
         public RoomUser User { get; }
@@ -171,7 +171,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 
         public string PetFigureForType(int type)
         {
-            Random random = new Random();
+            Random random = new();
 
             switch (type)
             {

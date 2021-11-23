@@ -17,10 +17,6 @@ namespace Plus.HabboHotel.Users.Clothing
         /// </summary>
         private readonly ConcurrentDictionary<int, ClothingParts> _allClothing = new();
 
-        public ClothingComponent()
-        {
-        }
-
         /// <summary>
         /// Initializes the EffectsComponent.
         /// </summary>

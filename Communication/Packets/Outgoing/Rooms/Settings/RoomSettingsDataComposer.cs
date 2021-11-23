@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
-    class RoomSettingsDataComposer : MessageComposer
+    internal class RoomSettingsDataComposer : MessageComposer
     {
         public Room Room { get; }
         public RoomSettingsDataComposer(Room room)

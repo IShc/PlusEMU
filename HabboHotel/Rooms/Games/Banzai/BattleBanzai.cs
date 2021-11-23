@@ -338,11 +338,11 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             item.UpdateNeeded = true;
             item.UpdateState();
 
-            Double newZ = _room.GetGameMap().Model.SqFloorHeight[newX, newY];
+            double newZ = _room.GetGameMap().Model.SqFloorHeight[newX, newY];
 
             _room.SendPacket(new SlideObjectBundleComposer(item.GetX, item.GetY, item.GetZ, newX, newY, newZ, 0, 0, item.Id));
 
-            _room.GetRoomItemHandler().SetFloorItem(mover, item, newX, newY, item.Rotation, false, false, false, false);
+            _room.GetRoomItemHandler().SetFloorItem(mover, item, newX, newY, item.Rotation, false, false, false);
 
             if (mover == null || mover.GetHabbo() == null)
                 return;

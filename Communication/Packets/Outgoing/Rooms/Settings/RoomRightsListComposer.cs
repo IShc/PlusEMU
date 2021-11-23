@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
-    class RoomRightsListComposer : MessageComposer
+    internal class RoomRightsListComposer : MessageComposer
     {
         public Room Room { get; }
         public RoomRightsListComposer(Room instance)

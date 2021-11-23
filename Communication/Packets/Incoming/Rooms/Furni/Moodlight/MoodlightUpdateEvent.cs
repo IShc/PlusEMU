@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight
 {
-    class MoodlightUpdateEvent : IPacketEvent
+    internal class MoodlightUpdateEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

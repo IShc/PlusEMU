@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class GetGuestRoomResultComposer : MessageComposer
+    internal class GetGuestRoomResultComposer : MessageComposer
     {
         public Habbo Habbo { get; }
         public RoomData Data { get; }

@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class ReloadUserMottoCommand : IRconCommand
+    internal class ReloadUserMottoCommand : IRconCommand
     {
         public string Description => "This command is used to reload the users motto from the database.";
 
@@ -32,18 +32,16 @@ namespace Plus.Communication.Rcon.Commands.User
             {
                 return true;
             }
-            else
+
+            //We are in a room, let's try to run the packets.
+            Room room = client.GetHabbo().CurrentRoom;
+            if (room != null)
             {
-                //We are in a room, let's try to run the packets.
-                Room room = client.GetHabbo().CurrentRoom;
-                if (room != null)
+                RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(client.GetHabbo().Id);
+                if (user != null)
                 {
-                    RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(client.GetHabbo().Id);
-                    if (user != null)
-                    {
-                        room.SendPacket(new UserChangeComposer(user, false));
-                        return true;
-                    }
+                    room.SendPacket(new UserChangeComposer(user, false));
+                    return true;
                 }
             }
 

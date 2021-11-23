@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.BuildersClub
 {
-    class BuildersClubMembershipComposer : MessageComposer
+    internal class BuildersClubMembershipComposer : MessageComposer
     {
         public BuildersClubMembershipComposer()
             : base(ServerPacketHeader.BuildersClubMembershipMessageComposer)

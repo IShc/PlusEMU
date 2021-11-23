@@ -7,7 +7,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Furni
 {
-    class RequestFurniInventoryEvent : IPacketEvent
+    internal class RequestFurniInventoryEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

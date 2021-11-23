@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Avatar
 {
-    class AvatarAspectUpdateMessageComposer : MessageComposer
+    internal class AvatarAspectUpdateMessageComposer : MessageComposer
     {
         public string Figure { get; }
         public string Gender { get; }

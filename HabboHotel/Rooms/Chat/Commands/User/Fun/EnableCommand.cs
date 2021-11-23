@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms.Games.Teams;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
-    class EnableCommand : IChatCommand
+    internal class EnableCommand : IChatCommand
     {
         public string PermissionRequired => "command_enable";
 
@@ -34,9 +34,10 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
                 session.SendWhisper("You cannot enable effects whilst riding a horse!");
                 return;
             }
-            else if (thisUser.Team != Team.None)
+
+            if (thisUser.Team != Team.None)
                 return;
-            else if (thisUser.IsLying)
+            if (thisUser.IsLying)
                 return;
 
             int effectId = 0;

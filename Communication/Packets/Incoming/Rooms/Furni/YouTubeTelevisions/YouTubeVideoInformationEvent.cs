@@ -5,7 +5,7 @@ using Plus.HabboHotel.Items.Televisions;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions
 {
-    class YouTubeVideoInformationEvent : IPacketEvent
+    internal class YouTubeVideoInformationEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

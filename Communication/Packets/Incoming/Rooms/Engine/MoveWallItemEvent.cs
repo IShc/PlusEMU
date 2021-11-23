@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 {
-    class MoveWallItemEvent : IPacketEvent
+    internal class MoveWallItemEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.LandingView
 {
-    class CampaignComposer : MessageComposer
+    internal class CampaignComposer : MessageComposer
     {
         public string CampaignString { get; }
         public string CampaignName { get; }

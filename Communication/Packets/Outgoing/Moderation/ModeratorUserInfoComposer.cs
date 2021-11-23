@@ -3,7 +3,7 @@ using System.Data;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class ModeratorUserInfoComposer : MessageComposer
+    internal class ModeratorUserInfoComposer : MessageComposer
     {
         public DataRow User { get; }
         public DataRow Info { get; }

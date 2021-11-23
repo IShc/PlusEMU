@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms.Trading;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Trading
 {
-    class TradingOfferItemEvent : IPacketEvent
+    internal class TradingOfferItemEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

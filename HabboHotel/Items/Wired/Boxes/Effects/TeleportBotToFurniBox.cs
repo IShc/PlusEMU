@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class TeleportBotToFurniBox : IWiredItem
+    internal class TeleportBotToFurniBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -45,14 +45,14 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public bool Execute(params object[] @params)
         {
-            if (String.IsNullOrEmpty(StringData))
+            if (string.IsNullOrEmpty(StringData))
                 return false;
 
             RoomUser user = Instance.GetRoomUserManager().GetBotByName(StringData);
             if (user == null)
                 return false;
 
-            Random rand = new Random();
+            Random rand = new();
             List<Item> items = SetItems.Values.ToList();
             items = items.OrderBy(x => rand.Next()).ToList();
 

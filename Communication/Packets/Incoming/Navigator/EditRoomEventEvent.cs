@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Navigator
 {
-    class EditRoomEventEvent : IPacketEvent
+    internal class EditRoomEventEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -34,8 +34,7 @@ namespace Plus.Communication.Packets.Incoming.Navigator
                 dbClient.RunQuery();
             }
 
-            Room room;
-            if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(Convert.ToInt32(roomId), out room))
+            if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(Convert.ToInt32(roomId), out Room room))
                 return;
 
             data.Promotion.Name = name;

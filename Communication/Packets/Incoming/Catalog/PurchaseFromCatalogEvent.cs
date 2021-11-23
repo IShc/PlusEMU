@@ -216,7 +216,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             switch (item.Data.Type.ToString().ToLower())
             {
                 default:
-                    List<Item> generatedGenericItems = new List<Item>();
+                    List<Item> generatedGenericItems = new();
 
                     Item newItem;
                     switch (item.Data.InteractionType)

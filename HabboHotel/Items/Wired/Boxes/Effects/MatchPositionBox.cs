@@ -8,9 +8,9 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class MatchPositionBox : IWiredItem, IWiredCycle
+    internal class MatchPositionBox : IWiredItem, IWiredCycle
     {
-        private int _delay = 0;
+        private int _delay;
         public Room Instance { get; set; }
 
         public Item Item { get; set; }
@@ -76,7 +76,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public bool OnCycle()
         {
-            if (!_requested || String.IsNullOrEmpty(StringData) || StringData == "0;0;0" || SetItems.Count == 0)
+            if (!_requested || string.IsNullOrEmpty(StringData) || StringData == "0;0;0" || SetItems.Count == 0)
                 return false;
 
             foreach (Item item in SetItems.Values.ToList())
@@ -109,7 +109,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                         if (int.Parse(StringData.Split(';')[0]) == 1)//State
                         {
                             if (part.Count() >= 4)
-                                SetState(ii, part[4].ToString());
+                                SetState(ii, part[4]);
                             else
                                 SetState(ii, "1");
                         }
@@ -126,7 +126,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     try
                     {
                         if (int.Parse(StringData.Split(';')[2]) == 1)//Position
-                            SetPosition(ii, Convert.ToInt32(part[0].ToString()), Convert.ToInt32(part[1].ToString()), Convert.ToDouble(part[2].ToString()));
+                            SetPosition(ii, Convert.ToInt32(part[0]), Convert.ToInt32(part[1]), Convert.ToDouble(part[2]));
                     }
                     catch (Exception e) { ExceptionLogger.LogWiredException(e); }
                 }

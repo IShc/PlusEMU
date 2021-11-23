@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
 {
-    class HideWiredConfigComposer : MessageComposer
+    internal class HideWiredConfigComposer : MessageComposer
     {
         public HideWiredConfigComposer()
             : base(ServerPacketHeader.HideWiredConfigMessageComposer)

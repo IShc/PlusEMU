@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class TeleportCommand : IChatCommand
+    internal class TeleportCommand : IChatCommand
     {
         public string PermissionRequired => "command_teleport";
 

@@ -39,7 +39,7 @@ namespace Plus.Core.FigureData
             if (_setTypes.Count > 0)
                 _setTypes.Clear();
 
-            XmlDocument xDoc = new XmlDocument();
+            XmlDocument xDoc = new();
             xDoc.Load($"Config{Path.DirectorySeparatorChar}figuredata.xml");
 
             XmlNodeList colors = xDoc.GetElementsByTagName("colors");
@@ -190,7 +190,7 @@ namespace Plus.Core.FigureData
                         }
                         else
                         {
-                            string[] ignore = new string[] { "ca", "wa" };
+                            string[] ignore = { "ca", "wa" };
 
                             if (ignore.Contains(type))
                             {

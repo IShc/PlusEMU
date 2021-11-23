@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Rcon.Commands.Hotel
 {
-    class ReloadCatalogCommand : IRconCommand
+    internal class ReloadCatalogCommand : IRconCommand
     {
         public string Description => "This command is used to reload the catalog.";
 

@@ -9,7 +9,7 @@ using Plus.Network.Codec;
 
 namespace Plus.Network.Handler
 {
-    class MessageInterceptorHandler : ByteToMessageDecoder
+    internal class MessageInterceptorHandler : ByteToMessageDecoder
     {
         protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object> output)
         {

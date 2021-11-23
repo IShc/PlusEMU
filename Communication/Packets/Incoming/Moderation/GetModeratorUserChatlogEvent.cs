@@ -11,7 +11,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class GetModeratorUserChatlogEvent : IPacketEvent
+    internal class GetModeratorUserChatlogEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
 
             PlusEnvironment.GetGame().GetChatManager().GetLogs().FlushAndSave();
 
-            List<KeyValuePair<RoomData, List<ChatLogEntry>>> chatlogs = new List<KeyValuePair<RoomData, List<ChatLogEntry>>>();
+            List<KeyValuePair<RoomData, List<ChatLogEntry>>> chatlogs = new();
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `room_id`,`entry_timestamp`,`exit_timestamp` FROM `user_roomvisits` WHERE `user_id` = '" + data.Id + "' ORDER BY `entry_timestamp` DESC LIMIT 7");
@@ -55,7 +55,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
 
         private List<ChatLogEntry> GetChatlogs(RoomData roomData, double timeEnter, double timeExit)
         {
-            List<ChatLogEntry> chats = new List<ChatLogEntry>();
+            List<ChatLogEntry> chats = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

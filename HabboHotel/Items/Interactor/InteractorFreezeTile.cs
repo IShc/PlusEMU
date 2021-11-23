@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms.Games.Teams;
 
 namespace Plus.HabboHotel.Items.Interactor
 {
-    class InteractorFreezeTile : IFurniInteractor
+    internal class InteractorFreezeTile : IFurniInteractor
     {
         public void OnPlace(GameClient session, Item item)
         {

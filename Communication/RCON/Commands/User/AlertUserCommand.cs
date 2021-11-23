@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class AlertUserCommand : IRconCommand
+    internal class AlertUserCommand : IRconCommand
     {
         public string Description => "This command is used to alert a user.";
 

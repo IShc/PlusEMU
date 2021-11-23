@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class GiveAdminRightsEvent : IPacketEvent
+    internal class GiveAdminRightsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

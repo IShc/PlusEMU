@@ -30,7 +30,7 @@ namespace Plus.HabboHotel.Catalog
                     data = dbClient.GetTable();
                 }
 
-                Dictionary<int, int> roomItems = new Dictionary<int, int>();
+                Dictionary<int, int> roomItems = new();
                 if (data != null)
                 {
                     foreach (DataRow dRow in data.Rows)

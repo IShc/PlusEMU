@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class ItemsComposer : MessageComposer
+    internal class ItemsComposer : MessageComposer
     {
         public Item[] Objects { get; }
         public int OwnerId { get; }

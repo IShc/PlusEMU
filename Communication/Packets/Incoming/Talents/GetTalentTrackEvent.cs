@@ -5,7 +5,7 @@ using Plus.HabboHotel.Talents;
 
 namespace Plus.Communication.Packets.Incoming.Talents
 {
-    class GetTalentTrackEvent : IPacketEvent
+    internal class GetTalentTrackEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

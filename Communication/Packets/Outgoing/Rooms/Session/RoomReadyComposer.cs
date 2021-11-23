@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Session
 {
-    class RoomReadyComposer : MessageComposer
+    internal class RoomReadyComposer : MessageComposer
     {
         public int RoomId { get; }
         public string Model { get; }

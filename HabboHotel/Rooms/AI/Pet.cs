@@ -151,8 +151,7 @@ namespace Plus.HabboHotel.Rooms.AI
 
                 if (PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(RoomId, out Room room))
                     return room;
-                else
-                    return null;
+                return null;
 
             }
         }

@@ -113,7 +113,7 @@ namespace Plus.HabboHotel.Groups
         {
             get
             {
-                List<int> members = new List<int>(_administrators.ToList());
+                List<int> members = new(_administrators.ToList());
                 members.AddRange(_members.ToList());
 
                 return members;

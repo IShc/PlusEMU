@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class GiveCommand : IChatCommand
+    internal class GiveCommand : IChatCommand
     {
         public string PermissionRequired => "command_give";
 

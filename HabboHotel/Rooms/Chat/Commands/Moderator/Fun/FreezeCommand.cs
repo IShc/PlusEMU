@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class FreezeCommand : IChatCommand
+    internal class FreezeCommand : IChatCommand
     {
         public string PermissionRequired => "command_freeze";
 

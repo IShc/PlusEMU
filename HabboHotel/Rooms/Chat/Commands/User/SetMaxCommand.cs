@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class SetMaxCommand : IChatCommand
+    internal class SetMaxCommand : IChatCommand
     {
         public string PermissionRequired => "command_setmax";
 

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class RoomKickCommand : IChatCommand
+    internal class RoomKickCommand : IChatCommand
     {
         public string PermissionRequired => "command_room_kick";
 
@@ -27,7 +27,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
                 roomUser.GetClient().SendNotification("You have been kicked by a moderator: " + message);
 
-                room.GetRoomUserManager().RemoveUserFromRoom(roomUser.GetClient(), true, false);
+                room.GetRoomUserManager().RemoveUserFromRoom(roomUser.GetClient(), true);
             }
 
             session.SendWhisper("Successfully kicked all users from the room.");

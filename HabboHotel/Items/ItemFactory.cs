@@ -11,7 +11,7 @@ namespace Plus.HabboHotel.Items
         {
             if (data == null) throw new InvalidOperationException("Data cannot be null.");
 
-            Item item = new Item(0, 0, data.Id, extraData, 0, 0, 0, 0, habbo.Id, groupId, limitedNumber, limitedStack, "");
+            Item item = new(0, 0, data.Id, extraData, 0, 0, 0, 0, habbo.Id, groupId, limitedNumber, limitedStack, "");
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -44,7 +44,7 @@ namespace Plus.HabboHotel.Items
         {
             if (data == null) throw new InvalidOperationException("Data cannot be null.");
 
-            Item item = new Item(itemId, 0, data.Id, extraData, 0, 0, 0, 0, habbo.Id, 0, limitedNumber, limitedStack, "");
+            Item item = new(itemId, 0, data.Id, extraData, 0, 0, 0, 0, habbo.Id, 0, limitedNumber, limitedStack, "");
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -71,7 +71,7 @@ namespace Plus.HabboHotel.Items
         {
             if (data == null) throw new InvalidOperationException("Data cannot be null.");
 
-            Item item = new Item(itemId, 0, data.Id, extraData, 0, 0, 0, 0, habbo.Id, 0, limitedNumber, limitedStack, "");
+            Item item = new(itemId, 0, data.Id, extraData, 0, 0, 0, 0, habbo.Id, 0, limitedNumber, limitedStack, "");
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -98,7 +98,7 @@ namespace Plus.HabboHotel.Items
         {
             if (data == null) throw new InvalidOperationException("Data cannot be null.");
 
-            List<Item> items = new List<Item>();
+            List<Item> items = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -115,7 +115,7 @@ namespace Plus.HabboHotel.Items
                     dbClient.AddParameter("rot", 0);
                     dbClient.AddParameter("flags", extraData);
 
-                    Item item = new Item(Convert.ToInt32(dbClient.InsertQuery()), 0, data.Id, extraData, 0, 0, 0, 0, habbo.Id, groupId, 0, 0, "");
+                    Item item = new(Convert.ToInt32(dbClient.InsertQuery()), 0, data.Id, extraData, 0, 0, 0, 0, habbo.Id, groupId, 0, 0, "");
 
                     if (groupId > 0)
                     {
@@ -133,7 +133,7 @@ namespace Plus.HabboHotel.Items
 
         public static List<Item> CreateTeleporterItems(ItemData data, Habbo habbo, int groupId = 0)
         {
-            List<Item> items = new List<Item>();
+            List<Item> items = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -163,8 +163,8 @@ namespace Plus.HabboHotel.Items
 
                 int item2Id = Convert.ToInt32(dbClient.InsertQuery());
 
-                Item item1 = new Item(item1Id, 0, data.Id, "", 0, 0, 0, 0, habbo.Id, groupId, 0, 0, "");
-                Item item2 = new Item(item2Id, 0, data.Id, "", 0, 0, 0, 0, habbo.Id, groupId, 0, 0, "");
+                Item item1 = new(item1Id, 0, data.Id, "", 0, 0, 0, 0, habbo.Id, groupId, 0, 0, "");
+                Item item2 = new(item2Id, 0, data.Id, "", 0, 0, 0, 0, habbo.Id, groupId, 0, 0, "");
 
                 dbClient.SetQuery("INSERT INTO `room_items_tele_links` (`tele_one_id`, `tele_two_id`) VALUES (" + item1Id + ", " + item2Id + "), (" + item2Id + ", " + item1Id + ")");
                 dbClient.RunQuery();

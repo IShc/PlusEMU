@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class FastwalkCommand : IChatCommand
+    internal class FastwalkCommand : IChatCommand
     {
         public string PermissionRequired => "command_fastwalk";
 

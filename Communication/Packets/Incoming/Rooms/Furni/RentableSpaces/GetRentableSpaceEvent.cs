@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.RentableSpaces
 {
-    class GetRentableSpaceEvent : IPacketEvent
+    internal class GetRentableSpaceEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

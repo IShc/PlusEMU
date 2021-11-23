@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class OpenHelpToolEvent : IPacketEvent
+    internal class OpenHelpToolEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

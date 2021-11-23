@@ -8,7 +8,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class SubmitNewTicketEvent : IPacketEvent
+    internal class SubmitNewTicketEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -26,7 +26,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
                 }
             }
 
-            List<string> chats = new List<string>();
+            List<string> chats = new();
 
             string message = StringCharFilter.Escape(packet.PopString().Trim());
             int category = packet.PopInt();
@@ -47,7 +47,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
                 chats.Add(packet.PopString());
             }
 
-            ModerationTicket ticket = new ModerationTicket(1, type, category, UnixTimestamp.GetNow(), 1, session.GetHabbo(), reportedUser, message, session.GetHabbo().CurrentRoom, chats);
+            ModerationTicket ticket = new(1, type, category, UnixTimestamp.GetNow(), 1, session.GetHabbo(), reportedUser, message, session.GetHabbo().CurrentRoom, chats);
             if (!PlusEnvironment.GetGame().GetModerationManager().TryAddTicket(ticket))
                 return;
 

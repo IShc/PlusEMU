@@ -5,7 +5,7 @@ using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class UpdateGroupIdentityEvent : IPacketEvent
+    internal class UpdateGroupIdentityEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

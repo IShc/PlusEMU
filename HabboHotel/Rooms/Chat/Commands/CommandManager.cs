@@ -57,7 +57,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
 
             if (message == _prefix + "commands")
             {
-                StringBuilder list = new StringBuilder();
+                StringBuilder list = new();
                 list.Append("This is the list of commands you have available:\n");
                 foreach (var cmdList in _commands.ToList())
                 {

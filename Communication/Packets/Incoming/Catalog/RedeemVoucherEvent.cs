@@ -39,15 +39,13 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                 session.SendNotification("You've already used this voucher code, one per each user, sorry!");
                 return;
             }
-            else
+
+            using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
-                {
-                    dbClient.SetQuery("INSERT INTO `user_vouchers` (`user_id`,`voucher`) VALUES (@userId, @Voucher)");
-                    dbClient.AddParameter("userId", session.GetHabbo().Id);
-                    dbClient.AddParameter("Voucher", code);
-                    dbClient.RunQuery();
-                }
+                dbClient.SetQuery("INSERT INTO `user_vouchers` (`user_id`,`voucher`) VALUES (@userId, @Voucher)");
+                dbClient.AddParameter("userId", session.GetHabbo().Id);
+                dbClient.AddParameter("Voucher", code);
+                dbClient.RunQuery();
             }
 
             voucher.UpdateUses();

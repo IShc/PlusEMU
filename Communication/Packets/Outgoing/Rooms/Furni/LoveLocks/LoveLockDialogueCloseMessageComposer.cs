@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.LoveLocks
 {
-    class LoveLockDialogueCloseMessageComposer : MessageComposer
+    internal class LoveLockDialogueCloseMessageComposer : MessageComposer
     {
         public int ItemId { get; }
 

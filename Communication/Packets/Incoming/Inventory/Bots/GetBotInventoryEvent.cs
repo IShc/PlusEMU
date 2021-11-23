@@ -5,7 +5,7 @@ using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Bots
 {
-    class GetBotInventoryEvent : IPacketEvent
+    internal class GetBotInventoryEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

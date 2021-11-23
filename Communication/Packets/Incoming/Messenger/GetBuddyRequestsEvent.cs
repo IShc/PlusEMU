@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {
-    class GetBuddyRequestsEvent : IPacketEvent
+    internal class GetBuddyRequestsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

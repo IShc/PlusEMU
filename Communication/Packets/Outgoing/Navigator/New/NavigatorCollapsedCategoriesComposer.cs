@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator.New
 {
-    class NavigatorCollapsedCategoriesComposer : MessageComposer
+    internal class NavigatorCollapsedCategoriesComposer : MessageComposer
     {
         public NavigatorCollapsedCategoriesComposer()
             : base(ServerPacketHeader.NavigatorCollapsedCategoriesMessageComposer)

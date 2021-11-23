@@ -9,7 +9,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
 {
-    class SaveFloorPlanModelEvent : IPacketEvent
+    internal class SaveFloorPlanModelEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

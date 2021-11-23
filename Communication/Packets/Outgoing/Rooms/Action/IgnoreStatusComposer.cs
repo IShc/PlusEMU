@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Action
 {
-    class IgnoreStatusComposer : MessageComposer
+    internal class IgnoreStatusComposer : MessageComposer
     {
         public int Status { get; }
         public string Username { get; }

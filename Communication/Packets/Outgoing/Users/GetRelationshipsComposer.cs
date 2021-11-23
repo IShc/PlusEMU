@@ -5,7 +5,7 @@ using Plus.HabboHotel.Users.Relationships;
 
 namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class GetRelationshipsComposer : MessageComposer
+    internal class GetRelationshipsComposer : MessageComposer
     {
         public Habbo Habbo { get; }
         public GetRelationshipsComposer(Habbo habbo)

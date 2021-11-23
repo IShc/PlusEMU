@@ -7,7 +7,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {
-    class HabboSearchEvent : IPacketEvent
+    internal class HabboSearchEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -18,8 +18,8 @@ namespace Plus.Communication.Packets.Incoming.Messenger
             if (query.Length < 1 || query.Length > 100)
                 return;
 
-            List<SearchResult> friends = new List<SearchResult>();
-            List<SearchResult> othersUsers = new List<SearchResult>();
+            List<SearchResult> friends = new();
+            List<SearchResult> othersUsers = new();
 
             List<SearchResult> results = SearchResultFactory.GetSearchResult(query);
             foreach (SearchResult result in results.ToList())

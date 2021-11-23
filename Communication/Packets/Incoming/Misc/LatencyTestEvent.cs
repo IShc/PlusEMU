@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Misc
 {
-    class LatencyTestEvent : IPacketEvent
+    internal class LatencyTestEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

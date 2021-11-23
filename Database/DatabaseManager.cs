@@ -18,7 +18,7 @@ namespace Plus.Database
         {
             try
             {
-                MySqlConnection con = new MySqlConnection(_connectionStr);
+                MySqlConnection con = new(_connectionStr);
                 con.Open();
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "SELECT 1+1";

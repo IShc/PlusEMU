@@ -6,7 +6,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class CheckValidNameEvent : IPacketEvent
+    internal class CheckValidNameEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Polls
 {
-    class PollStartEvent : IPacketEvent
+    internal class PollStartEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Sound
 {
-    class SetSoundSettingsEvent : IPacketEvent
+    internal class SetSoundSettingsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

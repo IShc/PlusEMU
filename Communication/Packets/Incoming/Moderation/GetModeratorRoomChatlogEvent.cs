@@ -10,7 +10,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class GetModeratorRoomChatlogEvent : IPacketEvent
+    internal class GetModeratorRoomChatlogEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
 
             PlusEnvironment.GetGame().GetChatManager().GetLogs().FlushAndSave();
 
-            List<ChatLogEntry> chats = new List<ChatLogEntry>();
+            List<ChatLogEntry> chats = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

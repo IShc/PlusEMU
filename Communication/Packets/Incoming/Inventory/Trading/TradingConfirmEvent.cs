@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms.Trading;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Trading
 {
-    class TradingConfirmEvent : IPacketEvent
+    internal class TradingConfirmEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

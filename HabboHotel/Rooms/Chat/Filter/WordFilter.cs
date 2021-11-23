@@ -1,6 +1,6 @@
 ﻿namespace Plus.HabboHotel.Rooms.Chat.Filter
 {
-    sealed class WordFilter
+    internal sealed class WordFilter
     {
         public WordFilter(string word, string replacement, bool strict, bool bannable)
         {

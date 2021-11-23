@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Help
 {
-    class GetSanctionStatusEvent : IPacketEvent
+    internal class GetSanctionStatusEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

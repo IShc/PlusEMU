@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Marketplace
 {
-    class MarketplaceMakeOfferResultComposer : MessageComposer
+    internal class MarketplaceMakeOfferResultComposer : MessageComposer
     {
         public int Success { get; }
 

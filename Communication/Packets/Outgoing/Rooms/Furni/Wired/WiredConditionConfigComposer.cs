@@ -5,7 +5,7 @@ using Plus.HabboHotel.Items.Wired;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
 {
-    class WiredConditionConfigComposer : MessageComposer
+    internal class WiredConditionConfigComposer : MessageComposer
     {
         public IWiredItem Box { get; }
 
@@ -32,7 +32,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
 
             if (Box.Type == WiredBoxType.ConditionMatchStateAndPosition || Box.Type == WiredBoxType.ConditionDontMatchStateAndPosition)
             {
-                if (String.IsNullOrEmpty(Box.StringData))
+                if (string.IsNullOrEmpty(Box.StringData))
                     Box.StringData = "0;0;0";
 
                 packet.WriteInteger(3);//Loop
@@ -42,7 +42,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             }
             else if (Box.Type == WiredBoxType.ConditionUserCountInRoom || Box.Type == WiredBoxType.ConditionUserCountDoesntInRoom)
             {
-                if (String.IsNullOrEmpty(Box.StringData))
+                if (string.IsNullOrEmpty(Box.StringData))
                     Box.StringData = "0;0";
 
                 packet.WriteInteger(2);//Loop
@@ -57,7 +57,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
                 packet.WriteInteger(0);
             else if (Box.Type == WiredBoxType.ConditionFurniHasNoFurni)
             {
-                if (String.IsNullOrEmpty(Box.StringData))
+                if (string.IsNullOrEmpty(Box.StringData))
                     Box.StringData = "0";
                 packet.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[0]) : 50);
             }

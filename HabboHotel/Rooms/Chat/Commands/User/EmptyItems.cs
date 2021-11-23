@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class EmptyItems : IChatCommand
+    internal class EmptyItems : IChatCommand
     {
         public string PermissionRequired => "command_empty_items";
 

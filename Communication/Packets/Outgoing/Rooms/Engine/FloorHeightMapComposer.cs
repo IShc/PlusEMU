@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class FloorHeightMapComposer : MessageComposer
+    internal class FloorHeightMapComposer : MessageComposer
     {
         public string Map { get; }
         public int WallHeight { get; }

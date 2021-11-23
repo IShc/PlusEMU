@@ -107,7 +107,7 @@ namespace Plus.HabboHotel.Items.Data.Moodlight
 
         public static MoodlightPreset GeneratePreset(string data)
         {
-            String[] bits = data.Split(',');
+            string[] bits = data.Split(',');
 
             if (!IsValidColor(bits[0]))
             {
@@ -159,13 +159,13 @@ namespace Plus.HabboHotel.Items.Data.Moodlight
             MoodlightPreset preset = GetPreset(CurrentPreset);
             var sb = new StringBuilder();
 
-            sb.Append(Enabled == true ? 2 : 1);
+            sb.Append(Enabled ? 2 : 1);
 
             sb.Append(",");
             sb.Append(CurrentPreset);
             sb.Append(",");
 
-            sb.Append(preset.BackgroundOnly == true ? 2 : 1);
+            sb.Append(preset.BackgroundOnly ? 2 : 1);
 
             sb.Append(",");
             sb.Append(preset.ColorCode);

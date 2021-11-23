@@ -6,7 +6,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {
-    class SendRoomInviteEvent : IPacketEvent
+    internal class SendRoomInviteEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -20,7 +20,7 @@ namespace Plus.Communication.Packets.Incoming.Messenger
             if (amount > 500)
                 return; // don't send at all
 
-            List<int> targets = new List<int>();
+            List<int> targets = new();
             for (int i = 0; i < amount; i++)
             {
                 int uid = packet.PopInt();

@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class GiveBadgeCommand : IChatCommand
+    internal class GiveBadgeCommand : IChatCommand
     {
         public string PermissionRequired => "command_give_badge";
 
@@ -33,11 +33,8 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                     session.SendWhisper("Oops, that user already has this badge (" + @params[2] + ") !");
                 return;
             }
-            else
-            {
-                session.SendWhisper("Oops, we couldn't find that target user!");
-                return;
-            }
+
+            session.SendWhisper("Oops, we couldn't find that target user!");
         }
     }
 }

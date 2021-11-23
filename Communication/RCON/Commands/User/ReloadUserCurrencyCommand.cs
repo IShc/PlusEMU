@@ -5,7 +5,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class ReloadUserCurrencyCommand : IRconCommand
+    internal class ReloadUserCurrencyCommand : IRconCommand
     {
         public string Description => "This command is used to update the users currency from the database.";
 

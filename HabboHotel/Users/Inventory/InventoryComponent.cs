@@ -174,7 +174,7 @@ namespace Plus.HabboHotel.Users.Inventory
                 }
             }
 
-            Item itemToAdd = new Item(id, 0, baseItem, extraData, 0, 0, 0, 0, _userId, group, limitedNumber, limitedStack, string.Empty);
+            Item itemToAdd = new(id, 0, baseItem, extraData, 0, 0, 0, 0, _userId, group, limitedNumber, limitedStack, string.Empty);
  
             if (UserHoldsItem(id))
                 RemoveItem(id);
@@ -251,11 +251,8 @@ namespace Plus.HabboHotel.Users.Inventory
         {
             if (_petsItems.ContainsKey(petId))
                 return _petsItems.TryGetValue(petId, out pet);
-            else
-            {
-                pet = null;
-                return false;
-            }
+            pet = null;
+            return false;
         }
         #endregion
 
@@ -274,22 +271,16 @@ namespace Plus.HabboHotel.Users.Inventory
         {
             if (_botItems.ContainsKey(botId))
                 return _botItems.TryRemove(botId, out bot);
-            else
-            {
-                bot = null;
-                return false;
-            }
+            bot = null;
+            return false;
         }
 
         public bool TryGetBot(int botId, out Bot bot)
         {
             if (_botItems.ContainsKey(botId))
                 return _botItems.TryGetValue(botId, out bot);
-            else
-            {
-                bot = null;
-                return false;
-            }
+            bot = null;
+            return false;
         }
         #endregion
 
@@ -299,14 +290,13 @@ namespace Plus.HabboHotel.Users.Inventory
             {
                 return _floorItems.TryAdd(item.Id, item);
             }
-            else if (item.Data.Type.ToString().ToLower() == "i")//ItemType.WALL)
+
+            if (item.Data.Type.ToString().ToLower() == "i")//ItemType.WALL)
             {
                 return _wallItems.TryAdd(item.Id, item);
             }
-            else
-            {
-                throw new InvalidOperationException("Item did not match neither floor or wall item");
-            }
+
+            throw new InvalidOperationException("Item did not match neither floor or wall item");
         }
 
         public bool TryAddFloorItem(int itemId, Item item)

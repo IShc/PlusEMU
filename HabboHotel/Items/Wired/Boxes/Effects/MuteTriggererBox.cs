@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class MuteTriggererBox : IWiredItem
+    internal class MuteTriggererBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }

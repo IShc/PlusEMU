@@ -177,7 +177,7 @@ namespace Plus.HabboHotel.Items
 
         public bool IsRoller { get; }
 
-        public Point Coordinate => new Point(GetX, GetY);
+        public Point Coordinate => new(GetX, GetY);
 
         public List<Point> GetCoords
         {
@@ -833,11 +833,6 @@ namespace Plus.HabboHotel.Items
                                                     GetRoom().GetGameMap().GenerateMaps();
                                                     // We're done with this tele. We have another one to bother.
                                                 }
-                                                else
-                                                {
-                                                    // We're linked, but there's a delay, so decrease the delay and wait it out.
-                                                    //User.TeleDelay--;
-                                                }
                                             }
                                             else
                                             {
@@ -939,7 +934,7 @@ namespace Plus.HabboHotel.Items
                         #region Dice
                         case InteractionType.Dice:
                             {
-                                string[] numbers = new string[] { "1", "2", "3", "4", "5", "6" };
+                                string[] numbers = { "1", "2", "3", "4", "5", "6" };
                                 if (ExtraData == "-1")
                                     ExtraData = RandomizeStrings(numbers)[0];
                                 UpdateState();
@@ -1310,7 +1305,7 @@ namespace Plus.HabboHotel.Items
 
                                 #region Target Calculation
                                 Point targetStart = Coordinate;
-                                List<Point> targetSquares = new List<Point>();
+                                List<Point> targetSquares = new();
                                 switch (Rotation)
                                 {
                                     case 0:
@@ -1322,7 +1317,7 @@ namespace Plus.HabboHotel.Items
 
                                             for (int I = 1; I <= 3; I++)
                                             {
-                                                Point targetSquare = new Point(targetStart.X - I, targetStart.Y);
+                                                Point targetSquare = new(targetStart.X - I, targetStart.Y);
 
                                                 if (!targetSquares.Contains(targetSquare))
                                                     targetSquares.Add(targetSquare);
@@ -1340,7 +1335,7 @@ namespace Plus.HabboHotel.Items
 
                                             for (int I = 1; I <= 3; I++)
                                             {
-                                                Point targetSquare = new Point(targetStart.X, targetStart.Y - I);
+                                                Point targetSquare = new(targetStart.X, targetStart.Y - I);
 
                                                 if (!targetSquares.Contains(targetSquare))
                                                     targetSquares.Add(targetSquare);
@@ -1358,7 +1353,7 @@ namespace Plus.HabboHotel.Items
 
                                             for (int I = 1; I <= 3; I++)
                                             {
-                                                Point targetSquare = new Point(targetStart.X + I, targetStart.Y);
+                                                Point targetSquare = new(targetStart.X + I, targetStart.Y);
 
                                                 if (!targetSquares.Contains(targetSquare))
                                                     targetSquares.Add(targetSquare);
@@ -1377,7 +1372,7 @@ namespace Plus.HabboHotel.Items
 
                                             for (int I = 1; I <= 3; I++)
                                             {
-                                                Point targetSquare = new Point(targetStart.X, targetStart.Y + I);
+                                                Point targetSquare = new(targetStart.X, targetStart.Y + I);
 
                                                 if (!targetSquares.Contains(targetSquare))
                                                     targetSquares.Add(targetSquare);
@@ -1432,7 +1427,7 @@ namespace Plus.HabboHotel.Items
 
         public static string[] RandomizeStrings(string[] arr)
         {
-            List<KeyValuePair<int, string>> list = new List<KeyValuePair<int, string>>();
+            List<KeyValuePair<int, string>> list = new();
             // Add all strings from array
             // Add new random int each time
             foreach (string s in arr)

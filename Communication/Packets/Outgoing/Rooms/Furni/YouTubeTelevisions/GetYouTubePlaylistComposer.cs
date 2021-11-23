@@ -4,7 +4,7 @@ using Plus.HabboHotel.Items.Televisions;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.YouTubeTelevisions
 {
-    class GetYouTubePlaylistComposer : MessageComposer
+    internal class GetYouTubePlaylistComposer : MessageComposer
     {
         public int ItemId { get; }
         public ICollection<TelevisionItem> Videos { get; }

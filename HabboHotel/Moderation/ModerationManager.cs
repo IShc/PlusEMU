@@ -23,11 +23,6 @@ namespace Plus.HabboHotel.Moderation
         private readonly Dictionary<int, string> _moderationCfhTopics = new();
         private readonly Dictionary<int, List<ModerationPresetActions>> _moderationCfhTopicActions = new();
 
-        public ModerationManager()
-        {
-
-        }
-
         public void Init()
         {
             if (_userPresets.Count > 0)
@@ -150,21 +145,18 @@ namespace Plus.HabboHotel.Moderation
                         double expires = (double)row["expire"];
                         string type = Convert.ToString(row["bantype"]);
 
-                        ModerationBan ban = new ModerationBan(BanTypeUtility.GetModerationBanType(type), value, reason, expires);
-                        if (ban != null)
+                        ModerationBan ban = new(BanTypeUtility.GetModerationBanType(type), value, reason, expires);
+                        if (expires > PlusEnvironment.GetUnixTimestamp())
                         {
-                            if (expires > PlusEnvironment.GetUnixTimestamp())
-                            {
-                                if (value != null && !_bans.ContainsKey(value))
-                                    _bans.Add(value, ban);
-                            }
-                            else
-                            {
-                                dbClient.SetQuery("DELETE FROM `bans` WHERE `bantype` = @banType AND `value` = @key LIMIT 1");
-                                dbClient.AddParameter("banType", BanTypeUtility.FromModerationBanType(ban.Type));
-                                dbClient.AddParameter("key", value);
-                                dbClient.RunQuery();
-                            }
+                            if (value != null && !_bans.ContainsKey(value))
+                                _bans.Add(value, ban);
+                        }
+                        else
+                        {
+                            dbClient.SetQuery("DELETE FROM `bans` WHERE `bantype` = @banType AND `value` = @key LIMIT 1");
+                            dbClient.AddParameter("banType", BanTypeUtility.FromModerationBanType(ban.Type));
+                            dbClient.AddParameter("key", value);
+                            dbClient.RunQuery();
                         }
                     }
                 }
@@ -195,21 +187,18 @@ namespace Plus.HabboHotel.Moderation
                         double expires = (double)row["expire"];
                         string type = Convert.ToString(row["bantype"]);
 
-                        ModerationBan ban = new ModerationBan(BanTypeUtility.GetModerationBanType(type), value, reason, expires);
-                        if (ban != null)
+                        ModerationBan ban = new(BanTypeUtility.GetModerationBanType(type), value, reason, expires);
+                        if (expires > PlusEnvironment.GetUnixTimestamp())
                         {
-                            if (expires > PlusEnvironment.GetUnixTimestamp())
-                            {
-                                if (value != null && !_bans.ContainsKey(value))
-                                    _bans.Add(value, ban);
-                            }
-                            else
-                            {
-                                dbClient.SetQuery("DELETE FROM `bans` WHERE `bantype` = @banType AND `value` = @key LIMIT 1");
-                                dbClient.AddParameter("banType", BanTypeUtility.FromModerationBanType(ban.Type));
-                                dbClient.AddParameter("key", value);
-                                dbClient.RunQuery();
-                            }
+                            if (value != null && !_bans.ContainsKey(value))
+                                _bans.Add(value, ban);
+                        }
+                        else
+                        {
+                            dbClient.SetQuery("DELETE FROM `bans` WHERE `bantype` = @banType AND `value` = @key LIMIT 1");
+                            dbClient.AddParameter("banType", BanTypeUtility.FromModerationBanType(ban.Type));
+                            dbClient.AddParameter("key", value);
+                            dbClient.RunQuery();
                         }
                     }
                 }
@@ -250,7 +239,7 @@ namespace Plus.HabboHotel.Moderation
         {
             get
             {
-                Dictionary<string, List<ModerationPresetActions>> result = new Dictionary<string, List<ModerationPresetActions>>();
+                Dictionary<string, List<ModerationPresetActions>> result = new();
                 foreach (KeyValuePair<int, string> category in _moderationCfhTopics.ToList())
                 {
                     result.Add(category.Value, new List<ModerationPresetActions>());

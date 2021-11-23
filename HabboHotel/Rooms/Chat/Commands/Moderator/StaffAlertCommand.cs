@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class StaffAlertCommand : IChatCommand
+    internal class StaffAlertCommand : IChatCommand
     {
         public string PermissionRequired => "command_staff_alert";
 
@@ -21,7 +21,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
             string message = CommandManager.MergeParams(@params, 1);
             PlusEnvironment.GetGame().GetClientManager().StaffAlert(new BroadcastMessageAlertComposer("Staff Alert:\r\r" + message + "\r\n" + "- " + session.GetHabbo().Username));
-            return;
         }
     }
 }

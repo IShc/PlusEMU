@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class DeleteGroupEvent : IPacketEvent
+    internal class DeleteGroupEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

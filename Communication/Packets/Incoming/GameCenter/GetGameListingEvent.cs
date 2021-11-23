@@ -5,7 +5,7 @@ using Plus.HabboHotel.Games;
 
 namespace Plus.Communication.Packets.Incoming.GameCenter
 {
-    class GetGameListingEvent : IPacketEvent
+    internal class GetGameListingEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

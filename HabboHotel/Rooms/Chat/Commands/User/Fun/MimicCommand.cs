@@ -5,7 +5,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
-    class MimicCommand : IChatCommand
+    internal class MimicCommand : IChatCommand
     {
         public string PermissionRequired => "command_mimic";
 
