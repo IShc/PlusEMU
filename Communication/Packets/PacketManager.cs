@@ -145,8 +145,8 @@ namespace Plus.Communication.Packets
                 else
                     Log.Debug("Handled Packet: [" + packet.Id + "] UnnamedPacketEvent");
 //            }
-
             if (!IgnoreTasks)
+#pragma warning disable CS0162
                 ExecutePacketAsync(session, packet, pak);
             pak.Parse(session, packet);
         }

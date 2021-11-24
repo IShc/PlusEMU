@@ -269,7 +269,7 @@ namespace Plus.HabboHotel.Moderation
 
         public bool UserHasTickets(int userId)
         {
-            return _modTickets.Count(x => x.Value.Sender.Id == userId && x.Value.Answered == false) > 0;
+            return _modTickets.Any(x => x.Value.Sender.Id == userId && x.Value.Answered == false);
         }
 
         public ModerationTicket GetTicketBySenderId(int userId)
@@ -314,8 +314,7 @@ namespace Plus.HabboHotel.Moderation
         /// <returns></returns>
         public bool MachineBanCheck(string machineId)
         {
-            ModerationBan machineBanRecord = null;
-            if (PlusEnvironment.GetGame().GetModerationManager().IsBanned(machineId, out machineBanRecord))
+            if (PlusEnvironment.GetGame().GetModerationManager().IsBanned(machineId, out ModerationBan _))
             {
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
@@ -341,8 +340,7 @@ namespace Plus.HabboHotel.Moderation
         /// <returns></returns>
         public bool UsernameBanCheck(string username)
         {
-            ModerationBan usernameBanRecord = null;
-            if (PlusEnvironment.GetGame().GetModerationManager().IsBanned(username, out usernameBanRecord))
+            if (PlusEnvironment.GetGame().GetModerationManager().IsBanned(username, out ModerationBan _))
             {
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {

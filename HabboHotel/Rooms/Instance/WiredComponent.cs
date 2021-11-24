@@ -483,8 +483,7 @@ namespace Plus.HabboHotel.Rooms.Instance
 
         public bool TryRemove(int itemId)
         {
-            IWiredItem item = null;
-            return _wiredItems.TryRemove(itemId, out item);
+            return _wiredItems.TryRemove(itemId, out IWiredItem _);
         }
 
         public bool TryGet(int id, out IWiredItem item)

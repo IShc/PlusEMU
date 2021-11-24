@@ -48,7 +48,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
                 return false;
 
             string message = Convert.ToString(@params[1]);
-            if ((BoolData && Instance.OwnerId != player.Id) || player == null || string.IsNullOrWhiteSpace(message) || string.IsNullOrWhiteSpace(StringData))
+            if ((BoolData && Instance.OwnerId != player.Id) || string.IsNullOrWhiteSpace(message) || string.IsNullOrWhiteSpace(StringData))
                 return false;
 
             if (message.Contains(" " + StringData) || message.Contains(StringData + " ") || message == StringData)

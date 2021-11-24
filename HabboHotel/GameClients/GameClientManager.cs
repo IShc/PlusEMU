@@ -234,8 +234,8 @@ namespace Plus.HabboHotel.GameClients
 
         public void UnregisterClient(int userid, string username)
         {
-            _userIdRegister.TryRemove(userid, out GameClient client);
-            _usernameRegister.TryRemove(username.ToLower(), out client);
+            _userIdRegister.TryRemove(userid, out GameClient _);
+            _usernameRegister.TryRemove(username.ToLower(), out GameClient _);
         }
 
         public void CloseAll()

@@ -40,11 +40,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
             if (thisUser.IsLying)
                 return;
 
-            int effectId = 0;
-            if (!int.TryParse(@params[1], out effectId))
-                return;
-
-            if (effectId > int.MaxValue || effectId < int.MinValue)
+            if (!int.TryParse(@params[1], out int effectId))
                 return;
 
             if ((effectId == 102 || effectId == 187) && !session.GetHabbo().GetPermissions().HasRight("mod_tool"))

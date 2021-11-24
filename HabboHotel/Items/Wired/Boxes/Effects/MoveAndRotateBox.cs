@@ -103,10 +103,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     if (!Instance.GetRoomItemHandler().GetFloor.Contains(item))
                         continue;
 
-                    Item toRemove = null;
-
                     if (Instance.GetWired().OtherBoxHasItem(this, item.Id))
-                        SetItems.TryRemove(item.Id, out toRemove);
+                        SetItems.TryRemove(item.Id, out Item _);
    
 
                     Point Point = HandleMovement(Convert.ToInt32(StringData.Split(';')[0]),new Point(item.GetX, item.GetY));

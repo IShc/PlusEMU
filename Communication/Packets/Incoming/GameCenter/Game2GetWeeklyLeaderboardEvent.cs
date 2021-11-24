@@ -9,8 +9,7 @@ namespace Plus.Communication.Packets.Incoming.GameCenter
         {
             int gameId = packet.PopInt();
 
-            GameData gameData = null;
-            if (PlusEnvironment.GetGame().GetGameDataManager().TryGetGame(gameId, out gameData))
+            if (PlusEnvironment.GetGame().GetGameDataManager().TryGetGame(gameId, out GameData _))
             {
                 //Code
             }

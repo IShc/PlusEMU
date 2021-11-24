@@ -86,9 +86,8 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
             {
                 dbClient.RunQuery("UPDATE `catalog_marketplace_offers` SET `state` = '2' WHERE `offer_id` = '" + offerId + "' LIMIT 1");
 
-                int id;
                 dbClient.SetQuery("SELECT `id` FROM `catalog_marketplace_data` WHERE `sprite` = " + item.SpriteId + " LIMIT 1;");
-                id = dbClient.GetInteger();
+                int id = dbClient.GetInteger();
 
                 if (id > 0)
                     dbClient.RunQuery("UPDATE `catalog_marketplace_data` SET `sold` = `sold` + 1, `avgprice` = (avgprice + " + Convert.ToInt32(row["total_price"]) + ") WHERE `id` = " + id + " LIMIT 1;");
@@ -119,7 +118,6 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
             ReloadOffers(session);
         }
 
-
         private void ReloadOffers(GameClient session)
         {
             int minCost = -1;
@@ -127,8 +125,7 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
             string searchQuery = "";
             int filterMode = 1;
 
-
-            DataTable table = null;
+            DataTable table;
             StringBuilder builder = new();
             string str;
             builder.Append("WHERE `state` = '1' AND `timestamp` >= " + PlusEnvironment.GetGame().GetCatalog().GetMarketplace().FormatTimestampString());

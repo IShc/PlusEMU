@@ -26,6 +26,7 @@ namespace Plus.HabboHotel.Cache.Process
         /// <summary>
         /// Checks if the timer is lagging behind (server can't keep up).
         /// </summary>
+#pragma warning disable CS0414
         private bool _timerLagging;
 
         /// <summary>
@@ -41,14 +42,14 @@ namespace Plus.HabboHotel.Cache.Process
         /// <summary>
         /// How often the timer should execute.
         /// </summary>
-        private static readonly int _runtimeInSec = 1200;
+        private const int RuntimeInSec = 1200;
 
         /// <summary>
         /// Initializes the ProcessComponent.
         /// </summary>
         public void Init()
         {
-            _timer = new Timer(Run, null, _runtimeInSec * 1000, _runtimeInSec * 1000);
+            _timer = new Timer(Run, null, RuntimeInSec * 1000, RuntimeInSec * 1000);
         }
 
         /// <summary>

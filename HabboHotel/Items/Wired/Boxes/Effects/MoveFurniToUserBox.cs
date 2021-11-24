@@ -99,10 +99,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     if (!Instance.GetRoomItemHandler().GetFloor.Contains(Item))
                         continue;
 
-                    Item toRemove = null;
-
                     if (Instance.GetWired().OtherBoxHasItem(this, Item.Id))
-                        SetItems.TryRemove(Item.Id, out toRemove);
+                        SetItems.TryRemove(Item.Id, out Item _);
 
                     Point point = Instance.GetGameMap().GetChaseMovement(Item);
 

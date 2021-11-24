@@ -73,8 +73,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
                     if (!Instance.GetRoomItemHandler().GetFloor.Contains(item))
                     {
-                        Item n = null;
-                        SetItems.TryRemove(item.Id, out n);
+                        SetItems.TryRemove(item.Id, out Item _);
                         continue;
                     }
 
