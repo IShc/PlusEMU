@@ -5,7 +5,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class GiveUserCurrencyCommand : IRconCommand
+    internal class GiveUserCurrencyCommand : IRconCommand
     {
         public string Description => "This command is used to give a user a specified amount of a specified currency.";
 

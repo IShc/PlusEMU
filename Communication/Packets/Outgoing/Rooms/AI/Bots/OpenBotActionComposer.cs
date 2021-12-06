@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Bots
 {
-    class OpenBotActionComposer : MessageComposer
+    internal class OpenBotActionComposer : MessageComposer
     {
         public int BotId { get; }
         public string BotName { get; }

@@ -12,10 +12,6 @@ namespace Plus.HabboHotel.Subscriptions
 
         private readonly Dictionary<int, SubscriptionData> _subscriptions = new();
 
-        public SubscriptionManager()
-        {
-        }
-
         public void Init()
         {
             if (_subscriptions.Count > 0)

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Handshake
 {
-    class PongComposer : MessageComposer
+    internal class PongComposer : MessageComposer
     {
         public PongComposer()
             : base(ServerPacketHeader.PongMessageComposer)

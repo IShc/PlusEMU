@@ -8,7 +8,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
-    class UseSellableClothingEvent : IPacketEvent
+    internal class UseSellableClothingEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -22,10 +22,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             int itemId = packet.PopInt();
 
             Item item = room.GetRoomItemHandler().GetItem(itemId);
-            if (item == null)
-                return;
 
-            if (item.Data == null)
+            if (item?.Data == null)
                 return;
 
             if (item.UserId != session.GetHabbo().Id)

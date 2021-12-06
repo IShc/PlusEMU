@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class RoomUnmuteCommand : IChatCommand
+    internal class RoomUnmuteCommand : IChatCommand
     {
         public string PermissionRequired => "command_unroommute";
 

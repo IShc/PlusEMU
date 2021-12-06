@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class RoomVisualizationSettingsComposer : MessageComposer
+    internal class RoomVisualizationSettingsComposer : MessageComposer
     {
         public int Walls { get; }
         public int Floor { get; }

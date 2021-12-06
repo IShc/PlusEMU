@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class MassEnableCommand : IChatCommand
+    internal class MassEnableCommand : IChatCommand
     {
         public string PermissionRequired => "command_massenable";
 
@@ -50,7 +50,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
             else
             {
                 session.SendWhisper("Please enter an effect ID.");
-                return;
             }
         }
     }

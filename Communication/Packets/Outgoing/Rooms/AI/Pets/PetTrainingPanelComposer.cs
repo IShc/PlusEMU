@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
 {
-    class PetTrainingPanelComposer : MessageComposer
+    internal class PetTrainingPanelComposer : MessageComposer
     {
         public int PetId { get; }
         public int Level { get; }

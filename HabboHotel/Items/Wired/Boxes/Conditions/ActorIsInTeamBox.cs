@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    class ActorIsInTeamBox : IWiredItem
+    internal class ActorIsInTeamBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -35,7 +35,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 
         public bool Execute(params object[] @params)
         {
-            if (@params.Length == 0 || Instance == null || String.IsNullOrEmpty(StringData))
+            if (@params.Length == 0 || Instance == null || string.IsNullOrEmpty(StringData))
                 return false;
 
             Habbo player = (Habbo)@params[0];
@@ -48,11 +48,11 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 
             if (int.Parse(StringData) == 1 && user.Team == Team.Red)
                 return true;
-            else if (int.Parse(StringData) == 2 && user.Team == Team.Green)
+            if (int.Parse(StringData) == 2 && user.Team == Team.Green)
                 return true;
-            else if (int.Parse(StringData) == 3 && user.Team == Team.Blue)
+            if (int.Parse(StringData) == 3 && user.Team == Team.Blue)
                 return true;
-            else if (int.Parse(StringData) == 4 && user.Team == Team.Yellow)
+            if (int.Parse(StringData) == 4 && user.Team == Team.Yellow)
                 return true;
             return false;
         }

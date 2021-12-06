@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class ShowMessageBox : IWiredItem
+    internal class ShowMessageBox : IWiredItem
     {
         public Room Instance { get; set; }
 

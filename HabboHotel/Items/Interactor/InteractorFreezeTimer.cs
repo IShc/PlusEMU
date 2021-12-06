@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Items.Interactor
 {
-    class InteractorFreezeTimer : IFurniInteractor
+    internal class InteractorFreezeTimer : IFurniInteractor
     {
         public void OnPlace(GameClient session, Item item)
         {

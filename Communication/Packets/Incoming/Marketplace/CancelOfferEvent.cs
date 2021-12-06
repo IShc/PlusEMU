@@ -8,7 +8,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
-    class CancelOfferEvent : IPacketEvent
+    internal class CancelOfferEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

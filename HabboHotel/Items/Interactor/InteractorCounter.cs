@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Items.Interactor
 {
-    class InteractorCounter : IFurniInteractor
+    internal class InteractorCounter : IFurniInteractor
     {
         public void OnPlace(GameClient session, Item item)
         {

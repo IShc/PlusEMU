@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class KickCommand : IChatCommand
+    internal class KickCommand : IChatCommand
     {
         public string PermissionRequired => "command_kick";
 
@@ -51,7 +51,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
             else
                 targetClient.SendNotification("A moderator has kicked you from the room.");
 
-            targetRoom.GetRoomUserManager().RemoveUserFromRoom(targetClient, true, false);
+            targetRoom.GetRoomUserManager().RemoveUserFromRoom(targetClient, true);
         }
     }
 }

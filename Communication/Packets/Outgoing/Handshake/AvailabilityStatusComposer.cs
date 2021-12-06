@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Handshake
 {
-    class AvailabilityStatusComposer : MessageComposer
+    internal class AvailabilityStatusComposer : MessageComposer
     {
         public AvailabilityStatusComposer()
             : base(ServerPacketHeader.AvailabilityStatusMessageComposer)

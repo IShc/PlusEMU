@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Misc
 {
-    class VideoOffersRewardsComposer : MessageComposer
+    internal class VideoOffersRewardsComposer : MessageComposer
     {
         public int OfferId { get; }
         public string Type { get; }

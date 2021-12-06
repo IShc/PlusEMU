@@ -8,7 +8,7 @@ using Plus.HabboHotel.Users.Badges;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    class IsNotWearingBadgeBox : IWiredItem
+    internal class IsNotWearingBadgeBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -38,7 +38,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
             if (@params.Length == 0)
                 return false;
 
-            if (String.IsNullOrEmpty(StringData))
+            if (string.IsNullOrEmpty(StringData))
                 return false;
 
             Habbo player = (Habbo)@params[0];

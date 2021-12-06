@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Rcon.Commands.Hotel
 {
-    class ReloadFilterCommand : IRconCommand
+    internal class ReloadFilterCommand : IRconCommand
     {
         public string Description => "This command is used to reload the chatting filter manager.";
 

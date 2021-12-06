@@ -9,7 +9,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Cache.Process
 {
-    sealed class ProcessComponent
+    internal sealed class ProcessComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ProcessComponent));
 
@@ -26,6 +26,7 @@ namespace Plus.HabboHotel.Cache.Process
         /// <summary>
         /// Checks if the timer is lagging behind (server can't keep up).
         /// </summary>
+#pragma warning disable CS0414
         private bool _timerLagging;
 
         /// <summary>
@@ -41,14 +42,14 @@ namespace Plus.HabboHotel.Cache.Process
         /// <summary>
         /// How often the timer should execute.
         /// </summary>
-        private static readonly int _runtimeInSec = 1200;
+        private const int RuntimeInSec = 1200;
 
         /// <summary>
         /// Initializes the ProcessComponent.
         /// </summary>
         public void Init()
         {
-            _timer = new Timer(Run, null, _runtimeInSec * 1000, _runtimeInSec * 1000);
+            _timer = new Timer(Run, null, RuntimeInSec * 1000, RuntimeInSec * 1000);
         }
 
         /// <summary>
@@ -106,8 +107,7 @@ namespace Plus.HabboHotel.Cache.Process
                             if (data.CacheExpired())
                                 PlusEnvironment.RemoveFromCache(data.Id, out temp);
 
-                            if (temp != null)
-                                temp.Dispose();
+                            temp?.Dispose();
                         }
                         catch (Exception e)
                         {
@@ -147,8 +147,7 @@ namespace Plus.HabboHotel.Cache.Process
             // Dispose the timer to disable it.
             try
             {
-                if (_timer != null)
-                    _timer.Dispose();
+                _timer?.Dispose();
             }
             catch { }
 

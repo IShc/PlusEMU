@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Help
 {
-    class SanctionStatusComposer : MessageComposer
+    internal class SanctionStatusComposer : MessageComposer
     {
         public SanctionStatusComposer()
             : base(ServerPacketHeader.SanctionStatusMessageComposer)

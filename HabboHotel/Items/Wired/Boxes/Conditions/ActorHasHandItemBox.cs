@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    class ActorHasHandItemBox : IWiredItem
+    internal class ActorHasHandItemBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -34,7 +34,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 
         public bool Execute(params object[] @params)
         {
-            if (@params.Length == 0 || Instance == null || String.IsNullOrEmpty(StringData))
+            if (@params.Length == 0 || Instance == null || string.IsNullOrEmpty(StringData))
                 return false;
 
             Habbo player = (Habbo)@params[0];

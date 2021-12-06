@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Wired
 {
-    class SaveWiredConfigEvent : IPacketEvent
+    internal class SaveWiredConfigEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

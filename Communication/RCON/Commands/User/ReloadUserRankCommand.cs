@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class ReloadUserRankCommand : IRconCommand
+    internal class ReloadUserRankCommand : IRconCommand
     {
         public string Description => "This command is used to reload a users rank and permissions.";
 

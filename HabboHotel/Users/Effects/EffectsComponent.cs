@@ -18,10 +18,6 @@ namespace Plus.HabboHotel.Users.Effects
         /// </summary>
         private readonly ConcurrentDictionary<int, AvatarEffect> _effects = new();
 
-        public EffectsComponent()
-        {
-        }
-
         /// <summary>
         /// Initializes the EffectsComponent.
         /// </summary>

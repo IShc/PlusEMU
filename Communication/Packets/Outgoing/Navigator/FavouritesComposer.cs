@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class FavouritesComposer : MessageComposer
+    internal class FavouritesComposer : MessageComposer
     {
         public ArrayList FavouriteIds { get; }
 

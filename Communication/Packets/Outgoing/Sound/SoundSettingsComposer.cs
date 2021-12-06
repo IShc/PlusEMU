@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Sound
 {
-    class SoundSettingsComposer : MessageComposer
+    internal class SoundSettingsComposer : MessageComposer
     {
         public IEnumerable<int> Volumes { get; }
         public bool ChatPreference { get; }

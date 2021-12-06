@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Action
 {
-    class MuteUserEvent : IPacketEvent
+    internal class MuteUserEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -24,7 +24,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Action
             RoomUser target = room.GetRoomUserManager().GetRoomUserByHabbo(PlusEnvironment.GetUsernameById(userId));
             if (target == null)
                 return;
-            else if (target.GetClient().GetHabbo().GetPermissions().HasRight("mod_tool"))
+            if (target.GetClient().GetHabbo().GetPermissions().HasRight("mod_tool"))
                 return;
 
             if (room.MutedUsers.ContainsKey(userId))

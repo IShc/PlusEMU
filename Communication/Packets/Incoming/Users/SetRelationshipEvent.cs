@@ -9,7 +9,7 @@ using Plus.HabboHotel.Users.Relationships;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class SetRelationshipEvent : IPacketEvent
+    internal class SetRelationshipEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

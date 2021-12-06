@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class NewGroupInfoComposer : MessageComposer
+    internal class NewGroupInfoComposer : MessageComposer
     {
         public int RoomId { get; }
         public int GroupId { get; }

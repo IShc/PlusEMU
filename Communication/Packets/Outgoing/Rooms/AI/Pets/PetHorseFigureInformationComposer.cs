@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
 {
-    class PetHorseFigureInformationComposer : MessageComposer
+    internal class PetHorseFigureInformationComposer : MessageComposer
     {
         public RoomUser PetUser { get; }
 

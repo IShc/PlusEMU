@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class HeightMapComposer : MessageComposer
+    internal class HeightMapComposer : MessageComposer
     {
         public string Map { get; }
 

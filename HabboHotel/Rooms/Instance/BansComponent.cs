@@ -112,7 +112,7 @@ namespace Plus.HabboHotel.Rooms.Instance
 
         public List<int> BannedUsers()
         {
-            List<int> bans = new List<int>();
+            List<int> bans = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

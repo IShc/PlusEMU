@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
 {
-    class TradingErrorComposer : MessageComposer
+    internal class TradingErrorComposer : MessageComposer
     {
         public int Error { get; }
         public string Username { get; }

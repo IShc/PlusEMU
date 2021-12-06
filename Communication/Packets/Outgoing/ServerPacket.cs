@@ -20,14 +20,20 @@ namespace Plus.Communication.Packets.Outgoing
             }
         }
 
-        public void WriteByte(byte b) =>
+        public void WriteByte(byte b)
+        {
             Buffer.WriteByte(b);
+        }
 
-        public void WriteByte(int b) =>
+        public void WriteByte(int b)
+        {
             Buffer.WriteByte((byte) b);
+        }
 
-        public void WriteDouble(double d) =>
+        public void WriteDouble(double d)
+        {
             WriteString(d.ToString());
+        }
 
         public void WriteString(string s) // d
         {
@@ -36,14 +42,20 @@ namespace Plus.Communication.Packets.Outgoing
             Buffer.WriteBytes(data);
         }
 
-        public void WriteShort(int s) =>
+        public void WriteShort(int s)
+        {
             Buffer.WriteShort(s);
+        }
 
-        public void WriteInteger(int i) =>
+        public void WriteInteger(int i)
+        {
             Buffer.WriteInt(i);
+        }
 
-        public void WriteBoolean(bool b) =>
+        public void WriteBoolean(bool b)
+        {
             Buffer.WriteByte(b ? 1 : 0);
+        }
 
         public int Length => Buffer.WriterIndex - 4;
 

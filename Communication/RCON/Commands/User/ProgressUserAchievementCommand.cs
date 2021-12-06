@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class ProgressUserAchievementCommand : IRconCommand
+    internal class ProgressUserAchievementCommand : IRconCommand
     {
         public string Description => "This command is used to progress a users achievement.";
 

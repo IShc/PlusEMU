@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 {
-    class RepeaterBox : IWiredItem, IWiredCycle
+    internal class RepeaterBox : IWiredItem, IWiredCycle
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -19,7 +19,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
         public int TickCount { get; set; }
         public string ItemsData { get; set; }
 
-        private int _delay = 0;
+        private int _delay;
 
         public RepeaterBox(Room instance, Item item)
         {
@@ -104,8 +104,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
                     if (!success)
                         return false;
 
-                    if (Instance != null)
-                        Instance.GetWired().OnEvent(effect.Item);
+                    Instance?.GetWired().OnEvent(effect.Item);
                 }
             }
 

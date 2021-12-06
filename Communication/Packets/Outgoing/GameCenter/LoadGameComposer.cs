@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.GameCenter
 {
-    class LoadGameComposer : MessageComposer
+    internal class LoadGameComposer : MessageComposer
     {
         public GameData GameData { get; }
         public string SsoTicket { get; }

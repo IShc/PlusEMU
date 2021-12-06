@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    class PresentDeliverErrorMessageComposer : MessageComposer
+    internal class PresentDeliverErrorMessageComposer : MessageComposer
     {
         public bool CreditError { get; }
         public bool DucketError { get; }

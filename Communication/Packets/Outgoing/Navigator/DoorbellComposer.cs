@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class DoorbellComposer : MessageComposer
+    internal class DoorbellComposer : MessageComposer
     {
         public string Username { get; }
 

@@ -45,8 +45,7 @@ namespace Plus.HabboHotel.Rooms.PathFinding
         {
             if (obj == null)
                 return false;
-            else
-                return base.GetHashCode().Equals(obj.GetHashCode());
+            return base.GetHashCode().Equals(obj.GetHashCode());
         }
     }
 }

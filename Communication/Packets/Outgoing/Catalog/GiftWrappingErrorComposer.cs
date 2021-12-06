@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    class GiftWrappingErrorComposer : MessageComposer
+    internal class GiftWrappingErrorComposer : MessageComposer
     {
         public GiftWrappingErrorComposer()
             : base(ServerPacketHeader.GiftWrappingErrorMessageComposer)

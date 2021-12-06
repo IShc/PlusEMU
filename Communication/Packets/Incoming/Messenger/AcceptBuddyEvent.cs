@@ -3,7 +3,7 @@ using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {
-    class AcceptBuddyEvent : IPacketEvent
+    internal class AcceptBuddyEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

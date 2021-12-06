@@ -17,7 +17,7 @@ namespace Plus.HabboHotel.Users.Messenger
                 dTable = dbClient.GetTable();
             }
 
-            List<SearchResult> results = new List<SearchResult>();
+            List<SearchResult> results = new();
 
             if (dTable != null)
             {

@@ -2,7 +2,7 @@
 
 namespace Plus.Utilities
 {
-    static class UnixTimestamp
+    internal static class UnixTimestamp
     {
         /// <summary>
         /// Gets the current date time now in Unix Timestamp format.
@@ -21,7 +21,7 @@ namespace Plus.Utilities
         /// <returns>DateTime object.</returns>
         public static DateTime FromUnixTimestamp(double timestamp)
         {
-            DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            DateTime dt = new(1970, 1, 1, 0, 0, 0, 0);
             dt = dt.AddSeconds(timestamp);
             return dt;
         }

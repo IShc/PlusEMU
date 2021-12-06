@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class GroupCreationWindowComposer : MessageComposer
+    internal class GroupCreationWindowComposer : MessageComposer
     {
         public ICollection<RoomData> Rooms { get; }
 

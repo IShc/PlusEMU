@@ -193,7 +193,7 @@ namespace Plus.HabboHotel.Users
             MachineId = machineId;
             ChatPreference = chatPreference;
             FocusPreference = focusPreference;
-            IsExpert = IsExpert == true;
+            IsExpert = IsExpert;
 
             AppearOffline = appearOffline;
             AllowTradingRequests = true;//TODO
@@ -332,8 +332,7 @@ namespace Plus.HabboHotel.Users
                 }
             }
 
-            Group g = null;
-            if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(_habboStats.FavouriteGroupId, out g))
+            if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(_habboStats.FavouriteGroupId, out Group _))
                 _habboStats.FavouriteGroupId = 0;
             #endregion
         }
@@ -354,8 +353,7 @@ namespace Plus.HabboHotel.Users
                 if (CurrentRoomId <= 0)
                     return null;
 
-                Room room = null;
-                if (PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(CurrentRoomId, out room))
+                if (PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(CurrentRoomId, out Room room))
                     return room;
 
                 return null;
@@ -470,8 +468,7 @@ namespace Plus.HabboHotel.Users
 
             try
             {
-                if (_process != null)
-                    _process.Dispose();
+                _process?.Dispose();
             }
             catch { }
 
@@ -499,11 +496,10 @@ namespace Plus.HabboHotel.Users
 
         public void Dispose()
         {
-            if (_inventoryComponent != null)
-                _inventoryComponent.SetIdleState();
+            _inventoryComponent?.SetIdleState();
 
             if (InRoom && CurrentRoom != null)
-                CurrentRoom.GetRoomUserManager().RemoveUserFromRoom(_client, false, false);
+                CurrentRoom.GetRoomUserManager().RemoveUserFromRoom(_client, false);
 
             if (_messenger != null)
             {
@@ -511,14 +507,11 @@ namespace Plus.HabboHotel.Users
                 _messenger.Destroy();
             }
 
-            if (_fx != null)
-                _fx.Dispose();
+            _fx?.Dispose();
 
-            if (_clothing != null)
-                _clothing.Dispose();
+            _clothing?.Dispose();
 
-            if (_permissions != null)
-                _permissions.Dispose();
+            _permissions?.Dispose();
 
             if (_ignores != null)
                 _permissions.Dispose();
@@ -599,8 +592,7 @@ namespace Plus.HabboHotel.Users
 
         public UserAchievement GetAchievementData(string p)
         {
-            UserAchievement achievement = null;
-            Achievements.TryGetValue(p, out achievement);
+            Achievements.TryGetValue(p, out UserAchievement achievement);
             return achievement;
         }
 
@@ -630,12 +622,11 @@ namespace Plus.HabboHotel.Users
 
             if (GetClient().GetHabbo().InRoom)
             {
-                Room oldRoom = null;
-                if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(GetClient().GetHabbo().CurrentRoomId, out oldRoom))
+                if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(GetClient().GetHabbo().CurrentRoomId, out Room oldRoom))
                     return;
 
                 if (oldRoom.GetRoomUserManager() != null)
-                    oldRoom.GetRoomUserManager().RemoveUserFromRoom(GetClient(), false, false);
+                    oldRoom.GetRoomUserManager().RemoveUserFromRoom(GetClient(), false);
             }
 
             if (GetClient().GetHabbo().IsTeleporting && GetClient().GetHabbo().TeleportingRoomId != id)
@@ -696,7 +687,7 @@ namespace Plus.HabboHotel.Users
 
                 if (room.Access == RoomAccess.Password && !GetClient().GetHabbo().GetPermissions().HasRight("room_enter_locked"))
                 {
-                    if (password.ToLower() != room.Password.ToLower() || String.IsNullOrWhiteSpace(password))
+                    if (password.ToLower() != room.Password.ToLower() || string.IsNullOrWhiteSpace(password))
                     {
                         GetClient().SendPacket(new GenericErrorComposer(-100002));
                         GetClient().SendPacket(new CloseConnectionComposer());
@@ -728,8 +719,7 @@ namespace Plus.HabboHotel.Users
             {
                 dbClient.RunQuery("INSERT INTO user_roomvisits (user_id,room_id,entry_timestamp,exit_timestamp,hour,minute) VALUES ('" + GetClient().GetHabbo().Id + "','" + GetClient().GetHabbo().CurrentRoomId + "','" + PlusEnvironment.GetUnixTimestamp() + "','0','" + DateTime.Now.Hour + "','" + DateTime.Now.Minute + "');");// +
             }
-
-
+            
             if (room.OwnerId != Id)
             {
                 GetClient().GetHabbo().GetStats().RoomVisits += 1;

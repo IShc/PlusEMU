@@ -10,7 +10,7 @@ using Plus.HabboHotel.Rooms.AI.Speech;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 {
-    class PlacePetEvent : IPacketEvent
+    internal class PlacePetEvent : IPacketEvent
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(PlacePetEvent));
 
@@ -66,8 +66,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
             pet.PlacedInRoom = true;
             pet.RoomId = room.RoomId;
 
-            List<RandomSpeech> rndSpeechList = new List<RandomSpeech>();
-            RoomBot roomBot = new RoomBot(pet.PetId, pet.RoomId, "pet", "freeroam", pet.Name, "", pet.Look, x, y, 0, 0, 0, 0, 0, 0, ref rndSpeechList, "", 0, pet.OwnerId, false, 0, false, 0);
+            List<RandomSpeech> rndSpeechList = new();
+            RoomBot roomBot = new(pet.PetId, pet.RoomId, "pet", "freeroam", pet.Name, "", pet.Look, x, y, 0, 0, 0, 0, 0, 0, ref rndSpeechList, "", 0, pet.OwnerId, false, 0, false, 0);
 
             room.GetRoomUserManager().DeployBot(roomBot, pet);
 

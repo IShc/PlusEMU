@@ -8,7 +8,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class BotChangesClothesBox : IWiredItem
+    internal class BotChangesClothesBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -41,7 +41,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (@params == null || @params.Length == 0)
                 return false;
 
-            if (String.IsNullOrEmpty(StringData))
+            if (string.IsNullOrEmpty(StringData))
                 return false;
 
 

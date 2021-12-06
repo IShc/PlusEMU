@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
 {
-    class FloorPlanEditorRoomPropertiesEvent : IPacketEvent
+    internal class FloorPlanEditorRoomPropertiesEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -15,10 +15,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
                 return;
 
             Room room = session.GetHabbo().CurrentRoom;
-            if (room == null)
-                return;
 
-            DynamicRoomModel model = room.GetGameMap().Model;
+            DynamicRoomModel model = room?.GetGameMap().Model;
             if (model == null)
                 return;
 

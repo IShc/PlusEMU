@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    class CatalogItemDiscountComposer : MessageComposer
+    internal class CatalogItemDiscountComposer : MessageComposer
     {
         public CatalogItemDiscountComposer()
             : base(ServerPacketHeader.CatalogItemDiscountMessageComposer)

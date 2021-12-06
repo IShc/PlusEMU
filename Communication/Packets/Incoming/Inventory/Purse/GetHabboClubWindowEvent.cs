@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Purse
 {
-    class GetHabboClubWindowEvent : IPacketEvent
+    internal class GetHabboClubWindowEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

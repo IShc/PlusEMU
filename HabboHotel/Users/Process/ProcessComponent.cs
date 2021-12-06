@@ -6,7 +6,7 @@ using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Users.Process
 {
-    sealed class ProcessComponent
+    internal sealed class ProcessComponent
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(ProcessComponent));
 
@@ -25,12 +25,11 @@ namespace Plus.HabboHotel.Users.Process
         /// </summary>
         private bool _timerRunning;
 
-#pragma warning disable CS0414 // The field 'ProcessComponent._timerLagging' is assigned but its value is never used
         /// <summary>
         /// Checks if the timer is lagging behind (server can't keep up).
         /// </summary>
+#pragma warning disable CS0414
         private bool _timerLagging;
-#pragma warning restore CS0414 // The field 'ProcessComponent._timerLagging' is assigned but its value is never used
 
         /// <summary>
         /// Enable/Disable the timer WITHOUT disabling the timer itself.
@@ -45,14 +44,7 @@ namespace Plus.HabboHotel.Users.Process
         /// <summary>
         /// How often the timer should execute.
         /// </summary>
-        private static readonly int _runtimeInSec = 60;
-
-        /// <summary>
-        /// Default.
-        /// </summary>
-        public ProcessComponent()
-        {
-        }
+        private const int RuntimeInSec = 60;
 
         /// <summary>
         /// Initializes the ProcessComponent.
@@ -66,7 +58,7 @@ namespace Plus.HabboHotel.Users.Process
                 return false;
 
             _player = player;
-            _timer = new Timer(Run, null, _runtimeInSec * 1000, _runtimeInSec * 1000);
+            _timer = new Timer(Run, null, RuntimeInSec * 1000, RuntimeInSec * 1000);
             return true;
         }
 
@@ -172,8 +164,7 @@ namespace Plus.HabboHotel.Users.Process
             // Dispose the timer to disable it.
             try
             {
-                if (_timer != null)
-                    _timer.Dispose();
+                _timer?.Dispose();
             }
             catch { }
 

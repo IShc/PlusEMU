@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
-    class GetRoomFilterListComposer : MessageComposer
+    internal class GetRoomFilterListComposer : MessageComposer
     {
         public List<string> WordFilterList { get; }
         public GetRoomFilterListComposer(List<string> wordFilterList)

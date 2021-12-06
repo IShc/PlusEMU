@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms.AI.Speech;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
 {
-    class OpenBotActionEvent : IPacketEvent
+    internal class OpenBotActionEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class MassBadgeCommand : IChatCommand
+    internal class MassBadgeCommand : IChatCommand
     {
         public string PermissionRequired => "command_mass_badge";
 

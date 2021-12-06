@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms.AI;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class KickPetsCommand : IChatCommand
+    internal class KickPetsCommand : IChatCommand
     {
         public string PermissionRequired => "command_kickpets";
 

@@ -48,7 +48,7 @@ namespace Plus.HabboHotel.Rooms
 
         public RoomUser DeployBot(RoomBot bot, Pet pet)
         {
-            RoomUser user = new RoomUser(0, _room.RoomId, _primaryPrivateUserId++, _room);
+            RoomUser user = new(0, _room.RoomId, _primaryPrivateUserId++, _room);
             bot.VirtualId = _primaryPrivateUserId;
 
             int personalId = _secondaryPrivateUserId++;
@@ -144,13 +144,10 @@ namespace Plus.HabboHotel.Rooms
             if (_room == null)
                 return false;
 
-            if (session == null)
-                return false;
-
-            if (session.GetHabbo().CurrentRoom == null)
+            if (session?.GetHabbo().CurrentRoom == null)
                 return false;
             
-            RoomUser user = new RoomUser(session.GetHabbo().Id, _room.RoomId, _primaryPrivateUserId++, _room);
+            RoomUser user = new(session.GetHabbo().Id, _room.RoomId, _primaryPrivateUserId++, _room);
 
             if (user == null || user.GetClient() == null)
                 return false;
@@ -350,7 +347,7 @@ namespace Plus.HabboHotel.Rooms
                 if (session == null)
                     return;
 
-                List<RoomUser> bots = new List<RoomUser>();
+                List<RoomUser> bots = new();
 
                 try
                 {
@@ -368,7 +365,7 @@ namespace Plus.HabboHotel.Rooms
                 }
                 catch { }
 
-                List<RoomUser> petsToRemove = new List<RoomUser>();
+                List<RoomUser> petsToRemove = new();
                 foreach (RoomUser bot in bots.ToList())
                 {
                     if (bot == null || bot.BotAI == null)
@@ -558,7 +555,7 @@ namespace Plus.HabboHotel.Rooms
         
         public List<Pet> GetPets()
         {
-            List<Pet> pets = new List<Pet>();
+            List<Pet> pets = new();
             foreach (RoomUser user in _pets.Values.ToList())
             {
                 if (user == null || !user.IsPet)
@@ -572,7 +569,7 @@ namespace Plus.HabboHotel.Rooms
 
         public void SerializeStatusUpdates()
         {
-            List<RoomUser> users = new List<RoomUser>();
+            List<RoomUser> users = new();
             ICollection<RoomUser> roomUsers = GetUserList();
 
             if (roomUsers == null)
@@ -623,7 +620,7 @@ namespace Plus.HabboHotel.Rooms
 
             try
             {
-                List<RoomUser> ToRemove = new List<RoomUser>();
+                List<RoomUser> ToRemove = new();
 
                 foreach (RoomUser user in GetUserList().ToList())
                 {
@@ -633,7 +630,7 @@ namespace Plus.HabboHotel.Rooms
                     if (!IsValid(user))
                     {
                         if (user.GetClient() != null)
-                            RemoveUserFromRoom(user.GetClient(), false, false);
+                            RemoveUserFromRoom(user.GetClient(), false);
                         else
                             RemoveRoomUser(user);
                     }
@@ -859,8 +856,7 @@ namespace Plus.HabboHotel.Rooms
                                 if (!user.IsBot && user.RidingHorse && user.IsPet == false)
                                 {
                                     RoomUser horse = GetRoomUserByVirtualId(user.HorseId);
-                                    if (horse != null)
-                                        horse.SetStatus("mv", nextX + "," + nextY + "," + TextHandling.GetString(nextZ));
+                                    horse?.SetStatus("mv", nextX + "," + nextY + "," + TextHandling.GetString(nextZ));
 
                                     user.SetStatus("mv", +nextX + "," + nextY + "," + TextHandling.GetString(nextZ + 1));
 
@@ -952,7 +948,7 @@ namespace Plus.HabboHotel.Rooms
                     GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(toRemove.HabboId);
                     if (client != null)
                     {
-                        RemoveUserFromRoom(client, true, false);
+                        RemoveUserFromRoom(client, true);
                     }
                     else
                         RemoveRoomUser(toRemove);

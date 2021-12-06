@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.BuildersClub
 {
-    class BCBorrowedItemsComposer : MessageComposer
+    internal class BCBorrowedItemsComposer : MessageComposer
     {
         public BCBorrowedItemsComposer()
             : base(ServerPacketHeader.BCBorrowedItemsMessageComposer)

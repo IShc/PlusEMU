@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Permissions
 {
-    class YouAreNotControllerComposer : MessageComposer
+    internal class YouAreNotControllerComposer : MessageComposer
     {
         public YouAreNotControllerComposer()
             : base(ServerPacketHeader.YouAreNotControllerMessageComposer)

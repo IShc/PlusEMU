@@ -37,7 +37,7 @@ namespace Plus.Communication.Encryption.KeyExchange
         {
             PublicKey = 0;
 
-            Random rand = new Random();
+            Random rand = new();
             while (PublicKey == 0)
             {
                 if (!ignoreBaseKeys)

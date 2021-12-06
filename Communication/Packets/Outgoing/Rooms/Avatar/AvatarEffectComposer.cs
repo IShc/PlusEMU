@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Avatar
 {
-    class AvatarEffectComposer : MessageComposer
+    internal class AvatarEffectComposer : MessageComposer
     {
         public int PlayerId { get; }
         public int EffectId { get; }

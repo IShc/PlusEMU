@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms.Trading;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Trading
 {
-    class TradingConfirmEvent : IPacketEvent
+    internal class TradingConfirmEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -13,10 +13,8 @@ namespace Plus.Communication.Packets.Incoming.Inventory.Trading
                 return;
 
             Room room = session.GetHabbo().CurrentRoom;
-            if (room == null)
-                return;
 
-            RoomUser roomUser = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            RoomUser roomUser = room?.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (roomUser == null)
                 return;
 

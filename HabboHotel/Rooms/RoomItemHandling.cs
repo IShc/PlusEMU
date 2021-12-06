@@ -212,10 +212,7 @@ namespace Plus.HabboHotel.Rooms
                 }
                 else if (item.IsWired)
                 {
-                    if (_room == null)
-                        continue;
-
-                    if (_room.GetWired() == null)
+                    if (_room?.GetWired() == null)
                         continue;
 
                     _room.GetWired().LoadWiredBox(item);
@@ -377,22 +374,22 @@ namespace Plus.HabboHotel.Rooms
                 _mRollerCycle = 0;
                 return _rollerMessages;
             }
-            else
-                _mRollerCycle++;
+
+            _mRollerCycle++;
 
             return new List<MessageComposer>();
         }
 
-        public MessageComposer UpdateItemOnRoller(Item pItem, Point nextCoord, int pRolledId, Double nextZ)
+        public MessageComposer UpdateItemOnRoller(Item pItem, Point nextCoord, int pRolledId, double nextZ)
         {
             var mMessage = new SlideObjectBundleComposer(pItem.GetX, pItem.GetY, pItem.GetZ, nextCoord.X, nextCoord.Y, nextZ, pRolledId, 0, pItem.Id);
             SetFloorItem(pItem, nextCoord.X, nextCoord.Y, nextZ);
             return mMessage;
         }
 
-        public MessageComposer UpdateUserOnRoller(RoomUser pUser, Point pNextCoord, int pRollerId, Double nextZ)
+        public MessageComposer UpdateUserOnRoller(RoomUser pUser, Point pNextCoord, int pRollerId, double nextZ)
         {
-            SlideObjectBundleComposer mMessage = new SlideObjectBundleComposer(pUser.X, pUser.Y, pUser.Z, pNextCoord.X,
+            SlideObjectBundleComposer mMessage = new(pUser.X, pUser.Y, pUser.Z, pNextCoord.X,
                 pNextCoord.Y, nextZ, pRollerId, pUser.VirtualId, -1);
 
             _room.GetGameMap()
@@ -634,8 +631,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 if (_floorItems.ContainsKey(item.Id))
                 {
-                    if (session != null)
-                        session.SendNotification(PlusEnvironment.GetLanguageManager().TryGetValue("room.item.already_placed"));
+                    session?.SendNotification(PlusEnvironment.GetLanguageManager().TryGetValue("room.item.already_placed"));
                     _room.GetGameMap().RemoveFromMap(item);
                     return true;
                 }
@@ -680,7 +676,7 @@ namespace Plus.HabboHotel.Rooms
             return _room.GetGameMap().GetCoordinatedItems(new Point(x, y));
         }
 
-        public bool SetFloorItem(Item item, int newX, int newY, Double newZ)
+        public bool SetFloorItem(Item item, int newX, int newY, double newZ)
         {
             if (_room == null)
                 return false;
@@ -772,7 +768,7 @@ namespace Plus.HabboHotel.Rooms
 
             if (_roomItemUpdateQueue.Count > 0)
             {
-                List<Item> addItems = new List<Item>();
+                List<Item> addItems = new();
                 while (_roomItemUpdateQueue.Count > 0)
                 {
                     if (_roomItemUpdateQueue.TryDequeue(out Item item))
@@ -796,7 +792,7 @@ namespace Plus.HabboHotel.Rooms
 
         public List<Item> RemoveItems(GameClient session)
         {
-            List<Item> items = new List<Item>();
+            List<Item> items = new();
 
             foreach (Item item in GetWallAndFloor.ToList())
             {
@@ -877,8 +873,8 @@ namespace Plus.HabboHotel.Rooms
                 }
 
                 List<Item> furniObjects = GetFurniObjects(newX, newY);
-                List<Item> collection = new List<Item>();
-                List<Item> list3 = new List<Item>();
+                List<Item> collection = new();
+                List<Item> list3 = new();
                 foreach (ThreeDCoord coord in dictionary.Values.ToList())
                 {
                     List<Item> list4 = GetFurniObjects(coord.X, coord.Y);

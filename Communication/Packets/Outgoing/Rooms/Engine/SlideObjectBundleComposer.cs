@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class SlideObjectBundleComposer : MessageComposer
+    internal class SlideObjectBundleComposer : MessageComposer
     {
         public int FromX { get; }
         public int FromY { get; }

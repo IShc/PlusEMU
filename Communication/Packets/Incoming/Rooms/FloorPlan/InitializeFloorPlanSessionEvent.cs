@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
 {
-    class InitializeFloorPlanSessionEvent : IPacketEvent
+    internal class InitializeFloorPlanSessionEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

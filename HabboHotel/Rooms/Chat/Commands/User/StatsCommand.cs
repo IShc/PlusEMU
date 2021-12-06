@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class StatsCommand : IChatCommand
+    internal class StatsCommand : IChatCommand
     {
         public string PermissionRequired => "command_stats";
 
@@ -19,7 +19,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
             int onlineTime = Convert.ToInt32(hours);
             string s = onlineTime == 1 ? "" : "s";
 
-            StringBuilder habboInfo = new StringBuilder();
+            StringBuilder habboInfo = new();
             habboInfo.Append("Your account stats:\r\r");
 
             habboInfo.Append("Currency Info:\r");
@@ -29,7 +29,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
             habboInfo.Append("Online Time: " + onlineTime + " Hour" + s + "\r");
             habboInfo.Append("Respects: " + session.GetHabbo().GetStats().Respect + "\r");
             habboInfo.Append("GOTW Points: " + session.GetHabbo().GotwPoints + "\r\r");
-
 
             session.SendNotification(habboInfo.ToString());
         }

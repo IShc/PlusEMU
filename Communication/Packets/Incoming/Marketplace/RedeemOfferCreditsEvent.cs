@@ -6,7 +6,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
-    class RedeemOfferCreditsEvent : IPacketEvent
+    internal class RedeemOfferCreditsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

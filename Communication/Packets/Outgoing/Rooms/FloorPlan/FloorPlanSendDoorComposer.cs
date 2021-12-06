@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.FloorPlan
 {
-    class FloorPlanSendDoorComposer : MessageComposer
+    internal class FloorPlanSendDoorComposer : MessageComposer
     {
         public int DoorX { get; }
         public int DoorY { get; }

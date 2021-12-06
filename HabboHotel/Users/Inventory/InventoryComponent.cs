@@ -94,23 +94,18 @@ namespace Plus.HabboHotel.Users.Inventory
             _floorItems.Clear();
             _wallItems.Clear();
 
-            if (_client != null)
-                _client.SendPacket(new FurniListUpdateComposer());
+            _client?.SendPacket(new FurniListUpdateComposer());
         }
 
         public void SetIdleState()
         {
-            if (_botItems != null)
-                _botItems.Clear();
+            _botItems?.Clear();
 
-            if (_petsItems != null)
-                _petsItems.Clear();
+            _petsItems?.Clear();
 
-            if (_floorItems != null)
-                _floorItems.Clear();
+            _floorItems?.Clear();
 
-            if (_wallItems != null)
-                _wallItems.Clear();
+            _wallItems?.Clear();
 
             _client = null;
         }
@@ -120,10 +115,7 @@ namespace Plus.HabboHotel.Users.Inventory
             if (fromDatabase)
                 Init();
 
-            if (_client != null)
-            {
-                _client.SendPacket(new FurniListUpdateComposer());
-            }
+            _client?.SendPacket(new FurniListUpdateComposer());
         }
 
         public Item GetItem(int id)
@@ -174,7 +166,7 @@ namespace Plus.HabboHotel.Users.Inventory
                 }
             }
 
-            Item itemToAdd = new Item(id, 0, baseItem, extraData, 0, 0, 0, 0, _userId, group, limitedNumber, limitedStack, string.Empty);
+            Item itemToAdd = new(id, 0, baseItem, extraData, 0, 0, 0, 0, _userId, group, limitedNumber, limitedStack, string.Empty);
  
             if (UserHoldsItem(id))
                 RemoveItem(id);
@@ -251,11 +243,8 @@ namespace Plus.HabboHotel.Users.Inventory
         {
             if (_petsItems.ContainsKey(petId))
                 return _petsItems.TryGetValue(petId, out pet);
-            else
-            {
-                pet = null;
-                return false;
-            }
+            pet = null;
+            return false;
         }
         #endregion
 
@@ -274,22 +263,16 @@ namespace Plus.HabboHotel.Users.Inventory
         {
             if (_botItems.ContainsKey(botId))
                 return _botItems.TryRemove(botId, out bot);
-            else
-            {
-                bot = null;
-                return false;
-            }
+            bot = null;
+            return false;
         }
 
         public bool TryGetBot(int botId, out Bot bot)
         {
             if (_botItems.ContainsKey(botId))
                 return _botItems.TryGetValue(botId, out bot);
-            else
-            {
-                bot = null;
-                return false;
-            }
+            bot = null;
+            return false;
         }
         #endregion
 
@@ -299,14 +282,13 @@ namespace Plus.HabboHotel.Users.Inventory
             {
                 return _floorItems.TryAdd(item.Id, item);
             }
-            else if (item.Data.Type.ToString().ToLower() == "i")//ItemType.WALL)
+
+            if (item.Data.Type.ToString().ToLower() == "i")//ItemType.WALL)
             {
                 return _wallItems.TryAdd(item.Id, item);
             }
-            else
-            {
-                throw new InvalidOperationException("Item did not match neither floor or wall item");
-            }
+
+            throw new InvalidOperationException("Item did not match neither floor or wall item");
         }
 
         public bool TryAddFloorItem(int itemId, Item item)

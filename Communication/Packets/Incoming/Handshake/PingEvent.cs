@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Handshake
 {
-    class PingEvent : IPacketEvent
+    internal class PingEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

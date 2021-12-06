@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Help
 {
-    class OnBullyClickEvent : IPacketEvent
+    internal class OnBullyClickEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

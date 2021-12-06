@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class SellRoomCommand : IChatCommand
+    internal class SellRoomCommand : IChatCommand
     {
         public string Description => "Allows the user to sell their own room.";
 
@@ -21,12 +21,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                 session.SendWhisper("Oops, you forgot to choose a price to sell the room for.");
                 return;
             }
-            else if (room.Group != null)
+
+            if (room.Group != null)
             {
                 session.SendWhisper("Oops, this room has a group. You must delete the group before you can sell the room.");
                 return;
             }
-            
+
             if (!int.TryParse(@params[1], out int price))
             {
                 session.SendWhisper("Oops, you've entered an invalid integer.");

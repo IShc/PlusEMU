@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.PathFinding
 {
-    sealed class MinHeap<T> where T : IComparable<T>
+    internal sealed class MinHeap<T> where T : IComparable<T>
     {
         private int _capacity;
         private T _temp;

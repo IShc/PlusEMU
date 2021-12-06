@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class TakeUserBadgeCommand : IRconCommand
+    internal class TakeUserBadgeCommand : IRconCommand
     {
         public string Description => "This command is used to take a badge from a user.";
 

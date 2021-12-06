@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class BotGivesHandItemBox : IWiredItem
+    internal class BotGivesHandItemBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -32,7 +32,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            StringData = botName.ToString() + ";" + drinkId.ToString();
+            StringData = botName + ";" + drinkId;
         }
 
         public bool Execute(params object[] @params)
@@ -40,7 +40,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (@params == null || @params.Length == 0)
                 return false;
 
-            if (String.IsNullOrEmpty(StringData))
+            if (string.IsNullOrEmpty(StringData))
                 return false;
 
             Habbo player = (Habbo)@params[0];

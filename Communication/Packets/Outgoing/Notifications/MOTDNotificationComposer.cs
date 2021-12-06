@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Notifications
 {
-    class MotdNotificationComposer : MessageComposer
+    internal class MotdNotificationComposer : MessageComposer
     {
         public string Message { get; }
         public MotdNotificationComposer(string message)

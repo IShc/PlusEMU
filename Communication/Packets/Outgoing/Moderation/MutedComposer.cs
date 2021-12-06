@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class MutedComposer : MessageComposer
+    internal class MutedComposer : MessageComposer
     {
         public double TimeMuted { get; }
 

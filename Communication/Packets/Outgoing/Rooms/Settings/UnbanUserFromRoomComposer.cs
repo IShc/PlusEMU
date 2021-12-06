@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
-    class UnbanUserFromRoomComposer : MessageComposer
+    internal class UnbanUserFromRoomComposer : MessageComposer
     {
         public int RoomId { get; }
         public int UserId { get; }

@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class MessengerInitComposer : MessageComposer
+    internal class MessengerInitComposer : MessageComposer
     {
         public MessengerInitComposer()
             : base(ServerPacketHeader.MessengerInitMessageComposer)

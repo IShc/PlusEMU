@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Rcon.Commands.User
 {
-    class ReloadUserVipRankCommand : IRconCommand
+    internal class ReloadUserVipRankCommand : IRconCommand
     {
         public string Description => "This command is used to reload a users VIP rank and permissions.";
 

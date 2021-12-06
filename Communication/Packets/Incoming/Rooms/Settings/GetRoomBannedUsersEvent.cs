@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 {
-    class GetRoomBannedUsersEvent : IPacketEvent
+    internal class GetRoomBannedUsersEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

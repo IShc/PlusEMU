@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class GetHabboGroupBadgesEvent : IPacketEvent
+    internal class GetHabboGroupBadgesEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -18,7 +18,7 @@ namespace Plus.Communication.Packets.Incoming.Users
             if (room == null)
                 return;
 
-            Dictionary<int, string> badges = new Dictionary<int, string>();
+            Dictionary<int, string> badges = new();
             foreach (RoomUser user in room.GetRoomUserManager().GetRoomUsers().ToList())
             {
                 if (user.IsBot || user.IsPet || user.GetClient() == null || user.GetClient().GetHabbo() == null)

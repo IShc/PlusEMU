@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class AddActorToTeamBox : IWiredItem
+    internal class AddActorToTeamBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -35,7 +35,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public bool Execute(params object[] @params)
         {
-            if (@params.Length == 0 || Instance == null || String.IsNullOrEmpty(StringData))
+            if (@params.Length == 0 || Instance == null || string.IsNullOrEmpty(StringData))
                 return false;
 
             Habbo player = (Habbo)@params[0];

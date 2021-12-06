@@ -1,6 +1,6 @@
 ﻿namespace Plus.HabboHotel.Permissions
 {
-    class PermissionCommand
+    internal class PermissionCommand
     {
         public string Command { get; }
         public int GroupId { get; }

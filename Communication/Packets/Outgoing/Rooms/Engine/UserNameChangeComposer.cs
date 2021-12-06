@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class UserNameChangeComposer : MessageComposer
+    internal class UserNameChangeComposer : MessageComposer
     {
         public int RoomId { get; }
         public int VirtualId { get; }

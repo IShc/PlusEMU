@@ -10,7 +10,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 {
-    class PlaceObjectEvent : IPacketEvent
+    internal class PlaceObjectEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -102,7 +102,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 if (!int.TryParse(data[2], out int y)) { return; }
                 if (!int.TryParse(data[3], out int rotation)) { return; }
 
-                Item roomItem = new Item(item.Id, room.RoomId, item.BaseItem, item.ExtraData, x, y, 0, rotation, session.GetHabbo().Id, item.GroupId, item.LimitedNo, item.LimitedTot, string.Empty, room);
+                Item roomItem = new(item.Id, room.RoomId, item.BaseItem, item.ExtraData, x, y, 0, rotation, session.GetHabbo().Id, item.GroupId, item.LimitedNo, item.LimitedTot, string.Empty, room);
                 if (room.GetRoomItemHandler().SetFloorItem(session, roomItem, x, y, rotation, true, false, true))
                 {
                     session.GetHabbo().GetInventoryComponent().RemoveItem(itemId);
@@ -134,7 +134,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 {
                     try
                     {
-                        Item roomItem = new Item(item.Id, room.RoomId, item.BaseItem, item.ExtraData, 0, 0, 0, 0, session.GetHabbo().Id, item.GroupId, item.LimitedNo, item.LimitedTot, wallPos, room);
+                        Item roomItem = new(item.Id, room.RoomId, item.BaseItem, item.ExtraData, 0, 0, 0, 0, session.GetHabbo().Id, item.GroupId, item.LimitedNo, item.LimitedTot, wallPos, room);
 
                         if (room.GetRoomItemHandler().SetWallItem(session, roomItem))
                         {

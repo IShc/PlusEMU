@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class ModerationMuteEvent : IPacketEvent
+    internal class ModerationMuteEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class MuteBotsCommand : IChatCommand
+    internal class MuteBotsCommand : IChatCommand
     {
         public string PermissionRequired => "command_mute_bots";
 

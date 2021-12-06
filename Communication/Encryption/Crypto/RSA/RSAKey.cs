@@ -109,11 +109,9 @@ namespace Plus.Communication.Encryption.Crypto.RSA
             {
                 return new RSAKey(new BigInteger(n, 16), Convert.ToInt32(e, 16), new BigInteger(d, 16), 0, 0, 0, 0, 0);
             }
-            else
-            {
-                return new RSAKey(new BigInteger(n, 16), Convert.ToInt32(e, 16), new BigInteger(d, 16), new BigInteger(p, 16), new BigInteger(q, 16), 
-                    new BigInteger(dmp1, 16), new BigInteger(dmq1, 16), new BigInteger(coeff, 16));
-            }
+
+            return new RSAKey(new BigInteger(n, 16), Convert.ToInt32(e, 16), new BigInteger(d, 16), new BigInteger(p, 16), new BigInteger(q, 16), 
+                new BigInteger(dmp1, 16), new BigInteger(dmq1, 16), new BigInteger(coeff, 16));
         }
 
         public int GetBlockSize()
@@ -123,22 +121,22 @@ namespace Plus.Communication.Encryption.Crypto.RSA
 
         public byte[] Encrypt(byte[] src)
         {
-            return DoEncrypt(new DoCalculateionDelegate(DoPublic), src, Pkcs1PadType.FullByte);
+            return DoEncrypt(DoPublic, src, Pkcs1PadType.FullByte);
         }
 
         public byte[] Decrypt(byte[] src)
         {
-            return DoDecrypt(new DoCalculateionDelegate(DoPublic), src, Pkcs1PadType.FullByte);
+            return DoDecrypt(DoPublic, src, Pkcs1PadType.FullByte);
         }
 
         public byte[] Sign(byte[] src)
         {
-            return DoEncrypt(new DoCalculateionDelegate(DoPrivate), src, Pkcs1PadType.FullByte);
+            return DoEncrypt(DoPrivate, src, Pkcs1PadType.FullByte);
         }
 
         public byte[] Verify(byte[] src)
         {
-            return DoDecrypt(new DoCalculateionDelegate(DoPrivate), src, Pkcs1PadType.FullByte);
+            return DoDecrypt(DoPrivate, src, Pkcs1PadType.FullByte);
         }
 
         private byte[] DoEncrypt(DoCalculateionDelegate method, byte[] src, Pkcs1PadType type)
@@ -148,7 +146,7 @@ namespace Plus.Communication.Encryption.Crypto.RSA
                 int bl = GetBlockSize();
 
                 byte[] paddedBytes = Pkcs1pad(src, bl, type);
-                BigInteger m = new BigInteger(paddedBytes);
+                BigInteger m = new(paddedBytes);
                 if (m == 0)
                 {
                     return null;
@@ -172,7 +170,7 @@ namespace Plus.Communication.Encryption.Crypto.RSA
         {
             try
             {
-                BigInteger c = new BigInteger(src);
+                BigInteger c = new(src);
                 BigInteger m = method(c);
                 if (m == 0)
                 {
@@ -262,10 +260,8 @@ namespace Plus.Communication.Encryption.Crypto.RSA
             {
                 return m.modPow(D, N);
             }
-            else
-            {
-                return 0;
-            }
+
+            return 0;
         }
     }
 

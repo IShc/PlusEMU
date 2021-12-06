@@ -10,7 +10,7 @@ namespace Plus.HabboHotel.Items
     {
         public static List<Item> GetItemsForRoom(int roomId, Room room)
         {
-            List<Item> items = new List<Item>();
+            List<Item> items = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -28,10 +28,6 @@ namespace Plus.HabboHotel.Items
                                 Convert.ToInt32(row["x"]), Convert.ToInt32(row["y"]), Convert.ToDouble(row["z"]), Convert.ToInt32(row["rot"]), Convert.ToInt32(row["user_id"]), 
                                 Convert.ToInt32(row["group_id"]), Convert.ToInt32(row["limited_number"]), Convert.ToInt32(row["limited_stack"]), Convert.ToString(row["wall_pos"]), room));
                         }
-                        else
-                        {
-                            // Item data does not exist anymore.
-                        }
                     }
                 }
             }
@@ -40,7 +36,7 @@ namespace Plus.HabboHotel.Items
 
         public static List<Item> GetItemsForUser(int userId)
         {
-            List<Item> I = new List<Item>();
+            List<Item> I = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -57,10 +53,6 @@ namespace Plus.HabboHotel.Items
                             I.Add(new Item(Convert.ToInt32(row["id"]), Convert.ToInt32(row["room_id"]), Convert.ToInt32(row["base_item"]), Convert.ToString(row["extra_data"]),
                                 Convert.ToInt32(row["x"]), Convert.ToInt32(row["y"]), Convert.ToDouble(row["z"]), Convert.ToInt32(row["rot"]), Convert.ToInt32(row["user_id"]),
                                 Convert.ToInt32(row["group_id"]), Convert.ToInt32(row["limited_number"]), Convert.ToInt32(row["limited_stack"]), Convert.ToString(row["wall_pos"])));
-                        }
-                        else
-                        {
-                            // Item data does not exist anymore.
                         }
                     }
                 }

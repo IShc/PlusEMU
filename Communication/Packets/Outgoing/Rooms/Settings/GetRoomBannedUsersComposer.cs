@@ -3,7 +3,7 @@ using Plus.HabboHotel.Cache.Type;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
-    class GetRoomBannedUsersComposer : MessageComposer
+    internal class GetRoomBannedUsersComposer : MessageComposer
     {
         public int RoomId { get; }
         public List<int> BannedUsers { get; }

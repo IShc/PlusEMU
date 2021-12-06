@@ -4,7 +4,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-     class ObjectUpdateComposer : MessageComposer
+    internal class ObjectUpdateComposer : MessageComposer
     {
         public Item Item { get; }
         public int UserId { get; }
@@ -23,8 +23,8 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
             packet.WriteInteger(Item.GetX);
             packet.WriteInteger(Item.GetY);
             packet.WriteInteger(Item.Rotation);
-            packet.WriteString(String.Format("{0:0.00}", TextHandling.GetString(Item.GetZ)));
-            packet.WriteString(String.Empty);
+            packet.WriteString(string.Format("{0:0.00}", TextHandling.GetString(Item.GetZ)));
+            packet.WriteString(string.Empty);
 
             if (Item.LimitedNo > 0)
             {

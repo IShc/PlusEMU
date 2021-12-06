@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Furni
 {
-    class GnomeBoxComposer : MessageComposer
+    internal class GnomeBoxComposer : MessageComposer
     {
         public int ItemId { get; }
 

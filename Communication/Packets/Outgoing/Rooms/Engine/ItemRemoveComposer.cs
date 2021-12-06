@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class ItemRemoveComposer : MessageComposer
+    internal class ItemRemoveComposer : MessageComposer
     {
         public int ItemId { get; }
         public int UserId { get; }

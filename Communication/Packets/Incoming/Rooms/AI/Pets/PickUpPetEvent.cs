@@ -8,7 +8,7 @@ using Plus.HabboHotel.Rooms.AI;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 {
-    class PickUpPetEvent : IPacketEvent
+    internal class PickUpPetEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -31,11 +31,9 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 
                 //Okay so, we've established we have no pets in this room by this virtual Id, let us check out users, maybe they're creeping as a pet?!
                 RoomUser targetUser = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(petId);
-                if (targetUser == null)
-                    return;
 
                 //Check some values first, please!
-                if (targetUser.GetClient() == null || targetUser.GetClient().GetHabbo() == null)
+                if (targetUser?.GetClient() == null || targetUser.GetClient().GetHabbo() == null)
                     return;
 
                 //Update the targets PetId.

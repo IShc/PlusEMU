@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Interactor
 {
-    class InteractorSwitch : IFurniInteractor
+    internal class InteractorSwitch : IFurniInteractor
     {
         public void OnPlace(GameClient session, Item item)
         {

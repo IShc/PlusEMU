@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class FurnitureAliasesComposer : MessageComposer
+    internal class FurnitureAliasesComposer : MessageComposer
     {
         public FurnitureAliasesComposer()
             : base(ServerPacketHeader.FurnitureAliasesMessageComposer)

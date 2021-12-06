@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class RegenMaps : IChatCommand
+    internal class RegenMaps : IChatCommand
     {
         public string PermissionRequired => "command_regen_maps";
 

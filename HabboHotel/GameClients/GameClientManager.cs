@@ -144,7 +144,7 @@ namespace Plus.HabboHotel.GameClients
             if (reporter == null || target == null || reporter.GetHabbo() == null || target.GetHabbo() == null)
                 return;
 
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
             builder.Append("New report submitted!\r\r");
             builder.Append("Reporter: " + reporter.GetHabbo().Username + "\r");
             builder.Append("Reported User: " + target.GetHabbo().Username + "\r\r");
@@ -194,7 +194,7 @@ namespace Plus.HabboHotel.GameClients
 
         public void CreateAndStartClient(IChannelHandlerContext connection)
         {
-            GameClient client = new GameClient(connection);
+            GameClient client = new(connection);
             if (_clients.TryAdd(connection.Channel.Id, client))
             {
                 //Hmmmmm?
@@ -208,8 +208,7 @@ namespace Plus.HabboHotel.GameClients
             if (!TryGetClient(clientId, out GameClient client))
                 return;
 
-            if (client != null)
-                client.Dispose();
+            client?.Dispose();
 
             _clients.TryRemove(clientId, out client);
         }
@@ -217,8 +216,7 @@ namespace Plus.HabboHotel.GameClients
         public void LogClonesOut(int userId)
         {
             GameClient client = GetClientByUserId(userId);
-            if (client != null)
-                client.Disconnect();
+            client?.Disconnect();
         }
 
         public void RegisterClient(GameClient client, int userId, string username)
@@ -236,18 +234,15 @@ namespace Plus.HabboHotel.GameClients
 
         public void UnregisterClient(int userid, string username)
         {
-            _userIdRegister.TryRemove(userid, out GameClient client);
-            _usernameRegister.TryRemove(username.ToLower(), out client);
+            _userIdRegister.TryRemove(userid, out GameClient _);
+            _usernameRegister.TryRemove(username.ToLower(), out GameClient _);
         }
 
         public void CloseAll()
         {
             foreach (GameClient client in GetClients.ToList())
             {
-                if (client == null)
-                    continue;
-
-                if (client.GetHabbo() != null)
+                if (client?.GetHabbo() != null)
                 {
                     try
                     {
@@ -302,7 +297,7 @@ namespace Plus.HabboHotel.GameClients
             {
                 _clientPingStopwatch.Restart();
 
-                List<GameClient> toPing = new List<GameClient>();
+                List<GameClient> toPing = new();
 
                 foreach (GameClient client in _clients.Values.ToList())
                 {
@@ -353,8 +348,7 @@ namespace Plus.HabboHotel.GameClients
                         if (_timedOutConnections.Count > 0)
                             client = (GameClient) _timedOutConnections.Dequeue();
 
-                        if (client != null)
-                            client.Disconnect();
+                        client?.Disconnect();
                     }
                 }
             }

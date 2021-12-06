@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Avatar
 {
-    class DanceEvent : IPacketEvent
+    internal class DanceEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

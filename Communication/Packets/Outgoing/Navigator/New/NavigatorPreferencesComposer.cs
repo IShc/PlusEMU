@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator.New
 {
-    class NavigatorPreferencesComposer : MessageComposer
+    internal class NavigatorPreferencesComposer : MessageComposer
     {
         public NavigatorPreferencesComposer()
             : base(ServerPacketHeader.NavigatorPreferencesMessageComposer)

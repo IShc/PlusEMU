@@ -4,7 +4,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    class CatalogOfferComposer : MessageComposer
+    internal class CatalogOfferComposer : MessageComposer
     {
         public CatalogItem Item { get; }
 

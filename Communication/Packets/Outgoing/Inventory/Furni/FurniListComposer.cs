@@ -4,7 +4,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
 {
-    class FurniListComposer : MessageComposer
+    internal class FurniListComposer : MessageComposer
     {
         public ICollection<Item> Items { get; }
         public int Pages { get; }

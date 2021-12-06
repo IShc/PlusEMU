@@ -53,7 +53,7 @@ namespace Plus.HabboHotel
         private bool _cycleEnded;
         private bool _cycleActive;
         private Task _gameCycle;
-        private readonly int _cycleSleepTime = 25;
+        private const int CycleSleepTime = 25;
 
         public Game()
         {
@@ -117,7 +117,6 @@ namespace Plus.HabboHotel
 
             _subscriptionManager = new SubscriptionManager();
             _subscriptionManager.Init();
-
         }
 
         public void StartGameLoop()
@@ -138,7 +137,7 @@ namespace Plus.HabboHotel
                 PlusEnvironment.GetGame().GetClientManager().OnCycle();
 
                 _cycleEnded = true;
-                Thread.Sleep(_cycleSleepTime);
+                Thread.Sleep(CycleSleepTime);
             }
         }
 
@@ -148,7 +147,7 @@ namespace Plus.HabboHotel
 
             while (!_cycleEnded)
             {
-                Thread.Sleep(_cycleSleepTime);
+                Thread.Sleep(CycleSleepTime);
             }
         }
 

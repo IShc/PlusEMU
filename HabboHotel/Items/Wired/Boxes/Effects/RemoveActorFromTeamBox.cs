@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class RemoveActorFromTeamBox : IWiredItem
+    internal class RemoveActorFromTeamBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }

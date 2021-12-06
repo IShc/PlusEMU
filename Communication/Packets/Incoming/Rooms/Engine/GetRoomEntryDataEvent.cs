@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 {
-    class GetRoomEntryDataEvent : IPacketEvent
+    internal class GetRoomEntryDataEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

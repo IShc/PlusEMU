@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
-    class FacelessCommand :IChatCommand
+    internal class FacelessCommand :IChatCommand
     {
         public string PermissionRequired => "command_faceless";
 
@@ -45,7 +45,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 
             session.SendPacket(new UserChangeComposer(user, true));
             session.GetHabbo().CurrentRoom.SendPacket(new UserChangeComposer(user, false));
-            return;
         }
     }
 }

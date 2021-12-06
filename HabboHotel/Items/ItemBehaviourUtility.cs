@@ -6,7 +6,7 @@ using Plus.HabboHotel.Items.Data.Toner;
 
 namespace Plus.HabboHotel.Items
 {
-    static class ItemBehaviourUtility
+    internal static class ItemBehaviourUtility
     {
         public static void GenerateExtradata(Item item, ServerPacket packet)
         {
@@ -81,7 +81,7 @@ namespace Plus.HabboHotel.Items
                 case InteractionType.Background:
                     packet.WriteInteger(0);
                     packet.WriteInteger(1);
-                    if (!String.IsNullOrEmpty(item.ExtraData))
+                    if (!string.IsNullOrEmpty(item.ExtraData))
                     {
                         packet.WriteInteger(item.ExtraData.Split(Convert.ToChar(9)).Length / 2);
 
@@ -132,7 +132,7 @@ namespace Plus.HabboHotel.Items
                                 packet.WriteString("PRODUCT_CODE");
                                 packet.WriteString("A1 KUMIANKKA");
                                 packet.WriteString("state");
-                                packet.WriteString(item.MagicRemove == true ? "1" : "0");
+                                packet.WriteString(item.MagicRemove ? "1" : "0");
                             }
                         }
                     }

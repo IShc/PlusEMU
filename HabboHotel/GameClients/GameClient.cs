@@ -121,14 +121,14 @@ namespace Plus.HabboHotel.GameClients
 
                     if (PlusEnvironment.GetGame().GetPermissionManager().TryGetGroup(_habbo.Rank, out PermissionGroup group))
                     {
-                        if (!String.IsNullOrEmpty(group.Badge))
+                        if (!string.IsNullOrEmpty(group.Badge))
                             if (!_habbo.GetBadgeComponent().HasBadge(group.Badge))
                                 _habbo.GetBadgeComponent().GiveBadge(group.Badge, true, this);
                     }
 
                     if (PlusEnvironment.GetGame().GetSubscriptionManager().TryGetSubscriptionData(_habbo.VipRank, out SubscriptionData subData))
                     {
-                        if (!String.IsNullOrEmpty(subData.Badge))
+                        if (!string.IsNullOrEmpty(subData.Badge))
                         {
                             if (!_habbo.GetBadgeComponent().HasBadge(subData.Badge))
                                 _habbo.GetBadgeComponent().GiveBadge(subData.Badge, true, this);
@@ -220,8 +220,7 @@ namespace Plus.HabboHotel.GameClients
 
             if (!_disconnected)
             {
-                if (_channel != null)
-                    _channel.CloseAsync();
+                _channel?.CloseAsync();
                 _disconnected = true;
             }
         }

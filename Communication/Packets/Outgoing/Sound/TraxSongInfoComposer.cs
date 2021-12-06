@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Sound
 {
-    class TraxSongInfoComposer : MessageComposer
+    internal class TraxSongInfoComposer : MessageComposer
     {
         public TraxSongInfoComposer()
             : base(ServerPacketHeader.TraxSongInfoMessageComposer)

@@ -9,7 +9,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class UpdateGroupColoursEvent : IPacketEvent
+    internal class UpdateGroupColoursEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class FlatCreatedComposer : MessageComposer
+    internal class FlatCreatedComposer : MessageComposer
     {
         public int RoomId { get; }
         public string RoomName { get; }

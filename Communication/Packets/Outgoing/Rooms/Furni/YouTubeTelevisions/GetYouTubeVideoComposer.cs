@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.YouTubeTelevisions
 {
-    class GetYouTubeVideoComposer : MessageComposer
+    internal class GetYouTubeVideoComposer : MessageComposer
     {
         public int ItemId { get; }
         public string YouTubeVideo { get; }

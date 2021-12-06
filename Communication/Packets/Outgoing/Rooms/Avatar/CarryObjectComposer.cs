@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Avatar
 {
-    class CarryObjectComposer : MessageComposer
+    internal class CarryObjectComposer : MessageComposer
     {
         public int VirtualId { get; }
         public int ItemId { get; }

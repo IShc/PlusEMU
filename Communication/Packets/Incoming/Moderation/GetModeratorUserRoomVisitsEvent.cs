@@ -8,7 +8,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class GetModeratorUserRoomVisitsEvent : IPacketEvent
+    internal class GetModeratorUserRoomVisitsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -20,7 +20,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             if (target == null)
                 return;
 
-            Dictionary<double, RoomData> visits = new Dictionary<double, RoomData>();
+            Dictionary<double, RoomData> visits = new();
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `room_id`, `entry_timestamp` FROM `user_roomvisits` WHERE `user_id` = @id ORDER BY `entry_timestamp` DESC LIMIT 50");

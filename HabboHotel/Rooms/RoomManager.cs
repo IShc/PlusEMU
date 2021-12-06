@@ -88,7 +88,7 @@ namespace Plus.HabboHotel.Rooms
 
                     if (model != null)
                         _roomModels.Add(model, new RoomModel(model, Convert.ToInt32(row["door_x"]),
-                            Convert.ToInt32(row["door_y"]), (Double) row["door_z"], Convert.ToInt32(row["door_dir"]),
+                            Convert.ToInt32(row["door_y"]), (double) row["door_z"], Convert.ToInt32(row["door_dir"]),
                             Convert.ToString(row["heightmap"]), PlusEnvironment.EnumToBool(row["club_only"].ToString()),
                             Convert.ToInt32(row["wall_height"]), false));
                 }
@@ -194,7 +194,7 @@ namespace Plus.HabboHotel.Rooms
                     return false;
                 }
 
-                Room myInstance = new Room(data);
+                Room myInstance = new(data);
                 if (_rooms.TryAdd(roomId, myInstance))
                 {
                     room = myInstance;
@@ -297,7 +297,7 @@ namespace Plus.HabboHotel.Rooms
                 roomId = Convert.ToInt32(dbClient.InsertQuery());
             }
 
-            RoomData data = new RoomData(roomId, name, model.Id, session.GetHabbo().Username, session.GetHabbo().Id, "", 0, "public", "open", 0, maxVisitors, category, description, string.Empty,
+            RoomData data = new(roomId, name, model.Id, session.GetHabbo().Username, session.GetHabbo().Id, "", 0, "public", "open", 0, maxVisitors, category, description, string.Empty,
              floor, landscape, 1, 1, 0, 0, wallthick, floorthick, wallpaper, 1, 1, 1, 1, 1, 1, 1, 8, tradeSettings, true, true, true, true, true, true, true, 0, 0, true, model);
 
             return data;
@@ -319,7 +319,7 @@ namespace Plus.HabboHotel.Rooms
 
                 PlusEnvironment.GetGame().GetRoomManager().UnloadRoom(room.Id);
                 Console.Clear();
-                Log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + String.Format("{0:0.##}", ((double)i / length) * 100) + "%");
+                Log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + string.Format("{0:0.##}", ((double)i / length) * 100) + "%");
                 i++;
             }
             Log.Info("Done disposing rooms!");

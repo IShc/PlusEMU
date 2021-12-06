@@ -4,7 +4,7 @@ using Plus.HabboHotel.Moderation;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class ReleaseTicketEvent : IPacketEvent
+    internal class ReleaseTicketEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

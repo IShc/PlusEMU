@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 {
-    class GameEndsBox : IWiredItem
+    internal class GameEndsBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }

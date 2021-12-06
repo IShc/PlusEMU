@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class BroadcastMessageAlertComposer : MessageComposer
+    internal class BroadcastMessageAlertComposer : MessageComposer
     {
         public string Message { get; }
         public string Url { get; }

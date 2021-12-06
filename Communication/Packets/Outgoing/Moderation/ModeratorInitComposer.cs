@@ -5,7 +5,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class ModeratorInitComposer : MessageComposer
+    internal class ModeratorInitComposer : MessageComposer
     {
         public ICollection<string> UserPresets { get; }
         public ICollection<string> RoomPresets { get; }

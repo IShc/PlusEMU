@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class UpdateFavouriteGroupComposer : MessageComposer
+    internal class UpdateFavouriteGroupComposer : MessageComposer
     {
         public Group Group { get; }
         public int VirtualId { get; }

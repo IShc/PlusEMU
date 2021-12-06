@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
-    class FlatControllerRemovedComposer : MessageComposer
+    internal class FlatControllerRemovedComposer : MessageComposer
     {
         public int RoomId { get; }
         public int UserId { get; }

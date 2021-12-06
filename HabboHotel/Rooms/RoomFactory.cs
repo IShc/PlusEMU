@@ -9,7 +9,7 @@ namespace Plus.HabboHotel.Rooms
     {
         public static List<RoomData> GetRoomsDataByOwnerSortByName(int ownerId)
         {
-            List<RoomData> data = new List<RoomData>();
+            List<RoomData> data = new();
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

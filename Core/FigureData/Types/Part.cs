@@ -1,6 +1,6 @@
 ﻿namespace Plus.Core.FigureData.Types
 {
-    class Part
+    internal class Part
     {
         public int Id { get; set; }
         public SetType SetType { get; set; }

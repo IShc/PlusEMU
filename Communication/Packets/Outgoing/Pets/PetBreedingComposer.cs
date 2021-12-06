@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Pets
 {
-    class PetBreedingComposer : MessageComposer
+    internal class PetBreedingComposer : MessageComposer
     {
         public PetBreedingComposer()
             : base(ServerPacketHeader.PetBreedingMessageComposer)

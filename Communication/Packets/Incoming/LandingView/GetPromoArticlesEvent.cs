@@ -5,7 +5,7 @@ using Plus.HabboHotel.LandingView.Promotions;
 
 namespace Plus.Communication.Packets.Incoming.LandingView
 {
-    class GetPromoArticlesEvent : IPacketEvent
+    internal class GetPromoArticlesEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

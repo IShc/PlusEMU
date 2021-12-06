@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Settings
 {
-    class ModifyRoomFilterListEvent : IPacketEvent
+    internal class ModifyRoomFilterListEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class FlagMeCommand : IChatCommand
+    internal class FlagMeCommand : IChatCommand
     {
         public string PermissionRequired => "command_flagme";
 
@@ -29,13 +29,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
         {
             if (habbo.Rank == 1 && habbo.VipRank == 0 && habbo.LastNameChange == 0)
                 return true;
-            else if (habbo.Rank == 1 && habbo.VipRank == 1 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 604800) > habbo.LastNameChange))
+            if (habbo.Rank == 1 && habbo.VipRank == 1 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 604800) > habbo.LastNameChange))
                 return true;
-            else if (habbo.Rank == 1 && habbo.VipRank == 2 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 86400) > habbo.LastNameChange))
+            if (habbo.Rank == 1 && habbo.VipRank == 2 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 86400) > habbo.LastNameChange))
                 return true;
-            else if (habbo.Rank == 1 && habbo.VipRank == 3)
+            if (habbo.Rank == 1 && habbo.VipRank == 3)
                 return true;
-            else if (habbo.GetPermissions().HasRight("mod_tool"))
+            if (habbo.GetPermissions().HasRight("mod_tool"))
                 return true;
 
             return false;

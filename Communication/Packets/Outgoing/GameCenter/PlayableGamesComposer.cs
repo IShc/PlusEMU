@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.GameCenter
 {
-    class PlayableGamesComposer : MessageComposer
+    internal class PlayableGamesComposer : MessageComposer
     {
         public int GameId { get; }
 

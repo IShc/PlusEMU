@@ -11,11 +11,6 @@ namespace Plus.HabboHotel.Catalog.Marketplace
         public Dictionary<int, int> MarketCounts = new();
         public Dictionary<int, int> MarketAverages = new();
 
-        public MarketplaceManager()
-        {
-
-        }
-
         public int AvgPriceForSprite(int spriteId)
         {
             int num = 0;
@@ -49,7 +44,7 @@ namespace Plus.HabboHotel.Catalog.Marketplace
 
         public string FormatTimestampString()
         {
-            return FormatTimestamp().ToString().Split(new char[] { ',' })[0];
+            return FormatTimestamp().ToString().Split(new[] { ',' })[0];
         }
 
         public double FormatTimestamp()
@@ -59,8 +54,8 @@ namespace Plus.HabboHotel.Catalog.Marketplace
 
         public int OfferCountForSprite(int spriteId)
         {
-            Dictionary<int, MarketOffer> dictionary = new Dictionary<int, MarketOffer>();
-            Dictionary<int, int> dictionary2 = new Dictionary<int, int>();
+            Dictionary<int, MarketOffer> dictionary = new();
+            Dictionary<int, int> dictionary2 = new();
             foreach (MarketOffer item in MarketItems)
             {
                 if (dictionary.ContainsKey(item.SpriteId))

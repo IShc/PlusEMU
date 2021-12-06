@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users.Clothing.Parts;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects
 {
-    class FigureSetIdsComposer : MessageComposer
+    internal class FigureSetIdsComposer : MessageComposer
     {
         public ICollection<ClothingParts> ClothingParts { get; }
 

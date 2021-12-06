@@ -4,7 +4,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class ModeratorTicketChatlogComposer : MessageComposer
+    internal class ModeratorTicketChatlogComposer : MessageComposer
     {
         public ModerationTicket ModerationTicket { get; }
         public RoomData RoomData { get; }

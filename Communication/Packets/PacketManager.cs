@@ -145,16 +145,15 @@ namespace Plus.Communication.Packets
                 else
                     Log.Debug("Handled Packet: [" + packet.Id + "] UnnamedPacketEvent");
 //            }
-
             if (!IgnoreTasks)
+#pragma warning disable CS0162
                 ExecutePacketAsync(session, packet, pak);
-            else
-                pak.Parse(session, packet);
+            pak.Parse(session, packet);
         }
 
         private void ExecutePacketAsync(GameClient session, ClientPacket packet, IPacketEvent pak)
         {
-            CancellationTokenSource cancelSource = new CancellationTokenSource();
+            CancellationTokenSource cancelSource = new();
             CancellationToken token = cancelSource.Token;
 
             Task t = _eventDispatcher.StartNew(() =>
@@ -180,11 +179,9 @@ namespace Plus.Communication.Packets
                     {
                         throw e;
                     }
-                    else
-                    {
-                        //log.Fatal("Unhandled Error: " + e.Message + " - " + e.StackTrace);
-                        session.Disconnect();
-                    }
+
+                    //log.Fatal("Unhandled Error: " + e.Message + " - " + e.StackTrace);
+                    session.Disconnect();
                 }
             }
             catch (OperationCanceledException)

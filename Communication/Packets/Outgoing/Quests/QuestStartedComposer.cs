@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Quests
 {
-    class QuestStartedComposer : MessageComposer
+    internal class QuestStartedComposer : MessageComposer
     {
         public Habbo Habbo { get; }
         public Quest Quest { get; }

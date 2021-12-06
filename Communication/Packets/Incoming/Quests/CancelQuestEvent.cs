@@ -5,7 +5,7 @@ using Plus.HabboHotel.Quests;
 
 namespace Plus.Communication.Packets.Incoming.Quests
 {
-    class CancelQuestEvent : IPacketEvent
+    internal class CancelQuestEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

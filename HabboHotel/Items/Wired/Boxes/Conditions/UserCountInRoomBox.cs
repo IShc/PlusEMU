@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    class UserCountInRoomBox : IWiredItem
+    internal class UserCountInRoomBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -36,7 +36,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
             if (@params.Length == 0)
                 return false;
 
-            if (String.IsNullOrEmpty(StringData))
+            if (string.IsNullOrEmpty(StringData))
                 return false;
 
             int countOne = StringData != null ? int.Parse(StringData.Split(';')[0]) : 1;

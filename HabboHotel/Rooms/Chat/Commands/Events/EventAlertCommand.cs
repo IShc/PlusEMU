@@ -20,11 +20,11 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Events
                 {
                     if (@params.Length != 1)
                     {
-                        session.SendWhisper("Invalid command! :eventalert", 0);
+                        session.SendWhisper("Invalid command! :eventalert");
                     }
                     else if (!PlusEnvironment.Event)
                     {
-                        PlusEnvironment.GetGame().GetClientManager().SendPacket(new BroadcastMessageAlertComposer(":follow " + session.GetHabbo().Username + " for events! win prizes!\r\n- " + session.GetHabbo().Username, ""), "");
+                        PlusEnvironment.GetGame().GetClientManager().SendPacket(new BroadcastMessageAlertComposer(":follow " + session.GetHabbo().Username + " for events! win prizes!\r\n- " + session.GetHabbo().Username));
                         PlusEnvironment.LastEvent = DateTime.Now;
                         PlusEnvironment.Event = true;
                     }
@@ -33,13 +33,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Events
                         TimeSpan timeSpan = DateTime.Now - PlusEnvironment.LastEvent;
                         if (timeSpan.Hours >= 1)
                         {
-                            PlusEnvironment.GetGame().GetClientManager().SendPacket(new BroadcastMessageAlertComposer(":follow " + session.GetHabbo().Username + " for events! win prizes!\r\n- " + session.GetHabbo().Username, ""), "");
+                            PlusEnvironment.GetGame().GetClientManager().SendPacket(new BroadcastMessageAlertComposer(":follow " + session.GetHabbo().Username + " for events! win prizes!\r\n- " + session.GetHabbo().Username));
                             PlusEnvironment.LastEvent = DateTime.Now;
                         }
                         else
                         {
                             int num = checked(60 - timeSpan.Minutes);
-                            session.SendWhisper("Event Cooldown! " + num + " minutes left until another event can be hosted.", 0);
+                            session.SendWhisper("Event Cooldown! " + num + " minutes left until another event can be hosted.");
                         }
                     }
                 }

@@ -3,7 +3,7 @@ using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class HabboGroupBadgesComposer : MessageComposer
+    internal class HabboGroupBadgesComposer : MessageComposer
     {
         public Dictionary<int, string> Badges { get; }
         public Group Group { get; }

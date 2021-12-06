@@ -58,7 +58,7 @@ namespace Plus
                 'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '.'
             });
 
-        private static readonly ConcurrentDictionary<int, Habbo> _usersCached = new();
+        private static readonly ConcurrentDictionary<int, Habbo> UsersCached = new();
 
         public static string SwfRevision = "";
 
@@ -282,8 +282,8 @@ namespace Plus
                     Habbo user = client.GetHabbo();
                     if (user != null && user.Id > 0)
                     {
-                        if (_usersCached.ContainsKey(userId))
-                            _usersCached.TryRemove(userId, out user);
+                        if (UsersCached.ContainsKey(userId))
+                            UsersCached.TryRemove(userId, out user);
                         return user;
                     }
                 }
@@ -291,21 +291,15 @@ namespace Plus
                 {
                     try
                     {
-                        if (_usersCached.ContainsKey(userId))
-                            return _usersCached[userId];
-                        else
+                        if (UsersCached.ContainsKey(userId))
+                            return UsersCached[userId];
+                        UserData data = UserDataFactory.GetUserData(userId);
+                        Habbo generated = data?.User;
+                        if (generated != null)
                         {
-                            UserData data = UserDataFactory.GetUserData(userId);
-                            if (data != null)
-                            {
-                                Habbo generated = data.User;
-                                if (generated != null)
-                                {
-                                    generated.InitInformation(data);
-                                    _usersCached.TryAdd(userId, generated);
-                                    return generated;
-                                }
-                            }
+                            generated.InitInformation(data);
+                            UsersCached.TryAdd(userId, generated);
+                            return generated;
                         }
                     }
                     catch { return null; }
@@ -318,7 +312,7 @@ namespace Plus
             }
         }
 
-        public static Habbo GetHabboByUsername(String userName)
+        public static Habbo GetHabboByUsername(string userName)
         {
             try
             {
@@ -407,12 +401,12 @@ namespace Plus
 
         public static ICollection<Habbo> GetUsersCached()
         {
-            return _usersCached.Values;
+            return UsersCached.Values;
         }
 
         public static bool RemoveFromCache(int id, out Habbo data)
         {
-            return _usersCached.TryRemove(id, out data);
+            return UsersCached.TryRemove(id, out data);
         }
     }
 }

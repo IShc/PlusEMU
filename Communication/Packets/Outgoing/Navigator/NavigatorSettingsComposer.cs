@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class NavigatorSettingsComposer : MessageComposer
+    internal class NavigatorSettingsComposer : MessageComposer
     {
         public int HomeRoomId { get; }
 

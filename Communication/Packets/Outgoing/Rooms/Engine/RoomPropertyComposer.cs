@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class RoomPropertyComposer : MessageComposer
+    internal class RoomPropertyComposer : MessageComposer
     {
         public string Name { get; }
         public string Val { get; }

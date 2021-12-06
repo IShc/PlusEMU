@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Polls.Questions
 {
-    class QuestionParserComposer : MessageComposer
+    internal class QuestionParserComposer : MessageComposer
     {
         public QuestionParserComposer()
             : base(ServerPacketHeader.QuestionParserMessageComposer)

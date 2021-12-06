@@ -3,7 +3,7 @@ using Plus.HabboHotel.Catalog.Marketplace;
 
 namespace Plus.Communication.Packets.Outgoing.Marketplace
 {
-    class MarketPlaceOffersComposer : MessageComposer
+    internal class MarketPlaceOffersComposer : MessageComposer
     {
         public Dictionary<int, MarketOffer> Offers { get; }
         public Dictionary<int, int> Dictionary2 { get; }

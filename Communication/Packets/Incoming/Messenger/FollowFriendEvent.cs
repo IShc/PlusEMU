@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {
-    class FollowFriendEvent : IPacketEvent
+    internal class FollowFriendEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -25,7 +25,8 @@ namespace Plus.Communication.Packets.Incoming.Messenger
                 session.GetHabbo().GetMessenger().UpdateFriend(client.GetHabbo().Id, client, true);
                 return;
             }
-            else if (session.GetHabbo().CurrentRoom != null && client.GetHabbo().CurrentRoom != null)
+
+            if (session.GetHabbo().CurrentRoom != null && client.GetHabbo().CurrentRoom != null)
             {
                 if (session.GetHabbo().CurrentRoom.RoomId == client.GetHabbo().CurrentRoom.RoomId)
                     return;

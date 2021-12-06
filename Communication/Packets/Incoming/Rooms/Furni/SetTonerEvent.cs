@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
-    class SetTonerEvent : IPacketEvent
+    internal class SetTonerEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

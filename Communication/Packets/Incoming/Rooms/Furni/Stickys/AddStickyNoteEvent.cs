@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys
 {
-    class AddStickyNoteEvent : IPacketEvent
+    internal class AddStickyNoteEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -29,7 +29,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys
             {
                 string wallPossition = WallPositionCheck(":" + locationData.Split(':')[1]);
 
-                Item roomItem = new Item(item.Id, room.RoomId, item.BaseItem, item.ExtraData, 0, 0, 0, 0, session.GetHabbo().Id, item.GroupId, 0, 0, wallPossition, room);
+                Item roomItem = new(item.Id, room.RoomId, item.BaseItem, item.ExtraData, 0, 0, 0, 0, session.GetHabbo().Id, item.GroupId, 0, 0, wallPossition, room);
                 if (room.GetRoomItemHandler().SetWallItem(session, roomItem))
                     session.GetHabbo().GetInventoryComponent().RemoveItem(itemId);
             }

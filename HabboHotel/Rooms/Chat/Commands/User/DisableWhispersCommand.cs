@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class DisableWhispersCommand : IChatCommand
+    internal class DisableWhispersCommand : IChatCommand
     {
         public string PermissionRequired => "command_disable_whispers";
 

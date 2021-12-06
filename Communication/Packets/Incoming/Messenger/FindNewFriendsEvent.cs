@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {
-    class FindNewFriendsEvent : IPacketEvent
+    internal class FindNewFriendsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -5,7 +5,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class GroupInfoComposer : MessageComposer
+    internal class GroupInfoComposer : MessageComposer
     {
         public Group Group { get; }
         public bool NewWindow { get; }

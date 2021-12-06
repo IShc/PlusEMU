@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {
-    class SendMsgEvent : IPacketEvent
+    internal class SendMsgEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

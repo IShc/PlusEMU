@@ -57,7 +57,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
 
             if (message == _prefix + "commands")
             {
-                StringBuilder list = new StringBuilder();
+                StringBuilder list = new();
                 list.Append("This is the list of commands you have available:\n");
                 foreach (var cmdList in _commands.ToList())
                 {
@@ -79,8 +79,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
             if (split.Length == 0)
                 return false;
 
-            IChatCommand cmd = null;
-            if (_commands.TryGetValue(split[0].ToLower(), out cmd))
+            if (_commands.TryGetValue(split[0].ToLower(), out IChatCommand cmd))
             {
                 if (session.GetHabbo().GetPermissions().HasRight("mod_tool"))
                     LogCommand(session.GetHabbo().Id, message, session.GetHabbo().MachineId);
@@ -90,8 +89,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
                     if (!session.GetHabbo().GetPermissions().HasCommand(cmd.PermissionRequired))
                         return false;
                 }
-
-
+                
                 session.GetHabbo().ChatCommand = cmd;
                 session.GetHabbo().CurrentRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSaysCommand, session.GetHabbo(), this);
 

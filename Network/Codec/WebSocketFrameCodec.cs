@@ -6,7 +6,7 @@ using DotNetty.Transport.Channels;
 
 namespace Plus.Network.Codec
 {
-    class WebSocketFrameCodec : MessageToMessageCodec<WebSocketFrame, IByteBuffer>
+    internal class WebSocketFrameCodec : MessageToMessageCodec<WebSocketFrame, IByteBuffer>
     {
         protected override void Decode(IChannelHandlerContext ctx, WebSocketFrame msg, List<object> output)
         {

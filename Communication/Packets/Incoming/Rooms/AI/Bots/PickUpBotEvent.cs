@@ -8,7 +8,7 @@ using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
 {
-    class PickUpBotEvent : IPacketEvent
+    internal class PickUpBotEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

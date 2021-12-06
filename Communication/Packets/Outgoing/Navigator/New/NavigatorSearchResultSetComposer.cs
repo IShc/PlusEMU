@@ -5,7 +5,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Navigator.New
 {
-    class NavigatorSearchResultSetComposer : MessageComposer
+    internal class NavigatorSearchResultSetComposer : MessageComposer
     {
         public string Category { get; }
         public string Data { get; }

@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Avatar
 {
-    class ApplySignEvent : IPacketEvent
+    internal class ApplySignEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

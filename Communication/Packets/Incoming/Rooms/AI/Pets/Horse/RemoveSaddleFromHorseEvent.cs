@@ -10,7 +10,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
 {
-    class RemoveSaddleFromHorseEvent : IPacketEvent
+    internal class RemoveSaddleFromHorseEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Quests
 {
-    class QuestAbortedComposer : MessageComposer
+    internal class QuestAbortedComposer : MessageComposer
     {
         public QuestAbortedComposer()
             : base(ServerPacketHeader.QuestAbortedMessageComposer)

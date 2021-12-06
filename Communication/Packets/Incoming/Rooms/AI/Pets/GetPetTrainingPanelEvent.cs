@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 {
-    class GetPetTrainingPanelEvent : IPacketEvent
+    internal class GetPetTrainingPanelEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -17,11 +17,9 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
             {
                 //Okay so, we've established we have no pets in this room by this virtual Id, let us check out users, maybe they're creeping as a pet?!
                 RoomUser user = session.GetHabbo().CurrentRoom.GetRoomUserManager().GetRoomUserByHabbo(petId);
-                if (user == null)
-                    return;
 
                 //Check some values first, please!
-                if (user.GetClient() == null || user.GetClient().GetHabbo() == null)
+                if (user?.GetClient() == null || user.GetClient().GetHabbo() == null)
                     return;
 
                 //And boom! Let us send the training panel composer 8-).

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Navigator
 {
-    class FlatAccessDeniedComposer : MessageComposer
+    internal class FlatAccessDeniedComposer : MessageComposer
     {
         public string Username { get; }
 

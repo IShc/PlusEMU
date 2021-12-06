@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class GotoCommand : IChatCommand
+    internal class GotoCommand : IChatCommand
     {
         public string PermissionRequired => "command_goto";
 
@@ -23,16 +23,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 session.SendWhisper("You must enter a valid room ID");
             else
             {
-                RoomData data = null;
-                if (!RoomFactory.TryGetData(roomId, out data))
+                if (!RoomFactory.TryGetData(roomId, out RoomData _))
                 {
                     session.SendWhisper("This room does not exist!");
                     return;
                 }
-                else
-                {
-                    session.GetHabbo().PrepareRoom(roomId, "");
-                }
+
+                session.GetHabbo().PrepareRoom(roomId, "");
             }
         }
     }

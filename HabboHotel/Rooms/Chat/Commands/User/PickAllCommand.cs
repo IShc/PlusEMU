@@ -7,7 +7,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class PickAllCommand : IChatCommand
+    internal class PickAllCommand : IChatCommand
     {
         public string PermissionRequired => "command_pickall";
 

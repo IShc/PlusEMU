@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class DisconnectCommand :IChatCommand
+    internal class DisconnectCommand :IChatCommand
     {
         public string PermissionRequired => "command_disconnect";
 

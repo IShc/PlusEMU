@@ -216,7 +216,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             switch (item.Data.Type.ToString().ToLower())
             {
                 default:
-                    List<Item> generatedGenericItems = new List<Item>();
+                    List<Item> generatedGenericItems = new();
 
                     Item newItem;
                     switch (item.Data.InteractionType)
@@ -369,10 +369,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                     {
                         effect = session.GetHabbo().Effects().GetEffectNullable(item.Data.SpriteId);
 
-                        if (effect != null)
-                        {
-                            effect.AddToQuantity();
-                        }
+                        effect?.AddToQuantity();
                     }
                     else
                         effect = AvatarEffectFactory.CreateNullable(session.GetHabbo(), item.Data.SpriteId, 3600);

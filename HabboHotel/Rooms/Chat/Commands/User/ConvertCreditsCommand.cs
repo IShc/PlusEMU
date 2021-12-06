@@ -7,7 +7,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class ConvertCreditsCommand : IChatCommand
+    internal class ConvertCreditsCommand : IChatCommand
     {
         public string PermissionRequired => "command_convert_credits";
 
@@ -21,7 +21,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
             try 
             {
-                DataTable table = null;           
+                DataTable table;           
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.SetQuery("SELECT `id` FROM `items` WHERE `user_id` = '" + session.GetHabbo().Id + "' AND (`room_id`=  '0' OR `room_id` = '')");

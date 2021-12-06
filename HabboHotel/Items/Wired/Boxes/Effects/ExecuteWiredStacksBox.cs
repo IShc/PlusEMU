@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class ExecuteWiredStacksBox : IWiredItem
+    internal class ExecuteWiredStacksBox : IWiredItem
     {
         public Room Instance { get; set; }
 
@@ -65,21 +65,17 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 {
                     if (wiredItem.Type == WiredBoxType.EffectExecuteWiredStacks)
                         continue;
-                    else
+                    ICollection<IWiredItem> effects = Instance.GetWired().GetEffects(wiredItem);
+                    if (effects.Count > 0)
                     {
-                       ICollection<IWiredItem> effects = Instance.GetWired().GetEffects(wiredItem);
-                       if (effects.Count > 0)
-                       {
-                           foreach (IWiredItem effectItem in effects.ToList())
-                           {
-                               if (SetItems.ContainsKey(effectItem.Item.Id) && effectItem.Item.Id != item.Id)
-                                   continue;
-                               else if (effectItem.Type == WiredBoxType.EffectExecuteWiredStacks)
-                                   continue;
-                               else
-                                   effectItem.Execute(player);
-                           }
-                       }
+                        foreach (IWiredItem effectItem in effects.ToList())
+                        {
+                            if (SetItems.ContainsKey(effectItem.Item.Id) && effectItem.Item.Id != item.Id)
+                                continue;
+                            if (effectItem.Type == WiredBoxType.EffectExecuteWiredStacks)
+                                continue;
+                            effectItem.Execute(player);
+                        }
                     }
                 }
                 else continue;

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Purse
 {
-    class GetCreditsInfoEvent : IPacketEvent
+    internal class GetCreditsInfoEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

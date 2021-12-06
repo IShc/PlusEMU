@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class FlagUserCommand : IChatCommand
+    internal class FlagUserCommand : IChatCommand
     {
         public string PermissionRequired => "command_flaguser";
 
@@ -31,13 +31,11 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 session.SendWhisper("You are not allowed to flag that user.");
                 return;
             }
-            else
-            {
-                targetClient.GetHabbo().LastNameChange = 0;
-                targetClient.GetHabbo().ChangingName = true;
-                targetClient.SendNotification("Please be aware that if your username is deemed as inappropriate, you will be banned without question.\r\rAlso note that Staff will NOT allow you to change your username again should you have an issue with what you have chosen.\r\rClose this window and click yourself to begin choosing a new username!");
-                targetClient.SendPacket(new UserObjectComposer(targetClient.GetHabbo()));
-            }
+
+            targetClient.GetHabbo().LastNameChange = 0;
+            targetClient.GetHabbo().ChangingName = true;
+            targetClient.SendNotification("Please be aware that if your username is deemed as inappropriate, you will be banned without question.\r\rAlso note that Staff will NOT allow you to change your username again should you have an issue with what you have chosen.\r\rClose this window and click yourself to begin choosing a new username!");
+            targetClient.SendPacket(new UserObjectComposer(targetClient.GetHabbo()));
 
         }
     }

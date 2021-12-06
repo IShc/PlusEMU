@@ -29,7 +29,7 @@ namespace Plus.HabboHotel.Rooms.Games
 
         private void CyclePyramids()
         {
-            Random rnd = new Random();
+            Random rnd = new();
 
             foreach (Item item in _banzaiPyramids.Values.ToList())
             {
@@ -129,10 +129,8 @@ namespace Plus.HabboHotel.Rooms.Games
 
         public void Dispose()
         {
-            if (_banzaiTeleports != null)
-                _banzaiTeleports.Clear();
-            if (_banzaiPyramids != null)
-                _banzaiPyramids.Clear();
+            _banzaiTeleports?.Clear();
+            _banzaiPyramids?.Clear();
             _banzaiPyramids = null;
             _banzaiTeleports = null;
             _room = null;

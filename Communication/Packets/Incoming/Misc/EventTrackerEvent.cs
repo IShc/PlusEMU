@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Misc
 {
-    class EventTrackerEvent : IPacketEvent
+    internal class EventTrackerEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

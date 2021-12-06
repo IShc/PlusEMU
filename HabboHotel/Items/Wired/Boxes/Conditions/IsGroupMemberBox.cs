@@ -5,7 +5,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    class IsGroupMemberBox : IWiredItem
+    internal class IsGroupMemberBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }

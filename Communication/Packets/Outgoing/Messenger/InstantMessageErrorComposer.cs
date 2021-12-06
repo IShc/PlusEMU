@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class InstantMessageErrorComposer : MessageComposer
+    internal class InstantMessageErrorComposer : MessageComposer
     {
         public MessengerMessageErrors Error { get; }
         public int Target { get; }

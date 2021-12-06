@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class SetUserFocusPreferenceEvent : IPacketEvent
+    internal class SetUserFocusPreferenceEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

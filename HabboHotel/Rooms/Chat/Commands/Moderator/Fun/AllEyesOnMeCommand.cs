@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms.PathFinding;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class AllEyesOnMeCommand : IChatCommand
+    internal class AllEyesOnMeCommand : IChatCommand
     {
         public string PermissionRequired => "command_alleyesonme";
 

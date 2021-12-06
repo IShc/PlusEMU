@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.Purse
 {
-    class CreditBalanceComposer : MessageComposer
+    internal class CreditBalanceComposer : MessageComposer
     {
         public int CreditsBalance { get; }
 

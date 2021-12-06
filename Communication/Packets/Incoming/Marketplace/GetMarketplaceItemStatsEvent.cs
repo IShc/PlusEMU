@@ -6,7 +6,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
-    class GetMarketplaceItemStatsEvent : IPacketEvent
+    internal class GetMarketplaceItemStatsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

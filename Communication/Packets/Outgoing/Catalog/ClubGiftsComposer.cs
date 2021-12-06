@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Catalog
 {
-    class ClubGiftsComposer : MessageComposer
+    internal class ClubGiftsComposer : MessageComposer
     {
         public ClubGiftsComposer() 
             : base(ServerPacketHeader.ClubGiftsMessageComposer)

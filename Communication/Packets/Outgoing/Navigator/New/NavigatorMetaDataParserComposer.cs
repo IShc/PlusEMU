@@ -4,7 +4,7 @@ using Plus.HabboHotel.Navigator;
 
 namespace Plus.Communication.Packets.Outgoing.Navigator.New
 {
-    class NavigatorMetaDataParserComposer : MessageComposer
+    internal class NavigatorMetaDataParserComposer : MessageComposer
     {
         public ICollection<TopLevelItem> TopLevelItems { get; }
 

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun 
 {
-    class PetCommand : IChatCommand
+    internal class PetCommand : IChatCommand
     {
         public string PermissionRequired => "command_pet";
 
@@ -41,13 +41,13 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
                 return;
             }
 
-            if (@params[1].ToString().ToLower() == "list")
+            if (@params[1].ToLower() == "list")
             {
                 session.SendWhisper("Habbo, Dog, Cat, Terrier, Croc, Bear, Pig, Lion, Rhino, Spider, Turtle, Chick, Frog, Drag, Monkey, Horse, Bunny, Pigeon, Demon and Gnome.");
                 return;
             }
 
-            int targetPetId = GetPetIdByString(@params[1].ToString());
+            int targetPetId = GetPetIdByString(@params[1]);
             if (targetPetId == 0)
             {
                 session.SendWhisper("Oops, couldn't find a pet by that name!");

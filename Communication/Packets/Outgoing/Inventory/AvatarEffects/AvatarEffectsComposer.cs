@@ -3,7 +3,7 @@ using Plus.HabboHotel.Users.Effects;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects
 {
-    class AvatarEffectsComposer : MessageComposer
+    internal class AvatarEffectsComposer : MessageComposer
     {
         public ICollection<AvatarEffect> Effects { get; }
 

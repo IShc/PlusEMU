@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
 {
-    class TradingConfirmedComposer : MessageComposer
+    internal class TradingConfirmedComposer : MessageComposer
     {
         public int UserId { get; }
         public bool Confirmed { get; }

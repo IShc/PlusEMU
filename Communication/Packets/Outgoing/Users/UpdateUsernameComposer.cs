@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Users
 {
-    class UpdateUsernameComposer : MessageComposer
+    internal class UpdateUsernameComposer : MessageComposer
     {
         public string Username { get; }
         public UpdateUsernameComposer(string username)

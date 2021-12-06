@@ -4,7 +4,7 @@ using Plus.HabboHotel.Moderation;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class CallForHelpPendingCallsDeletedEvent : IPacketEvent
+    internal class CallForHelpPendingCallsDeletedEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

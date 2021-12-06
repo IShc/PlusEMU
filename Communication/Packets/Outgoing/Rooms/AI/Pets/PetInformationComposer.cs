@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
 {
-    class PetInformationComposer : MessageComposer
+    internal class PetInformationComposer : MessageComposer
     {
         public Pet Pet { get; }
         public Habbo Habbo { get; }

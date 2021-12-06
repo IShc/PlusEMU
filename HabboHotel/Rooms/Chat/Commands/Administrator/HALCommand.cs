@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 {
-    class HalCommand : IChatCommand
+    internal class HalCommand : IChatCommand
     {
         public string PermissionRequired => "command_hal";
 
@@ -23,7 +23,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Administrator
 
             string message = CommandManager.MergeParams(@params, 2);
             PlusEnvironment.GetGame().GetClientManager().SendPacket(new RoomNotificationComposer("Habboon Hotel Alert!", message + "\r\n" + "- " + session.GetHabbo().Username, "", url, url));
-            return;
         }
     }
 }

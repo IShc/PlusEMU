@@ -4,7 +4,7 @@ using Plus.HabboHotel.LandingView.Promotions;
 
 namespace Plus.Communication.Packets.Outgoing.LandingView
 {
-    class PromoArticlesComposer : MessageComposer
+    internal class PromoArticlesComposer : MessageComposer
     {
         public ICollection<Promotion> LandingPromotions { get; }
 

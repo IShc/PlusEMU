@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Moodlight
 {
-    class MoodlightConfigComposer : MessageComposer
+    internal class MoodlightConfigComposer : MessageComposer
     {
         public MoodlightData Data { get; }
 

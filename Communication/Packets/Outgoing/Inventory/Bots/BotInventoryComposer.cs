@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Bots
 {
-    class BotInventoryComposer : MessageComposer
+    internal class BotInventoryComposer : MessageComposer
     {
         public ICollection<Bot> Bots { get; }
 

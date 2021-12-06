@@ -6,7 +6,7 @@ using Plus.HabboHotel.Games;
 
 namespace Plus.Communication.Packets.Incoming.GameCenter
 {
-    class JoinPlayerQueueEvent : IPacketEvent
+    internal class JoinPlayerQueueEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -27,9 +27,9 @@ namespace Plus.Communication.Packets.Incoming.GameCenter
 
         private string GenerateSso(int length)
         {
-            Random random = new Random();
+            Random random = new();
             string characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-            StringBuilder result = new StringBuilder(length);
+            StringBuilder result = new(length);
             for (int i = 0; i < length; i++)
             {
                 result.Append(characters[random.Next(characters.Length)]);

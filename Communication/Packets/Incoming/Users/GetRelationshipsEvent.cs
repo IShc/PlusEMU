@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class GetRelationshipsEvent : IPacketEvent
+    internal class GetRelationshipsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

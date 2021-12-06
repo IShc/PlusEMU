@@ -36,13 +36,12 @@ namespace Plus.HabboHotel.Cache
                     return user;
 
             GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(id);
-            if (client != null)
-                if (client.GetHabbo() != null)
-                {
-                    user = new UserCache(id, client.GetHabbo().Username, client.GetHabbo().Motto, client.GetHabbo().Look);
-                    _usersCached.TryAdd(id, user);
-                    return user;
-                }
+            if (client?.GetHabbo() != null)
+            {
+                user = new UserCache(id, client.GetHabbo().Username, client.GetHabbo().Motto, client.GetHabbo().Look);
+                _usersCached.TryAdd(id, user);
+                return user;
+            }
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class NewConsoleMessageComposer : MessageComposer
+    internal class NewConsoleMessageComposer : MessageComposer
     {
         public int Sender { get; }
         public string Message { get; }

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 {
-    class GetFurnitureAliasesEvent : IPacketEvent
+    internal class GetFurnitureAliasesEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

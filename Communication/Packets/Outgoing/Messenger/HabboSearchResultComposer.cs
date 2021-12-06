@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class HabboSearchResultComposer : MessageComposer
+    internal class HabboSearchResultComposer : MessageComposer
     {
         public List<SearchResult> Friends { get; }
         public List<SearchResult> OtherUsers { get; }

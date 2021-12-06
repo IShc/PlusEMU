@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms.AI;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Pets
 {
-    class PetInventoryComposer : MessageComposer
+    internal class PetInventoryComposer : MessageComposer
     {
         public ICollection<Pet> Pets { get; }
 

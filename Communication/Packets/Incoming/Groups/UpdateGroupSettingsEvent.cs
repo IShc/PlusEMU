@@ -8,7 +8,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class UpdateGroupSettingsEvent : IPacketEvent
+    internal class UpdateGroupSettingsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -77,7 +77,7 @@ namespace Plus.Communication.Packets.Incoming.Groups
                 }
                 else if (furniOptions == 0 && !user.Statusses.ContainsKey("flatctrl 1"))
                 {
-                    user.SetStatus("flatctrl 1", "");
+                    user.SetStatus("flatctrl 1");
                     user.UpdateNeeded = true;
 
                     user.GetClient().SendPacket(new YouAreControllerComposer(1));

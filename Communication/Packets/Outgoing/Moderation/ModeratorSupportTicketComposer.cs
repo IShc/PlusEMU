@@ -4,7 +4,7 @@ using Plus.Utilities;
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class ModeratorSupportTicketComposer : MessageComposer
+    internal class ModeratorSupportTicketComposer : MessageComposer
     {
         public int TabId { get; }
         public ModerationTicket Ticket { get; }

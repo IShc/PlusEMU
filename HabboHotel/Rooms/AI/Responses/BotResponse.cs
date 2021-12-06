@@ -36,11 +36,10 @@ namespace Plus.HabboHotel.Rooms.AI.Responses
                     }
                     catch
                     {
-                        continue;
                     }
                 }
             }
-            else if (!String.IsNullOrEmpty(responseBeverages) && (int.Parse(responseBeverages)) > 0)
+            else if (!string.IsNullOrEmpty(responseBeverages) && (int.Parse(responseBeverages)) > 0)
                 BeverageIds.Add(int.Parse(responseBeverages));
         }
 

@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
-    class DanceCommand :IChatCommand
+    internal class DanceCommand :IChatCommand
     {
         public string PermissionRequired => "command_dance";
 

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Help
 {
-    class SubmitBullyReportComposer : MessageComposer
+    internal class SubmitBullyReportComposer : MessageComposer
     {
         public int Result { get; }
 

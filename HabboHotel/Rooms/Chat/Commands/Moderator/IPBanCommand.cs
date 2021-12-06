@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class IpBanCommand : IChatCommand
+    internal class IpBanCommand : IChatCommand
     {
         public string PermissionRequired => "command_ip_ban";
 
@@ -35,7 +35,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 return;
             }
 
-            String ipAddress = String.Empty;
+            string ipAddress = string.Empty;
             double expire = PlusEnvironment.GetUnixTimestamp() + 78892200;
             string username = habbo.Username;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
@@ -46,7 +46,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 ipAddress = dbClient.GetString();
             }
 
-            string reason = null;
+            string reason;
             if (@params.Length >= 3)
                 reason = CommandManager.MergeParams(@params, 2);
             else
@@ -57,8 +57,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
             PlusEnvironment.GetGame().GetModerationManager().BanUser(session.GetHabbo().Username, ModerationBanType.Username, habbo.Username, reason, expire);
 
             GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(username);
-            if (targetClient != null)
-                targetClient.Disconnect();
+            targetClient?.Disconnect();
 
 
             session.SendWhisper("Success, you have IP and account banned the user '" + username + "' for '" + reason + "'!");

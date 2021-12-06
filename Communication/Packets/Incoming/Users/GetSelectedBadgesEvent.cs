@@ -4,7 +4,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Incoming.Users
 {
-    class GetSelectedBadgesEvent : IPacketEvent
+    internal class GetSelectedBadgesEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

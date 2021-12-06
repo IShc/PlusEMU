@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Plus.Utilities
 {
-    static class StringCharFilter
+    internal static class StringCharFilter
     {
         /// <summary>
         /// Escapes the characters used for injecting special chars from a user input.

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Freeze
 {
-    class UpdateFreezeLivesComposer : MessageComposer
+    internal class UpdateFreezeLivesComposer : MessageComposer
     {
         public int UserId { get; }
         public int FreezeLives { get; }

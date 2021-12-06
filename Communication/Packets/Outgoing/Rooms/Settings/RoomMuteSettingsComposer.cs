@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 {
-    class RoomMuteSettingsComposer : MessageComposer
+    internal class RoomMuteSettingsComposer : MessageComposer
     {
         public bool Status { get; }
         public RoomMuteSettingsComposer(bool status)

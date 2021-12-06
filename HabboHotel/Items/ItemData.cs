@@ -67,11 +67,10 @@ namespace Plus.HabboHotel.Items
                     catch
                     {
                         Console.WriteLine("Error with Item " + ItemName + " - Vending Ids");
-                        continue;
                     }
                 }
             }
-            else if (!String.IsNullOrEmpty(vendingIds) && (int.Parse(vendingIds)) > 0)
+            else if (!string.IsNullOrEmpty(vendingIds) && (int.Parse(vendingIds)) > 0)
                 VendingIds.Add(int.Parse(vendingIds));
 
             AdjustableHeights = new List<double>();
@@ -82,7 +81,7 @@ namespace Plus.HabboHotel.Items
                     AdjustableHeights.Add(double.Parse(h));
                 }
             }
-            else if (!String.IsNullOrEmpty(adjustableHeights) && (double.Parse(adjustableHeights)) > 0)
+            else if (!string.IsNullOrEmpty(adjustableHeights) && (double.Parse(adjustableHeights)) > 0)
                 AdjustableHeights.Add(double.Parse(adjustableHeights));
 
             EffectId = effectId;

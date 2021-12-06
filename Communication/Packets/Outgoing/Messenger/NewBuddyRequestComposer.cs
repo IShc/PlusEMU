@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class NewBuddyRequestComposer : MessageComposer
+    internal class NewBuddyRequestComposer : MessageComposer
     {
         public UserCache UserCache { get; }
 

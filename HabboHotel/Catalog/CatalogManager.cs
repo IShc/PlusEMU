@@ -107,7 +107,7 @@ namespace Plus.HabboHotel.Catalog
                         string name = Convert.ToString(row["name"]);
                         int roomId = Convert.ToInt32(row["room_id"]);
 
-                        CatalogDeal deal = new CatalogDeal(id, items, name, roomId, itemDataManager);
+                        CatalogDeal deal = new(id, items, name, roomId, itemDataManager);
 
                         if (!_deals.ContainsKey(id))
                             _deals.Add(deal.Id, deal);

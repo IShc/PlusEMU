@@ -3,7 +3,7 @@ using Plus.HabboHotel.Quests;
 
 namespace Plus.Communication.Packets.Incoming.Messenger
 {
-    class RequestBuddyEvent : IPacketEvent
+    internal class RequestBuddyEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

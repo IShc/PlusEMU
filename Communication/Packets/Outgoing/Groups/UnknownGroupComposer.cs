@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Groups
 {
-    class UnknownGroupComposer : MessageComposer
+    internal class UnknownGroupComposer : MessageComposer
     {
         public int GroupId { get; }
         public int HabboId { get; }

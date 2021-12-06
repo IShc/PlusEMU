@@ -79,7 +79,7 @@ namespace Plus.HabboHotel.Navigator
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists
                  where cat.Value.Category == category
-                 orderby cat.Value.OrderId ascending
+                 orderby cat.Value.OrderId
                  select cat.Value);
             return categories.ToList();
         }
@@ -89,7 +89,7 @@ namespace Plus.HabboHotel.Navigator
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists
                  where cat.Value.CategoryIdentifier == category
-                 orderby cat.Value.OrderId ascending
+                 orderby cat.Value.OrderId
                  select cat.Value);
             return categories.ToList();
         }
@@ -99,7 +99,7 @@ namespace Plus.HabboHotel.Navigator
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists
                  where cat.Value.CategoryType == NavigatorCategoryType.Category
-                 orderby cat.Value.OrderId ascending
+                 orderby cat.Value.OrderId
                  select cat.Value);
             return categories.ToList();
         }
@@ -109,7 +109,7 @@ namespace Plus.HabboHotel.Navigator
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists
                  where cat.Value.CategoryType == NavigatorCategoryType.PromotionCategory
-                 orderby cat.Value.OrderId ascending
+                 orderby cat.Value.OrderId
                  select cat.Value);
             return categories.ToList();
         }

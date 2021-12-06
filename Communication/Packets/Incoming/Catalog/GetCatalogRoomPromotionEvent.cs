@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Catalog
 {
-    class GetCatalogRoomPromotionEvent : IPacketEvent
+    internal class GetCatalogRoomPromotionEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

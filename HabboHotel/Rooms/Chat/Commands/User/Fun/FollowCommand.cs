@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
-    class FollowCommand : IChatCommand
+    internal class FollowCommand : IChatCommand
     {
         public string PermissionRequired => "command_follow";
 

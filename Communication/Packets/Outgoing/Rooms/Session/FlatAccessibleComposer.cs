@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Session
 {
-    class FlatAccessibleComposer : MessageComposer
+    internal class FlatAccessibleComposer : MessageComposer
     {
         public string Username { get; }
         public FlatAccessibleComposer(string username)

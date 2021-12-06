@@ -9,7 +9,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Marketplace
 {
-    class GetOffersEvent : IPacketEvent
+    internal class GetOffersEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -20,7 +20,7 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
 
 
             DataTable table;
-            StringBuilder builder = new StringBuilder();
+            StringBuilder builder = new();
             string str;
             builder.Append("WHERE `state` = '1' AND `timestamp` >= " + PlusEnvironment.GetGame().GetCatalog().GetMarketplace().FormatTimestampString());
             if (minCost >= 0)
@@ -67,8 +67,8 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
                 }
             }
 
-            Dictionary<int, MarketOffer> dictionary = new Dictionary<int, MarketOffer>();
-            Dictionary<int, int> dictionary2 = new Dictionary<int, int>();
+            Dictionary<int, MarketOffer> dictionary = new();
+            Dictionary<int, int> dictionary2 = new();
 
             foreach (MarketOffer item in PlusEnvironment.GetGame().GetCatalog().GetMarketplace().MarketItems)
             {

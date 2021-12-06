@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms.AI;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class UserChangeComposer : MessageComposer
+    internal class UserChangeComposer : MessageComposer
     {
         public RoomUser User { get; }
         public bool Self { get; }

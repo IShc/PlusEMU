@@ -13,7 +13,7 @@ namespace Plus.Communication.Packets.Outgoing
 
         public ServerPacket WriteMessage(IByteBuffer buf)
         {
-            ServerPacket packet = new ServerPacket(Id, buf);
+            ServerPacket packet = new(Id, buf);
             try
             {
                 Compose(packet);

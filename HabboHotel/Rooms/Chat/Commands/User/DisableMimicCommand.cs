@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class DisableMimicCommand : IChatCommand
+    internal class DisableMimicCommand : IChatCommand
     {
         public string PermissionRequired => "command_disable_mimic";
 
@@ -14,7 +14,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
         public void Execute(GameClient session, Room room, string[] @params)
         {
             session.GetHabbo().AllowMimic = !session.GetHabbo().AllowMimic;
-            session.SendWhisper("You're " + (session.GetHabbo().AllowMimic == true ? "now" : "no longer") + " able to be mimiced.");
+            session.SendWhisper("You're " + (session.GetHabbo().AllowMimic ? "now" : "no longer") + " able to be mimiced.");
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

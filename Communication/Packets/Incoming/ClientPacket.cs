@@ -21,13 +21,19 @@ namespace Plus.Communication.Packets.Incoming
             return Encoding.UTF8.GetString(data.Array);
         }
 
-        public int PopInt() =>
-            _buffer.ReadInt();
+        public int PopInt()
+        {
+            return _buffer.ReadInt();
+        }
 
-        public bool PopBoolean() =>
-            _buffer.ReadByte() == 1;
+        public bool PopBoolean()
+        {
+            return _buffer.ReadByte() == 1;
+        }
 
-        public int RemainingLength() =>
-            _buffer.ReadableBytes;
+        public int RemainingLength()
+        {
+            return _buffer.ReadableBytes;
+        }
     }
 }

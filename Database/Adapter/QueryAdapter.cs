@@ -66,8 +66,8 @@ namespace Plus.Database.Adapter
             DataRow row = null;
             try
             {
-                DataSet dataSet = new DataSet();
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(Command))
+                DataSet dataSet = new();
+                using (MySqlDataAdapter adapter = new(Command))
                 {
                     adapter.Fill(dataSet);
                 }
@@ -111,7 +111,7 @@ namespace Plus.Database.Adapter
 
             try
             {
-                using (MySqlDataAdapter adapter = new MySqlDataAdapter(Command))
+                using (MySqlDataAdapter adapter = new(Command))
                 {
                     adapter.Fill(dataTable);
                 }

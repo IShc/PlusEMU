@@ -10,7 +10,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class RemoveGroupMemberEvent : IPacketEvent
+    internal class RemoveGroupMemberEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -115,7 +115,7 @@ namespace Plus.Communication.Packets.Incoming.Groups
                 if (group.IsMember(userId))
                     group.DeleteMember(userId);
 
-                List<UserCache> members = new List<UserCache>();
+                List<UserCache> members = new();
                 List<int> memberIds = group.GetAllMembers;
                 foreach (int id in memberIds.ToList())
                 {

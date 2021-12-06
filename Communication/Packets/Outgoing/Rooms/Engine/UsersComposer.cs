@@ -8,7 +8,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-    class UsersComposer : MessageComposer
+    internal class UsersComposer : MessageComposer
     {
         public ICollection<RoomUser> Users { get; }
         public RoomUser User { get; }
@@ -32,19 +32,16 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                 Habbo habbo = user.GetClient().GetHabbo();
 
                 Group group = null;
-                if (habbo != null)
+                if (habbo?.GetStats() != null)
                 {
-                    if (habbo.GetStats() != null)
+                    if (habbo.GetStats().FavouriteGroupId > 0)
                     {
-                        if (habbo.GetStats().FavouriteGroupId > 0)
-                        {
-                            if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(habbo.GetStats().FavouriteGroupId, out group))
-                                group = null;
-                        }
+                        if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(habbo.GetStats().FavouriteGroupId, out group))
+                            group = null;
                     }
                 }
 
-                if (habbo.PetId == 0)
+                if (habbo?.PetId == 0)
                 {
                     packet.WriteInteger(habbo.Id);
                     packet.WriteString(habbo.Username);
@@ -76,7 +73,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                     packet.WriteInteger(habbo.GetStats().AchievementPoints);//Achievement score
                     packet.WriteBoolean(false);//Builders club?
                 }
-                else if (habbo.PetId > 0 && habbo.PetId != 100)
+                else if (habbo?.PetId > 0 && habbo.PetId != 100)
                 {
                     packet.WriteInteger(habbo.Id);
                     packet.WriteString(habbo.Username);
@@ -100,7 +97,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                     packet.WriteInteger(0);
                     packet.WriteString("");
                 }
-                else if (habbo.PetId > 0 && habbo.PetId == 100)
+                else if (habbo?.PetId > 0 && habbo.PetId == 100)
                 {
                     packet.WriteInteger(habbo.Id);
                     packet.WriteString(habbo.Username);
@@ -171,7 +168,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 
         public string PetFigureForType(int type)
         {
-            Random random = new Random();
+            Random random = new();
 
             switch (type)
             {

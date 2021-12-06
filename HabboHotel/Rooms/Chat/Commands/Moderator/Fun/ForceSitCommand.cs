@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
 {
-    class ForceSitCommand : IChatCommand
+    internal class ForceSitCommand : IChatCommand
     {
         public string PermissionRequired => "command_forcesit";
 
@@ -29,9 +29,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
             {
                 if ((user.RotBody % 2) == 0)
                 {
-                    if (user == null)
-                        return;
-
                     try
                     {
                         user.Statusses.Add("sit", "1.0");
@@ -50,7 +47,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
                     user.UpdateNeeded = true;
                 }
             }
-            else if (user.IsSitting == true)
+            else if (user.IsSitting)
             {
                 user.Z += 0.35;
                 user.Statusses.Remove("sit");

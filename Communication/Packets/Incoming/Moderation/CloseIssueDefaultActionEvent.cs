@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class CloseIssueDefaultActionEvent : IPacketEvent
+    internal class CloseIssueDefaultActionEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

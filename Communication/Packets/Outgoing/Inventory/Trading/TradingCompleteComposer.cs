@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
 {
-    class TradingCompleteComposer : MessageComposer
+    internal class TradingCompleteComposer : MessageComposer
     {
         public TradingCompleteComposer()
             : base(ServerPacketHeader.TradingCompleteMessageComposer)

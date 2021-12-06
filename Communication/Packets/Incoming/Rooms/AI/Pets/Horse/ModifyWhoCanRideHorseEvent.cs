@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
 {
-    class ModifyWhoCanRideHorseEvent : IPacketEvent
+    internal class ModifyWhoCanRideHorseEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

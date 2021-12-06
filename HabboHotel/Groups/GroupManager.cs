@@ -165,15 +165,12 @@ namespace Plus.HabboHotel.Groups
             if (_groups.ContainsKey(id))
                 _groups.TryRemove(id, out group);
 
-            if (group != null)
-            {
-                group.Dispose();
-            }
+            group?.Dispose();
         }
 
         public List<Group> GetGroupsForUser(int userId)
         {
-            List<Group> groups = new List<Group>();
+            List<Group> groups = new();
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT g.id FROM `group_memberships` AS m RIGHT JOIN `groups` AS g ON m.group_id = g.id WHERE m.user_id = @user");

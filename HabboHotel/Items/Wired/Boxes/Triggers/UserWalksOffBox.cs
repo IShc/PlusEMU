@@ -8,7 +8,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 {
-    class UserWalksOffBox : IWiredItem
+    internal class UserWalksOffBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -64,8 +64,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
                 if (!condition.Execute(player))
                     return false;
 
-                if (Instance != null)
-                    Instance.GetWired().OnEvent(condition.Item);
+                Instance?.GetWired().OnEvent(condition.Item);
             }
 
             //Check the ICollection to find the random addon effect.
@@ -96,8 +95,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
                     if (!effect.Execute(player))
                         return false;
 
-                    if (Instance != null)
-                        Instance.GetWired().OnEvent(effect.Item);
+                    Instance?.GetWired().OnEvent(effect.Item);
                 }
             }
 

@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 {
-    class UpdateMagicTileEvent : IPacketEvent
+    internal class UpdateMagicTileEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

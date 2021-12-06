@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.Badges
 {
-    class SetActivatedBadgesEvent : IPacketEvent
+    internal class SetActivatedBadgesEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

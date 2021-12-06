@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class FindFriendsProcessResultComposer : MessageComposer
+    internal class FindFriendsProcessResultComposer : MessageComposer
     {
         public bool Found { get; }
 

@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Moderation
 {
-    class ModeratorRoomInfoComposer : MessageComposer
+    internal class ModeratorRoomInfoComposer : MessageComposer
     {
         public RoomData Data { get; }
         public bool OwnerInRoom { get; }

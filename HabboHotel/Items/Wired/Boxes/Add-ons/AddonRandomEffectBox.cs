@@ -4,7 +4,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes
 {
-    class AddonRandomEffectBox: IWiredItem
+    internal class AddonRandomEffectBox: IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }

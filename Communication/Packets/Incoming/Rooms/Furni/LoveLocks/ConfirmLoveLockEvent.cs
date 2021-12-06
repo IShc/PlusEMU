@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Furni.LoveLocks
 {
-    class ConfirmLoveLockEvent : IPacketEvent
+    internal class ConfirmLoveLockEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -15,10 +15,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.LoveLocks
             bool isConfirmed = packet.PopBoolean();
 
             Room room = session.GetHabbo().CurrentRoom;
-            if (room == null)
-                return;
 
-            Item item = room.GetRoomItemHandler().GetItem(pId);
+            Item item = room?.GetRoomItemHandler().GetItem(pId);
 
             if (item == null || item.GetBaseItem() == null || item.GetBaseItem().InteractionType != InteractionType.LoveLock)
                 return;

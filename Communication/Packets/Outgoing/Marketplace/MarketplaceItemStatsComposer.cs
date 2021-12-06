@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Marketplace
 {
-    class MarketplaceItemStatsComposer : MessageComposer
+    internal class MarketplaceItemStatsComposer : MessageComposer
     {
         public int ItemId { get; }
         public int SpriteId { get; }

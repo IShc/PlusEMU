@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 {
-    class MoveAvatarEvent : IPacketEvent
+    internal class MoveAvatarEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -14,10 +14,8 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 return;
 
             Room room = session.GetHabbo().CurrentRoom;
-            if (room == null)
-                return;
 
-            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            RoomUser user = room?.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (user == null || !user.CanWalk)
                 return;
 
@@ -30,8 +28,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
             if (user.RidingHorse)
             {
                 RoomUser horse = room.GetRoomUserManager().GetRoomUserByVirtualId(user.HorseId);
-                if (horse != null)
-                    horse.MoveTo(moveX, moveY);
+                horse?.MoveTo(moveX, moveY);
             }
 
             user.MoveTo(moveX, moveY);        

@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users.Relationships;
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class BuddyListComposer : MessageComposer
+    internal class BuddyListComposer : MessageComposer
     {
         public ICollection<MessengerBuddy> Friends { get; }
         public Habbo Habbo { get; }

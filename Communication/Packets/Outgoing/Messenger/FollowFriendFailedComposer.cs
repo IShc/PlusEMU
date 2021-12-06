@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class FollowFriendFailedComposer : MessageComposer
+    internal class FollowFriendFailedComposer : MessageComposer
     {
         public int ErrorCode { get; }
 

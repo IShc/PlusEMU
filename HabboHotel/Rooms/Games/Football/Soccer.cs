@@ -277,7 +277,7 @@ namespace Plus.HabboHotel.Rooms.Games.Football
             item.ExtraData = "11";
             item.UpdateNeeded = true;
 
-            _room.GetRoomItemHandler().SetFloorItem(null, item, newX, newY, item.Rotation, false, false, false, false);
+            _room.GetRoomItemHandler().SetFloorItem(null, item, newX, newY, item.Rotation, false, false, false);
 
             _room.OnUserShoot(user, item);
         }

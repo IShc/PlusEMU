@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class MessengerErrorComposer : MessageComposer
+    internal class MessengerErrorComposer : MessageComposer
     {
         public int ErrorCode1 { get; }
         public int ErrorCode2 { get; }

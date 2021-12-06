@@ -7,7 +7,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class SetGroupFavouriteEvent : IPacketEvent
+    internal class SetGroupFavouriteEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

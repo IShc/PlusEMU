@@ -3,7 +3,7 @@ using Plus.HabboHotel.Games;
 
 namespace Plus.Communication.Packets.Outgoing.GameCenter
 {
-    class GameListComposer : MessageComposer
+    internal class GameListComposer : MessageComposer
     {
         public ICollection<GameData> Games { get; }
 

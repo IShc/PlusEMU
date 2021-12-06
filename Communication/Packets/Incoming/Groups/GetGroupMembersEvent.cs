@@ -7,7 +7,7 @@ using Plus.HabboHotel.Groups;
 
 namespace Plus.Communication.Packets.Incoming.Groups
 {
-    class GetGroupMembersEvent : IPacketEvent
+    internal class GetGroupMembersEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -19,7 +19,7 @@ namespace Plus.Communication.Packets.Incoming.Groups
             if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(groupId, out Group group))
                 return;
 
-            List<UserCache> members = new List<UserCache>();
+            List<UserCache> members = new();
 
             switch (requestType)
             {

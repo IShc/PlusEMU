@@ -4,7 +4,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.Communication.Packets.Incoming.Help
 {
-    class SubmitBullyReportEvent : IPacketEvent
+    internal class SubmitBullyReportEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

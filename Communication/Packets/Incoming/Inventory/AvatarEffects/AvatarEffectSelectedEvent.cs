@@ -3,7 +3,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Inventory.AvatarEffects
 {
-    class AvatarEffectSelectedEvent : IPacketEvent
+    internal class AvatarEffectSelectedEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
@@ -15,10 +15,8 @@ namespace Plus.Communication.Packets.Incoming.Inventory.AvatarEffects
                 return;
 
             Room room = session.GetHabbo().CurrentRoom;
-            if (room == null)
-                return;
 
-            RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
+            RoomUser user = room?.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
             if (user == null)
                 return;
 

@@ -11,7 +11,7 @@ using Plus.HabboHotel.Users.Messenger;
 
 namespace Plus.HabboHotel.Navigator
 {
-    static class NavigatorHandler
+    internal static class NavigatorHandler
     {
         public static void Search(ServerPacket packet, SearchResultList result, string query, Habbo habbo, int limit)
         {
@@ -48,7 +48,7 @@ namespace Plus.HabboHotel.Navigator
                                     }
                                 }
 
-                                List<RoomData> results = new List<RoomData>();
+                                List<RoomData> results = new();
                                 if (getRooms != null)
                                 {
                                     foreach (DataRow row in getRooms.Rows)
@@ -102,7 +102,7 @@ namespace Plus.HabboHotel.Navigator
                                     table = dbClient.GetTable();
                                 }
 
-                                List<RoomData> results = new List<RoomData>();
+                                List<RoomData> results = new();
                                 if (table != null)
                                 {
                                     foreach (DataRow row in table.Rows)
@@ -184,7 +184,7 @@ namespace Plus.HabboHotel.Navigator
 
                 case NavigatorCategoryType.MyGroups:
                     {
-                        List<RoomData> myGroups = new List<RoomData>();
+                        List<RoomData> myGroups = new();
 
                         foreach (Group group in PlusEnvironment.GetGame().GetGroupManager().GetGroupsForUser(habbo.Id).ToList())
                         {
@@ -211,7 +211,7 @@ namespace Plus.HabboHotel.Navigator
 
                 case NavigatorCategoryType.MyFriendsRooms:
                     {
-                        List<int> roomIds = new List<int>();
+                        List<int> roomIds = new();
 
                         if (habbo == null || habbo.GetMessenger() == null || habbo.GetMessenger().GetFriends() == null)
                             return;
@@ -238,7 +238,7 @@ namespace Plus.HabboHotel.Navigator
 
                 case NavigatorCategoryType.MyRights:
                     {
-                        List<RoomData> myRights = new List<RoomData>();
+                        List<RoomData> myRights = new();
 
                         if (habbo != null)
                         {

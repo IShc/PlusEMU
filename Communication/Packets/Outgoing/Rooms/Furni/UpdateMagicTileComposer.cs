@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Furni
 {
-    class UpdateMagicTileComposer : MessageComposer
+    internal class UpdateMagicTileComposer : MessageComposer
     {
         public int ItemId { get; }
         public int Decimal { get; }

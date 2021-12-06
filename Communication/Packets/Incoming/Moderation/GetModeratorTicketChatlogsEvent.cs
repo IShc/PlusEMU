@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.Communication.Packets.Incoming.Moderation
 {
-    class GetModeratorTicketChatlogsEvent : IPacketEvent
+    internal class GetModeratorTicketChatlogsEvent : IPacketEvent
     {
         public void Parse(GameClient session, ClientPacket packet)
         {

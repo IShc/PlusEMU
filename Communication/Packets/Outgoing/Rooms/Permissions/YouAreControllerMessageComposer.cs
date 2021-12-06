@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Permissions
 {
-    class YouAreControllerComposer : MessageComposer
+    internal class YouAreControllerComposer : MessageComposer
     {
         public int Setting { get; }
         public YouAreControllerComposer(int setting)

@@ -1,6 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Misc
 {
-    class LatencyTestComposer : MessageComposer
+    internal class LatencyTestComposer : MessageComposer
     {
         public int TestResponse { get; }
 

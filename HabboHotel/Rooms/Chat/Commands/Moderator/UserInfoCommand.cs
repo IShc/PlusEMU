@@ -6,7 +6,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
-    class UserInfoCommand : IChatCommand
+    internal class UserInfoCommand : IChatCommand
     {
         public string PermissionRequired => "command_user_info";
 
@@ -56,7 +56,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Convert.ToDouble(userInfo["trading_locked"]));
 
-            StringBuilder habboInfo = new StringBuilder();
+            StringBuilder habboInfo = new();
             habboInfo.Append(Convert.ToString(userData["username"]) + "'s account:\r\r");
             habboInfo.Append("Generic Info:\r");
             habboInfo.Append("ID: " + Convert.ToInt32(userData["id"]) + "\r");

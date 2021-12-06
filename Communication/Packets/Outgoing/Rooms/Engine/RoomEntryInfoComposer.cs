@@ -1,7 +1,6 @@
 ﻿namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 {
-
-    class RoomEntryInfoComposer : MessageComposer
+    internal class RoomEntryInfoComposer : MessageComposer
     {
         public int RoomId { get; }
         public bool IsOwner { get; }

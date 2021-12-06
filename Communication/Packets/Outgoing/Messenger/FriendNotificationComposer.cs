@@ -2,7 +2,7 @@
 
 namespace Plus.Communication.Packets.Outgoing.Messenger
 {
-    class FriendNotificationComposer : MessageComposer
+    internal class FriendNotificationComposer : MessageComposer
     {
         public int UserId { get; }
         public MessengerEventTypes Type { get; }

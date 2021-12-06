@@ -3,7 +3,7 @@ using Plus.HabboHotel.Users.Badges;
 
 namespace Plus.Communication.Packets.Outgoing.Inventory.Badges
 {
-    class BadgesComposer : MessageComposer
+    internal class BadgesComposer : MessageComposer
     {
         public ICollection<Badge> Badges { get; }
 
@@ -15,7 +15,7 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Badges
 
         public override void Compose(ServerPacket packet)
         {
-            List<Badge> equippedBadges = new List<Badge>();
+            List<Badge> equippedBadges = new();
 
             packet.WriteInteger(Badges.Count);
             foreach (Badge badge in Badges)

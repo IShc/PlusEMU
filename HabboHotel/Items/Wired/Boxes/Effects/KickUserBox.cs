@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    class KickUserBox : IWiredItem, IWiredCycle
+    internal class KickUserBox : IWiredItem, IWiredCycle
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -92,7 +92,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     if (player == null || !player.InRoom || player.CurrentRoom != Instance)
                         continue;
 
-                    Instance.GetRoomUserManager().RemoveUserFromRoom(player.GetClient(), true, false);
+                    Instance.GetRoomUserManager().RemoveUserFromRoom(player.GetClient(), true);
                 }
             }
             TickCount = 3;

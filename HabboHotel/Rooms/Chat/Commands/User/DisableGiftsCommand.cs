@@ -3,7 +3,7 @@ using Plus.HabboHotel.GameClients;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class DisableGiftsCommand : IChatCommand
+    internal class DisableGiftsCommand : IChatCommand
     {
         public string PermissionRequired => "command_disable_gifts";
 
@@ -14,7 +14,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
         public void Execute(GameClient session, Room room, string[] @params)
         {
             session.GetHabbo().AllowGifts = !session.GetHabbo().AllowGifts;
-            session.SendWhisper("You're " + (session.GetHabbo().AllowGifts == true ? "now" : "no longer") + " accepting gifts.");
+            session.SendWhisper("You're " + (session.GetHabbo().AllowGifts ? "now" : "no longer") + " accepting gifts.");
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

@@ -7,7 +7,7 @@ using Plus.HabboHotel.Users.Inventory.Bots;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    class KickBotsCommand : IChatCommand
+    internal class KickBotsCommand : IChatCommand
     {
         public string PermissionRequired => "command_kickbots";
 
