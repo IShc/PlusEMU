@@ -10,7 +10,7 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
         public int TotalLevels { get; }
         public UserAchievement UserData { get; }
 
-        public AchievementProgressedComposer(Achievement achievement, int targetLevel, AchievementLevel targetLevelData,int totalLevels, UserAchievement userData)
+        public AchievementProgressedComposer(Achievement achievement, int targetLevel, AchievementLevel targetLevelData, int totalLevels, UserAchievement userData)
             : base(ServerPacketHeader.AchievementProgressedMessageComposer)
         {
             Achievement = achievement;

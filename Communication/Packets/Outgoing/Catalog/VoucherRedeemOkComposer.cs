@@ -5,13 +5,12 @@
         public VoucherRedeemOkComposer()
             : base(ServerPacketHeader.VoucherRedeemOkMessageComposer)
         {
-           
         }
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteString("");//productName
-            packet.WriteString("");//productDescription
+            packet.WriteString(""); //productName
+            packet.WriteString(""); //productDescription
         }
     }
 }

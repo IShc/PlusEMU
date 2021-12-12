@@ -11,7 +11,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             if (session == null || session.GetHabbo() == null || !session.GetHabbo().GetPermissions().HasRight("mod_tool"))
                 return;
 
-            packet.PopInt();//Junk
+            packet.PopInt(); //Junk
             int ticketId = packet.PopInt();
 
             if (!PlusEnvironment.GetGame().GetModerationManager().TryGetTicket(ticketId, out ModerationTicket ticket))

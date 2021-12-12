@@ -12,8 +12,8 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public ICollection<GroupColours> BackgroundColours { get; }
 
         public BadgeEditorPartsComposer(ICollection<GroupBadgeParts> bases, ICollection<GroupBadgeParts> symbols, ICollection<GroupColours> baseColours, ICollection<GroupColours> symbolColours,
-          ICollection<GroupColours> backgroundColours)
-          : base(ServerPacketHeader.BadgeEditorPartsMessageComposer)
+            ICollection<GroupColours> backgroundColours)
+            : base(ServerPacketHeader.BadgeEditorPartsMessageComposer)
         {
             Bases = bases;
             Symbols = symbols;

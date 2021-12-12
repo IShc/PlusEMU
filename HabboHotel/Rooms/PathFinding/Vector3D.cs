@@ -8,7 +8,9 @@
 
         public double Z { get; set; }
 
-        public Vector3D() { }
+        public Vector3D()
+        {
+        }
 
         public Vector3D(int x, int y, double z)
         {

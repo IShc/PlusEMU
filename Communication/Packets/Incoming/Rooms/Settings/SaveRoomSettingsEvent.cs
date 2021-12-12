@@ -47,7 +47,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
                 formattedTags.Append(tag);
             }
 
-            int tradeSettings = packet.PopInt();//2 = All can trade, 1 = owner only, 0 = no trading.
+            int tradeSettings = packet.PopInt(); //2 = All can trade, 1 = owner only, 0 = no trading.
             int allowPets = Convert.ToInt32(PlusEnvironment.BoolToEnum(packet.PopBoolean()));
             int allowPetsEat = Convert.ToInt32(PlusEnvironment.BoolToEnum(packet.PopBoolean()));
             int roomBlockingEnabled = Convert.ToInt32(PlusEnvironment.BoolToEnum(packet.PopBoolean()));
@@ -217,7 +217,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
                 room.SendPacket(new RoomInfoUpdatedComposer(room.RoomId));
                 room.SendPacket(new RoomVisualizationSettingsComposer(room.WallThickness, room.FloorThickness, PlusEnvironment.EnumToBool(room.HideWall.ToString())));
             }
-            
+
             PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(session, "ACH_SelfModDoorModeSeen", 1);
             PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(session, "ACH_SelfModWalkthroughSeen", 1);
             PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(session, "ACH_SelfModChatScrollSpeedSeen", 1);

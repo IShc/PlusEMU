@@ -21,7 +21,6 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 
         public override void OnSelfEnterRoom()
         {
-
         }
 
         public override void OnSelfLeaveRoom(bool kicked)
@@ -122,6 +121,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         @string = "I really shouldn't be using HTML within bot speeches.";
                     GetRoomUser().Chat(@string, GetBotData().ChatBubble);
                 }
+
                 _speechTimer = GetBotData().SpeakingInterval;
             }
             else
@@ -185,6 +185,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                             Point nextCoord = GetRoom().GetGameMap().GetRandomWalkableSquare();
                             GetRoomUser().MoveTo(nextCoord.X, nextCoord.Y);
                         }
+
                         break;
 
                     case "specified_range":

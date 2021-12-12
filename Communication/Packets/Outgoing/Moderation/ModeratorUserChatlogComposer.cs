@@ -27,7 +27,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             foreach (KeyValuePair<RoomData, List<ChatLogEntry>> chatlog in ChatLogs)
             {
                 packet.WriteByte(1);
-                packet.WriteShort(2);//Count
+                packet.WriteShort(2); //Count
                 packet.WriteString("roomName");
                 packet.WriteByte(2);
                 packet.WriteString(chatlog.Key.Name); // room name

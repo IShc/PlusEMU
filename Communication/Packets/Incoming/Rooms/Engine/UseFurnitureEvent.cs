@@ -33,7 +33,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
             {
                 if (!room.CheckRights(session, true))
                     return;
-                
+
                 room.TonerData.Enabled = room.TonerData.Enabled == 0 ? 1 : 0;
 
                 room.SendPacket(new ObjectUpdateComposer(item, room.OwnerId));
@@ -44,6 +44,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 {
                     dbClient.RunQuery("UPDATE `room_items_toner` SET `enabled` = '" + room.TonerData.Enabled + "' LIMIT 1");
                 }
+
                 return;
             }
 
@@ -73,7 +74,6 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 item.GetRoom().GetWired().TriggerEvent(WiredBoxType.TriggerStateChanges, session.GetHabbo(), item);
 
             PlusEnvironment.GetGame().GetQuestManager().ProgressUserQuest(session, QuestType.ExploreFindItem, item.GetBaseItem().Id);
-      
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight
 
             if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(session.GetHabbo().CurrentRoomId, out Room room))
                 return;
-            
+
             if (!room.CheckRights(session, true) || room.MoodlightData == null)
                 return;
 

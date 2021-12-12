@@ -25,8 +25,7 @@ namespace Plus.HabboHotel.Items.Interactor
             if (!hasRights)
                 return;
 
-            IWiredItem box = null;
-            if (!item.GetRoom().GetWired().TryGet(item.Id, out box))
+            if (!item.GetRoom().GetWired().TryGet(item.Id, out IWiredItem box))
                 return;
 
             item.ExtraData = "1";
@@ -48,7 +47,6 @@ namespace Plus.HabboHotel.Items.Interactor
             else if (item.GetRoom().GetWired().IsCondition(item))
                 session.SendPacket(new WiredConditionConfigComposer(box));
         }
-
 
         public void OnWiredTrigger(Item item)
         {

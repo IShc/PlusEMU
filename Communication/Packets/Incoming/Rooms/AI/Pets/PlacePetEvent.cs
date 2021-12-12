@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
 
             if (room.GetRoomUserManager().PetCount > Convert.ToInt32(PlusEnvironment.GetSettingsManager().TryGetValue("room.pets.placement_limit")))
             {
-                session.SendPacket(new RoomErrorNotifComposer(2));//5 = I have too many.
+                session.SendPacket(new RoomErrorNotifComposer(2)); //5 = I have too many.
                 return;
             }
 

@@ -47,7 +47,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (owner == null || !owner.GetPermissions().HasRight("room_item_wired_rewards"))
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null || player.GetClient() == null)
                 return false;
 

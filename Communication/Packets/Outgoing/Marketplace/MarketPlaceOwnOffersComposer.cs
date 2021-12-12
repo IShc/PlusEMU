@@ -30,13 +30,14 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
                     packet.WriteInteger(table.Rows.Count);
                     foreach (DataRow row in table.Rows)
                     {
-                        int num2 = Convert.ToInt32(Math.Floor(((double)row["timestamp"] + 172800.0 - PlusEnvironment.GetUnixTimestamp()) / 60.0));
+                        int num2 = Convert.ToInt32(Math.Floor(((double) row["timestamp"] + 172800.0 - PlusEnvironment.GetUnixTimestamp()) / 60.0));
                         int num3 = int.Parse(row["state"].ToString());
                         if ((num2 <= 0) && (num3 != 2))
                         {
                             num3 = 3;
                             num2 = 0;
                         }
+
                         packet.WriteInteger(Convert.ToInt32(row["offer_id"]));
                         packet.WriteInteger(num3);
                         packet.WriteInteger(1);

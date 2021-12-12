@@ -4,6 +4,7 @@
     {
         public int RoomId { get; }
         public string Model { get; }
+
         public RoomReadyComposer(int roomId, string model)
             : base(ServerPacketHeader.RoomReadyMessageComposer)
         {

@@ -38,7 +38,6 @@ namespace Plus.HabboHotel.Items.Interactor
 
         public void OnWiredTrigger(Item item)
         {
-
         }
     }
 }

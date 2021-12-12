@@ -15,10 +15,10 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(1);// Count for whatever reason?
+            packet.WriteInteger(1); // Count for whatever reason?
             {
                 packet.WriteString(Ticket.Id.ToString());
-                packet.WriteString(UnixTimestamp.FromUnixTimestamp(Ticket.Timestamp).ToShortTimeString());// "11-02-2017 04:07:05";
+                packet.WriteString(UnixTimestamp.FromUnixTimestamp(Ticket.Timestamp).ToShortTimeString()); // "11-02-2017 04:07:05";
                 packet.WriteString(Ticket.Issue);
             }
         }

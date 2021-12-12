@@ -42,7 +42,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                 {
                     packet.WriteInteger(item.Id);
                     packet.WriteString(item.Name);
-                    packet.WriteBoolean(false);//IsRentable
+                    packet.WriteBoolean(false); //IsRentable
                     packet.WriteInteger(item.CostCredits);
 
                     if (item.CostDiamonds > 0)
@@ -63,7 +63,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                         CatalogDeal deal = null;
                         if (!PlusEnvironment.GetGame().GetCatalog().TryGetDeal(item.Data.BehaviourData, out deal))
                         {
-                            packet.WriteInteger(0);//Count
+                            packet.WriteInteger(0); //Count
                         }
                         else
                         {
@@ -81,7 +81,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                     }
                     else
                     {
-                        packet.WriteInteger(string.IsNullOrEmpty(item.Badge) ? 1 : 2);//Count 1 item if there is no badge, otherwise count as 2.
+                        packet.WriteInteger(string.IsNullOrEmpty(item.Badge) ? 1 : 2); //Count 1 item if there is no badge, otherwise count as 2.
 
                         if (!string.IsNullOrEmpty(item.Badge))
                         {
@@ -102,7 +102,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                             {
                                 packet.WriteString(item.Name.Split('_')[2]);
                             }
-                            else if (item.Data.InteractionType == InteractionType.Bot)//Bots
+                            else if (item.Data.InteractionType == InteractionType.Bot) //Bots
                             {
                                 CatalogBot catalogBot = null;
                                 if (!PlusEnvironment.GetGame().GetCatalog().TryGetBot(item.ItemId, out catalogBot))
@@ -114,6 +114,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                             {
                                 packet.WriteString(item.ExtraData != null ? item.ExtraData : string.Empty);
                             }
+
                             packet.WriteInteger(item.Amount);
                             packet.WriteBoolean(item.IsLimited); // IsLimited
                             if (item.IsLimited)
@@ -123,19 +124,21 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                             }
                         }
                     }
+
                     packet.WriteInteger(0); //club_level
                     packet.WriteBoolean(ItemUtility.CanSelectAmount(item));
 
-                    packet.WriteBoolean(false);// TODO: Figure out
-                    packet.WriteString("");//previewImage -> e.g; catalogue/pet_lion.png
+                    packet.WriteBoolean(false); // TODO: Figure out
+                    packet.WriteString(""); //previewImage -> e.g; catalogue/pet_lion.png
                 }
             }
             else
                 packet.WriteInteger(0);
+
             packet.WriteInteger(-1);
             packet.WriteBoolean(false);
 
-            packet.WriteInteger(PlusEnvironment.GetGame().GetCatalog().GetPromotions().ToList().Count);//Count
+            packet.WriteInteger(PlusEnvironment.GetGame().GetCatalog().GetPromotions().ToList().Count); //Count
             foreach (CatalogPromotion promotion in PlusEnvironment.GetGame().GetCatalog().GetPromotions().ToList())
             {
                 packet.WriteInteger(promotion.Id);

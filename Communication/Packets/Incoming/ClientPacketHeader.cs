@@ -231,7 +231,9 @@
         public const int RedeemVoucherMessageEvent = 339; // PRODUCTION-201611291003-338511768
         public const int NavigatorSearchMessageEvent = 249; // PRODUCTION-201611291003-338511768
         public const int MoveAvatarMessageEvent = 3320; // PRODUCTION-201611291003-338511768
+
         public const int GetSoundSettingsMessageEvent = 2388; // PRODUCTION-201611291003-338511768
+
         //public const int GetRecyclerRewardsMessageEvent = 398; // PRODUCTION-201611291003-338511768
         public const int GetClientVersionMessageEvent = 4000; // PRODUCTION-201611291003-338511768
         public const int GuideSessionResolvedMessageEvent = 887; // PRODUCTION-201611291003-338511768
@@ -252,8 +254,10 @@
         public const int GuideSessionMsgMessageEvent = 3899; // PRODUCTION-201611291003-338511768
         public const int GetGroupFurniConfigMessageEvent = 367; // PRODUCTION-201611291003-338511768
         public const int TradingConfirmMessageEvent = 2760; // PRODUCTION-201611291003-338511768
+
         public const int RemoveGroupFavouriteMessageEvent = 1820; // PRODUCTION-201611291003-338511768
-                                                                  // public const int VersionCheckMessageEvent = 1053; // PRODUCTION-201611291003-338511768
+
+        // public const int VersionCheckMessageEvent = 1053; // PRODUCTION-201611291003-338511768
         public const int PlacePetMessageEvent = 2647; // PRODUCTION-201611291003-338511768
         public const int CheckValidNameMessageEvent = 3950; // PRODUCTION-201611291003-338511768
         public const int ModifyWhoCanRideHorseMessageEvent = 1472; // PRODUCTION-201611291003-338511768
@@ -355,11 +359,12 @@
         public const int GetThreadsListDataMessageEvent = 436; // PRODUCTION-201611291003-338511768
         public const int PostGroupContentMessageEvent = 3529; // PRODUCTION-201611291003-338511768
         public const int DeleteGroupPostMessageEvent = 286; // PRODUCTION-201611291003-338511768
-        public const int UpdateForumThreadStatusMessageEvent = -1;//error 404
-        public const int UpdateForumReadMarkerMessageEvent = -1;//error 404
+        public const int UpdateForumThreadStatusMessageEvent = -1; //error 404
+        public const int UpdateForumReadMarkerMessageEvent = -1; //error 404
 
         //target offer
         public const int RequestTargetOfferEvent = 2487; // PRODUCTION-201611291003-338511768
+
         public const int TargetedOfferBuyEvent = 1826; // PRODUCTION-201611291003-338511768
         // [2817]
 
@@ -370,13 +375,11 @@
         public const int NuxAcceptGiftsMessageEvent = 1379; // PRODUCTION-201611291003-338511768
         public const int GetNuxPresentEvent = 1822; // PRODUCTION-201611291003-338511768
         public const int RetrieveCitizenshipStatus = 2127; // PRODUCTION-201611291003-338511768
-        public const int GetCraftingItemMessageEvent = -1;//error 404
-        public const int SetCraftingRecipeMessageEvent = -1;//error 404
-        public const int ExecuteCraftingRecipeMessageEvent = -1;//error 404
+        public const int GetCraftingItemMessageEvent = -1; //error 404
+        public const int SetCraftingRecipeMessageEvent = -1; //error 404
+        public const int ExecuteCraftingRecipeMessageEvent = -1; //error 404
         public const int GetRecyclerRewardsMessageEvent = -1; //error 404
         public const int CallForHelpPendingCallsDeletedMessageEvent = 3605;
         public const int CloseIssueDefaultActionEvent = 2717;
-
-
     }
 }

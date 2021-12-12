@@ -47,7 +47,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Action
             }
             else
             {
-                UserCache user =  PlusEnvironment.GetGame().GetCacheManager().GenerateUser(userId);
+                UserCache user = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(userId);
                 if (user != null)
                     session.SendPacket(new FlatControllerAddedComposer(room.RoomId, user.Id, user.Username));
             }

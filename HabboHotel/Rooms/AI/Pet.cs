@@ -33,7 +33,7 @@ namespace Plus.HabboHotel.Rooms.AI
         public double Z;
         public int Experience;
 
-        public int[] ExperienceLevels = { 100, 200, 400, 600, 1000, 1300, 1800, 2400, 3200, 4300, 7200, 8500, 10100, 13300, 17500, 23000, 51900, 75000, 128000, 150000 };
+        public int[] ExperienceLevels = {100, 200, 400, 600, 1000, 1300, 1800, 2400, 3200, 4300, 7200, 8500, 10100, 13300, 17500, 23000, 51900, 75000, 128000, 150000};
 
         public string GnomeClothing;
 
@@ -112,7 +112,6 @@ namespace Plus.HabboHotel.Rooms.AI
                     maxE = MaxEnergy - Energy;
                 else
                     maxE = 10;
-
             }
             else
                 maxE = 15; // Remove Max Energy as 15
@@ -151,7 +150,6 @@ namespace Plus.HabboHotel.Rooms.AI
                 if (PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(RoomId, out Room room))
                     return room;
                 return null;
-
             }
         }
 
@@ -166,6 +164,7 @@ namespace Plus.HabboHotel.Rooms.AI
                     if (Experience < ExperienceLevels[level])
                         return level + 1;
                 }
+
                 return ExperienceLevels.Length;
             }
         }

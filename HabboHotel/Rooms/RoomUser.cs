@@ -115,7 +115,7 @@ namespace Plus.HabboHotel.Rooms
 
             AllowOverride = false;
             CanWalk = true;
-            
+
             SqState = 3;
 
             InternalRoomId = 0;
@@ -134,13 +134,13 @@ namespace Plus.HabboHotel.Rooms
             TradePartner = 0;
             IsTrading = false;
         }
-        
+
         public Point Coordinate => new(X, Y);
 
         public bool IsPet => IsBot && BotData.IsPet;
 
         public int CurrentEffect => GetClient().GetHabbo().Effects().CurrentEffect;
-        
+
         public bool IsDancing => DanceId >= 1;
 
         public bool IsTrading { get; set; }
@@ -150,7 +150,7 @@ namespace Plus.HabboHotel.Rooms
         public int TradeId { get; set; }
 
         public Dictionary<string, string> Statusses { get; }
-        
+
         public bool NeedsAutoKick
         {
             get
@@ -189,7 +189,6 @@ namespace Plus.HabboHotel.Rooms
                 }
 
                 return PlusEnvironment.GetUsernameById(HabboId);
-
             }
 
             return PlusEnvironment.GetUsernameById(HabboId);
@@ -226,7 +225,7 @@ namespace Plus.HabboHotel.Rooms
 
             if (!IsBot)
                 return;
-            
+
             if (IsPet)
             {
                 foreach (RoomUser user in GetRoom().GetRoomUserManager().GetUserList().ToList())
@@ -293,6 +292,7 @@ namespace Plus.HabboHotel.Rooms
                 ChatSpamCount = 0;
                 return true;
             }
+
             return false;
         }
 
@@ -355,6 +355,7 @@ namespace Plus.HabboHotel.Rooms
             }
 
             #region Pets/Bots responces
+
             if (shout)
             {
                 foreach (RoomUser user in _mRoom.GetRoomUserManager().GetUserList().ToList())
@@ -377,8 +378,8 @@ namespace Plus.HabboHotel.Rooms
                         user.BotAI.OnUserSay(this, message);
                 }
             }
-            #endregion
 
+            #endregion
         }
 
         public void ClearMovement(bool update)
@@ -506,7 +507,7 @@ namespace Plus.HabboHotel.Rooms
 
             UpdateNeeded = true;
         }
-        
+
         public bool HasStatus(string key)
         {
             return Statusses.ContainsKey(key);
@@ -647,6 +648,7 @@ namespace Plus.HabboHotel.Rooms
                 {
                     sq.Y--;
                 }
+
                 return sq;
             }
         }
@@ -657,6 +659,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 return null;
             }
+
             if (_mClient == null)
                 _mClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(HabboId);
             return _mClient;

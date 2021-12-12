@@ -6,7 +6,6 @@ namespace Plus.Communication.Packets.Incoming.GameCenter
     {
         public void Parse(GameClient session, ClientPacket packet)
         {
-           
         }
     }
 }

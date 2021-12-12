@@ -5,7 +5,6 @@
         public OpenHelpToolComposer()
             : base(ServerPacketHeader.OpenHelpToolMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

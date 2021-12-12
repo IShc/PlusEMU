@@ -51,7 +51,7 @@ namespace Plus.HabboHotel.Users.UserData
 
                 dbClient.SetQuery("SELECT room_id FROM user_favorites WHERE `user_id` = '" + userId + "'");
                 dFavouriteRooms = dbClient.GetTable();
-                
+
                 dbClient.SetQuery("SELECT `badge_id`,`badge_slot` FROM user_badges WHERE `user_id` = '" + userId + "'");
                 dBadges = dbClient.GetTable();
 

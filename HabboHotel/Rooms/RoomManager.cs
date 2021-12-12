@@ -22,7 +22,7 @@ namespace Plus.HabboHotel.Rooms
         private readonly ConcurrentDictionary<int, Room> _rooms;
 
         private DateTime _cycleLastExecution;
-        
+
         public RoomManager()
         {
             _roomModels = new Dictionary<string, RoomModel>();
@@ -111,7 +111,7 @@ namespace Plus.HabboHotel.Rooms
                 if (model != null && !_roomModels.ContainsKey(model))
                 {
                     _roomModels.Add(model, new RoomModel(model, Convert.ToInt32(row["door_x"]), Convert.ToInt32(row["door_y"]), Convert.ToDouble(row["door_z"]), Convert.ToInt32(row["door_dir"]),
-                      Convert.ToString(row["heightmap"]), PlusEnvironment.EnumToBool(row["club_only"].ToString()), Convert.ToInt32(row["wall_height"]), true));
+                        Convert.ToString(row["heightmap"]), PlusEnvironment.EnumToBool(row["club_only"].ToString()), Convert.ToInt32(row["wall_height"]), true));
                 }
 
                 return true;
@@ -298,7 +298,7 @@ namespace Plus.HabboHotel.Rooms
             }
 
             RoomData data = new(roomId, name, model.Id, session.GetHabbo().Username, session.GetHabbo().Id, "", 0, "public", "open", 0, maxVisitors, category, description, string.Empty,
-             floor, landscape, 1, 1, 0, 0, wallthick, floorthick, wallpaper, 1, 1, 1, 1, 1, 1, 1, 8, tradeSettings, true, true, true, true, true, true, true, 0, 0, true, model);
+                floor, landscape, 1, 1, 0, 0, wallthick, floorthick, wallpaper, 1, 1, 1, 1, 1, 1, 1, 8, tradeSettings, true, true, true, true, true, true, true, 0, 0, true, model);
 
             return data;
         }
@@ -319,9 +319,10 @@ namespace Plus.HabboHotel.Rooms
 
                 PlusEnvironment.GetGame().GetRoomManager().UnloadRoom(room.Id);
                 Console.Clear();
-                Log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + string.Format("{0:0.##}", ((double)i / length) * 100) + "%");
+                Log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + string.Format("{0:0.##}", ((double) i / length) * 100) + "%");
                 i++;
             }
+
             Log.Info("Done disposing rooms!");
         }
     }

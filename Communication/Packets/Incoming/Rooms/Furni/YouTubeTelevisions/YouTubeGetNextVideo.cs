@@ -32,7 +32,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions
                 item = value;
             }
 
-            if(item == null)
+            if (item == null)
             {
                 session.SendNotification("Oh, it looks like their was a problem getting the video.");
                 return;

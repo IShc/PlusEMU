@@ -18,32 +18,26 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 
         public override void OnSelfEnterRoom()
         {
-
         }
 
         public override void OnSelfLeaveRoom(bool kicked)
         {
-
         }
 
         public override void OnUserEnterRoom(RoomUser user)
         {
-
         }
 
         public override void OnUserLeaveRoom(GameClient client)
         {
-
         }
 
         public override void OnUserSay(RoomUser user, string message)
         {
-
         }
 
         public override void OnUserShout(RoomUser user, string message)
         {
-
         }
 
         public override void OnTimerTick()
@@ -65,11 +59,12 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         @string = "I really shouldn't be using HTML within bot speeches.";
                     GetRoomUser().Chat(@string, GetBotData().ChatBubble);
                 }
+
                 _speechTimer = GetBotData().SpeakingInterval;
             }
             else
                 _speechTimer--;
-           
+
             if (_actionTimer <= 0)
             {
                 switch (GetBotData().WalkingMode.ToLower())
@@ -122,11 +117,12 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                                 GetRoomUser().MoveTo(sq);
                             }
                         }
-                        else if(GetBotData().TargetUser == 0)
+                        else if (GetBotData().TargetUser == 0)
                         {
                             Point nextCoord = GetRoom().GetGameMap().GetRandomWalkableSquare();
                             GetRoomUser().MoveTo(nextCoord.X, nextCoord.Y);
                         }
+
                         break;
 
                     case "specified_range":

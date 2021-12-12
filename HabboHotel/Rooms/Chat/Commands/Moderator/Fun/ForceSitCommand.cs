@@ -36,7 +36,9 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
                         user.IsSitting = true;
                         user.UpdateNeeded = true;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 else
                 {

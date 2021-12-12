@@ -90,6 +90,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                     habboInfo.Append("Current Visitors: " + targetClient.GetHabbo().CurrentRoom.UserCount + "/" + targetClient.GetHabbo().CurrentRoom.UsersMax);
                 }
             }
+
             session.SendNotification(habboInfo.ToString());
         }
     }

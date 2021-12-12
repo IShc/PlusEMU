@@ -34,7 +34,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (@params.Length == 0 || Instance == null)
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null)
                 return false;
 
@@ -55,6 +55,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                         user.GetClient().GetHabbo().Effects().ApplyEffect(0);
                 }
             }
+
             return true;
         }
     }

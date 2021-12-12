@@ -1,5 +1,5 @@
 ﻿namespace Plus.HabboHotel.Moderation
-{ 
+{
     public class ModerationBan
     {
         public string Value { get; set; }

@@ -44,7 +44,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 Instance.LastRegeneration = DateTime.Now;
                 return true;
             }
-            
+
             return false;
         }
     }

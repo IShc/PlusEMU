@@ -6,7 +6,7 @@ using Plus.Communication.Rcon.Commands.User;
 namespace Plus.Communication.Rcon.Commands
 {
     public class CommandManager
-    { 
+    {
         /// <summary>
         /// Commands registered for use.
         /// </summary>
@@ -18,7 +18,7 @@ namespace Plus.Communication.Rcon.Commands
         public CommandManager()
         {
             _commands = new Dictionary<string, IRconCommand>();
-            
+
             RegisterUser();
             RegisterHotel();
         }
@@ -46,6 +46,7 @@ namespace Plus.Communication.Rcon.Commands
 
                 return command.TryExecute(parameters);
             }
+
             return false;
         }
 
@@ -66,7 +67,7 @@ namespace Plus.Communication.Rcon.Commands
             Register("progress_user_achievement", new ProgressUserAchievementCommand());
             Register("give_user_badge", new GiveUserBadgeCommand());
             Register("take_user_badge", new TakeUserBadgeCommand());
-        }   
+        }
 
         /// <summary>
         /// Registers the commands tailored towards the hotel.

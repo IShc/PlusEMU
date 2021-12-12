@@ -4,6 +4,7 @@
     {
         public int UserId { get; }
         public int Respect { get; }
+
         public RespectNotificationComposer(int userId, int respect)
             : base(ServerPacketHeader.RespectNotificationMessageComposer)
         {

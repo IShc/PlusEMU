@@ -38,7 +38,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
             if (@params.Length == 0 || Instance == null || string.IsNullOrEmpty(StringData))
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null)
                 return false;
 

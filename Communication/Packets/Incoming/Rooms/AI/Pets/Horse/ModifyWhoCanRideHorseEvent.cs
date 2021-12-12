@@ -16,7 +16,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
                 return;
 
             int petId = packet.PopInt();
-           
+
             if (!room.GetRoomUserManager().TryGetPet(petId, out RoomUser pet))
                 return;
 

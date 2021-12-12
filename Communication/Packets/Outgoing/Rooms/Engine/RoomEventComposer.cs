@@ -26,7 +26,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
             packet.WriteString(Promotion == null ? "" : Promotion.Description);
             packet.WriteInteger(0);
             packet.WriteInteger(0);
-            packet.WriteInteger(0);//Unknown, came in build RELEASE63-201411181343-400753188
+            packet.WriteInteger(0); //Unknown, came in build RELEASE63-201411181343-400753188
         }
     }
 }

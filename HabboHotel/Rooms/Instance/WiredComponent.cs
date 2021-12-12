@@ -19,7 +19,7 @@ namespace Plus.HabboHotel.Rooms.Instance
         private readonly Room _room;
         private readonly ConcurrentDictionary<int, IWiredItem> _wiredItems;
 
-        public WiredComponent(Room instance)//, RoomItem Items)
+        public WiredComponent(Room instance) //, RoomItem Items)
         {
             _room = instance;
             _wiredItems = new ConcurrentDictionary<int, IWiredItem>();
@@ -47,6 +47,7 @@ namespace Plus.HabboHotel.Rooms.Instance
                     }
                 }
             }
+
             TimeSpan span = (DateTime.Now - start);
             if (span.Milliseconds > 400)
             {
@@ -120,6 +121,7 @@ namespace Plus.HabboHotel.Rooms.Instance
             {
                 // ummm
             }
+
             return newBox;
         }
 
@@ -163,7 +165,7 @@ namespace Plus.HabboHotel.Rooms.Instance
 
                 case WiredBoxType.EffectGiveReward:
                     return new GiveRewardBox(_room, item);
-                
+
                 case WiredBoxType.EffectMatchPosition:
                     return new MatchPositionBox(_room, item);
                 case WiredBoxType.EffectAddActorToTeam:
@@ -214,7 +216,7 @@ namespace Plus.HabboHotel.Rooms.Instance
                     return new ActorHasHandItemBox(_room, item);
                 case WiredBoxType.ConditionActorIsInTeamBox:
                     return new ActorIsInTeamBox(_room, item);
-                
+
                 /*
                 case WiredBoxType.ConditionMatchStateAndPosition:
                     return new FurniMatchStateAndPositionBox(_room, Item);
@@ -253,6 +255,7 @@ namespace Plus.HabboHotel.Rooms.Instance
                 case WiredBoxType.EffectGiveUserBadge:
                     return new GiveUserBadgeBox(_room, item);
             }
+
             return null;
         }
 
@@ -328,6 +331,7 @@ namespace Plus.HabboHotel.Rooms.Instance
                             finished = box.Execute(@params);
                         }
                     }
+
                     return finished;
                 }
 

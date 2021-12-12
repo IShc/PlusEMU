@@ -72,7 +72,7 @@ namespace Plus.Core.FigureData
                             if (subb.Attributes["type"] != null)
                             {
                                 _setTypes[child.Attributes["type"].Value].Sets[Convert.ToInt32(sub.Attributes["id"].Value)].Parts.Add(Convert.ToInt32(subb.Attributes["id"].Value) + "-" + subb.Attributes["type"].Value,
-                                  new Part(Convert.ToInt32(subb.Attributes["id"].Value), SetTypeUtility.GetSetType(child.Attributes["type"].Value), Convert.ToInt32(subb.Attributes["colorable"].Value) == 1, Convert.ToInt32(subb.Attributes["index"].Value), Convert.ToInt32(subb.Attributes["colorindex"].Value)));
+                                    new Part(Convert.ToInt32(subb.Attributes["id"].Value), SetTypeUtility.GetSetType(child.Attributes["type"].Value), Convert.ToInt32(subb.Attributes["colorable"].Value) == 1, Convert.ToInt32(subb.Attributes["index"].Value), Convert.ToInt32(subb.Attributes["colorindex"].Value)));
                             }
                         }
                     }
@@ -94,6 +94,7 @@ namespace Plus.Core.FigureData
             string rebuildFigure = string.Empty;
 
             #region Check clothing, colors & Habbo Club
+
             string[] figureParts = figure.Split('.');
             foreach (string part in figureParts.ToList())
             {
@@ -108,6 +109,7 @@ namespace Plus.Core.FigureData
                     if (figureSet.Sets.TryGetValue(partId, out Set set))
                     {
                         #region Gender Check
+
                         if (set.Gender != gender && set.Gender != "U")
                         {
                             if (figureSet.Sets.Count(x => x.Value.Gender == gender || x.Value.Gender == "U") > 0)
@@ -120,9 +122,11 @@ namespace Plus.Core.FigureData
                                 colorId = GetRandomColor(figureSet.PalletId);
                             }
                         }
+
                         #endregion
 
                         #region Colors
+
                         if (set.Colorable)
                         {
                             //Couldn't think of a better way to split the colors, if I looped the parts I still have to remove Type-PartId, then loop color 1 & color 2. Meh
@@ -131,6 +135,7 @@ namespace Plus.Core.FigureData
                             if (splitterCounter == 2 || splitterCounter == 3)
                             {
                                 #region First Color
+
                                 if (!string.IsNullOrEmpty(part.Split('-')[2]))
                                 {
                                     if (int.TryParse(part.Split('-')[2], out colorId))
@@ -155,12 +160,14 @@ namespace Plus.Core.FigureData
                                 }
                                 else
                                     colorId = 0;
+
                                 #endregion
                             }
 
                             if (splitterCounter == 3)
                             {
                                 #region Second Color
+
                                 if (!string.IsNullOrEmpty(part.Split('-')[3]))
                                 {
                                     if (int.TryParse(part.Split('-')[3], out secondColorId))
@@ -185,12 +192,13 @@ namespace Plus.Core.FigureData
                                 }
                                 else
                                     secondColorId = 0;
+
                                 #endregion
                             }
                         }
                         else
                         {
-                            string[] ignore = { "ca", "wa" };
+                            string[] ignore = {"ca", "wa"};
 
                             if (ignore.Contains(type))
                             {
@@ -200,6 +208,7 @@ namespace Plus.Core.FigureData
                                 }
                             }
                         }
+
                         #endregion
 
                         if (set.ClubLevel > 0 && !hasHabboClub)
@@ -218,9 +227,11 @@ namespace Plus.Core.FigureData
                     }
                 }
             }
+
             #endregion
 
             #region Check Required Clothing
+
             foreach (string requirement in _requirements)
             {
                 if (!rebuildFigure.Contains(requirement))
@@ -241,9 +252,11 @@ namespace Plus.Core.FigureData
                     }
                 }
             }
+
             #endregion
 
             #region Check Purcashable Clothing
+
             if (clothingParts != null)
             {
                 ICollection<ClothingItem> purchasableParts = PlusEnvironment.GetGame().GetCatalog().GetClothingManager().GetClothingAllParts;
@@ -254,7 +267,7 @@ namespace Plus.Core.FigureData
                     int partId = Convert.ToInt32(part.Split('-')[1]);
                     if (purchasableParts.Count(x => x.PartIds.Contains(partId)) > 0)
                     {
-                        if (clothingParts.Count(x => x.PartId == partId)== 0)
+                        if (clothingParts.Count(x => x.PartId == partId) == 0)
                         {
                             string type = part.Split('-')[0];
 
@@ -273,6 +286,7 @@ namespace Plus.Core.FigureData
                     }
                 }
             }
+
             #endregion
 
             return rebuildFigure;

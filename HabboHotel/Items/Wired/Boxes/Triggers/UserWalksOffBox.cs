@@ -45,11 +45,11 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 
         public bool Execute(params object[] @params)
         {
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null)
                 return false;
 
-            Item item = (Item)@params[1];
+            Item item = (Item) @params[1];
             if (item == null)
                 return false;
 

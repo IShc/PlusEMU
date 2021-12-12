@@ -7,6 +7,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
         public int Error { get; }
         public string Name { get; }
         public ICollection<string> Tags { get; }
+
         public NameChangeUpdateComposer(string name, int error, ICollection<string> tags)
             : base(ServerPacketHeader.NameChangeUpdateMessageComposer)
         {

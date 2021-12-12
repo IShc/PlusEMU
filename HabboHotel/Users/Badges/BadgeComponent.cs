@@ -19,13 +19,13 @@ namespace Plus.HabboHotel.Users.Badges
 
             foreach (Badge badge in data.Badges)
             {
-                if (!PlusEnvironment.GetGame().GetBadgeManager().TryGetBadge(badge.Code, out BadgeDefinition badgeDefinition) || 
+                if (!PlusEnvironment.GetGame().GetBadgeManager().TryGetBadge(badge.Code, out BadgeDefinition badgeDefinition) ||
                     badgeDefinition.RequiredRight.Length > 0 && !player.GetPermissions().HasRight(badgeDefinition.RequiredRight))
                     continue;
 
                 if (!_badges.ContainsKey(badge.Code))
                     _badges.Add(badge.Code, badge);
-            }     
+            }
         }
 
         public int Count => _badges.Count;

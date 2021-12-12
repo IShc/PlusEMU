@@ -5,6 +5,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
     public class IgnoredUsersComposer : MessageComposer
     {
         public IReadOnlyCollection<string> IgnoredUsers { get; }
+
         public IgnoredUsersComposer(IReadOnlyCollection<string> ignoredUsers)
             : base(ServerPacketHeader.IgnoredUsersMessageComposer)
         {

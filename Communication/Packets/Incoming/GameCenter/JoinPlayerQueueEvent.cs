@@ -15,8 +15,7 @@ namespace Plus.Communication.Packets.Incoming.GameCenter
 
             int gameId = packet.PopInt();
 
-            GameData gameData = null;
-            if (PlusEnvironment.GetGame().GetGameDataManager().TryGetGame(gameId, out gameData))
+            if (PlusEnvironment.GetGame().GetGameDataManager().TryGetGame(gameId, out GameData gameData))
             {
                 string ssoTicket = "HABBOON-Fastfood-" + GenerateSso(32) + "-" + session.GetHabbo().Id;
 
@@ -34,6 +33,7 @@ namespace Plus.Communication.Packets.Incoming.GameCenter
             {
                 result.Append(characters[random.Next(characters.Length)]);
             }
+
             return result.ToString();
         }
     }

@@ -20,11 +20,12 @@ namespace Plus.HabboHotel.Users.Inventory.Bots
                 {
                     foreach (DataRow dRow in dBots.Rows)
                     {
-                        b.Add(new Bot(Convert.ToInt32(dRow["id"]), Convert.ToInt32(dRow["user_id"]), Convert.ToString(dRow["name"]), 
-                            Convert.ToString(dRow["motto"]),  Convert.ToString(dRow["look"]), Convert.ToString(dRow["gender"])));
+                        b.Add(new Bot(Convert.ToInt32(dRow["id"]), Convert.ToInt32(dRow["user_id"]), Convert.ToString(dRow["name"]),
+                            Convert.ToString(dRow["motto"]), Convert.ToString(dRow["look"]), Convert.ToString(dRow["gender"])));
                     }
                 }
             }
+
             return b;
         }
     }

@@ -11,6 +11,7 @@
         public string Image { get; }
         public string HotelName { get; }
         public string HotelUrl { get; }
+
         public RoomNotificationComposer(string type, string key, string value)
             : base(ServerPacketHeader.RoomNotificationMessageComposer)
         {
@@ -37,7 +38,7 @@
 
         public override void Compose(ServerPacket packet)
         {
-            if(!string.IsNullOrEmpty(Message))
+            if (!string.IsNullOrEmpty(Message))
             {
                 packet.WriteString(Image);
                 packet.WriteInteger(string.IsNullOrEmpty(HotelName) ? 2 : 4);
@@ -53,18 +54,20 @@
                     packet.WriteString("linkTitle");
                     packet.WriteString(HotelName);
                 }
-            } else if(!string.IsNullOrEmpty(Key))
+            }
+            else if (!string.IsNullOrEmpty(Key))
             {
                 packet.WriteString(Type);
-                packet.WriteInteger(1);//Count
+                packet.WriteInteger(1); //Count
                 {
-                    packet.WriteString(Key);//Type of message
+                    packet.WriteString(Key); //Type of message
                     packet.WriteString(Value);
                 }
-            } else
+            }
+            else
             {
                 packet.WriteString(Type);
-                packet.WriteInteger(0);//Count
+                packet.WriteInteger(0); //Count
             }
         }
     }

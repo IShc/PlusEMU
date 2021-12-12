@@ -93,7 +93,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets
                     }
                 }
             }
-            
+
             room.GetRoomUserManager().RemoveBot(pet.VirtualId, false);
         }
     }

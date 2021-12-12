@@ -1,6 +1,6 @@
 ﻿namespace Plus.HabboHotel.Users.Messenger
 {
-   public static class MessengerEventTypesUtility
+    public static class MessengerEventTypesUtility
     {
         public static int GetEventTypePacketNum(MessengerEventTypes type)
         {

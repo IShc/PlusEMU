@@ -23,9 +23,10 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.YouTubeTelevisions
             foreach (TelevisionItem video in Videos.ToList())
             {
                 packet.WriteString(video.YouTubeId);
-                packet.WriteString(video.Title);//Title
-                packet.WriteString(video.Description);//Description
+                packet.WriteString(video.Title); //Title
+                packet.WriteString(video.Description); //Description
             }
+
             packet.WriteString("");
         }
     }

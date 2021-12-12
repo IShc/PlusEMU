@@ -41,7 +41,8 @@ namespace Plus.HabboHotel.Rooms.Games
                     winning = i;
                 }
             }
-            return (Team)winning;
+
+            return (Team) winning;
         }
 
         public void AddPointToTeam(Team team, int points)
@@ -160,6 +161,7 @@ namespace Plus.HabboHotel.Rooms.Games
         }
 
         #region Gates
+
         public void LockGates()
         {
             foreach (Item item in _redTeamItems.Values.ToList())
@@ -218,6 +220,7 @@ namespace Plus.HabboHotel.Rooms.Games
                 {
                     user.SqState = 0;
                 }
+
                 _room.GetGameMap().GameMap[item.GetX, item.GetY] = 0;
             }
         }
@@ -234,9 +237,11 @@ namespace Plus.HabboHotel.Rooms.Games
                 {
                     user.SqState = 1;
                 }
+
                 _room.GetGameMap().GameMap[item.GetX, item.GetY] = 1;
             }
         }
+
         #endregion
 
         public void StopGame()

@@ -39,12 +39,13 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Achievements
                 packet.WriteInteger(0); // Type of reward
                 packet.WriteInteger(userData != null ? userData.Progress : 0); // Current progress
 
-                packet.WriteBoolean(userData != null ? (userData.Level >= totalLevels) : false);// Set 100% completed(??)
+                packet.WriteBoolean(userData != null ? (userData.Level >= totalLevels) : false); // Set 100% completed(??)
                 packet.WriteString(achievement.Category); // Category
                 packet.WriteString(string.Empty);
                 packet.WriteInteger(totalLevels); // Total amount of levels 
                 packet.WriteInteger(0);
             }
+
             packet.WriteString("");
         }
     }

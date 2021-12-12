@@ -22,8 +22,15 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public bool BoolData { get; set; }
 
-        public int Delay { get => _delay;
-            set { _delay = value; TickCount = value + 1; } }
+        public int Delay
+        {
+            get => _delay;
+            set
+            {
+                _delay = value;
+                TickCount = value + 1;
+            }
+        }
 
         public int TickCount { get; set; }
 
@@ -71,6 +78,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 TickCount = Delay;
                 _requested = true;
             }
+
             return true;
         }
 
@@ -100,13 +108,16 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                         if (string.IsNullOrEmpty(partsString[0]) || string.IsNullOrEmpty(partsString[1]))
                             continue;
                     }
-                    catch { continue; }
+                    catch
+                    {
+                        continue;
+                    }
 
                     string[] part = partsString[1].Split(',');
 
                     try
                     {
-                        if (int.Parse(StringData.Split(';')[0]) == 1)//State
+                        if (int.Parse(StringData.Split(';')[0]) == 1) //State
                         {
                             if (part.Count() >= 4)
                                 SetState(ii, part[4]);
@@ -114,23 +125,33 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                                 SetState(ii, "1");
                         }
                     }
-                    catch (Exception e) { ExceptionLogger.LogWiredException(e); }
+                    catch (Exception e)
+                    {
+                        ExceptionLogger.LogWiredException(e);
+                    }
 
                     try
                     {
-                        if (int.Parse(StringData.Split(';')[1]) == 1)//Direction
+                        if (int.Parse(StringData.Split(';')[1]) == 1) //Direction
                             SetRotation(ii, Convert.ToInt32(part[3]));
                     }
-                    catch (Exception e) { ExceptionLogger.LogWiredException(e); }
+                    catch (Exception e)
+                    {
+                        ExceptionLogger.LogWiredException(e);
+                    }
 
                     try
                     {
-                        if (int.Parse(StringData.Split(';')[2]) == 1)//Position
+                        if (int.Parse(StringData.Split(';')[2]) == 1) //Position
                             SetPosition(ii, Convert.ToInt32(part[0]), Convert.ToInt32(part[1]), Convert.ToDouble(part[2]));
                     }
-                    catch (Exception e) { ExceptionLogger.LogWiredException(e); }
+                    catch (Exception e)
+                    {
+                        ExceptionLogger.LogWiredException(e);
+                    }
                 }
             }
+
             _requested = false;
             return true;
         }

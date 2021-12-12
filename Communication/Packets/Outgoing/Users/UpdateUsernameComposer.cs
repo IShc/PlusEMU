@@ -3,6 +3,7 @@
     internal class UpdateUsernameComposer : MessageComposer
     {
         public string Username { get; }
+
         public UpdateUsernameComposer(string username)
             : base(ServerPacketHeader.UpdateUsernameMessageComposer)
         {

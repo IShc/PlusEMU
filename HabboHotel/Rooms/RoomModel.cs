@@ -66,10 +66,10 @@ namespace Plus.HabboHotel.Rooms
                             SqState[x, y] = SquareState.Open;
                             SqFloorHeight[x, y] = Parse(square);
                         }
+
                         x++;
                     }
                 }
-
             }
             catch //(Exception e)
             {
@@ -81,7 +81,6 @@ namespace Plus.HabboHotel.Rooms
 
         public static short Parse(char input)
         {
-
             switch (input)
             {
                 case '0':

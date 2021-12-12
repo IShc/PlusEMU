@@ -8,6 +8,7 @@ namespace Plus.Communication.Packets.Outgoing.Talents
     {
         public ICollection<TalentTrackLevel> Levels { get; }
         public string Type { get; }
+
         public TalentTrackComposer(ICollection<TalentTrackLevel> levels, string type)
             : base(ServerPacketHeader.TalentTrackMessageComposer)
         {
@@ -22,17 +23,17 @@ namespace Plus.Communication.Packets.Outgoing.Talents
 
             foreach (TalentTrackLevel level in Levels.ToList())
             {
-                packet.WriteInteger(level.Level);//First level
-                packet.WriteInteger(0);//Progress, 0 = nothing, 1 = started, 2 = done
+                packet.WriteInteger(level.Level); //First level
+                packet.WriteInteger(0); //Progress, 0 = nothing, 1 = started, 2 = done
 
                 packet.WriteInteger(level.GetSubLevels().Count);
                 foreach (TalentTrackSubLevel sub in level.GetSubLevels())
                 {
-                    packet.WriteInteger(0);//Achievement Id
-                    packet.WriteInteger(0);//Achievement level
-                    packet.WriteString(sub.Badge);//Achievement name
-                    packet.WriteInteger(0);//Progress, 0 = nothing, 1 = started, 2 = done
-                    packet.WriteInteger(0);//My actual progress
+                    packet.WriteInteger(0); //Achievement Id
+                    packet.WriteInteger(0); //Achievement level
+                    packet.WriteString(sub.Badge); //Achievement name
+                    packet.WriteInteger(0); //Progress, 0 = nothing, 1 = started, 2 = done
+                    packet.WriteInteger(0); //My actual progress
                     packet.WriteInteger(sub.RequiredProgress);
                 }
 

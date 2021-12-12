@@ -133,10 +133,12 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
             {
                 builder.Append(" AND `total_price` > " + minCost);
             }
+
             if (maxCost >= 0)
             {
                 builder.Append(" AND `total_price` < " + maxCost);
             }
+
             switch (filterMode)
             {
                 case 1:
@@ -150,13 +152,13 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-
                 dbClient.SetQuery("SELECT `offer_id`,`item_type`,`sprite_id`,`total_price`,`limited_number`,`limited_stack` FROM `catalog_marketplace_offers` " + builder + " " + str + " LIMIT 500");
                 dbClient.AddParameter("search_query", "%" + searchQuery + "%");
                 if (searchQuery.Length >= 1)
                 {
                     builder.Append(" AND `public_name` LIKE @search_query");
                 }
+
                 table = dbClient.GetTable();
             }
 

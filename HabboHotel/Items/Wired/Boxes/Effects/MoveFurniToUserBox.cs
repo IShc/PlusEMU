@@ -80,6 +80,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 TickCount = Delay;
                 _requested = true;
             }
+
             return true;
         }
 
@@ -110,7 +111,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                         continue;
 
                     if (Instance.GetGameMap().CanRollItemHere(point.X, point.Y) && !Instance.GetGameMap().SquareHasUsers(point.X, point.Y))
-                    {    
+                    {
                         double newZ = Item.GetZ;
                         bool canBePlaced = true;
 
@@ -146,6 +147,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 _next = 0;
                 return true;
             }
+
             return false;
         }
     }

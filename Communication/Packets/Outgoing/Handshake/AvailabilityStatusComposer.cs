@@ -5,7 +5,6 @@
         public AvailabilityStatusComposer()
             : base(ServerPacketHeader.AvailabilityStatusMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

@@ -25,7 +25,6 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 
         public void HandleSave(ClientPacket packet)
         {
-
         }
 
         public bool Execute(params object[] @params)

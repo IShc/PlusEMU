@@ -5,14 +5,14 @@
         public QuestionParserComposer()
             : base(ServerPacketHeader.QuestionParserMessageComposer)
         {
-            
         }
+
         public override void Compose(ServerPacket packet)
         {
             packet.WriteString("MATCHING_POLL");
-            packet.WriteInteger(2686);//??
-            packet.WriteInteger(10016);//???
-            packet.WriteInteger(60);//Duration
+            packet.WriteInteger(2686); //??
+            packet.WriteInteger(10016); //???
+            packet.WriteInteger(60); //Duration
             packet.WriteInteger(10016);
             packet.WriteInteger(9);
             packet.WriteInteger(6);

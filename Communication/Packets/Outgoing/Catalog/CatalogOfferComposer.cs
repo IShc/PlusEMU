@@ -18,7 +18,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
         {
             packet.WriteInteger(Item.OfferId);
             packet.WriteString(Item.Data.ItemName);
-            packet.WriteBoolean(false);//IsRentable
+            packet.WriteBoolean(false); //IsRentable
             packet.WriteInteger(Item.CostCredits);
 
             if (Item.CostDiamonds > 0)
@@ -33,7 +33,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
             }
 
             packet.WriteBoolean(ItemUtility.CanGiftItem(Item));
-            packet.WriteInteger(string.IsNullOrEmpty(Item.Badge) ? 1 : 2);//Count 1 item if there is no badge, otherwise count as 2.
+            packet.WriteInteger(string.IsNullOrEmpty(Item.Badge) ? 1 : 2); //Count 1 item if there is no badge, otherwise count as 2.
 
             if (!string.IsNullOrEmpty(Item.Badge))
             {
@@ -43,13 +43,13 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
 
             packet.WriteString(Item.Data.Type.ToString());
             if (Item.Data.Type.ToString().ToLower() == "b")
-                packet.WriteString(Item.Data.ItemName);//Badge name.
+                packet.WriteString(Item.Data.ItemName); //Badge name.
             else
             {
                 packet.WriteInteger(Item.Data.SpriteId);
                 if (Item.Data.InteractionType == InteractionType.Wallpaper || Item.Data.InteractionType == InteractionType.Floor || Item.Data.InteractionType == InteractionType.Landscape)
                     packet.WriteString(Item.Name.Split('_')[2]);
-                else if (Item.PageId == 9)//Bots
+                else if (Item.PageId == 9) //Bots
                 {
                     CatalogBot cataBot = null;
                     if (!PlusEnvironment.GetGame().GetCatalog().TryGetBot(Item.ItemId, out cataBot))
@@ -59,6 +59,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                 }
                 else if (Item.ExtraData != null)
                     packet.WriteString(Item.ExtraData != null ? Item.ExtraData : string.Empty);
+
                 packet.WriteInteger(Item.Amount);
                 packet.WriteBoolean(Item.IsLimited); // IsLimited
                 if (Item.IsLimited)
@@ -67,10 +68,11 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
                     packet.WriteInteger(Item.LimitedEditionStack - Item.LimitedEditionSells);
                 }
             }
+
             packet.WriteInteger(0); // club_level
             packet.WriteBoolean(ItemUtility.CanSelectAmount(Item));
-            packet.WriteBoolean(false);// TODO: Figure out
-            packet.WriteString("");//previewImage -> e.g; catalogue/pet_lion.png
+            packet.WriteBoolean(false); // TODO: Figure out
+            packet.WriteString(""); //previewImage -> e.g; catalogue/pet_lion.png
         }
     }
 }

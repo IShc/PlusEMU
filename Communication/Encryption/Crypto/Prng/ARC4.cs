@@ -28,7 +28,7 @@ namespace Plus.Communication.Encryption.Crypto.Prng
 
             for (i = 0; i < POOLSIZE; ++i)
             {
-                bytes[i] = (byte)i;
+                bytes[i] = (byte) i;
             }
 
             for (i = 0; i < POOLSIZE; ++i)
@@ -68,8 +68,6 @@ namespace Plus.Communication.Encryption.Crypto.Prng
         {
             Encrypt(ref src);
         }
-        
-        
 
 
         public IByteBuffer Decipher(IByteBuffer buffer)

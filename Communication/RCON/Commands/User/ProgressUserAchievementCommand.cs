@@ -17,7 +17,7 @@ namespace Plus.Communication.Rcon.Commands.User
             GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(userId);
             if (client == null || client.GetHabbo() == null)
                 return false;
-        
+
             // Validate the achievement
             if (string.IsNullOrEmpty(Convert.ToString(parameters[1])))
                 return false;

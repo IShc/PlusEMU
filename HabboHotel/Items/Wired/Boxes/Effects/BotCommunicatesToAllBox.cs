@@ -5,7 +5,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    internal class BotCommunicatesToAllBox: IWiredItem
+    internal class BotCommunicatesToAllBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }

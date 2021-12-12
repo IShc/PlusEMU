@@ -40,7 +40,7 @@ namespace Plus.Database
             try
             {
                 IDatabaseClient dbConnection = new DatabaseConnection(_connectionStr);
-              
+
                 dbConnection.Connect();
 
                 return dbConnection.GetQueryReactor();

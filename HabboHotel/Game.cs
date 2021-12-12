@@ -32,7 +32,7 @@ namespace Plus.HabboHotel
         private readonly ModerationManager _moderationManager;
         private readonly ItemDataManager _itemDataManager;
         private readonly CatalogManager _catalogManager;
-        private readonly TelevisionManager _televisionManager;//TODO: Initialize from the item manager.
+        private readonly TelevisionManager _televisionManager; //TODO: Initialize from the item manager.
         private readonly NavigatorManager _navigatorManager;
         private readonly RoomManager _roomManager;
         private readonly ChatManager _chatManager;
@@ -40,7 +40,7 @@ namespace Plus.HabboHotel
         private readonly QuestManager _questManager;
         private readonly AchievementManager _achievementManager;
         private readonly TalentTrackManager _talentTrackManager;
-        private readonly LandingViewManager _landingViewManager;//TODO: Rename class
+        private readonly LandingViewManager _landingViewManager; //TODO: Rename class
         private readonly GameDataManager _gameDataManager;
         private readonly ServerStatusUpdater _globalUpdater;
         private readonly BotManager _botManager;
@@ -100,7 +100,7 @@ namespace Plus.HabboHotel
 
             _globalUpdater = new ServerStatusUpdater();
             _globalUpdater.Init();
-            
+
             _botManager = new BotManager();
             _botManager.Init();
 
@@ -215,7 +215,7 @@ namespace Plus.HabboHotel
         {
             return _groupManager;
         }
-        
+
         public LandingViewManager GetLandingManager()
         {
             return _landingViewManager;

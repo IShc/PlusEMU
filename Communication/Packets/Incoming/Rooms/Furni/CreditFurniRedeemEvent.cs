@@ -13,13 +13,13 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
         {
             if (!session.GetHabbo().InRoom)
                 return;
-            
+
             if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(session.GetHabbo().CurrentRoomId, out Room room))
                 return;
 
             if (!room.CheckRights(session, true))
                 return;
-            
+
             if (PlusEnvironment.GetSettingsManager().TryGetValue("room.item.exchangeables.enabled") != "1")
             {
                 session.SendNotification("The hotel managers have temporarilly disabled exchanging!");
@@ -52,7 +52,6 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
             session.SendPacket(new FurniListUpdateComposer());
             room.GetRoomItemHandler().RemoveFurniture(null, exchange.Id);
             session.GetHabbo().GetInventoryComponent().RemoveItem(exchange.Id);
-
         }
     }
 }

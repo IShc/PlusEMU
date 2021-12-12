@@ -35,9 +35,9 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
             packet.WriteBoolean(Item.GetBaseItem().AllowTrade);
             packet.WriteBoolean(Item.LimitedNo == 0 ? Item.GetBaseItem().AllowInventoryStack : false);
             packet.WriteBoolean(ItemUtility.IsRare(Item));
-            packet.WriteInteger(-1);//Seconds to expiration.
+            packet.WriteInteger(-1); //Seconds to expiration.
             packet.WriteBoolean(true);
-            packet.WriteInteger(-1);//Item RoomId
+            packet.WriteInteger(-1); //Item RoomId
 
             if (!Item.IsWallItem)
             {

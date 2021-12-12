@@ -7,6 +7,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
     internal class HabboUserBadgesComposer : MessageComposer
     {
         public Habbo Habbo { get; }
+
         public HabboUserBadgesComposer(Habbo habbo)
             : base(ServerPacketHeader.HabboUserBadgesMessageComposer)
         {

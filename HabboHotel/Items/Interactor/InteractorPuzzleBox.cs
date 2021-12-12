@@ -30,11 +30,12 @@ namespace Plus.HabboHotel.Items.Interactor
             if (!((Math.Abs((user.X - item.GetX)) >= 2) || (Math.Abs((user.Y - item.GetY)) >= 2)))
             {
                 user.SetRot(Rotation.Calculate(user.X, user.Y, item.GetX, item.GetY), false);
-                if (user.RotBody%2 != 0)
+                if (user.RotBody % 2 != 0)
                 {
                     user.MoveTo(item.GetX + 1, item.GetY);
                     return;
                 }
+
                 Room room = item.GetRoom();
                 var newPoint = new Point(0, 0);
                 if (user.RotBody == 4)

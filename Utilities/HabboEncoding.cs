@@ -5,7 +5,9 @@ namespace Plus.Utilities
     public static class HabboEncoding
     {
         /* Encoding Functions */
+
         #region Encoding/Cipher Methods
+
         /// <summary>
         /// Encodes the Int32 data given.
         /// </summary>
@@ -14,7 +16,7 @@ namespace Plus.Utilities
         public static string EncodeInt32(int v)
         {
             string t = "";
-            return t + (char)(v >> 0x18) + (char)(v >> 0x10) + (char)(v >> 8) + (char)v;
+            return t + (char) (v >> 0x18) + (char) (v >> 0x10) + (char) (v >> 8) + (char) v;
         }
 
         /// <summary>
@@ -25,12 +27,15 @@ namespace Plus.Utilities
         public static string EncodeInt16(int v)
         {
             string t = "";
-            return t + (char)(v >> 8) + (char)v;
+            return t + (char) (v >> 8) + (char) v;
         }
+
         #endregion
 
         /* Decoding Functions */
+
         #region Decoding/DeCipher Methods
+
         /// <summary>
         /// Decodes the Encoded int32 data.
         /// </summary>
@@ -42,6 +47,7 @@ namespace Plus.Utilities
             {
                 return -1;
             }
+
             return (v[0] << 0x18) + (v[1] << 0x10) + (v[2] << 8) + v[3];
         }
 
@@ -56,6 +62,7 @@ namespace Plus.Utilities
             {
                 return -1;
             }
+
             return (v[0] << 0x18) + (v[1] << 0x10) + (v[2] << 8) + v[3];
         }
 
@@ -70,6 +77,7 @@ namespace Plus.Utilities
             {
                 return -1;
             }
+
             return (v[0] << 8) + v[1];
         }
 
@@ -85,7 +93,8 @@ namespace Plus.Utilities
             {
                 return -1;
             }
-            return (short)((v[0] << 8) + v[1]);
+
+            return (short) ((v[0] << 8) + v[1]);
         }
 
         public static bool DecodeBool(string v)
@@ -101,6 +110,7 @@ namespace Plus.Utilities
                 return false;
             }
         }
+
         #endregion
     }
 }

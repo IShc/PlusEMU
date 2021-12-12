@@ -11,7 +11,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public double Timestamp { get; }
 
         public ModeratorTicketChatlogComposer(ModerationTicket ticket, RoomData roomData, double timestamp)
-              : base(ServerPacketHeader.ModeratorTicketChatlogMessageComposer)
+            : base(ServerPacketHeader.ModeratorTicketChatlogMessageComposer)
         {
             ModerationTicket = ticket;
             RoomData = roomData;
@@ -26,7 +26,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteInteger(RoomData.Id);
 
             packet.WriteByte(1);
-            packet.WriteShort(2);//Count
+            packet.WriteShort(2); //Count
             packet.WriteString("roomName");
             packet.WriteByte(2);
             packet.WriteString(RoomData.Name);

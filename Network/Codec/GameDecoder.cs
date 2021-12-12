@@ -15,13 +15,12 @@ namespace Plus.Network.Codec
             {
                 short id = message.ReadShort();
                 ClientPacket packet = new(id, message.ReadBytes(message.ReadableBytes));
-                
+
                 output.Add(packet);
-            } catch (Exception)
-            {
-                
             }
-                
+            catch (Exception)
+            {
+            }
         }
     }
 }

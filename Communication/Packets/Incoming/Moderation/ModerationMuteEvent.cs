@@ -43,4 +43,3 @@ namespace Plus.Communication.Packets.Incoming.Moderation
         }
     }
 }
-

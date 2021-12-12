@@ -92,7 +92,7 @@ namespace Plus.HabboHotel.Rooms
         {
             if (_userMap.ContainsKey(coord))
                 return _userMap[coord];
-            
+
             return new List<RoomUser>();
         }
 
@@ -191,7 +191,7 @@ namespace Plus.HabboHotel.Rooms
 
                 Array.Clear(items, 0, items.Length);
             }
-            
+
             if (maxY > (Model.MapSizeY - 1) || maxX > (Model.MapSizeX - 1))
             {
                 if (maxX < Model.MapSizeX)
@@ -208,7 +208,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 EffectMap = new byte[Model.MapSizeX, Model.MapSizeY];
                 GameMap = new byte[Model.MapSizeX, Model.MapSizeY];
-                
+
                 _itemHeightMap = new double[Model.MapSizeX, Model.MapSizeY];
                 //if (modelRemap)
                 //    Model.Generate(); //Clears model
@@ -243,7 +243,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 EffectMap = new byte[Model.MapSizeX, Model.MapSizeY];
                 GameMap = new byte[Model.MapSizeX, Model.MapSizeY];
-                
+
                 _itemHeightMap = new double[Model.MapSizeX, Model.MapSizeY];
 
                 for (int line = 0; line < Model.MapSizeY; line++)
@@ -282,7 +282,7 @@ namespace Plus.HabboHotel.Rooms
                 if (!AddItemToMap(item))
                     continue;
             }
-            
+
             Array.Clear(tmpItems, 0, tmpItems.Length);
 
             if (_room.RoomBlockingEnabled == 0)
@@ -301,7 +301,9 @@ namespace Plus.HabboHotel.Rooms
             {
                 GameMap[Model.DoorX, Model.DoorY] = 3;
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private bool ConstructMapForItem(Item item, Point coord)
@@ -326,6 +328,7 @@ namespace Plus.HabboHotel.Rooms
                 {
                     Model.OpenSquare(coord.X, coord.Y, item.GetZ);
                 }
+
                 if (_itemHeightMap[coord.X, coord.Y] <= item.TotalHeight)
                 {
                     _itemHeightMap[coord.X, coord.Y] = item.TotalHeight - Model.SqFloorHeight[item.GetX, item.GetY];
@@ -350,14 +353,14 @@ namespace Plus.HabboHotel.Rooms
                             EffectMap[coord.X, coord.Y] = 5;
                             break;
                     }
-                    
+
                     //SwimHalloween
-                    if (item.GetBaseItem().Walkable)    // If this item is walkable and on the floor, allow users to walk here.
+                    if (item.GetBaseItem().Walkable) // If this item is walkable and on the floor, allow users to walk here.
                     {
                         if (GameMap[coord.X, coord.Y] != 3)
                             GameMap[coord.X, coord.Y] = 1;
                     }
-                    else if (item.GetZ <= (Model.SqFloorHeight[item.GetX, item.GetY] + 0.1) && item.GetBaseItem().InteractionType == InteractionType.Gate && item.ExtraData == "1")// If this item is a gate, open, and on the floor, allow users to walk here.
+                    else if (item.GetZ <= (Model.SqFloorHeight[item.GetX, item.GetY] + 0.1) && item.GetBaseItem().InteractionType == InteractionType.Gate && item.ExtraData == "1") // If this item is a gate, open, and on the floor, allow users to walk here.
                     {
                         if (GameMap[coord.X, coord.Y] != 3)
                             GameMap[coord.X, coord.Y] = 1;
@@ -381,6 +384,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 ExceptionLogger.LogException(e);
             }
+
             return true;
         }
 
@@ -428,6 +432,7 @@ namespace Plus.HabboHotel.Rooms
                 _coordinatedItems[point].RemoveAll(x => x == item.Id);
                 return true;
             }
+
             return false;
         }
 
@@ -438,7 +443,7 @@ namespace Plus.HabboHotel.Rooms
                 case InteractionType.FootballGate:
                     //IsTrans = true;
                     _room.GetSoccer().RegisterGate(item);
-                    
+
                     string[] splittedExtraData = item.ExtraData.Split(':');
 
                     if (string.IsNullOrEmpty(item.ExtraData) || splittedExtraData.Length <= 1)
@@ -465,52 +470,53 @@ namespace Plus.HabboHotel.Rooms
                         item.Gender = splittedExtraData[0];
                         item.Figure = splittedExtraData[1];
                     }
+
                     break;
 
                 case InteractionType.BanzaiFloor:
-                    {
-                        _room.GetBanzai().AddTile(item, item.Id);
-                        break;
-                    }
+                {
+                    _room.GetBanzai().AddTile(item, item.Id);
+                    break;
+                }
 
                 case InteractionType.BanzaiPyramid:
-                    {
-                        _room.GetGameItemHandler().AddPyramid(item, item.Id);
-                        break;
-                    }
+                {
+                    _room.GetGameItemHandler().AddPyramid(item, item.Id);
+                    break;
+                }
 
                 case InteractionType.BanzaiTele:
-                    {
-                        _room.GetGameItemHandler().AddTeleport(item, item.Id);
-                        item.ExtraData = "";
-                        break;
-                    }
+                {
+                    _room.GetGameItemHandler().AddTeleport(item, item.Id);
+                    item.ExtraData = "";
+                    break;
+                }
                 case InteractionType.BanzaiPuck:
-                    {
-                        _room.GetBanzai().AddPuck(item);
-                        break;
-                    }
+                {
+                    _room.GetBanzai().AddPuck(item);
+                    break;
+                }
 
                 case InteractionType.Football:
-                    {
-                        _room.GetSoccer().AddBall(item);
-                        break;
-                    }
+                {
+                    _room.GetSoccer().AddBall(item);
+                    break;
+                }
                 case InteractionType.FreezeTileBlock:
-                    {
-                        _room.GetFreeze().AddFreezeBlock(item);
-                        break;
-                    }
+                {
+                    _room.GetFreeze().AddFreezeBlock(item);
+                    break;
+                }
                 case InteractionType.FreezeTile:
-                    {
-                        _room.GetFreeze().AddFreezeTile(item);
-                        break;
-                    }
+                {
+                    _room.GetFreeze().AddFreezeTile(item);
+                    break;
+                }
                 case InteractionType.FreezeExit:
-                    {
-                        _room.GetFreeze().AddExitTile(item);
-                        break;
-                    }
+                {
+                    _room.GetFreeze().AddExitTile(item);
+                    break;
+                }
             }
         }
 
@@ -590,9 +596,9 @@ namespace Plus.HabboHotel.Rooms
                     ConstructMapForItem(Item, coord);
                 }
             }
-            
+
             items.Clear();
-            
+
             return isRemoved;
         }
 
@@ -615,55 +621,55 @@ namespace Plus.HabboHotel.Rooms
                     case InteractionType.BanzaiGateRed:
                     case InteractionType.FreezeRedCounter:
                     case InteractionType.FreezeRedGate:
-                        {
-                            if (!_room.GetRoomItemHandler().GetFloor.Contains(item))
-                                _room.GetGameManager().AddFurnitureToTeam(item, Team.Red);
-                            break;
-                        }
+                    {
+                        if (!_room.GetRoomItemHandler().GetFloor.Contains(item))
+                            _room.GetGameManager().AddFurnitureToTeam(item, Team.Red);
+                        break;
+                    }
                     case InteractionType.FootballGoalGreen:
                     case InteractionType.FootballCounterGreen:
                     case InteractionType.BanzaiScoreGreen:
                     case InteractionType.BanzaiGateGreen:
                     case InteractionType.FreezeGreenCounter:
                     case InteractionType.FreezeGreenGate:
-                        {
-                            if (!_room.GetRoomItemHandler().GetFloor.Contains(item))
-                                _room.GetGameManager().AddFurnitureToTeam(item, Team.Green);
-                            break;
-                        }
+                    {
+                        if (!_room.GetRoomItemHandler().GetFloor.Contains(item))
+                            _room.GetGameManager().AddFurnitureToTeam(item, Team.Green);
+                        break;
+                    }
                     case InteractionType.FootballGoalBlue:
                     case InteractionType.FootballCounterBlue:
                     case InteractionType.BanzaiScoreBlue:
                     case InteractionType.BanzaiGateBlue:
                     case InteractionType.FreezeBlueCounter:
                     case InteractionType.FreezeBlueGate:
-                        {
-                            if (!_room.GetRoomItemHandler().GetFloor.Contains(item))
-                                _room.GetGameManager().AddFurnitureToTeam(item, Team.Blue);
-                            break;
-                        }
+                    {
+                        if (!_room.GetRoomItemHandler().GetFloor.Contains(item))
+                            _room.GetGameManager().AddFurnitureToTeam(item, Team.Blue);
+                        break;
+                    }
                     case InteractionType.FootballGoalYellow:
                     case InteractionType.FootballCounterYellow:
                     case InteractionType.BanzaiScoreYellow:
                     case InteractionType.BanzaiGateYellow:
                     case InteractionType.FreezeYellowCounter:
                     case InteractionType.FreezeYellowGate:
-                        {
-                            if (!_room.GetRoomItemHandler().GetFloor.Contains(item))
-                                _room.GetGameManager().AddFurnitureToTeam(item, Team.Yellow);
-                            break;
-                        }
+                    {
+                        if (!_room.GetRoomItemHandler().GetFloor.Contains(item))
+                            _room.GetGameManager().AddFurnitureToTeam(item, Team.Yellow);
+                        break;
+                    }
                     case InteractionType.FreezeExit:
-                        {
-                            _room.GetFreeze().AddExitTile(item);
-                            break;
-                        }
+                    {
+                        _room.GetFreeze().AddExitTile(item);
+                        break;
+                    }
                     case InteractionType.Roller:
-                        {
-                            if (!_room.GetRoomItemHandler().GetRollers().Contains(item))
-                                _room.GetRoomItemHandler().TryAddRoller(item.Id, item);
-                            break;
-                        }
+                    {
+                        if (!_room.GetRoomItemHandler().GetRollers().Contains(item))
+                            _room.GetRoomItemHandler().TryAddRoller(item.Id, item);
+                        break;
+                    }
                 }
             }
 
@@ -852,7 +858,7 @@ namespace Plus.HabboHotel.Rooms
 
             if (distance > 5)
                 return item.GetSides().OrderBy(x => Guid.NewGuid()).FirstOrDefault();
-            
+
             if (x && distance < 99)
             {
                 if (iX > coord.X)
@@ -968,9 +974,10 @@ namespace Plus.HabboHotel.Rooms
                 if (!userX.IsWalking && endOfPath)
                     return false;
             }
+
             return true;
         }
-    
+
         public bool IsValidStep(Vector2D from, Vector2D to, bool endOfPath, bool overriding, bool roller = false)
         {
             if (!ValidTile(to.X, to.Y))
@@ -1021,6 +1028,7 @@ namespace Plus.HabboHotel.Rooms
 
                 return false;
             }
+
             return true;
         }
 
@@ -1036,7 +1044,7 @@ namespace Plus.HabboHotel.Rooms
         public double SqAbsoluteHeight(int x, int y)
         {
             Point points = new(x, y);
-            
+
             if (_coordinatedItems.TryGetValue(points, out List<int> ids))
             {
                 List<Item> items = GetItemsFromIds(ids);
@@ -1047,6 +1055,7 @@ namespace Plus.HabboHotel.Rooms
             return Model.SqFloorHeight[x, y];
 
             #region Old
+
             /*
             if (mCoordinatedItems.ContainsKey(Points))
             {
@@ -1058,6 +1067,7 @@ namespace Plus.HabboHotel.Rooms
                 }
                 return SqAbsoluteHeight(X, Y, Items);
             }*/
+
             #endregion
         }
 
@@ -1085,6 +1095,7 @@ namespace Plus.HabboHotel.Rooms
                             }
                             else
                                 deduct = false;
+
                             highestStack = item.TotalHeight;
                         }
                     }
@@ -1112,7 +1123,7 @@ namespace Plus.HabboHotel.Rooms
         {
             if (x < 0 || y < 0 || x >= Model.MapSizeX || y >= Model.MapSizeY)
                 return false;
-            
+
             return true;
         }
 
@@ -1204,7 +1215,7 @@ namespace Plus.HabboHotel.Rooms
         public List<Item> GetRoomItemForSquare(int pX, int pY, double minZ)
         {
             var itemsToReturn = new List<Item>();
-            
+
             var coord = new Point(pX, pY);
             if (_coordinatedItems.ContainsKey(coord))
             {
@@ -1257,12 +1268,12 @@ namespace Plus.HabboHotel.Rooms
         {
             return MapGotUser(new Point(x, y));
         }
-        
+
         public static bool TilesTouching(int x1, int y1, int x2, int y2)
         {
             if (!(Math.Abs(x1 - x2) > 1 || Math.Abs(y1 - y2) > 1))
                 return true;
-            
+
             return x1 == x2 && y1 == y2;
         }
 

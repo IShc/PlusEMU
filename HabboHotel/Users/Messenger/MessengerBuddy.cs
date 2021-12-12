@@ -40,7 +40,7 @@ namespace Plus.HabboHotel.Users.Messenger
         #region Constructor
 
         public MessengerBuddy(int userId, string pUsername, string pLook, string pMotto, int pLastOnline,
-                                bool pAppearOffline, bool pHideInroom)
+            bool pAppearOffline, bool pHideInroom)
         {
             UserId = userId;
             MUsername = pUsername;
@@ -54,6 +54,7 @@ namespace Plus.HabboHotel.Users.Messenger
         #endregion
 
         #region Methods
+
         public void UpdateUser(GameClient client)
         {
             Client = client;
@@ -65,7 +66,7 @@ namespace Plus.HabboHotel.Users.Messenger
         {
             Relationship relationship = null;
 
-            if(habbo != null && habbo.Relationships != null)
+            if (habbo != null && habbo.Relationships != null)
                 relationship = habbo.Relationships.FirstOrDefault(x => x.Value.UserId == Convert.ToInt32(UserId)).Value;
 
             int y = relationship == null ? 0 : relationship.Type;

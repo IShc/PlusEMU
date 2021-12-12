@@ -79,7 +79,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
             RoomUser pet = GetRoomUser();
             if (pet == null)
                 return;
-            
+
             #region Speech
 
             if (_speechTimer <= 0)
@@ -102,6 +102,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                     else
                         pet.Statusses.Add(rSpeech, TextHandling.GetString(pet.Z));
                 }
+
                 _speechTimer = PlusEnvironment.GetRandomNumber(20, 120);
             }
             else
@@ -172,7 +173,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
 
             if (pet.PetData.DbState != PetDatabaseUpdateState.NeedsInsert)
                 pet.PetData.DbState = PetDatabaseUpdateState.NeedsUpdate;
-       
+
             if (message.ToLower().Equals(pet.PetData.Name.ToLower()))
             {
                 pet.SetRot(Rotation.Calculate(pet.X, pet.Y, user.X, user.Y), false);
@@ -194,6 +195,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                     switch (PlusEnvironment.GetGame().GetChatManager().GetPetCommands().TryInvoke(command))
                     {
                         // TODO - Level you can use the commands at...
+
                         #region free
 
                         case 1:
@@ -211,6 +213,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         #endregion
 
                         #region here
+
                         case 2:
                             RemovePetStatus();
 
@@ -324,6 +327,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         #endregion
 
                         #region sleep
+
                         case 6:
                             // Remove Status
                             RemovePetStatus();
@@ -343,6 +347,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         #endregion
 
                         #region jump
+
                         case 7:
                             // Remove Status
                             RemovePetStatus();
@@ -362,8 +367,10 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                         #endregion
 
                         #region breed
+
                         case 46:
                             break;
+
                         #endregion
 
                         default:
@@ -372,6 +379,7 @@ namespace Plus.HabboHotel.Rooms.AI.Types
                             pet.Chat(speech[RandomNumber.GenerateRandom(0, speech.Length - 1)]);
                             break;
                     }
+
                     pet.PetData.PetEnergy(false); // Remove Energy
                 }
                 else

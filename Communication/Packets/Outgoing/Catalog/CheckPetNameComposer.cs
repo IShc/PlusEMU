@@ -14,7 +14,7 @@
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(Error);//0 = nothing, 1 = too long, 2 = too short, 3 = invalid characters
+            packet.WriteInteger(Error); //0 = nothing, 1 = too long, 2 = too short, 3 = invalid characters
             packet.WriteString(ExtraData);
         }
     }

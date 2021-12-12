@@ -13,7 +13,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
         {
             if (!session.GetHabbo().InRoom)
                 return;
-            
+
             if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(session.GetHabbo().CurrentRoomId, out Room room))
                 return;
 
@@ -23,7 +23,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
                 return;
 
             int petId = packet.PopInt();
-            
+
             if (!room.GetRoomUserManager().TryGetPet(petId, out RoomUser petUser))
                 return;
 
@@ -75,7 +75,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Pets.Horse
             {
                 int hairDye = 48;
                 string hairType = item.GetBaseItem().ItemName.Split('_')[2];
-            
+
                 hairDye = hairDye + int.Parse(hairType);
                 petUser.PetData.HairDye = hairDye;
 

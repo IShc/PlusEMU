@@ -8,7 +8,7 @@ namespace Plus.Communication.Packets.Incoming.Misc
         {
             int idkYet = packet.PopInt();
             string gordanPath = packet.PopString();
-            string externalVariables = packet.PopString();   
+            string externalVariables = packet.PopString();
         }
     }
 }

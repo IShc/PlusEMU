@@ -15,10 +15,10 @@
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(ItemId);
-            packet.WriteString(YouTubeVideo);//"9Ht5RZpzPqw");
-            packet.WriteInteger(0);//Start seconds
-            packet.WriteInteger(0);//End seconds
-            packet.WriteInteger(0);//State
+            packet.WriteString(YouTubeVideo); //"9Ht5RZpzPqw");
+            packet.WriteInteger(0); //Start seconds
+            packet.WriteInteger(0); //End seconds
+            packet.WriteInteger(0); //State
         }
     }
 }

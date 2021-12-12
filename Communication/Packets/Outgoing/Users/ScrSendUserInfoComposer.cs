@@ -5,7 +5,6 @@
         public ScrSendUserInfoComposer()
             : base(ServerPacketHeader.ScrSendUserInfoMessageComposer)
         {
-           
         }
 
         public override void Compose(ServerPacket packet)

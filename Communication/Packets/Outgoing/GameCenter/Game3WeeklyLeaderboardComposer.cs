@@ -28,20 +28,20 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
             //Used to generate the ranking numbers.
             int num = 0;
 
-            packet.WriteInteger(Habbos.Count);//Count
+            packet.WriteInteger(Habbos.Count); //Count
             foreach (Habbo habbo in Habbos.ToList())
             {
                 num++;
-                packet.WriteInteger(habbo.Id);//Id
-                packet.WriteInteger(habbo.FastFoodScore);//Score
-                packet.WriteInteger(num);//Rank
-                packet.WriteString(habbo.Username);//Username
-                packet.WriteString(habbo.Look);//Figure
-                packet.WriteString(habbo.Gender.ToLower());//Gender .ToLower()
+                packet.WriteInteger(habbo.Id); //Id
+                packet.WriteInteger(habbo.FastFoodScore); //Score
+                packet.WriteInteger(num); //Rank
+                packet.WriteString(habbo.Username); //Username
+                packet.WriteString(habbo.Look); //Figure
+                packet.WriteString(habbo.Gender.ToLower()); //Gender .ToLower()
             }
 
-            packet.WriteInteger(0);//
-            packet.WriteInteger(GameData.Id);//Game Id?
+            packet.WriteInteger(0); //
+            packet.WriteInteger(GameData.Id); //Game Id?
         }
     }
 }

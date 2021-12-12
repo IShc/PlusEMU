@@ -23,7 +23,7 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
                 foreach (KeyValuePair<int, MarketOffer> pair in Offers)
                 {
                     packet.WriteInteger(pair.Value.OfferId);
-                    packet.WriteInteger(1);//State
+                    packet.WriteInteger(1); //State
                     packet.WriteInteger(1);
                     packet.WriteInteger(pair.Value.SpriteId);
 
@@ -38,7 +38,8 @@ namespace Plus.Communication.Packets.Outgoing.Marketplace
                     packet.WriteInteger(Dictionary2[pair.Value.SpriteId]);
                 }
             }
-            packet.WriteInteger(Offers.Count);//Item count to show how many were found.
+
+            packet.WriteInteger(Offers.Count); //Item count to show how many were found.
         }
     }
 }

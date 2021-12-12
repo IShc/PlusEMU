@@ -15,8 +15,8 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(Effect.SpriteId);
-            packet.WriteInteger((int)Effect.Duration);
-            packet.WriteBoolean(false);//Permanent
+            packet.WriteInteger((int) Effect.Duration);
+            packet.WriteBoolean(false); //Permanent
         }
     }
 }

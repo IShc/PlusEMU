@@ -19,13 +19,21 @@ namespace Plus.HabboHotel.Talents
 
             foreach (string str in dataActions.Split('|'))
             {
-                if (Actions == null) { Actions = new List<string>(); }
+                if (Actions == null)
+                {
+                    Actions = new List<string>();
+                }
+
                 Actions.Add(str);
             }
 
             foreach (string str in dataGifts.Split('|'))
             {
-                if (Gifts == null) { Gifts = new List<string>(); }
+                if (Gifts == null)
+                {
+                    Gifts = new List<string>();
+                }
+
                 Gifts.Add(str);
             }
 

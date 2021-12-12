@@ -21,6 +21,7 @@ namespace Plus.HabboHotel.Catalog.Marketplace
                 {
                     return (MarketAverages[spriteId] / MarketCounts[spriteId]);
                 }
+
                 return 0;
             }
 
@@ -37,14 +38,14 @@ namespace Plus.HabboHotel.Catalog.Marketplace
             MarketCounts.Add(spriteId, num2);
 
             if (num2 > 0)
-                return Convert.ToInt32(Math.Ceiling((double)(num / num2)));
-            
+                return Convert.ToInt32(Math.Ceiling((double) (num / num2)));
+
             return 0;
         }
 
         public string FormatTimestampString()
         {
-            return FormatTimestamp().ToString().Split(new[] { ',' })[0];
+            return FormatTimestamp().ToString().Split(new[] {','})[0];
         }
 
         public double FormatTimestamp()
@@ -81,6 +82,7 @@ namespace Plus.HabboHotel.Catalog.Marketplace
             {
                 return dictionary2[spriteId];
             }
+
             return 0;
         }
 

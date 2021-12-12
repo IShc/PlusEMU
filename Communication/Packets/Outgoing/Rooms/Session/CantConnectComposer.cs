@@ -3,6 +3,7 @@
     internal class CantConnectComposer : MessageComposer
     {
         public int Error { get; }
+
         public CantConnectComposer(int error)
             : base(ServerPacketHeader.CantConnectMessageComposer)
         {

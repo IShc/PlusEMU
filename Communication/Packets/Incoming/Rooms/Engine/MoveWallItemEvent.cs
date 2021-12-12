@@ -28,7 +28,10 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 string wallPos = room.GetRoomItemHandler().WallPositionCheck(":" + wallPositionData.Split(':')[1]);
                 item.WallCoord = wallPos;
             }
-            catch { return; }
+            catch
+            {
+                return;
+            }
 
             room.GetRoomItemHandler().UpdateItem(item);
             room.SendPacket(new ItemUpdateComposer(item, room.OwnerId));

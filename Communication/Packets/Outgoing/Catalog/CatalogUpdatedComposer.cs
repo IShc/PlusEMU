@@ -5,7 +5,6 @@
         public CatalogUpdatedComposer()
             : base(ServerPacketHeader.CatalogUpdatedMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

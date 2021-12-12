@@ -23,6 +23,5 @@ namespace Plus.Core.FigureData.Types
 
             Parts = new Dictionary<string, Part>();
         }
-
     }
 }

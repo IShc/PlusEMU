@@ -117,7 +117,7 @@
         FxProvider,
         Exchange
     }
-    
+
     public static class InteractionTypes
     {
         public static InteractionType GetTypeFromString(string type)
@@ -288,7 +288,7 @@
                     return InteractionType.StackTool;
                 case "television":
                     return InteractionType.Television;
-                
+
                 case "wired_effect":
                     return InteractionType.WiredEffect;
                 case "wired_trigger":
@@ -351,10 +351,10 @@
                 case "pet":
                     return InteractionType.Pet;
                 default:
-                    {
-                        //Logging.WriteLine("Unknown interaction type in parse code: " + pType, ConsoleColor.Yellow);
-                        return InteractionType.None;
-                    }
+                {
+                    //Logging.WriteLine("Unknown interaction type in parse code: " + pType, ConsoleColor.Yellow);
+                    return InteractionType.None;
+                }
             }
         }
     }

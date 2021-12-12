@@ -34,7 +34,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
                 return;
             }
 
-            if(map.Any(letter => !validLetters.Contains(letter)) || string.IsNullOrEmpty(map))
+            if (map.Any(letter => !validLetters.Contains(letter)) || string.IsNullOrEmpty(map))
             {
                 session.SendPacket(new RoomNotificationComposer("floorplan_editor.error", "errors", "Oops, it appears that you have entered an invalid floor map!"));
                 return;
@@ -120,7 +120,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
                 dbClient.AddParameter("model", "model_bc_" + room.Id);
                 DataRow row = dbClient.GetRow();
 
-                if (row == null)//The row is still null, let's insert instead.
+                if (row == null) //The row is still null, let's insert instead.
                 {
                     dbClient.SetQuery("INSERT INTO `room_models` (`id`,`door_x`,`door_y`, `door_z`, `door_dir`,`heightmap`,`custom`,`wall_height`) VALUES (@ModelName, @DoorX, @DoorY, @DoorZ, @DoorDirection, @Map,'1',@WallHeight)");
                     dbClient.AddParameter("ModelName", "model_bc_" + room.Id);
@@ -174,7 +174,6 @@ namespace Plus.Communication.Packets.Incoming.Rooms.FloorPlan
 
         private static short Parse(char input)
         {
-
             switch (input)
             {
                 default:

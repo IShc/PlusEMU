@@ -5,12 +5,10 @@
         public OpenConnectionComposer()
             : base(ServerPacketHeader.OpenConnectionMessageComposer)
         {
-
         }
 
         public override void Compose(ServerPacket packet)
         {
-            
         }
     }
 }

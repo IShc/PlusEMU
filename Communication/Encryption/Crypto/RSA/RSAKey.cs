@@ -110,7 +110,7 @@ namespace Plus.Communication.Encryption.Crypto.RSA
                 return new RSAKey(new BigInteger(n, 16), Convert.ToInt32(e, 16), new BigInteger(d, 16), 0, 0, 0, 0, 0);
             }
 
-            return new RSAKey(new BigInteger(n, 16), Convert.ToInt32(e, 16), new BigInteger(d, 16), new BigInteger(p, 16), new BigInteger(q, 16), 
+            return new RSAKey(new BigInteger(n, 16), Convert.ToInt32(e, 16), new BigInteger(d, 16), new BigInteger(p, 16), new BigInteger(q, 16),
                 new BigInteger(dmp1, 16), new BigInteger(dmq1, 16), new BigInteger(coeff, 16));
         }
 
@@ -205,13 +205,18 @@ namespace Plus.Communication.Encryption.Crypto.RSA
                 byte x = 0;
                 switch (type)
                 {
-                    case Pkcs1PadType.FullByte: x = 0xFF; break;
-                    case Pkcs1PadType.RandomByte: x = Randomizer.NextByte(1, 255); break;
+                    case Pkcs1PadType.FullByte:
+                        x = 0xFF;
+                        break;
+                    case Pkcs1PadType.RandomByte:
+                        x = Randomizer.NextByte(1, 255);
+                        break;
                 }
+
                 bytes[--n] = x;
             }
 
-            bytes[--n] = (byte)type;
+            bytes[--n] = (byte) type;
             bytes[--n] = 0;
             return bytes;
         }

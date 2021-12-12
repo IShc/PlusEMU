@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using Plus.Database.Interfaces;
 
 namespace Plus.HabboHotel.Items

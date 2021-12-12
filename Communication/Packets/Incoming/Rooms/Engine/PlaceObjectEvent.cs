@@ -54,42 +54,47 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
             switch (item.GetBaseItem().InteractionType)
             {
                 #region Interaction Types
+
                 case InteractionType.Moodlight:
+                {
+                    MoodlightData moodData = room.MoodlightData;
+                    if (moodData != null && room.GetRoomItemHandler().GetItem(moodData.ItemId) != null)
                     {
-                        MoodlightData moodData = room.MoodlightData;
-                        if (moodData != null && room.GetRoomItemHandler().GetItem(moodData.ItemId) != null)
-                        {
-                            session.SendNotification("You can only have one background moodlight per room!");
-                            return;
-                        }
-                        break;
+                        session.SendNotification("You can only have one background moodlight per room!");
+                        return;
                     }
+
+                    break;
+                }
                 case InteractionType.Toner:
+                {
+                    TonerData tonerData = room.TonerData;
+                    if (tonerData != null && room.GetRoomItemHandler().GetItem(tonerData.ItemId) != null)
                     {
-                        TonerData tonerData = room.TonerData;
-                        if (tonerData != null && room.GetRoomItemHandler().GetItem(tonerData.ItemId) != null)
-                        {
-                            session.SendNotification("You can only have one background toner per room!");
-                            return;
-                        }
-                        break;
+                        session.SendNotification("You can only have one background toner per room!");
+                        return;
                     }
+
+                    break;
+                }
                 case InteractionType.Hopper:
+                {
+                    if (room.GetRoomItemHandler().HopperCount > 0)
                     {
-                        if (room.GetRoomItemHandler().HopperCount > 0)
-                        {
-                            session.SendNotification("You can only have one hopper per room!");
-                            return;
-                        }
-                        break;
+                        session.SendNotification("You can only have one hopper per room!");
+                        return;
                     }
+
+                    break;
+                }
 
                 case InteractionType.Tent:
                 case InteractionType.TentSmall:
-                    {
-                        room.AddTent(item.Id);
-                        break;
-                    }
+                {
+                    room.AddTent(item.Id);
+                    break;
+                }
+
                 #endregion
             }
 
@@ -98,9 +103,20 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 if (data.Length < 4)
                     return;
 
-                if (!int.TryParse(data[1], out int x)) { return; }
-                if (!int.TryParse(data[2], out int y)) { return; }
-                if (!int.TryParse(data[3], out int rotation)) { return; }
+                if (!int.TryParse(data[1], out int x))
+                {
+                    return;
+                }
+
+                if (!int.TryParse(data[2], out int y))
+                {
+                    return;
+                }
+
+                if (!int.TryParse(data[3], out int rotation))
+                {
+                    return;
+                }
 
                 Item roomItem = new(item.Id, room.RoomId, item.BaseItem, item.ExtraData, x, y, 0, rotation, session.GetHabbo().Id, item.GroupId, item.LimitedNo, item.LimitedTot, string.Empty, room);
                 if (room.GetRoomItemHandler().SetFloorItem(session, roomItem, x, y, rotation, true, false, true))
@@ -112,8 +128,14 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 
                     if (roomItem.IsWired)
                     {
-                        try { room.GetWired().LoadWiredBox(roomItem); }
-                        catch { Console.WriteLine(item.GetBaseItem().InteractionType); }
+                        try
+                        {
+                            room.GetWired().LoadWiredBox(roomItem);
+                        }
+                        catch
+                        {
+                            Console.WriteLine(item.GetBaseItem().InteractionType);
+                        }
                     }
                 }
                 else
@@ -130,7 +152,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                     correctedData[i - 1] = data[i];
                 }
 
-                if (TrySetWallItem( correctedData, out string wallPos))
+                if (TrySetWallItem(correctedData, out string wallPos))
                 {
                     try
                     {
@@ -184,7 +206,6 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
             //}
 
 
-
             string wallPos = ":w=" + w1 + "," + w2 + " l=" + l1 + "," + l2 + " " + data[2];
 
             position = WallPositionCheck(wallPos);
@@ -201,6 +222,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 {
                     return null;
                 }
+
                 if (wallPosition.Contains(Convert.ToChar(9)))
                 {
                     return null;

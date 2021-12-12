@@ -30,6 +30,7 @@ namespace Plus.Communication.Rcon.Commands.User
                 client.GetHabbo().GetBadgeComponent().GiveBadge(badge, true, client);
                 client.SendPacket(new BroadcastMessageAlertComposer("You have been given a new badge!"));
             }
+
             return true;
         }
     }

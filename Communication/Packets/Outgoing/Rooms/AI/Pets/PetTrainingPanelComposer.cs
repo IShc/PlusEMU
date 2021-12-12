@@ -14,13 +14,13 @@
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(PetId);//Pet Id for sure.
+            packet.WriteInteger(PetId); //Pet Id for sure.
 
             //Commands available to be done.
-            packet.WriteInteger(8);//Count
+            packet.WriteInteger(8); //Count
             {
-                packet.WriteInteger(46);//Breed?
-                packet.WriteInteger(0);//Command Id
+                packet.WriteInteger(46); //Breed?
+                packet.WriteInteger(0); //Command Id
                 packet.WriteInteger(1);
                 packet.WriteInteger(2);
                 packet.WriteInteger(3);
@@ -30,10 +30,10 @@
             }
 
             //Commands that can be used NOW. (Level ups give you new commands etc).
-            packet.WriteInteger(GetCount(Level));//Count
+            packet.WriteInteger(GetCount(Level)); //Count
             {
-                packet.WriteInteger(46);//Breed?
-                packet.WriteInteger(0);//Command Id
+                packet.WriteInteger(46); //Breed?
+                packet.WriteInteger(0); //Command Id
                 packet.WriteInteger(1);
                 packet.WriteInteger(2);
                 packet.WriteInteger(3);
@@ -45,7 +45,7 @@
 
         public int GetCount(int level)
         {
-            switch(level)
+            switch (level)
             {
                 case 1:
                 case 2:

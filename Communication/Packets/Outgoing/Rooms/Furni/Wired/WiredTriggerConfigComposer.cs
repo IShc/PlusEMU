@@ -37,6 +37,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             {
                 packet.WriteInteger(cycle.Delay);
             }
+
             packet.WriteInteger(0);
             packet.WriteInteger(WiredBoxTypeUtility.GetWiredId(WiredItem.Type));
             packet.WriteInteger(BlockedItems.Count());
@@ -44,7 +45,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
             {
                 foreach (int itemId in BlockedItems.ToList())
                 {
-                   packet.WriteInteger(itemId);
+                    packet.WriteInteger(itemId);
                 }
             }
         }

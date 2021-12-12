@@ -42,7 +42,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (@params == null || @params.Length == 0)
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null || player.GetClient() == null || string.IsNullOrWhiteSpace(StringData))
                 return false;
 
@@ -63,7 +63,6 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
             if (StringData.Contains("%USERSONLINE%"))
                 message = message.Replace("%USERSONLINE%", PlusEnvironment.GetGame().GetClientManager().Count.ToString());
-
 
 
             player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, message, 0, 34));

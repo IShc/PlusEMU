@@ -48,6 +48,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys
                 {
                     return null;
                 }
+
                 if (wallPosition.Contains(Convert.ToChar(9)))
                 {
                     return null;

@@ -12,6 +12,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
         public List<Group> Groups { get; }
         public int FriendCount { get; }
         public Habbo MyHabbo { get; }
+
         public ProfileInformationComposer(Habbo habbo, GameClient session, List<Group> groups, int friendCount)
             : base(ServerPacketHeader.ProfileInformationMessageComposer)
         {
@@ -45,8 +46,8 @@ namespace Plus.Communication.Packets.Outgoing.Users
                 packet.WriteString(PlusEnvironment.GetGame().GetGroupManager().GetColourCode(group.Colour1, true));
                 packet.WriteString(PlusEnvironment.GetGame().GetGroupManager().GetColourCode(group.Colour2, false));
                 packet.WriteBoolean(TargetHabbo.GetStats().FavouriteGroupId == group.Id); // todo favs
-                packet.WriteInteger(0);//what the fuck
-                packet.WriteBoolean(group != null ? group.ForumEnabled : true);//HabboTalk
+                packet.WriteInteger(0); //what the fuck
+                packet.WriteBoolean(group != null ? group.ForumEnabled : true); //HabboTalk
             }
 
             packet.WriteInteger(Convert.ToInt32(PlusEnvironment.GetUnixTimestamp() - TargetHabbo.LastOnline)); // Last online

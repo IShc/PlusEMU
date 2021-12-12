@@ -22,7 +22,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
             if (session.GetHabbo().AllowBotSpeech)
                 session.SendWhisper("Change successful, you can no longer see speech from bots.");
             else
-                session.SendWhisper("Change successful, you can now see speech from bots.");                       
+                session.SendWhisper("Change successful, you can now see speech from bots.");
         }
     }
 }

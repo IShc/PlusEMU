@@ -11,7 +11,6 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public CfhTopicsInitComposer(Dictionary<string, List<ModerationPresetActions>> userActionPresets)
             : base(ServerPacketHeader.CfhTopicsInitMessageComposer)
         {
-
             UserActionPresets = userActionPresets;
         }
 

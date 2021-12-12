@@ -11,14 +11,14 @@ namespace Plus.Communication.Packets.Incoming.Messenger
 
             bool declineAll = packet.PopBoolean();
             packet.PopInt(); //amount
-         
+
             if (!declineAll)
             {
                 int requestId = packet.PopInt();
                 session.GetHabbo().GetMessenger().HandleRequest(requestId);
             }
             else
-                session.GetHabbo().GetMessenger().HandleAllRequests();          
+                session.GetHabbo().GetMessenger().HandleAllRequests();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Plus.Communication.Packets.Outgoing.Groups
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(VirtualId);//Sends 0 on .COM
+            packet.WriteInteger(VirtualId); //Sends 0 on .COM
             packet.WriteInteger(Group != null ? Group.Id : 0);
             packet.WriteInteger(3);
             packet.WriteString(Group != null ? Group.Name : string.Empty);

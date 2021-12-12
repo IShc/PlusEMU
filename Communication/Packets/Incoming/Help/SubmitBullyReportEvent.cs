@@ -13,19 +13,19 @@ namespace Plus.Communication.Packets.Incoming.Help
                 return;
 
             int userId = packet.PopInt();
-            if (userId == session.GetHabbo().Id)//Hax
+            if (userId == session.GetHabbo().Id) //Hax
                 return;
 
             if (session.GetHabbo().AdvertisingReportedBlocked)
             {
-                session.SendPacket(new SubmitBullyReportComposer(1));//This user is blocked from reporting.
+                session.SendPacket(new SubmitBullyReportComposer(1)); //This user is blocked from reporting.
                 return;
             }
 
             GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(Convert.ToInt32(userId));
             if (client == null)
             {
-                session.SendPacket(new SubmitBullyReportComposer(0));//Just say it's sent, the user isn't found.
+                session.SendPacket(new SubmitBullyReportComposer(0)); //Just say it's sent, the user isn't found.
                 return;
             }
 
@@ -35,7 +35,7 @@ namespace Plus.Communication.Packets.Incoming.Help
                 return;
             }
 
-            if (client.GetHabbo().GetPermissions().HasRight("mod_tool"))//Reporting staff, nope!
+            if (client.GetHabbo().GetPermissions().HasRight("mod_tool")) //Reporting staff, nope!
             {
                 session.SendNotification("Sorry, you cannot report staff members via this tool.");
                 return;

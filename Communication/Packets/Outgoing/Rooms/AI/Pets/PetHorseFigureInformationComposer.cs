@@ -44,6 +44,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
                 packet.WriteInteger(PetUser.PetData.PetHair);
                 packet.WriteInteger(PetUser.PetData.HairDye);
             }
+
             packet.WriteBoolean(PetUser.PetData.Saddle > 0);
             packet.WriteBoolean(PetUser.RidingHorse);
         }

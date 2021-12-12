@@ -77,12 +77,12 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
                 if (string.IsNullOrEmpty(WiredItem.StringData))
                     WiredItem.StringData = "0;Message";
 
-                packet.WriteInteger(1);//Count, for the time.
+                packet.WriteInteger(1); //Count, for the time.
                 packet.WriteInteger(WiredItem.StringData != null ? int.Parse(WiredItem.StringData.Split(';')[0]) : 0);
             }
             else if (WiredItem.Type == WiredBoxType.EffectBotFollowsUserBox)
             {
-                packet.WriteInteger(1);//Count, for the time.
+                packet.WriteInteger(1); //Count, for the time.
                 packet.WriteInteger(WiredItem.StringData != null ? int.Parse(WiredItem.StringData.Split(';')[0]) : 0);
             }
             else if (WiredItem.Type == WiredBoxType.EffectBotGivesHanditemBox)
@@ -92,14 +92,14 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
 
             if (WiredItem is IWiredCycle && WiredItem.Type != WiredBoxType.EffectKickUser && WiredItem.Type != WiredBoxType.EffectMatchPosition && WiredItem.Type != WiredBoxType.EffectMoveAndRotate && WiredItem.Type != WiredBoxType.EffectSetRollerSpeed)
             {
-                IWiredCycle cycle = (IWiredCycle)WiredItem;
+                IWiredCycle cycle = (IWiredCycle) WiredItem;
                 packet.WriteInteger(WiredBoxTypeUtility.GetWiredId(WiredItem.Type));
                 packet.WriteInteger(0);
                 packet.WriteInteger(cycle.Delay);
             }
             else if (WiredItem.Type == WiredBoxType.EffectMatchPosition || WiredItem.Type == WiredBoxType.EffectMoveAndRotate)
             {
-                IWiredCycle cycle = (IWiredCycle)WiredItem;
+                IWiredCycle cycle = (IWiredCycle) WiredItem;
                 packet.WriteInteger(0);
                 packet.WriteInteger(WiredBoxTypeUtility.GetWiredId(WiredItem.Type));
                 packet.WriteInteger(cycle.Delay);

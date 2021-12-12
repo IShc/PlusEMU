@@ -8,7 +8,7 @@ namespace Plus.Communication.Packets.Outgoing.Groups
         public Habbo Habbo { get; }
         public int Type { get; }
 
-        public GroupMembershipRequestedComposer(int groupId, Habbo habbo, int type) 
+        public GroupMembershipRequestedComposer(int groupId, Habbo habbo, int type)
             : base(ServerPacketHeader.GroupMembershipRequestedMessageComposer)
         {
             GroupId = groupId;
@@ -18,10 +18,10 @@ namespace Plus.Communication.Packets.Outgoing.Groups
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(GroupId);//GroupId
-            packet.WriteInteger(Type);//Type?
+            packet.WriteInteger(GroupId); //GroupId
+            packet.WriteInteger(Type); //Type?
             {
-                packet.WriteInteger(Habbo.Id);//UserId
+                packet.WriteInteger(Habbo.Id); //UserId
                 packet.WriteString(Habbo.Username);
                 packet.WriteString(Habbo.Look);
                 packet.WriteString(string.Empty);

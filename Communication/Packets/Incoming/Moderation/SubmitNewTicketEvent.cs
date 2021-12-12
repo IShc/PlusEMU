@@ -31,7 +31,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             string message = StringCharFilter.Escape(packet.PopString().Trim());
             int category = packet.PopInt();
             int reportedUserId = packet.PopInt();
-            int type = packet.PopInt();// Unsure on what this actually is.
+            int type = packet.PopInt(); // Unsure on what this actually is.
 
             Habbo reportedUser = PlusEnvironment.GetHabboById(reportedUserId);
             if (reportedUser == null)

@@ -20,8 +20,8 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(Pages);//Pages
-            packet.WriteInteger(Page);//Page?
+            packet.WriteInteger(Pages); //Pages
+            packet.WriteInteger(Page); //Page?
 
             packet.WriteInteger(Items.Count);
             foreach (Item item in Items)
@@ -52,9 +52,9 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Furni
             packet.WriteBoolean(item.GetBaseItem().AllowTrade);
             packet.WriteBoolean(item.LimitedNo == 0 ? item.GetBaseItem().AllowInventoryStack : false);
             packet.WriteBoolean(ItemUtility.IsRare(item));
-            packet.WriteInteger(-1);//Seconds to expiration.
+            packet.WriteInteger(-1); //Seconds to expiration.
             packet.WriteBoolean(true);
-            packet.WriteInteger(-1);//Item RoomId
+            packet.WriteInteger(-1); //Item RoomId
 
             if (!item.IsWallItem)
             {

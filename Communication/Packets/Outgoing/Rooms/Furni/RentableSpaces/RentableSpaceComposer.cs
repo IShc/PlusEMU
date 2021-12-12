@@ -5,7 +5,6 @@
         public RentableSpaceComposer()
             : base(ServerPacketHeader.RentableSpaceMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

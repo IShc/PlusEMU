@@ -3,6 +3,7 @@
     internal class FlatAccessibleComposer : MessageComposer
     {
         public string Username { get; }
+
         public FlatAccessibleComposer(string username)
             : base(ServerPacketHeader.FlatAccessibleMessageComposer)
         {

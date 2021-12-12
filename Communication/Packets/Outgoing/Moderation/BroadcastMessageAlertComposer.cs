@@ -4,6 +4,7 @@
     {
         public string Message { get; }
         public string Url { get; }
+
         public BroadcastMessageAlertComposer(string message, string url = "")
             : base(ServerPacketHeader.BroadcastMessageAlertMessageComposer)
         {
@@ -18,4 +19,3 @@
         }
     }
 }
-

@@ -3,6 +3,7 @@
     internal class UserTagsComposer : MessageComposer
     {
         public int UserId { get; }
+
         public UserTagsComposer(int userId)
             : base(ServerPacketHeader.UserTagsMessageComposer)
         {

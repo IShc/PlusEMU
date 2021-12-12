@@ -12,7 +12,7 @@ namespace Plus.Communication.Packets.Incoming.Navigator
 
             if (!RoomFactory.TryGetData(roomId, out RoomData data))
                 return;
-            
+
             bool enter = packet.PopInt() == 1;
             bool forward = packet.PopInt() == 1;
 

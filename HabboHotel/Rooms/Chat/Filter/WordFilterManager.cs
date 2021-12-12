@@ -75,6 +75,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Filter
                 if (message.Contains(filter.Word))
                     return true;
             }
+
             return false;
         }
 
@@ -85,6 +86,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Filter
                 if (message.Contains(filter.Word))
                     return true;
             }
+
             return false;
         }
     }

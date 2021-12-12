@@ -5,7 +5,7 @@ namespace Plus.HabboHotel.Catalog
     public class CatalogPage
     {
         public CatalogPage(int id, int parentId, string enabled, string caption, string pageLink, int icon, int minRank, int minVip,
-              string visible, string template, string pageStrings1, string pageStrings2, Dictionary<int, CatalogItem> items, ref Dictionary<int, int> flatOffers)
+            string visible, string template, string pageStrings1, string pageStrings2, Dictionary<int, CatalogItem> items, ref Dictionary<int, int> flatOffers)
         {
             Id = id;
             ParentId = parentId;
@@ -20,13 +20,21 @@ namespace Plus.HabboHotel.Catalog
 
             foreach (string str in pageStrings1.Split('|'))
             {
-                if (PageStrings1 == null) { PageStrings1 = new List<string>(); }
+                if (PageStrings1 == null)
+                {
+                    PageStrings1 = new List<string>();
+                }
+
                 PageStrings1.Add(str);
             }
 
             foreach (string str in pageStrings2.Split('|'))
             {
-                if (PageStrings2 == null) { PageStrings2 = new List<string>(); }
+                if (PageStrings2 == null)
+                {
+                    PageStrings2 = new List<string>();
+                }
+
                 PageStrings2.Add(str);
             }
 

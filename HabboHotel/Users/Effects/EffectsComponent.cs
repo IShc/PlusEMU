@@ -25,7 +25,7 @@ namespace Plus.HabboHotel.Users.Effects
         {
             if (_effects.Count > 0)
                 return false;
-            
+
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `user_effects` WHERE `user_id` = @id;");
@@ -82,6 +82,7 @@ namespace Plus.HabboHotel.Users.Effects
                     return effect;
                 }
             }
+
             return null;
         }
 

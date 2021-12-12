@@ -5,7 +5,7 @@ using Plus.HabboHotel.Items;
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    internal class EjectAllCommand :IChatCommand
+    internal class EjectAllCommand : IChatCommand
     {
         public string PermissionRequired => "command_ejectall";
 

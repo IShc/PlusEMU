@@ -36,7 +36,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Action
             }
 
             room.MutedUsers.Add(userId, (PlusEnvironment.GetUnixTimestamp() + (time * 60)));
-          
+
             target.GetClient().SendWhisper("The room owner has muted you for " + time + " minutes!");
             PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(session, "ACH_SelfModMuteSeen", 1);
         }

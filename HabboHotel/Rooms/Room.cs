@@ -51,7 +51,7 @@ namespace Plus.HabboHotel.Rooms
 
         private Gamemap _gamemap;
         private GameItemHandler _gameItemHandler;
-        
+
         public TeamManager TeamBanzai;
         public TeamManager TeamFreeze;
 
@@ -68,7 +68,7 @@ namespace Plus.HabboHotel.Rooms
         public int IdleTime { get; set; }
 
         public Room(RoomData data)
-         : base(data)
+            : base(data)
         {
             IsLagging = 0;
             Unloaded = false;
@@ -120,6 +120,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 _roomItemHandling = new RoomItemHandling(this);
             }
+
             return _roomItemHandling;
         }
 
@@ -364,7 +365,11 @@ namespace Plus.HabboHotel.Rooms
                     }
                 }
             }
-            catch (Exception e) { ExceptionLogger.LogException(e); }
+            catch (Exception e)
+            {
+                ExceptionLogger.LogException(e);
+            }
+
             return false;
         }
 
@@ -376,7 +381,7 @@ namespace Plus.HabboHotel.Rooms
             {
                 if (item.GetBaseItem().ItemName.StartsWith("fball_goal_"))
                 {
-                    key = item.GetBaseItem().ItemName.Split(new[] { '_' })[2];
+                    key = item.GetBaseItem().ItemName.Split(new[] {'_'})[2];
                     user.UnIdle();
                     user.DanceId = 0;
 
@@ -431,19 +436,26 @@ namespace Plus.HabboHotel.Rooms
                     return;
                 }
 
-                try { GetRoomItemHandler().OnCycle(); }
+                try
+                {
+                    GetRoomItemHandler().OnCycle();
+                }
                 catch (Exception e)
                 {
                     ExceptionLogger.LogException(e);
                 }
 
-                try { GetRoomUserManager().OnCycle(); }
+                try
+                {
+                    GetRoomUserManager().OnCycle();
+                }
                 catch (Exception e)
                 {
                     ExceptionLogger.LogException(e);
                 }
 
                 #region Status Updates
+
                 try
                 {
                     GetRoomUserManager().SerializeStatusUpdates();
@@ -452,9 +464,11 @@ namespace Plus.HabboHotel.Rooms
                 {
                     ExceptionLogger.LogException(e);
                 }
+
                 #endregion
 
                 #region Game Item Cycle
+
                 try
                 {
                     _gameItemHandler?.OnCycle();
@@ -463,14 +477,17 @@ namespace Plus.HabboHotel.Rooms
                 {
                     ExceptionLogger.LogException(e);
                 }
+
                 #endregion
 
-                try { GetWired().OnCycle(); }
+                try
+                {
+                    GetWired().OnCycle();
+                }
                 catch (Exception e)
                 {
                     ExceptionLogger.LogException(e);
                 }
-
             }
             catch (Exception e)
             {
@@ -488,7 +505,7 @@ namespace Plus.HabboHotel.Rooms
                     if (user == null || user.GetClient() == null)
                         continue;
 
-                    user.GetClient().SendNotification("Sorry, it appears that room has crashed!");//Unhandled exception in room: " + e);
+                    user.GetClient().SendNotification("Sorry, it appears that room has crashed!"); //Unhandled exception in room: " + e);
 
                     try
                     {
@@ -496,7 +513,8 @@ namespace Plus.HabboHotel.Rooms
                     }
                     catch (Exception e2)
                     {
-                        ExceptionLogger.LogException(e2); }
+                        ExceptionLogger.LogException(e2);
+                    }
                 }
             }
             catch (Exception e3)
@@ -562,6 +580,7 @@ namespace Plus.HabboHotel.Rooms
         }
 
         #region Tents
+
         public void AddTent(int tentId)
         {
             if (_tents.ContainsKey(tentId))
@@ -628,9 +647,11 @@ namespace Plus.HabboHotel.Rooms
                 user.GetClient().SendPacket(packet);
             }
         }
+
         #endregion
 
         #region Communication (Packets)
+
         public void SendPacket(MessageComposer message, bool withRightsOnly = false)
         {
             if (message == null)
@@ -684,6 +705,7 @@ namespace Plus.HabboHotel.Rooms
 
             BroadcastPacket(packets);
         }
+
         #endregion
 
         public void Dispose()
@@ -701,7 +723,9 @@ namespace Plus.HabboHotel.Rooms
                     if (ProcessTask != null && ProcessTask.IsCompleted)
                         ProcessTask.Dispose();
                 }
-                catch { }
+                catch
+                {
+                }
 
                 if (ActiveTrades.Count > 0)
                     ActiveTrades.Clear();

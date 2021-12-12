@@ -52,11 +52,11 @@ namespace Plus
         public static DateTime ServerStarted;
 
         private static readonly List<char> AllowedChars = new(new[]
-            {
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-                'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-                'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '.'
-            });
+        {
+            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
+            'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+            'y', 'z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '.'
+        });
 
         private static readonly ConcurrentDictionary<int, Habbo> UsersCached = new();
 
@@ -160,10 +160,10 @@ namespace Plus
                 Log.Info("EMULATOR -> READY! (" + timeUsed.Seconds + " s, " + timeUsed.Milliseconds + " ms)");
             }
             catch (KeyNotFoundException)
-            { 
+            {
                 Log.Error("Please check your configuration file - some values appear to be missing.");
                 Log.Error("Press any key to shut down ...");
-         
+
                 Console.ReadKey(true);
                 Environment.Exit(1);
             }
@@ -209,7 +209,7 @@ namespace Plus
         {
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0);
             double unixTime = ts.TotalMilliseconds;
-            return (long)unixTime;
+            return (long) unixTime;
         }
 
         public static string FilterFigure(string figure)
@@ -302,8 +302,12 @@ namespace Plus
                             return generated;
                         }
                     }
-                    catch { return null; }
+                    catch
+                    {
+                        return null;
+                    }
                 }
+
                 return null;
             }
             catch
@@ -324,9 +328,13 @@ namespace Plus
                     if (id > 0)
                         return GetHabboById(Convert.ToInt32(id));
                 }
+
                 return null;
             }
-            catch { return null; }
+            catch
+            {
+                return null;
+            }
         }
 
         public static void PerformShutDown()
@@ -338,12 +346,12 @@ namespace Plus
             GetGame().GetClientManager().SendPacket(new BroadcastMessageAlertComposer(GetLanguageManager().TryGetValue("server.shutdown.message")));
             GetGame().StopGameLoop();
             Thread.Sleep(2500);
-            GetGame().GetPacketManager().UnregisterAll();//Unregister the packets.
+            GetGame().GetPacketManager().UnregisterAll(); //Unregister the packets.
             GetGame().GetPacketManager().WaitForAllToComplete();
-            GetGame().GetClientManager().CloseAll();//Close all connections
+            GetGame().GetClientManager().CloseAll(); //Close all connections
             _bootstrap.Shutdown().Wait();
             _bootstrap.ShutdownWorkers();
-            GetGame().GetRoomManager().Dispose();//Stop the game loop.
+            GetGame().GetRoomManager().Dispose(); //Stop the game loop.
 
             using (IQueryAdapter dbClient = _manager.GetQueryReactor())
             {

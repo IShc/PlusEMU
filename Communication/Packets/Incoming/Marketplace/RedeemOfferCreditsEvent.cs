@@ -16,7 +16,7 @@ namespace Plus.Communication.Packets.Incoming.Marketplace
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT `asking_price` FROM `catalog_marketplace_offers` WHERE `user_id` = '" + session.GetHabbo().Id + "' AND `state` = '2'");
-               table = dbClient.GetTable();
+                table = dbClient.GetTable();
             }
 
             if (table != null)

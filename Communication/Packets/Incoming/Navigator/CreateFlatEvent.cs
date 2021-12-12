@@ -25,8 +25,8 @@ namespace Plus.Communication.Packets.Incoming.Navigator
             string modelName = packet.PopString();
 
             int category = packet.PopInt();
-            int maxVisitors = packet.PopInt();//10 = min, 25 = max.
-            int tradeSettings = packet.PopInt();//2 = All can trade, 1 = owner only, 0 = no trading.
+            int maxVisitors = packet.PopInt(); //10 = min, 25 = max.
+            int tradeSettings = packet.PopInt(); //2 = All can trade, 1 = owner only, 0 = no trading.
 
             if (name.Length < 3)
                 return;

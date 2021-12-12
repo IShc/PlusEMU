@@ -15,9 +15,9 @@
         public override void Compose(ServerPacket packet)
         {
             packet.WriteInteger(SpriteId);
-            packet.WriteInteger(0);//Types
+            packet.WriteInteger(0); //Types
             packet.WriteInteger(Duration);
-            packet.WriteBoolean(false);//Permanent
+            packet.WriteBoolean(false); //Permanent
         }
     }
 }

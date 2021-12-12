@@ -18,7 +18,7 @@ namespace Plus.HabboHotel.Users.Ignores
         {
             if (_ignoredUsers.Count > 0)
                 return false;
-            
+
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.SetQuery("SELECT * FROM `user_ignores` WHERE `user_id` = @uid;");
@@ -33,6 +33,7 @@ namespace Plus.HabboHotel.Users.Ignores
                     }
                 }
             }
+
             return true;
         }
 
@@ -57,7 +58,7 @@ namespace Plus.HabboHotel.Users.Ignores
 
         public ICollection<int> IgnoredUserIds()
         {
-           return _ignoredUsers;
+            return _ignoredUsers;
         }
 
         public void Dispose()

@@ -33,7 +33,7 @@ namespace Plus.Communication.Packets.Outgoing.Navigator
             packet.WriteString(Data.Description);
             packet.WriteInteger(Data.TradeSettings);
             packet.WriteInteger(Data.Score);
-            packet.WriteInteger(0);//Top rated room rank.
+            packet.WriteInteger(0); //Top rated room rank.
             packet.WriteInteger(Data.Category);
 
             packet.WriteInteger(Data.Tags.Count);

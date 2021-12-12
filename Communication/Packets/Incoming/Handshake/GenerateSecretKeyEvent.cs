@@ -9,14 +9,14 @@ namespace Plus.Communication.Packets.Incoming.Handshake
         public void Parse(GameClient session, ClientPacket packet)
         {
             string cipherPublicKey = packet.PopString();
-           
+
             BigInteger sharedKey = HabboEncryptionV2.CalculateDiffieHellmanSharedKey(cipherPublicKey);
             if (sharedKey != 0)
             {
                 session.SendPacket(new SecretKeyComposer(HabboEncryptionV2.GetRsaDiffieHellmanPublicKey()));
                 session.EnableEncryption(sharedKey.getBytes());
             }
-            else 
+            else
             {
                 session.SendNotification("There was an error logging you in, please try again!");
             }

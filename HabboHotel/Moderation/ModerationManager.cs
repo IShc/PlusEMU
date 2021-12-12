@@ -19,7 +19,7 @@ namespace Plus.HabboHotel.Moderation
         private readonly Dictionary<int, string> _userActionPresetCategories = new();
         private readonly Dictionary<int, List<ModerationPresetActionMessages>> _userActionPresetMessages = new();
         private readonly ConcurrentDictionary<int, ModerationTicket> _modTickets = new();
-        
+
         private readonly Dictionary<int, string> _moderationCfhTopics = new();
         private readonly Dictionary<int, List<ModerationPresetActions>> _moderationCfhTopicActions = new();
 
@@ -142,7 +142,7 @@ namespace Plus.HabboHotel.Moderation
                     {
                         string value = Convert.ToString(row["value"]);
                         string reason = Convert.ToString(row["reason"]);
-                        double expires = (double)row["expire"];
+                        double expires = (double) row["expire"];
                         string type = Convert.ToString(row["bantype"]);
 
                         ModerationBan ban = new(BanTypeUtility.GetModerationBanType(type), value, reason, expires);
@@ -184,7 +184,7 @@ namespace Plus.HabboHotel.Moderation
                     {
                         string value = Convert.ToString(row["value"]);
                         string reason = Convert.ToString(row["reason"]);
-                        double expires = (double)row["expire"];
+                        double expires = (double) row["expire"];
                         string type = Convert.ToString(row["bantype"]);
 
                         ModerationBan ban = new(BanTypeUtility.GetModerationBanType(type), value, reason, expires);
@@ -252,6 +252,7 @@ namespace Plus.HabboHotel.Moderation
                         }
                     }
                 }
+
                 return result;
             }
         }
@@ -304,6 +305,7 @@ namespace Plus.HabboHotel.Moderation
                     _bans.Remove(key);
                 return false;
             }
+
             return false;
         }
 
@@ -330,9 +332,10 @@ namespace Plus.HabboHotel.Moderation
                     }
                 }
             }
+
             return true;
         }
-       
+
         /// <summary>
         /// Run a quick database check to see if this ban exists in the database.
         /// </summary>
@@ -356,6 +359,7 @@ namespace Plus.HabboHotel.Moderation
                     }
                 }
             }
+
             return true;
         }
 

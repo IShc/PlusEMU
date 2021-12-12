@@ -169,7 +169,7 @@ namespace Plus.HabboHotel.GameClients
                     continue;
 
                 if (client.GetHabbo().GetPermissions().HasRight("mod_tool") && !client.GetHabbo().GetPermissions()
-                        .HasRight("staff_ignore_advertisement_reports"))
+                    .HasRight("staff_ignore_advertisement_reports"))
                     client.SendPacket(new MotdNotificationComposer(builder.ToString()));
             }
         }
@@ -277,6 +277,7 @@ namespace Plus.HabboHotel.GameClients
                     {
                     }
                 }
+
                 Console.Clear();
                 Log.Info("<<- SERVER SHUTDOWN ->> CLOSING CONNECTIONS");
             }

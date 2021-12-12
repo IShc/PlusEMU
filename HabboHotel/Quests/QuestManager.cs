@@ -51,7 +51,7 @@ namespace Plus.HabboHotel.Quests
                         int time = Convert.ToInt32(dRow["timestamp_unlock"]);
                         int locked = Convert.ToInt32(dRow["timestamp_lock"]);
 
-                        _quests.Add(id, new Quest(id, category, num, (QuestType)type, goalData, name, reward, dataBit, rewardtype, time, locked));
+                        _quests.Add(id, new Quest(id, category, num, (QuestType) type, goalData, name, reward, dataBit, rewardtype, time, locked));
                         AddToCounter(category);
                     }
                 }
@@ -111,8 +111,9 @@ namespace Plus.HabboHotel.Quests
                     {
                         completeQuest = true;
                     }
+
                     break;
-                    
+
                 case QuestType.ExploreFindItem:
                     if (data != quest.GoalData)
                         return;

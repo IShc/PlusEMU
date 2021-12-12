@@ -19,12 +19,12 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.AvatarEffects
 
             foreach (AvatarEffect effect in Effects)
             {
-                packet.WriteInteger(effect.SpriteId);//Effect Id
-                packet.WriteInteger(0);//Type, 0 = Hand, 1 = Full
-                packet.WriteInteger((int)effect.Duration);
+                packet.WriteInteger(effect.SpriteId); //Effect Id
+                packet.WriteInteger(0); //Type, 0 = Hand, 1 = Full
+                packet.WriteInteger((int) effect.Duration);
                 packet.WriteInteger(effect.Activated ? effect.Quantity - 1 : effect.Quantity);
-                packet.WriteInteger(effect.Activated ? (int)effect.TimeLeft : -1);
-                packet.WriteBoolean(false);//Permanent
+                packet.WriteInteger(effect.Activated ? (int) effect.TimeLeft : -1);
+                packet.WriteBoolean(false); //Permanent
             }
         }
     }

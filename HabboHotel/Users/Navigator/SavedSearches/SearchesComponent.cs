@@ -34,6 +34,7 @@ namespace Plus.HabboHotel.Users.Navigator.SavedSearches
                     }
                 }
             }
+
             return true;
         }
 

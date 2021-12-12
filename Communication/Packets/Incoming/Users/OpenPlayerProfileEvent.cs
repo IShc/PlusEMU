@@ -20,9 +20,9 @@ namespace Plus.Communication.Packets.Incoming.Users
                 session.SendNotification("An error occured whilst finding that user's profile.");
                 return;
             }
-            
+
             List<Group> groups = PlusEnvironment.GetGame().GetGroupManager().GetGroupsForUser(targetData.Id);
-            
+
             int friendCount;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

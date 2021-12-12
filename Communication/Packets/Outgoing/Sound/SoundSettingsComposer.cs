@@ -9,6 +9,7 @@ namespace Plus.Communication.Packets.Outgoing.Sound
         public bool InviteStatus { get; }
         public bool FocusPreference { get; }
         public int FriendBarState { get; }
+
         public SoundSettingsComposer(IEnumerable<int> volumes, bool chatPreference, bool invitesStatus, bool focusPreference, int friendBarState)
             : base(ServerPacketHeader.SoundSettingsMessageComposer)
         {

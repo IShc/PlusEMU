@@ -15,7 +15,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             int result = packet.PopInt(); // 1 = useless, 2 = abusive, 3 = resolved
             packet.PopInt(); //junk
             int ticketId = packet.PopInt();
-            
+
             if (!PlusEnvironment.GetGame().GetModerationManager().TryGetTicket(ticketId, out ModerationTicket ticket))
                 return;
 

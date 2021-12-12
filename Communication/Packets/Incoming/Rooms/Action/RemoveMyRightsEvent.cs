@@ -17,7 +17,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Action
 
             if (!room.CheckRights(session, false))
                 return;
-            
+
             if (room.UsersWithRights.Contains(session.GetHabbo().Id))
             {
                 RoomUser user = room.GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);

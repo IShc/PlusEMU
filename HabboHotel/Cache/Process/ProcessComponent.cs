@@ -22,7 +22,7 @@ namespace Plus.HabboHotel.Cache.Process
         /// Prevents the timer from overlapping itself.
         /// </summary>
         private bool _timerRunning;
-        
+
         /// <summary>
         /// Checks if the timer is lagging behind (server can't keep up).
         /// </summary>
@@ -139,7 +139,9 @@ namespace Plus.HabboHotel.Cache.Process
             {
                 _resetEvent.WaitOne(TimeSpan.FromMinutes(5));
             }
-            catch { } // give up
+            catch
+            {
+            } // give up
 
             // Set the timer to disabled
             _disabled = true;
@@ -149,7 +151,9 @@ namespace Plus.HabboHotel.Cache.Process
             {
                 _timer?.Dispose();
             }
-            catch { }
+            catch
+            {
+            }
 
             // Remove reference to the timer.
             _timer = null;

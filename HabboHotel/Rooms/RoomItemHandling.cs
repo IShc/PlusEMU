@@ -85,6 +85,7 @@ namespace Plus.HabboHotel.Rooms
                 {
                     return null;
                 }
+
                 if (wallPosition.Contains(Convert.ToChar(9)))
                 {
                     return null;
@@ -105,7 +106,7 @@ namespace Plus.HabboHotel.Rooms
                 int lengthY = int.Parse(lenD[1]);
                 if (lengthX < -1 || lengthY < -1000 || lengthX > 700 || lengthY > 700)
                     return null;
-                
+
                 return ":w=" + widthX + "," + widthY + " " + "l=" + lengthX + "," + lengthY + " " + posD[2];
             }
             catch
@@ -153,6 +154,7 @@ namespace Plus.HabboHotel.Rooms
                             client.GetHabbo().GetInventoryComponent().AddNewItem(item.Id, item.BaseItem, item.ExtraData, item.GroupId, true, true, item.LimitedNo, item.LimitedTot);
                             client.GetHabbo().GetInventoryComponent().UpdateItems(false);
                         }
+
                         continue;
                     }
 
@@ -291,7 +293,7 @@ namespace Plus.HabboHotel.Rooms
                 _rollerItemsMoved.Clear();
                 _rollerUsersMoved.Clear();
                 _rollerMessages.Clear();
-                
+
                 foreach (Item roller in _rollers.Values.ToList())
                 {
                     if (roller == null)
@@ -472,7 +474,7 @@ namespace Plus.HabboHotel.Rooms
             }
 
             List<Item> itemsOnTile = GetFurniObjects(newX, newY);
-            if (item.GetBaseItem().InteractionType == InteractionType.Roller && itemsOnTile.Count(x => x.GetBaseItem().InteractionType == InteractionType.Roller && x.Id != item.Id)> 0)
+            if (item.GetBaseItem().InteractionType == InteractionType.Roller && itemsOnTile.Count(x => x.GetBaseItem().InteractionType == InteractionType.Roller && x.Id != item.Id) > 0)
                 return false;
 
             if (!newItem)
@@ -496,6 +498,7 @@ namespace Plus.HabboHotel.Rooms
                     {
                         _room.GetGameMap().AddToMap(item);
                     }
+
                     return false;
                 }
             }
@@ -523,6 +526,7 @@ namespace Plus.HabboHotel.Rooms
                                 //AddItem(Item);
                                 _room.GetGameMap().AddToMap(item);
                             }
+
                             return false;
                         }
                     }
@@ -555,7 +559,7 @@ namespace Plus.HabboHotel.Rooms
                         itemsAffected.AddRange(temp);
                     }
                 }
-                
+
                 itemsComplete.AddRange(itemsOnTile);
                 itemsComplete.AddRange(itemsAffected);
 
@@ -580,6 +584,7 @@ namespace Plus.HabboHotel.Rooms
                                 //AddItem(Item);
                                 _room.GetGameMap().AddToMap(item);
                             }
+
                             return false;
                         }
                     }
@@ -600,10 +605,11 @@ namespace Plus.HabboHotel.Rooms
                             continue;
 
                         if (i.GetBaseItem().InteractionType == InteractionType.StackTool)
-                        {                       
+                        {
                             newZ = i.GetZ;
                             break;
                         }
+
                         if (i.TotalHeight > newZ)
                         {
                             newZ = i.TotalHeight;
@@ -650,6 +656,7 @@ namespace Plus.HabboHotel.Rooms
                 if (!onRoller && sendMessage)
                     _room.SendPacket(new ObjectUpdateComposer(item, _room.OwnerId));
             }
+
             _room.GetGameMap().AddToMap(item);
 
             if (item.GetBaseItem().IsSeat)
@@ -668,9 +675,10 @@ namespace Plus.HabboHotel.Rooms
             {
                 dbClient.RunQuery("UPDATE `items` SET `room_id` = '" + _room.RoomId + "', `x` = '" + item.GetX + "', `y` = '" + item.GetY + "', `z` = '" + item.GetZ + "', `rot` = '" + item.Rotation + "' WHERE `id` = '" + item.Id + "' LIMIT 1");
             }
+
             return true;
         }
-        
+
         public List<Item> GetFurniObjects(int x, int y)
         {
             return _room.GetGameMap().GetCoordinatedItems(new Point(x, y));
@@ -691,6 +699,7 @@ namespace Plus.HabboHotel.Rooms
                     _room.TonerData = new TonerData(item.Id);
                 }
             }
+
             UpdateItem(item);
             _room.GetGameMap().AddItemToMap(item);
             return true;
@@ -746,7 +755,7 @@ namespace Plus.HabboHotel.Rooms
 
             if (_movedItems.ContainsKey(item.Id))
                 _movedItems.TryRemove(item.Id, out item);
-            
+
             if (item != null && _rollers.ContainsKey(item.Id))
                 _rollers.TryRemove(item.Id, out item);
         }
@@ -803,7 +812,7 @@ namespace Plus.HabboHotel.Rooms
                 {
                     _floorItems.TryRemove(item.Id, out Item I);
                     session.GetHabbo().GetInventoryComponent().TryAddFloorItem(item.Id, I);
-                    _room.SendPacket(new ObjectRemoveComposer(item, item.UserId));                    
+                    _room.SendPacket(new ObjectRemoveComposer(item, item.UserId));
                 }
                 else if (item.IsWallItem)
                 {
@@ -811,7 +820,7 @@ namespace Plus.HabboHotel.Rooms
                     session.GetHabbo().GetInventoryComponent().TryAddWallItem(item.Id, I);
                     _room.SendPacket(new ItemRemoveComposer(item, item.UserId));
                 }
-                
+
                 session.SendPacket(new FurniListAddComposer(item));
             }
 
@@ -832,7 +841,7 @@ namespace Plus.HabboHotel.Rooms
                 Dictionary<int, ThreeDCoord> dictionary = Gamemap.GetAffectedTiles(item.GetBaseItem().Length, item.GetBaseItem().Width, newX, newY, newRot);
                 if (!_room.GetGameMap().ValidTile(newX, newY))
                     return false;
-                
+
                 foreach (ThreeDCoord coord in dictionary.Values.ToList())
                 {
                     if ((_room.GetGameMap().Model.DoorX == coord.X) && (_room.GetGameMap().Model.DoorY == coord.Y))
@@ -841,13 +850,13 @@ namespace Plus.HabboHotel.Rooms
 
                 if ((_room.GetGameMap().Model.DoorX == newX) && (_room.GetGameMap().Model.DoorY == newY))
                     return false;
-                
+
                 foreach (ThreeDCoord coord in dictionary.Values.ToList())
                 {
                     if (!_room.GetGameMap().ValidTile(coord.X, coord.Y))
                         return false;
                 }
-                
+
                 double num = _room.GetGameMap().Model.SqFloorHeight[newX, newY];
                 if ((((item.Rotation == newRot) && (item.GetX == newX)) && (item.GetY == newY)) && (item.GetZ != num))
                     return false;
@@ -860,6 +869,7 @@ namespace Plus.HabboHotel.Rooms
                     if (_room.GetGameMap().Model.SqState[coord.X, coord.Y] != SquareState.Open)
                         return false;
                 }
+
                 if (!item.GetBaseItem().IsSeat)
                 {
                     if (_room.GetGameMap().SquareHasUsers(newX, newY))
@@ -880,7 +890,6 @@ namespace Plus.HabboHotel.Rooms
                     List<Item> list4 = GetFurniObjects(coord.X, coord.Y);
                     if (list4 != null)
                         collection.AddRange(list4);
-
                 }
 
                 if (furniObjects == null)
@@ -893,6 +902,7 @@ namespace Plus.HabboHotel.Rooms
                     if ((i.Id != item.Id) && !i.GetBaseItem().Stackable)
                         return false;
                 }
+
                 return true;
             }
             catch

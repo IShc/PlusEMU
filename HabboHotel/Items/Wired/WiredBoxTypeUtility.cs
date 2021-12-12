@@ -208,6 +208,7 @@ namespace Plus.HabboHotel.Items.Wired
                 case WiredBoxType.EffectBotCommunicatesToUserBox:
                     return 27;
             }
+
             return 0;
         }
 
@@ -232,7 +233,7 @@ namespace Plus.HabboHotel.Items.Wired
             return blockedItems;
         }
 
-        public static List<int> ContainsBlockedEffect(IWiredItem box,  ICollection<IWiredItem> effects)
+        public static List<int> ContainsBlockedEffect(IWiredItem box, ICollection<IWiredItem> effects)
         {
             List<int> blockedItems = new();
 
@@ -250,7 +251,7 @@ namespace Plus.HabboHotel.Items.Wired
                         blockedItems.Add(item.Item.GetBaseItem().SpriteId);
                     else continue;
                 }
-                else if((item.Type == WiredBoxType.EffectMoveFurniToNearestUser && hasMoveRotate) || (item.Type == WiredBoxType.EffectMoveAndRotate && hasMoveNear))
+                else if ((item.Type == WiredBoxType.EffectMoveFurniToNearestUser && hasMoveRotate) || (item.Type == WiredBoxType.EffectMoveAndRotate && hasMoveNear))
                 {
                     if (!blockedItems.Contains(item.Item.GetBaseItem().SpriteId))
                         blockedItems.Add(item.Item.GetBaseItem().SpriteId);

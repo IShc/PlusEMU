@@ -5,12 +5,10 @@
         public CloseConnectionComposer()
             : base(ServerPacketHeader.CloseConnectionMessageComposer)
         {
-
         }
 
         public override void Compose(ServerPacket packet)
         {
-            
         }
     }
 }

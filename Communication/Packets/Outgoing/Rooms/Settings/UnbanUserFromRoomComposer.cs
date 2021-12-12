@@ -4,6 +4,7 @@
     {
         public int RoomId { get; }
         public int UserId { get; }
+
         public UnbanUserFromRoomComposer(int roomId, int userId)
             : base(ServerPacketHeader.UnbanUserFromRoomMessageComposer)
         {

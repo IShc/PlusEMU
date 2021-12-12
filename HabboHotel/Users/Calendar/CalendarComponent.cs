@@ -56,6 +56,7 @@ namespace Plus.HabboHotel.Users.Calendar
                     }
                 }
             }
+
             return true;
         }
 

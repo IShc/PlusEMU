@@ -16,7 +16,7 @@ namespace Plus.Communication.Packets.Incoming.Groups
                 return;
             }
 
-            if (group.CreatorId != session.GetHabbo().Id && !session.GetHabbo().GetPermissions().HasRight("group_delete_override"))//Maybe a FUSE check for staff override?
+            if (group.CreatorId != session.GetHabbo().Id && !session.GetHabbo().GetPermissions().HasRight("group_delete_override")) //Maybe a FUSE check for staff override?
             {
                 session.SendNotification("Oops, only the group owner can delete a group!");
                 return;
@@ -30,7 +30,7 @@ namespace Plus.Communication.Packets.Incoming.Groups
 
             if (!PlusEnvironment.GetGame().GetRoomManager().TryGetRoom(group.RoomId, out Room room))
                 return;
-            
+
             if (!RoomFactory.TryGetData(group.RoomId, out RoomData _))
                 return;
 

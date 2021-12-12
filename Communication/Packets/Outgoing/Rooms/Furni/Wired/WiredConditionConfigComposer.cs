@@ -35,7 +35,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
                 if (string.IsNullOrEmpty(Box.StringData))
                     Box.StringData = "0;0;0";
 
-                packet.WriteInteger(3);//Loop
+                packet.WriteInteger(3); //Loop
                 packet.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[0]) : 0);
                 packet.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[1]) : 0);
                 packet.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[2]) : 0);
@@ -45,7 +45,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
                 if (string.IsNullOrEmpty(Box.StringData))
                     Box.StringData = "0;0";
 
-                packet.WriteInteger(2);//Loop
+                packet.WriteInteger(2); //Loop
                 packet.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[0]) : 1);
                 packet.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[1]) : 50);
             }
@@ -61,6 +61,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni.Wired
                     Box.StringData = "0";
                 packet.WriteInteger(Box.StringData != null ? int.Parse(Box.StringData.Split(';')[0]) : 50);
             }
+
             packet.WriteInteger(0);
             packet.WriteInteger(WiredBoxTypeUtility.GetWiredId(Box.Type));
         }

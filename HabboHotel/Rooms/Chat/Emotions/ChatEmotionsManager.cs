@@ -5,45 +5,45 @@ namespace Plus.HabboHotel.Rooms.Chat.Emotions
     public sealed class ChatEmotionsManager
     {
         private readonly Dictionary<string, ChatEmotions> _emotions = new()
-            {
-                // Smile
-                { ":)", ChatEmotions.Smile },
-                { ";)", ChatEmotions.Smile },
-                { ":d", ChatEmotions.Smile },
-                { ";d", ChatEmotions.Smile },
-                { ":]", ChatEmotions.Smile },
-                { ";]", ChatEmotions.Smile },
-                { "=)", ChatEmotions.Smile },
-                { "=]", ChatEmotions.Smile },
-                { ":-)", ChatEmotions.Smile },
-     
-                // Angry
-                { ">:(", ChatEmotions.Angry },
-                { ">:[", ChatEmotions.Angry },
-                { ">;[", ChatEmotions.Angry },
-                { ">;(", ChatEmotions.Angry },
-                { ">=(", ChatEmotions.Angry },
-     
-                // Shocked
-                { ":o", ChatEmotions.Shocked },
-                { ";o", ChatEmotions.Shocked },
-                { ">;o", ChatEmotions.Shocked },
-                { ">:o", ChatEmotions.Shocked },
-                { "=o", ChatEmotions.Shocked },
-                { ">=o", ChatEmotions.Shocked },
-     
-                // Sad
-                { ";'(", ChatEmotions.Sad },
-                { ";[", ChatEmotions.Sad },
-                { ":[", ChatEmotions.Sad },
-                { ";(", ChatEmotions.Sad },
-                { "=(", ChatEmotions.Sad },
-                { "='(", ChatEmotions.Sad },
-                { "=[", ChatEmotions.Sad },
-                { "='[", ChatEmotions.Sad },
-                { ":(", ChatEmotions.Sad },
-                { ":-(", ChatEmotions.Sad }
-            };
+        {
+            // Smile
+            {":)", ChatEmotions.Smile},
+            {";)", ChatEmotions.Smile},
+            {":d", ChatEmotions.Smile},
+            {";d", ChatEmotions.Smile},
+            {":]", ChatEmotions.Smile},
+            {";]", ChatEmotions.Smile},
+            {"=)", ChatEmotions.Smile},
+            {"=]", ChatEmotions.Smile},
+            {":-)", ChatEmotions.Smile},
+
+            // Angry
+            {">:(", ChatEmotions.Angry},
+            {">:[", ChatEmotions.Angry},
+            {">;[", ChatEmotions.Angry},
+            {">;(", ChatEmotions.Angry},
+            {">=(", ChatEmotions.Angry},
+
+            // Shocked
+            {":o", ChatEmotions.Shocked},
+            {";o", ChatEmotions.Shocked},
+            {">;o", ChatEmotions.Shocked},
+            {">:o", ChatEmotions.Shocked},
+            {"=o", ChatEmotions.Shocked},
+            {">=o", ChatEmotions.Shocked},
+
+            // Sad
+            {";'(", ChatEmotions.Sad},
+            {";[", ChatEmotions.Sad},
+            {":[", ChatEmotions.Sad},
+            {";(", ChatEmotions.Sad},
+            {"=(", ChatEmotions.Sad},
+            {"='(", ChatEmotions.Sad},
+            {"=[", ChatEmotions.Sad},
+            {"='[", ChatEmotions.Sad},
+            {":(", ChatEmotions.Sad},
+            {":-(", ChatEmotions.Sad}
+        };
 
         /// <summary>
         /// Searches the provided text for any emotions that need to be applied and returns the packet number.

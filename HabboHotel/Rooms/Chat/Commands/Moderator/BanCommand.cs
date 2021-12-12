@@ -8,7 +8,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 {
     internal class BanCommand : IChatCommand
     {
-
         public string PermissionRequired => "command_ban";
 
         public string Parameters => "%username% %length% %reason% ";

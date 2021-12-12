@@ -65,6 +65,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                 if (!hasUsers)
                     return false;
             }
+
             return true;
         }
     }

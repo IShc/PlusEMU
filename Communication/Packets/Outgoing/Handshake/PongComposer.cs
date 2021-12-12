@@ -5,12 +5,10 @@
         public PongComposer()
             : base(ServerPacketHeader.PongMessageComposer)
         {
-
         }
 
         public override void Compose(ServerPacket packet)
         {
-            
         }
     }
 }

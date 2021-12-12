@@ -8,12 +8,10 @@ namespace Plus.HabboHotel.Items.Interactor
     {
         public void OnPlace(GameClient session, Item item)
         {
-
         }
 
         public void OnRemove(GameClient session, Item item)
         {
-
         }
 
         public void OnTrigger(GameClient session, Item item, int request, bool hasRights)
@@ -57,7 +55,6 @@ namespace Plus.HabboHotel.Items.Interactor
 
         public void OnWiredTrigger(Item item)
         {
-          
         }
     }
 }

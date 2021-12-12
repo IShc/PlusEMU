@@ -16,7 +16,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
         public void Execute(GameClient session, Room room, string[] @params)
         {
-
             if (@params.Length == 1)
             {
                 session.SendWhisper("Please enter the username of the user you'd like to IP ban & account ban.");

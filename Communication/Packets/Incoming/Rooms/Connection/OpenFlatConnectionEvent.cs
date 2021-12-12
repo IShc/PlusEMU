@@ -11,7 +11,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Connection
 
             int roomId = packet.PopInt();
             string password = packet.PopString();
-        
+
             session.GetHabbo().PrepareRoom(roomId, password);
         }
     }

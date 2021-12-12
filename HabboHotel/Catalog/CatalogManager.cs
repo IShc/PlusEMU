@@ -75,7 +75,7 @@ namespace Plus.HabboHotel.Catalog
                         int pageId = Convert.ToInt32(row["page_id"]);
                         int baseId = Convert.ToInt32(row["item_id"]);
                         int offerId = Convert.ToInt32(row["offer_id"]);
-                        
+
                         if (!itemDataManager.GetItem(baseId, out ItemData data))
                         {
                             Log.Error("Couldn't load Catalog Item " + itemId + ", no furniture record found.");
@@ -123,7 +123,7 @@ namespace Plus.HabboHotel.Catalog
                     foreach (DataRow row in catalogPages.Rows)
                     {
                         _pages.Add(Convert.ToInt32(row["id"]), new CatalogPage(Convert.ToInt32(row["id"]), Convert.ToInt32(row["parent_id"]), row["enabled"].ToString(), Convert.ToString(row["caption"]),
-                            Convert.ToString(row["page_link"]), Convert.ToInt32(row["icon_image"]), Convert.ToInt32(row["min_rank"]), Convert.ToInt32(row["min_vip"]), row["visible"].ToString(), Convert.ToString(row["page_layout"]), 
+                            Convert.ToString(row["page_link"]), Convert.ToInt32(row["icon_image"]), Convert.ToInt32(row["min_rank"]), Convert.ToInt32(row["min_vip"]), row["visible"].ToString(), Convert.ToString(row["page_layout"]),
                             Convert.ToString(row["page_strings_1"]), Convert.ToString(row["page_strings_2"]),
                             _items.ContainsKey(Convert.ToInt32(row["id"])) ? _items[Convert.ToInt32(row["id"])] : new Dictionary<int, CatalogItem>(), ref _itemOffers));
                     }

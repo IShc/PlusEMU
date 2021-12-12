@@ -39,7 +39,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 
         public bool Execute(params object[] @params)
         {
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null || player.CurrentRoom == null || !player.InRoom)
                 return false;
 
@@ -50,8 +50,8 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
             if ((BoolData && Instance.OwnerId != player.Id) || string.IsNullOrWhiteSpace(StringData))
                 return false;
 
-            IChatCommand chatCommand = null;
-            if (!PlusEnvironment.GetGame().GetChatManager().GetCommands().TryGetCommand(StringData.Replace(":", "").ToLower(), out chatCommand))
+            if (!PlusEnvironment.GetGame().GetChatManager().GetCommands().TryGetCommand(StringData.Replace(":", "").ToLower(),
+                out IChatCommand chatCommand))
                 return false;
 
             if (player.ChatCommand == chatCommand)
@@ -100,6 +100,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
                         Instance.GetWired().OnEvent(effect.Item);
                     }
                 }
+
                 return true;
             }
 

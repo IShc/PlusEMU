@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
-
 using Plus.Communication.Packets.Incoming;
 using Plus.HabboHotel.Rooms;
 using System.Drawing;
@@ -84,6 +83,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 TickCount = Delay;
                 _requested = true;
             }
+
             return true;
         }
 
@@ -105,9 +105,9 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
                     if (Instance.GetWired().OtherBoxHasItem(this, item.Id))
                         SetItems.TryRemove(item.Id, out Item _);
-   
 
-                    Point Point = HandleMovement(Convert.ToInt32(StringData.Split(';')[0]),new Point(item.GetX, item.GetY));
+
+                    Point Point = HandleMovement(Convert.ToInt32(StringData.Split(';')[0]), new Point(item.GetX, item.GetY));
                     int newRot = HandleRotation(Convert.ToInt32(StringData.Split(';')[1]), item.Rotation);
 
                     Instance.GetWired().OnUserFurniCollision(Instance, item);
@@ -158,6 +158,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 _next = 0;
                 return true;
             }
+
             return false;
         }
 
@@ -172,6 +173,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     {
                         rotation = 0;
                     }
+
                     break;
                 }
 
@@ -182,6 +184,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     {
                         rotation = 6;
                     }
+
                     break;
                 }
 
@@ -203,9 +206,11 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                             rotation = 6;
                         }
                     }
+
                     break;
                 }
             }
+
             return rotation;
         }
 
@@ -236,6 +241,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                             newPos = new Point(position.X, position.Y - 1);
                             break;
                     }
+
                     break;
                 }
                 case 2:
@@ -248,6 +254,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     {
                         newPos = new Point(position.X + 1, position.Y);
                     }
+
                     break;
                 }
                 case 3:
@@ -260,6 +267,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     {
                         newPos = new Point(position.X, position.Y + 1);
                     }
+
                     break;
                 }
                 case 4:

@@ -18,7 +18,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             if (currentRoom == null)
                 return;
 
-            int alertMode = packet.PopInt(); 
+            int alertMode = packet.PopInt();
             string alertMessage = packet.PopString();
             bool isCaution = alertMode != 3;
 

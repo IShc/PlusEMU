@@ -47,14 +47,14 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
             string[] stuff = StringData.Split('\t');
             if (stuff.Length != 2)
-                return false;//This is important, incase a cunt scripts.
+                return false; //This is important, incase a cunt scripts.
 
             string username = stuff[0];
 
             RoomUser user = Instance.GetRoomUserManager().GetBotByName(username);
             if (user == null)
-                return false;      
-            
+                return false;
+
             string figure = stuff[1];
 
             user.BotData.Look = figure;
@@ -63,7 +63,6 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             MessageComposer userChangeComposer = new UserChangeComposer(user.VirtualId, user.BotData);
             Instance.SendPacket(userChangeComposer);
 
-            
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {

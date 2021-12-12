@@ -17,6 +17,7 @@ namespace Plus.Utilities
             {
                 bytes[i / 2] = Convert.ToByte(characters.Substring(i, 2), 16);
             }
+
             return bytes;
         }
     }

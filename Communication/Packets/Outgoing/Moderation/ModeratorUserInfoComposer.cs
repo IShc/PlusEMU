@@ -29,13 +29,13 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteInteger(Info != null ? Convert.ToInt32(Info["cfhs_abusive"]) : 0);
             packet.WriteInteger(Info != null ? Convert.ToInt32(Info["cautions"]) : 0);
             packet.WriteInteger(Info != null ? Convert.ToInt32(Info["bans"]) : 0);
-            packet.WriteInteger(Info != null ? Convert.ToInt32(Info["trading_locks_count"]) : 0);//Trading lock counts
-            packet.WriteString(Convert.ToDouble(Info["trading_locked"]) != 0 ? (Origin.ToString("dd/MM/yyyy HH:mm:ss")) : "0");//Trading lock
-            packet.WriteString("");//Purchases
-            packet.WriteInteger(0);//Itendity information tool
-            packet.WriteInteger(0);//Id bans.
+            packet.WriteInteger(Info != null ? Convert.ToInt32(Info["trading_locks_count"]) : 0); //Trading lock counts
+            packet.WriteString(Convert.ToDouble(Info["trading_locked"]) != 0 ? (Origin.ToString("dd/MM/yyyy HH:mm:ss")) : "0"); //Trading lock
+            packet.WriteString(""); //Purchases
+            packet.WriteInteger(0); //Itendity information tool
+            packet.WriteInteger(0); //Id bans.
             packet.WriteString(User != null ? Convert.ToString(User["mail"]) : "Unknown");
-            packet.WriteString("");//user_classification
+            packet.WriteString(""); //user_classification
         }
     }
 }

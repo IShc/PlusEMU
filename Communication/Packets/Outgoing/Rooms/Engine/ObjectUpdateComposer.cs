@@ -9,9 +9,9 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         public Item Item { get; }
         public int UserId { get; }
 
-         public ObjectUpdateComposer(Item item, int userId)
-             : base(ServerPacketHeader.ObjectUpdateMessageComposer)
-         {
+        public ObjectUpdateComposer(Item item, int userId)
+            : base(ServerPacketHeader.ObjectUpdateMessageComposer)
+        {
             Item = item;
             UserId = userId;
         }

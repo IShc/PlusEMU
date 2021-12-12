@@ -18,7 +18,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             if (!page.Enabled || !page.Visible || page.MinimumRank > session.GetHabbo().Rank || (page.MinimumVip > session.GetHabbo().VipRank && session.GetHabbo().Rank == 1))
                 return;
 
-           session.SendPacket(new CatalogPageComposer(page, cataMode));
+            session.SendPacket(new CatalogPageComposer(page, cataMode));
         }
     }
 }

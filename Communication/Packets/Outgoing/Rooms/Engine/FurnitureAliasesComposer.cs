@@ -5,7 +5,6 @@
         public FurnitureAliasesComposer()
             : base(ServerPacketHeader.FurnitureAliasesMessageComposer)
         {
-                      
         }
 
         public override void Compose(ServerPacket packet)

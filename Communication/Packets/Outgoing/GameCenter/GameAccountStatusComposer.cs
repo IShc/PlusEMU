@@ -14,7 +14,7 @@
         {
             packet.WriteInteger(GameId);
             packet.WriteInteger(-1); // Games Left
-            packet.WriteInteger(0);//Was 16?
+            packet.WriteInteger(0); //Was 16?
         }
     }
 }

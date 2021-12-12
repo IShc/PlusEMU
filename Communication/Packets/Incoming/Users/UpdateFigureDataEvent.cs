@@ -36,7 +36,7 @@ namespace Plus.Communication.Packets.Incoming.Users
 
             session.GetHabbo().LastClothingUpdateTime = DateTime.Now;
 
-            string[] allowedGenders = { "M", "F" };
+            string[] allowedGenders = {"M", "F"};
             if (!allowedGenders.Contains(gender))
             {
                 session.SendPacket(new BroadcastMessageAlertComposer("Sorry, you chose an invalid gender."));

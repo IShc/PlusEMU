@@ -39,7 +39,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Triggers
 
         public bool Execute(params object[] @params)
         {
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null || player.CurrentRoom == null || !player.InRoom)
                 return false;
 

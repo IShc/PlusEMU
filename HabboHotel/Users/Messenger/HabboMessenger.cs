@@ -23,7 +23,7 @@ namespace Plus.HabboHotel.Users.Messenger
         public HabboMessenger(int userId)
         {
             _userId = userId;
-            
+
             _requests = new Dictionary<int, MessengerRequest>();
             _friends = new Dictionary<int, MessengerBuddy>();
         }
@@ -35,7 +35,7 @@ namespace Plus.HabboHotel.Users.Messenger
             _friends = new Dictionary<int, MessengerBuddy>(friends);
         }
 
-        public bool TryGetRequest(int senderId,  out MessengerRequest request)
+        public bool TryGetRequest(int senderId, out MessengerRequest request)
         {
             return _requests.TryGetValue(senderId, out request);
         }
@@ -61,7 +61,7 @@ namespace Plus.HabboHotel.Users.Messenger
 
                     foreach (DataRow row in getMessages.Rows)
                     {
-                        client.SendPacket(new NewConsoleMessageComposer(Convert.ToInt32(row["from_id"]), Convert.ToString(row["message"]), (int)(UnixTimestamp.GetNow() - Convert.ToInt32(row["timestamp"]))));
+                        client.SendPacket(new NewConsoleMessageComposer(Convert.ToInt32(row["from_id"]), Convert.ToString(row["message"]), (int) (UnixTimestamp.GetNow() - Convert.ToInt32(row["timestamp"]))));
                     }
 
                     dbClient.SetQuery("DELETE FROM `messenger_offline_messages` WHERE `to_id` = @id");
@@ -144,7 +144,7 @@ namespace Plus.HabboHotel.Users.Messenger
         {
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("DELETE FROM messenger_requests WHERE (from_id = " + _userId + " AND to_id = " +       sender + ") OR (to_id = " + _userId + " AND from_id = " + sender + ")");
+                dbClient.RunQuery("DELETE FROM messenger_requests WHERE (from_id = " + _userId + " AND to_id = " + sender + ") OR (to_id = " + _userId + " AND from_id = " + sender + ")");
             }
 
             _requests.Remove(sender);
@@ -178,8 +178,7 @@ namespace Plus.HabboHotel.Users.Messenger
         {
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("DELETE FROM messenger_friendships WHERE (user_one_id = " + _userId +     " AND user_two_id = " + friendId + ") OR (user_two_id = " + _userId +  " AND user_one_id = " + friendId + ")");
-
+                dbClient.RunQuery("DELETE FROM messenger_friendships WHERE (user_one_id = " + _userId + " AND user_two_id = " + friendId + ") OR (user_two_id = " + _userId + " AND user_one_id = " + friendId + ")");
             }
 
             OnDestroyFriendship(friendId);
@@ -365,6 +364,7 @@ namespace Plus.HabboHotel.Users.Messenger
                     dbClient.AddParameter("msg", message);
                     dbClient.RunQuery();
                 }
+
                 return;
             }
 

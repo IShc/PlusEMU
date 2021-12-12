@@ -20,7 +20,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
         }
 
         public UserChangeComposer(int virtualId, RoomBot botData)
-            :base(ServerPacketHeader.UserChangeMessageComposer)
+            : base(ServerPacketHeader.UserChangeMessageComposer)
         {
             VirtualId = virtualId;
             BotData = botData;
@@ -28,14 +28,15 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
 
         public override void Compose(ServerPacket packet)
         {
-            if(BotData == null)
+            if (BotData == null)
             {
                 packet.WriteInteger((Self) ? -1 : VirtualId);
                 packet.WriteString(User.GetClient().GetHabbo().Look);
                 packet.WriteString(User.GetClient().GetHabbo().Gender);
                 packet.WriteString(User.GetClient().GetHabbo().Motto);
                 packet.WriteInteger(User.GetClient().GetHabbo().GetStats().AchievementPoints);
-            } else
+            }
+            else
             {
                 packet.WriteInteger(VirtualId);
                 packet.WriteString(BotData.Look);
@@ -43,7 +44,6 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                 packet.WriteString(BotData.Motto);
                 packet.WriteInteger(0);
             }
-            
         }
     }
 }
