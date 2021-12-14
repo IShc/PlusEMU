@@ -4,10 +4,10 @@
     {
         public int TestResponse { get; }
 
-        public LatencyTestComposer(int testResponce)
+        public LatencyTestComposer(int testResponse)
             : base(ServerPacketHeader.LatencyResponseMessageComposer)
         {
-            TestResponse = testResponce;
+            TestResponse = testResponse;
         }
 
         public override void Compose(ServerPacket packet)

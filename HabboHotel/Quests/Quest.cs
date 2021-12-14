@@ -31,7 +31,7 @@ namespace Plus.HabboHotel.Quests
             HasEnded = timeLock >= UnixTimestamp.GetNow() && timeLock > 0;
         }
 
-        public string ActionName => QuestTypeUtillity.GetString(GoalType);
+        public string ActionName => QuestTypeUtility.GetString(GoalType);
 
         public bool IsCompleted(int progress)
         {

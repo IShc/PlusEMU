@@ -23,7 +23,7 @@ namespace Plus.Communication.Packets.Incoming.Navigator
             }
             else
             {
-                categories = PlusEnvironment.GetGame().GetNavigator().GetCategorysForSearch(category);
+                categories = PlusEnvironment.GetGame().GetNavigator().GetCategoriesForSearch(category);
                 if (categories.Count == 0)
                 {
                     //Are we going in deep?!

@@ -5,8 +5,7 @@ namespace Plus.Communication.Encryption.KeyExchange
 {
     public class DiffieHellman
     {
-        public readonly int BITLENGTH = 32;
-
+        public readonly int BitLength = 32;
         public BigInteger Prime { get; private set; }
         public BigInteger Generator { get; private set; }
 
@@ -20,7 +19,7 @@ namespace Plus.Communication.Encryption.KeyExchange
 
         public DiffieHellman(int b)
         {
-            BITLENGTH = b;
+            BitLength = b;
 
             Initialize();
         }
@@ -42,19 +41,17 @@ namespace Plus.Communication.Encryption.KeyExchange
             {
                 if (!ignoreBaseKeys)
                 {
-                    Prime = BigInteger.genPseudoPrime(BITLENGTH, 10, rand);
-                    Generator = BigInteger.genPseudoPrime(BITLENGTH, 10, rand);
+                    Prime = BigInteger.genPseudoPrime(BitLength, 10, rand);
+                    Generator = BigInteger.genPseudoPrime(BitLength, 10, rand);
                 }
 
-                byte[] bytes = new byte[BITLENGTH / 8];
+                byte[] bytes = new byte[BitLength / 8];
                 Randomizer.NextBytes(bytes);
                 PrivateKey = new BigInteger(bytes);
 
                 if (Generator > Prime)
                 {
-                    BigInteger temp = Prime;
-                    Prime = Generator;
-                    Generator = temp;
+                    (Prime, Generator) = (Generator, Prime);
                 }
 
                 PublicKey = Generator.modPow(PrivateKey, Prime);

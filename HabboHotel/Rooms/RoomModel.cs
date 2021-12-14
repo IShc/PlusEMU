@@ -20,7 +20,7 @@ namespace Plus.HabboHotel.Rooms
 
         public string StaticFurniMap;
 
-        public byte[,] mRoomModelfx;
+        public byte[,] mRoomModelFx;
 
         public int WallHeight;
 

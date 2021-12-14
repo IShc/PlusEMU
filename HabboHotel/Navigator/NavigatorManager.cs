@@ -74,7 +74,7 @@ namespace Plus.HabboHotel.Navigator
             Log.Info("Navigator -> LOADED");
         }
 
-        public List<SearchResultList> GetCategorysForSearch(string category)
+        public List<SearchResultList> GetCategoriesForSearch(string category)
         {
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists

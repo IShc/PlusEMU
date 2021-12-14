@@ -51,7 +51,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
             int allowPets = Convert.ToInt32(PlusEnvironment.BoolToEnum(packet.PopBoolean()));
             int allowPetsEat = Convert.ToInt32(PlusEnvironment.BoolToEnum(packet.PopBoolean()));
             int roomBlockingEnabled = Convert.ToInt32(PlusEnvironment.BoolToEnum(packet.PopBoolean()));
-            int hidewall = Convert.ToInt32(PlusEnvironment.BoolToEnum(packet.PopBoolean()));
+            int hideWall = Convert.ToInt32(PlusEnvironment.BoolToEnum(packet.PopBoolean()));
             int wallThickness = packet.PopInt();
             int floorThickness = packet.PopInt();
             int whoMute = packet.PopInt(); // mute
@@ -127,7 +127,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
             room.AllowPets = allowPets;
             room.AllowPetsEating = allowPetsEat;
             room.RoomBlockingEnabled = roomBlockingEnabled;
-            room.HideWall = hidewall;
+            room.HideWall = hideWall;
 
             room.Name = name;
             room.Access = access;

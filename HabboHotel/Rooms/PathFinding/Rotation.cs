@@ -40,10 +40,10 @@
             if (!moonwalk)
                 return rot;
 
-            return RotationIverse(rot);
+            return RotationInverse(rot);
         }
 
-        public static int RotationIverse(int rot)
+        public static int RotationInverse(int rot)
         {
             if (rot > 3)
                 rot = rot - 4;

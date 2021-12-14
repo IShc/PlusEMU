@@ -60,7 +60,7 @@ namespace Plus
 
         private static readonly ConcurrentDictionary<int, Habbo> UsersCached = new();
 
-        public static string SwfRevision = "";
+        public static string ClientRevision = "";
 
         public static void Initialize()
         {

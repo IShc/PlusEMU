@@ -8,8 +8,8 @@ namespace Plus.Communication.Packets.Incoming.Handshake
         {
             string build = packet.PopString();
 
-            if (PlusEnvironment.SwfRevision != build)
-                PlusEnvironment.SwfRevision = build;
+            if (PlusEnvironment.ClientRevision != build)
+                PlusEnvironment.ClientRevision = build;
         }
     }
 }

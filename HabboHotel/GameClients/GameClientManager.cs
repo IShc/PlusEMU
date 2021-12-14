@@ -232,9 +232,9 @@ namespace Plus.HabboHotel.GameClients
                 _userIdRegister.TryAdd(userId, client);
         }
 
-        public void UnregisterClient(int userid, string username)
+        public void UnregisterClient(int userId, string username)
         {
-            _userIdRegister.TryRemove(userid, out GameClient _);
+            _userIdRegister.TryRemove(userId, out GameClient _);
             _usernameRegister.TryRemove(username.ToLower(), out GameClient _);
         }
 

@@ -25,7 +25,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                 "Online Users: " + onlineUsers + "\n" +
                 "Rooms Loaded: " + roomCount + "\n" +
                 "Uptime: " + uptime.Days + " day(s), " + uptime.Hours + " hours and " + uptime.Minutes + " minutes.\n\n" +
-                "<b>SWF Revision</b>:\n" + PlusEnvironment.SwfRevision, "plus", ""));
+                "<b>SWF Revision</b>:\n" + PlusEnvironment.ClientRevision, "plus", ""));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Plus.HabboHotel.Users.Messenger
 
         public int UserId;
         public bool MAppearOffline;
-        public bool MHideInroom;
+        public bool MHideInRoom;
         public int MLastOnline;
         public string MLook;
         public string MMotto;
@@ -40,7 +40,7 @@ namespace Plus.HabboHotel.Users.Messenger
         #region Constructor
 
         public MessengerBuddy(int userId, string pUsername, string pLook, string pMotto, int pLastOnline,
-            bool pAppearOffline, bool pHideInroom)
+            bool pAppearOffline, bool pHideInRoom)
         {
             UserId = userId;
             MUsername = pUsername;
@@ -48,7 +48,7 @@ namespace Plus.HabboHotel.Users.Messenger
             MMotto = pMotto;
             MLastOnline = pLastOnline;
             MAppearOffline = pAppearOffline;
-            MHideInroom = pHideInroom;
+            MHideInRoom = pHideInRoom;
         }
 
         #endregion
@@ -75,7 +75,7 @@ namespace Plus.HabboHotel.Users.Messenger
             message.WriteString(MUsername);
             message.WriteInteger(1);
             message.WriteBoolean(!MAppearOffline || habbo.GetPermissions().HasRight("mod_tool") ? IsOnline : false);
-            message.WriteBoolean(!MHideInroom || habbo.GetPermissions().HasRight("mod_tool") ? InRoom : false);
+            message.WriteBoolean(!MHideInRoom || habbo.GetPermissions().HasRight("mod_tool") ? InRoom : false);
             message.WriteString(IsOnline ? MLook : "");
             message.WriteInteger(0); // categoryid
             message.WriteString(MMotto);

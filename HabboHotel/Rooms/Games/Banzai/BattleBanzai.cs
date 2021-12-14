@@ -176,9 +176,9 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             }
         }
 
-        private bool VerifyPuck(RoomUser user, int actualx, int actualy)
+        private bool VerifyPuck(RoomUser user, int actualX, int actualY)
         {
-            return Rotation.Calculate(user.X, user.Y, actualx, actualy) == user.RotBody;
+            return Rotation.Calculate(user.X, user.Y, actualX, actualY) == user.RotBody;
         }
 
         public void BanzaiStart()

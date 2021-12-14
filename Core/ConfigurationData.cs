@@ -8,13 +8,13 @@ namespace Plus.Core
     {
         public Dictionary<string, string> Data;
 
-        public ConfigurationData(string filePath, bool maynotexist = false)
+        public ConfigurationData(string filePath, bool mayNotExist = false)
         {
             Data = new Dictionary<string, string>();
 
             if (!File.Exists(filePath))
             {
-                if (!maynotexist)
+                if (!mayNotExist)
                     throw new ArgumentException("Unable to locate configuration file at '" + filePath + "'.");
                 return;
             }

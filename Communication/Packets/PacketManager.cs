@@ -41,7 +41,7 @@ using Plus.Communication.Packets.Incoming.Rooms.Furni;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.LoveLocks;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.RentableSpaces;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.Stickies;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.Wired;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions;
 using Plus.Communication.Packets.Incoming.Rooms.Settings;

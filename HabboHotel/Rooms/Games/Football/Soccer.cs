@@ -164,9 +164,9 @@ namespace Plus.HabboHotel.Rooms.Games.Football
             }
         }
 
-        private bool VerifyBall(RoomUser user, int actualx, int actualy)
+        private bool VerifyBall(RoomUser user, int actualX, int actualY)
         {
-            return Rotation.Calculate(user.X, user.Y, actualx, actualy) == user.RotBody;
+            return Rotation.Calculate(user.X, user.Y, actualX, actualY) == user.RotBody;
         }
 
         public void RegisterGate(Item item)

@@ -6,7 +6,7 @@ namespace Plus.Communication.Packets.Outgoing
     {
         protected short Id { get; }
 
-        public MessageComposer(short id)
+        protected MessageComposer(short id)
         {
             Id = id;
         }

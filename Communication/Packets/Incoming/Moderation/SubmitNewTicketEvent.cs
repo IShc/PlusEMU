@@ -40,8 +40,8 @@ namespace Plus.Communication.Packets.Incoming.Moderation
                 return;
             }
 
-            int messagecount = packet.PopInt();
-            for (int i = 0; i < messagecount; i++)
+            int messageCount = packet.PopInt();
+            for (int i = 0; i < messageCount; i++)
             {
                 packet.PopInt();
                 chats.Add(packet.PopString());

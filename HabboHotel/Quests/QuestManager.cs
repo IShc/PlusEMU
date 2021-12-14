@@ -47,11 +47,11 @@ namespace Plus.HabboHotel.Quests
                         string name = Convert.ToString(dRow["action"]);
                         int reward = Convert.ToInt32(dRow["pixel_reward"]);
                         string dataBit = Convert.ToString(dRow["data_bit"]);
-                        int rewardtype = Convert.ToInt32(dRow["reward_type"].ToString());
+                        int rewardType = Convert.ToInt32(dRow["reward_type"].ToString());
                         int time = Convert.ToInt32(dRow["timestamp_unlock"]);
                         int locked = Convert.ToInt32(dRow["timestamp_lock"]);
 
-                        _quests.Add(id, new Quest(id, category, num, (QuestType) type, goalData, name, reward, dataBit, rewardtype, time, locked));
+                        _quests.Add(id, new Quest(id, category, num, (QuestType) type, goalData, name, reward, dataBit, rewardType, time, locked));
                         AddToCounter(category);
                     }
                 }

@@ -28,7 +28,6 @@ namespace Plus.HabboHotel.Users.Messenger
             _friends = new Dictionary<int, MessengerBuddy>();
         }
 
-
         public void Init(Dictionary<int, MessengerBuddy> friends, Dictionary<int, MessengerRequest> requests)
         {
             _requests = new Dictionary<int, MessengerRequest>(requests);
@@ -116,16 +115,16 @@ namespace Plus.HabboHotel.Users.Messenger
             }
         }
 
-        public void UpdateFriend(int userid, GameClient client, bool notification)
+        public void UpdateFriend(int userId, GameClient client, bool notification)
         {
-            if (_friends.ContainsKey(userid))
+            if (_friends.ContainsKey(userId))
             {
-                _friends[userid].UpdateUser(client);
+                _friends[userId].UpdateUser(client);
 
                 if (notification)
                 {
-                    GameClient userclient = GetClient();
-                    userclient?.SendPacket(SerializeUpdate(_friends[userid]));
+                    GameClient userClient = GetClient();
+                    userClient?.SendPacket(SerializeUpdate(_friends[userId]));
                 }
             }
         }
@@ -211,7 +210,6 @@ namespace Plus.HabboHotel.Users.Messenger
             {
                 Habbo user = friend.GetHabbo();
 
-
                 newFriend = new MessengerBuddy(friendId, user.Username, user.Look, user.Motto, 0, user.AppearOffline, user.AllowPublicRoomStatus);
                 newFriend.UpdateUser(friend);
             }
@@ -258,7 +256,7 @@ namespace Plus.HabboHotel.Users.Messenger
             GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUsername(userQuery);
             if (client == null)
             {
-                DataRow row = null;
+                DataRow row;
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.SetQuery("SELECT `id`,`block_newfriends` FROM `users` WHERE `username` = @query LIMIT 1");
@@ -349,8 +347,7 @@ namespace Plus.HabboHotel.Users.Messenger
                 GetClient().SendNotification("You cannot send a message, you have flooded the console.\n\nYou can send a message in " + time + " seconds.");
                 return;
             }
-
-
+            
             GetClient().GetHabbo().MessengerSpamCount++;
 
             GameClient client = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(toId);
@@ -396,7 +393,9 @@ namespace Plus.HabboHotel.Users.Messenger
         {
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.SetQuery("INSERT INTO chatlogs_console VALUES (NULL, " + fromId + ", " + toId + ", @message, UNIX_TIMESTAMP())");
+                dbClient.SetQuery("INSERT INTO chatlogs_console VALUES (NULL, @fromId, @toId, @message, UNIX_TIMESTAMP())");
+                dbClient.AddParameter("fromId", fromId);
+                dbClient.AddParameter("toId", toId);
                 dbClient.AddParameter("message", message);
                 dbClient.RunQuery();
             }
