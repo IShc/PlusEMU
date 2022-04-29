@@ -23,7 +23,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
 
         public override void Compose(ServerPacket packet)
         {
-            if(Pet != null)
+            if (Pet != null)
             {
                 packet.WriteInteger(Pet.PetId);
                 packet.WriteString(Pet.Name);
@@ -39,24 +39,25 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
                 packet.WriteInteger(Pet.OwnerId);
                 packet.WriteInteger(Pet.Age);
                 packet.WriteString(Pet.OwnerName);
-                packet.WriteInteger(1);//3 on hab
+                packet.WriteInteger(1); //3 on hab
                 packet.WriteBoolean(Pet.Saddle > 0);
                 packet.WriteBoolean(false);
-                packet.WriteInteger(0);//5 on hab
+                packet.WriteInteger(0); //5 on hab
                 packet.WriteInteger(Pet.AnyoneCanRide); // Anyone can ride horse
                 packet.WriteInteger(0);
-                packet.WriteInteger(0);//512 on hab
-                packet.WriteInteger(0);//1536
-                packet.WriteInteger(0);//2560
-                packet.WriteInteger(0);//3584
+                packet.WriteInteger(0); //512 on hab
+                packet.WriteInteger(0); //1536
+                packet.WriteInteger(0); //2560
+                packet.WriteInteger(0); //3584
                 packet.WriteInteger(0);
                 packet.WriteString("");
                 packet.WriteBoolean(false);
-                packet.WriteInteger(-1);//255 on hab
+                packet.WriteInteger(-1); //255 on hab
                 packet.WriteInteger(-1);
                 packet.WriteInteger(-1);
                 packet.WriteBoolean(false);
-            } else if (Habbo != null)
+            }
+            else if (Habbo != null)
             {
                 packet.WriteInteger(Habbo.Id);
                 packet.WriteString(Habbo.Username);
@@ -70,22 +71,22 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.AI.Pets
                 packet.WriteInteger(100);
                 packet.WriteInteger(Habbo.GetStats().Respect);
                 packet.WriteInteger(Habbo.Id);
-                packet.WriteInteger(Convert.ToInt32(Math.Floor((PlusEnvironment.GetUnixTimestamp() - Habbo.AccountCreated) / 86400)));//How?
+                packet.WriteInteger(Convert.ToInt32(Math.Floor((PlusEnvironment.GetUnixTimestamp() - Habbo.AccountCreated) / 86400))); //How?
                 packet.WriteString(Habbo.Username);
-                packet.WriteInteger(1);//3 on hab
+                packet.WriteInteger(1); //3 on hab
                 packet.WriteBoolean(false);
                 packet.WriteBoolean(false);
-                packet.WriteInteger(0);//5 on hab
+                packet.WriteInteger(0); //5 on hab
                 packet.WriteInteger(0); // Anyone can ride horse
                 packet.WriteInteger(0);
-                packet.WriteInteger(0);//512 on hab
-                packet.WriteInteger(0);//1536
-                packet.WriteInteger(0);//2560
-                packet.WriteInteger(0);//3584
+                packet.WriteInteger(0); //512 on hab
+                packet.WriteInteger(0); //1536
+                packet.WriteInteger(0); //2560
+                packet.WriteInteger(0); //3584
                 packet.WriteInteger(0);
                 packet.WriteString("");
                 packet.WriteBoolean(false);
-                packet.WriteInteger(-1);//255 on hab
+                packet.WriteInteger(-1); //255 on hab
                 packet.WriteInteger(-1);
                 packet.WriteInteger(-1);
                 packet.WriteBoolean(false);

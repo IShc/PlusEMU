@@ -36,6 +36,7 @@ namespace Plus.HabboHotel.Items
                     dbClient.AddParameter("gid", groupId);
                     dbClient.RunQuery();
                 }
+
                 return item;
             }
         }
@@ -66,7 +67,7 @@ namespace Plus.HabboHotel.Items
                 return item;
             }
         }
-      
+
         public static Item CreateGiftItem(ItemData data, Habbo habbo, string extraData, string displayFlags, int itemId, int limitedNumber = 0, int limitedStack = 0)
         {
             if (data == null) throw new InvalidOperationException("Data cannot be null.");
@@ -128,6 +129,7 @@ namespace Plus.HabboHotel.Items
                     items.Add(item);
                 }
             }
+
             return items;
         }
 
@@ -172,6 +174,7 @@ namespace Plus.HabboHotel.Items
                 items.Add(item1);
                 items.Add(item2);
             }
+
             return items;
         }
 

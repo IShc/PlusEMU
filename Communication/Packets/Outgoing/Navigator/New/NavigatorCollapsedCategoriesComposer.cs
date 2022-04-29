@@ -5,7 +5,6 @@
         public NavigatorCollapsedCategoriesComposer()
             : base(ServerPacketHeader.NavigatorCollapsedCategoriesMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

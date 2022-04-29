@@ -27,10 +27,10 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
                     packet.WriteString(item.GetBaseItem().Type.ToString().ToLower());
                     packet.WriteInteger(item.Id);
                     packet.WriteInteger(item.Data.SpriteId);
-                    packet.WriteInteger(0);//Not sure.
+                    packet.WriteInteger(0); //Not sure.
                     if (item.LimitedNo > 0)
                     {
-                        packet.WriteBoolean(false);//Stackable
+                        packet.WriteBoolean(false); //Stackable
                         packet.WriteInteger(256);
                         packet.WriteString("");
                         packet.WriteInteger(item.LimitedNo);
@@ -38,7 +38,7 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
                     }
                     else
                     {
-                        packet.WriteBoolean(true);//Stackable
+                        packet.WriteBoolean(true); //Stackable
                         packet.WriteInteger(0);
                         packet.WriteString("");
                     }
@@ -51,7 +51,7 @@ namespace Plus.Communication.Packets.Outgoing.Inventory.Trading
                         packet.WriteInteger(0);
                 }
 
-                packet.WriteInteger(user.OfferedItems.Count);//Item Count
+                packet.WriteInteger(user.OfferedItems.Count); //Item Count
                 packet.WriteInteger(user.OfferedItems.Values.Where(x => x.Data.InteractionType == InteractionType.Exchange).Sum(t => t.Data.BehaviourData));
             }
         }

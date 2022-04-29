@@ -6,7 +6,7 @@ namespace Plus.Communication.Packets.Outgoing
     {
         protected short Id { get; }
 
-        public MessageComposer(short id)
+        protected MessageComposer(short id)
         {
             Id = id;
         }
@@ -17,10 +17,12 @@ namespace Plus.Communication.Packets.Outgoing
             try
             {
                 Compose(packet);
-            } finally
+            }
+            finally
             {
                 Dispose();
             }
+
             return packet;
         }
 
@@ -28,7 +30,6 @@ namespace Plus.Communication.Packets.Outgoing
 
         public void Dispose()
         {
-
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
     {
         public int RoomId { get; }
         public List<int> BannedUsers { get; }
+
         public GetRoomBannedUsersComposer(int roomId, List<int> bannedUsers)
             : base(ServerPacketHeader.GetRoomBannedUsersMessageComposer)
         {
@@ -18,7 +19,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
         {
             packet.WriteInteger(RoomId);
 
-            packet.WriteInteger(BannedUsers.Count);//Count
+            packet.WriteInteger(BannedUsers.Count); //Count
             foreach (int id in BannedUsers)
             {
                 UserCache data = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(id);

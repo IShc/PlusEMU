@@ -17,8 +17,17 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public ConcurrentDictionary<int, Item> SetItems { get; set; }
         public string StringData { get; set; }
         public bool BoolData { get; set; }
-        public int Delay { get => _delay;
-            set { _delay = value; TickCount = value + 1; } }
+
+        public int Delay
+        {
+            get => _delay;
+            set
+            {
+                _delay = value;
+                TickCount = value + 1;
+            }
+        }
+
         public int TickCount { get; set; }
         public string ItemsData { get; set; }
 
@@ -65,7 +74,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
             while (_queue.Count > 0)
             {
-                Habbo player = (Habbo)_queue.Dequeue();
+                Habbo player = (Habbo) _queue.Dequeue();
                 if (player == null || player.CurrentRoom != Instance)
                     continue;
 
@@ -81,7 +90,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (@params == null || @params.Length == 0)
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
 
             if (player == null)
                 return false;
@@ -122,7 +131,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 SetItems.TryRemove(item.Id, out item);
 
                 if (items.Contains(item))
-                items.Remove(item);
+                    items.Remove(item);
 
                 if (SetItems.Count == 0 || items.Count == 0)
                     return;

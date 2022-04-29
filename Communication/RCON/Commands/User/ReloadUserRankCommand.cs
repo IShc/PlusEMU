@@ -31,10 +31,11 @@ namespace Plus.Communication.Rcon.Commands.User
             if (client.GetHabbo().GetPermissions().HasRight("mod_tickets"))
             {
                 client.SendPacket(new ModeratorInitComposer(
-                  PlusEnvironment.GetGame().GetModerationManager().UserMessagePresets,
-                  PlusEnvironment.GetGame().GetModerationManager().RoomMessagePresets,
-                  PlusEnvironment.GetGame().GetModerationManager().GetTickets));
+                    PlusEnvironment.GetGame().GetModerationManager().UserMessagePresets,
+                    PlusEnvironment.GetGame().GetModerationManager().RoomMessagePresets,
+                    PlusEnvironment.GetGame().GetModerationManager().GetTickets));
             }
+
             return true;
         }
     }

@@ -73,7 +73,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
                 session.SendWhisper("Oops, this user has their whispers disabled!");
                 return;
             }
-            
+
             PlusEnvironment.GetGame().GetChatManager().GetLogs().StoreChatLog(new ChatLogEntry(session.GetHabbo().Id, room.Id, "<Whisper to " + toUser + ">: " + message, UnixTimestamp.GetNow(), session.GetHabbo(), room));
 
             if (PlusEnvironment.GetGame().GetChatManager().GetFilter().CheckBannedWords(message))
@@ -85,6 +85,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
                     session.Disconnect();
                     return;
                 }
+
                 session.SendPacket(new WhisperComposer(user.VirtualId, message, 0, user.LastBubble));
                 return;
             }
@@ -102,7 +103,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
                     user2.GetClient().SendPacket(new WhisperComposer(user.VirtualId, message, 0, user.LastBubble));
                 }
             }
- 
+
             List<RoomUser> toNotify = room.GetRoomUserManager().GetRoomUserByRank(2);
             if (toNotify.Count > 0)
             {

@@ -2,7 +2,7 @@
 
 namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 {
-    internal class SitCommand :IChatCommand
+    internal class SitCommand : IChatCommand
     {
         public string PermissionRequired => "command_sit";
 
@@ -18,7 +18,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
 
             if (user.Statusses.ContainsKey("lie") || user.IsLying || user.RidingHorse || user.IsWalking)
                 return;
-            
+
             if (!user.Statusses.ContainsKey("sit"))
             {
                 if ((user.RotBody % 2) == 0)
@@ -30,7 +30,9 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                         user.IsSitting = true;
                         user.UpdateNeeded = true;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 else
                 {

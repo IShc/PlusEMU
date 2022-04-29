@@ -50,6 +50,7 @@ namespace Plus.Utilities
                 {
                     seed = globalRandom.Next();
                 }
+
                 localRandom = inst = new Random(seed);
             }
 

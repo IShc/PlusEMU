@@ -4,6 +4,7 @@
     {
         public int RoomId { get; }
         public int UserId { get; }
+
         public FlatControllerRemovedComposer(int roomId, int userId)
             : base(ServerPacketHeader.FlatControllerRemovedMessageComposer)
         {

@@ -5,7 +5,6 @@
         public BCBorrowedItemsComposer()
             : base(ServerPacketHeader.BCBorrowedItemsMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

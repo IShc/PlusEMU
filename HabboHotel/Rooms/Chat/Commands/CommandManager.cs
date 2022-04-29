@@ -40,7 +40,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
             RegisterModerator();
             RegisterAdministrator();
         }
-        
+
         /// <summary>
         /// Request the text to parse and check for commands that need to be executed.
         /// </summary>
@@ -69,6 +69,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
 
                     list.Append(":" + cmdList.Key + " " + cmdList.Value.Parameters + " - " + cmdList.Value.Description + "\n");
                 }
+
                 session.SendPacket(new MotdNotificationComposer(list.ToString()));
                 return true;
             }
@@ -89,13 +90,14 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
                     if (!session.GetHabbo().GetPermissions().HasCommand(cmd.PermissionRequired))
                         return false;
                 }
-                
+
                 session.GetHabbo().ChatCommand = cmd;
                 session.GetHabbo().CurrentRoom.GetWired().TriggerEvent(WiredBoxType.TriggerUserSaysCommand, session.GetHabbo(), this);
 
                 cmd.Execute(session, session.GetHabbo().CurrentRoom, split);
                 return true;
             }
+
             return false;
         }
 
@@ -141,7 +143,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
 
             Register("unload", new UnloadCommand());
             Register("regenmaps", new RegenMaps());
-            Register("emptyitems", new EmptyItems());
+            Register("emptyitems", new EmptyItemsCommand());
             Register("setmax", new SetMaxCommand());
             Register("setspeed", new SetSpeedCommand());
             Register("disablediagonal", new DisableDiagonalCommand());
@@ -156,12 +158,11 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands
             Register("disablegifts", new DisableGiftsCommand());
             Register("convertcredits", new ConvertCreditsCommand());
             Register("disablewhispers", new DisableWhispersCommand());
-            Register("disablemimic", new DisableMimicCommand()); ;
+            Register("disablemimic", new DisableMimicCommand());
 
             Register("pet", new PetCommand());
             Register("spush", new SuperPushCommand());
             Register("superpush", new SuperPushCommand());
-
         }
 
         /// <summary>

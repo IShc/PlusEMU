@@ -6,7 +6,7 @@ using Plus.HabboHotel.Users;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 {
-    internal class BotFollowsUserBox: IWiredItem
+    internal class BotFollowsUserBox : IWiredItem
     {
         public Room Instance { get; set; }
         public Item Item { get; set; }
@@ -26,13 +26,13 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public void HandleSave(ClientPacket packet)
         {
             int unknown = packet.PopInt();
-            int followMode = packet.PopInt();//1 = follow, 0 = don't.
+            int followMode = packet.PopInt(); //1 = follow, 0 = don't.
             string botConfiguration = packet.PopString();
-       
+
             if (SetItems.Count > 0)
                 SetItems.Clear();
 
-            StringData = followMode + ";" +botConfiguration;
+            StringData = followMode + ";" + botConfiguration;
         }
 
         public bool Execute(params object[] @params)
@@ -43,7 +43,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (string.IsNullOrEmpty(StringData))
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null)
                 return false;
 
@@ -53,7 +53,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
             string[] stuff = StringData.Split(';');
             if (stuff.Length != 2)
-                return false;//This is important, incase a cunt scripts.
+                return false; //This is important, incase a cunt scripts.
 
             string username = stuff[1];
 

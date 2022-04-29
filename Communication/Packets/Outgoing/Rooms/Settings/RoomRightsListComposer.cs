@@ -7,6 +7,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
     internal class RoomRightsListComposer : MessageComposer
     {
         public Room Room { get; }
+
         public RoomRightsListComposer(Room instance)
             : base(ServerPacketHeader.RoomRightsListMessageComposer)
         {

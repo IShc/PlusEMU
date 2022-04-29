@@ -388,7 +388,7 @@
 
         public const int NuxItemListComposer = 3575; // PRODUCTION-201611291003-338511768
         public const int NuxSuggestFreeGiftsMessageComposer = 3639; // PRODUCTION-201611291003-338511768
-        public const int MassEventComposer = -1;//error 404
+        public const int MassEventComposer = -1; //error 404
 
         // Crafting
         public const int CraftableProductsMessageComposer = 1000; // PRODUCTION-201611291003-338511768

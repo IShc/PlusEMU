@@ -8,7 +8,7 @@ using Plus.HabboHotel.Users.Clothing.Parts;
 
 namespace Plus.HabboHotel.Users.Clothing
 {
-     public sealed class ClothingComponent
+    public sealed class ClothingComponent
     {
         private Habbo _habbo;
 

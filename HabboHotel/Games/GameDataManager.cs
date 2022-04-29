@@ -49,7 +49,7 @@ namespace Plus.HabboHotel.Games
         {
             return _games.Values.Count(x => x.Enabled);
         }
-    
+
         public ICollection<GameData> GameData => _games.Values;
     }
 }

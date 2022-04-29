@@ -4,7 +4,7 @@
     {
         public int UsersNow { get; }
 
-        public ConcurrentUsersGoalProgressComposer(int usersNow) 
+        public ConcurrentUsersGoalProgressComposer(int usersNow)
             : base(ServerPacketHeader.ConcurrentUsersGoalProgressMessageComposer)
         {
             UsersNow = usersNow;
@@ -12,7 +12,7 @@
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(0);//0/1 = Not done, 2 = Done & can claim, 3 = claimed.
+            packet.WriteInteger(0); //0/1 = Not done, 2 = Done & can claim, 3 = claimed.
             packet.WriteInteger(UsersNow);
             packet.WriteInteger(1000);
         }

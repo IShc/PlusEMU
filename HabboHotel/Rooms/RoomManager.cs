@@ -22,7 +22,7 @@ namespace Plus.HabboHotel.Rooms
         private readonly ConcurrentDictionary<int, Room> _rooms;
 
         private DateTime _cycleLastExecution;
-        
+
         public RoomManager()
         {
             _roomModels = new Dictionary<string, RoomModel>();
@@ -111,7 +111,7 @@ namespace Plus.HabboHotel.Rooms
                 if (model != null && !_roomModels.ContainsKey(model))
                 {
                     _roomModels.Add(model, new RoomModel(model, Convert.ToInt32(row["door_x"]), Convert.ToInt32(row["door_y"]), Convert.ToDouble(row["door_z"]), Convert.ToInt32(row["door_dir"]),
-                      Convert.ToString(row["heightmap"]), PlusEnvironment.EnumToBool(row["club_only"].ToString()), Convert.ToInt32(row["wall_height"]), true));
+                        Convert.ToString(row["heightmap"]), PlusEnvironment.EnumToBool(row["club_only"].ToString()), Convert.ToInt32(row["wall_height"]), true));
                 }
 
                 return true;
@@ -206,7 +206,6 @@ namespace Plus.HabboHotel.Rooms
             }
         }
 
-
         public List<Room> SearchGroupRooms(string query)
         {
             return _rooms.Values.Where(x => x.Group != null && x.Group.Name.ToLower().Contains(query.ToLower()) && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.UsersNow).Take(50).ToList();
@@ -224,12 +223,12 @@ namespace Plus.HabboHotel.Rooms
 
         public List<Room> GetRecommendedRooms(int amount = 50, int currentRoomId = 0)
         {
-            return _rooms.Values.Where(x => x.Id != currentRoomId && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.UsersNow).OrderByDescending(x => x.Score).Take(amount).ToList();
+            return _rooms.Values.Where(x => x.Id != currentRoomId && x.Access != RoomAccess.Invisible).OrderByDescending(x => x.UsersNow).ThenByDescending(x => x.Score).Take(amount).ToList();
         }
 
         public List<Room> GetPopularRatedRooms(int amount = 50)
         {
-            return _rooms.Values.Where(x => x.Access != RoomAccess.Invisible).OrderByDescending(x => x.Score).OrderByDescending(x => x.UsersNow).Take(amount).ToList();
+            return _rooms.Values.Where(x => x.Access != RoomAccess.Invisible).OrderByDescending(x => x.Score).ThenByDescending(x => x.UsersNow).Take(amount).ToList();
         }
 
         public List<Room> GetRoomsByCategory(int category, int amount = 50)
@@ -267,13 +266,12 @@ namespace Plus.HabboHotel.Rooms
             return _rooms.Values.Where(x => x.UsersNow > 0 && x.Access != RoomAccess.Invisible && x.UsersNow < x.UsersMax).OrderByDescending(x => x.UsersNow).FirstOrDefault();
         }
 
-
         public bool TryGetRoom(int roomId, out Room room)
         {
             return _rooms.TryGetValue(roomId, out room);
         }
 
-        public RoomData CreateRoom(GameClient session, string name, string description, int category, int maxVisitors, int tradeSettings, RoomModel model, string wallpaper = "0.0", string floor = "0.0", string landscape = "0.0", int wallthick = 0, int floorthick = 0)
+        public RoomData CreateRoom(GameClient session, string name, string description, int category, int maxVisitors, int tradeSettings, RoomModel model, string wallpaper = "0.0", string floor = "0.0", string landscape = "0.0", int wallThick = 0, int floorThick = 0)
         {
             if (name.Length < 3)
             {
@@ -298,7 +296,7 @@ namespace Plus.HabboHotel.Rooms
             }
 
             RoomData data = new(roomId, name, model.Id, session.GetHabbo().Username, session.GetHabbo().Id, "", 0, "public", "open", 0, maxVisitors, category, description, string.Empty,
-             floor, landscape, 1, 1, 0, 0, wallthick, floorthick, wallpaper, 1, 1, 1, 1, 1, 1, 1, 8, tradeSettings, true, true, true, true, true, true, true, 0, 0, true, model);
+                floor, landscape, 1, 1, 0, 0, wallThick, floorThick, wallpaper, 1, 1, 1, 1, 1, 1, 1, 8, tradeSettings, true, true, true, true, true, true, true, 0, 0, true, model);
 
             return data;
         }
@@ -319,9 +317,10 @@ namespace Plus.HabboHotel.Rooms
 
                 PlusEnvironment.GetGame().GetRoomManager().UnloadRoom(room.Id);
                 Console.Clear();
-                Log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + string.Format("{0:0.##}", ((double)i / length) * 100) + "%");
+                Log.Info("<<- SERVER SHUTDOWN ->> ROOM ITEM SAVE: " + string.Format("{0:0.##}", ((double) i / length) * 100) + "%");
                 i++;
             }
+
             Log.Info("Done disposing rooms!");
         }
     }

@@ -12,6 +12,5 @@ namespace Plus.Core.FigureData.Types
             Id = id;
             Colors = new Dictionary<int, Color>();
         }
-
     }
 }

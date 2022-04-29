@@ -17,7 +17,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Avatar
 
             if (user.IsAsleep)
                 return;
-            
+
             user.UnIdle();
 
             int x = packet.PopInt();

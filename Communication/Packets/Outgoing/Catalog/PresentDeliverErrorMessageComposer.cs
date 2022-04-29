@@ -14,8 +14,8 @@
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteBoolean(CreditError);//Do we have enough credits?
-            packet.WriteBoolean(DucketError);//Do we have enough duckets?
+            packet.WriteBoolean(CreditError); //Do we have enough credits?
+            packet.WriteBoolean(DucketError); //Do we have enough duckets?
         }
     }
 }

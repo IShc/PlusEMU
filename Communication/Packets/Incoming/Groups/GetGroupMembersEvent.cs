@@ -24,49 +24,52 @@ namespace Plus.Communication.Packets.Incoming.Groups
             switch (requestType)
             {
                 case 0:
+                {
+                    List<int> memberIds = group.GetAllMembers;
+                    foreach (int id in memberIds.ToList())
                     {
-                        List<int> memberIds = group.GetAllMembers;
-                        foreach (int id in memberIds.ToList())
-                        {
-                            UserCache groupMember = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(id);
-                            if (groupMember == null)
-                                continue;
+                        UserCache groupMember = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(id);
+                        if (groupMember == null)
+                            continue;
 
-                            if (!members.Contains(groupMember))
-                                members.Add(groupMember);
-                        }
-                        break;
+                        if (!members.Contains(groupMember))
+                            members.Add(groupMember);
                     }
+
+                    break;
+                }
 
                 case 1:
+                {
+                    List<int> adminIds = group.GetAdministrators;
+                    foreach (int id in adminIds.ToList())
                     {
-                        List<int> adminIds = group.GetAdministrators;
-                        foreach (int id in adminIds.ToList())
-                        {
-                            UserCache groupMember = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(id);
-                            if (groupMember == null)
-                                continue;
+                        UserCache groupMember = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(id);
+                        if (groupMember == null)
+                            continue;
 
-                            if (!members.Contains(groupMember))
-                                members.Add(groupMember);
-                        }
-                        break;
+                        if (!members.Contains(groupMember))
+                            members.Add(groupMember);
                     }
+
+                    break;
+                }
 
                 case 2:
+                {
+                    List<int> requestIds = group.GetRequests;
+                    foreach (int id in requestIds.ToList())
                     {
-                        List<int> requestIds = group.GetRequests;
-                        foreach (int id in requestIds.ToList())
-                        {
-                            UserCache groupMember = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(id);
-                            if (groupMember == null)
-                                continue;
+                        UserCache groupMember = PlusEnvironment.GetGame().GetCacheManager().GenerateUser(id);
+                        if (groupMember == null)
+                            continue;
 
-                            if (!members.Contains(groupMember))
-                                members.Add(groupMember);
-                        }
-                        break;
+                        if (!members.Contains(groupMember))
+                            members.Add(groupMember);
                     }
+
+                    break;
+                }
             }
 
             if (!string.IsNullOrEmpty(searchVal))

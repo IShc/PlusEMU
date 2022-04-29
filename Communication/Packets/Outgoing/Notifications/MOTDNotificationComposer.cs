@@ -3,6 +3,7 @@
     internal class MotdNotificationComposer : MessageComposer
     {
         public string Message { get; }
+
         public MotdNotificationComposer(string message)
             : base(ServerPacketHeader.MotdNotificationMessageComposer)
         {

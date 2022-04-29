@@ -67,7 +67,7 @@ namespace Plus.HabboHotel.Rooms
                 {
                     if (x == DoorX && y == DoorY)
                     {
-                        floorMap.Append(DoorZ > 9 ? ((char)(87 + DoorZ)).ToString() : DoorZ.ToString());
+                        floorMap.Append(DoorZ > 9 ? ((char) (87 + DoorZ)).ToString() : DoorZ.ToString());
                         continue;
                     }
 
@@ -78,10 +78,10 @@ namespace Plus.HabboHotel.Rooms
                     }
 
                     double height = SqFloorHeight[x, y];
-                    string val = height > 9 ? ((char)(87 + height)).ToString() : height.ToString();
+                    string val = height > 9 ? ((char) (87 + height)).ToString() : height.ToString();
                     floorMap.Append(val);
-
                 }
+
                 floorMap.Append(Convert.ToChar(13));
             }
 
@@ -133,7 +133,7 @@ namespace Plus.HabboHotel.Rooms
                 z = 9;
             if (z < 0)
                 z = 0;
-            SqFloorHeight[x, y] = (short)z;
+            SqFloorHeight[x, y] = (short) z;
             SqState[x, y] = SquareState.Open;
         }
 

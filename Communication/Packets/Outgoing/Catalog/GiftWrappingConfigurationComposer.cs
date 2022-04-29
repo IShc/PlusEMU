@@ -5,7 +5,6 @@
         public GiftWrappingConfigurationComposer()
             : base(ServerPacketHeader.GiftWrappingConfigurationMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)
@@ -18,6 +17,7 @@
                 packet.WriteInteger(i);
                 i++;
             }
+
             packet.WriteInteger(7);
             packet.WriteInteger(0);
             packet.WriteInteger(1);

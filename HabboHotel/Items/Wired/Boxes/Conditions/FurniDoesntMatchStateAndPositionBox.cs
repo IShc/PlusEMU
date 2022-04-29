@@ -6,7 +6,7 @@ using Plus.HabboHotel.Rooms;
 
 namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
 {
-    internal class FurniDoesntMatchStateAndPositionBox: IWiredItem
+    internal class FurniDoesntMatchStateAndPositionBox : IWiredItem
     {
         public Room Instance { get; set; }
 
@@ -76,25 +76,26 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                     string[] partsString = I.Split(':');
                     string[] part = partsString[1].Split(',');
 
-                    if (int.Parse(StringData.Split(';')[0]) == 1)//State
+                    if (int.Parse(StringData.Split(';')[0]) == 1) //State
                     {
                         if (ii.ExtraData == part[4])
                             return false;
                     }
 
-                    if (int.Parse(StringData.Split(';')[1]) == 1)//Direction
+                    if (int.Parse(StringData.Split(';')[1]) == 1) //Direction
                     {
                         if (ii.Rotation == Convert.ToInt32(part[3]))
                             return false;
                     }
 
-                    if (int.Parse(StringData.Split(';')[2]) == 1)//Position
+                    if (int.Parse(StringData.Split(';')[2]) == 1) //Position
                     {
                         if (ii.GetX == Convert.ToInt32(part[0]) && ii.GetY == Convert.ToInt32(part[1]) && ii.GetZ == Convert.ToDouble(part[2]))
                             return false;
-                    }              
+                    }
                 }
             }
+
             return true;
         }
     }

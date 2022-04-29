@@ -5,12 +5,11 @@
         public TraxSongInfoComposer()
             : base(ServerPacketHeader.TraxSongInfoMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(0);//Count
+            packet.WriteInteger(0); //Count
         }
     }
 }

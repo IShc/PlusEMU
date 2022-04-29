@@ -29,7 +29,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
             if (!room.GetRoomUserManager().AddAvatarToRoom(session))
             {
                 room.GetRoomUserManager().RemoveUserFromRoom(session, false);
-                return;//TODO: Remove?
+                return; //TODO: Remove?
             }
 
             room.SendObjects(session);
@@ -55,7 +55,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 room.GetWired().TriggerEvent(WiredBoxType.TriggerRoomEnter, session.GetHabbo());
 
             if (PlusEnvironment.GetUnixTimestamp() < session.GetHabbo().FloodTime && session.GetHabbo().FloodTime != 0)
-                session.SendPacket(new FloodControlComposer((int)session.GetHabbo().FloodTime - (int)PlusEnvironment.GetUnixTimestamp()));
+                session.SendPacket(new FloodControlComposer((int) session.GetHabbo().FloodTime - (int) PlusEnvironment.GetUnixTimestamp()));
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Plus.HabboHotel.Items.Interactor
             if (item.ExtraData == "1")
                 return;
 
-            if(Gamemap.TileDistance(actor.X, actor.Y, item.GetX, item.GetY) > 2)
+            if (Gamemap.TileDistance(actor.X, actor.Y, item.GetX, item.GetY) > 2)
                 return;
 
             item.ExtraData = "1";

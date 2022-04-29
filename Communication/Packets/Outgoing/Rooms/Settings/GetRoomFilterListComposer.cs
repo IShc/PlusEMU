@@ -5,6 +5,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
     internal class GetRoomFilterListComposer : MessageComposer
     {
         public List<string> WordFilterList { get; }
+
         public GetRoomFilterListComposer(List<string> wordFilterList)
             : base(ServerPacketHeader.GetRoomFilterListMessageComposer)
         {

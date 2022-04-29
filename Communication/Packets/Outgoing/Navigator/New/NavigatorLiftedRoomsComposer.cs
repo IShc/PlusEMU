@@ -5,7 +5,6 @@
         public NavigatorLiftedRoomsComposer()
             : base(ServerPacketHeader.NavigatorLiftedRoomsMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

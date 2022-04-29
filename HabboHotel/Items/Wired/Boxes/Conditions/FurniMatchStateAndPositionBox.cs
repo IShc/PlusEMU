@@ -86,7 +86,9 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                             if (ii.ExtraData != part[4])
                                 return false;
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
 
                     if (int.Parse(StringData.Split(';')[1]) == 1) //Direction
@@ -96,7 +98,9 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                             if (ii.Rotation != Convert.ToInt32(part[3]))
                                 return false;
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
 
                     if (int.Parse(StringData.Split(';')[2]) == 1) //Position
@@ -107,11 +111,13 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                                 ii.GetZ != Convert.ToDouble(part[2]))
                                 return false;
                         }
-                        catch { }
+                        catch
+                        {
+                        }
                     }
-
                 }
             }
+
             return true;
         }
     }

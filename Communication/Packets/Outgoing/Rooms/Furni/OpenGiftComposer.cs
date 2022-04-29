@@ -25,7 +25,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Furni
             packet.WriteString(Data.ItemName);
             packet.WriteInteger(Item.Id);
             packet.WriteString(Data.Type.ToString());
-            packet.WriteBoolean(ItemIsInRoom);//Is it in the room?
+            packet.WriteBoolean(ItemIsInRoom); //Is it in the room?
             packet.WriteString(Text);
         }
     }

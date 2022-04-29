@@ -4,7 +4,7 @@
     {
         public string Figure { get; }
         public string Gender { get; }
-        
+
         public AvatarAspectUpdateMessageComposer(string figure, string gender)
             : base(ServerPacketHeader.AvatarAspectUpdateMessageComposer)
         {

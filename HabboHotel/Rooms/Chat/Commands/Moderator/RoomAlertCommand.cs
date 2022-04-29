@@ -18,7 +18,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 return;
             }
 
-            if(!session.GetHabbo().GetPermissions().HasRight("mod_alert") && room.OwnerId != session.GetHabbo().Id)
+            if (!session.GetHabbo().GetPermissions().HasRight("mod_alert") && room.OwnerId != session.GetHabbo().Id)
             {
                 session.SendWhisper("You can only Room Alert in your own room!");
                 return;
@@ -32,6 +32,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
                 roomUser.GetClient().SendNotification(session.GetHabbo().Username + " alerted the room with the following message:\n\n" + message);
             }
+
             session.SendWhisper("Message successfully sent to the room.");
         }
     }

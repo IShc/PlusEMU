@@ -34,6 +34,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                     packet.WriteString(item.ExtraData);
                     break;
             }
+
             packet.WriteInteger(-1);
             packet.WriteInteger((item.GetBaseItem().Modes > 1) ? 1 : 0);
             packet.WriteInteger(userId);

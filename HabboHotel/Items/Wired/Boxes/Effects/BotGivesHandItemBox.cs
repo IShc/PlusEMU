@@ -43,14 +43,14 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (string.IsNullOrEmpty(StringData))
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
 
-            if(player == null)
+            if (player == null)
                 return false;
 
             RoomUser actor = Instance.GetRoomUserManager().GetRoomUserByHabbo(player.Id);
 
-            if(actor == null)
+            if (actor == null)
                 return false;
 
             RoomUser user = Instance.GetRoomUserManager().GetBotByName(StringData.Split(';')[0]);
@@ -64,7 +64,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                     return false;
 
                 string[] data = StringData.Split(';');
-                
+
                 if (!int.TryParse(data[1], out int drinkId))
                     return false;
 

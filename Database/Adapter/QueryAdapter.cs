@@ -71,6 +71,7 @@ namespace Plus.Database.Adapter
                 {
                     adapter.Fill(dataSet);
                 }
+
                 if ((dataSet.Tables.Count > 0) && (dataSet.Tables[0].Rows.Count == 1))
                 {
                     row = dataSet.Tables[0].Rows[0];
@@ -154,6 +155,7 @@ namespace Plus.Database.Adapter
             {
                 ExceptionLogger.LogQueryError(Command.CommandText, exception);
             }
+
             return lastInsertedId;
         }
 

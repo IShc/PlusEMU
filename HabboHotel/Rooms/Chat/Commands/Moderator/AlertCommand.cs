@@ -41,7 +41,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
 
             targetClient.SendNotification(session.GetHabbo().Username + " alerted you with the following message:\n\n" + message);
             session.SendWhisper("Alert successfully sent to " + targetClient.GetHabbo().Username);
-
         }
     }
 }

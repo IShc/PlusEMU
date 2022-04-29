@@ -16,7 +16,7 @@ namespace Plus.Communication.Packets.Outgoing.LandingView
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(LandingPromotions.Count);//Count
+            packet.WriteInteger(LandingPromotions.Count); //Count
             foreach (Promotion promotion in LandingPromotions.ToList())
             {
                 packet.WriteInteger(promotion.Id); //ID

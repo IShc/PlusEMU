@@ -67,43 +67,36 @@ namespace Plus.HabboHotel.Rooms.Games.Football
                     {
                         newX = user.X;
                         newY = user.Y + 2;
-
                     }
                     else if (user.RotBody == 6)
                     {
                         newX = user.X - 2;
                         newY = user.Y;
-
                     }
                     else if (user.RotBody == 0)
                     {
                         newX = user.X;
                         newY = user.Y - 2;
-
                     }
                     else if (user.RotBody == 2)
                     {
                         newX = user.X + 2;
                         newY = user.Y;
-
                     }
                     else if (user.RotBody == 1)
                     {
                         newX = user.X + 2;
                         newY = user.Y - 2;
-
                     }
                     else if (user.RotBody == 7)
                     {
                         newX = user.X - 2;
                         newY = user.Y - 2;
-
                     }
                     else if (user.RotBody == 3)
                     {
                         newX = user.X + 2;
                         newY = user.Y + 2;
-
                     }
                     else if (user.RotBody == 5)
                     {
@@ -155,7 +148,7 @@ namespace Plus.HabboHotel.Rooms.Games.Football
                         }
                     }
                 }
-                else if (differenceX <= 1 && differenceX >= -1 && differenceY <= 1 && differenceY >= -1 && VerifyBall(user, item.Coordinate.X, item.Coordinate.Y))//VERYFIC BALL CHECAR SI ESTA EN DIRECCION ASIA LA PELOTA
+                else if (differenceX <= 1 && differenceX >= -1 && differenceY <= 1 && differenceY >= -1 && VerifyBall(user, item.Coordinate.X, item.Coordinate.Y)) //VERYFIC BALL CHECAR SI ESTA EN DIRECCION ASIA LA PELOTA
                 {
                     newX = differenceX * -1;
                     newY = differenceY * -1;
@@ -171,9 +164,9 @@ namespace Plus.HabboHotel.Rooms.Games.Football
             }
         }
 
-        private bool VerifyBall(RoomUser user, int actualx, int actualy)
+        private bool VerifyBall(RoomUser user, int actualX, int actualY)
         {
-            return Rotation.Calculate(user.X, user.Y, actualx, actualy) == user.RotBody;
+            return Rotation.Calculate(user.X, user.Y, actualX, actualY) == user.RotBody;
         }
 
         public void RegisterGate(Item item)
@@ -205,25 +198,25 @@ namespace Plus.HabboHotel.Rooms.Games.Football
             switch (item.Team)
             {
                 case Team.Blue:
-                    {
-                        _gates[0] = null;
-                        break;
-                    }
+                {
+                    _gates[0] = null;
+                    break;
+                }
                 case Team.Red:
-                    {
-                        _gates[1] = null;
-                        break;
-                    }
+                {
+                    _gates[1] = null;
+                    break;
+                }
                 case Team.Green:
-                    {
-                        _gates[2] = null;
-                        break;
-                    }
+                {
+                    _gates[2] = null;
+                    break;
+                }
                 case Team.Yellow:
-                    {
-                        _gates[3] = null;
-                        break;
-                    }
+                {
+                    _gates[3] = null;
+                    break;
+                }
             }
         }
 
@@ -233,28 +226,28 @@ namespace Plus.HabboHotel.Rooms.Games.Football
             {
                 case InteractionType.FootballGoalRed:
                 case InteractionType.FootballCounterRed:
-                    {
-                        _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Red);
-                        break;
-                    }
+                {
+                    _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Red);
+                    break;
+                }
                 case InteractionType.FootballGoalGreen:
                 case InteractionType.FootballCounterGreen:
-                    {
-                        _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Green);
-                        break;
-                    }
+                {
+                    _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Green);
+                    break;
+                }
                 case InteractionType.FootballGoalBlue:
                 case InteractionType.FootballCounterBlue:
-                    {
-                        _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Blue);
-                        break;
-                    }
+                {
+                    _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Blue);
+                    break;
+                }
                 case InteractionType.FootballGoalYellow:
                 case InteractionType.FootballCounterYellow:
-                    {
-                        _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Yellow);
-                        break;
-                    }
+                {
+                    _room.GetGameManager().RemoveFurnitureFromTeam(item, Team.Yellow);
+                    break;
+                }
             }
         }
 

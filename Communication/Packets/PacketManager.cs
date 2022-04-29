@@ -41,7 +41,7 @@ using Plus.Communication.Packets.Incoming.Rooms.Furni;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.LoveLocks;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.Moodlight;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.RentableSpaces;
-using Plus.Communication.Packets.Incoming.Rooms.Furni.Stickys;
+using Plus.Communication.Packets.Incoming.Rooms.Furni.Stickies;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.Wired;
 using Plus.Communication.Packets.Incoming.Rooms.Furni.YouTubeTelevisions;
 using Plus.Communication.Packets.Incoming.Rooms.Settings;
@@ -123,27 +123,26 @@ namespace Plus.Communication.Packets
             RegisterModeration();
             RegisterGameCenter();
             RegisterNames();
-
         }
 
         public void TryExecutePacket(GameClient session, ClientPacket packet)
         {
             if (session == null)
                 return;
-            
+
             if (!_incomingPackets.TryGetValue(packet.Id, out IPacketEvent pak))
             {
                 if (Debugger.IsAttached)
                     Log.Debug("Unhandled Packet: " + packet.Id);
                 return;
             }
-            
+
 //            if (System.Diagnostics.Debugger.IsAttached)
 //            {
-                if (_packetNames.ContainsKey(packet.Id))
-                    Log.Debug("Handled Packet: [" + packet.Id + "] " + _packetNames[packet.Id]);
-                else
-                    Log.Debug("Handled Packet: [" + packet.Id + "] UnnamedPacketEvent");
+            if (_packetNames.ContainsKey(packet.Id))
+                Log.Debug("Handled Packet: [" + packet.Id + "] " + _packetNames[packet.Id]);
+            else
+                Log.Debug("Handled Packet: [" + packet.Id + "] UnnamedPacketEvent");
 //            }
             if (!IgnoreTasks)
 #pragma warning disable CS0162
@@ -248,7 +247,6 @@ namespace Plus.Communication.Packets
             _incomingPackets.Add(ClientPacketHeader.GetGroupFurniConfigMessageEvent, new GetGroupFurniConfigEvent());
             _incomingPackets.Add(ClientPacketHeader.CheckGnomeNameMessageEvent, new CheckGnomeNameEvent());
             _incomingPackets.Add(ClientPacketHeader.GetClubGiftsMessageEvent, new GetClubGiftsEvent());
-
         }
 
         private void RegisterMarketplace()

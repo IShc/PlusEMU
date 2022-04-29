@@ -11,7 +11,7 @@ namespace Plus.HabboHotel.Items.Interactor
             if (item.Team == Team.None)
                 return;
 
-            item.ExtraData = item.GetRoom().GetGameManager().Points[Convert.ToInt32( item.Team)].ToString();
+            item.ExtraData = item.GetRoom().GetGameManager().Points[Convert.ToInt32(item.Team)].ToString();
             item.UpdateState(false, true);
         }
 

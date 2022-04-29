@@ -37,6 +37,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 
             if (thisUser.Team != Team.None)
                 return;
+
             if (thisUser.IsLying)
                 return;
 

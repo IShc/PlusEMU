@@ -96,6 +96,7 @@ namespace Plus.HabboHotel.Rooms.AI
         public bool IsPet => AiType == BotAIType.Pet;
 
         #region Speech Related
+
         public void LoadRandomSpeech(List<RandomSpeech> speeches)
         {
             RandomSpeech = new List<RandomSpeech>();
@@ -114,9 +115,11 @@ namespace Plus.HabboHotel.Rooms.AI
                 return new RandomSpeech("", 0);
             return RandomSpeech[rand.Next(0, RandomSpeech.Count - 1)];
         }
+
         #endregion
 
         #region AI Related
+
         public BotAI GenerateBotAI(int virtualId)
         {
             switch (AiType)
@@ -131,6 +134,7 @@ namespace Plus.HabboHotel.Rooms.AI
                     return new GenericBot(virtualId);
             }
         }
+
         #endregion
 
         public int ChatBubble { get; set; }

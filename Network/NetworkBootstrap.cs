@@ -34,7 +34,7 @@ namespace Plus.Network
             BossGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().Data["game.tcp.acceptGroupThreads"]));
             WorkerGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().Data["game.tcp.ioGroupThreads"]));
             ChannelGroup = new MultithreadEventLoopGroup(int.Parse(PlusEnvironment.GetConfig().Data["game.tcp.channelGroupThreads"]));
-            
+
             ServerBootstrap = new ServerBootstrap()
                 .Group(BossGroup, WorkerGroup)
                 .Channel<TcpServerSocketChannel>()
@@ -53,7 +53,7 @@ namespace Plus.Network
                 .ChildOption(ChannelOption.RcvbufAllocator, new FixedRecvByteBufAllocator(1024))
                 .ChildOption(ChannelOption.Allocator, UnpooledByteBufferAllocator.Default);
             ServerChannel = await ServerBootstrap.BindAsync(IPAddress.Parse(Host), Port);
-            Log.Info($"Game Server listening on {((IPEndPoint)ServerChannel.LocalAddress).Address.MapToIPv4()}:{Port}");
+            Log.Info($"Game Server listening on {((IPEndPoint) ServerChannel.LocalAddress).Address.MapToIPv4()}:{Port}");
         }
 
         /// <summary>

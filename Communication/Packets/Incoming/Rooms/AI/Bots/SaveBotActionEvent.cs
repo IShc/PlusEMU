@@ -48,160 +48,173 @@ namespace Plus.Communication.Packets.Incoming.Rooms.AI.Bots
             switch (actionId)
             {
                 #region Copy Looks (1)
+
                 case 1:
+                {
+                    //Change the defaults
+                    bot.BotData.Look = session.GetHabbo().Look;
+                    bot.BotData.Gender = session.GetHabbo().Gender;
+
+                    UserChangeComposer userChangeComposer = new(bot.VirtualId, bot.BotData);
+
+                    room.SendPacket(userChangeComposer);
+
+
+                    using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                     {
-                        //Change the defaults
-                        bot.BotData.Look = session.GetHabbo().Look;
-                        bot.BotData.Gender = session.GetHabbo().Gender;
-
-                        UserChangeComposer userChangeComposer = new(bot.VirtualId, bot.BotData);
-                        
-                        room.SendPacket(userChangeComposer);
-
-                        
-
-                        using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
-                        {
-                            dbClient.SetQuery("UPDATE `bots` SET `look` = @look, `gender` = '" + session.GetHabbo().Gender + "' WHERE `id` = '" + bot.BotData.Id + "' LIMIT 1");
-                            dbClient.AddParameter("look", session.GetHabbo().Look);
-                            dbClient.RunQuery();
-                        }
-
-                        //Room.SendMessage(new UserChangeComposer(BotUser.GetClient(), true));
-                        break;
+                        dbClient.SetQuery("UPDATE `bots` SET `look` = @look, `gender` = '" + session.GetHabbo().Gender + "' WHERE `id` = '" + bot.BotData.Id + "' LIMIT 1");
+                        dbClient.AddParameter("look", session.GetHabbo().Look);
+                        dbClient.RunQuery();
                     }
+
+                    //Room.SendMessage(new UserChangeComposer(BotUser.GetClient(), true));
+                    break;
+                }
+
                 #endregion
 
                 #region Setup Speech (2)
+
                 case 2:
+                {
+                    string[] configData = dataString.Split(new[]
                     {
+                        ";#;"
+                    }, StringSplitOptions.None);
 
-                        string[] configData = dataString.Split(new[]
+                    string[] speechData = configData[0].Split(new[]
+                    {
+                        '\r',
+                        '\n'
+                    }, StringSplitOptions.RemoveEmptyEntries);
+
+                    string automaticChat = Convert.ToString(configData[1]);
+                    string speakingInterval = Convert.ToString(configData[2]);
+                    string mixChat = Convert.ToString(configData[3]);
+
+                    if (string.IsNullOrEmpty(speakingInterval) || Convert.ToInt32(speakingInterval) <= 0 || Convert.ToInt32(speakingInterval) < 7)
+                        speakingInterval = "7";
+
+                    roomBot.AutomaticChat = Convert.ToBoolean(automaticChat);
+                    roomBot.SpeakingInterval = Convert.ToInt32(speakingInterval);
+                    roomBot.MixSentences = Convert.ToBoolean(mixChat);
+
+                    using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
+                    {
+                        dbClient.RunQuery("DELETE FROM `bots_speech` WHERE `bot_id` = '" + bot.BotData.Id + "'");
+
+                        #region Save Data - TODO: MAKE METHODS FOR THIS.
+
+                        for (int i = 0; i <= speechData.Length - 1; i++)
                         {
-                            ";#;"
-                        }, StringSplitOptions.None);
-
-                        string[] speechData = configData[0].Split(new[]
-                        {
-                            '\r',
-                            '\n'
-                        }, StringSplitOptions.RemoveEmptyEntries);
-
-                        string automaticChat = Convert.ToString(configData[1]);
-                        string speakingInterval = Convert.ToString(configData[2]);
-                        string mixChat = Convert.ToString(configData[3]);
-
-                        if (string.IsNullOrEmpty(speakingInterval) || Convert.ToInt32(speakingInterval) <= 0 || Convert.ToInt32(speakingInterval) < 7)
-                            speakingInterval = "7";
-
-                        roomBot.AutomaticChat = Convert.ToBoolean(automaticChat);
-                        roomBot.SpeakingInterval = Convert.ToInt32(speakingInterval);
-                        roomBot.MixSentences = Convert.ToBoolean(mixChat);
-
-                        using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
-                        {
-                            dbClient.RunQuery("DELETE FROM `bots_speech` WHERE `bot_id` = '" + bot.BotData.Id + "'");
-
-                            #region Save Data - TODO: MAKE METHODS FOR THIS.  
-
-                            for (int i = 0; i <= speechData.Length - 1; i++)
-                            {
-                                dbClient.SetQuery("INSERT INTO `bots_speech` (`bot_id`, `text`) VALUES (@id, @data)");
-                                dbClient.AddParameter("id", botId);
-                                dbClient.AddParameter("data", speechData[i]);
-                                dbClient.RunQuery();
-
-                                dbClient.SetQuery("UPDATE `bots` SET `automatic_chat` = @AutomaticChat, `speaking_interval` = @SpeakingInterval, `mix_sentences` = @MixChat WHERE `id` = @id LIMIT 1");
-                                dbClient.AddParameter("id", botId);
-                                dbClient.AddParameter("AutomaticChat", automaticChat.ToLower());
-                                dbClient.AddParameter("SpeakingInterval", Convert.ToInt32(speakingInterval));
-                                dbClient.AddParameter("MixChat", PlusEnvironment.BoolToEnum(Convert.ToBoolean(mixChat)));
-                                dbClient.RunQuery();
-                            }
-                            #endregion
-
-                            #region Handle Speech
-                            roomBot.RandomSpeech.Clear();
-
-                            dbClient.SetQuery("SELECT `text` FROM `bots_speech` WHERE `bot_id` = @id");
+                            dbClient.SetQuery("INSERT INTO `bots_speech` (`bot_id`, `text`) VALUES (@id, @data)");
                             dbClient.AddParameter("id", botId);
+                            dbClient.AddParameter("data", speechData[i]);
+                            dbClient.RunQuery();
 
-                            DataTable botSpeech = dbClient.GetTable();
-
-                            foreach (DataRow speech in botSpeech.Rows)
-                            {
-                                roomBot.RandomSpeech.Add(new RandomSpeech(Convert.ToString(speech["text"]), botId));
-                            }
-
-                            #endregion
+                            dbClient.SetQuery("UPDATE `bots` SET `automatic_chat` = @AutomaticChat, `speaking_interval` = @SpeakingInterval, `mix_sentences` = @MixChat WHERE `id` = @id LIMIT 1");
+                            dbClient.AddParameter("id", botId);
+                            dbClient.AddParameter("AutomaticChat", automaticChat.ToLower());
+                            dbClient.AddParameter("SpeakingInterval", Convert.ToInt32(speakingInterval));
+                            dbClient.AddParameter("MixChat", PlusEnvironment.BoolToEnum(Convert.ToBoolean(mixChat)));
+                            dbClient.RunQuery();
                         }
-                        break;
+
+                        #endregion
+
+                        #region Handle Speech
+
+                        roomBot.RandomSpeech.Clear();
+
+                        dbClient.SetQuery("SELECT `text` FROM `bots_speech` WHERE `bot_id` = @id");
+                        dbClient.AddParameter("id", botId);
+
+                        DataTable botSpeech = dbClient.GetTable();
+
+                        foreach (DataRow speech in botSpeech.Rows)
+                        {
+                            roomBot.RandomSpeech.Add(new RandomSpeech(Convert.ToString(speech["text"]), botId));
+                        }
+
+                        #endregion
                     }
+
+                    break;
+                }
+
                 #endregion
 
                 #region Relax (3)
-                case 3:
-                    {
-                        if (bot.BotData.WalkingMode == "stand")
-                            bot.BotData.WalkingMode = "freeroam";
-                        else
-                            bot.BotData.WalkingMode = "stand";
 
-                        using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
-                        {
-                            dbClient.RunQuery("UPDATE `bots` SET `walk_mode` = '" + bot.BotData.WalkingMode + "' WHERE `id` = '" + bot.BotData.Id + "' LIMIT 1");
-                        }
-                        break;
+                case 3:
+                {
+                    if (bot.BotData.WalkingMode == "stand")
+                        bot.BotData.WalkingMode = "freeroam";
+                    else
+                        bot.BotData.WalkingMode = "stand";
+
+                    using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
+                    {
+                        dbClient.RunQuery("UPDATE `bots` SET `walk_mode` = '" + bot.BotData.WalkingMode + "' WHERE `id` = '" + bot.BotData.Id + "' LIMIT 1");
                     }
+
+                    break;
+                }
+
                 #endregion
 
                 #region Dance (4)
-                case 4:
-                    {
-                        if (bot.BotData.DanceId > 0)
-                            bot.BotData.DanceId = 0;
-                        else
-                        {
-                            Random randomDance = new();
-                            bot.BotData.DanceId = randomDance.Next(1, 4);
-                        }
 
-                        room.SendPacket(new DanceComposer(bot.VirtualId, bot.BotData.DanceId));
-                        break;
+                case 4:
+                {
+                    if (bot.BotData.DanceId > 0)
+                        bot.BotData.DanceId = 0;
+                    else
+                    {
+                        Random randomDance = new();
+                        bot.BotData.DanceId = randomDance.Next(1, 4);
                     }
+
+                    room.SendPacket(new DanceComposer(bot.VirtualId, bot.BotData.DanceId));
+                    break;
+                }
+
                 #endregion
 
                 #region Change Name (5)
+
                 case 5:
+                {
+                    if (dataString.Length == 0)
                     {
-                        if (dataString.Length == 0)
-                        {
-                            session.SendWhisper("Come on, atleast give the bot a name!");
-                            return;
-                        }
-
-                        if (dataString.Length >= 16)
-                        {
-                            session.SendWhisper("Come on, the bot doesn't need a name that long!");
-                            return;
-                        }
-
-                        if (dataString.Contains("<img src") || dataString.Contains("<font ") || dataString.Contains("</font>") || dataString.Contains("</a>") || dataString.Contains("<i>"))
-                        {
-                            session.SendWhisper("No HTML, please :<");
-                            return;
-                        }
-
-                        bot.BotData.Name = dataString;                      
-                        using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
-                        {
-                            dbClient.SetQuery("UPDATE `bots` SET `name` = @name WHERE `id` = '" + bot.BotData.Id + "' LIMIT 1");
-                            dbClient.AddParameter("name", dataString);
-                            dbClient.RunQuery();
-                        }
-                        room.SendPacket(new UsersComposer(bot));
-                        break;
+                        session.SendWhisper("Come on, atleast give the bot a name!");
+                        return;
                     }
+
+                    if (dataString.Length >= 16)
+                    {
+                        session.SendWhisper("Come on, the bot doesn't need a name that long!");
+                        return;
+                    }
+
+                    if (dataString.Contains("<img src") || dataString.Contains("<font ") || dataString.Contains("</font>") || dataString.Contains("</a>") || dataString.Contains("<i>"))
+                    {
+                        session.SendWhisper("No HTML, please :<");
+                        return;
+                    }
+
+                    bot.BotData.Name = dataString;
+                    using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
+                    {
+                        dbClient.SetQuery("UPDATE `bots` SET `name` = @name WHERE `id` = '" + bot.BotData.Id + "' LIMIT 1");
+                        dbClient.AddParameter("name", dataString);
+                        dbClient.RunQuery();
+                    }
+
+                    room.SendPacket(new UsersComposer(bot));
+                    break;
+                }
+
                 #endregion
             }
         }

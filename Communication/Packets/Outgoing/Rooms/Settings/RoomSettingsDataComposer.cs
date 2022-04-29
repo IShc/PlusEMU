@@ -5,6 +5,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
     internal class RoomSettingsDataComposer : MessageComposer
     {
         public Room Room { get; }
+
         public RoomSettingsDataComposer(Room room)
             : base(ServerPacketHeader.RoomSettingsDataMessageComposer)
         {
@@ -29,17 +30,17 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Settings
 
             packet.WriteInteger(Room.TradeSettings); //Trade
             packet.WriteInteger(Room.AllowPets); // allows pets in room - pet system lacking, so always off
-            packet.WriteInteger(Room.AllowPetsEating);// allows pets to eat your food - pet system lacking, so always off
+            packet.WriteInteger(Room.AllowPetsEating); // allows pets to eat your food - pet system lacking, so always off
             packet.WriteInteger(Room.RoomBlockingEnabled);
             packet.WriteInteger(Room.HideWall);
             packet.WriteInteger(Room.WallThickness);
             packet.WriteInteger(Room.FloorThickness);
 
-            packet.WriteInteger(Room.ChatMode);//Chat mode
-            packet.WriteInteger(Room.ChatSize);//Chat size
-            packet.WriteInteger(Room.ChatSpeed);//Chat speed
-            packet.WriteInteger(Room.ChatDistance);//Hearing Distance
-            packet.WriteInteger(Room.ExtraFlood);//Additional Flood
+            packet.WriteInteger(Room.ChatMode); //Chat mode
+            packet.WriteInteger(Room.ChatSize); //Chat size
+            packet.WriteInteger(Room.ChatSpeed); //Chat speed
+            packet.WriteInteger(Room.ChatDistance); //Hearing Distance
+            packet.WriteInteger(Room.ExtraFlood); //Additional Flood
 
             packet.WriteBoolean(true);
 

@@ -38,7 +38,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             if (!PlusEnvironment.GetGame().GetCatalog().TryGetPage(pageId, out CatalogPage page))
                 return;
 
-            if ( !page.Enabled || !page.Visible || page.MinimumRank > session.GetHabbo().Rank || page.MinimumVip > session.GetHabbo().VipRank && session.GetHabbo().Rank == 1)
+            if (!page.Enabled || !page.Visible || page.MinimumRank > session.GetHabbo().Rank || page.MinimumVip > session.GetHabbo().VipRank && session.GetHabbo().Rank == 1)
                 return;
 
             if (!page.Items.TryGetValue(itemId, out CatalogItem item))
@@ -87,7 +87,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
             if ((DateTime.Now - session.GetHabbo().LastGiftPurchaseTime).TotalSeconds <= 15.0)
             {
                 session.SendNotification("You're purchasing gifts too fast! Please wait 15 seconds!");
-        
+
                 session.GetHabbo().GiftPurchasingWarnings += 1;
                 if (session.GetHabbo().GiftPurchasingWarnings >= 25)
                     session.GetHabbo().SessionGiftBlocked = true;
@@ -231,7 +231,7 @@ namespace Plus.Communication.Packets.Incoming.Catalog
                     PlusEnvironment.GetGame().GetQuestManager().ProgressUserQuest(session, QuestType.GiftOthers);
                 }
             }
-       
+
             session.SendPacket(new PurchaseOkComposer(item, presentData));
 
             if (item.CostCredits > 0)

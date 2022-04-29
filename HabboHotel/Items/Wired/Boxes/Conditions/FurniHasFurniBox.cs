@@ -61,6 +61,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Conditions
                 if (!hasFurni)
                     return false;
             }
+
             return true;
         }
     }

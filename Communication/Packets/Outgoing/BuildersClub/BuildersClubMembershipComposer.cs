@@ -5,7 +5,6 @@
         public BuildersClubMembershipComposer()
             : base(ServerPacketHeader.BuildersClubMembershipMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

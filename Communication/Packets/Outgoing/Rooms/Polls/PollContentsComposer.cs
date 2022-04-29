@@ -5,15 +5,14 @@
         public PollContentsComposer()
             : base(3826)
         {
-
         }
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(111141);//Room Id
-            packet.WriteString("Customer Satisfaction Poll");//Title
-            packet.WriteString("Thanks!");//Ending message
-            packet.WriteInteger(2);//Questions
+            packet.WriteInteger(111141); //Room Id
+            packet.WriteString("Customer Satisfaction Poll"); //Title
+            packet.WriteString("Thanks!"); //Ending message
+            packet.WriteInteger(2); //Questions
             {
                 packet.WriteInteger(9299);
                 packet.WriteInteger(1);

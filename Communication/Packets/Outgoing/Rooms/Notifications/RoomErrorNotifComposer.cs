@@ -3,6 +3,7 @@
     internal class RoomErrorNotifComposer : MessageComposer
     {
         public int Error { get; }
+
         public RoomErrorNotifComposer(int error)
             : base(ServerPacketHeader.RoomErrorNotifMessageComposer)
         {

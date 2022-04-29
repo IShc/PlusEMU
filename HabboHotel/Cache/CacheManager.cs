@@ -22,6 +22,7 @@ namespace Plus.HabboHotel.Cache
             _process.Init();
             Log.Info("Cache Manager -> LOADED");
         }
+
         public bool ContainsUser(int id)
         {
             return _usersCached.ContainsKey(id);

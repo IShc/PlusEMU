@@ -8,16 +8,16 @@ namespace Plus.Communication.Encryption.Crypto.Prng
         private int j;
         private readonly byte[] bytes;
 
-        public const int POOLSIZE = 256;
+        public const int PoolSize = 256;
 
         public ARC4()
         {
-            bytes = new byte[POOLSIZE];
+            bytes = new byte[PoolSize];
         }
 
         public ARC4(byte[] key)
         {
-            bytes = new byte[POOLSIZE];
+            bytes = new byte[PoolSize];
             Initialize(key);
         }
 
@@ -26,14 +26,14 @@ namespace Plus.Communication.Encryption.Crypto.Prng
             i = 0;
             j = 0;
 
-            for (i = 0; i < POOLSIZE; ++i)
+            for (i = 0; i < PoolSize; ++i)
             {
-                bytes[i] = (byte)i;
+                bytes[i] = (byte) i;
             }
 
-            for (i = 0; i < POOLSIZE; ++i)
+            for (i = 0; i < PoolSize; ++i)
             {
-                j = (j + bytes[i] + key[i % key.Length]) & (POOLSIZE - 1);
+                j = (j + bytes[i] + key[i % key.Length]) & (PoolSize - 1);
                 Swap(i, j);
             }
 
@@ -43,15 +43,13 @@ namespace Plus.Communication.Encryption.Crypto.Prng
 
         private void Swap(int a, int b)
         {
-            byte t = bytes[a];
-            bytes[a] = bytes[b];
-            bytes[b] = t;
+            (bytes[a], bytes[b]) = (bytes[b], bytes[a]);
         }
 
         public byte Next()
         {
-            i = ++i & (POOLSIZE - 1);
-            j = (j + bytes[i]) & (POOLSIZE - 1);
+            i = ++i & (PoolSize - 1);
+            j = (j + bytes[i]) & (PoolSize - 1);
             Swap(i, j);
             return bytes[(bytes[i] + bytes[j]) & 255];
         }
@@ -69,9 +67,6 @@ namespace Plus.Communication.Encryption.Crypto.Prng
             Encrypt(ref src);
         }
         
-        
-
-
         public IByteBuffer Decipher(IByteBuffer buffer)
         {
             IByteBuffer result = Unpooled.Buffer();

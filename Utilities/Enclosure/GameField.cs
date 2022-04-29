@@ -10,7 +10,7 @@ namespace Plus.Utilities.Enclosure
     {
         private readonly AStarSolver<GameField> _astarSolver;
         private readonly bool _diagonal;
-        private readonly Queue<FieldUpdate> _newEntries;// = new Queue<FieldUpdate>();
+        private readonly Queue<FieldUpdate> _newEntries; // = new Queue<FieldUpdate>();
         private byte[,] _currentField;
         private FieldUpdate _currentlyChecking;
 
@@ -60,7 +60,7 @@ namespace Plus.Utilities.Enclosure
 
                 if (pointList.Count > 1)
                 {
-                    IEnumerable<LinkedList<AStarSolver<GameField>.PathNode>> routeList = HandleListOfConnectedPoints(  pointList);
+                    IEnumerable<LinkedList<AStarSolver<GameField>.PathNode>> routeList = HandleListOfConnectedPoints(pointList);
 
                     foreach (var nodeList in routeList)
                     {
@@ -76,8 +76,8 @@ namespace Plus.Utilities.Enclosure
                 }
 
                 _currentField[_currentlyChecking.Y, _currentlyChecking.X] = _currentlyChecking.Value;
-
             }
+
             return returnList;
         }
 
@@ -134,24 +134,28 @@ namespace Plus.Utilities.Enclosure
                     if (!toFill.Contains(toAdd) && !checkedItems.Contains(toAdd))
                         toFill.Add(toAdd);
                 }
+
                 if (this[y + 1, x] && _currentField[y + 1, x] == 0)
                 {
                     toAdd = new Point(x, y + 1);
                     if (!toFill.Contains(toAdd) && !checkedItems.Contains(toAdd))
                         toFill.Add(toAdd);
                 }
+
                 if (this[y, x - 1] && _currentField[y, x - 1] == 0)
                 {
                     toAdd = new Point(x - 1, y);
                     if (!toFill.Contains(toAdd) && !checkedItems.Contains(toAdd))
                         toFill.Add(toAdd);
                 }
+
                 if (this[y, x + 1] && _currentField[y, x + 1] == 0)
                 {
                     toAdd = new Point(x + 1, y);
                     if (!toFill.Contains(toAdd) && !checkedItems.Contains(toAdd))
                         toFill.Add(toAdd);
                 }
+
                 if (GetValue(current) == 0)
                     returnList.Add(current);
                 checkedItems.Add(current);
@@ -181,6 +185,7 @@ namespace Plus.Utilities.Enclosure
                     }
                 }
             }
+
             return returnList;
         }
 
@@ -198,14 +203,17 @@ namespace Plus.Utilities.Enclosure
                 {
                     connectedItems.Add(new Point(x - 1, y - 1));
                 }
+
                 if (this[y - 1, x + 1] && _currentField[y - 1, x + 1] == update.Value)
                 {
                     connectedItems.Add(new Point(x + 1, y - 1));
                 }
+
                 if (this[y + 1, x - 1] && _currentField[y + 1, x - 1] == update.Value)
                 {
                     connectedItems.Add(new Point(x - 1, y + 1));
                 }
+
                 if (this[y + 1, x + 1] && _currentField[y + 1, x + 1] == update.Value)
                 {
                     connectedItems.Add(new Point(x + 1, y + 1));
@@ -217,14 +225,17 @@ namespace Plus.Utilities.Enclosure
             {
                 connectedItems.Add(new Point(x, y - 1));
             }
+
             if (this[y + 1, x] && _currentField[y + 1, x] == update.Value)
             {
                 connectedItems.Add(new Point(x, y + 1));
             }
+
             if (this[y, x - 1] && _currentField[y, x - 1] == update.Value)
             {
                 connectedItems.Add(new Point(x - 1, y));
             }
+
             if (this[y, x + 1] && _currentField[y, x + 1] == update.Value)
             {
                 connectedItems.Add(new Point(x + 1, y));

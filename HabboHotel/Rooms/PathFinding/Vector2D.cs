@@ -29,7 +29,7 @@
         {
             if (obj is Vector2D)
             {
-                var v2d = (Vector2D)obj;
+                var v2d = (Vector2D) obj;
                 return v2d.X == X && v2d.Y == Y;
             }
 

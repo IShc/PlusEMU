@@ -28,6 +28,7 @@ namespace Plus.Communication.Rcon.Commands.User
             {
                 client.GetHabbo().GetBadgeComponent().RemoveBadge(badge);
             }
+
             return true;
         }
     }

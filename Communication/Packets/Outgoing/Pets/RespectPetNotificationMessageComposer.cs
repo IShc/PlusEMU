@@ -22,31 +22,32 @@ namespace Plus.Communication.Packets.Outgoing.Pets
 
         public override void Compose(ServerPacket packet)
         {
-            if(Pet != null)
+            if (Pet != null)
             {
                 //TODO: Structure
                 packet.WriteInteger(Pet.VirtualId);
                 packet.WriteInteger(Pet.VirtualId);
-                packet.WriteInteger(Pet.PetId);//Pet Id, 100%
+                packet.WriteInteger(Pet.PetId); //Pet Id, 100%
                 packet.WriteString(Pet.Name);
                 packet.WriteInteger(0);
                 packet.WriteInteger(0);
                 packet.WriteString(Pet.Color);
                 packet.WriteInteger(0);
-                packet.WriteInteger(0);//Count - 3 ints.
+                packet.WriteInteger(0); //Count - 3 ints.
                 packet.WriteInteger(1);
-            } else if(RoomUser != null)
+            }
+            else if (RoomUser != null)
             {
                 //TODO: Structure
                 packet.WriteInteger(RoomUser.VirtualId);
                 packet.WriteInteger(RoomUser.VirtualId);
-                packet.WriteInteger(RoomUser.GetClient().GetHabbo().Id);//Pet Id, 100%
+                packet.WriteInteger(RoomUser.GetClient().GetHabbo().Id); //Pet Id, 100%
                 packet.WriteString(RoomUser.GetClient().GetHabbo().Username);
                 packet.WriteInteger(0);
                 packet.WriteInteger(0);
-                packet.WriteString("FFFFFF");//Yeah..
+                packet.WriteString("FFFFFF"); //Yeah..
                 packet.WriteInteger(0);
-                packet.WriteInteger(0);//Count - 3 ints.
+                packet.WriteInteger(0); //Count - 3 ints.
                 packet.WriteInteger(1);
             }
         }

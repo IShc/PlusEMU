@@ -11,7 +11,7 @@ namespace Plus.HabboHotel.Catalog.Utilities
     {
         public static Bot CreateBot(ItemData itemData, int ownerId)
         {
-            DataRow bot = null;
+            DataRow bot;
             if (!PlusEnvironment.GetGame().GetCatalog().TryGetBot(itemData.Id, out CatalogBot cataBot))
                 return null;
 

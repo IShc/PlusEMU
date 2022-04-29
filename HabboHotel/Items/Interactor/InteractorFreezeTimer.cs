@@ -62,7 +62,7 @@ namespace Plus.HabboHotel.Items.Interactor
             }
             else if (request == 1 || request == 0)
             {
-                if(request == 1 && oldValue == 0)
+                if (request == 1 && oldValue == 0)
                 {
                     item.ExtraData = "30";
                     oldValue = 30;

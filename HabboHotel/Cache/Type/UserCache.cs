@@ -9,6 +9,7 @@ namespace Plus.HabboHotel.Cache.Type
         public string Motto { get; set; }
         public string Look { get; set; }
         public DateTime AddedTime { get; set; }
+
         public UserCache(int id, string username, string motto, string look)
         {
             Id = id;
@@ -17,6 +18,7 @@ namespace Plus.HabboHotel.Cache.Type
             Look = look;
             AddedTime = DateTime.Now;
         }
+
         public bool IsExpired()
         {
             TimeSpan cacheTime = DateTime.Now - AddedTime;

@@ -39,7 +39,9 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                         user.IsLying = true;
                         user.UpdateNeeded = true;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
                 else
                 {
@@ -49,7 +51,6 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                     user.IsLying = true;
                     user.UpdateNeeded = true;
                 }
-
             }
             else
             {

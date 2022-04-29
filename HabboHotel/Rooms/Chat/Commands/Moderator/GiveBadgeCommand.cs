@@ -31,6 +31,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator
                 }
                 else
                     session.SendWhisper("Oops, that user already has this badge (" + @params[2] + ") !");
+
                 return;
             }
 

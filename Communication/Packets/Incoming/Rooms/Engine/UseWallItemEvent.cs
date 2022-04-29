@@ -27,7 +27,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
 
             item.Interactor.OnTrigger(session, item, request, hasRights);
             item.GetRoom().GetWired().TriggerEvent(WiredBoxType.TriggerStateChanges, session.GetHabbo(), item);
-        
+
             PlusEnvironment.GetGame().GetQuestManager().ProgressUserQuest(session, QuestType.ExploreFindItem, item.GetBaseItem().Id);
         }
     }

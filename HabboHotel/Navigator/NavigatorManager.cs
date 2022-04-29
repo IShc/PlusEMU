@@ -10,7 +10,7 @@ namespace Plus.HabboHotel.Navigator
     public sealed class NavigatorManager
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(NavigatorManager));
-        
+
         private readonly Dictionary<int, FeaturedRoom> _featuredRooms;
 
         private readonly Dictionary<int, TopLevelItem> _topLevelItems;
@@ -20,7 +20,7 @@ namespace Plus.HabboHotel.Navigator
         {
             _topLevelItems = new Dictionary<int, TopLevelItem>();
             _searchResultLists = new Dictionary<int, SearchResultList>();
-            
+
             //Does this need to be dynamic?
             _topLevelItems.Add(1, new TopLevelItem(1, "official_view", "", ""));
             _topLevelItems.Add(2, new TopLevelItem(2, "hotel_view", "", ""));
@@ -54,7 +54,7 @@ namespace Plus.HabboHotel.Navigator
                         }
                     }
                 }
-           
+
                 dbClient.SetQuery("SELECT `room_id`,`caption`,`description`,`image_url`,`enabled` FROM `navigator_publics` ORDER BY `order_num` ASC");
                 DataTable getPublics = dbClient.GetTable();
 
@@ -74,13 +74,13 @@ namespace Plus.HabboHotel.Navigator
             Log.Info("Navigator -> LOADED");
         }
 
-        public List<SearchResultList> GetCategorysForSearch(string category)
+        public List<SearchResultList> GetCategoriesForSearch(string category)
         {
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists
-                 where cat.Value.Category == category
-                 orderby cat.Value.OrderId
-                 select cat.Value);
+                    where cat.Value.Category == category
+                    orderby cat.Value.OrderId
+                    select cat.Value);
             return categories.ToList();
         }
 
@@ -88,9 +88,9 @@ namespace Plus.HabboHotel.Navigator
         {
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists
-                 where cat.Value.CategoryIdentifier == category
-                 orderby cat.Value.OrderId
-                 select cat.Value);
+                    where cat.Value.CategoryIdentifier == category
+                    orderby cat.Value.OrderId
+                    select cat.Value);
             return categories.ToList();
         }
 
@@ -98,9 +98,9 @@ namespace Plus.HabboHotel.Navigator
         {
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists
-                 where cat.Value.CategoryType == NavigatorCategoryType.Category
-                 orderby cat.Value.OrderId
-                 select cat.Value);
+                    where cat.Value.CategoryType == NavigatorCategoryType.Category
+                    orderby cat.Value.OrderId
+                    select cat.Value);
             return categories.ToList();
         }
 
@@ -108,9 +108,9 @@ namespace Plus.HabboHotel.Navigator
         {
             IEnumerable<SearchResultList> categories =
                 (from cat in _searchResultLists
-                 where cat.Value.CategoryType == NavigatorCategoryType.PromotionCategory
-                 orderby cat.Value.OrderId
-                 select cat.Value);
+                    where cat.Value.CategoryType == NavigatorCategoryType.PromotionCategory
+                    orderby cat.Value.OrderId
+                    select cat.Value);
             return categories.ToList();
         }
 

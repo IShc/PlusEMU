@@ -63,7 +63,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
 
             if (message.StartsWith(":", StringComparison.CurrentCulture) && PlusEnvironment.GetGame().GetChatManager().GetCommands().Parse(session, message))
                 return;
-            
+
             if (PlusEnvironment.GetGame().GetChatManager().GetFilter().CheckBannedWords(message))
             {
                 session.GetHabbo().BannedPhraseCount++;
@@ -73,6 +73,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Chat
                     session.Disconnect();
                     return;
                 }
+
                 session.SendPacket(new ShoutComposer(user.VirtualId, message, 0, colour));
                 return;
             }

@@ -48,6 +48,7 @@ namespace Plus.HabboHotel.GameClients
                 }
 
                 #region Ban Checking
+
                 //Let's have a quick search for a ban before we successfully authenticate..
                 if (!string.IsNullOrEmpty(MachineId))
                 {
@@ -72,6 +73,7 @@ namespace Plus.HabboHotel.GameClients
                         }
                     }
                 }
+
                 #endregion
 
                 if (userData.User == null) //Possible NPE
@@ -140,13 +142,13 @@ namespace Plus.HabboHotel.GameClients
 
                     _habbo.Look = PlusEnvironment.GetFigureManager().ProcessFigure(_habbo.Look, _habbo.Gender, _habbo.GetClothing().GetClothingParts, true);
                     _habbo.InitProcess();
-          
+
                     if (userData.User.GetPermissions().HasRight("mod_tickets"))
                     {
                         SendPacket(new ModeratorInitComposer(
-                          PlusEnvironment.GetGame().GetModerationManager().UserMessagePresets,
-                          PlusEnvironment.GetGame().GetModerationManager().RoomMessagePresets,
-                          PlusEnvironment.GetGame().GetModerationManager().GetTickets));
+                            PlusEnvironment.GetGame().GetModerationManager().UserMessagePresets,
+                            PlusEnvironment.GetGame().GetModerationManager().RoomMessagePresets,
+                            PlusEnvironment.GetGame().GetModerationManager().GetTickets));
                     }
 
                     if (PlusEnvironment.GetSettingsManager().TryGetValue("user.login.message.enabled") == "1")
@@ -160,6 +162,7 @@ namespace Plus.HabboHotel.GameClients
             {
                 ExceptionLogger.LogException(e);
             }
+
             return false;
         }
 
@@ -187,10 +190,11 @@ namespace Plus.HabboHotel.GameClients
 
         public async void SendPacketsAsync(List<MessageComposer> messages)
         {
-            foreach(MessageComposer message in messages)
+            foreach (MessageComposer message in messages)
             {
                 await _channel.WriteAsync(message);
             }
+
             _channel.Flush();
         }
 

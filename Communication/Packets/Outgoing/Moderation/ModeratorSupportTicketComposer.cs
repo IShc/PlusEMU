@@ -10,7 +10,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public ModerationTicket Ticket { get; }
 
         public ModeratorSupportTicketComposer(int tabId, ModerationTicket ticket)
-          : base(ServerPacketHeader.ModeratorSupportTicketMessageComposer)
+            : base(ServerPacketHeader.ModeratorSupportTicketMessageComposer)
         {
             TabId = tabId;
             Ticket = ticket;
@@ -24,9 +24,9 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
             packet.WriteInteger(Ticket.Category); // Category 
             packet.WriteInteger(Convert.ToInt32((DateTime.Now - UnixTimestamp.FromUnixTimestamp(Ticket.Timestamp)).TotalMilliseconds)); // This should fix the overflow?
             packet.WriteInteger(Ticket.Priority); // Priority
-            packet.WriteInteger(0);//??
+            packet.WriteInteger(0); //??
             packet.WriteInteger(Ticket.Sender == null ? 0 : Ticket.Sender.Id); // Sender ID
-                                                                        //base.WriteInteger(1);
+            //base.WriteInteger(1);
             packet.WriteString(Ticket.Sender == null ? string.Empty : Ticket.Sender.Username); // Sender Name
             packet.WriteInteger(Ticket.Reported == null ? 0 : Ticket.Reported.Id); // Reported ID
             packet.WriteString(Ticket.Reported == null ? string.Empty : Ticket.Reported.Username); // Reported Name

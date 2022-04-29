@@ -167,7 +167,7 @@ namespace Plus.HabboHotel.Users.Inventory
             }
 
             Item itemToAdd = new(id, 0, baseItem, extraData, 0, 0, 0, 0, _userId, group, limitedNumber, limitedStack, string.Empty);
- 
+
             if (UserHoldsItem(id))
                 RemoveItem(id);
 
@@ -180,7 +180,6 @@ namespace Plus.HabboHotel.Users.Inventory
 
         private bool UserHoldsItem(int itemId)
         {
-         
             if (_floorItems.ContainsKey(itemId))
                 return true;
             if (_wallItems.ContainsKey(itemId))
@@ -192,8 +191,8 @@ namespace Plus.HabboHotel.Users.Inventory
         {
             if (GetClient() == null)
                 return;
-            
-            if(GetClient().GetHabbo() == null || GetClient().GetHabbo().GetInventoryComponent() == null)
+
+            if (GetClient().GetHabbo() == null || GetClient().GetHabbo().GetInventoryComponent() == null)
                 GetClient().Disconnect();
 
             if (_floorItems.ContainsKey(id))
@@ -220,6 +219,7 @@ namespace Plus.HabboHotel.Users.Inventory
         }
 
         #region Pet Handling
+
         public ICollection<Pet> GetPets()
         {
             return _petsItems.Values;
@@ -234,7 +234,7 @@ namespace Plus.HabboHotel.Users.Inventory
         {
             if (_petsItems.ContainsKey(petId))
                 return _petsItems.TryRemove(petId, out petItem);
-            
+
             petItem = null;
             return false;
         }
@@ -246,9 +246,11 @@ namespace Plus.HabboHotel.Users.Inventory
             pet = null;
             return false;
         }
+
         #endregion
 
         #region Bot Handling
+
         public ICollection<Bot> GetBots()
         {
             return _botItems.Values;
@@ -274,16 +276,17 @@ namespace Plus.HabboHotel.Users.Inventory
             bot = null;
             return false;
         }
+
         #endregion
 
         public bool TryAddItem(Item item)
         {
-            if (item.Data.Type.ToString().ToLower() == "s")// ItemType.FLOOR)
+            if (item.Data.Type.ToString().ToLower() == "s") // ItemType.FLOOR)
             {
                 return _floorItems.TryAdd(item.Id, item);
             }
 
-            if (item.Data.Type.ToString().ToLower() == "i")//ItemType.WALL)
+            if (item.Data.Type.ToString().ToLower() == "i") //ItemType.WALL)
             {
                 return _wallItems.TryAdd(item.Id, item);
             }

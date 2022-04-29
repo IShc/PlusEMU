@@ -94,7 +94,7 @@ namespace Plus.Communication.Packets.Incoming.Users
                 dbClient.AddParameter("timestamp", PlusEnvironment.GetUnixTimestamp());
                 dbClient.RunQuery();
             }
-            
+
             foreach (Room ownRooms in PlusEnvironment.GetGame().GetRoomManager().GetRooms().ToList())
             {
                 if (ownRooms == null || ownRooms.OwnerId != session.GetHabbo().Id || ownRooms.OwnerName == newName)
@@ -111,7 +111,6 @@ namespace Plus.Communication.Packets.Incoming.Users
 
         private static bool CanChangeName(Habbo habbo)
         {
-
             if (habbo.Rank == 1 && habbo.VipRank == 0 && habbo.LastNameChange == 0)
                 return true;
             if (habbo.Rank == 1 && habbo.VipRank == 1 && (habbo.LastNameChange == 0 || (PlusEnvironment.GetUnixTimestamp() + 604800) > habbo.LastNameChange))

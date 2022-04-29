@@ -16,7 +16,7 @@ namespace Plus.Communication.Packets.Outgoing.Catalog
         public override void Compose(ServerPacket packet)
         {
             packet.WriteBoolean(true);
-            packet.WriteInteger(Rooms.Count);//Count
+            packet.WriteInteger(Rooms.Count); //Count
 
             foreach (RoomData data in Rooms)
             {

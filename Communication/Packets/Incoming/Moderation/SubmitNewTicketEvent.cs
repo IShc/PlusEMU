@@ -31,7 +31,7 @@ namespace Plus.Communication.Packets.Incoming.Moderation
             string message = StringCharFilter.Escape(packet.PopString().Trim());
             int category = packet.PopInt();
             int reportedUserId = packet.PopInt();
-            int type = packet.PopInt();// Unsure on what this actually is.
+            int type = packet.PopInt(); // Unsure on what this actually is.
 
             Habbo reportedUser = PlusEnvironment.GetHabboById(reportedUserId);
             if (reportedUser == null)
@@ -40,8 +40,8 @@ namespace Plus.Communication.Packets.Incoming.Moderation
                 return;
             }
 
-            int messagecount = packet.PopInt();
-            for (int i = 0; i < messagecount; i++)
+            int messageCount = packet.PopInt();
+            for (int i = 0; i < messageCount; i++)
             {
                 packet.PopInt();
                 chats.Add(packet.PopString());

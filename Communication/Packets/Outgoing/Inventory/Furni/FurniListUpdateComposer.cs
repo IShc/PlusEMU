@@ -5,12 +5,10 @@
         public FurniListUpdateComposer()
             : base(ServerPacketHeader.FurniListUpdateMessageComposer)
         {
-
         }
 
         public override void Compose(ServerPacket packet)
         {
-            
         }
     }
 }

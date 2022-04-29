@@ -42,7 +42,7 @@ namespace Plus.Communication.Packets.Incoming.Messenger
                     page++;
                 }
             }
-          
+
             session.GetHabbo().GetMessenger().ProcessOfflineMessages();
         }
     }

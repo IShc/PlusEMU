@@ -16,14 +16,14 @@ namespace Plus.Communication.Packets.Outgoing.Groups
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(Convert.ToInt32(PlusEnvironment.GetSettingsManager().TryGetValue("catalog.group.purchase.cost")));//Price
+            packet.WriteInteger(Convert.ToInt32(PlusEnvironment.GetSettingsManager().TryGetValue("catalog.group.purchase.cost"))); //Price
 
-            packet.WriteInteger(Rooms.Count);//Room count that the user has.
+            packet.WriteInteger(Rooms.Count); //Room count that the user has.
             foreach (RoomData room in Rooms)
             {
-                packet.WriteInteger(room.Id);//Room Id
-                packet.WriteString(room.Name);//Room Name
-                packet.WriteBoolean(false);//What?
+                packet.WriteInteger(room.Id); //Room Id
+                packet.WriteString(room.Name); //Room Name
+                packet.WriteBoolean(false); //What?
             }
 
             packet.WriteInteger(5);

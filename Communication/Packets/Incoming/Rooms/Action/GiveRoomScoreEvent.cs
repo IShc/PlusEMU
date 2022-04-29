@@ -30,13 +30,13 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Action
                 default:
                     return;
             }
-          
+
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
                 dbClient.RunQuery("UPDATE rooms SET score = '" + room.Score + "' WHERE id = '" + room.RoomId + "' LIMIT 1");
             }
 
-            session.GetHabbo().RatedRooms.Add(room.RoomId);        
+            session.GetHabbo().RatedRooms.Add(room.RoomId);
             session.SendPacket(new RoomRatingComposer(room.Score, !(session.GetHabbo().RatedRooms.Contains(room.RoomId) || room.CheckRights(session, true))));
         }
     }

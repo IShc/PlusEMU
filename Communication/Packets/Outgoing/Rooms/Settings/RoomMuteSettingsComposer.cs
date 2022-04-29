@@ -3,6 +3,7 @@
     internal class RoomMuteSettingsComposer : MessageComposer
     {
         public bool Status { get; }
+
         public RoomMuteSettingsComposer(bool status)
             : base(ServerPacketHeader.RoomMuteSettingsMessageComposer)
         {

@@ -38,7 +38,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (@params.Length == 0 || Instance == null || string.IsNullOrEmpty(StringData))
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null)
                 return false;
 
@@ -63,6 +63,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                         user.GetClient().GetHabbo().Effects().ApplyEffect(Convert.ToInt32(toJoin + 39));
                 }
             }
+
             return true;
         }
     }

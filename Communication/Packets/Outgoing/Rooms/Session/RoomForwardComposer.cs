@@ -3,6 +3,7 @@
     public class RoomForwardComposer : MessageComposer
     {
         public int RoomId { get; }
+
         public RoomForwardComposer(int roomId)
             : base(ServerPacketHeader.RoomForwardMessageComposer)
         {

@@ -16,11 +16,11 @@
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(AveragePrice);//Avg price in last 7 days.
+            packet.WriteInteger(AveragePrice); //Avg price in last 7 days.
             packet.WriteInteger(PlusEnvironment.GetGame().GetCatalog().GetMarketplace().OfferCountForSprite(SpriteId));
 
-            packet.WriteInteger(0);//No idea.
-            packet.WriteInteger(0);//No idea.
+            packet.WriteInteger(0); //No idea.
+            packet.WriteInteger(0); //No idea.
 
             packet.WriteInteger(ItemId);
             packet.WriteInteger(SpriteId);

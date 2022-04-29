@@ -1,7 +1,7 @@
 ﻿using Plus.Communication.Packets.Outgoing.Rooms.Engine;
 using Plus.HabboHotel.GameClients;
 
-namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun 
+namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
 {
     internal class PetCommand : IChatCommand
     {
@@ -32,6 +32,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
                     //Add the new one, they won't even notice a thing!!11 8-)
                     room.SendPacket(new UsersComposer(roomUser));
                 }
+
                 return;
             }
 
@@ -77,7 +78,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User.Fun
                 case "habbo":
                     return -1;
                 case "dog":
-                    return 60;//This should be 0.
+                    return 60; //This should be 0.
                 case "cat":
                     return 1;
                 case "terrier":

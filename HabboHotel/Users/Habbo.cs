@@ -76,7 +76,7 @@ namespace Plus.HabboHotel.Users
         public int WantsToRideHorse { get; set; }
         public int TimeAfk { get; set; }
         public bool DisableForcedEffects { get; set; }
-        
+
         // Player saving.
         private bool _disconnected;
         private bool _habboSaved;
@@ -84,8 +84,8 @@ namespace Plus.HabboHotel.Users
 
         // Counters
         public int FriendCount { get; set; }
-        public double FloodTime { get; set; } 
-        public double TimeMuted { get; set; } 
+        public double FloodTime { get; set; }
+        public double TimeMuted { get; set; }
         public double TradingLockExpiry { get; set; }
         public int BannedPhraseCount { get; set; }
         public double SessionStart { get; set; }
@@ -108,7 +108,7 @@ namespace Plus.HabboHotel.Users
         public double LastAdvertiseReport { get; set; }
         public bool AdvertisingReported { get; set; }
         public bool AdvertisingReportedBlocked { get; set; }
-        
+
         // Values generated within the game.
         public bool WiredInteraction { get; set; }
         public int QuestLastCompleted { get; set; }
@@ -138,7 +138,7 @@ namespace Plus.HabboHotel.Users
         public bool SessionGiftBlocked { get; set; }
         public bool SessionMottoBlocked { get; set; }
         public bool SessionClothingBlocked { get; set; }
-        
+
         public List<int> RatedRooms;
 
         private GameClient _client;
@@ -196,9 +196,9 @@ namespace Plus.HabboHotel.Users
             IsExpert = IsExpert;
 
             AppearOffline = appearOffline;
-            AllowTradingRequests = true;//TODO
-            AllowUserFollowing = true;//TODO
-            AllowFriendRequests = hasFriendRequestsDisabled;//TODO
+            AllowTradingRequests = true; //TODO
+            AllowUserFollowing = true; //TODO
+            AllowFriendRequests = hasFriendRequestsDisabled; //TODO
             AllowMessengerInvites = ignoreInvites;
             AllowPetSpeech = petsMuted;
             AllowBotSpeech = botsMuted;
@@ -295,7 +295,7 @@ namespace Plus.HabboHotel.Users
                 dbClient.AddParameter("user_id", id);
                 DataRow statRow = dbClient.GetRow();
 
-                if (statRow == null)//No row, add it yo
+                if (statRow == null) //No row, add it yo
                 {
                     dbClient.RunQuery("INSERT INTO `user_stats` (`id`) VALUES ('" + id + "')");
                     dbClient.SetQuery("SELECT `id`,`roomvisits`,`onlinetime`,`respect`,`respectgiven`,`giftsgiven`,`giftsreceived`,`dailyrespectpoints`,`dailypetrespectpoints`,`achievementscore`,`quest_id`,`quest_progress`,`groupid`,`tickets_answered`,`respectstimestamp`,`forum_posts` FROM `user_stats` WHERE `id` = @user_id LIMIT 1");
@@ -334,9 +334,10 @@ namespace Plus.HabboHotel.Users
 
             if (!PlusEnvironment.GetGame().GetGroupManager().TryGetGroup(_habboStats.FavouriteGroupId, out Group _))
                 _habboStats.FavouriteGroupId = 0;
+
             #endregion
         }
-        
+
         public IChatCommand ChatCommand { get; set; }
 
         public HabboStats GetStats()
@@ -450,7 +451,7 @@ namespace Plus.HabboHotel.Users
             InitClothing();
             InitIgnores();
         }
-        
+
         public PermissionComponent GetPermissions()
         {
             return _permissions;
@@ -470,7 +471,9 @@ namespace Plus.HabboHotel.Users
             {
                 _process?.Dispose();
             }
-            catch { }
+            catch
+            {
+            }
 
             _disconnected = true;
 
@@ -481,7 +484,7 @@ namespace Plus.HabboHotel.Users
                 _habboSaved = true;
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
-                    dbClient.RunQuery("UPDATE `users` SET `online` = '0', `last_online` = '" + PlusEnvironment.GetUnixTimestamp() + "', `activity_points` = '" + Duckets + "', `credits` = '" + Credits + "', `vip_points` = '" + Diamonds + "', `home_room` = '" + HomeRoom + "', `gotw_points` = '" + GotwPoints + "', `time_muted` = '" + TimeMuted + "',`friend_bar_state` = '" + FriendBarStateUtility.GetInt(FriendBarState) + "' WHERE id = '" + Id + "' LIMIT 1;UPDATE `user_stats` SET `roomvisits` = '" + _habboStats.RoomVisits + "', `onlineTime` = '" + (PlusEnvironment.GetUnixTimestamp() - SessionStart + _habboStats.OnlineTime) + "', `respect` = '" + _habboStats.Respect + "', `respectGiven` = '" + _habboStats.RespectGiven + "', `giftsGiven` = '" + _habboStats.GiftsGiven + "', `giftsReceived` = '" + _habboStats.GiftsReceived + "', `dailyRespectPoints` = '" + _habboStats.DailyRespectPoints + "', `dailyPetRespectPoints` = '" + _habboStats.DailyPetRespectPoints + "', `AchievementScore` = '" + _habboStats.AchievementPoints + "', `quest_id` = '" + _habboStats.QuestId + "', `quest_progress` = '" + _habboStats.QuestProgress + "', `groupid` = '" + _habboStats.FavouriteGroupId + "',`forum_posts` = '" + _habboStats.ForumPosts +"' WHERE `id` = '" + Id + "' LIMIT 1;");
+                    dbClient.RunQuery("UPDATE `users` SET `online` = '0', `last_online` = '" + PlusEnvironment.GetUnixTimestamp() + "', `activity_points` = '" + Duckets + "', `credits` = '" + Credits + "', `vip_points` = '" + Diamonds + "', `home_room` = '" + HomeRoom + "', `gotw_points` = '" + GotwPoints + "', `time_muted` = '" + TimeMuted + "',`friend_bar_state` = '" + FriendBarStateUtility.GetInt(FriendBarState) + "' WHERE id = '" + Id + "' LIMIT 1;UPDATE `user_stats` SET `roomvisits` = '" + _habboStats.RoomVisits + "', `onlineTime` = '" + (PlusEnvironment.GetUnixTimestamp() - SessionStart + _habboStats.OnlineTime) + "', `respect` = '" + _habboStats.Respect + "', `respectGiven` = '" + _habboStats.RespectGiven + "', `giftsGiven` = '" + _habboStats.GiftsGiven + "', `giftsReceived` = '" + _habboStats.GiftsReceived + "', `dailyRespectPoints` = '" + _habboStats.DailyRespectPoints + "', `dailyPetRespectPoints` = '" + _habboStats.DailyPetRespectPoints + "', `AchievementScore` = '" + _habboStats.AchievementPoints + "', `quest_id` = '" + _habboStats.QuestId + "', `quest_progress` = '" + _habboStats.QuestProgress + "', `groupid` = '" + _habboStats.FavouriteGroupId + "',`forum_posts` = '" + _habboStats.ForumPosts + "' WHERE `id` = '" + Id + "' LIMIT 1;");
 
                     if (GetPermissions().HasRight("mod_tickets"))
                         dbClient.RunQuery("UPDATE `moderation_tickets` SET `status` = 'open', `moderator_id` = '0' WHERE `status` ='picked' AND `moderator_id` = '" + Id + "'");
@@ -491,7 +494,6 @@ namespace Plus.HabboHotel.Users
             Dispose();
 
             _client = null;
-
         }
 
         public void Dispose()
@@ -543,7 +545,9 @@ namespace Plus.HabboHotel.Users
                     CreditsUpdateTick = Convert.ToInt32(PlusEnvironment.GetSettingsManager().TryGetValue("user.currency_scheduler.tick"));
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public GameClient GetClient()
@@ -635,8 +639,7 @@ namespace Plus.HabboHotel.Users
                 return;
             }
 
-            Room room = null;
-            if (!PlusEnvironment.GetGame().GetRoomManager().TryLoadRoom(id, out room))
+            if (!PlusEnvironment.GetGame().GetRoomManager().TryLoadRoom(id, out Room room))
             {
                 GetClient().SendPacket(new CloseConnectionComposer());
                 return;
@@ -698,7 +701,6 @@ namespace Plus.HabboHotel.Users
 
             if (!EnterRoom(room))
                 GetClient().SendPacket(new CloseConnectionComposer());
-
         }
 
         public bool EnterRoom(Room room)
@@ -717,14 +719,15 @@ namespace Plus.HabboHotel.Users
 
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
-                dbClient.RunQuery("INSERT INTO user_roomvisits (user_id,room_id,entry_timestamp,exit_timestamp,hour,minute) VALUES ('" + GetClient().GetHabbo().Id + "','" + GetClient().GetHabbo().CurrentRoomId + "','" + PlusEnvironment.GetUnixTimestamp() + "','0','" + DateTime.Now.Hour + "','" + DateTime.Now.Minute + "');");// +
+                dbClient.RunQuery("INSERT INTO user_roomvisits (user_id,room_id,entry_timestamp,exit_timestamp,hour,minute) VALUES ('" + GetClient().GetHabbo().Id + "','" + GetClient().GetHabbo().CurrentRoomId + "','" + PlusEnvironment.GetUnixTimestamp() + "','0','" + DateTime.Now.Hour + "','" + DateTime.Now.Minute + "');"); // +
             }
-            
+
             if (room.OwnerId != Id)
             {
                 GetClient().GetHabbo().GetStats().RoomVisits += 1;
                 PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(GetClient(), "ACH_RoomEntry", 1);
             }
+
             return true;
         }
     }

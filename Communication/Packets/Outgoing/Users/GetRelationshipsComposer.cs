@@ -8,6 +8,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
     internal class GetRelationshipsComposer : MessageComposer
     {
         public Habbo Habbo { get; }
+
         public GetRelationshipsComposer(Habbo habbo)
             : base(ServerPacketHeader.GetRelationshipsMessageComposer)
         {

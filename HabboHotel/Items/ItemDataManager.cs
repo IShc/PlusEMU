@@ -11,7 +11,7 @@ namespace Plus.HabboHotel.Items
         private static readonly ILog Log = LogManager.GetLogger(typeof(ItemDataManager));
 
         public Dictionary<int, ItemData> Items;
-        public Dictionary<int, ItemData> Gifts;//<SpriteId, Item>
+        public Dictionary<int, ItemData> Gifts; //<SpriteId, Item>
 
         public ItemDataManager()
         {
@@ -92,6 +92,7 @@ namespace Plus.HabboHotel.Items
                 if (item.ItemName == name)
                     return item;
             }
+
             return null;
         }
 

@@ -30,10 +30,10 @@ namespace Plus.Communication.Packets.Outgoing.Groups
             packet.WriteString(Group.Description);
             packet.WriteString(Group.Badge);
             packet.WriteInteger(Group.RoomId);
-            packet.WriteString(Group.GetRoom() != null ? Group.GetRoom().Name : "No room found..");    // room name
+            packet.WriteString(Group.GetRoom() != null ? Group.GetRoom().Name : "No room found.."); // room name
             packet.WriteInteger(Group.CreatorId == Habbo.Id ? 3 : Group.HasRequest(Habbo.Id) ? 2 : Group.IsMember(Habbo.Id) ? 1 : 0);
             packet.WriteInteger(Group.MemberCount); // Members
-            packet.WriteBoolean(false);//?? CHANGED
+            packet.WriteBoolean(false); //?? CHANGED
             packet.WriteString(Origin.Day + "-" + Origin.Month + "-" + Origin.Year);
             packet.WriteBoolean(Group.CreatorId == Habbo.Id);
             packet.WriteBoolean(Group.IsAdmin(Habbo.Id)); // admin
@@ -42,7 +42,7 @@ namespace Plus.Communication.Packets.Outgoing.Groups
             packet.WriteBoolean(Group.AdminOnlyDeco == 0); // Any user can place furni in home room
             packet.WriteInteger(Group.CreatorId == Habbo.Id ? Group.RequestCount : Group.IsAdmin(Habbo.Id) ? Group.RequestCount : Group.IsMember(Habbo.Id) ? 0 : 0); // Pending users
             //base.WriteInteger(0);//what the fuck
-            packet.WriteBoolean(Group != null ? Group.ForumEnabled : true);//HabboTalk.
+            packet.WriteBoolean(Group != null ? Group.ForumEnabled : true); //HabboTalk.
         }
     }
 }

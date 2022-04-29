@@ -32,7 +32,7 @@ namespace Plus.HabboHotel.LandingView
                 {
                     foreach (DataRow row in getData.Rows)
                     {
-                        _promotionItems.Add(Convert.ToInt32(row[0]), new Promotion((int)row[0], row[1].ToString(), row[2].ToString(), row[3].ToString(), Convert.ToInt32(row[4]), row[5].ToString(), row[6].ToString()));
+                        _promotionItems.Add(Convert.ToInt32(row[0]), new Promotion((int) row[0], row[1].ToString(), row[2].ToString(), row[3].ToString(), Convert.ToInt32(row[4]), row[5].ToString(), row[6].ToString()));
                     }
                 }
             }

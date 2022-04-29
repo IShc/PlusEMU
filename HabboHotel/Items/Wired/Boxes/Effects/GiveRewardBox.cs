@@ -17,7 +17,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
         public GiveRewardBox(Room instance, Item item)
         {
             Instance = instance;
-            Item = item; 
+            Item = item;
             SetItems = new ConcurrentDictionary<int, Item>();
 
             if (SetItems.Count > 0)
@@ -38,7 +38,6 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
 
         public bool Execute(params object[] @params)
         {
-
             return true;
         }
     }

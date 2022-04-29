@@ -6,7 +6,7 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
     internal class FriendListUpdateComposer : MessageComposer
     {
         public int FriendId { get; }
-        
+
         public Habbo Habbo { get; }
         public MessengerBuddy Buddy { get; }
 
@@ -25,18 +25,19 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
 
         public override void Compose(ServerPacket packet)
         {
-            if(Habbo != null)
+            if (Habbo != null)
             {
-                packet.WriteInteger(0);//Category Count
-                packet.WriteInteger(1);//Updates Count
-                packet.WriteInteger(0);//Update
+                packet.WriteInteger(0); //Category Count
+                packet.WriteInteger(1); //Updates Count
+                packet.WriteInteger(0); //Update
 
                 Buddy.Serialize(packet, Habbo);
-            } else
+            }
+            else
             {
-                packet.WriteInteger(0);//Category Count
-                packet.WriteInteger(1);//Updates Count
-                packet.WriteInteger(-1);//Update
+                packet.WriteInteger(0); //Category Count
+                packet.WriteInteger(1); //Updates Count
+                packet.WriteInteger(-1); //Update
                 packet.WriteInteger(FriendId);
             }
         }

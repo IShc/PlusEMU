@@ -25,7 +25,7 @@ namespace Plus.Utilities
                 str = str.Replace(Convert.ToChar(13), ' ');
             }
 
-           str = Regex.Replace(str, "<(.|\\n)*?>", string.Empty);
+            str = Regex.Replace(str, "<(.|\\n)*?>", string.Empty);
 
             return str;
         }

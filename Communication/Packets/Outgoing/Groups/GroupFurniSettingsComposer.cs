@@ -18,12 +18,12 @@ namespace Plus.Communication.Packets.Outgoing.Groups
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(ItemId);//Item Id
-            packet.WriteInteger(Group.Id);//Group Id?
+            packet.WriteInteger(ItemId); //Item Id
+            packet.WriteInteger(Group.Id); //Group Id?
             packet.WriteString(Group.Name);
-            packet.WriteInteger(Group.RoomId);//RoomId
-            packet.WriteBoolean(Group.IsMember(UserId));//Member?
-            packet.WriteBoolean(Group.ForumEnabled);//Has a forum
+            packet.WriteInteger(Group.RoomId); //RoomId
+            packet.WriteBoolean(Group.IsMember(UserId)); //Member?
+            packet.WriteBoolean(Group.ForumEnabled); //Has a forum
         }
     }
 }

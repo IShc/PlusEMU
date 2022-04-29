@@ -20,7 +20,10 @@ namespace Plus.Communication.Rcon
             {
                 _socket.BeginReceive(_buffer, 0, _buffer.Length, SocketFlags.None, OnCallBack, _socket);
             }
-            catch { Dispose(); }
+            catch
+            {
+                Dispose();
+            }
         }
 
         public void OnCallBack(IAsyncResult iAr)
@@ -55,7 +58,7 @@ namespace Plus.Communication.Rcon
                 _socket.Close();
                 _socket.Dispose();
             }
-            
+
             _socket = null;
             _buffer = null;
         }

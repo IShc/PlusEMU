@@ -21,7 +21,7 @@ namespace Plus.HabboHotel.Users.UserData
         public Dictionary<int, int> Quests;
 
         public UserData(int userId, ConcurrentDictionary<string, UserAchievement> achievements, List<int> favoritedRooms,
-            List<Badge> badges, Dictionary<int, MessengerBuddy> friends, Dictionary<int, MessengerRequest> requests, Dictionary<int, int> quests, Habbo user, 
+            List<Badge> badges, Dictionary<int, MessengerBuddy> friends, Dictionary<int, MessengerRequest> requests, Dictionary<int, int> quests, Habbo user,
             Dictionary<int, Relationship> relations)
         {
             UserId = userId;

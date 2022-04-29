@@ -29,7 +29,10 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                     {
                         pos = split[y][x];
                     }
-                    catch { pos = 'x'; }
+                    catch
+                    {
+                        pos = 'x';
+                    }
 
                     if (pos == 'x')
                         packet.WriteShort(-1);
@@ -44,6 +47,7 @@ namespace Plus.Communication.Packets.Outgoing.Rooms.Engine
                         {
                             height = ((Convert.ToInt32(pos) - 87) * 256);
                         }
+
                         packet.WriteShort(height);
                     }
                 }

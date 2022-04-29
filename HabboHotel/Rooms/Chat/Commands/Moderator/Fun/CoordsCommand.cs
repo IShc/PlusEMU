@@ -16,7 +16,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.Moderator.Fun
             if (thisUser == null)
                 return;
 
-            session.SendNotification("X: " + thisUser.X + "\n - Y: " + thisUser.Y + "\n - Z: " + thisUser.Z + "\n - Rot: " + thisUser.RotBody + ", sqState: " + room.GetGameMap().GameMap[thisUser.X, thisUser.Y] + "\n\n - RoomID: " + session.GetHabbo().CurrentRoomId);                           
+            session.SendNotification("X: " + thisUser.X + "\n - Y: " + thisUser.Y + "\n - Z: " + thisUser.Z + "\n - Rot: " + thisUser.RotBody + ", sqState: " + room.GetGameMap().GameMap[thisUser.X, thisUser.Y] + "\n\n - RoomID: " + session.GetHabbo().CurrentRoomId);
         }
     }
 }

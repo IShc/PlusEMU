@@ -10,6 +10,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
         public ICollection<string> UserPresets { get; }
         public ICollection<string> RoomPresets { get; }
         public ICollection<ModerationTicket> Tickets { get; }
+
         public ModeratorInitComposer(ICollection<string> userPresets, ICollection<string> roomPresets, ICollection<ModerationTicket> tickets)
             : base(ServerPacketHeader.ModeratorInitMessageComposer)
         {
@@ -38,7 +39,7 @@ namespace Plus.Communication.Packets.Outgoing.Moderation
                 packet.WriteString(ticket.Moderator == null ? string.Empty : ticket.Moderator.Username); // Mod Name
                 packet.WriteString(ticket.Issue); // Issue
                 packet.WriteInteger(ticket.Room == null ? 0 : ticket.Room.Id); // Room Id
-                packet.WriteInteger(0);//LOOP
+                packet.WriteInteger(0); //LOOP
             }
 
             packet.WriteInteger(UserPresets.Count);

@@ -9,12 +9,12 @@ namespace Plus.Communication.Packets.Incoming.LandingView
         {
             try
             {
-                string parseCampaings = packet.PopString();
-                if (parseCampaings.Contains("gamesmaker"))
+                string parseCampaigns = packet.PopString();
+                if (parseCampaigns.Contains("gamesmaker"))
                     return;
 
-                string campaingName = "";
-                string[] parser = parseCampaings.Split(';');
+                string campaignName = "";
+                string[] parser = parseCampaigns.Split(';');
 
                 foreach (var value in parser)
                 {
@@ -22,10 +22,10 @@ namespace Plus.Communication.Packets.Incoming.LandingView
                         continue;
 
                     string[] data = value.Split(',');
-                    campaingName = data.Length > 1 ? data[1] : "";
+                    campaignName = data.Length > 1 ? data[1] : "";
                 }
 
-                session.SendPacket(new CampaignComposer(parseCampaings, campaingName));
+                session.SendPacket(new CampaignComposer(parseCampaigns, campaignName));
             }
             catch
             {

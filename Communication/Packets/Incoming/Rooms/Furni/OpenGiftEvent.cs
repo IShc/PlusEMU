@@ -29,7 +29,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 
             if (present.UserId != session.GetHabbo().Id)
                 return;
-            
+
             DataRow data;
             using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
             {
@@ -52,7 +52,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
                 session.GetHabbo().GetInventoryComponent().RemoveItem(present.Id);
                 return;
             }
-            
+
             if (!int.TryParse(present.ExtraData.Split(Convert.ToChar(5))[2], out int purchaserId))
             {
                 session.SendNotification("Oops! Appears there was a bug with this gift.\nWe'll just get rid of it for you.");
@@ -63,6 +63,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
                     dbClient.RunQuery("DELETE FROM `items` WHERE `id` = '" + present.Id + "' LIMIT 1");
                     dbClient.RunQuery("DELETE FROM `user_presents` WHERE `item_id` = '" + present.Id + "' LIMIT 1");
                 }
+
                 session.GetHabbo().GetInventoryComponent().RemoveItem(present.Id);
 
                 return;
@@ -83,7 +84,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
                 session.GetHabbo().GetInventoryComponent().RemoveItem(present.Id);
                 return;
             }
-            
+
             if (!PlusEnvironment.GetGame().GetItemManager().GetItem(Convert.ToInt32(data["base_id"]), out ItemData baseItem))
             {
                 session.SendNotification("Oops, it appears that the item within the gift is no longer in the hotel!");
@@ -105,8 +106,6 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Furni
 
             Thread thread = new(() => FinishOpenGift(session, baseItem, present, room, data));
             thread.Start();
-
-
         }
 
         private void FinishOpenGift(GameClient session, ItemData baseItem, Item present, Room room, DataRow row)

@@ -35,7 +35,7 @@ namespace Plus.HabboHotel.Badges
 
             Log.Info("Loaded " + _badges.Count + " badge definitions.");
         }
-   
+
         public bool TryGetBadge(string code, out BadgeDefinition badge)
         {
             return _badges.TryGetValue(code.ToUpper(), out badge);

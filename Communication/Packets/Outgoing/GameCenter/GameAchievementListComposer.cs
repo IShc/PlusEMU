@@ -45,6 +45,7 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
                 packet.WriteInteger(0); // total levels
                 packet.WriteInteger(0);
             }
+
             packet.WriteString("");
         }
     }

@@ -21,10 +21,10 @@ namespace Plus.Communication.Packets.Outgoing.GameCenter
             packet.WriteString(GameData.ResourcePath + GameData.SWF);
             packet.WriteString("best");
             packet.WriteString("showAll");
-            packet.WriteInteger(60);//FPS?
+            packet.WriteInteger(60); //FPS?
             packet.WriteInteger(10);
             packet.WriteInteger(8);
-            packet.WriteInteger(6);//Asset count
+            packet.WriteInteger(6); //Asset count
             packet.WriteString("assetUrl");
             packet.WriteString(GameData.ResourcePath + GameData.Assets);
             packet.WriteString("habboHost");

@@ -31,7 +31,7 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Engine
                 horse?.MoveTo(moveX, moveY);
             }
 
-            user.MoveTo(moveX, moveY);        
+            user.MoveTo(moveX, moveY);
         }
     }
 }

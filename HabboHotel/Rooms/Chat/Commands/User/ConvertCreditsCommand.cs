@@ -19,9 +19,9 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
         {
             int totalValue = 0;
 
-            try 
+            try
             {
-                DataTable table;           
+                DataTable table;
                 using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
                 {
                     dbClient.SetQuery("SELECT `id` FROM `items` WHERE `user_id` = '" + session.GetHabbo().Id + "' AND (`room_id`=  '0' OR `room_id` = '')");
@@ -33,6 +33,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                     session.SendWhisper("You currently have no items in your inventory!");
                     return;
                 }
+
                 if (table.Rows.Count > 0)
                 {
                     using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())
@@ -42,7 +43,7 @@ namespace Plus.HabboHotel.Rooms.Chat.Commands.User
                             Item item = session.GetHabbo().GetInventoryComponent().GetItem(Convert.ToInt32(row[0]));
                             if (item == null || item.RoomId > 0 || item.Data.InteractionType != InteractionType.Exchange)
                                 continue;
-                            
+
                             int value = item.Data.BehaviourData;
 
                             dbClient.RunQuery("DELETE FROM `items` WHERE `id` = '" + item.Id + "' LIMIT 1");

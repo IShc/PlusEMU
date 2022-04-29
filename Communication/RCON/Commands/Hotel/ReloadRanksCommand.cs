@@ -20,7 +20,7 @@ namespace Plus.Communication.Rcon.Commands.Hotel
 
                 client.GetHabbo().GetPermissions().Init(client.GetHabbo());
             }
-            
+
             return true;
         }
     }

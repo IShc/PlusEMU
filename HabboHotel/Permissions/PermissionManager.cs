@@ -52,7 +52,7 @@ namespace Plus.HabboHotel.Permissions
                 {
                     foreach (DataRow row in getCommands.Rows)
                     {
-                         _commands.Add(Convert.ToString(row["command"]), new PermissionCommand(Convert.ToString(row["command"]), Convert.ToInt32(row["group_id"]), Convert.ToInt32(row["subscription_id"])));
+                        _commands.Add(Convert.ToString(row["command"]), new PermissionCommand(Convert.ToString(row["command"]), Convert.ToInt32(row["group_id"]), Convert.ToInt32(row["subscription_id"])));
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace Plus.HabboHotel.Permissions
                         {
                             continue; // permission group does not exist
                         }
-                        
+
                         if (!_permissions.TryGetValue(permissionId, out Permission permission))
                         {
                             continue; // permission does not exist
@@ -101,12 +101,11 @@ namespace Plus.HabboHotel.Permissions
                         {
                             List<string> rightsSet = new()
                             {
-                                    permission.PermissionName
-                                };
+                                permission.PermissionName
+                            };
 
                             _permissionGroupRights.Add(groupId, rightsSet);
                         }
-
                     }
                 }
             }
@@ -134,8 +133,8 @@ namespace Plus.HabboHotel.Permissions
                         {
                             List<string> rightsSet = new()
                             {
-                                    permission.PermissionName
-                                };
+                                permission.PermissionName
+                            };
 
                             _permissionSubscriptionRights.Add(subscriptionId, rightsSet);
                         }

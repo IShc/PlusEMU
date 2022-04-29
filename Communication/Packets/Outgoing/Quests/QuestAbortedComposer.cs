@@ -5,7 +5,6 @@
         public QuestAbortedComposer()
             : base(ServerPacketHeader.QuestAbortedMessageComposer)
         {
-            
         }
 
         public override void Compose(ServerPacket packet)

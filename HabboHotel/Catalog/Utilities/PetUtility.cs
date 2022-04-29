@@ -29,6 +29,7 @@ namespace Plus.HabboHotel.Catalog.Utilities
                 dbClient.AddParameter(pet.PetId + "color", pet.Color);
                 dbClient.RunQuery();
             }
+
             return pet;
         }
     }

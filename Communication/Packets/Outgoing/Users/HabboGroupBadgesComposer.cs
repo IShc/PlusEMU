@@ -7,6 +7,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
     {
         public Dictionary<int, string> Badges { get; }
         public Group Group { get; }
+
         public HabboGroupBadgesComposer(Dictionary<int, string> badges)
             : base(ServerPacketHeader.HabboGroupBadgesMessageComposer)
         {
@@ -21,7 +22,7 @@ namespace Plus.Communication.Packets.Outgoing.Users
 
         public override void Compose(ServerPacket packet)
         {
-            if(Badges != null)
+            if (Badges != null)
             {
                 packet.WriteInteger(Badges.Count);
                 foreach (KeyValuePair<int, string> badge in Badges)
@@ -29,13 +30,15 @@ namespace Plus.Communication.Packets.Outgoing.Users
                     packet.WriteInteger(badge.Key);
                     packet.WriteString(badge.Value);
                 }
-            } else if(Group != null)
+            }
+            else if (Group != null)
             {
                 packet.WriteInteger(1); //count
 
                 packet.WriteInteger(Group.Id);
                 packet.WriteString(Group.Badge);
-            } else
+            }
+            else
             {
                 packet.WriteInteger(0);
             }

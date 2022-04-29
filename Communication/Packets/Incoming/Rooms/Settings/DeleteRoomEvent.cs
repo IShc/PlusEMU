@@ -46,13 +46,13 @@ namespace Plus.Communication.Packets.Incoming.Rooms.Settings
             foreach (Item item in itemsToRemove)
             {
                 GameClient targetClient = PlusEnvironment.GetGame().GetClientManager().GetClientByUserId(item.UserId);
-                if (targetClient != null && targetClient.GetHabbo() != null)//Again, do we have an active client?
+                if (targetClient != null && targetClient.GetHabbo() != null) //Again, do we have an active client?
                 {
                     room.GetRoomItemHandler().RemoveFurniture(targetClient, item.Id);
                     targetClient.GetHabbo().GetInventoryComponent().AddNewItem(item.Id, item.BaseItem, item.ExtraData, item.GroupId, true, true, item.LimitedNo, item.LimitedTot);
                     targetClient.GetHabbo().GetInventoryComponent().UpdateItems(false);
                 }
-                else//No, query time.
+                else //No, query time.
                 {
                     room.GetRoomItemHandler().RemoveFurniture(null, item.Id);
                     using (IQueryAdapter dbClient = PlusEnvironment.GetDatabaseManager().GetQueryReactor())

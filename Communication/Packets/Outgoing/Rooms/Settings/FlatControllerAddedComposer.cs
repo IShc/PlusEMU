@@ -5,6 +5,7 @@
         public int RoomId { get; }
         public int UserId { get; }
         public string Username { get; }
+
         public FlatControllerAddedComposer(int roomId, int userId, string username)
             : base(ServerPacketHeader.FlatControllerAddedMessageComposer)
         {

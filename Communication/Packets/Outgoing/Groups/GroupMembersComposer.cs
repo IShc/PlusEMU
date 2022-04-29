@@ -46,6 +46,7 @@ namespace Plus.Communication.Packets.Outgoing.Groups
                     packet.WriteString(string.Empty);
                 }
             }
+
             packet.WriteBoolean(Admin);
             packet.WriteInteger(14);
             packet.WriteInteger(Page);

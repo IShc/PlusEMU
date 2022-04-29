@@ -74,43 +74,36 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                     {
                         newX = user.X;
                         newY = user.Y + 2;
-
                     }
                     else if (user.RotBody == 6)
                     {
                         newX = user.X - 2;
                         newY = user.Y;
-
                     }
                     else if (user.RotBody == 0)
                     {
                         newX = user.X;
                         newY = user.Y - 2;
-
                     }
                     else if (user.RotBody == 2)
                     {
                         newX = user.X + 2;
                         newY = user.Y;
-
                     }
                     else if (user.RotBody == 1)
                     {
                         newX = user.X + 2;
                         newY = user.Y - 2;
-
                     }
                     else if (user.RotBody == 7)
                     {
                         newX = user.X - 2;
                         newY = user.Y - 2;
-
                     }
                     else if (user.RotBody == 3)
                     {
                         newX = user.X + 2;
                         newY = user.Y + 2;
-
                     }
                     else if (user.RotBody == 5)
                     {
@@ -162,7 +155,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                         }
                     }
                 }
-                else if (differenceX <= 1 && differenceX >= -1 && differenceY <= 1 && differenceY >= -1 && VerifyPuck(user, item.Coordinate.X, item.Coordinate.Y))//VERYFIC BALL CHECAR SI ESTA EN DIRECCION ASIA LA PELOTA
+                else if (differenceX <= 1 && differenceX >= -1 && differenceY <= 1 && differenceY >= -1 && VerifyPuck(user, item.Coordinate.X, item.Coordinate.Y)) //VERYFIC BALL CHECAR SI ESTA EN DIRECCION ASIA LA PELOTA
                 {
                     newX = differenceX * -1;
                     newY = differenceY * -1;
@@ -183,9 +176,9 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
             }
         }
 
-        private bool VerifyPuck(RoomUser user, int actualx, int actualy)
+        private bool VerifyPuck(RoomUser user, int actualX, int actualY)
         {
-            return Rotation.Calculate(user.X, user.Y, actualx, actualy) == user.RotBody;
+            return Rotation.Calculate(user.X, user.Y, actualX, actualY) == user.RotBody;
         }
 
         public void BanzaiStart()
@@ -233,11 +226,11 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                     case InteractionType.BanzaiScoreGreen:
                     case InteractionType.BanzaiScoreRed:
                     case InteractionType.BanzaiScoreYellow:
-                        {
-                            item.ExtraData = "0";
-                            item.UpdateState();
-                            break;
-                        }
+                    {
+                        item.ExtraData = "0";
+                        item.UpdateState();
+                        break;
+                    }
                 }
             }
         }
@@ -282,6 +275,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                             PlusEnvironment.GetGame().GetAchievementManager().ProgressAchievement(user.GetClient(), "ACH_BattleBallPlayer", 1);
                         }
                     }
+
                     if (winner == Team.Blue)
                     {
                         if (user.CurrentEffect == 35)
@@ -330,7 +324,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                 return;
 
             Point oldRoomCoord = item.Coordinate;
-            
+
             if (oldRoomCoord.X == newX && oldRoomCoord.Y == newY)
                 return;
 
@@ -365,12 +359,12 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                     {
                         user.LockedTilesCount++;
                         _room.GetGameManager().AddPointToTeam(item.Team, 1);
-                        _field.UpdateLocation(item.GetX, item.GetY, (byte)team);
+                        _field.UpdateLocation(item.GetX, item.GetY, (byte) team);
                         List<PointField> gField = _field.DoUpdate();
                         Team t;
                         foreach (PointField gameField in gField)
                         {
-                            t = (Team)gameField.ForValue;
+                            t = (Team) gameField.ForValue;
                             foreach (Point p in gameField.GetPoints())
                             {
                                 HandleMaxBanzaiTiles(new Point(p.X, p.Y), t);
@@ -428,6 +422,7 @@ namespace Plus.HabboHotel.Rooms.Games.Banzai
                     i++;
                 item.UpdateState(false, true);
             }
+
             if (i == _banzaiTiles.Count)
                 BanzaiEnd();
         }

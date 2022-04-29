@@ -84,6 +84,7 @@ namespace Plus.HabboHotel.Rooms.Instance
                     dbClient.AddParameter("uid", userId);
                     dbClient.RunQuery();
                 }
+
                 return false;
             }
 
@@ -104,6 +105,7 @@ namespace Plus.HabboHotel.Rooms.Instance
                     dbClient.AddParameter("uid", userId);
                     dbClient.RunQuery();
                 }
+
                 return true;
             }
 

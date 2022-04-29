@@ -25,8 +25,8 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(Pages);// Pages
-            packet.WriteInteger(Page);// Page
+            packet.WriteInteger(Pages); // Pages
+            packet.WriteInteger(Page); // Page
 
             packet.WriteInteger(Friends.Count);
             foreach (MessengerBuddy friend in Friends.ToList())
@@ -35,17 +35,17 @@ namespace Plus.Communication.Packets.Outgoing.Messenger
 
                 packet.WriteInteger(friend.Id);
                 packet.WriteString(friend.MUsername);
-                packet.WriteInteger(1);//Gender.
+                packet.WriteInteger(1); //Gender.
                 packet.WriteBoolean(friend.IsOnline);
                 packet.WriteBoolean(friend.IsOnline && friend.InRoom);
                 packet.WriteString(friend.IsOnline ? friend.MLook : string.Empty);
                 packet.WriteInteger(0); // category id
                 packet.WriteString(friend.IsOnline ? friend.MMotto : string.Empty);
-                packet.WriteString(string.Empty);//Alternative name?
+                packet.WriteString(string.Empty); //Alternative name?
                 packet.WriteString(string.Empty);
                 packet.WriteBoolean(true);
                 packet.WriteBoolean(false);
-                packet.WriteBoolean(false);//Pocket Habbo user.
+                packet.WriteBoolean(false); //Pocket Habbo user.
                 packet.WriteShort(relationship == null ? 0 : relationship.Type);
             }
         }

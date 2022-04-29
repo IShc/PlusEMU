@@ -169,7 +169,7 @@ namespace Plus.HabboHotel.GameClients
                     continue;
 
                 if (client.GetHabbo().GetPermissions().HasRight("mod_tool") && !client.GetHabbo().GetPermissions()
-                        .HasRight("staff_ignore_advertisement_reports"))
+                    .HasRight("staff_ignore_advertisement_reports"))
                     client.SendPacket(new MotdNotificationComposer(builder.ToString()));
             }
         }
@@ -232,9 +232,9 @@ namespace Plus.HabboHotel.GameClients
                 _userIdRegister.TryAdd(userId, client);
         }
 
-        public void UnregisterClient(int userid, string username)
+        public void UnregisterClient(int userId, string username)
         {
-            _userIdRegister.TryRemove(userid, out GameClient _);
+            _userIdRegister.TryRemove(userId, out GameClient _);
             _usernameRegister.TryRemove(username.ToLower(), out GameClient _);
         }
 
@@ -277,6 +277,7 @@ namespace Plus.HabboHotel.GameClients
                     {
                     }
                 }
+
                 Console.Clear();
                 Log.Info("<<- SERVER SHUTDOWN ->> CLOSING CONNECTIONS");
             }

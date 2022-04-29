@@ -48,7 +48,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             if (@params.Length != 1)
                 return false;
 
-            Habbo player = (Habbo)@params[0];
+            Habbo player = (Habbo) @params[0];
             if (player == null)
                 return false;
 
@@ -61,7 +61,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 if (user == null)
                     return false;
 
-                if (player.GetPermissions().HasRight("mod_tool")  || Instance.OwnerId == player.Id)
+                if (player.GetPermissions().HasRight("mod_tool") || Instance.OwnerId == player.Id)
                 {
                     player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, "Wired Kick Exception: Unkickable Player", 0, 0));
                     return false;
@@ -70,6 +70,7 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
                 _toKick.Enqueue(player);
                 player.GetClient().SendPacket(new WhisperComposer(user.VirtualId, StringData, 0, 0));
             }
+
             return true;
         }
 
@@ -88,13 +89,14 @@ namespace Plus.HabboHotel.Items.Wired.Boxes.Effects
             {
                 while (_toKick.Count > 0)
                 {
-                    Habbo player = (Habbo)_toKick.Dequeue();
+                    Habbo player = (Habbo) _toKick.Dequeue();
                     if (player == null || !player.InRoom || player.CurrentRoom != Instance)
                         continue;
 
                     Instance.GetRoomUserManager().RemoveUserFromRoom(player.GetClient(), true);
                 }
             }
+
             TickCount = 3;
             return true;
         }

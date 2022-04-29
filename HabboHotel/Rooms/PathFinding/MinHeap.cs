@@ -12,7 +12,9 @@ namespace Plus.HabboHotel.Rooms.PathFinding
 
         public int Count { get; private set; }
 
-        public MinHeap() : this(16) { }
+        public MinHeap() : this(16)
+        {
+        }
 
         public MinHeap(int capacity)
         {
@@ -37,6 +39,7 @@ namespace Plus.HabboHotel.Rooms.PathFinding
             {
                 DoubleArray();
             }
+
             _array[Count - 1] = item;
             int position = Count - 1;
 
@@ -75,6 +78,7 @@ namespace Plus.HabboHotel.Rooms.PathFinding
             {
                 throw new InvalidOperationException("Heap is empty");
             }
+
             _temp = _array[0];
             _array[0] = _array[Count - 1];
             Count--;
@@ -115,7 +119,6 @@ namespace Plus.HabboHotel.Rooms.PathFinding
                 {
                     return;
                 }
-
             } while (true);
         }
     }

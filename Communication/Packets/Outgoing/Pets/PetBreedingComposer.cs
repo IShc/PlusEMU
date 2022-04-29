@@ -5,19 +5,18 @@
         public PetBreedingComposer()
             : base(ServerPacketHeader.PetBreedingMessageComposer)
         {
-           
         }
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(219005779);//An Id?
+            packet.WriteInteger(219005779); //An Id?
             {
                 //Pet 1.
-                packet.WriteInteger(2169464);//Pet Id
+                packet.WriteInteger(2169464); //Pet Id
                 packet.WriteString("Tes");
-                packet.WriteInteger(69);//Level
-                packet.WriteString("1 22 F2E5CC");//Breed/figure?
-                packet.WriteString("Sledmore");//Owner
+                packet.WriteInteger(69); //Level
+                packet.WriteString("1 22 F2E5CC"); //Breed/figure?
+                packet.WriteString("Sledmore"); //Owner
 
                 //Pet 2.
                 packet.WriteInteger(2169465);
@@ -26,7 +25,7 @@
                 packet.WriteString("1 0 D4D4D4");
                 packet.WriteString("Sledmore");
 
-                packet.WriteInteger(4);//Count
+                packet.WriteInteger(4); //Count
                 {
                     packet.WriteInteger(1);
                     packet.WriteInteger(3);

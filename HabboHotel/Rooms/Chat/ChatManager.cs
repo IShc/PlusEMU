@@ -55,14 +55,14 @@ namespace Plus.HabboHotel.Rooms.Chat
         {
             _emotions = new ChatEmotionsManager();
             _logs = new ChatLogManager();
-         
+
             _filter = new WordFilterManager();
             _filter.Init();
 
             _commands = new CommandManager(":");
             _petCommands = new PetCommandManager();
             _petLocale = new PetLocale();
-      
+
             _chatStyles = new ChatStyleManager();
             _chatStyles.Init();
 

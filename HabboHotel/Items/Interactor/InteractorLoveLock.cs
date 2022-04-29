@@ -52,11 +52,11 @@ namespace Plus.HabboHotel.Items.Interactor
                     RoomUser userOne = item.GetRoom().GetRoomUserManager().GetUserForSquare(pointOne.X, pointOne.Y);
                     RoomUser userTwo = item.GetRoom().GetRoomUserManager().GetUserForSquare(pointTwo.X, pointTwo.Y);
 
-                    if(userOne == null || userTwo == null)
+                    if (userOne == null || userTwo == null)
                         session.SendNotification("We couldn't find a valid user to lock this love lock with.");
-                    else if(userOne.GetClient() == null || userTwo.GetClient() == null)
+                    else if (userOne.GetClient() == null || userTwo.GetClient() == null)
                         session.SendNotification("We couldn't find a valid user to lock this love lock with.");
-                    else if(userOne.HabboId != item.UserId && userTwo.HabboId != item.UserId)
+                    else if (userOne.HabboId != item.UserId && userTwo.HabboId != item.UserId)
                         session.SendNotification("You can only use this item with the item owner.");
                     else
                     {
@@ -69,8 +69,6 @@ namespace Plus.HabboHotel.Items.Interactor
                         userOne.GetClient().SendPacket(new LoveLockDialogueMessageComposer(item.Id));
                         userTwo.GetClient().SendPacket(new LoveLockDialogueMessageComposer(item.Id));
                     }
-
-
                 }
                 else
                     return;

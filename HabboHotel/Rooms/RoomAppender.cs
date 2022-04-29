@@ -17,7 +17,7 @@ namespace Plus.HabboHotel.Rooms
             packet.WriteString(data.Description);
             packet.WriteInteger(data.TradeSettings);
             packet.WriteInteger(data.Score);
-            packet.WriteInteger(0);//Top rated room rank.
+            packet.WriteInteger(0); //Top rated room rank.
             packet.WriteInteger(data.Category);
 
             packet.WriteInteger(data.Tags.Count);
@@ -35,7 +35,7 @@ namespace Plus.HabboHotel.Rooms
                 roomType += 8;
             if (data.AllowPets == 1)
                 roomType += 16;
-            
+
             if (PlusEnvironment.GetGame().GetNavigator().TryGetFeaturedRoom(data.Id, out FeaturedRoom item))
             {
                 roomType += 1;

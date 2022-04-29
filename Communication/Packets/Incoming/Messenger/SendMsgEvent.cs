@@ -25,7 +25,6 @@ namespace Plus.Communication.Packets.Incoming.Messenger
             }
 
             session.GetHabbo().GetMessenger().SendInstantMessage(userId, message);
-
         }
     }
 }

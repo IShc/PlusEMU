@@ -12,9 +12,9 @@
 
         public override void Compose(ServerPacket packet)
         {
-            packet.WriteInteger(2);//Club level
+            packet.WriteInteger(2); //Club level
             packet.WriteInteger(Rank);
-            packet.WriteBoolean(false);//Is an ambassador
+            packet.WriteBoolean(false); //Is an ambassador
         }
     }
 }

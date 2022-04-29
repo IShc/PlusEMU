@@ -45,7 +45,7 @@ namespace Plus.HabboHotel.Items.Interactor
         {
             if (session == null)
                 return;
-            
+
             RoomUser user = item.GetRoom().GetRoomUserManager().GetRoomUserByHabbo(session.GetHabbo().Id);
 
             if (item.InteractingUser2 != user.UserId)
@@ -55,33 +55,35 @@ namespace Plus.HabboHotel.Items.Interactor
             {
                 return;
             }
+
             if (item.GetBaseItem().InteractionType == InteractionType.OneWayGate)
             {
-            if (user.Coordinate != item.SquareInFront && user.CanWalk)
-            {
-                user.MoveTo(item.SquareInFront);
-                return;
-            }
-            if (!item.GetRoom().GetGameMap().ValidTile(item.SquareBehind.X, item.SquareBehind.Y) ||
-                !item.GetRoom().GetGameMap().CanWalk(item.SquareBehind.X, item.SquareBehind.Y, false)
-                || !item.GetRoom().GetGameMap().SquareIsOpen(item.SquareBehind.X, item.SquareBehind.Y, false))
-            {
-                return;
-            }
+                if (user.Coordinate != item.SquareInFront && user.CanWalk)
+                {
+                    user.MoveTo(item.SquareInFront);
+                    return;
+                }
 
-            if ((user.LastInteraction - PlusEnvironment.GetUnixTimestamp() < 0) && user.InteractingGate &&
-                user.GateId == item.Id)
-            {
-                user.InteractingGate = false;
-                user.GateId = 0;
-            }
+                if (!item.GetRoom().GetGameMap().ValidTile(item.SquareBehind.X, item.SquareBehind.Y) ||
+                    !item.GetRoom().GetGameMap().CanWalk(item.SquareBehind.X, item.SquareBehind.Y, false)
+                    || !item.GetRoom().GetGameMap().SquareIsOpen(item.SquareBehind.X, item.SquareBehind.Y, false))
+                {
+                    return;
+                }
 
-           
-            if (!item.GetRoom().GetGameMap().CanWalk(item.SquareBehind.X, item.SquareBehind.Y, user.AllowOverride))
-            {
-                return;
-            }
-          
+                if ((user.LastInteraction - PlusEnvironment.GetUnixTimestamp() < 0) && user.InteractingGate &&
+                    user.GateId == item.Id)
+                {
+                    user.InteractingGate = false;
+                    user.GateId = 0;
+                }
+
+
+                if (!item.GetRoom().GetGameMap().CanWalk(item.SquareBehind.X, item.SquareBehind.Y, user.AllowOverride))
+                {
+                    return;
+                }
+
                 if (item.InteractingUser == 0)
                 {
                     user.InteractingGate = true;
