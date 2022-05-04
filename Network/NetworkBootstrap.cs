@@ -22,6 +22,7 @@ namespace Plus.Network
         private ServerBootstrap ServerBootstrap { get; set; }
         private IChannel ServerChannel { get; set; }
         private static readonly ILog Log = LogManager.GetLogger(typeof(NetworkBootstrap));
+        public static readonly int MAX_FRAME_SIZE = 500000;
 
         public NetworkBootstrap(string host, int port)
         {
@@ -42,7 +43,7 @@ namespace Plus.Network
                 {
                     channel.Pipeline.AddLast("messageInterceptor", new MessageInterceptorHandler());
                     channel.Pipeline.AddLast("xmlDecoder", new GamePolicyDecoder());
-                    channel.Pipeline.AddLast("frameDecoder", new LengthFieldBasedFrameDecoder(500000, 0, 4, 0, 4));
+                    channel.Pipeline.AddLast("frameDecoder", new LengthFieldBasedFrameDecoder(MAX_FRAME_SIZE, 0, 4, 0, 4));
                     channel.Pipeline.AddLast("gameEncoder", new GameEncoder());
                     channel.Pipeline.AddLast("gameDecoder", new GameDecoder());
                     channel.Pipeline.AddLast(ChannelGroup, "clientHandler", new NetworkChannelHandler());
